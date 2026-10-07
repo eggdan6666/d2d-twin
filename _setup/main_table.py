@@ -92,11 +92,12 @@ def make_relaxc(ir, part):
     return vpath, n
 
 
-def chip_matrix(part, tier, include_b=False):
+def chip_matrix(part, tier, include_b=False, tags=None):
     """逐颗 × 逐份 × 逐断言的状态矩阵。tier=gold|relax|relaxc"""
-    rows = json.load(io.open(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % TAGS[part]), encoding="utf-8"))
+    active_tags = tags or TAGS
+    rows = json.load(io.open(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % active_tags[part]), encoding="utf-8"))
     if include_b:
-        b_tag = "tmp1075kt_b" if part == "TMP1075" else TAGS[part] + "_b"
+        b_tag = "tmp1075kt_b" if part == "TMP1075" else active_tags[part] + "_b"
         b_path = os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % b_tag)
         if os.path.exists(b_path):
             rows = rows + json.load(io.open(b_path, encoding="utf-8"))
@@ -226,26 +227,31 @@ def declared(ir, t):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--quick", action="store_true", help="只跑新落分的两颗（调试用）")
+    ap.add_argument("--include-b", action="store_true", help="并入 *_kt_b 加样批样本 (n=24)")
+    ap.add_argument("--model-tag", default="qwen14b", choices=["qwen14b", "ds67b"],
+                    help="模型类型：qwen14b (默认) 或 ds67b")
+    args = ap.parse_args()
+
     from joblock import acquire as _lock
-    _lock("main_table")
+    lock_name = "main_table_ds67b" if args.model_tag == "ds67b" else "main_table"
+    _lock(lock_name)
     import hashlib
     harness_path = os.path.join(ROOT, "d2d", "eval", "test_d2d_blackbox.py")
     harness_md5 = hashlib.md5(open(harness_path, "rb").read()).hexdigest()
     print("Harness MD5: %s" % harness_md5, flush=True)
 
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--quick", action="store_true", help="只跑新落分的两颗（调试用）")
-    ap.add_argument("--include-b", action="store_true", help="并入 *_kt_b 加样批样本 (n=24)")
-    args = ap.parse_args()
+    active_tags = {c: ("ds67b%s" % c.lower()) for c in ORDER} if args.model_tag == "ds67b" else TAGS
     chips = ["ADS1220", "LM83", "TPS23861", "TMP126"] if args.quick else ORDER
-    chips = [c for c in chips if os.path.exists(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % TAGS[c]))]
+    chips = [c for c in chips if os.path.exists(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % active_tags[c]))]
 
     strict, relax, relaxc = {}, {}, {}
     per_chip_green = {}
     for c in chips:
-        strict[c], g_s, n_s = chip_matrix(c, "gold", include_b=args.include_b)
-        relax[c], g_r, _ = chip_matrix(c, "relax", include_b=args.include_b)
-        relaxc[c], _, _ = chip_matrix(c, "relaxc", include_b=args.include_b)
+        strict[c], g_s, n_s = chip_matrix(c, "gold", include_b=args.include_b, tags=active_tags)
+        relax[c], g_r, _ = chip_matrix(c, "relax", include_b=args.include_b, tags=active_tags)
+        relaxc[c], _, _ = chip_matrix(c, "relaxc", include_b=args.include_b, tags=active_tags)
         per_chip_green[c] = {"strict": g_s, "relax": g_r, "n": n_s}
         print("  %-8s 全绿 strict=%2d/%d relax=%2d/%d" % (c, g_s, n_s, g_r, n_s), flush=True)
 
@@ -375,7 +381,7 @@ def main():
            "vacuous_excluded": vac,
            "dimensions": dims, "assertion4_split": split, "gradient": grad,
            "per_chip_rate_pct": {c: round(rate[c] * 100, 1) for c in chips}}
-    suffix = "_n24" if args.include_b else ""
+    suffix = "_ds67b" if args.model_tag == "ds67b" else ("_n24" if args.include_b else "")
     dst = os.path.join(ROOT, "d2d", "eval", "main_table%s.json" % suffix)
     json.dump(out, io.open(dst, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 

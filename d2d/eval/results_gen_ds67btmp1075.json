@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 27.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.FFsss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_0/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_0/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_0/test_d2d_blackbox.py:218: AssertionError: 单字节读应返回高字节 0x1，实得 0x1ff\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\nFAILED test_d2d_blackbox.py::test_single_byte_semantics - AssertionError: 单...\n3 failed, 2 passed, 3 skipped in 1.72s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1 and addr in [0x00, 0x0F]:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in [0x01, 0x02, 0x03]:  # RW registers\n            if nbytes == 1:  # single-byte write\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0x00FF) << 8)\n            else:  # full-width write\n                self.regs[addr] = (data & 0xFFFF)\n        elif addr in [0x0F]:  # RO register\n            pass  # ignore writes\n        else:\n            if nbytes == 1:  # single-byte write\n                self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0x00FF)\n            else:  # full-width write\n                self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 58.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 3,
+  "tail": ".FF..sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_1/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_1/test_d2d_blackbox.py:160: AssertionError: CFGR.R[14:13] 写全 1 后读回 0，期望 3（整寄存器 0xff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CFGR...\n2 failed, 3 passed, 3 skipped in 0.82s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1 and addr in [0x01, 0x0F]:  # CFGR, DIEID\n            return (self.regs[addr] & 0xFF00) >> 8  # return only bits 15:8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in [0x01, 0x02, 0x03]:  # CFGR, LLIM, HLIM\n            if nbytes == 1:  # single byte write\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0x00FF) << 8)  # update only bits 15:8\n            else:\n                self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0x00FF)  # full word write\n        elif addr == 0x0F:  # DIEID\n            pass  # read only register\n        else:\n            self.regs[addr] = data  # normal write\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 79.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 3,
+  "tail": ".F.F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_2/test_d2d_blackbox.py:123: AssertionError: DIEID 是 RO：写脏数据后 0x7500 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_2/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: DIEID...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n2 failed, 3 passed, 3 skipped in 0.87s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1 and addr in [0x01, 0x0F]:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0x00FF) << 8)\n        elif addr in [0x01, 0x02, 0x03] or (addr == 0x0F and nbytes == 2):\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 98.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFFsss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_3/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_3/tmp1075_simulator.py:26: TypeError: argument of type 'int' is not iterable\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_3/tmp1075_simulator.py:26: TypeError: argument of type 'int' is not iterable\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_1_3/tmp1075_simulator.py:26: TypeError: argument of type 'int' is not iterable\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - TypeError: argument ...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - TypeError: argument ...\nFAILED test_d2d_blackbox.py::test_single_byte_semantics - TypeError: argument...\n4 failed, 1 passed, 3 skipped in 0.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n\n        if addr == 0x01 and \"OS\" in self.regs[addr]:  # OS bit is write-only\n            self.regs[addr] &= 0x7FFF  # Clear the OS bit\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 121.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": ".F...sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_0/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\n1 failed, 4 passed, 3 skipped in 0.75s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n\n        # Fields with read_as must always return that value\n        if addr == 0x01:  # CFGR\n            if (data & 0x80) != 0:  # OS bit\n                self.regs[addr] &= 0x7FFF  # read_as = 0\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 146.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_1/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 1.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1 and addr in [0x01, 0x0F]:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1 and addr in [0x01, 0x02, 0x03]:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        elif addr in [0x01, 0x02, 0x03]:\n            self.regs[addr] = (data & 0xFFFF)\n        elif addr == 0x0F:\n            pass  # DIEID is read-only\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 169.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".FFF.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_2/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_2/test_d2d_blackbox.py:160: AssertionError: CFGR.R[14:13] 写全 1 后读回 0，期望 3（整寄存器 0xff）\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_2/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CFGR...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n3 failed, 2 passed, 3 skipped in 1.74s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n\n        if addr == 0x01:  # CFGR\n            self.regs[addr] = (self.regs[addr] & 0x8FFF) | 0x0000  # Reset OS bit\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 198.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 3,
+  "tail": ".F.F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_3/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_2_3/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n2 failed, 3 passed, 3 skipped in 1.01s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n\n        # Ignore writes to RO registers\n        if addr in [0x01, 0x0F]:\n            self.regs[addr] = (self.regs[addr] & 0xFF00) | (self.regs[0x01] & 0x00FF)\n\n        # Write to read_as fields\n        if addr == 0x01:\n            self.regs[0x01] = (self.regs[0x01] & 0x00FF) | ((data & 0xFF) << 8)\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 220.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 3,
+  "tail": ".F.F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_0/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_0/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n2 failed, 3 passed, 3 skipped in 0.55s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 249.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.FFsss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_1/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_1/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_1/test_d2d_blackbox.py:216: AssertionError: 单字节写 0x01 后整寄存器期望 0x1ff，实得 0x1\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\nFAILED test_d2d_blackbox.py::test_single_byte_semantics - AssertionError: 单...\n3 failed, 2 passed, 3 skipped in 0.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1 and addr in [0x01, 0x0F]:  # CFGR and DIEID\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1 and addr in [0x01, 0x0F]:  # CFGR and DIEID\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n\n        # Ignore writes to RO fields\n        if addr in [0x01, 0x02, 0x03]:  # CFGR, LLIM, HLIM\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 269.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFFsss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_2/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_2/test_d2d_blackbox.py:160: AssertionError: CFGR.R[14:13] 写全 1 后读回 0，期望 3（整寄存器 0xff）\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_2/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_2/test_d2d_blackbox.py:216: AssertionError: 单字节写 0x01 后整寄存器期望 0x1ff，实得 0x1\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CFGR...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\nFAILED test_d2d_blackbox.py::test_single_byte_semantics - AssertionError: 单...\n4 failed, 1 passed, 3 skipped in 0.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n\n        # ignore writes to RO fields\n        if addr in [0x01, 0x0F]:\n            self.regs[addr] = data\n\n        # fields with read_as value\n        if addr == 0x01:\n            self.regs[0x01] = (self.regs[0x01] & 0x80FF) | (data & 0x7F)\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 289.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67btmp1075_3_3/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.52s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1 and addr in [0x01, 0x0F]:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in [0x01, 0x02, 0x03]:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0x00FF) << 8)\n            else:\n                self.regs[addr] = (data & 0xFFFF)\n        elif addr == 0x01 and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0x00FF)\n        elif addr == 0x0F:\n            pass  # DIEID is read-only\n"
+ }
+]

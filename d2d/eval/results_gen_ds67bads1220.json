@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 30.9,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.50s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 本基准目标器件寄存器宽度（16 位为主）\n\n    def __init__(self):\n        self.regs = {0x00: 0x0000, 0x01: 0x0000, 0x02: 0x0000, 0x03: 0x0000}  # addr(int) -> value(int)\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 2:\n            return self.regs[addr]\n        else:\n            return (self.regs[addr] & 0xFF00) >> 8\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 2:\n            self.regs[addr] = data\n        else:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0x00FF) << 8)\n\n        if addr == 0x00 and self.regs[addr] & 0x0008:  # PGA_BYPASS bit is RW\n            self.regs[addr] |= 0x0008\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 49.4,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.40s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 67.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.20s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x00: 0x0000, 0x01: 0x0000, 0x02: 0x0000, 0x03: 0x0000}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 89.7,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.74s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONFIG0\n            0x01: 0x0000,  # CONFIG1\n            0x02: 0x0000,  # CONFIG2\n            0x03: 0x0000   # CONFIG3\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            data = (data & 0xFF) << 8\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | data\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 116.2,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.32s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x00,\n            0x01: 0x00,\n            0x02: 0x00,\n            0x03: 0x00\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        elif nbytes == 2:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Invalid number of bytes: {nbytes}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        elif nbytes == 2:\n            self.regs[addr] = data\n        else:\n            raise ValueError(f\"Invalid number of bytes: {nbytes}\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 135.9,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.16s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 本基准目标器件寄存器宽度（16 位为主）\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x00: 0x0000, 0x01: 0x0000, 0x02: 0x0000, 0x03: 0x0000}  # addr(int) -> value(int)\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 151.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.59s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 166.0,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.91s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x00,\n            0x01: 0x00,\n            0x02: 0x00,\n            0x03: 0x00\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 200.5,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.97s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x00: 0x00, 0x01: 0x00, 0x02: 0x00, 0x03: 0x00}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: 0x{addr:02x}\")\n        if nbytes not in (1, 2):\n            raise ValueError(f\"Invalid number of bytes: {nbytes}\")\n\n        data = self.regs[addr]\n\n        if nbytes == 1:\n            data = (data & 0xFF00) | ((data >> 8) & 0xFF)\n\n        return data\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: 0x{addr:02x}\")\n        if nbytes not in (1, 2):\n            raise ValueError(f\"Invalid number of bytes: {nbytes}\")\n\n        if nbytes == 2:\n            self.regs[addr] = data\n        else:\n            self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0xFF)\n\n        # Handle read-only and write-only fields\n        if addr == 0x00:\n            if (data & 0xF0) != (self.regs[addr] & 0xF0):\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xF0) << 8)\n        elif addr == 0x03:\n            if (data & 0x80) != (self.regs[addr] & 0x80):\n                self.regs[addr] = (self.regs[addr] & 0x7F00) | (data & 0x7F)\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 224.8,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.68s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x00,  # CONFIG0\n            0x01: 0x00,  # CONFIG1\n            0x02: 0x00,  # CONFIG2\n            0x03: 0x00   # CONFIG3\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address {addr}\")\n\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        elif nbytes == 2:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Invalid number of bytes {nbytes}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address {addr}\")\n\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        elif nbytes == 2:\n            self.regs[addr] = data\n        else:\n            raise ValueError(f\"Invalid number of bytes {nbytes}\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 244.2,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.94s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x00: 0x00, 0x01: 0x00, 0x02: 0x00, 0x03: 0x00}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 262.5,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.55s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1220_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x00: 0x00, 0x01: 0x00, 0x02: 0x00, 0x03: 0x00}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ }
+]
