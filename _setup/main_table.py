@@ -96,7 +96,7 @@ def chip_matrix(part, tier, include_b=False):
     """逐颗 × 逐份 × 逐断言的状态矩阵。tier=gold|relax|relaxc"""
     rows = json.load(io.open(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % TAGS[part]), encoding="utf-8"))
     if include_b:
-        b_tag = TAGS[part] + "_b"
+        b_tag = "tmp1075kt_b" if part == "TMP1075" else TAGS[part] + "_b"
         b_path = os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % b_tag)
         if os.path.exists(b_path):
             rows = rows + json.load(io.open(b_path, encoding="utf-8"))
@@ -375,10 +375,11 @@ def main():
            "vacuous_excluded": vac,
            "dimensions": dims, "assertion4_split": split, "gradient": grad,
            "per_chip_rate_pct": {c: round(rate[c] * 100, 1) for c in chips}}
-    dst = os.path.join(ROOT, "d2d", "eval", "main_table.json")
+    suffix = "_n24" if args.include_b else ""
+    dst = os.path.join(ROOT, "d2d", "eval", "main_table%s.json" % suffix)
     json.dump(out, io.open(dst, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
 
-    csvp = os.path.join(ROOT, "d2d", "eval", "main_table.csv")
+    csvp = os.path.join(ROOT, "d2d", "eval", "main_table%s.csv" % suffix)
     with io.open(csvp, "w", encoding="utf-8-sig", newline="") as f:
         w = csv.writer(f)
         w.writerow(["断言", "名称", "聚类数(颗)", "失败/适用", "失败率%", "推断方式", "区间",
