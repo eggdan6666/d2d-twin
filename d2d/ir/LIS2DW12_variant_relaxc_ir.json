@@ -1,0 +1,559 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "第 13 颗，也是**第一个非 TI/Bosch 厂商（ST）**。来源 = corpus/data/raw_pdf/.../LIS2DW12.pdf 直读（65 页）；注意 d2d/parsed/LIS2DW12/auto/LIS2DW12.md 有损（SOFT_RESET 在解析稿里 0 命中、COM_OR_EN/LPEN 丢失），故金标以 PDF 文本层为准。选它的理由：ST 只在**寄存器级**给 R / R/W，逐位不给访问码 ⇒ 这是 C 档（未文档化）密度最高的一颗，正好检验 Q0 三档框架在粗文档厂商上还剩多少计分断言。",
+ "device": "LIS2DW12",
+ "vendor": "STMicroelectronics",
+ "interface": "I2C/SPI",
+ "reg_width": 8,
+ "i2c": {
+  "addresses_7bit": [
+   "0x6B",
+   "0x6A"
+  ],
+  "note": "SA0 引脚选择（§8.1）；MVP 不建模总线地址"
+ },
+ "registers": [
+  {
+   "name": "OUT_T_L",
+   "addr": "0x0D",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "温度低字节（p.35 Table 23）TEMP[3:0] 有效，[7:4] 读 0",
+   "fields": [
+    {
+     "name": "TEMP_3_0",
+     "bits": "3:0",
+     "access": "RO",
+     "reset": 0,
+     "tier": "A",
+     "desc": "Table 22 位图里 [7:4] 标 0（无行名）⇒ 文档明示读 0"
+    },
+    {
+     "name": "ZERO_7_4",
+     "bits": "7:4",
+     "access": "RO",
+     "reset": 0,
+     "tier": "A",
+     "desc": "Table 22 位图直接写 0，无字段名、无访问码列"
+    }
+   ]
+  },
+  {
+   "name": "OUT_T_H",
+   "addr": "0x0E",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "温度高字节（p.35 Table 24/25）TEMP[11:4]，与 OUT_T_L 组成 16-bit 补码，0 LSB=25°C，灵敏度 16 LSB/°C",
+   "fields": [
+    {
+     "name": "TEMP_11_4",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "8 位全命名，无保留位"
+    }
+   ]
+  },
+  {
+   "name": "WHO_AM_I",
+   "addr": "0x0F",
+   "access": "RO",
+   "reset": "0x44",
+   "desc": "器件 ID（p.33 寄存器地图默认 01000100 = 0x44）。**非零复位值**，② 的硬断言点",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 68,
+     "desc": "固定 0x44"
+    }
+   ]
+  },
+  {
+   "name": "CTRL1",
+   "addr": "0x20",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.36 Table 27/28：ODR3 ODR2 ODR1 ODR0 MODE1 MODE0 LP_MODE1 LP_MODE0 —— 8 位全命名",
+   "fields": [
+    {
+     "name": "ODR",
+     "bits": "7:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "输出数据率与功耗模式选择（Table 29）"
+    },
+    {
+     "name": "MODE",
+     "bits": "3:2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "模式选择（Table 30）"
+    },
+    {
+     "name": "LP_MODE",
+     "bits": "1:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "低功耗模式选择（Table 31）"
+    }
+   ]
+  },
+  {
+   "name": "CTRL2",
+   "addr": "0x21",
+   "access": "RW",
+   "reset": "0x04",
+   "desc": "p.37 Table 32/33：BOOT SOFT_RESET 0(1) CS_PU_DISC BDU IF_ADD_INC I2C_DISABLE SIM；默认 0000 0100（IF_ADD_INC=1）。**本颗最有价值的寄存器**：一个自清零软复位位 + 一个脚注『must be set to 0』的无访问码位",
+   "fields": [
+    {
+     "name": "BOOT",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "写 1 从 NVM 重载校准参数"
+    },
+    {
+     "name": "SOFT_RESET",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "ST 叫 SOFT_RESET（不是 SW_RESET）。写 1 复位后**自动回 0** ⇒ ⑤ 写触发/自清零；解析稿里 0 命中，只有 PDF 文本层有"
+    },
+    {
+     "name": "MUST_BE_ZERO",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0,
+     "tier": "C",
+     "tier_evidence": "p.37 Table 32 位图这一格只写『0』并加脚注『This bit must be set to 0 for the correct operation of the device』——**没有 TYPE/访问码列**，读回行为也未说明 ⇒ C 档（Q0 约定敏感）",
+     "desc": "[仅 C 档变体] 位图里无字段名，脚注要求保持 0"
+    },
+    {
+     "name": "CS_PU_DISC",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "片选上拉断开"
+    },
+    {
+     "name": "BDU",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "块数据更新"
+    },
+    {
+     "name": "IF_ADD_INC",
+     "bits": "2",
+     "access": "RW",
+     "reset": 1,
+     "desc": "地址自增，默认 1（决定复位值 0x04）"
+    },
+    {
+     "name": "I2C_DISABLE",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "禁用 I2C"
+    },
+    {
+     "name": "SIM",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "SPI 三线/四线选择"
+    }
+   ]
+  },
+  {
+   "name": "CTRL4_INT1_PAD_CTRL",
+   "addr": "0x23",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.39 Table 36/37：INT1_6D / SINGLE_TAP / WU / FF / TAP / DIFF5 / FTH / DRDY，8 位全命名",
+   "fields": [
+    {
+     "name": "INT1_6D",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_SINGLE_TAP",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_WU",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_FF",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_TAP",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_DIFF5",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_FTH",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT1_DRDY",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "CTRL5_INT2_PAD_CTRL",
+   "addr": "0x24",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.40 Table 38/39：INT2_SLEEP_STATE / SLEEP_CHG / BOOT / DRDY_T / OVR / DIFF5 / FTH / DRDY",
+   "fields": [
+    {
+     "name": "INT2_SLEEP_STATE",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_SLEEP_CHG",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_BOOT",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_DRDY_T",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_OVR",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_DIFF5",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_FTH",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "INT2_DRDY",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "OUT_T",
+   "addr": "0x26",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "p.42 Table 43/44：8 位温度输出，1°C/LSB，25°C 为 0 LSB",
+   "fields": [
+    {
+     "name": "TEMP_7_0",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "STATUS",
+   "addr": "0x27",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "p.45 Table 45/46：FIFO_THS WU_IA SLEEP_STATE DOUBLE_TAP SINGLE_TAP 6D_IA FF_IA DRDY，8 位全命名（只读）",
+   "fields": [
+    {
+     "name": "FIFO_THS",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "WU_IA",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "SLEEP_STATE",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "DOUBLE_TAP",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "SINGLE_TAP",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "SIXD_IA",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "FF_IA",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "DRDY",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "FIFO_CTRL",
+   "addr": "0x2E",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.44 Table 53/54：FMode2 FMode1 FMode0 FTH4..FTH0，8 位全命名；FMode 默认 000",
+   "fields": [
+    {
+     "name": "FMODE",
+     "bits": "7:5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "FIFO 模式选择（Table 55）"
+    },
+    {
+     "name": "FTH",
+     "bits": "4:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "FIFO 阈值水位"
+    }
+   ]
+  },
+  {
+   "name": "FIFO_SAMPLES",
+   "addr": "0x2F",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "p.45 Table 56/57：FIFO_FTH FIFO_OVR Diff5..Diff0（只读）",
+   "fields": [
+    {
+     "name": "FIFO_FTH",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "FIFO_OVR",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0
+    },
+    {
+     "name": "DIFF",
+     "bits": "5:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未读样点数，100000=满 32 样点"
+    }
+   ]
+  },
+  {
+   "name": "WAKE_UP_SRC",
+   "addr": "0x38",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "p.50 Table 77/78：位图前两格写『0』，其后 FF_IA SLEEP_STATE_IA WU_IA X_WU Y_WU Z_WU。ST 的中断标志是**锁存、读该寄存器即清除**",
+   "fields": [
+    {
+     "name": "ZERO_7_6",
+     "bits": "7:6",
+     "access": "RO",
+     "reset": 0,
+     "tier": "C",
+     "tier_evidence": "p.50 Table 77 位图 [7:6] 只写 0，无字段名、无访问码列 ⇒ C 档",
+     "desc": "位图标 0"
+    },
+    {
+     "name": "FF_IA",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "自由落体事件标志，读清除"
+    },
+    {
+     "name": "SLEEP_STATE_IA",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear"
+    },
+    {
+     "name": "WU_IA",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear"
+    },
+    {
+     "name": "X_WU",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear"
+    },
+    {
+     "name": "Y_WU",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear"
+    },
+    {
+     "name": "Z_WU",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear"
+    }
+   ]
+  },
+  {
+   "name": "X_OFS_USR",
+   "addr": "0x3C",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.54 Table 85/86：X_OFS_USR[7:0] 二补码用户偏移（权重由 CTRL7.USR_OFF_W 决定）",
+   "fields": [
+    {
+     "name": "X_OFS_USR",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "Y_OFS_USR",
+   "addr": "0x3D",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.54 Table 87/88，同 X",
+   "fields": [
+    {
+     "name": "Y_OFS_USR",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "Z_OFS_USR",
+   "addr": "0x3E",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "p.54-55 Table 89/90，同 X",
+   "fields": [
+    {
+     "name": "Z_OFS_USR",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  }
+ ],
+ "excluded_blocks": [
+  {
+   "block": "0x00–0x0C、0x10–0x1F、0x40–0xFF",
+   "reason": "p.33-34 寄存器地图标 RESERVED；脚注『Registers marked as Reserved must not be changed. Writing to those registers may cause permanent damage』⇒ 不做写断言（且地址级保留，不是位级 Q0 问题）"
+  },
+  {
+   "block": "0x28–0x2D OUT_X_L..OUT_Z_H",
+   "reason": "加速度输出：读即清除 + 地址自增（IF_ADD_INC）+ 数据率驱动的动态值，复位断言与 ③ 快照语义都要先建 FIFO/输出数据模型；MVP 不建模，避免把动态量当可存储位"
+  },
+  {
+   "block": "0x22 CTRL3、0x25 CTRL6、0x30–0x37、0x39–0x3B、0x3F CTRL7",
+   "reason": "位表已定位但未逐位抄全（CTRL3/CTRL6 的位名在本次 PDF 抽取里落在未打印页），金标不猜——留待下一轮补，宁可少 5 个寄存器也不引入错判据（INA3221 的教训）"
+  },
+  {
+   "block": "0x33 INT_DUR 的『RMW』类型",
+   "reason": "p.33 地图里 Type 列写 RMW（read-modify-write），是基准里第一次出现该访问码；断言怎么写需要设计，不进本颗"
+  }
+ ],
+ "proofread_record": [
+  {
+   "id": "L1",
+   "item": "CTRL2[5] 定 C 档（脚注 must be set to 0，无访问码列）",
+   "risk": "它决定 ④b 在这颗上有没有份；若你认为脚注即等于文档明示读 0，应改 A",
+   "verify": "PDF p.37 Table 32 位图第三格 + 脚注 (1)"
+  },
+  {
+   "id": "L2",
+   "item": "WAKE_UP_SRC[7:6] 定 C 档（位图只写 0）",
+   "risk": "同上",
+   "verify": "PDF p.50 Table 77"
+  },
+  {
+   "id": "L3",
+   "item": "SOFT_RESET(CTRL2[6]) 编成 read_as=0",
+   "risk": "低：ST 原文『performs a reset of the internal blocks and then returns to 0』",
+   "verify": "PDF p.37 Table 33"
+  },
+  {
+   "id": "L4",
+   "item": "解析稿 md 不可用于本颗（SOFT_RESET/COM_OR_EN/LPEN 等位名在 md 里 0 命中）",
+   "risk": "若别人拿 md 复核会得出『手册没写』的错误结论",
+   "verify": "对比 d2d/parsed/LIS2DW12/auto/LIS2DW12.md 与 PDF p.36-40"
+  }
+ ]
+}

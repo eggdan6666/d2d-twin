@@ -27,7 +27,9 @@ TAGS = {"TMP102": "tmp102kt", "BME280": "bme280kt", "TMP100": "tmp100kt",
         "HDC2021": "hdc2021kt", "TMP117": "tmp117kt", "ADS1220": "ads1220kt",
         "LM83": "lm83kt",
         "TPS23861": "tps23861kt",
-        "TMP126": "tmp126kt"}
+        "TMP126": "tmp126kt",
+        "LIS2DW12": "lis2dw12kt",
+        "INA226": "ina226kt"}
 RES_NAME = re.compile(r"UNUSED|RESERVED|_RES\b|^RES\d*$", re.I)
 RES_DESC = re.compile(r"恒 0|未用|保留|tie.?0|not used", re.I)
 

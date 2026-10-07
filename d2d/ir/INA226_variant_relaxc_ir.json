@@ -1,0 +1,348 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "第 14 颗。来源 = corpus/data/raw_pdf/TI/INA226.pdf（SBOS547C）人工直读：p.22 Table 7-1/7-2、p.23 RST/AVG/VBUSCT/VSHCT 原文、p.25 BUS_VOLTAGE 脚注、p.26 Table 7-9~7-12。选它的理由有两条：① CONFIG.RST 是**自清零软复位位**（给 ⑤ 再加一个簇，且与 INA3221 同厂不同族 ⇒ 用于检验 R1『IP 模板复用』假说）；② 它在开源语料里极普及 ⇒ 是 Q1b『参数化记忆 vs 结构化转录』最强的靶。",
+ "device": "INA226",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x40",
+   "0x41",
+   "0x44",
+   "0x45",
+   "0x46"
+  ],
+  "note": "A0/A1 引脚组合（§6.3）；MVP 不建模总线地址"
+ },
+ "registers": [
+  {
+   "name": "CONFIG",
+   "addr": "0x00",
+   "access": "RW",
+   "reset": "0x4127",
+   "desc": "配置寄存器（p.22 Table 7-2；POR 二进制 01000001 00100111 = 4127h，TYPE 列寄存器级 R/W）",
+   "fields": [
+    {
+     "name": "RST",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "p.23 原文『Setting this bit to 1 generates a system reset that is the same as power-on reset. Resets all registers to default values; **this bit self-clears**.』⇒ 写触发 + 自清零（⑤）"
+    },
+    {
+     "name": "UNNAMED_14_12",
+     "bits": "14:12",
+     "access": "RW",
+     "reset": 4,
+     "tier": "C",
+     "tier_evidence": "p.22 Table 7-2 位图这三格**只有 POR 值 1/0/0、无位名、正文无描述**；寄存器级 TYPE 是 R/W ⇒ 未文档化保留位，受 Q0 裁决影响。注意复位值非零（100b），是基准里第一个『非零 C 档』，靠 is_convention_bit 的 tier==C 短路才不会被漏算",
+     "desc": "[仅 C 档变体] 未命名保留位，POR=100b"
+    },
+    {
+     "name": "AVG",
+     "bits": "11:9",
+     "access": "RW",
+     "reset": 0,
+     "desc": "平均模式 000=1 … 111=1024（Table 7-3，默认 000）"
+    },
+    {
+     "name": "VBUSCT",
+     "bits": "8:6",
+     "access": "RW",
+     "reset": 4,
+     "desc": "总线电压转换时间（Table 7-4，默认 100b=1.1ms）"
+    },
+    {
+     "name": "VSHCT",
+     "bits": "5:3",
+     "access": "RW",
+     "reset": 4,
+     "desc": "分流电压转换时间（Table 7-5，默认 100b=1.1ms）"
+    },
+    {
+     "name": "MODE",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 7,
+     "desc": "工作模式，默认 111 = 分流+总线连续测量"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT_VOLTAGE",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "分流电压测量值（p.22 Table 7-1，TYPE=R；有符号）",
+   "fields": [
+    {
+     "name": "SV",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "15 位幅值 + 符号；未建模 ADC 输入，恒为复位值"
+    }
+   ]
+  },
+  {
+   "name": "BUS_VOLTAGE",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "总线电压测量值（p.22 Table 7-1，TYPE=R）",
+   "fields": [
+    {
+     "name": "RESERVED_15",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "tier": "A",
+     "tier_evidence": "p.25 脚注原文『D15 is always zero because bus voltage can only be positive』⇒ 文档明说恒读 0，计分且不受 Q0 影响",
+     "desc": "符号位恒 0"
+    },
+    {
+     "name": "BV",
+     "bits": "14:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "总线电压幅值， LSB 由量程决定"
+    }
+   ]
+  },
+  {
+   "name": "POWER",
+   "addr": "0x03",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "功率寄存器（p.26 Table 7-9，PD15..PD0 全具名，TYPE=R；脚注 2：因 CALIBRATION 默认 0 故 POR=0）",
+   "fields": [
+    {
+     "name": "PD",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "CURRENT",
+   "addr": "0x04",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "电流寄存器（p.26 Table 7-10，D15=CSIGN 具名符号位 + CD14..CD0，TYPE=R）",
+   "fields": [
+    {
+     "name": "CSIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Table 7-10 明确给名 CSIGN（符号），非保留位"
+    },
+    {
+     "name": "CD",
+     "bits": "14:0",
+     "access": "RO",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "CALIBRATION",
+   "addr": "0x05",
+   "access": "RW",
+   "reset": "0x0000",
+   "desc": "校准寄存器（p.26 Table 7-11，TYPE=R/W）",
+   "fields": [
+    {
+     "name": "UNNAMED_15",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "tier": "C",
+     "tier_evidence": "p.26 Table 7-11 该格位名是『—』、POR=0，正文无描述，而寄存器整体标 R/W ⇒ 未文档化保留位（C 档）",
+     "desc": "[仅 C 档变体] 未命名保留位"
+    },
+    {
+     "name": "FS",
+     "bits": "14:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "校准系数 FS14..FS0"
+    }
+   ]
+  },
+  {
+   "name": "MASK_ENABLE",
+   "addr": "0x06",
+   "access": "RW",
+   "reset": "0x0000",
+   "desc": "屏蔽/使能寄存器（p.26 Table 7-12，TYPE=R/W）。AFF/CVRF/OVF 是硬件标志位；**本基准不建模转换与告警通路**，故它们在参考实现里恒为 0，也不声明 read_action（加了不改变判分，见 proofread_record）",
+   "fields": [
+    {
+     "name": "SOL",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "SUL",
+     "bits": "14",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "BOL",
+     "bits": "13",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "BUL",
+     "bits": "12",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "POL",
+     "bits": "11",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "CNVR",
+     "bits": "10",
+     "access": "RW",
+     "reset": 0,
+     "desc": "Conversion Ready 使能（注意：D10 是**具名可写位**，不是标志位）"
+    },
+    {
+     "name": "UNNAMED_9_5",
+     "bits": "9:5",
+     "access": "RW",
+     "reset": 0,
+     "tier": "C",
+     "tier_evidence": "p.26 Table 7-12 这五格位名全是『—』、POR=0、正文无描述 ⇒ C 档（未文档化保留位）",
+     "desc": "[仅 C 档变体] 未命名保留位 ×5"
+    },
+    {
+     "name": "AFF",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Alert Function Flag（硬件置位，未建模）"
+    },
+    {
+     "name": "CVRF",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Conversion Ready Flag（硬件置位，未建模）"
+    },
+    {
+     "name": "OVF",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Overrange Flag（硬件置位，未建模）"
+    },
+    {
+     "name": "APOL",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0
+    },
+    {
+     "name": "LEN",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "ALERT_LIMIT",
+   "addr": "0x07",
+   "access": "RW",
+   "reset": "0x0000",
+   "desc": "告警门限（p.22 Table 7-1，TYPE=R/W，POR 0000h）",
+   "fields": [
+    {
+     "name": "AUL",
+     "bits": "15:0",
+     "access": "RW",
+     "reset": 0
+    }
+   ]
+  },
+  {
+   "name": "MANUFACTURER_ID",
+   "addr": "0xFE",
+   "access": "RO",
+   "reset": "0x5449",
+   "desc": "厂商 ID = 0x5449（ASCII 'TI'），p.22 Table 7-1，TYPE=R ⇒ ② 的硬断言点",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 21577
+    }
+   ]
+  },
+  {
+   "name": "DIE_ID",
+   "addr": "0xFF",
+   "access": "RO",
+   "reset": "0x2260",
+   "runtime_value": true,
+   "desc": "芯片 ID。p.22 Table 7-1 脚注 (3)：**Die COO: 2260 = USA or Japan, 2261 = USA** ⇒ 复位值随封装产地而变，不是唯一确定值",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 8800
+    }
+   ],
+   "runtime_value_note": "2260h 或 2261h"
+  }
+ ],
+ "excluded_blocks": [
+  {
+   "block": "指针 08h–FFh 之间未列出的地址",
+   "reason": "Table 7-1 只给 00h–07h 与 FEh/FFh；其余地址行为未定义，不断言"
+  },
+  {
+   "block": "AFF/CVRF/OVF 的读清除语义",
+   "reason": "p.27 的清除条件（写 CONFIG 或读 Mask/Enable 即清除）本次未在文本层取到，且基准不建模转换/告警 ⇒ 这些位恒 0，不声明 read_action；若将来建模告警需回来补"
+  }
+ ],
+ "proofread_record": [
+  {
+   "id": "N1",
+   "item": "CONFIG[14:12] 定为 C 档且复位值非零（100b）",
+   "risk": "基准第一个非零 C 档；若 is_convention_bit 不短路 reset==0，④b 会静默漏算这一档",
+   "verify": "p.22 Table 7-2 POR 行 D14=1,D13=0,D12=0"
+  },
+  {
+   "id": "N2",
+   "item": "DIE_ID 复位值二义（2260/2261）",
+   "risk": "写死 0x2260 会让 ② 变成可争议断言；已用 runtime_value 标注，但 harness 目前仍按 reset 字段判 ⇒ 需人工裁决是否把 0xFF 排除出 ②",
+   "verify": "p.22 Table 7-1 脚注 (3)"
+  },
+  {
+   "id": "N3",
+   "item": "RST 自清零 + 全寄存器回默认",
+   "risk": "低（原文直引）",
+   "verify": "p.23『this bit self-clears』"
+  },
+  {
+   "id": "N4",
+   "item": "外部 AI 提供的 IR 草稿里把 CALIBRATION/MASK_ENABLE 的未命名位写成普通 RO 无 tier、且未处理 DIE_ID 二义",
+   "risk": "会同时漏算 ④b 并制造一个假 ② 断言",
+   "verify": "对照 p.22/p.26 位图"
+  }
+ ]
+}

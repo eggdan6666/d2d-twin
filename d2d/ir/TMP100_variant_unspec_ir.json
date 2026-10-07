@@ -127,8 +127,8 @@
      "access": "UNSPEC",
      "reset": 0,
      "desc": "[unspec 变体] 恒 0，写忽略（RW 寄存器内的只读位）",
-     "tier": "UNVERIFIED",
-     "tier_evidence": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行"
+     "tier": "C",
+     "tier_evidence": "裁决(用户)：全文仅 3 处 R/W（2 处 I2C 协议描述 + 寄存器级 Table 5 TYPE），无逐位码。注：qoder 保留一条异议——p.9 有 prose『unused LSBs set to zero』且 Table 1 的数据格式对 TEMP/TLOW/THIGH 通用，按 A 定义的另一半（文档说明读 0）也说得通；此段是 ④b 里唯一有争议的 7 份"
     }
    ]
   },
@@ -152,8 +152,8 @@
      "access": "UNSPEC",
      "reset": 0,
      "desc": "[unspec 变体] 恒 0，写忽略",
-     "tier": "UNVERIFIED",
-     "tier_evidence": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行"
+     "tier": "C",
+     "tier_evidence": "同 TMP100.TLOW，含同一条异议"
     }
    ]
   }

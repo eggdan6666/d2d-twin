@@ -315,7 +315,7 @@
  },
  {
   "chip": "TMP117",
-  "convention_bits": 2,
+  "convention_bits": 1,
   "strict": {
    "n": 12,
    "green": 0,
@@ -352,9 +352,9 @@
     "test_write_trigger_fields": 11
    },
    "diagnostic": {
-    "samples_observed": 10,
-    "reserved_written_as_storage": 10,
-    "pct": 100.0,
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
     "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
    }
   }
@@ -527,6 +527,96 @@
     "samples_observed": 0,
     "reserved_written_as_storage": 0,
     "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "LIS2DW12",
+  "convention_bits": 1,
+  "strict": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 24,
+   "assert_total": 48,
+   "rate": 50.0,
+   "fail_by_test": {
+    "test_readonly_protection": 10,
+    "test_rw_field_persistence": 8,
+    "test_write_trigger_fields": 6
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 32,
+   "assert_total": 48,
+   "rate": 66.7,
+   "fail_by_test": {
+    "test_readonly_protection": 10,
+    "test_write_trigger_fields": 6
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 32,
+   "assert_total": 48,
+   "rate": 66.7,
+   "fail_by_test": {
+    "test_readonly_protection": 10,
+    "test_write_trigger_fields": 6
+   },
+   "diagnostic": {
+    "samples_observed": 12,
+    "reserved_written_as_storage": 8,
+    "pct": 66.7,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "INA226",
+  "convention_bits": 3,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 20,
+   "assert_total": 48,
+   "rate": 41.7,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_readonly_protection": 9,
+    "test_write_trigger_fields": 7
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 20,
+   "assert_total": 48,
+   "rate": 41.7,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_readonly_protection": 9,
+    "test_write_trigger_fields": 7
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 20,
+   "assert_total": 48,
+   "rate": 41.7,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_readonly_protection": 9,
+    "test_write_trigger_fields": 7
+   },
+   "diagnostic": {
+    "samples_observed": 12,
+    "reserved_written_as_storage": 12,
+    "pct": 100.0,
     "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
    }
   }

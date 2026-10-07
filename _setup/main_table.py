@@ -30,9 +30,11 @@ TAGS = {"TMP1075": "kt", "BMP280": "bmp280kt", "TMP102": "tmp102kt", "BME280": "
         "TMP100": "tmp100kt", "INA3221": "ina3221kt", "HDC2021": "hdc2021kt",
         "TMP117": "tmp117kt", "ADS1220": "ads1220kt", "LM83": "lm83kt",
         "TPS23861": "tps23861kt",
-        "TMP126": "tmp126kt"}
+        "TMP126": "tmp126kt",
+        "LIS2DW12": "lis2dw12kt",
+        "INA226": "ina226kt"}
 ORDER = ["TMP1075", "BMP280", "TMP102", "BME280", "TMP100", "INA3221", "HDC2021", "TMP117",
-         "ADS1220", "LM83", "TPS23861", "TMP126"]
+         "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226"]
 DIM = {  # 断言 → (编号, 论文里的名字)
     "test_reset_values": ("②", "Reset values"),
     "test_readonly_protection": ("③", "RO write protection"),
@@ -90,9 +92,14 @@ def make_relaxc(ir, part):
     return vpath, n
 
 
-def chip_matrix(part, tier):
+def chip_matrix(part, tier, include_b=False):
     """逐颗 × 逐份 × 逐断言的状态矩阵。tier=gold|relax|relaxc"""
     rows = json.load(io.open(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % TAGS[part]), encoding="utf-8"))
+    if include_b:
+        b_tag = TAGS[part] + "_b"
+        b_path = os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % b_tag)
+        if os.path.exists(b_path):
+            rows = rows + json.load(io.open(b_path, encoding="utf-8"))
     gp = os.path.join(ROOT, "d2d", "ir", "%s_gold_ir.json" % part)
     if tier == "gold":
         ir_file = "%s_gold_ir.json" % part
@@ -221,8 +228,14 @@ def declared(ir, t):
 def main():
     from joblock import acquire as _lock
     _lock("main_table")
+    import hashlib
+    harness_path = os.path.join(ROOT, "d2d", "eval", "test_d2d_blackbox.py")
+    harness_md5 = hashlib.md5(open(harness_path, "rb").read()).hexdigest()
+    print("Harness MD5: %s" % harness_md5, flush=True)
+
     ap = argparse.ArgumentParser()
     ap.add_argument("--quick", action="store_true", help="只跑新落分的两颗（调试用）")
+    ap.add_argument("--include-b", action="store_true", help="并入 *_kt_b 加样批样本 (n=24)")
     args = ap.parse_args()
     chips = ["ADS1220", "LM83", "TPS23861", "TMP126"] if args.quick else ORDER
     chips = [c for c in chips if os.path.exists(os.path.join(ROOT, "d2d", "eval", "results_gen_%s.json" % TAGS[c]))]
@@ -230,9 +243,9 @@ def main():
     strict, relax, relaxc = {}, {}, {}
     per_chip_green = {}
     for c in chips:
-        strict[c], g_s, n_s = chip_matrix(c, "gold")
-        relax[c], g_r, _ = chip_matrix(c, "relax")
-        relaxc[c], _, _ = chip_matrix(c, "relaxc")
+        strict[c], g_s, n_s = chip_matrix(c, "gold", include_b=args.include_b)
+        relax[c], g_r, _ = chip_matrix(c, "relax", include_b=args.include_b)
+        relaxc[c], _, _ = chip_matrix(c, "relaxc", include_b=args.include_b)
         per_chip_green[c] = {"strict": g_s, "relax": g_r, "n": n_s}
         print("  %-8s 全绿 strict=%2d/%d relax=%2d/%d" % (c, g_s, n_s, g_r, n_s), flush=True)
 
@@ -354,7 +367,8 @@ def main():
                 "label": nm, "rho": rho, "p": round(p, 4), "method": how,
                 "values": {c: feats[c][k] for c in grp}}
 
-    out = {"generated": "2026-10-07", "chips": chips, "n_samples_per_chip": 12,
+    out = {"generated": "2026-10-07", "harness_md5": harness_md5, "chips": chips,
+           "n_samples_per_chip": "mixed (12 or 24)" if args.include_b else 12,
            "note_denominator": "passed/applicable；SKIPPED 由 IR 声明决定，不计入分母；白送通过另列",
            "min_clusters_for_ci": MIN_CLUSTER, "bootstrap_B": B,
            "per_chip_green": per_chip_green, "per_chip_scored": score_of,
