@@ -19,6 +19,7 @@ from joblock import acquire
 
 PART = (sys.argv[sys.argv.index("--part") + 1] if "--part" in sys.argv else "INA3221")
 TAG = (sys.argv[sys.argv.index("--tag") + 1] if "--tag" in sys.argv else "ina3221noreset")
+SCRUB = "--scrub-desc" in sys.argv or "q1c" in TAG
 LOG = os.path.join(ROOT, "_out", "q1.log")
 
 
@@ -43,7 +44,14 @@ def main():
     if "HAVE" in (o or ""):
         log("已有结果，跳过")
         return
-    log("等 GPU 锁（LIS2DW12 在跑）")
+
+    # 同步最新 gen_code.py 到远端以支持 scrub-desc
+    local_gen = os.path.join(ROOT, "d2d", "eval", "gen_code.py")
+    remote_gen = "%s/eval/gen_code.py" % cc.RD2D
+    ssh.put(local_gen, remote_gen)
+    log("已同步 gen_code.py 到远端")
+
+    log("等 GPU 锁")
     for _ in range(60):
         if gpu_free(ssh):
             break
@@ -51,11 +59,12 @@ def main():
     else:
         log("等锁超时，退出")
         return
+    extra = " --strip-reset" + (" --scrub-desc" if SCRUB else "")
     cmd = ('cd %s && %s nohup python -u eval/gen_code.py --model-path %s --ir %s_gold_ir.json '
-           '--tag %s --n 4 --temperature 0.7 --seeds 1,2,3 --strip-reset > %s 2>&1 & echo PID=$!'
-           % (cc.RD2D, cc.ENVS, cc.MODEL, PART, TAG, logf))
+           '--tag %s --n 4 --temperature 0.7 --seeds 1,2,3%s > %s 2>&1 & echo PID=$!'
+           % (cc.RD2D, cc.ENVS, cc.MODEL, PART, TAG, extra, logf))
     rc, o, e = ssh.run(cmd, timeout=120)
-    log("Q1 点火 %s（strip-reset 开）" % (re.search(r"PID=(\d+)", o or "").group(1) if re.search(r"PID=(\d+)", o or "") else "?"))
+    log("Q1 点火 %s（flags:%s）" % (re.search(r"PID=(\d+)", o or "").group(1) if re.search(r"PID=(\d+)", o or "") else "?", extra))
     t0 = time.time()
     while time.time() - t0 < 45 * 60:
         time.sleep(70)

@@ -52,19 +52,35 @@ Write class `{device}_Simulator(BaseVirtualSensor)` that behaviorally simulates 
 Output a single ```python code block with the complete implementation."""
 
 
-def strip_reset(node):
-    """递归删掉 reset 字段——**只用于构造 prompt，判据侧仍用完整 IR**。
-    Q1 实验：复位值 0/144 失败到底是"从手册抽取"还是"照我们给的 IR 转录"。"""
+def scrub_text(text):
+    if not isinstance(text, str):
+        return text
+    t = re.sub(r"0x[0-9a-fA-F]+", "—", text)
+    t = re.sub(r"\b[0-9a-fA-F]+h\b", "—", t, flags=re.I)
+    t = re.sub(r"\b[01]+b\b", "—", t)
+    t = re.sub(r"\b\d+\b", "—", t)
+    return t
+
+
+def clean_ir_for_prompt(node, strip_reset=False, scrub_desc=False):
     if isinstance(node, dict):
-        return {k: strip_reset(v) for k, v in node.items() if k != "reset"}
+        out = {}
+        for k, v in node.items():
+            if strip_reset and k == "reset":
+                continue
+            if scrub_desc and k == "desc":
+                out[k] = scrub_text(v)
+            else:
+                out[k] = clean_ir_for_prompt(v, strip_reset, scrub_desc)
+        return out
     if isinstance(node, list):
-        return [strip_reset(v) for v in node]
+        return [clean_ir_for_prompt(v, strip_reset, scrub_desc) for v in node]
     return node
 
 
-def build_prompt(ir, strip=False):
+def build_prompt(ir, strip=False, scrub=False):
     base_src = BASE_FILE.read_text(encoding="utf-8")
-    body = strip_reset(ir) if strip else ir
+    body = clean_ir_for_prompt(ir, strip_reset=strip, scrub_desc=scrub) if (strip or scrub) else ir
     return USER_TMPL.format(device=ir["device"], base_src=base_src,
                             ir=json.dumps(body, ensure_ascii=False, indent=1))
 
@@ -98,6 +114,8 @@ def main():
     ap.add_argument("--max-new", type=int, default=2048)
     ap.add_argument("--strip-reset", action="store_true",
                     help="prompt 里不给 reset 字段（判据侧仍用完整 IR）——Q1 抽取 vs 转录实验用")
+    ap.add_argument("--scrub-desc", action="store_true",
+                    help="prompt 里把 desc 里的数值替换为 —（消除散文泄漏——Q1c 干净消融用）")
     a = ap.parse_args()
 
     import torch
@@ -107,7 +125,7 @@ def main():
     ir = json.load(open(ir_file, encoding="utf-8"))
     device = ir["device"]
     module_name = f"{device.lower()}_simulator"
-    prompt = build_prompt(ir, a.strip_reset)
+    prompt = build_prompt(ir, a.strip_reset, a.scrub_desc)
     msgs = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": prompt}]
 
     tok = AutoTokenizer.from_pretrained(a.model_path)
