@@ -1,0 +1,882 @@
+[
+ {
+  "qid": "P001",
+  "type": "param",
+  "question": "What is the specified value for 'junction temperature range' of stm32l151cb (ST)?",
+  "gold": "-40 °C to 105 °C",
+  "evidence": "-40 °C ≤ TA ≤ 105°C",
+  "note": "gold丢负号,按evidence补全为范围"
+ },
+ {
+  "qid": "P002",
+  "type": "param",
+  "question": "What is the specified value for 'resistances below' of LMH6624 (TI)?",
+  "gold": "26 Ω",
+  "evidence": "resistances below 26 Ω",
+  "note": ""
+ },
+ {
+  "qid": "P008",
+  "type": "param",
+  "question": "What is the specified value for 'maximum junction temperature, tj' of LM2576 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Maximum junction temperature, TJ 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P013",
+  "type": "param",
+  "question": "What is the specified value for 'the current produces a voltage drop' of TPIC6595 (TI)?",
+  "gold": "0.5V",
+  "evidence": "The current produces a voltage drop of 0.5V",
+  "note": ""
+ },
+ {
+  "qid": "P014",
+  "type": "param",
+  "question": "What is the specified value for 'the power converter system.' of TPS54622 (TI)?",
+  "gold": "4.5 V to 17 V",
+  "evidence": "If tied together, the input voltage for VIN and PVIN can range from 4.5 V to 17 ",
+  "note": "补全范围上限"
+ },
+ {
+  "qid": "P016",
+  "type": "param",
+  "question": "What is the specified value for 'continuous currents above' of OPA2356 (TI)?",
+  "gold": "60mA",
+  "evidence": "60mA are not recommended",
+  "note": ""
+ },
+ {
+  "qid": "P020",
+  "type": "param",
+  "question": "What is the specified value for 'stop (flash in deep power down mode, slow wake-up time)' of stm32f410rb (ST)?",
+  "gold": "6 µA @ 25 °C",
+  "evidence": "wake-up time): down to 6 µA @ 25 °C;",
+  "note": "原gold 25°C是条件,真值为行内6 µA;参数名补全"
+ },
+ {
+  "qid": "P022",
+  "type": "param",
+  "question": "What is the specified value for 'rated for junction temperatures greater than' of LM5018 (TI)?",
+  "gold": "125°C",
+  "evidence": "rated for junction temperatures greater than 125°C",
+  "note": ""
+ },
+ {
+  "qid": "P023",
+  "type": "param",
+  "question": "What is the specified value for 'inductor current ripples can be calculated:' of LM3404 (TI)?",
+  "gold": "266 mA",
+  "evidence": "ΔiL(TYP) = [(24 - 7.1) × 7.43 × 10-7] / 47 × 10-6 = 266 mAP-P",
+  "note": ""
+ },
+ {
+  "qid": "P024",
+  "type": "param",
+  "question": "What is the specified value for 'junction-to-ambient thermal resistance' of TPS62150 (TI)?",
+  "gold": "45 °C/W",
+  "evidence": "Junction-to-ambient thermal resistance 45 °C/W",
+  "note": ""
+ },
+ {
+  "qid": "P026",
+  "type": "param",
+  "question": "What is the specified value for 'VM operating supply current' of DRV8825 (TI)?",
+  "gold": "5 mA to 8 mA",
+  "evidence": "| I VM operating supply current VM | | V = 24 V (VMx) | 5 8 | | | mA |",
+  "note": "原gold 24V是条件;行内真值5–8 mA(VM=24V,MIN/TYP/MAX被解析合并)"
+ },
+ {
+  "qid": "P027",
+  "type": "param",
+  "question": "What is the specified value for 'supply voltage' of TMP1075 (TI)?",
+  "gold": "1.7 V to 5.5 V",
+  "evidence": "1.7 V to 5.5 V",
+  "note": "补全范围"
+ },
+ {
+  "qid": "P029",
+  "type": "param",
+  "question": "What is the specified value for 'maximum junction temperature' of SN74LVC1G14 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Maximum junction temperature 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P030",
+  "type": "param",
+  "question": "What is the specified value for 'p/n power-supply voltage' of INA219 (TI)?",
+  "gold": "3V to 5.5V",
+  "evidence": "3V to 5.5V",
+  "note": "补全范围"
+ },
+ {
+  "qid": "P031",
+  "type": "param",
+  "question": "What is the specified value for 'under-voltage lockout hysteresis' of TPS7A47 (TI)?",
+  "gold": "177 mV",
+  "evidence": "Under-voltage lockout hysteresis 177 mV",
+  "note": "误报:gold 177 mV 与 evidence 一致,预筛不认识 mV"
+ },
+ {
+  "qid": "P033",
+  "type": "param",
+  "question": "What is the specified value for 'input bias current' of OPA4322 (TI)?",
+  "gold": "±0.2 pA typ, ±10 pA max",
+  "evidence": "| IB Input bias current | | | TA = 25°C | | ±0.2 ±10 | | | pA |",
+  "note": "清理参数名管道符;gold按行内±0.2/±10 pA补正(TA=25°C)"
+ },
+ {
+  "qid": "P034",
+  "type": "param",
+  "question": "What is the specified value for 'vil, low level input voltage' of MPU9250 (InvenSense)?",
+  "gold": "-0.5V",
+  "evidence": "-0.5V",
+  "note": "gold丢负号(VIL=-0.5V)"
+ },
+ {
+  "qid": "P035",
+  "type": "param",
+  "question": "What is the specified value for 'power supply recommendations' of SN65HVD230 (TI)?",
+  "gold": "3.3 V",
+  "evidence": "The SN65HVD23x 3.3 V CAN transceivers provide the interface between the 3.3 V µP",
+  "note": ""
+ },
+ {
+  "qid": "P038",
+  "type": "param",
+  "question": "What is the specified value for 'operating junction temperature' of TLC5947 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Operating junction temperature 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P039",
+  "type": "param",
+  "question": "What is the specified value for 'maximum voltage must not exceed' of ISO7741 (TI)?",
+  "gold": "6 V",
+  "evidence": "Maximum voltage must not exceed 6 V",
+  "note": ""
+ },
+ {
+  "qid": "P040",
+  "type": "param",
+  "question": "What is the specified value for 'enable supply voltage' of TPS7A49 (TI)?",
+  "gold": "0 V to VIN",
+  "evidence": "Enable supply voltage 0 V",
+  "note": "语料原文为 0 V to VIN,gold截断"
+ },
+ {
+  "qid": "P041",
+  "type": "param",
+  "question": "What is the specified value for 'total power dissipation (power down)' of TVP5146 (TI)?",
+  "gold": "11 mW",
+  "evidence": "Total power dissipation (power down) 11 mW",
+  "note": ""
+ },
+ {
+  "qid": "P042",
+  "type": "param",
+  "question": "What is the specified value for 'maximum junction temperature (tjmax)' of LMT86 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Maximum junction temperature (TJMAX) 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P044",
+  "type": "param",
+  "question": "What is the specified value for 'rated mains voltage' of UCC21330 (TI)?",
+  "gold": "≤ 150 VRMS",
+  "evidence": "Rated mains voltage ≤ 150 VRMS",
+  "note": "参数名'overvoltage category'与gold不符,改为行内参数rated mains voltage"
+ },
+ {
+  "qid": "P046",
+  "type": "param",
+  "question": "What is the specified value for 'threshold hysteresis' of UCC2946 (TI)?",
+  "gold": "15 mV",
+  "evidence": "Threshold hysteresis 15 mV",
+  "note": "误报:gold 15 mV 与 evidence 一致"
+ },
+ {
+  "qid": "P048",
+  "type": "param",
+  "question": "What is the specified value for 'temperature register reads' of TMP104 (TI)?",
+  "gold": "0°C",
+  "evidence": "Temperature Register reads 0°C",
+  "note": ""
+ },
+ {
+  "qid": "P049",
+  "type": "param",
+  "question": "What is the specified value for 'temperature range' of BMP280 (Bosch)?",
+  "gold": "-40 °C to +85 °C",
+  "evidence": "-40 … +85 °C",
+  "note": "补全范围;清理参数名项目符号"
+ },
+ {
+  "qid": "P050",
+  "type": "param",
+  "question": "What is the specified value for 'operate over an extended temperature range' of LIS3DH (ST)?",
+  "gold": "-40 °C to +85 °C",
+  "evidence": "from -40 °C to +85 °C.",
+  "note": "gold丢负号与上限"
+ },
+ {
+  "qid": "P051",
+  "type": "param",
+  "question": "What is the specified value for 'changed typical short-circuit current limit' of TPS7A21 (TI)?",
+  "gold": "300 mA",
+  "evidence": "Changed typical short-circuit current limit from 300 mA",
+  "note": ""
+ },
+ {
+  "qid": "P055",
+  "type": "param",
+  "question": "What is the specified value for 'power supply recommendations' of LM5180 (TI)?",
+  "gold": "4.5 V to 65 V",
+  "evidence": "The P/N PSR flyback converter operates over a wide input voltage range from 4.5 V to 65 V",
+  "note": "补全范围4.5–65V(已核语料原文),evidence同步补齐"
+ },
+ {
+  "qid": "P061",
+  "type": "param",
+  "question": "What is the specified value for 'temperature resolution' of ADS1220 (TI)?",
+  "gold": "0.03125 °C",
+  "evidence": "Temperature resolution 0.03125 °C",
+  "note": ""
+ },
+ {
+  "qid": "P064",
+  "type": "param",
+  "question": "What is the specified value for 'junction-to-board thermal resistance' of DRV11873 (TI)?",
+  "gold": "25.6 °C/W",
+  "evidence": "Junction-to-board thermal resistance 25.6 °C/W",
+  "note": ""
+ },
+ {
+  "qid": "P065",
+  "type": "param",
+  "question": "What is the specified value for 'operating temperature range' of lt1024 (ADI)?",
+  "gold": "-55°C to 125°C",
+  "evidence": "P/N / P/N (OBSOLETE).....–55°C to 125°C",
+  "note": "gold丢负号与上限(–55°C to 125°C)"
+ },
+ {
+  "qid": "C010",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: TMP1075 or INA219? Give both values.",
+  "gold": "TMP1075:1.7 V to 5.5 V|INA219:3V to 5.5V",
+  "evidence": "1.7 V to 5.5 V || 3V to 5.5V",
+  "note": "两侧均补全范围"
+ },
+ {
+  "qid": "C012",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: TMP1075 or MPU9250? Give both values.",
+  "gold": "TMP1075:1.7 V to 5.5 V|MPU9250:-0.5V",
+  "evidence": "1.7 V to 5.5 V || -0.5V",
+  "note": "TMP1075补范围;MPU9250补负号(VIL=-0.5V)"
+ },
+ {
+  "qid": "C017",
+  "type": "cross",
+  "question": "For 'junction-to-ambient thermal resistance', which is larger: UCC21520 or UCC21530? Give both values.",
+  "gold": "UCC21520:69.8°C/W|UCC21530:74.1°C/W",
+  "evidence": "Rθ JA = 69.8°C/W, VDDA/B = 15 V, TJ = || Rθ JA = 74.1°C/W, VDDA/B = 15 V, TJ =",
+  "note": "问题参数名'output current'与gold(热阻)不符,改为热阻;两侧值均在evidence"
+ },
+ {
+  "qid": "C018",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: TLC5947 or lt1024? Give both values.",
+  "gold": "TLC5947:150 °C|lt1024:-55°C to 125°C",
+  "evidence": "Operating junction temperature 150 °C || P/N / P/N (OBSOLETE).....–55°C to 125°C",
+  "note": "lt1024侧丢负号与上限,补正"
+ },
+ {
+  "qid": "C019",
+  "type": "cross",
+  "question": "For 'output current', which is larger: UCC28060 or AMC3301? Give both values.",
+  "gold": "UCC28060:2.5 mA|AMC3301:4 mA",
+  "evidence": "IGDA, IGDB = 2.5 mA || HLDO to HGND, 4 mA external load,",
+  "note": "问题参数名'output voltage'与gold(电流值)不符,改为output current"
+ },
+ {
+  "qid": "P073",
+  "type": "param",
+  "question": "What is the specified value for 'feedback voltage' of TPS7A49 (TI)?",
+  "gold": "1.185 V",
+  "evidence": "Feedback voltage 1.185 V",
+  "note": ""
+ },
+ {
+  "qid": "P074",
+  "type": "param",
+  "question": "What is the specified value for 'maximum repetitive peak isolation voltage' of AMC1400 (TI)?",
+  "gold": "2800 VPK",
+  "evidence": "At AC voltage 2800 V",
+  "note": "参数名误取条件列'At AC voltage';语料行真身为VIORM隔离电压 2800 VPK,已改正"
+ },
+ {
+  "qid": "P078",
+  "type": "param",
+  "question": "What is the specified value for 'temperature sensor output data.' of lis2dw12 (ST)?",
+  "gold": "1 °C/LSB",
+  "evidence": "The value is expressed as two’s complement sign. Sensitivity = 1°C/LSB",
+  "note": "补单位/LSB(evidence: Sensitivity = 1°C/LSB)"
+ },
+ {
+  "qid": "P081",
+  "type": "param",
+  "question": "What is the specified value for 'high-side MOSFET ON-resistance' of TPS62150 (TI)?",
+  "gold": "90 mΩ to 170 mΩ",
+  "evidence": "| r DS(on) | High-side MOSFET ON-resistance | V ≥ 6 V IN | | 90 170 | | | mΩ |",
+  "note": "参数名误取'power switch'分区名;行值90/170 mΩ(条件VIN≥6V)"
+ },
+ {
+  "qid": "P083",
+  "type": "param",
+  "question": "What is the specified value for 'voltage on this pin' of UCC28220 (TI)?",
+  "gold": "2.5 V",
+  "evidence": "voltage on this pin is 2.5 V",
+  "note": ""
+ },
+ {
+  "qid": "P084",
+  "type": "param",
+  "question": "What is the specified value for 'maximum working voltage' of ISO7731 (TI)?",
+  "gold": "5000 VRMS",
+  "evidence": "5000 VRMS (DW-16) and",
+  "note": "补单位RMS"
+ },
+ {
+  "qid": "P085",
+  "type": "param",
+  "question": "What is the specified value for 'recommended operating junction temperature range' of LM5180 (TI)?",
+  "gold": "-40°C to 150°C",
+  "evidence": "Over the recommended operating junction temperature range of –40°C to 150°C (unl",
+  "note": "参数名'absolute maximum ratings'错配;按行文改为工作结温范围并补全"
+ },
+ {
+  "qid": "P086",
+  "type": "param",
+  "question": "What is the specified value for 'transmitting power' of ESP32 (Espressif)?",
+  "gold": "9 dBm",
+  "evidence": "• +9 dBm transmitting power",
+  "note": "参数名误取分区名;gold补dBm单位"
+ },
+ {
+  "qid": "P087",
+  "type": "param",
+  "question": "What is the specified value for 'power-supply recommendations' of OPA192 (TI)?",
+  "gold": "4.5 V to 36 V",
+  "evidence": "The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma",
+  "note": "补全范围"
+ },
+ {
+  "qid": "P089",
+  "type": "param",
+  "question": "What is the specified value for 'supply voltage' of BME280 (Bosch)?",
+  "gold": "1.71 V to 3.6 V",
+  "evidence": "VDD main supply voltage range: 1.71 V to 3.6 V",
+  "note": "补全范围;清理参数名项目符号"
+ },
+ {
+  "qid": "P091",
+  "type": "param",
+  "question": "What is the specified value for 'input offset voltage' of OPA454 (TI)?",
+  "gold": "±0.2 mV typ, ±4 mV max",
+  "evidence": "| VOS Input offset voltage | | | IO = 0 mA | ±0.2 ±4 | | | mV |",
+  "note": "清理参数名管道符;gold按行内±0.2/±4 mV补正(IO=0mA)"
+ },
+ {
+  "qid": "P094",
+  "type": "param",
+  "question": "What is the specified value for 'critical, warning, power valid' of INA3221 (TI)?",
+  "gold": "6 V",
+  "evidence": "Critical, warning, power valid 6 V",
+  "note": ""
+ },
+ {
+  "qid": "P106",
+  "type": "param",
+  "question": "What is the specified value for 'A-port VCCA' of TXB0104 (TI)?",
+  "gold": "1.2 V to 3.6 V",
+  "evidence": "A-port VCCA = 1.2 V to 3.6 V",
+  "note": "参数名是句子残片,改为行内VCCA;补全范围"
+ },
+ {
+  "qid": "P107",
+  "type": "param",
+  "question": "What is the specified value for 'junction temperature' of OPA140 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Junction temperature 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P108",
+  "type": "param",
+  "question": "What is the specified value for 'switching frequency' of TPS54331 (TI)?",
+  "gold": "570 kHz",
+  "evidence": "| Switching frequency | V = 12 V, 25°C IN | 456 570 68 | | | 4 kHz |",
+  "note": "原gold 12V是条件;行值456/570/684 kHz(已核语料),取typ 570 kHz"
+ },
+ {
+  "qid": "P109",
+  "type": "param",
+  "question": "What is the specified value for 'switching node pin voltage less than' of DRV8323R (TI)?",
+  "gold": "30ns",
+  "evidence": "Switching node pin voltage less than 30ns",
+  "note": ""
+ },
+ {
+  "qid": "P110",
+  "type": "param",
+  "question": "What is the specified value for 'peak source/sink current' of LM5111 (TI)?",
+  "gold": "3A/5A",
+  "evidence": "The P/N dual low side MOSFET driver is capable of sourcing/sinking 3A/5A peak cu",
+  "note": "参数名是分区残片,改为行文中的驱动峰值电流3A/5A"
+ },
+ {
+  "qid": "P112",
+  "type": "param",
+  "question": "What is the specified value for 'operating junction temperature, tj' of TXS0104E (TI)?",
+  "gold": "150 °C",
+  "evidence": "Operating junction temperature, TJ 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P113",
+  "type": "param",
+  "question": "What is the specified value for 'supply voltage' of OPA2365 (TI)?",
+  "gold": "5.5 V",
+  "evidence": "Supply voltage 5.5 V",
+  "note": ""
+ },
+ {
+  "qid": "P114",
+  "type": "param",
+  "question": "What is the specified value for 'automotive temperature range' of ATmega328P (Microchip)?",
+  "gold": "-40°C to +125°C",
+  "evidence": "●Automotive temperature range: –40°C to +125°C",
+  "note": "gold丢负号与上限;参数名清理"
+ },
+ {
+  "qid": "P115",
+  "type": "param",
+  "question": "What is the specified value for 'quiescent current (per amplifier)' of OPA2134 (TI)?",
+  "gold": "4 mA to 5 mA",
+  "evidence": "| I Q | Quiescent current (per amplifier) | I = 0mA O | | 4 5 | | | mA |",
+  "note": "清理参数名;gold按行内4/5 mA补正(IO=0mA)"
+ },
+ {
+  "qid": "P118",
+  "type": "param",
+  "question": "What is the specified value for 'overtemperature' of UCC28600 (TI)?",
+  "gold": "140°C",
+  "evidence": "Overtemperature lockout typically occurs when the substrate temperature reaches 140°C",
+  "note": "gold正确但evidence字段截断,已按语料补全(140°C)"
+ },
+ {
+  "qid": "P122",
+  "type": "param",
+  "question": "What is the specified value for 'f corner frequency' of OPA835 (TI)?",
+  "gold": "147 Hz",
+  "evidence": "f corner frequency 147 Hz",
+  "note": ""
+ },
+ {
+  "qid": "P123",
+  "type": "param",
+  "question": "What is the specified value for 'switching node pin voltage less than' of DRV8320 (TI)?",
+  "gold": "30ns",
+  "evidence": "Switching node pin voltage less than 30ns",
+  "note": ""
+ },
+ {
+  "qid": "P126",
+  "type": "param",
+  "question": "What is the specified value for 'source current after tdrive' of DRV8320 (TI)?",
+  "gold": "10 mA",
+  "evidence": "Source current after tDRIVE 10 mA",
+  "note": ""
+ },
+ {
+  "qid": "P127",
+  "type": "param",
+  "question": "What is the specified value for 'output current' of TPS62203 (TI)?",
+  "gold": "300 mA",
+  "evidence": "Output current 300 mA",
+  "note": ""
+ },
+ {
+  "qid": "P130",
+  "type": "param",
+  "question": "What is the specified value for 'controller supply voltage' of DRV8876 (TI)?",
+  "gold": "3.3 V",
+  "evidence": "3.3 V",
+  "note": "语料行确为 Controller supply voltage 3.3 V"
+ },
+ {
+  "qid": "P132",
+  "type": "param",
+  "question": "What is the specified value for 'junction-to-ambient thermal resistance' of LMR14020 (TI)?",
+  "gold": "43.2 °C/W",
+  "evidence": "Junction-to-ambient thermal resistance 43.2 °C/W",
+  "note": ""
+ },
+ {
+  "qid": "P133",
+  "type": "param",
+  "question": "What is the specified value for 'internal power dissipation' of ad8230 (ADI)?",
+  "gold": "304 mW",
+  "evidence": "304 mW",
+  "note": "语料行确为 Internal Power Dissipation 304 mW"
+ },
+ {
+  "qid": "P134",
+  "type": "param",
+  "question": "What is the specified value for 'to keep the junction temperature at or below' of TPS54521 (TI)?",
+  "gold": "125°C",
+  "evidence": "to keep the junction temperature at or below 125°C",
+  "note": ""
+ },
+ {
+  "qid": "P138",
+  "type": "param",
+  "question": "What is the specified value for 'output current for latch shut down (per pin)' of DRV8412 (TI)?",
+  "gold": "20 A",
+  "evidence": "output current for latch shut down (per pin) 20 A",
+  "note": ""
+ },
+ {
+  "qid": "P140",
+  "type": "param",
+  "question": "What is the specified value for 'RRT (frequency-setting resistor) range' of LM5143 (TI)?",
+  "gold": "10 kΩ to 220 kΩ",
+  "evidence": "10 kΩ < RRT < 220 kΩ",
+  "note": "参数名与单位错配;行值是RRT阻值范围10–220 kΩ"
+ },
+ {
+  "qid": "P142",
+  "type": "param",
+  "question": "What is the specified value for 'maximum repetitive peak isolation voltage,' of UCC23514 (TI)?",
+  "gold": "2121 VPK",
+  "evidence": "2121 VPK",
+  "note": "补单位PK"
+ },
+ {
+  "qid": "P143",
+  "type": "param",
+  "question": "What is the specified value for 'maximum continuous switch current' of LM66100 (TI)?",
+  "gold": "1.5 A",
+  "evidence": "Maximum Continuous Switch Current 1.5 A",
+  "note": ""
+ },
+ {
+  "qid": "P146",
+  "type": "param",
+  "question": "What is the specified value for 'hz (low power only)' of LSM6DSL (ST)?",
+  "gold": "12.5 Hz",
+  "evidence": "Hz (low power only) 12.5 Hz",
+  "note": ""
+ },
+ {
+  "qid": "P149",
+  "type": "param",
+  "question": "What is the specified value for 'operating voltage' of OPA2376 (TI)?",
+  "gold": "2.2 V to 5.5 V",
+  "evidence": "The OPA376 family of amplifiers operates over a power-supply range of 2.2 V to 5.5 V",
+  "note": "补全范围2.2–5.5V(已核语料),evidence同步补齐"
+ },
+ {
+  "qid": "P150",
+  "type": "param",
+  "question": "What is the specified value for 'supply voltage (VS)' of TMP20 (TI)?",
+  "gold": "2.7 V to 5.5 V",
+  "evidence": "| V S S | pecified voltage | T = –55°C to 130°C A | 2.7 5.5 | | | V |",
+  "note": "原gold 55°C是条件;行值VS=2.7–5.5 V(TA=-55~130°C)"
+ },
+ {
+  "qid": "P151",
+  "type": "param",
+  "question": "What is the specified value for 'junction temperature, tj' of TL072 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Junction temperature, TJ 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P152",
+  "type": "param",
+  "question": "What is the specified value for 'internal reference voltage' of ADS131M02 (TI)?",
+  "gold": "1.2 V",
+  "evidence": "Internal reference voltage 1.2 V",
+  "note": ""
+ },
+ {
+  "qid": "P154",
+  "type": "param",
+  "question": "What is the specified value for 'maximum junction temperature' of LM2674 (TI)?",
+  "gold": "150 °C",
+  "evidence": "Maximum junction temperature 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "P155",
+  "type": "param",
+  "question": "What is the specified value for 'enable and adjusting undervoltage lockout' of TPS54541 (TI)?",
+  "gold": "4.3 V",
+  "evidence": "The P/N device enables when the VIN pin voltage rises above 4.3 V and the EN pin",
+  "note": ""
+ },
+ {
+  "qid": "P156",
+  "type": "param",
+  "question": "What is the specified value for 'rising threshold' of LMR33620 (TI)?",
+  "gold": "1 V",
+  "evidence": "Rising threshold 1 V",
+  "note": ""
+ },
+ {
+  "qid": "P158",
+  "type": "param",
+  "question": "What is the specified value for 'input bias current' of OPA330 (TI)?",
+  "gold": "±200 pA typ, ±500 pA max",
+  "evidence": "| IB Input bias current | | At 25°C | | | ±200 ±500 | | | pA |",
+  "note": "清理参数名;gold按行内±200/±500 pA补正(25°C)"
+ },
+ {
+  "qid": "P159",
+  "type": "param",
+  "question": "What is the specified value for 'output voltage' of TPS7A37 (TI)?",
+  "gold": "3.3 V",
+  "evidence": "3.3 V",
+  "note": "语料行确为 Output voltage 3.3 V"
+ },
+ {
+  "qid": "P162",
+  "type": "param",
+  "question": "What is the specified value for 'line frequency' of UCC29950 (TI)?",
+  "gold": "47 Hz to 63 Hz",
+  "evidence": "47 Hz to 63 Hz",
+  "note": "补全范围"
+ },
+ {
+  "qid": "P163",
+  "type": "param",
+  "question": "What is the specified value for 'vbus over voltage threshold' of SC89601 (Southchip)?",
+  "gold": "5.8V",
+  "evidence": "5.8V, Rising edge",
+  "note": ""
+ },
+ {
+  "qid": "P164",
+  "type": "param",
+  "question": "What is the specified value for 'enable and adjusting undervoltage lockout' of TPS54360 (TI)?",
+  "gold": "4.3 V",
+  "evidence": "The P/N is enabled when the VIN terminal voltage rises above 4.3 V and the EN te",
+  "note": ""
+ },
+ {
+  "qid": "P165",
+  "type": "param",
+  "question": "What is the specified value for 'the voltage at the pin can exceed the' of TPS62873 (TI)?",
+  "gold": "6.5V",
+  "evidence": "The voltage at the pin can exceed the 6.5V",
+  "note": ""
+ },
+ {
+  "qid": "P167",
+  "type": "param",
+  "question": "What is the specified value for 'inputs accept voltages' of SN74LVC245A (TI)?",
+  "gold": "5.5 V",
+  "evidence": "Inputs Accept Voltages to 5.5 V",
+  "note": ""
+ },
+ {
+  "qid": "P168",
+  "type": "param",
+  "question": "What is the specified value for 'high-side current limit' of LMR33640 (TI)?",
+  "gold": "4.8 A to 6.2 A",
+  "evidence": "| ISC | High-side current limit | P/N | 4.8 5.5 | | | 6.2 A |",
+  "note": "清理参数名;行值4.8/5.5/6.2 A取范围"
+ },
+ {
+  "qid": "C036",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: AMC1311 or TL431? Give both values.",
+  "gold": "AMC1311:-55°C to +125°C|TL431:150 °C",
+  "evidence": "–55°C to +125°C || Operating Junction Temperature Range 150 °C",
+  "note": "AMC1311侧丢负号与上限,补正"
+ },
+ {
+  "qid": "C038",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: AMC1311 or TL432? Give both values.",
+  "gold": "AMC1311:-55°C to +125°C|TL432:150 °C",
+  "evidence": "–55°C to +125°C || Operating Junction Temperature Range 150 °C",
+  "note": "同C036,补负号与上限"
+ },
+ {
+  "qid": "C039",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: TMP1075 or SN65HVD230? Give both values.",
+  "gold": "TMP1075:1.7 V to 5.5 V|SN65HVD230:3.3 V",
+  "evidence": "1.7 V to 5.5 V || The SN65HVD23x 3.3 V CAN transceivers provide the interface between the 3.3 V µP",
+  "note": ""
+ },
+ {
+  "qid": "C040",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: INA219 or OPA2365? Give both values.",
+  "gold": "INA219:3V to 5.5V|OPA2365:5.5 V",
+  "evidence": "3V to 5.5V || Supply voltage 5.5 V",
+  "note": ""
+ },
+ {
+  "qid": "C041",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: BME280 or TMP20? Give both values.",
+  "gold": "BME280:1.71 V to 3.6 V|TMP20:2.7 V to 5.5 V",
+  "evidence": "VDD main supply voltage range: 1.71 V to 3.6 V || | V S S | pecified voltage | T = –55°C to 130°C A | 2.7 5.5 | | | V |",
+  "note": ""
+ },
+ {
+  "qid": "C042",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: OPA2376 or DRV8876? Give both values.",
+  "gold": "OPA2376:2.2 V to 5.5 V|DRV8876:3.3 V",
+  "evidence": "The OPA376 family of amplifiers operates over a power-supply range of 2.2 V to 5.5 V || 3.3 V",
+  "note": ""
+ },
+ {
+  "qid": "C043",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: LM5180 or OPA192? Give both values.",
+  "gold": "LM5180:4.5 V to 65 V|OPA192:4.5 V to 36 V",
+  "evidence": "The P/N PSR flyback converter operates over a wide input voltage range from 4.5 V to 65 V || The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma",
+  "note": ""
+ },
+ {
+  "qid": "C044",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: SN65HVD230 or BME280? Give both values.",
+  "gold": "SN65HVD230:3.3 V|BME280:1.71 V to 3.6 V",
+  "evidence": "The SN65HVD23x 3.3 V CAN transceivers provide the interface between the 3.3 V µP || VDD main supply voltage range: 1.71 V to 3.6 V",
+  "note": ""
+ },
+ {
+  "qid": "C045",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: TMP20 or INA219? Give both values.",
+  "gold": "TMP20:2.7 V to 5.5 V|INA219:3V to 5.5V",
+  "evidence": "| V S S | pecified voltage | T = –55°C to 130°C A | 2.7 5.5 | | | V | || 3V to 5.5V",
+  "note": ""
+ },
+ {
+  "qid": "C046",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: OPA192 or OPA2365? Give both values.",
+  "gold": "OPA192:4.5 V to 36 V|OPA2365:5.5 V",
+  "evidence": "The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma || Supply voltage 5.5 V",
+  "note": ""
+ },
+ {
+  "qid": "C047",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: LM5180 or TMP1075? Give both values.",
+  "gold": "LM5180:4.5 V to 65 V|TMP1075:1.7 V to 5.5 V",
+  "evidence": "The P/N PSR flyback converter operates over a wide input voltage range from 4.5 V to 65 V || 1.7 V to 5.5 V",
+  "note": ""
+ },
+ {
+  "qid": "C048",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: DRV8876 or TMP1075? Give both values.",
+  "gold": "DRV8876:3.3 V|TMP1075:1.7 V to 5.5 V",
+  "evidence": "3.3 V || 1.7 V to 5.5 V",
+  "note": ""
+ },
+ {
+  "qid": "C049",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: OPA2376 or OPA192? Give both values.",
+  "gold": "OPA2376:2.2 V to 5.5 V|OPA192:4.5 V to 36 V",
+  "evidence": "The OPA376 family of amplifiers operates over a power-supply range of 2.2 V to 5.5 V || The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma",
+  "note": ""
+ },
+ {
+  "qid": "C050",
+  "type": "cross",
+  "question": "For 'input voltage', which is larger: BME280 or DRV8876? Give both values.",
+  "gold": "BME280:1.71 V to 3.6 V|DRV8876:3.3 V",
+  "evidence": "VDD main supply voltage range: 1.71 V to 3.6 V || 3.3 V",
+  "note": ""
+ },
+ {
+  "qid": "C051",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: TLC5947 or LM5180? Give both values.",
+  "gold": "TLC5947:150 °C|LM5180:-40°C to 150°C",
+  "evidence": "Operating junction temperature 150 °C || Over the recommended operating junction temperature range of –40°C to 150°C (unl",
+  "note": ""
+ },
+ {
+  "qid": "C052",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: TXS0104E or lt1024? Give both values.",
+  "gold": "TXS0104E:150 °C|lt1024:-55°C to 125°C",
+  "evidence": "Operating junction temperature, TJ 150 °C || P/N / P/N (OBSOLETE).....–55°C to 125°C",
+  "note": ""
+ },
+ {
+  "qid": "C053",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: LM5180 or lt1024? Give both values.",
+  "gold": "LM5180:-40°C to 150°C|lt1024:-55°C to 125°C",
+  "evidence": "Over the recommended operating junction temperature range of –40°C to 150°C (unl || P/N / P/N (OBSOLETE).....–55°C to 125°C",
+  "note": ""
+ },
+ {
+  "qid": "C054",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: BMP280 or stm32l151cb? Give both values.",
+  "gold": "BMP280:-40 °C to +85 °C|stm32l151cb:-40 °C to 105 °C",
+  "evidence": "-40 … +85 °C || -40 °C ≤ TA ≤ 105°C",
+  "note": ""
+ },
+ {
+  "qid": "C055",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: LIS3DH or TXS0104E? Give both values.",
+  "gold": "LIS3DH:-40 °C to +85 °C|TXS0104E:150 °C",
+  "evidence": "from -40 °C to +85 °C. || Operating junction temperature, TJ 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "C056",
+  "type": "cross",
+  "question": "For 'operating temperature', which is larger: stm32l151cb or TLC5947? Give both values.",
+  "gold": "stm32l151cb:-40 °C to 105 °C|TLC5947:150 °C",
+  "evidence": "-40 °C ≤ TA ≤ 105°C || Operating junction temperature 150 °C",
+  "note": ""
+ },
+ {
+  "qid": "C057",
+  "type": "cross",
+  "question": "For 'output voltage', which is larger: TPS7A37 or ADS131M02? Give both values.",
+  "gold": "TPS7A37:3.3 V|ADS131M02:1.2 V",
+  "evidence": "3.3 V || Internal reference voltage 1.2 V",
+  "note": ""
+ },
+ {
+  "qid": "C058",
+  "type": "cross",
+  "question": "For 'output current', which is larger: TPS62203 or DRV8412? Give both values.",
+  "gold": "TPS62203:300 mA|DRV8412:20 A",
+  "evidence": "Output current 300 mA || output current for latch shut down (per pin) 20 A",
+  "note": ""
+ }
+]

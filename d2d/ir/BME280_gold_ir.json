@@ -1,0 +1,354 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = d2d/parsed/BME280/auto/BME280.md（MinerU 解析 Bosch BST-BME280-DS002）+ 人工校对；SVD 可映射",
+ "device": "BME280",
+ "vendor": "Bosch",
+ "interface": "I2C+SPI",
+ "reg_width": 8,
+ "i2c": {
+  "addresses_7bit": [
+   "0x76",
+   "0x77"
+  ],
+  "note": "SDO 引脚选择（§5.2）；MVP 寄存器级仿真不建模总线地址",
+  "auto_increment_read": true
+ },
+ "excluded_blocks": [
+  {
+   "name": "calib0..calib25",
+   "addr_range": "0x88..0xA1",
+   "reason": "出厂校准（runtime 值），MVP 断言不覆盖"
+  },
+  {
+   "name": "calib26..calib41",
+   "addr_range": "0xE1..0xF0",
+   "reason": "湿度校准（runtime 值），同上"
+  }
+ ],
+ "registers": [
+  {
+   "name": "id",
+   "addr": "0xD0",
+   "access": "RO",
+   "reset": "0x60",
+   "desc": "chip_id[7:0]=0x60，上电复位完成后即可读，§5.4.1",
+   "fields": [
+    {
+     "name": "chip_id",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 96,
+     "desc": "固定 0x60"
+    }
+   ]
+  },
+  {
+   "name": "reset",
+   "addr": "0xE0",
+   "access": "W",
+   "reset": "0x00",
+   "write_key": "0xB6",
+   "write_effect": "soft_reset：写 0xB6 触发完整上电复位；写其他值无任何效果；读出恒 0x00",
+   "desc": "软复位寄存器，§5.4.2（erratum 见 proofread_record）",
+   "fields": [
+    {
+     "name": "reset",
+     "bits": "7:0",
+     "access": "W",
+     "reset": 0,
+     "desc": "软复位字，键值 0xB6"
+    }
+   ]
+  },
+  {
+   "name": "ctrl_hum",
+   "addr": "0xF2",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "湿度过采样控制，§5.4.3。注意：对本寄存器的写入只有在其后再写 ctrl_meas 才生效（Phase 1.5 行为语义）",
+   "fields": [
+    {
+     "name": "osrs_h",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "000:skipped(输出 0x8000) 001:x1 010:x2 011:x4 100:x8 101+:x16"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "7:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0",
+     "tier": "C",
+     "tier_evidence": "裁决(用户)：Bosch 逐位 R/W 全在图片里，整篇文本层 0 处访问码"
+    }
+   ]
+  },
+  {
+   "name": "status",
+   "addr": "0xF3",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "器件状态位，§5.4.4",
+   "fields": [
+    {
+     "name": "measuring",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "转换进行中为 1"
+    },
+    {
+     "name": "im_update",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "NVM 拷贝期间为 1"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "7:4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "Bosch 手册的 ctrl_hum 位表在文本层里没给出 7:3 的 Access 列（解析/排版丢失），需人眼"
+    },
+    {
+     "name": "UNUSED2",
+     "bits": "2:1",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "Bosch 手册的 ctrl_hum 位表在文本层里没给出 7:3 的 Access 列（解析/排版丢失），需人眼"
+    }
+   ]
+  },
+  {
+   "name": "ctrl_meas",
+   "addr": "0xF4",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "控制寄存器：过采样+模式，§5.4.5",
+   "fields": [
+    {
+     "name": "osrs_t",
+     "bits": "7:5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "温度过采样 000:skipped 001:x1 010:x2 011:x4 100:x8 101+:x16"
+    },
+    {
+     "name": "osrs_p",
+     "bits": "4:2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "气压过采样同上"
+    },
+    {
+     "name": "mode",
+     "bits": "1:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "00:sleep 01:forced 10/11:normal"
+    }
+   ]
+  },
+  {
+   "name": "config",
+   "addr": "0xF5",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "速率/滤波/接口选项，§5.4.6。normal 模式下写可能被忽略（MVP 断言均在 sleep 态执行）",
+   "fields": [
+    {
+     "name": "t_sb",
+     "bits": "7:5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "normal 待机时间 000:0.5ms 001:62.5ms 010:125ms 011:250ms 100:500ms 101:1000ms 110:2000ms 111:4000ms"
+    },
+    {
+     "name": "filter",
+     "bits": "4:2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "IIR 滤波 000:off 001:x2 010:x4 011:x8 100:x16"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "not used"
+    },
+    {
+     "name": "spi3w_en",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "3 线 SPI 使能（I2C 下无作用）"
+    }
+   ]
+  },
+  {
+   "name": "press_msb",
+   "addr": "0xF7",
+   "access": "RO",
+   "reset": "0x80",
+   "desc": "raw 压力 up[19:12]，§5.4.7",
+   "fields": [
+    {
+     "name": "press_msb",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 128,
+     "desc": "up[19:12]"
+    }
+   ]
+  },
+  {
+   "name": "press_lsb",
+   "addr": "0xF8",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "raw 压力 up[11:4]",
+   "fields": [
+    {
+     "name": "press_lsb",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "up[11:4]"
+    }
+   ]
+  },
+  {
+   "name": "press_xlsb",
+   "addr": "0xF9",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "raw 压力 up[3:0]（高 4 位有效）",
+   "fields": [
+    {
+     "name": "press_xlsb",
+     "bits": "7:4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "up[3:0]"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "3:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "Bosch 手册的 ctrl_hum 位表在文本层里没给出 7:3 的 Access 列（解析/排版丢失），需人眼"
+    }
+   ]
+  },
+  {
+   "name": "temp_msb",
+   "addr": "0xFA",
+   "access": "RO",
+   "reset": "0x80",
+   "desc": "raw 温度 ut[19:12]，§5.4.8",
+   "fields": [
+    {
+     "name": "temp_msb",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 128,
+     "desc": "ut[19:12]"
+    }
+   ]
+  },
+  {
+   "name": "temp_lsb",
+   "addr": "0xFB",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "raw 温度 ut[11:4]",
+   "fields": [
+    {
+     "name": "temp_lsb",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "ut[11:4]"
+    }
+   ]
+  },
+  {
+   "name": "temp_xlsb",
+   "addr": "0xFC",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "raw 温度 ut[3:0]（高 4 位有效）",
+   "fields": [
+    {
+     "name": "temp_xlsb",
+     "bits": "7:4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "ut[3:0]"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "3:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "Bosch 手册的 ctrl_hum 位表在文本层里没给出 7:3 的 Access 列（解析/排版丢失），需人眼"
+    }
+   ]
+  },
+  {
+   "name": "hum_msb",
+   "addr": "0xFD",
+   "access": "RO",
+   "reset": "0x80",
+   "desc": "raw 湿度 uh[15:8]，§5.4.9",
+   "fields": [
+    {
+     "name": "hum_msb",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 128,
+     "desc": "uh[15:8]"
+    }
+   ]
+  },
+  {
+   "name": "hum_lsb",
+   "addr": "0xFE",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "raw 湿度 uh[7:0]",
+   "fields": [
+    {
+     "name": "hum_lsb",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "uh[7:0]"
+    }
+   ]
+  }
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "从 MinerU 解析文本提炼初稿；PDF 对照校验中（用户环节）",
+  "erratum_found": "§5.4.2 reset 键值被 OCR 系统性误识为 0x86（B→8 字体替换）——与 BMP280 解析（同段 0x86/0xB6 自相矛盾）跨文档复现。权威键值 0xB6（Bosch API BME280_SOFT_RESET_COMMAND）。",
+  "open_questions": [
+   "Q1: press/temp/hum_msb 复位 0x80（对应 raw 输出 0x8000/0x80000）请对照 PDF 寄存器地图确认",
+   "Q2: ctrl_hum『写后需写 ctrl_meas 才生效』——MVP 未断言该时序语义，Phase 1.5 是否纳入请定夺",
+   "Q3: config bit1 与各 UNUSED 位编成（Bosch 未给访问码，沿用 TMP102 对照惯例处理）",
+   "Q4: calib 块 0x88-0xA1 + 0xE1-0xF0 共 42 字节未入断言（runtime 值）"
+  ]
+ }
+}

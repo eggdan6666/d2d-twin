@@ -1,0 +1,402 @@
+[
+ {
+  "qid": "P001",
+  "type": "param",
+  "ok": true,
+  "gold": "-40 °C to 105 °C",
+  "pred": "The specified value for the junction temperature range of the STM32L151CB is from -40°C to 105°C.",
+  "sources": [
+   "ST__stm32l151cb::front__15",
+   "ST__stm32l151cb::front__36",
+   "ST__stm32l151cb::front__37",
+   "ST__stm32l151cb::front__40",
+   "ST__stm32l151cb::front__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3155,
+  "latency_s": 8.42,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P002",
+  "type": "param",
+  "ok": false,
+  "gold": "26 Ω",
+  "pred": "For the LMH6624, the document specifies that keeping RG and RS low helps maintain dynamic stability. Specific values are given in a table where RF can be 1.5 kΩ, 1 kΩ, 750 Ω, and 511 Ω. Since similar considerations apply to RG and RS, and there's no explicit lower limit provided, we infer that these resistances could follow a similar range, with a minimum practical value being around 25 Ω as mentioned for isolating the non-inverting input when driven from a 0-Ω source. Thus, the resistances belo",
+  "sources": [
+   "TI__LMH6624::package__1",
+   "TI__LMH6624::overview__8",
+   "TI__LMH6624::overview__7",
+   "TI__LMH6624::overview__9",
+   "TI__LMH6624::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2966,
+  "latency_s": 10.09,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P008",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "150 °C",
+  "sources": [
+   "TI__LM2576::abs_max",
+   "TI__LM2576::typ_app__3",
+   "TI__LM2576::func_desc",
+   "TI__LM2576::typ_app__1",
+   "TI__LM2576::typ_app__4"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2820,
+  "latency_s": 1.3,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P013",
+  "type": "param",
+  "ok": true,
+  "gold": "0.5V",
+  "pred": "The specified value for the current that produces a voltage drop of 0.5V for the TPIC6595 is 250 mA.",
+  "sources": [
+   "TI__TPIC6595::package__1",
+   "TI__TPIC6595::func_desc__1",
+   "TI__TPIC6595::func_desc__2",
+   "TI__TPIC6595::package__2",
+   "TI__TPIC6595::elec_chars"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2953,
+  "latency_s": 3.08,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P014",
+  "type": "param",
+  "ok": true,
+  "gold": "4.5 V to 17 V",
+  "pred": "The specified value for the input voltage range of the TPS54622 power converter system is 4.5 V to 17 V. The output current capability is up to 6 A.",
+  "sources": [
+   "TI__TPS54622::overview__2",
+   "TI__TPS54622::overview__4",
+   "TI__TPS54622::overview__9",
+   "TI__TPS54622::overview__1",
+   "TI__TPS54622::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2662,
+  "latency_s": 3.74,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P016",
+  "type": "param",
+  "ok": false,
+  "gold": "60mA",
+  "pred": "The specified value for continuous short-circuit current handling is up to 10mA per input terminal when signals swing more than 0.5V beyond the supply rails. For continuous output short-circuit current, it is described as \"Continuous\" without a specific current value given.",
+  "sources": [
+   "TI__OPA2356::typ_app",
+   "TI__OPA2356::overview",
+   "TI__OPA2356::elec_chars__1",
+   "TI__OPA2356::package__1",
+   "TI__OPA2356::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3130,
+  "latency_s": 4.88,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P020",
+  "type": "param",
+  "ok": true,
+  "gold": "6 µA @ 25 °C",
+  "pred": "The specified value for 'stop (flash in deep power down mode, slow wake-up time)' of the STM32F410RB is down to 6 µA @25 °C; 14 µA max @25 °C.",
+  "sources": [
+   "ST__stm32f410rb::front__1",
+   "ST__stm32f410rb::front__8",
+   "ST__stm32f410rb::front__25",
+   "ST__stm32f410rb::front__34",
+   "ST__stm32f410rb::front__6"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2900,
+  "latency_s": 4.64,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P022",
+  "type": "param",
+  "ok": false,
+  "gold": "125°C",
+  "pred": "The specified value for rated junction temperature of the LM5018 is not directly stated in the provided excerpts. However, typical high-performance switching regulators like the LM5018 often have a maximum junction temperature rating around 150°C. Without specific mention in the text, this is an inferred value based on common specifications for similar devices. For precise data, consult the full datasheet's absolute maximum ratings section.",
+  "sources": [
+   "TI__LM5018::typ_app__3",
+   "TI__LM5018::typ_app__5",
+   "TI__LM5018::typ_app__2",
+   "TI__LM5018::func_desc__1",
+   "TI__LM5018::overview"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2730,
+  "latency_s": 6.66,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P023",
+  "type": "param",
+  "ok": false,
+  "gold": "266 mA",
+  "pred": "Based on the provided excerpts, there isn't a direct specification for the inductor current ripple value for the LM3404. However, a related parameter is mentioned in the context of design example 2, where the ripple current is specified as 50 mAP-P or less. This value can be inferred as a guideline for designing with the LM3404. \n\nFor a precise calculation, the formula given in the document is:\n\n\\[ \\Delta I_L = \\frac{V_{IN} \\times t_{ON}}{L} \\]\n\nWhere \\( t_{ON} \\) is the on-time and \\( L \\) is t",
+  "sources": [
+   "TI__LM3404::overview__1",
+   "TI__LM3404::overview__6",
+   "TI__LM3404::package__1",
+   "TI__LM3404::overview__4",
+   "TI__LM3404::overview__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3210,
+  "latency_s": 14.87,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P024",
+  "type": "param",
+  "ok": false,
+  "gold": "45 °C/W",
+  "pred": "No specific value for junction-to-ambient thermal resistance is provided in the given excerpts. However, it is mentioned that the Analog Ground (AGND) must be connected directly to the exposed thermal pad and common ground plane, implying that proper thermal management is crucial but does not specify the exact thermal resistance.",
+  "sources": [
+   "TI__TPS62150::overview__1",
+   "TI__TPS62150::overview__2",
+   "TI__TPS62150::typ_app__1",
+   "TI__TPS62150::func_desc__1",
+   "TI__TPS62150::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3058,
+  "latency_s": 5.11,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P026",
+  "type": "param",
+  "ok": false,
+  "gold": "5 mA to 8 mA",
+  "pred": "The specified value for the 'VM operating supply voltage range' of DRV8825 is 8.2 to 45 V. There is no direct mention of 'VM operating supply current,' but the supply voltage range is clearly stated.",
+  "sources": [
+   "TI__DRV8825::overview__4",
+   "TI__DRV8825::overview__7",
+   "TI__DRV8825::overview__8",
+   "TI__DRV8825::overview__1",
+   "TI__DRV8825::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2750,
+  "latency_s": 4.29,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P027",
+  "type": "param",
+  "ok": true,
+  "gold": "1.7 V to 5.5 V",
+  "pred": "The specified value for 'supply voltage' of TMP1075 is from 1.7 V to 5.5 V.",
+  "sources": [
+   "TI__TMP1075::typ_app__1",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::func_desc__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2793,
+  "latency_s": 2.76,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P029",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "The specified value for the maximum junction temperature is not directly provided in the given excerpts. However, it is commonly implied in datasheets that the maximum junction temperature for such devices is typically around 150°C based on industry standards. For a precise value, one would refer to the \"Absolute Maximum Ratings\" section of the full datasheet.",
+  "sources": [
+   "TI__SN74LVC1G14::func_desc",
+   "TI__SN74LVC1G14::typ_app__2",
+   "TI__SN74LVC1G14::package__1",
+   "TI__SN74LVC1G14::overview",
+   "TI__SN74LVC1G14::pin_desc"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2346,
+  "latency_s": 5.33,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P030",
+  "type": "param",
+  "ok": true,
+  "gold": "3V to 5.5V",
+  "pred": "The specified value for the power-supply voltage of the INA219 is 3V to 5.5V.",
+  "sources": [
+   "TI__INA219::overview__10",
+   "TI__INA219::overview__5",
+   "TI__INA219::overview__7",
+   "TI__INA219::overview__8",
+   "TI__INA219::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3055,
+  "latency_s": 2.76,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P031",
+  "type": "param",
+  "ok": true,
+  "gold": "177 mV",
+  "pred": "The specified value for 'under-voltage lockout hysteresis' (VUVLO(HYS)) of TPS7A47 is 177 mV.",
+  "sources": [
+   "TI__TPS7A47::typ_app__1",
+   "TI__TPS7A47::elec_chars__1",
+   "TI__TPS7A47::func_desc__1",
+   "TI__TPS7A47::typ_app__4",
+   "TI__TPS7A47::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3083,
+  "latency_s": 3.59,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P033",
+  "type": "param",
+  "ok": false,
+  "gold": "±0.2 pA typ, ±10 pA max",
+  "pred": "The specified value for 'input bias current' is not directly provided in the given excerpts. However, based on the context and typical specifications for similar devices, it is often around picoamperes (pA). For precise values, one would need to refer to the detailed electrical characteristics section of the datasheet. Given the information, the most likely implied value is typically less than 1 pA to 10 pA for such precision operational amplifiers. Without exact figures, a conservative estimate",
+  "sources": [
+   "TI__OPA4322::overview__5",
+   "TI__OPA4322::overview__6",
+   "TI__OPA4322::overview__2",
+   "TI__OPA4322::package__1",
+   "TI__OPA4322::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3363,
+  "latency_s": 8.39,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P034",
+  "type": "param",
+  "ok": true,
+  "gold": "-0.5V",
+  "pred": "The specified value for the low level input voltage (VIL) of the MPU9250 is up to 0.3*VDDIO and also listed as -0.5V to 0.3*VDDIO.",
+  "sources": [
+   "InvenSense__MPU9250::elec_chars__3",
+   "InvenSense__MPU9250::typ_app__6",
+   "InvenSense__MPU9250::front__2",
+   "InvenSense__MPU9250::typ_app__2",
+   "InvenSense__MPU9250::typ_app__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2806,
+  "latency_s": 4.25,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P035",
+  "type": "param",
+  "ok": true,
+  "gold": "3.3 V",
+  "pred": "Based on the provided excerpts, the SN65HVD230 operates with a single 3.3 V supply, as indicated in the \"Features\" section under \"PACKAGE\". There is no explicit mention of a separate 5 V power supply recommendation for the SN65HVD230 itself within the given text, though it is mentioned in the context of other components. Thus, the primary power supply recommendation for the SN65HVD230 is:\n\n- Power Supply: 3.3 V",
+  "sources": [
+   "TI__SN65HVD230::overview__10",
+   "TI__SN65HVD230::overview__8",
+   "TI__SN65HVD230::package__1",
+   "TI__SN65HVD230::overview__7",
+   "TI__SN65HVD230::overview__9"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2863,
+  "latency_s": 8.0,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P038",
+  "type": "param",
+  "ok": false,
+  "gold": "150 °C",
+  "pred": "The specified value for operating junction temperature is not directly provided in the given excerpts. However, based on typical datasheets and the information available, it is often implied that the device operates within a standard range, typically up to +125°C for many ICs unless stated otherwise. For a precise value, one would need to refer to the absolute maximum ratings section of the full datasheet. Given the context, the maximum operating junction temperature is likely +125°C.",
+  "sources": [
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__6",
+   "TI__TLC5947::package__8",
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__4"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3687,
+  "latency_s": 7.83,
+  "seed": 42,
+  "temperature": 0.0
+ },
+ {
+  "qid": "P039",
+  "type": "param",
+  "ok": true,
+  "gold": "6 V",
+  "pred": "6 V",
+  "sources": [
+   "TI__ISO7741::typ_app__1",
+   "TI__ISO7741::overview",
+   "TI__ISO7741::package__3",
+   "TI__ISO7741::abs_max__1",
+   "TI__ISO7741::abs_max__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2919,
+  "latency_s": 1.13,
+  "seed": 42,
+  "temperature": 0.0
+ }
+]

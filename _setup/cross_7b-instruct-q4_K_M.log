@@ -1,0 +1,41 @@
+[000][cross] ok=True | For the datasheet parameter 'junction-to-ambient thermal | gold=TPS62150:45 °C/W|LMR14020:43 | pred='TPS62150: 45 °C/W\nLMR14020: 43.2 °C/W\n\nT'
+[001][cross] ok=False | For the datasheet parameter 'supply voltage', which part | gold=TMP1075:1.7 V to 5.5 V|BME28 | pred='For the supply voltage:\n- TMP1075: 3.6 V'
+[002][cross] ok=False | For the datasheet parameter 'supply voltage', which part | gold=TMP1075:1.7 V to 5.5 V|OPA23 | pred='TMP1075: 6.5 V\nOPA2365: 5.5 V\n\nThe large'
+[003][cross] ok=False | For the datasheet parameter 'supply voltage', which part | gold=BME280:1.71 V to 3.6 V|OPA23 | pred='For the supply voltage:\n- BME280: 3.6 V\n'
+[004][cross] ok=True | For the datasheet parameter 'maximum junction temperatur | gold=SN74LVC1G14:150 °C|LM2674:15 | pred='SN74LVC1G14: 150°C\nLM2674: 150°C\n\nThe ma'
+[005][cross] ok=False | For the datasheet parameter 'input bias current', which  | gold=OPA4322:±0.2 pA typ, ±10 pA  | pred='For the OPA4322, the input bias current '
+[006][cross] ok=False | For the datasheet parameter 'power supply recommendation | gold=SN65HVD230:3.3 V|LM5180:4.5  | pred='The datasheet excerpts do not provide ex'
+[007][cross] ok=False | For the datasheet parameter 'maximum repetitive peak iso | gold=AMC1400:2800 VPK|UCC23514:21 | pred="For the 'maximum repetitive peak isolati"
+[008][cross] ok=False | For the datasheet parameter 'switching node pin voltage  | gold=DRV8323R:30ns|DRV8320:30ns | pred='The information provided does not contai'
+[009][cross] ok=False | For the datasheet parameter 'enable and adjusting underv | gold=TPS54541:4.3 V|TPS54360:4.3  | pred='For the TPS54541, the enable threshold v'
+[010][cross] ok=False | For 'input voltage', which is larger: TMP1075 or INA219? | gold=TMP1075:1.7 V to 5.5 V|INA21 | pred='TMP1075: 6.5 V\nINA219: 26 V'
+[011][cross] ok=False | For 'input voltage', which is larger: TMP1075 or MPU9250 | gold=TMP1075:1.7 V to 5.5 V|MPU92 | pred="For 'input voltage', the TMP1075 has a l"
+[012][cross] ok=False | For the datasheet parameter 'safety output supply curren | gold=UCC21520:69.8°C/W|UCC21530:7 | pred='For the UCC21520, the safety output supp'
+[013][cross] ok=False | For 'operating temperature', which is larger: TLC5947 or | gold=TLC5947:150 °C|lt1024:-55°C  | pred="For 'operating temperature':\n- TLC5947: "
+[014][cross] ok=False | Compare the datasheet-specified values 'gda, gdb output  | gold=UCC28060:2.5 mA|AMC3301:4 mA | pred='The UCC28060 datasheet does not specify '
+[015][cross] ok=False | For 'operating temperature', which is larger: AMC1311 or | gold=AMC1311:-55°C to +125°C|TL43 | pred='AMC1311: -55°C to 125°C\nTL431: 0°C to 70'
+[016][cross] ok=False | For 'operating temperature', which is larger: AMC1311 or | gold=AMC1311:-55°C to +125°C|TL43 | pred='The operating temperature range for the '
+[017][cross] ok=False | For 'input voltage', which is larger: TMP1075 or SN65HVD | gold=TMP1075:1.7 V to 5.5 V|SN65H | pred='TMP1075: 6.5 V\nSN65HVD230: 3.6 V\n\nThe TM'
+[018][cross] ok=False | For 'input voltage', which is larger: INA219 or OPA2365? | gold=INA219:3V to 5.5V|OPA2365:5. | pred="For 'input voltage', the OPA2365 has a l"
+[019][cross] ok=False | For 'input voltage', which is larger: BME280 or TMP20? G | gold=BME280:1.71 V to 3.6 V|TMP20 | pred='The input voltage range for the BME280 i'
+[020][cross] ok=False | For 'input voltage', which is larger: OPA2376 or DRV8876 | gold=OPA2376:2.2 V to 5.5 V|DRV88 | pred="For 'input voltage', the maximum value f"
+[021][cross] ok=True | For 'input voltage', which is larger: LM5180 or OPA192?  | gold=LM5180:4.5 V to 65 V|OPA192: | pred="For 'input voltage':\n- LM5180: 4.5 V to "
+[022][cross] ok=False | For 'input voltage', which is larger: SN65HVD230 or BME2 | gold=SN65HVD230:3.3 V|BME280:1.71 | pred="For 'input voltage', the SN65HVD230 has "
+[023][cross] ok=False | For 'input voltage', which is larger: TMP20 or INA219? G | gold=TMP20:2.7 V to 5.5 V|INA219: | pred="For 'input voltage' or common-mode volta"
+[024][cross] ok=True | For 'input voltage', which is larger: OPA192 or OPA2365? | gold=OPA192:4.5 V to 36 V|OPA2365 | pred="For 'input voltage range':\n- OPA192: 4.5"
+[025][cross] ok=False | For 'input voltage', which is larger: LM5180 or TMP1075? | gold=LM5180:4.5 V to 65 V|TMP1075 | pred='LM5180: 9.5 V to 65 V  \nTMP1075: –0.3 V '
+[026][cross] ok=False | For 'input voltage', which is larger: DRV8876 or TMP1075 | gold=DRV8876:3.3 V|TMP1075:1.7 V  | pred="For 'input voltage', TMP1075 has a large"
+[027][cross] ok=True | For 'input voltage', which is larger: OPA2376 or OPA192? | gold=OPA2376:2.2 V to 5.5 V|OPA19 | pred="For 'input voltage' (specifically the su"
+[028][cross] ok=False | For 'input voltage', which is larger: BME280 or DRV8876? | gold=BME280:1.71 V to 3.6 V|DRV88 | pred="For 'input voltage', the BME280 has a lo"
+[029][cross] ok=True | For 'operating temperature', which is larger: TLC5947 or | gold=TLC5947:150 °C|LM5180:-40°C  | pred="For 'operating temperature':\n- TLC5947: "
+[030][cross] ok=False | For 'operating temperature', which is larger: TXS0104E o | gold=TXS0104E:150 °C|lt1024:-55°C | pred='TXS0104E: -40°C to 85°C\nlt1024: -55°C to'
+[031][cross] ok=True | For 'operating temperature', which is larger: LM5180 or  | gold=LM5180:-40°C to 150°C|lt1024 | pred='LM5180 operates from -40°C to 150°C.\nLT1'
+[032][cross] ok=True | For 'operating temperature', which is larger: BMP280 or  | gold=BMP280:-40 °C to +85 °C|stm3 | pred='The operating temperature range for the '
+[033][cross] ok=False | For 'operating temperature', which is larger: LIS3DH or  | gold=LIS3DH:-40 °C to +85 °C|TXS0 | pred='LIS3DH operating temperature range: -40°'
+[034][cross] ok=False | For 'operating temperature', which is larger: stm32l151c | gold=stm32l151cb:-40 °C to 105 °C | pred="For 'operating temperature':\n- STM32L151"
+[035][cross] ok=False | Compare the datasheet-specified values 'output voltage'  | gold=TPS7A37:3.3 V|ADS131M02:1.2  | pred='The output voltage of the TPS7A37 is 5.5'
+[036][cross] ok=False | Compare the datasheet-specified values 'output current'  | gold=TPS62203:300 mA|DRV8412:20 A | pred='The TPS62203 output current is 300 mA.\n\n'
+
+== QA100 acc(部分)=8/37 ==
+  cross  8/37 = 0.22
+明细: eval/qa100/results_1791150295.json

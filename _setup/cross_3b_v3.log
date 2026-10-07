@@ -1,0 +1,31 @@
+[000][cross] ok=False | For 'input voltage', which is larger: TMP1075 or INA219? | gold=TMP1075:1.7 V to 5.5 V|INA21 | pred='TMP1075 input voltage SCL, SDA, A0: -0.3'
+[001][cross] ok=False | For 'input voltage', which is larger: TMP1075 or MPU9250 | gold=TMP1075:1.7 V to 5.5 V|MPU92 | pred='TMP1075 input voltage SCL, SDA, A0: 6.5 '
+[002][cross] ok=True | For 'junction-to-ambient thermal resistance', which is l | gold=UCC21520:69.8°C/W|UCC21530:7 | pred='For UCC21520, the junction-to-ambient th'
+[003][cross] ok=False | For 'operating temperature', which is larger: TLC5947 or | gold=TLC5947:150 °C|lt1024:-55°C  | pred='For TLC5947, the operating temperature r'
+[004][cross] ok=False | For 'output current', which is larger: UCC28060 or AMC33 | gold=UCC28060:2.5 mA|AMC3301:4 mA | pred="For 'output current', the UCC28060 does "
+[005][cross] ok=False | For 'operating temperature', which is larger: AMC1311 or | gold=AMC1311:-55°C to +125°C|TL43 | pred='TL431: -40°C to 85°C\nAMC1311: -55°C to 1'
+[006][cross] ok=False | For 'operating temperature', which is larger: AMC1311 or | gold=AMC1311:-55°C to +125°C|TL43 | pred='TL432: -40°C to 85°C\nAMC1311: -55°C to 1'
+[007][cross] ok=False | For 'input voltage', which is larger: TMP1075 or SN65HVD | gold=TMP1075:1.7 V to 5.5 V|SN65H | pred='TMP1075 input voltage SCL, SDA, A0: 6.5 '
+[008][cross] ok=False | For 'input voltage', which is larger: INA219 or OPA2365? | gold=INA219:3V to 5.5V|OPA2365:5. | pred='For INA219, the input voltage range is V'
+[009][cross] ok=False | For 'input voltage', which is larger: BME280 or TMP20? G | gold=BME280:1.71 V to 3.6 V|TMP20 | pred='BME280: Not specified in excerpt\nTMP20: '
+[010][cross] ok=False | For 'input voltage', which is larger: OPA2376 or DRV8876 | gold=OPA2376:2.2 V to 5.5 V|DRV88 | pred='OPA2376: NOM = 4.5 V, MAX = 37 V\nDRV8876'
+[011][cross] ok=False | For 'input voltage', which is larger: LM5180 or OPA192?  | gold=LM5180:4.5 V to 65 V|OPA192: | pred='LM5180: Input voltage range (steady stat'
+[012][cross] ok=False | For 'input voltage', which is larger: SN65HVD230 or BME2 | gold=SN65HVD230:3.3 V|BME280:1.71 | pred='For SN65HVD230, the input voltage range '
+[013][cross] ok=False | For 'input voltage', which is larger: TMP20 or INA219? G | gold=TMP20:2.7 V to 5.5 V|INA219: | pred='TMP20: Supply Voltage Range: 1.8 V to 5.'
+[014][cross] ok=False | For 'input voltage', which is larger: OPA192 or OPA2365? | gold=OPA192:4.5 V to 36 V|OPA2365 | pred='OPA192: VCM\nOPA2365: VCM'
+[015][cross] ok=False | For 'input voltage', which is larger: LM5180 or TMP1075? | gold=LM5180:4.5 V to 65 V|TMP1075 | pred='LM5180: 65 V\nTMP1075: 6.5 V'
+[016][cross] ok=False | For 'input voltage', which is larger: DRV8876 or TMP1075 | gold=DRV8876:3.3 V|TMP1075:1.7 V  | pred='DRV8876: 4.5 37 V\nTMP1075: -0.3 6.5 V'
+[017][cross] ok=False | For 'input voltage', which is larger: OPA2376 or OPA192? | gold=OPA2376:2.2 V to 5.5 V|OPA19 | pred='OPA2376: MIN -40 V, NOM -2.2 V, MAX 5.5 '
+[018][cross] ok=False | For 'input voltage', which is larger: BME280 or DRV8876? | gold=BME280:1.71 V to 3.6 V|DRV88 | pred='BME280: NOM 37 V MAX\nDRV8876: NOM 5.5 V '
+[019][cross] ok=True | For 'operating temperature', which is larger: TLC5947 or | gold=TLC5947:150 °C|LM5180:-40°C  | pred='For TLC5947, the operating temperature r'
+[020][cross] ok=False | For 'operating temperature', which is larger: TXS0104E o | gold=TXS0104E:150 °C|lt1024:-55°C | pred='TXS0104E: over recommended operating fre'
+[021][cross] ok=True | For 'operating temperature', which is larger: LM5180 or  | gold=LM5180:-40°C to 150°C|lt1024 | pred='LM5180: -40°C to 150°C\nlt1024: -55°C to '
+[022][cross] ok=True | For 'operating temperature', which is larger: BMP280 or  | gold=BMP280:-40 °C to +85 °C|stm3 | pred='BMP280: -40°C to 85°C/105°C\nstm32l151cb:'
+[023][cross] ok=False | For 'operating temperature', which is larger: LIS3DH or  | gold=LIS3DH:-40 °C to +85 °C|TXS0 | pred='LIS3DH: -40 to +85 °C\nTXS0104E: -40 to +'
+[024][cross] ok=False | For 'operating temperature', which is larger: stm32l151c | gold=stm32l151cb:-40 °C to 105 °C | pred='stm32l151cb: -40°C to 85°C/105°C\nTLC5947'
+[025][cross] ok=False | For 'output voltage', which is larger: TPS7A37 or ADS131 | gold=TPS7A37:3.3 V|ADS131M02:1.2  | pred='For TPS7A37, the maximum output voltage '
+[026][cross] ok=False | For 'output current', which is larger: TPS62203 or DRV84 | gold=TPS62203:300 mA|DRV8412:20 A | pred='TPS62203: 300 mA\nDRV8412: 12A (or 12000 '
+
+== QA100 acc(部分)=4/27 ==
+  cross  4/27 = 0.15
+明细: eval/qa100/results_1791147904.json

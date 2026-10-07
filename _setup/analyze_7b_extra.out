@@ -1,0 +1,34 @@
+== completion tokens (parsed from run logs, prompt+completion) ==
+  3B-strict rag=18.2 (n=500)  none=6.9 (n=500)
+  7B-strict rag=12.9 (n=493)  none=6.9 (n=492)
+  3B-loose  rag=29.6 (n=500)  none=21.1 (n=500)
+
+== behaviour given retrieval hit (rag, questions with gold_recall>0) ==
+  3B-strict hit=468 refused=275(0.588) answered=193 correct_among_answered=111(0.575)
+            correct total=111 (from hit=111, from recall==0/None=0)
+  7B-strict hit=468 refused=277(0.592) answered=191 correct_among_answered=124(0.649)
+            correct total=124 (from hit=124, from recall==0/None=0)
+  3B-loose  hit=468 refused=0(0.000) answered=468 correct_among_answered=167(0.357)
+            correct total=167 (from hit=167, from recall==0/None=0)
+
+== per-qtype literal-refusal rate among hit questions (rag) ==
+  qtype                        3B refuse/answer-prec 7B refuse/answer-prec loose3B refuse/prec
+  knowledge-update              36/ 77=0.47 prec=0.44 |  34/ 77=0.44 prec=0.53 |   0/ 77=0.00 prec=0.39
+  multi-session                101/124=0.81 prec=0.30 | 101/124=0.81 prec=0.26 |   0/124=0.00 prec=0.13
+  single-session-assistant       1/ 56=0.02 prec=0.75 |   1/ 56=0.02 prec=0.80 |   0/ 56=0.00 prec=0.70
+  single-session-preference      4/ 20=0.20 prec=0.00 |  14/ 20=0.70 prec=0.00 |   0/ 20=0.00 prec=0.00
+  single-session-user           25/ 67=0.37 prec=0.88 |  31/ 67=0.46 prec=0.94 |   0/ 67=0.00 prec=0.64
+  temporal-reasoning           108/124=0.87 prec=0.50 |  96/124=0.77 prec=0.61 |   0/124=0.00 prec=0.31
+
+== cost of pass (rag condition) ==
+  3B-strict acc=0.2220 tok/q=1442.1 -> 6496 tok/correct | lat(idx<492) mean=6.74 med=5.96 -> 30s/correct (0.5 min)
+  7B-strict acc=0.2480 tok/q=1436.9 -> 5794 tok/correct | lat(idx<492) mean=15.43 med=12.66 -> 62s/correct (1.0 min)
+  3B-loose  acc=0.3340 tok/q=1464.5 -> 4385 tok/correct | lat(idx<492) mean=8.83 med=7.42 -> 26s/correct (0.4 min)
+
+== residual gap to MemTier 0.382 ==
+  3B-strict acc=0.2220 gap=0.1600 (58.1% of 0.382 recovered) | recoverable if all hit-refusals turned correct: acc -> 0.7720
+  7B-strict acc=0.2480 gap=0.1340 (64.9% of 0.382 recovered) | recoverable if all hit-refusals turned correct: acc -> 0.8020
+  3B-loose  acc=0.3340 gap=0.0480 (87.4% of 0.382 recovered) | recoverable if all hit-refusals turned correct: acc -> 0.3340
+  3B-strict upper bound if retrieval fixed to 100% hit & refusals removed: n_answered_correct + (500-275 hit-refused)
+  7B-strict upper bound if retrieval fixed to 100% hit & refusals removed: n_answered_correct + (500-277 hit-refused)
+  3B-loose  upper bound if retrieval fixed to 100% hit & refusals removed: n_answered_correct + (500-0 hit-refused)

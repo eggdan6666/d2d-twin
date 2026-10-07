@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 4,
+  "i": 0,
+  "gen_s": 32.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_4_0/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.68s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            # Read-only registers\n            return\n        \n        if nbytes == 1:\n            # Update only bits 15:8\n            mask = 0xFF00\n            self.regs[addr] = (self.regs[addr] & ~mask) | ((data << 8) & mask)\n        else:\n            self.regs[addr] = data & 0xFFFF\n"
+ },
+ {
+  "seed": 4,
+  "i": 1,
+  "gen_s": 62.9,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 5,
+  "tail": ".....sss                                                                 [100%]\n5 passed, 3 skipped in 0.70s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # RO registers ignore writes\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | (data & mask)\n\n        if addr == 0x01:\n            self.regs[addr] &= 0x7FFF  # OS bit is read-only and always 0\n"
+ },
+ {
+  "seed": 4,
+  "i": 2,
+  "gen_s": 90.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_4_2/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.99s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # RO registers ignore writes\n        \n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data = (current_value & 0x00FF) | ((data & 0xFF) << 8)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 4,
+  "i": 3,
+  "gen_s": 119.9,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_4_3/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.61s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            # Read-only registers, ignore writes\n            return\n        \n        if nbytes == 1:\n            # Update only bits 15:8\n            mask = 0xFF00\n            self.regs[addr] = (self.regs[addr] & ~mask) | ((data << 8) & mask)\n        else:\n            # Full register write\n            self.regs[addr] = data & 0xFFFF\n"
+ },
+ {
+  "seed": 5,
+  "i": 0,
+  "gen_s": 148.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_5_0/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.97s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04X}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04X}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # TEMP and DIEID are read-only\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | (data & mask)\n"
+ },
+ {
+  "seed": 5,
+  "i": 1,
+  "gen_s": 175.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_5_1/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 2.06s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # TEMP and DIEID are read-only\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | (data & mask)\n"
+ },
+ {
+  "seed": 5,
+  "i": 2,
+  "gen_s": 208.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_5_2/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 1.85s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#06x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        else:\n            return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#06x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # TEMP and DIEID are read-only\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            shift = 8\n        else:\n            mask = 0xFFFF\n            shift = 0\n        \n        current_value = self.regs[addr]\n        new_value = (current_value & ~mask) | ((data << shift) & mask)\n        self.regs[addr] = new_value\n"
+ },
+ {
+  "seed": 5,
+  "i": 3,
+  "gen_s": 238.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_5_3/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.74s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            # TEMP and DIEID are read-only\n            return\n        \n        if nbytes == 1:\n            # Update only bits 15:8\n            mask = 0xFF00\n            self.regs[addr] = (self.regs[addr] & ~mask) | ((data << 8) & mask)\n        else:\n            self.regs[addr] = data & 0xFFFF\n"
+ },
+ {
+  "seed": 6,
+  "i": 0,
+  "gen_s": 267.9,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 5,
+  "tail": ".....sss                                                                 [100%]\n5 passed, 3 skipped in 0.74s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # RO registers ignore writes\n        \n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data <<= 8\n            data |= (current_value & 0xFF)\n        \n        if addr == 0x01:\n            # OS bit is read-as-zero\n            data &= ~(1 << 15)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 6,
+  "i": 1,
+  "gen_s": 296.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_6_1/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.53s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500   # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # RO registers ignore writes\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        current_value = self.regs[addr]\n        new_value = (current_value & ~mask) | (data & mask)\n        self.regs[addr] = new_value\n"
+ },
+ {
+  "seed": 6,
+  "i": 2,
+  "gen_s": 325.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_6_2/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 0.75s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # RO registers ignore writes\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            self.regs[addr] = (self.regs[addr] & ~mask) | ((data << 8) & mask)\n        else:\n            self.regs[addr] = data & 0xFFFF\n"
+ },
+ {
+  "seed": 6,
+  "i": 3,
+  "gen_s": 353.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 4,
+  "tail": "...F.sss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp1075kt_b_6_3/test_d2d_blackbox.py:198: AssertionError: CFGR.OS 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CFGR...\n1 failed, 4 passed, 3 skipped in 1.03s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP1075_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x00FF,  # CFGR\n            0x02: 0x4B00,  # LLIM\n            0x03: 0x5000,  # HLIM\n            0x0F: 0x7500,  # DIEID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00 or addr == 0x0F:\n            return  # RO registers ignore writes\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | (data & mask)\n"
+ }
+]

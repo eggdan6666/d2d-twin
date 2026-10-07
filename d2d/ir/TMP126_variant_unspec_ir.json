@@ -1,0 +1,413 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = corpus/data/raw_pdf/TI/TMP126.pdf（SNIS209C – JULY 2021 – REVISED JUNE 2022，即 Revision C）人工直读 PDF 文本层 + MinerU 解析稿交叉核对；SVD 可映射。第 12 颗。选它的理由：TI 在这颗上给了**逐位 TYPE 与 Reset 码**（含少见的 RC＝读即清除），并且把『位自清零 + 写触发动作』写在同一个寄存器里。",
+ "device": "TMP126",
+ "vendor": "TI",
+ "interface": "I2C/SMBus",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B"
+  ],
+  "note": "A0/A1 引脚组合（§7.1）；MVP 不建模总线地址。MDA（Multiple Device Access）全局广播命令属总线协议层，不在寄存器契约内，见 excluded_blocks"
+ },
+ "registers": [
+  {
+   "name": "TEMP_RESULT",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "温度转换结果（§8.6.1 p.26）。14-bit 二进制补码，LSB = 0.03125°C，占 15:2 位，低 2 位恒 0",
+   "fields": [
+    {
+     "name": "TEMP",
+     "bits": "15:2",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Temp_Result[13:0]，14-bit 补码，0.03125°C/LSB（Table 8-6：Type R，Reset 0000h）"
+    },
+    {
+     "name": "RESERVED_1_0",
+     "bits": "1:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，Type R，Reset 00b，原文『These two bits will always read 00b』⇒ A 档（有文档明示读 0，计分）"
+    }
+   ]
+  },
+  {
+   "name": "SLEW_RESULT",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "斜率计算结果（§8.6.2 p.26-27）。14-bit 补码，LSB = 0.03125°C/s；非连续转换模式下回默认值（动态量，复位值仍是确定的 0000h，可断言）",
+   "fields": [
+    {
+     "name": "SLEW",
+     "bits": "15:2",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Slew_Result[13:0]。位划分照 §8.6.2 的 14-bit 描述与 00h 同格式推断——p.26 图 8-2 的位标在解析稿里丢失，属人工核验项（见 proofread_record P1）"
+    },
+    {
+     "name": "RESERVED_1_0",
+     "bits": "1:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "低 2 位读 0，同 00h 格式推断（P1）"
+    }
+   ]
+  },
+  {
+   "name": "ALERT_STATUS",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "告警状态（§8.6.3 p.27-28，Table 8-7）。**TI 在这里逐位标了 RC＝Read-Clear**，是基准里第一个由手册明文给出读清零语义的寄存器；高 8 位 Reserved 标 R",
+   "fields": [
+    {
+     "name": "RESERVED_15_8",
+     "bits": "15:8",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，Type R，Reset 00h ⇒ A 档计分"
+    },
+    {
+     "name": "CRC_FLAG",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "CRC_Flag，Type **RC**：上一次使能 CRC 的写事务校验失败则置 1，读该寄存器即清除"
+    },
+    {
+     "name": "SLEW_POS_STATUS",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "正斜率状态，Type R，Reset 0b"
+    },
+    {
+     "name": "SLEW_FLAG",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "斜率标志，Type RC（读清零）"
+    },
+    {
+     "name": "THIGH_STATUS",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "高温状态位，Type R"
+    },
+    {
+     "name": "TLOW_STATUS",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "低温状态位，Type R"
+    },
+    {
+     "name": "THIGH_FLAG",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "高温标志，Type RC"
+    },
+    {
+     "name": "TLOW_FLAG",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "低温标志，Type RC"
+    },
+    {
+     "name": "DATA_READY_FLAG",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "数据就绪标志，Type RC。读清零掩码 = 1011_0111b = 0xB7"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x03",
+   "access": "RW",
+   "reset": "0x0006",
+   "desc": "配置寄存器（§8.6.4 p.29，Figure 8-22 + Table 8-8）。复位 0006h＝Conv_Period=110b(1s)。同时含**两个自清零位**：bit8 软复位、bit4 单次转换触发",
+   "fields": [
+    {
+     "name": "RESERVED_15_9",
+     "bits": "15:9",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，图标注 R-00h ⇒ A 档计分（写进去必须仍读 0）",
+     "tier": "A",
+     "tier_evidence": "PDF p.29 Table 8-8：『15:9 Reserved  R  00h』"
+    },
+    {
+     "name": "RESETS",
+     "bits": "8",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "Table 8-8 里 Type 标 **R/W**、Reset 0b，但描述写『写 1b 触发 0.5ms 软件复位，且该位永远读回 0b』⇒ 写触发＋自清零（⑤），不是普通可写位"
+    },
+    {
+     "name": "AVG",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "平均使能：1b＝每次测量做 8 次转换平均"
+    },
+    {
+     "name": "RESERVED_6",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，图标注 R-0b ⇒ A 档",
+     "tier": "A",
+     "tier_evidence": "PDF p.29 Figure 8-22 位标注 R-0b"
+    },
+    {
+     "name": "INT_COMP",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0b＝中断模式，1b＝比较器模式"
+    },
+    {
+     "name": "ONE_SHOT",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "单次转换触发，原文『This bit will always read 0h』⇒ 写触发＋自清零（⑤）；触发后转换完成回到 shutdown"
+    },
+    {
+     "name": "MODE",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0b＝连续转换，1b＝关断"
+    },
+    {
+     "name": "CONV_PERIOD",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 6,
+     "desc": "转换周期 000=6ms … 110=1s（默认）… 111=4s"
+    }
+   ]
+  },
+  {
+   "name": "ALERT_ENABLE",
+   "addr": "0x04",
+   "access": "RW",
+   "reset": "0x0016",
+   "desc": "告警使能（§8.6.5 p.30，Table 8-9）。复位 0016h＝CRC_Alert_En=1, THigh=1, TLow=1",
+   "fields": [
+    {
+     "name": "RESERVED_15_5",
+     "bits": "15:5",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，图标注 R-000h ⇒ A 档",
+     "tier": "A",
+     "tier_evidence": "PDF p.30 Table 8-9：『15:5 Reserved  R  000h』"
+    },
+    {
+     "name": "CRC_ALERT_EN",
+     "bits": "4",
+     "access": "RW",
+     "reset": 1,
+     "desc": "使能 CRC_Flag 驱动 ALERT 引脚，默认 1"
+    },
+    {
+     "name": "SLEW_ALERT_EN",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "使能 Slew_Flag（中断模式）/Slew_Status（比较器模式）"
+    },
+    {
+     "name": "THIGH_ALERT_EN",
+     "bits": "2",
+     "access": "RW",
+     "reset": 1,
+     "desc": "高温告警输出使能，默认 1"
+    },
+    {
+     "name": "TLOW_ALERT_EN",
+     "bits": "1",
+     "access": "RW",
+     "reset": 1,
+     "desc": "低温告警输出使能，默认 1"
+    },
+    {
+     "name": "DATA_READY_ALERT_EN",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "数据就绪告警输出使能"
+    }
+   ]
+  },
+  {
+   "name": "TLOW_LIMIT",
+   "addr": "0x05",
+   "access": "RW",
+   "reset": "0xF380",
+   "desc": "低温限值（§8.6.6 p.31，Table 8-10）。复位 F380h＝-25°C。**寄存器复位值与位域复位值不同尺度**：Table 给 15:2 字段复位 3CE0h（14-bit 原生宽度），寄存器复位是它左移 2 位的 F380h ⇒ 掩码/对齐陷阱，正是 ④a 想测的",
+   "fields": [
+    {
+     "name": "TLOW_LIMIT",
+     "bits": "15:2",
+     "access": "RW",
+     "reset": 15584,
+     "desc": "TLow_Limit[13:0]，14-bit 补码，0.03125°C/LSB；Table 8-10 标 3CE0h（=0xF380>>2）"
+    },
+    {
+     "name": "RESERVED_1_0",
+     "bits": "1:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "图标注 R-00b，原文『always read 00b』⇒ A 档",
+     "tier": "A",
+     "tier_evidence": "PDF p.31 Table 8-10：『1:0 Reserved  R  00b』＋原文 always read 00b"
+    }
+   ]
+  },
+  {
+   "name": "THIGH_LIMIT",
+   "addr": "0x06",
+   "access": "RW",
+   "reset": "0x2A80",
+   "desc": "高温限值（§8.6.7 p.31，Table 8-11）。复位 2A80h＝+85°C；同 05h 的尺度差异：字段原生值 AA0h（0x2A80>>2）",
+   "fields": [
+    {
+     "name": "THIGH_LIMIT",
+     "bits": "15:2",
+     "access": "RW",
+     "reset": 2720,
+     "desc": "THigh_Limit[13:0]，14-bit 补码；Table 给 AA0h"
+    },
+    {
+     "name": "RESERVED_1_0",
+     "bits": "1:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "R-00b ⇒ A 档",
+     "tier": "A",
+     "tier_evidence": "PDF p.31 Table 8-11：同上"
+    }
+   ]
+  },
+  {
+   "name": "HYSTERESIS",
+   "addr": "0x07",
+   "access": "RW",
+   "reset": "0x0A0A",
+   "desc": "迟滞（§8.6.8 p.32，Table 8-12）。两个 8-bit 无符号字段，LSB=0.5°C，各默认 0Ah＝5°C。全 16 位可写",
+   "fields": [
+    {
+     "name": "THIGH_HYST",
+     "bits": "15:8",
+     "access": "RW",
+     "reset": 10,
+     "desc": "高温迟滞＝THigh_Limit - THigh_Hyst"
+    },
+    {
+     "name": "TLOW_HYST",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 10,
+     "desc": "低温迟滞＝TLow_Limit + TLow_Hyst"
+    }
+   ]
+  },
+  {
+   "name": "SLEW_LIMIT",
+   "addr": "0x08",
+   "access": "RW",
+   "reset": "0x0500",
+   "desc": "斜率限值（§8.6.9 p.33，Table 8-13）。13-bit 无符号字段占 14:2，LSB=0.03125°C/s，默认 0140h＝10°C/s（寄存器复位 0500h＝0140h<<2）。bit15 与 bit1:0 标 R-0b",
+   "fields": [
+    {
+     "name": "RESERVED_15",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "R-00b ⇒ A 档",
+     "tier": "A",
+     "tier_evidence": "PDF p.33 Table 8-13：『15 Reserved  R  00b』"
+    },
+    {
+     "name": "SLEW_RATE_LIMIT",
+     "bits": "14:2",
+     "access": "RW",
+     "reset": 320,
+     "desc": "Slew_Rate_Limit[12:0]，Table 给 0140h（＝0x0500>>2）"
+    },
+    {
+     "name": "RESERVED_1_0",
+     "bits": "1:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "R-00b ⇒ A 档",
+     "tier": "A",
+     "tier_evidence": "PDF p.33 Table 8-13：『1:0 Reserved  R  00b』"
+    }
+   ]
+  }
+ ],
+ "excluded_blocks": [
+  {
+   "block": "0x09–0x0B Unique_ID1/2/3",
+   "reason": "复位值标 xxxxh（每颗器件唯一，NIST 溯源用）⇒ ② 复位值断言无法判定，不进 IR"
+  },
+  {
+   "block": "MDA 全局广播 / CRC 写事务 / EEPROM 写命令时序",
+   "reason": "属总线协议层与命令序列，不在 read_register/write_register 寄存器契约内；纳入需先扩接口（同 AT24C02/SHT3x 的处理）"
+  },
+  {
+   "block": "§8.6.4 写 CONFIG 会中止进行中的转换",
+   "reason": "需要转换时序模型才能断言，MVP 不建模；已在 desc 记录"
+  }
+ ],
+ "proofread_record": [
+  {
+   "id": "P1",
+   "item": "SLEW_RESULT(01h) 的位划分按 00h 同格式推断（MinerU 把 Figure 8-2 的位标丢了）",
+   "risk": "低：只影响 01h 的 ④/⑤ 断言粒度，寄存器级 RO 与复位 0000h 是原文直读",
+   "verify": "PDF p.26 图 8-2 人眼核一次"
+  },
+  {
+   "id": "P2",
+   "item": "TLOW/THIGH/SLEW_LIMIT 三个字段的 Table 复位值是**原生位宽**（3CE0h/AA0h/0140h），寄存器复位值是左移后的 F380h/2A80h/0500h",
+   "risk": "这是本颗对 ④a 最有价值的地方，但若我把两者写反会让金标自己错",
+   "verify": "已交叉核对 0x3CE0<<2==0xF380、0xAA0<<2==0x2A80、0x140<<2==0x0500（三条全中）"
+  },
+  {
+   "id": "P3",
+   "item": "ALERT_STATUS 的 9 个位里 5 个是 RC（读清零），寄存器本身是 RO",
+   "risk": "命中③的 read-clear 豁免条件（寄存器级 RO ＋ 读清零 ＋ 复位值非零时才会触发）；本颗复位为 0000h，豁免不会被动触发",
+   "verify": "金标回归必须绿；已跑"
+  },
+  {
+   "id": "P4",
+   "item": "CONFIG bit8 名称手册写作 \"Resets\"，Type 列标 R/W 但描述说读回 0",
+   "risk": "若照 Type 列编成普通可写位，⑤ 会漏测；这里编成 read_as=0 ＋ 写触发全寄存器复位",
+   "verify": "PDF p.29 Table 8-8 第一列 Type/Reset 已直读"
+  }
+ ]
+}

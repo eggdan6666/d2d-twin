@@ -1,0 +1,862 @@
+=== Page 22 ===
+7 Registers
+7.1 Register Maps
+The INA226 uses a bank of registers for holding configuration settings, measurement results, minimum and 
+maximum limits, and status information. Table 7-1 summarizes the device registers; refer to the Functional Block 
+Diagram section for an illustration of the registers.
+All 16-bit device registers are two 8-bit bytes using the I2C interface.
+Table 7-1. Register Set Summary
+POINTER 
+ADDRESS
+REGISTER NAME
+FUNCTION
+POWER-ON RESET
+TYPE(1)
+HEX
+BINARY
+HEX
+00h
+Configuration Register
+All-register reset, shunt voltage and 
+bus voltage ADC conversion times and 
+averaging, operating mode.
+01000001 00100111
+4127
+R/ W
+01h
+Shunt Voltage Register
+Shunt voltage measurement data.
+00000000 00000000
+0000
+R
+02h
+Bus Voltage Register
+Bus voltage measurement data.
+00000000 00000000
+0000
+R
+03h
+Power Register(2)
+Contains the value of the calculated 
+power being delivered to the load.
+00000000 00000000
+0000
+R
+04h
+Current Register(2)
+Contains the value of the calculated 
+current flowing through the shunt 
+resistor.
+00000000 00000000
+0000
+R
+05h
+Calibration Register
+Sets full-scale range and LSB of current 
+and power measurements. Overall 
+system calibration.
+00000000 00000000
+0000
+R/ W
+06h
+Mask/Enable Register
+Alert configuration and Conversion 
+Ready flag.
+00000000 00000000
+0000
+R/ W
+07h
+Alert Limit Register
+Contains the limit value to compare to 
+the selected Alert function.
+00000000 00000000
+0000
+R/ W
+FEh
+Manufacturer ID Register
+Contains unique manufacturer 
+identification number.
+0101010001001001
+5449
+R
+FFh
+Die ID Register
+Contains unique die identification 
+number.
+0010001001100000
+or 0010001001100001
+2260
+or 2261(3)
+R
+(1)
+Type: R = Read-Only, R/ W = Read/Write.
+(2)
+The Current Register (04h) and Power Register (03h) default to '0' because the Calibration register defaults to '0', yielding zero current 
+and power values until the Calibration register is programmed.
+(3)
+Die COO: 2260 = USA or Japan, 2261 = USA
+7.1.1 Configuration Register (00h) (Read/Write)
+Table 7-2. Configuration Register (00h) (Read/Write) Descriptions
+BIT NO.
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+RST
+—
+—
+—
+AVG2
+AVG1
+AVG0
+VBUSCT2
+VBUSCT1
+VBUSCT0
+VSHCT2
+VSHCT1
+VSHCT0
+MODE3
+MODE2
+MODE1
+POR 
+VALUE
+0
+1
+0
+0
+0
+0
+0
+1
+0
+0
+1
+0
+0
+1
+1
+1
+The Configuration Register settings control the operating modes for the device. This register controls the 
+conversion time settings for both the shunt and bus voltage measurements as well as the averaging mode 
+used. The operating mode that controls what signals are selected to be measured is also programmed in the 
+Configuration Register.
+The Configuration Register can be read from at any time without impacting or affecting the device settings or 
+a conversion in progress. Writing to the Configuration Register halts any conversion in progress until the write 
+sequence is completed resulting in a new conversion starting based on the new contents of the Configuration 
+Register (00h). This halt prevents any uncertainty in the conditions used for the next completed conversion.
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+www.ti.com
+22
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA226
+=== Page 23 ===
+RST:
+Reset Bit
+Bit 15
+Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default 
+values; this bit self-clears.
+AVG:
+Averaging Mode
+Bits 9–11
+Determines the number of samples that are collected and averaged. Table 7-3 shows all the AVG bit settings and 
+related number of averages for each bit setting.
+Table 7-3. AVG Bit Settings[11:9] Combinations
+AVG2
+D11
+AVG1
+D10
+AVG0
+D9
+NUMBER OF
+AVERAGES(1)
+0
+0
+0
+1
+0
+0
+1
+4
+0
+1
+0
+16
+0
+1
+1
+64
+1
+0
+0
+128
+1
+0
+1
+256
+1
+1
+0
+512
+1
+1
+1
+1024
+(1)
+Shaded values are default.
+VBUSCT:
+Bus Voltage Conversion Time
+Bits 6–8
+Sets the conversion time for the bus voltage measurement. Table 7-4 shows the VBUSCT bit options and related 
+conversion times for each bit setting.
+Table 7-4. VBUSCT Bit Settings [8:6] Combinations
+VBUSCT2
+D8
+VBUSCT1
+D7
+VBUSCT0
+D6
+CONVERSION 
+TIME(1)
+0
+0
+0
+140µs
+0
+0
+1
+204µs
+0
+1
+0
+332µs
+0
+1
+1
+588µs
+1
+0
+0
+1.1ms
+1
+0
+1
+2.116ms
+1
+1
+0
+4.156ms
+1
+1
+1
+8.244ms
+(1)
+Shaded values are default.
+VSHCT:
+Shunt Voltage Conversion Time
+Bits 3–5
+Sets the conversion time for the shunt voltage measurement. Table 7-5 shows the VSHCT bit options and related 
+conversion times for each bit setting.
+Table 7-5. VSHCT Bit Settings [5:3] Combinations
+VSHCT2
+D8
+VSHCT1
+D7
+VSHCT0
+D6
+CONVERSION 
+TIME(1)
+0
+0
+0
+140µs
+0
+0
+1
+204µs
+0
+1
+0
+332µs
+0
+1
+1
+588µs
+1
+0
+0
+1.1ms
+1
+0
+1
+2.116ms
+1
+1
+0
+4.156ms
+www.ti.com
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+23
+Product Folder Links: INA226
+=== Page 24 ===
+Table 7-5. VSHCT Bit Settings [5:3] Combinations 
+(continued)
+VSHCT2
+D8
+VSHCT1
+D7
+VSHCT0
+D6
+CONVERSION 
+TIME(1)
+1
+1
+1
+8.244ms
+(1)
+Shaded values are default.
+MODE:
+Operating Mode
+Bits 0-2
+Selects continuous, triggered, or power-down mode of operation. These bits default to continuous shunt and bus 
+measurement mode. The mode settings are shown in Table 7-6.
+Table 7-6. Mode Settings [2:0] Combinations
+MODE3
+D2
+MODE2
+D1
+MODE1
+D0
+MODE(1)
+0
+0
+0
+Power-Down (or Shutdown)
+0
+0
+1
+Shunt Voltage, Triggered
+0
+1
+0
+Bus Voltage, Triggered
+0
+1
+1
+Shunt and Bus, Triggered
+1
+0
+0
+Power-Down (or Shutdown)
+1
+0
+1
+Shunt Voltage, Continuous
+1
+1
+0
+Bus Voltage, Continuous
+1
+1
+1
+Shunt and Bus, Continuous
+(1)
+Shaded values are default.
+7.1.2 Shunt Voltage Register (01h) (Read-Only)
+The Shunt Voltage Register stores the current shunt voltage reading, VSHUNT. Negative numbers are 
+represented in two's complement format. Generate the two's complement of a negative number by 
+complementing the absolute value binary number and adding 1. An MSB = '1' denotes a negative number.
+Example: For a value of VSHUNT = –80mV:
+1.
+Take the absolute value: 80mV
+2.
+Translate this number to a whole decimal number (80mV ÷ 2.5µV) = 32000
+3.
+Convert this number to binary = 0111 1101 0000 0000
+4.
+Complement the binary result = 1000 0010 1111 1111
+5.
+Add '1' to the complement to create the two's complement result = 1000 0011 0000 0000 = 8300h
+If averaging is enabled, this register displays the averaged value.
+Full-scale range = 81.92mV (decimal = 7FFF); LSB: 2.5μV.
+Table 7-7. Shunt Voltage Register (01h) (Read-Only) Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+SIGN
+SD14
+SD13
+SD12
+SD11
+SD10
+SD9
+SD8
+SD7
+SD6
+SD5
+SD4
+SD3
+SD2
+SD1
+SD0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+7.1.3 Bus Voltage Register (02h) (Read-Only) 
+The Bus Voltage Register stores the most recent bus voltage reading, VBUS.
+If averaging is enabled, this register displays the averaged value.
+Full-scale range = 40.96V (decimal = 7FFF); LSB = 1.25mV.
+Table 7-8. Bus Voltage Register (02h) (Read-Only) Description
+BIT #
+D15(1)
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+—
+BD14
+BD13
+BD12
+BD11
+BD10
+BD9
+BD8
+BD7
+BD6
+BD5
+BD4
+BD3
+BD2
+BD1
+BD0
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+www.ti.com
+24
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA226
+=== Page 25 ===
+Table 7-8. Bus Voltage Register (02h) (Read-Only) Description (continued)
+BIT #
+D15(1)
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+(1)
+D15 is always zero because bus voltage can only be positive.
+www.ti.com
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+25
+Product Folder Links: INA226
+=== Page 26 ===
+7.1.4 Power Register (03h) (Read-Only)
+If averaging is enabled, this register displays the averaged value.
+The Power Register LSB is internally programmed to equal 25 times the programmed value of the Current_LSB.
+The Power Register records power in Watts by multiplying the decimal values of the Current Register with the 
+decimal value of the Bus Voltage Register according to Equation 4.
+Table 7-9. Power Register (03h) (Read-Only) Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+PD15
+PD14
+PD13
+PD12
+PD11
+PD10
+PD9
+PD8
+PD7
+PD6
+PD5
+PD4
+PD3
+PD2
+PD1
+PD0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+7.1.5 Current Register (04h) (Read-Only)
+If averaging is enabled, this register displays the averaged value.
+The value of the Current Register is calculated by multiplying the decimal value in the Shunt Voltage Register 
+with the decimal value of the Calibration Register, according to Equation 3.
+Table 7-10. Current Register (04h) (Read-Only) Register Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+CSIGN
+CD14
+CD13
+CD12
+CD11
+CD10
+CD9
+CD8
+CD7
+CD6
+CD5
+CD4
+CD3
+CD2
+CD1
+CD0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+7.1.6 Calibration Register (05h) (Read/Write)
+This register provides the device with the value of the shunt resistor that is present to create the measured 
+differential voltage. The register also sets the resolution of the Current Register. Programming this register 
+sets the Current_LSB and the Power_LSB. This register is also used in overall system calibration. See the 
+Programming the Calibration Register for additional information on programming the Calibration Register.
+Table 7-11. Calibration Register (05h) (Read/Write) Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+—
+FS14
+FS13
+FS12
+FS11
+FS10
+FS9
+FS8
+FS7
+FS6
+FS5
+FS4
+FS3
+FS2
+FS1
+FS0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+7.1.7 Mask/Enable Register (06h) (Read/Write)
+The Mask/Enable Register selects the function that is enabled to control the Alert pin as well as how that pin 
+functions. If multiple functions are enabled, the highest significant bit position Alert Function (D15-D11) takes 
+priority and responds to the Alert Limit Register.
+Table 7-12. Mask/Enable Register (06h) (Read/Write)
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+SOL
+SUL
+BOL
+BUL
+POL
+CNVR
+—
+—
+—
+—
+—
+AFF
+CVRF
+OVF
+APOL
+LEN
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+SOL:
+Shunt Voltage Over-Voltage
+Bit 15
+Setting this bit high configures the Alert pin to be asserted if the shunt voltage measurement following a conversion 
+exceeds the value programmed in the Alert Limit Register.
+SUL:
+Shunt Voltage Under-Voltage
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+www.ti.com
+26
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA226
+=== Page 27 ===
+Bit 14
+Setting this bit high configures the Alert pin to be asserted if the shunt voltage measurement following a conversion 
+drops below the value programmed in the Alert Limit Register.
+BOL:
+Bus Voltage Over-Voltage
+Bit 13
+Setting this bit high configures the Alert pin to be asserted if the bus voltage measurement following a conversion 
+exceeds the value programmed in the Alert Limit Register.
+BUL:
+Bus Voltage Under-Voltage
+Bit 12
+Setting this bit high configures the Alert pin to be asserted if the bus voltage measurement following a conversion 
+drops below the value programmed in the Alert Limit Register.
+POL:
+Power Over-Limit
+Bit 11
+Setting this bit high configures the Alert pin to be asserted if the Power calculation made following a bus voltage 
+measurement exceeds the value programmed in the Alert Limit Register.
+CNVR:
+Conversion Ready
+Bit 10
+Setting this bit high configures the Alert pin to be asserted when the Conversion Ready Flag, Bit 3, is asserted 
+indicating that the device is ready for the next conversion.
+AFF:
+Alert Function Flag
+Bit 4
+While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be 
+enabled to assert the Alert pin. Reading the Alert Function Flag following an alert allows the user to determine if the 
+Alert Function is the source of the Alert.
+When the Alert Latch Enable bit is set to Latch mode, the Alert Function Flag bit clears only when the Mask/Enable 
+Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared 
+following the next conversion that does not result in an Alert condition.
+CVRF:
+Conversion Ready Flag
+Bit 3
+Although the device can be read at any time, and the data from the last conversion is available, the Conversion 
+Ready Flag bit is provided to help coordinate one-shot or triggered conversions. The Conversion Ready Flag bit is 
+set after all conversions, averaging, and multiplications are complete. Conversion Ready Flag bit clears under the 
+following conditions:
+1.) Writing to the Configuration Register (except for Power-Down selection)
+2.) Reading the Mask/Enable Register
+OVF:
+Math Overflow Flag
+Bit 2
+This bit is set to '1' if an arithmetic operation resulted in an overflow error. The bit indicates that current and power 
+data can be invalid.
+APOL:
+Alert Polarity bit; sets the Alert pin polarity.
+Bit 1
+1 = Inverted (active-high open collector)
+0 = Normal (active-low open collector) (default)
+LEN:
+Alert Latch Enable; configures the latching feature of the Alert pin and Alert Flag bits.
+Bit 0
+1 = Latch enabled
+0 = Transparent (default)
+When the Alert Latch Enable bit is set to Transparent mode, the Alert pin and Flag bit resets to the idle states when 
+the fault has been cleared. When the Alert Latch Enable bit is set to Latch mode, the Alert pin and Alert Flag bit 
+remains active following a fault until the Mask/Enable Register has been read.
+www.ti.com
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+27
+Product Folder Links: INA226

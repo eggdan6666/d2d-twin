@@ -1,0 +1,534 @@
+[
+ {
+  "chip": "TMP1075",
+  "convention_bits": 0,
+  "strict": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 43,
+   "assert_total": 60,
+   "rate": 71.7,
+   "fail_by_test": {
+    "test_write_trigger_fields": 11,
+    "test_readonly_protection": 2,
+    "test_rw_field_persistence": 2,
+    "test_single_byte_semantics": 2
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 43,
+   "assert_total": 60,
+   "rate": 71.7,
+   "fail_by_test": {
+    "test_write_trigger_fields": 11,
+    "test_readonly_protection": 2,
+    "test_rw_field_persistence": 2,
+    "test_single_byte_semantics": 2
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 43,
+   "assert_total": 60,
+   "rate": 71.7,
+   "fail_by_test": {
+    "test_write_trigger_fields": 11,
+    "test_readonly_protection": 2,
+    "test_rw_field_persistence": 2,
+    "test_single_byte_semantics": 2
+   },
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "BMP280",
+  "convention_bits": 0,
+  "strict": {
+   "n": 12,
+   "green": 4,
+   "assert_pass": 38,
+   "assert_total": 48,
+   "rate": 79.2,
+   "fail_by_test": {
+    "test_readonly_protection": 8,
+    "test_write_only_reset_key": 2
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 4,
+   "assert_pass": 38,
+   "assert_total": 48,
+   "rate": 79.2,
+   "fail_by_test": {
+    "test_readonly_protection": 8,
+    "test_write_only_reset_key": 2
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 4,
+   "assert_pass": 38,
+   "assert_total": 48,
+   "rate": 79.2,
+   "fail_by_test": {
+    "test_readonly_protection": 8,
+    "test_write_only_reset_key": 2
+   },
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "TMP102",
+  "convention_bits": 3,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 24,
+   "assert_total": 36,
+   "rate": 66.7,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 9,
+   "assert_pass": 33,
+   "assert_total": 36,
+   "rate": 91.7,
+   "fail_by_test": {
+    "test_rw_field_persistence": 3
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 9,
+   "assert_pass": 33,
+   "assert_total": 36,
+   "rate": 91.7,
+   "fail_by_test": {
+    "test_rw_field_persistence": 3
+   },
+   "diagnostic": {
+    "samples_observed": 11,
+    "reserved_written_as_storage": 11,
+    "pct": 100.0,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "BME280",
+  "convention_bits": 1,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 18,
+   "assert_total": 48,
+   "rate": 37.5,
+   "fail_by_test": {
+    "test_readonly_protection": 10,
+    "test_rw_field_persistence": 12,
+    "test_write_only_reset_key": 8
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 30,
+   "assert_total": 48,
+   "rate": 62.5,
+   "fail_by_test": {
+    "test_readonly_protection": 10,
+    "test_write_only_reset_key": 7,
+    "test_rw_field_persistence": 1
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 1,
+   "assert_pass": 30,
+   "assert_total": 48,
+   "rate": 62.5,
+   "fail_by_test": {
+    "test_readonly_protection": 10,
+    "test_write_only_reset_key": 7,
+    "test_rw_field_persistence": 1
+   },
+   "diagnostic": {
+    "samples_observed": 11,
+    "reserved_written_as_storage": 11,
+    "pct": 100.0,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "TMP100",
+  "convention_bits": 2,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 34,
+   "assert_total": 48,
+   "rate": 70.8,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_readonly_protection": 1,
+    "test_write_trigger_fields": 1
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 7,
+   "assert_pass": 41,
+   "assert_total": 48,
+   "rate": 85.4,
+   "fail_by_test": {
+    "test_rw_field_persistence": 5,
+    "test_readonly_protection": 1,
+    "test_write_trigger_fields": 1
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 7,
+   "assert_pass": 41,
+   "assert_total": 48,
+   "rate": 85.4,
+   "fail_by_test": {
+    "test_rw_field_persistence": 5,
+    "test_readonly_protection": 1,
+    "test_write_trigger_fields": 1
+   },
+   "diagnostic": {
+    "samples_observed": 7,
+    "reserved_written_as_storage": 7,
+    "pct": 100.0,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "INA3221",
+  "convention_bits": 0,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 22,
+   "assert_total": 48,
+   "rate": 45.8,
+   "fail_by_test": {
+    "test_readonly_protection": 8,
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 6
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 22,
+   "assert_total": 48,
+   "rate": 45.8,
+   "fail_by_test": {
+    "test_readonly_protection": 8,
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 6
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 22,
+   "assert_total": 48,
+   "rate": 45.8,
+   "fail_by_test": {
+    "test_readonly_protection": 8,
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 6
+   },
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "HDC2021",
+  "convention_bits": 1,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 17,
+   "assert_total": 48,
+   "rate": 35.4,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 11,
+    "test_readonly_protection": 8
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 29,
+   "assert_total": 48,
+   "rate": 60.4,
+   "fail_by_test": {
+    "test_write_trigger_fields": 11,
+    "test_readonly_protection": 8
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 29,
+   "assert_total": 48,
+   "rate": 60.4,
+   "fail_by_test": {
+    "test_write_trigger_fields": 11,
+    "test_readonly_protection": 8
+   },
+   "diagnostic": {
+    "samples_observed": 12,
+    "reserved_written_as_storage": 12,
+    "pct": 100.0,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "TMP117",
+  "convention_bits": 2,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 22,
+   "assert_total": 48,
+   "rate": 45.8,
+   "fail_by_test": {
+    "test_readonly_protection": 3,
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 11
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 22,
+   "assert_total": 48,
+   "rate": 45.8,
+   "fail_by_test": {
+    "test_readonly_protection": 3,
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 11
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 22,
+   "assert_total": 48,
+   "rate": 45.8,
+   "fail_by_test": {
+    "test_readonly_protection": 3,
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 11
+   },
+   "diagnostic": {
+    "samples_observed": 10,
+    "reserved_written_as_storage": 10,
+    "pct": 100.0,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "ADS1220",
+  "convention_bits": 0,
+  "strict": {
+   "n": 12,
+   "green": 12,
+   "assert_pass": 36,
+   "assert_total": 36,
+   "rate": 100.0,
+   "fail_by_test": {}
+  },
+  "relax": {
+   "n": 12,
+   "green": 12,
+   "assert_pass": 36,
+   "assert_total": 36,
+   "rate": 100.0,
+   "fail_by_test": {}
+  },
+  "unspec": {
+   "n": 12,
+   "green": 12,
+   "assert_pass": 36,
+   "assert_total": 36,
+   "rate": 100.0,
+   "fail_by_test": {},
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "LM83",
+  "convention_bits": 2,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 15,
+   "assert_total": 48,
+   "rate": 31.2,
+   "fail_by_test": {
+    "test_readonly_protection": 9,
+    "test_rw_field_persistence": 12,
+    "test_read_write_alias": 12
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 15,
+   "assert_total": 48,
+   "rate": 31.2,
+   "fail_by_test": {
+    "test_readonly_protection": 9,
+    "test_rw_field_persistence": 12,
+    "test_read_write_alias": 12
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 15,
+   "assert_total": 48,
+   "rate": 31.2,
+   "fail_by_test": {
+    "test_readonly_protection": 9,
+    "test_rw_field_persistence": 12,
+    "test_read_write_alias": 12
+   },
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "TPS23861",
+  "convention_bits": 0,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 15,
+   "assert_total": 48,
+   "rate": 31.2,
+   "fail_by_test": {
+    "test_readonly_protection": 9,
+    "test_rw_field_persistence": 12,
+    "test_clear_on_read": 12
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 15,
+   "assert_total": 48,
+   "rate": 31.2,
+   "fail_by_test": {
+    "test_readonly_protection": 9,
+    "test_rw_field_persistence": 12,
+    "test_clear_on_read": 12
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 15,
+   "assert_total": 48,
+   "rate": 31.2,
+   "fail_by_test": {
+    "test_readonly_protection": 9,
+    "test_rw_field_persistence": 12,
+    "test_clear_on_read": 12
+   },
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ },
+ {
+  "chip": "TMP126",
+  "convention_bits": 0,
+  "strict": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 26,
+   "assert_total": 48,
+   "rate": 54.2,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 7,
+    "test_readonly_protection": 3
+   }
+  },
+  "relax": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 26,
+   "assert_total": 48,
+   "rate": 54.2,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 7,
+    "test_readonly_protection": 3
+   }
+  },
+  "unspec": {
+   "n": 12,
+   "green": 0,
+   "assert_pass": 26,
+   "assert_total": 48,
+   "rate": 54.2,
+   "fail_by_test": {
+    "test_rw_field_persistence": 12,
+    "test_write_trigger_fields": 7,
+    "test_readonly_protection": 3
+   },
+   "diagnostic": {
+    "samples_observed": 0,
+    "reserved_written_as_storage": 0,
+    "pct": null,
+    "note": "UNSPEC 档不计分：只统计模型把未文档化保留位当可写存储的比例"
+   }
+  }
+ }
+]

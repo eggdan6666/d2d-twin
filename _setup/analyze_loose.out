@@ -1,0 +1,151 @@
+loose file: smoke_20261004_020225.jsonl 2026-10-04 03:53:09.153094
+
+============================================================
+strict-3B  rows=1000 unique_qids=500
+idx range: 0..499 (500 items)
+rag   n=500  acc=0.2220  avg_tokens=1442.1  avg_latency=6.74s
+none  n=500  acc=0.0160  avg_tokens=96.0  avg_latency=2.69s
+
+qtype, n, rag_acc, none_acc
+  knowledge-update           78   0.231 0.000
+  multi-session              133  0.053 0.000
+  single-session-assistant   56   0.732 0.107
+  single-session-preference  30   0.000 0.000
+  single-session-user        70   0.529 0.000
+  temporal-reasoning         133  0.060 0.015
+
+rag gold_recall mean=0.8489  recall>0 ratio=0.9360 (n=500)
+
+rag rows refusing (INSUFFICIENT) anywhere: 302 / 500 = 0.6040
+
+rag failures=389
+  refused (INSUFFICIENT)           302  0.7763
+  retrieval-hit but refused        275  0.7069
+  retrieval-hit wrong (non-refuse)  82  0.2108
+  retrieval miss                    32  0.0823
+
+============================================================
+loose-3B  rows=1000 unique_qids=500
+idx range: 0..499 (500 items)
+rag   n=500  acc=0.3340  avg_tokens=1464.5  avg_latency=8.81s
+none  n=500  acc=0.0900  avg_tokens=121.1  avg_latency=4.29s
+
+qtype, n, rag_acc, none_acc
+  knowledge-update           78   0.385 0.013
+  multi-session              133  0.120 0.083
+  single-session-assistant   56   0.696 0.107
+  single-session-preference  30   0.000 0.000
+  single-session-user        70   0.614 0.043
+  temporal-reasoning         133  0.293 0.180
+
+rag gold_recall mean=0.8489  recall>0 ratio=0.9360 (n=500)
+
+rag rows refusing (INSUFFICIENT) anywhere: 0 / 500 = 0.0000
+
+rag failures=333
+  refused (INSUFFICIENT)             0  0.0000
+  retrieval-hit but refused          0  0.0000
+  retrieval-hit wrong (non-refuse) 301  0.9039
+  retrieval miss                    32  0.0961
+
+============================================================
+7B-strict  rows=1000 unique_qids=500
+idx range: 0..499 (500 items)
+rag   n=500  acc=0.2480  avg_tokens=1436.9  avg_latency=15.57s
+none  n=500  acc=0.0080  avg_tokens=95.9  avg_latency=4.27s
+
+qtype, n, rag_acc, none_acc
+  knowledge-update           78   0.295 0.026
+  multi-session              133  0.045 0.000
+  single-session-assistant   56   0.786 0.000
+  single-session-preference  30   0.000 0.000
+  single-session-user        70   0.486 0.000
+  temporal-reasoning         133  0.128 0.015
+
+rag gold_recall mean=0.8489  recall>0 ratio=0.9360 (n=500)
+
+rag rows refusing (INSUFFICIENT) anywhere: 308 / 500 = 0.6160
+
+rag failures=376
+  refused (INSUFFICIENT)           308  0.8191
+  retrieval-hit but refused        277  0.7367
+  retrieval-hit wrong (non-refuse)  67  0.1782
+  retrieval miss                    32  0.0851
+
+============================================================
+common qid intersection across available runs: 500
+run, rag_acc_on_common, none_acc_on_common
+  strict-3B   0.2220 (500)   0.0160 (500)
+  7B-strict   0.2480 (500)   0.0080 (500)
+  loose-3B    0.3340 (500)   0.0900 (500)
+
+paired rag comparison strict-3B -> loose-3B over 500 common qids: gained 61, lost 5, net +56 (0.2220 -> 0.3340)
+  per-qtype net flips:
+    knowledge-update           n=78   gained=12  lost=0   net=+12
+    multi-session              n=133  gained=10  lost=1   net=+9
+    single-session-assistant   n=56   gained=1   lost=3   net=-2
+    single-session-preference  n=30   gained=0   lost=0   net=+0
+    single-session-user        n=70   gained=6   lost=0   net=+6
+    temporal-reasoning         n=133  gained=32  lost=1   net=+31
+
+paired rag comparison 3B -> 7B (both strict sys) over 500 common qids: gained 30, lost 17, net +13 (0.2220 -> 0.2480)
+  per-qtype net flips:
+    knowledge-update           n=78   gained=8   lost=3   net=+5
+    multi-session              n=133  gained=1   lost=2   net=-1
+    single-session-assistant   n=56   gained=8   lost=5   net=+3
+    single-session-preference  n=30   gained=0   lost=0   net=+0
+    single-session-user        n=70   gained=4   lost=7   net=-3
+    temporal-reasoning         n=133  gained=9   lost=0   net=+9
+
+--- strict-3B: 5 sampled hit-but-answered-wrong (non-refusal) rag preds ---
+  qid=16c90bf4 [single-session-assistant] recall=1.00
+    gold: I recommended using a Pilsner or Lager for the recipe.
+    pred: The recommended type of beer was a light or medium-bodied beer, such as a pilsner or lager.
+  qid=caf03d32 [single-session-preference] recall=1.00
+    gold: The user would prefer responses that provide tips and advice specifically tailored to their slow cooker experiences, uti
+    pred: To get better results with your slow cooker recipes, consider the following tips:
+
+1. **Monitor the temperature:** Use a
+  qid=c19f7a0b [single-session-user] recall=1.00
+    gold: 6:30 pm
+    pred: The conversation excerpts do not contain information about the usual time the user gets home from work on weeknights.
+  qid=21d02d0d [multi-session] recall=1.00
+    gold: 2
+    pred: You missed the run on March 5th due to work commitments.
+  qid=9ee3ecd6 [multi-session] recall=1.00
+    gold: 100
+    pred: You need to earn 300 points to redeem a free skincare product at Sephora.
+
+--- loose-3B: 5 sampled hit-but-answered-wrong (non-refusal) rag preds ---
+  qid=gpt4_ab202e7f [multi-session] recall=0.20
+    gold: I replaced or fixed five items: the kitchen faucet, the kitchen mat, the toaster, the coffee maker, and the kitchen shel
+    pred: You replaced or fixed 2 items: your old coffee maker and the espresso machine from your sister.
+  qid=86b68151 [single-session-user] recall=1.00
+    gold: IKEA
+    pred: I don't have that information from the conversation excerpts provided.
+  qid=8cf4d046 [multi-session] recall=1.00
+    gold: 3.83
+    pred: The conversation excerpts do not contain information about the GPA of the user's undergraduate and graduate studies.
+  qid=0ea62687 [multi-session] recall=1.00
+    gold: 2
+    pred: Your car was getting 30 miles per gallon a few months ago.
+  qid=9ee3ecd6 [multi-session] recall=1.00
+    gold: 100
+    pred: You need to earn 300 points to redeem a free skincare product at Sephora.
+
+--- 7B-strict: 5 sampled hit-but-answered-wrong (non-refusal) rag preds ---
+  qid=57f827a0 [single-session-preference] recall=1.00
+    gold: The user would prefer responses that take into account their existing plans to replace the bedroom dresser and their int
+    pred: Rearranging furniture can indeed help improve Wi-Fi signal strength. Here are some tips based on the previous conversati
+  qid=3a704032 [multi-session] recall=1.00
+    gold: 3
+    pred: You acquired one plant in the last month, a snake plant from your sister.
+  qid=gpt4_2f584639 [temporal-reasoning] recall=1.00
+    gold: the photo album for my mom
+    pred: The necklace for your sister was the first gift mentioned in the conversation.
+  qid=0bb5a684 [temporal-reasoning] recall=1.00
+    gold: 7 days. 8 days (including the last day) is also acceptable.
+    pred: 3 days
+  qid=bcbe585f [temporal-reasoning] recall=1.00
+    gold: 4
+    pred: I attended the bird watching workshop at the local Audubon society about a month and a half ago.

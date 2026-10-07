@@ -1,0 +1,74 @@
+==============================================================================
+3B  file=smoke_20261003_191205.jsonl  raw_lines=1000  unique(cond,qid)=1000  rag=500 none=500
+  rag  acc=0.2220 (111/500) | tok mean=1442.1 | lat mean=6.74s median=5.97s | excl.idx>=492: mean=6.74s median=5.96s (n=492)
+  none acc=0.0160 (8/500) | tok mean=96.0 | lat mean=2.69s median=2.55s | excl.idx>=492: mean=2.68s median=2.55s (n=492)
+  retrieval: gold_recall mean=0.8489 (n_gold_annotated=500)  recall>0=0.9360 (468/500)
+  failures=389 (0.7780 (389/500) of 500)
+    literal-refuse            0.7763 (302/389) of failures | 0.6040 of all rag
+    HIT-but-refused           0.7069 (275/389) of failures | 0.5500 of all rag
+    HIT-but-wrong(answered)   0.2108 (82/389) of failures | 0.1640 of all rag
+    MISS(no gold in ctx)      0.0823 (32/389) of failures | 0.0640 of all rag
+      (miss & refused 27, miss & answered 5)
+    [wide] evasive of failures 0.8123 (316/389) ; judged-correct but evasive=0 -> conservative acc=0.2220
+    none-condition literal-refuse=0.9400 (470/500) evasive=0.9660 (483/500)
+==============================================================================
+7B  file=smoke_20261003_225222.jsonl  raw_lines=1000  unique(cond,qid)=1000  rag=500 none=500
+  rag  acc=0.2480 (124/500) | tok mean=1436.9 | lat mean=15.57s median=12.67s | excl.idx>=492: mean=15.43s median=12.66s (n=492)
+  none acc=0.0080 (4/500) | tok mean=95.9 | lat mean=4.27s median=3.69s | excl.idx>=492: mean=4.03s median=3.69s (n=492)
+  retrieval: gold_recall mean=0.8489 (n_gold_annotated=500)  recall>0=0.9360 (468/500)
+  failures=376 (0.7520 (376/500) of 500)
+    literal-refuse            0.8191 (308/376) of failures | 0.6160 of all rag
+    HIT-but-refused           0.7367 (277/376) of failures | 0.5540 of all rag
+    HIT-but-wrong(answered)   0.1782 (67/376) of failures | 0.1340 of all rag
+    MISS(no gold in ctx)      0.0851 (32/376) of failures | 0.0640 of all rag
+      (miss & refused 31, miss & answered 1)
+    [wide] evasive of failures 0.8218 (309/376) ; judged-correct but evasive=0 -> conservative acc=0.2480
+    none-condition literal-refuse=0.9760 (488/500) evasive=0.9760 (488/500)
+
+==============================================================================
+PER-QTYPE (rag acc | none acc | gold_recall mean)
+qtype                           n | 3B rag/none        | 7B rag/none        | delta
+multi-session                 133 | 0.053 / 0.000  r=0.747 | 0.045 / 0.000  r=0.747 | -0.008
+temporal-reasoning            133 | 0.060 / 0.015  r=0.805 | 0.128 / 0.015  r=0.805 | +0.068
+knowledge-update               78 | 0.231 / 0.000  r=0.962 | 0.295 / 0.026  r=0.962 | +0.064
+single-session-user            70 | 0.529 / 0.000  r=0.957 | 0.486 / 0.000  r=0.957 | -0.043
+single-session-assistant       56 | 0.732 / 0.107  r=1.000 | 0.786 / 0.000  r=1.000 | +0.054
+single-session-preference      30 | 0.000 / 0.000  r=0.667 | 0.000 / 0.000  r=0.667 | +0.000
+
+==============================================================================
+PAIRED 3B -> 7B (same qid, same retrieval, strict prompt both sides)
+matched (cond,qid) pairs: 1000
+  rag  both=94 gain(3B错->7B对)=30 loss(3B对->7B错)=17 neither=359 | McNemar exact p=0.0789
+       temporal-reasoning           +9 / -0  net=+9
+       knowledge-update             +8 / -3  net=+5
+       single-session-assistant     +8 / -5  net=+3
+       multi-session                +1 / -2  net=-1
+       single-session-user          +4 / -7  net=-3
+  none both=1 gain(3B错->7B对)=3 loss(3B对->7B错)=7 neither=489 | McNemar exact p=0.3438
+       knowledge-update             +2 / -0  net=+2
+       temporal-reasoning           +1 / -1  net=+0
+       single-session-assistant     +0 / -6  net=-6
+
+==============================================================================
+HYPOTHESIS: 命中后拒答随规模下降?
+  3B: 命中题 468 中字面拒答 275 (0.5876) | 失败 389 中命中后拒答 275 (0.7069)
+  7B: 命中题 468 中字面拒答 277 (0.5919) | 失败 376 中命中后拒答 277 (0.7367)
+  paired on hit-rag qids (n=468): 3B拒/7B答=37 , 3B答/7B拒=39 -> McNemar exact p=0.9088
+  命中题字面拒答率 3B 0.5876 vs 7B 0.5919 | chi2=0.02 p=0.8943 (unpaired)
+  rag acc 3B 111/500=0.222 vs 7B 124/500=0.248 | chi2 p=0.3323
+
+==============================================================================
+COST OF PASS
+  3B  rag  acc=0.222 tok/q=1442  tok-per-correct=6496  sec/q mean=6.7 median=6.0  sec-per-correct(median)=27 (0.4 min)
+  3B  none acc=0.016 tok/q=96  tok-per-correct=5999  sec/q mean=2.7 median=2.5  sec-per-correct(median)=159 (2.7 min)
+  7B  rag  acc=0.248 tok/q=1437  tok-per-correct=5794  sec/q mean=15.6 median=12.7  sec-per-correct(median)=51 (0.9 min)
+  7B  none acc=0.008 tok/q=96  tok-per-correct=11986  sec/q mean=4.3 median=3.7  sec-per-correct(median)=461 (7.7 min)
+
+==============================================================================
+LATENCY CONTAMINATION (7B): reconstructed per-row wall time
+  rows idx<492: n=984, sum(latency)=9572s, real window=9638s -> wall/lat factor 1.007
+  rows whose reconstructed time falls in ablation window 23:56-00:03: n=20
+     rag in-window lat mean=37.97s (n=10)
+     rag all(idx<492) mean=15.43s | minus ablation window mean=14.96s (n=482)
+     none in-window lat mean=4.24s (n=10)
+     none all(idx<492) mean=4.03s | minus ablation window mean=4.02s (n=482)

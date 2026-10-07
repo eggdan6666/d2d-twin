@@ -1,0 +1,273 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = corpus/data/raw_pdf/TI/TMP117.pdf（SNOSD82D Rev D）§7.6 Register Map p.25-29 的 PDF 原生文本层。第 8 颗芯片，第一颗带 **EEPROM 后备复位值**与**读清零标志**的器件。",
+ "device": "TMP117",
+ "vendor": "TI",
+ "interface": "I2C/SMBus",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B"
+  ],
+  "note": "ADDR 引脚四态（§7.5）；8 位指针寄存器复位 00（§7.5.2），MVP 不断言指针本身"
+ },
+ "registers": [
+  {
+   "name": "TEMP",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x8000",
+   "desc": "温度结果（§7.6.2 Table 7-5）。16 位只读、补码、1 LSB=7.8125 m°C；**复位后读 8000h（= −256°C）直至首次转换完成**——本基准少见的非零 RO 复位值",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "T[15:0]（复位值按整寄存器 8000h 断言，字段级不设 read_as）"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x01",
+   "access": "RW",
+   "reset": "0x0220",
+   "desc": "配置寄存器（§7.6.3 Figure 7-14 p.27 + Table 7-6 p.27-28），出厂复位 0220h（bit9 CONV2=1、bit5 AVG0=1）。bit15:12 是**只读标志位**（HIGH/LOW_Alert、Data_Ready、EEPROM_Busy），其中前三位是 read-to-clear（见 Q2）",
+   "fields": [
+    {
+     "name": "HIGH_ALERT",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "高温标志，R；读 CONFIG 后清除（Table 7-6）",
+     "read_action": "clear"
+    },
+    {
+     "name": "LOW_ALERT",
+     "bits": "14",
+     "access": "RO",
+     "reset": 0,
+     "desc": "低温标志，R；读 CONFIG 后清除",
+     "read_action": "clear"
+    },
+    {
+     "name": "DATA_READY",
+     "bits": "13",
+     "access": "RO",
+     "reset": 0,
+     "desc": "转换完成标志，R；**读 TEMP 或 CONFIG 都会清除**",
+     "read_action": "clear"
+    },
+    {
+     "name": "EEPROM_BUSY",
+     "bits": "12",
+     "access": "RO",
+     "reset": 0,
+     "desc": "EEPROM 忙标志，R"
+    },
+    {
+     "name": "MOD",
+     "bits": "11:10",
+     "access": "RW",
+     "reset": 0,
+     "desc": "转换模式 00/10=连续(10 读回 00) 01=shutdown 11=one-shot"
+    },
+    {
+     "name": "CONV",
+     "bits": "9:7",
+     "access": "RW",
+     "reset": 4,
+     "desc": "转换周期 CONV2-0，复位 100b（T/nA=0 时 0.25Hz…）"
+    },
+    {
+     "name": "AVG",
+     "bits": "6:5",
+     "access": "RW",
+     "reset": 1,
+     "desc": "平均次数 00=1 01=2 10=4 11=8，复位 01"
+    },
+    {
+     "name": "TNA",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0=Alert 模式 1=Thermometer 模式"
+    },
+    {
+     "name": "POL",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "ALERT/DRDY 极性"
+    },
+    {
+     "name": "DR_ALERT",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "引脚功能选择 DRDY vs Alert"
+    },
+    {
+     "name": "SOFT_RESET",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "软件复位位：写 1 触发 2ms 软复位、**该位永远读回 0**（Table 7-6 p.28 标 R/W；Figure 7-14 p.27 误标 R-0，见 erratum_found）"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，R-0",
+     "tier": "A",
+     "tier_evidence": "qoder 直读 PDF p.27 Figure 7-14 渲染图：bit0 位标注就是 R-0（同图 bit1 Soft_Reset 标 R-0，与 p.28 Table 7-6 续表的 R/W 冲突＝已知第 4 类 erratum）"
+    }
+   ]
+  },
+  {
+   "name": "THIGH",
+   "addr": "0x02",
+   "access": "RW",
+   "reset": "0x6000",
+   "desc": "高温门限（§7.6.4 Figure 7-15，16 位全 R/W，出厂 6000h 来自 EEPROM）",
+   "fields": [
+    {
+     "name": "H",
+     "bits": "15:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "H[15:0]，补码，1 LSB=7.8125 m°C"
+    }
+   ]
+  },
+  {
+   "name": "TLOW",
+   "addr": "0x03",
+   "access": "RW",
+   "reset": "0x8000",
+   "desc": "低温门限（§7.6.5，出厂 8000h 来自 EEPROM）",
+   "fields": [
+    {
+     "name": "L",
+     "bits": "15:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "L[15:0]"
+    }
+   ]
+  },
+  {
+   "name": "EEPROM_UL",
+   "addr": "0x04",
+   "access": "RW",
+   "reset": "0x0000",
+   "desc": "EEPROM 解锁寄存器（§7.6.6 Figure 7-17）：bit15 EUN 为 R/W-0，bit14 EEPROM_Busy 与 bits13:0 全标 **R-0**。真实器件上 EEPROM1-3 的写只有在 EUN=1 时才生效——该 gating 语义 MVP 未断言（见 Q1）",
+   "fields": [
+    {
+     "name": "EUN",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "desc": "EEPROM unlock（写 1 允许编程 EEPROM 单元）"
+    },
+    {
+     "name": "EEPROM_BUSY",
+     "bits": "14",
+     "access": "RO",
+     "reset": 0,
+     "desc": "忙标志，R-0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "13:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "R-0 全 14 位保留",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "寄存器地图给 04h R/W 0000h，但位级图未打开确认；LM83 同理待看图"
+    }
+   ]
+  },
+  {
+   "name": "EEPROM1",
+   "addr": "0x05",
+   "access": "RW",
+   "reset": "0x0000",
+   "runtime_value": true,
+   "desc": "通用 EEPROM1（§7.6.7）——**复位值来自出厂 EEPROM，手册写 xxxxh**，故标 runtime_value 跳过复位值断言；字段留空＝不参与位域断言（见 Q3）",
+   "fields": []
+  },
+  {
+   "name": "EEPROM2",
+   "addr": "0x06",
+   "access": "RW",
+   "reset": "0x0000",
+   "runtime_value": true,
+   "desc": "通用 EEPROM2，同上",
+   "fields": []
+  },
+  {
+   "name": "TEMP_OFFSET",
+   "addr": "0x07",
+   "access": "RW",
+   "reset": "0x0000",
+   "desc": "温度偏移（§7.6.8，16 位 R/W，复位 0000h）",
+   "fields": [
+    {
+     "name": "OFF",
+     "bits": "15:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "补码偏移"
+    }
+   ]
+  },
+  {
+   "name": "EEPROM3",
+   "addr": "0x08",
+   "access": "RW",
+   "reset": "0x0000",
+   "runtime_value": true,
+   "desc": "通用 EEPROM3，同 EEPROM1",
+   "fields": []
+  },
+  {
+   "name": "DEVICE_ID",
+   "addr": "0x0F",
+   "access": "RO",
+   "reset": "0x0117",
+   "desc": "器件 ID（§7.6.10）= 0117h，只读且复位即为此值——又一个『RO 但复位值非零』的抄表用例",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "0x0117"
+    }
+   ]
+  }
+ ],
+ "excluded_blocks": [
+  "I2C general-call reset（§7.5.3.x 提到用 general call 命令触发软件复位）属总线行为，不在寄存器堆黑盒接口内",
+  "EEPROM 编程时序（2ms busy、需 EUN 解锁）不建模，见 open_questions Q1/Q3"
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "PDF 原生文本层逐寄存器取 Table 7-3 的 TYPE/RESET 列 + Figure 7-13~7-17 的逐位 R-n/R/W-n；MinerU 解析仅作 Phase 2 对照素材",
+  "erratum_found": "**手册内部自相矛盾**：bit1 SOFT_RESET 在 Figure 7-14（p.27）标 `R-0`（只读），而 Table 7-6 续表（p.28）同一位标 `R/W` 并写明『When set to 1 it triggers software reset with a duration of 2 ms / This bit will always read back 0』。金标采信表格描述（R/W + read_as=0）。这是继 TMP1075 Table 7-11 TYPE 列、Bosch 0xB6→0x86 之后的第 4 处手册级 erratum，且第一处是同一份文档图/表不一致——纯文本 QA 永远发现不了，只有必须逐位编码访问码时才会撞上",
+  "open_questions": [
+   "Q1: EEPROM 写 gating（EUN=0 时写 EEPROM1-3 应无效）与 SOFT_RESET 级联复位都未断言。加『位级软复位级联』断言会改变各芯片断言分母（需把已跑的 7 颗重算），是否与 INA3221 Q1/HDC2021 Q1 一起裁决",
+   "Q2: HIGH_ALERT/LOW_ALERT/DATA_READY 是 **read-to-clear**（读 CONFIG/TEMP 即清除）。注意：一旦金标实现 read-clear，本基准的断言③『RO 寄存器写脏后快照不变』会与之冲突——快照本身要先读一次才拿到 before，实现 read-clear 的器件 before/after 必不同。要么断言③对这类寄存器加豁免标记，要么 Phase 1.5 新增 read-clear 专项断言。请裁决（这条影响 TMP117/INA3221 Mask-Enable 两颗）",
+   "Q3: EEPROM1-3（0x05/0x06/0x08）复位值为 xxxxh（出厂编程），已标 runtime_value 且字段留空＝完全不参与断言。是否改成『断言 EUN gating 行为』才有信息量",
+   "Q4: MOD=10 手册明说『读回 00』——这是天然的 read_as 型非法编码约束，MVP 未断言（TEMP 的 8000h 复位已断言）",
+   "Q5: 温度量纲（1 LSB=7.8125 m°C、补码、−256°C 占位）属数值语义，MVP 只断言权限与复位值"
+  ]
+ }
+}

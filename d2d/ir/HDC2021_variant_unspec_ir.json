@@ -1,0 +1,490 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = corpus/data/raw_pdf/TI/HDC2021.pdf（SNAS773A Rev A）§7.6 Register Maps（p.20-32）的 PDF 原生文本层。第 7 颗芯片，也是本基准第一颗**8 位寄存器**为主面的 TI 湿度器件（BME280 虽 8 位但语义集中在 Bosch 家族）。",
+ "device": "HDC2021",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 8,
+ "i2c": {
+  "addresses_7bit": [
+   "0x40",
+   "0x41"
+  ],
+  "note": "ADDR 引脚接 VDD=1000001x，接 GND 或悬空=1000000x（§5）；MVP 不建模总线地址"
+ },
+ "registers": [
+  {
+   "name": "TEMP_LOW",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "温度低字节（§7.6.1 Table 7-8，16 位温度跨 0x00/0x01）",
+   "fields": [
+    {
+     "name": "TEMP7_0",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "TEMP[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_HIGH",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "温度高字节（§7.6.2 Table 7-10）",
+   "fields": [
+    {
+     "name": "TEMP15_8",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "TEMP[15:8]"
+    }
+   ]
+  },
+  {
+   "name": "HUM_LOW",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "湿度低字节（§7.6.3 Table 7-12）",
+   "fields": [
+    {
+     "name": "HUM7_0",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "HUMIDITY[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "HUM_HIGH",
+   "addr": "0x03",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "湿度高字节（§7.6.4）",
+   "fields": [
+    {
+     "name": "HUM15_8",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "HUMIDITY[15:8]"
+    }
+   ]
+  },
+  {
+   "name": "STATUS",
+   "addr": "0x04",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "状态（§7.6.5 Table 7-16）：全 8 位只读；bit2:0 的 RES 行**TYPE 列 TI 未填**",
+   "fields": [
+    {
+     "name": "DRDY_STATUS",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0,
+     "desc": "数据就绪"
+    },
+    {
+     "name": "TH_STATUS",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "温度高门限中断状态"
+    },
+    {
+     "name": "TL_STATUS",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0,
+     "desc": "温度低门限中断状态"
+    },
+    {
+     "name": "HH_STATUS",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "湿度高门限中断状态"
+    },
+    {
+     "name": "HL_STATUS",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "湿度低门限中断状态"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved（TI 未给访问码，按 Q0 现约定编成 RO 硬连 0）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.25 的 Interrupt Enable 位表只给了『2 RES 0 Reserved』这样没有访问码列的行 ⇒ 倾向 C 档，但未定稿"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_MAX",
+   "addr": "0x05",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "单次模式最大温度（§7.6.6，Table 7-18 type R）",
+   "fields": [
+    {
+     "name": "TMAX",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "TEMPERATUREMAX[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "HUM_MAX",
+   "addr": "0x06",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "单次模式最大湿度（§7.6.7）",
+   "fields": [
+    {
+     "name": "HMAX",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "HUMIDITYMAX[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "INTERRUPT_ENABLE",
+   "addr": "0x07",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "中断使能（§7.6.8 Table 7-22）：bit7:3 标 R/W；bit2:0 的 RES 行 TYPE 列空白",
+   "fields": [
+    {
+     "name": "DRDY_ENABLE",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "数据就绪中断使能"
+    },
+    {
+     "name": "TH_ENABLE",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0,
+     "desc": "温度高门限中断使能"
+    },
+    {
+     "name": "TL_ENABLE",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "温度低门限中断使能"
+    },
+    {
+     "name": "HH_ENABLE",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "湿度高门限中断使能"
+    },
+    {
+     "name": "HL_ENABLE",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "湿度低门限中断使能"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "UNSPEC",
+     "reset": 0,
+     "desc": "[unspec 变体] Reserved（同上，受 Q0 约定影响）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.25 的 Interrupt Enable 位表只给了『2 RES 0 Reserved』这样没有访问码列的行 ⇒ 倾向 C 档，但未定稿"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_OFFSET",
+   "addr": "0x08",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "温度偏移调整（§7.6.9 Table 7-24，R/W）",
+   "fields": [
+    {
+     "name": "TOFF",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "加到转换结果的偏移量"
+    }
+   ]
+  },
+  {
+   "name": "HUM_OFFSET",
+   "addr": "0x09",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "湿度偏移调整（§7.6.10 Table 7-26，R/W；bit7=–25%RH 的补码语义未断言）",
+   "fields": [
+    {
+     "name": "HOFF",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "HUM_OFFSET_ADJUST[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_THR_L",
+   "addr": "0x0A",
+   "access": "RW",
+   "reset": "0x01",
+   "desc": "温度低门限（§7.6.11 Table 7-28，R/W，**复位值 0x01 非零**）",
+   "fields": [
+    {
+     "name": "TT_L",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 1,
+     "desc": "TEMP_THRES_LOW[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_THR_H",
+   "addr": "0x0B",
+   "access": "RW",
+   "reset": "0xFF",
+   "desc": "温度高门限（Table 7-6 复位 FF）",
+   "fields": [
+    {
+     "name": "TT_H",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 255,
+     "desc": "TEMP_THRES_HIGH[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "RH_THR_L",
+   "addr": "0x0C",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "湿度低门限（§7.6.13）",
+   "fields": [
+    {
+     "name": "RH_L",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "RH_THRES_LOW[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "RH_THR_H",
+   "addr": "0x0D",
+   "access": "RW",
+   "reset": "0xFF",
+   "desc": "湿度高门限（复位 FF）",
+   "fields": [
+    {
+     "name": "RH_H",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 255,
+     "desc": "RH_THRES_HIGH[7:0]"
+    }
+   ]
+  },
+  {
+   "name": "DEVICE_CONFIG",
+   "addr": "0x0E",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "器件配置（§7.6.15 Table 7-35/7-36）：全 8 位标 R/W。bit7 SOFT_RES『1 = Trigger a Soft Reset. This bit **self-clears after RESET**』→ 与 INA3221 的 CONFIG.RST 同类（位级自清零软复位），与 BME280 的 0xE0 独立 W 寄存器是两种机制",
+   "fields": [
+    {
+     "name": "SOFT_RES",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "写 1 触发软复位（所有寄存器回默认值），该位自清零 → 读恒 0"
+    },
+    {
+     "name": "CC",
+     "bits": "6:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "连续/单次转换与采样率 000=one-shot … 111=5Hz"
+    },
+    {
+     "name": "HEAT_EN",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "片内加热器使能"
+    },
+    {
+     "name": "DRDY_INT_EN",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "DRDY/INT 引脚输出使能"
+    },
+    {
+     "name": "INT_POL",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "中断极性"
+    },
+    {
+     "name": "INT_MODE",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0=数据就绪模式 1=中断模式"
+    }
+   ]
+  },
+  {
+   "name": "MEAS_CONFIG",
+   "addr": "0x0F",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "测量配置（§7.6.16 Table 7-37/7-38）。注意 bit3 名字就叫 RES 却标 **R/W**（与 HDC 系列一贯写法），bit2:1 的 MEAS_CONF 与 bit1:0 的 TACC/HACC 各有『11: NA』非法编码",
+   "fields": [
+    {
+     "name": "TACC",
+     "bits": "7:6",
+     "access": "RW",
+     "reset": 0,
+     "desc": "温度精度 00=14bit 01=11bit 10=9bit 11=NA"
+    },
+    {
+     "name": "HACC",
+     "bits": "5:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "湿度精度，同上"
+    },
+    {
+     "name": "RSVD3",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "Reserved，但 Table 7-38 标 R/W（可写！）"
+    },
+    {
+     "name": "MEAS_CONF",
+     "bits": "2:1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "00=湿度+温度 01=仅温度 10/11=NA"
+    },
+    {
+     "name": "MEAS_TRIG",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "写 1 启动单次测量；转换完成后硬件清 0——MVP 不建模转换过程，见 Q3"
+    }
+   ]
+  },
+  {
+   "name": "MANUF_ID_L",
+   "addr": "0xFC",
+   "access": "RO",
+   "reset": "0x49",
+   "desc": "厂商 ID 低字节 = 0x49（'I'）",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 73,
+     "desc": "0x49"
+    }
+   ]
+  },
+  {
+   "name": "MANUF_ID_H",
+   "addr": "0xFD",
+   "access": "RO",
+   "reset": "0x54",
+   "desc": "厂商 ID 高字节 = 0x54（'T'）",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 84,
+     "desc": "0x54"
+    }
+   ]
+  },
+  {
+   "name": "DEVICE_ID_L",
+   "addr": "0xFE",
+   "access": "RO",
+   "reset": "0xD0",
+   "desc": "器件 ID 低字节 = 0xD0",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 208,
+     "desc": "0xD0"
+    }
+   ]
+  },
+  {
+   "name": "DEVICE_ID_H",
+   "addr": "0xFF",
+   "access": "RO",
+   "reset": "0x07",
+   "desc": "器件 ID 高字节 = 0x07（Table 7-6 描述串印成『higher0byte』，是原文粘连，不影响数值）",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 7,
+     "desc": "0x07"
+    }
+   ]
+  }
+ ],
+ "excluded_blocks": [
+  "ID 寄存器 0xFC-0xFF 为工厂 programmed 只读，已入断言（复位值非零）；无 EEPROM/指针寄存器"
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "PDF 原生文本层逐寄存器取 Table 7-6 复位值 + 各 Table 的 TYPE/RESET 列；MinerU 并行解析仅作 Phase 2 对照",
+  "erratum_found": "①STATUS 与 INTERRUPT_ENABLE 的 Reserved 行 **TYPE 列 TI 干脆没填**（只写 RES + reset 0）——这是 Q0 保留位约定的第三个受害者（前两个是 TMP102/BME280）；②MEAS_CONFIG bit3 名为 RES 却标 R/W，与 INA3221 Mask/Enable bit15 同类：同一份手册里 reserved 有两种访问码，一刀切必错",
+  "open_questions": [
+   "Q1: SOFT_RES（0x0E bit7）按『写 1 自清零 + 复位全部寄存器』建模，read_as=0；是否加『软复位级联』断言（会改各芯片断言分母）——与 INA3221 Q1 同一裁决",
+   "Q2: STATUS bits2:0 与 INTERRUPT_ENABLE bits2:0 的 Reserved 位 TI 未填 TYPE，现按 Q0 现约定编成 RO 硬连 0。若 Q0 裁成放宽，这两处（共 6 位）也随之改",
+   "Q3: MEAS_TRIG（0x0F bit0）转换完成后硬件清 0；MVP 无转换过程，编成普通 RW。是否 Phase 1.5",
+   "Q4: TACC/HACC/MEAS_CONF 的『11 = NA』非法编码未断言（写非法值后读回什么，手册未定义）",
+   "Q5: 温度/湿度/偏移量纲（165·x/2^16−40、%RH=100·x/2^16、偏移补码）属数值语义，MVP 只断言权限与复位值"
+  ]
+ }
+}

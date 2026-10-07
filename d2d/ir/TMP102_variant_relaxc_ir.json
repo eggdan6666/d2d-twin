@@ -1,0 +1,208 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = d2d/parsed/TMP102/auto/TMP102.md（MinerU 解析 TI SBOS410）+ 人工校对；SVD 可映射",
+ "device": "TMP102",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B"
+  ],
+  "note": "ADD0 引脚四态接法（GND/V+/SDA/SCL），§6.3.4 Table 6-4；MVP 不建模总线地址",
+  "pointer_register": "写命令首字节为 8 位指针（P7..P2 恒 0，P1P0 选寄存器，上电 00）；MVP 断言不覆盖指针本身"
+ },
+ "registers": [
+  {
+   "name": "TEMP",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "12 位二进制补码温度（EM=1 时 13 位），1 LSB=0.0625°C；上电读到 0°C 直至首次转换完成，§6.5.2",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "15:4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "T[11:0] 最近一次转换结果"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "3:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（EM=1 时 bit0 为 EM 标志）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x01",
+   "access": "RW",
+   "reset": "0x60A0",
+   "desc": "16 位配置寄存器，§6.5.3；byte1=OS,R1,R0,F1,F0,POL,TM,SD；byte2=CR1,CR0,AL,EM,0,0,0,0；上电 0x60A0",
+   "fields": [
+    {
+     "name": "OS",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "desc": "shutdown 态写 1 触发单次转换；转换期间读 0（§6.5.3.6；转换完成后行为见 open_questions[1]）"
+    },
+    {
+     "name": "R1",
+     "bits": "14",
+     "access": "RO",
+     "reset": 1,
+     "desc": "只读！分辨率位，出厂设 11（§6.5.3.5）"
+    },
+    {
+     "name": "R0",
+     "bits": "13",
+     "access": "RO",
+     "reset": 1,
+     "desc": "只读！同上"
+    },
+    {
+     "name": "F1",
+     "bits": "12",
+     "access": "RW",
+     "reset": 0,
+     "desc": "故障队列 00:1 01:2 10:4 11:6 连续故障（§6.5.3.4 Table 6-12）"
+    },
+    {
+     "name": "F0",
+     "bits": "11",
+     "access": "RW",
+     "reset": 0,
+     "desc": "同上"
+    },
+    {
+     "name": "POL",
+     "bits": "10",
+     "access": "RW",
+     "reset": 0,
+     "desc": "ALERT 极性 0:低有效 1:高有效"
+    },
+    {
+     "name": "TM",
+     "bits": "9",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0:比较器模式 1:中断模式"
+    },
+    {
+     "name": "SD",
+     "bits": "8",
+     "access": "RW",
+     "reset": 0,
+     "desc": "1=关断模式"
+    },
+    {
+     "name": "CR1",
+     "bits": "7",
+     "access": "RW",
+     "reset": 1,
+     "desc": "转换速率 00:0.25Hz 01:4Hz(默认) 10:8Hz 11:8Hz？见 §6.5.3.9 Table 6-5"
+    },
+    {
+     "name": "CR0",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0,
+     "desc": "同上"
+    },
+    {
+     "name": "AL",
+     "bits": "5",
+     "access": "RO",
+     "reset": 1,
+     "desc": "只读！比较器状态位：POL=0 时常态读 1，超 THIGH 连续故障后读 0（§6.5.3.8）"
+    },
+    {
+     "name": "EM",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "扩展模式 0:12 位 1:13 位"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[仅 C 档变体] 恒 0",
+     "tier": "C",
+     "tier_evidence": "裁决(用户)：整文档文本层 0 处逐位访问码；p.8 唯一 prose 只覆盖 temperature register，不含 CONFIG 的 [3:0]"
+    }
+   ]
+  },
+  {
+   "name": "TLOW",
+   "addr": "0x02",
+   "access": "RW",
+   "reset": "0x4B00",
+   "desc": "低温阈值 12 位，复位 75°C，格式同 TEMP，§6.5.4",
+   "fields": [
+    {
+     "name": "L",
+     "bits": "15:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "L[11:0]"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[仅 C 档变体] 恒 0（EM=1 时 bit0 有意义）",
+     "tier": "C",
+     "tier_evidence": "同上：温度限值寄存器的 [3:0] 无逐位 Type"
+    }
+   ]
+  },
+  {
+   "name": "THIGH",
+   "addr": "0x03",
+   "access": "RW",
+   "reset": "0x5000",
+   "desc": "高温阈值 12 位，复位 80°C，§6.5.4",
+   "fields": [
+    {
+     "name": "H",
+     "bits": "15:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "H[11:0]"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[仅 C 档变体] 恒 0（EM=1 时 bit0 有意义）",
+     "tier": "C",
+     "tier_evidence": "同上"
+    }
+   ]
+  }
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "从 MinerU 解析文本提炼初稿；PDF 对照校验中（用户环节）",
+  "erratum_found": "Table 6-10 复位行被 OCR 打残（'OS0/R11' 粘连、复位行只剩 4 格）——byte1 复位值按 §6.5.3.5 prose（R1R0 启动=11）+ byte2 完整表格推得 0x60A0",
+  "open_questions": [
+   "Q1: CONFIG 复位值 0x60A0 的 byte1 复位行 OCR 残缺——请对照 PDF Table 6-10 逐位确认（重点 R0 复位是 1 还是 0）",
+   "Q2: OS 位转换完成后读 0 还是回读 1？§6.5.3.6 只说『转换期间读 0』——IR 暂不设 read_as 断言，仅测可写持久性",
+   "Q3: R1/R0/AL 三个 RO 位位于 RW 寄存器内——新增的『RW 内 RO 位保护』断言会检查写全 1 后它们保持复位值，AL 依赖环境温度的运行时语义未断言（仿真在默认态 AL=1）",
+   "Q4: 13 位扩展模式（EM=1）未纳入 MVP 断言"
+  ]
+ }
+}

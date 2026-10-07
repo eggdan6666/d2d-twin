@@ -1,0 +1,181 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = d2d/parsed/TMP100/auto/TMP100.md（MinerU 解析 TI SBOS231I）+ 人工校对；SVD 可映射。第 5 颗芯片，外部 agent（Gemini 3.8 Flash）提供的 TMP100 事实已逐条对原文核实后采纳，其 TEMP 位域宽度按其 12-bit 写法纠正为默认 9-bit（见 proofread_record）。",
+ "device": "TMP100",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B"
+  ],
+  "note": "A0 引脚三态 + 默认（§7.3.2 Table 2/Table 3）；MVP 不建模总线地址",
+  "pointer_register": "8 位指针寄存器，P1P0 选寄存器、上电 00（§7.5.1 Table 4）；MVP 断言不覆盖指针本身，与 TMP102 IR 同口径"
+ },
+ "registers": [
+  {
+   "name": "TEMP",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "温度结果，二进制补码，左对齐；默认分辨率 R1R0=00 → 9 位、1 LSB=0.5°C，占 bits[15:7]，未用低位恒 0（§7.3.1 与 §7.5.1.2 前文：『For 9-, 10-, or 11-bit resolution, the MSBs in the Temperature Register are used with the unused least significant bits equal to zero』）；上电读到 0°C 直至首次转换完成",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "15:7",
+     "access": "RO",
+     "reset": 0,
+     "desc": "T[8:0] 9 位温度（默认分辨率）"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "6:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（R1R0=11 时才扩展为 [15:4] 12 位）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x01",
+   "access": "RW",
+   "reset": "0x0080",
+   "desc": "8 位配置寄存器（§7.5.3 Table 8）。手册两句合读：内部位上电全 0，但『The OS/ALERT bit reads as 1 after power-up or reset value』→ 总线读回 0x80。与 TMP102 的关键差异：本芯片 R1/R0 可写（9~12 位用户可选），TMP102 的 R1/R0 是只读 11",
+   "fields": [
+    {
+     "name": "OS",
+     "bits": "7",
+     "access": "RW",
+     "reset": 1,
+     "read_as": 1,
+     "desc": "OS/ALERT：关断态写 1 触发单次转换；读为比较器状态——POL=0 时常态读 1，连续故障达 THIGH 后读 0（§7.4.2）。默认态（温度 0°C < THIGH）读 1，故复位读回 0x80"
+    },
+    {
+     "name": "R1",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0,
+     "desc": "分辨率高位 00:9 01:10 10:11 11:12 位（§7.5.3）"
+    },
+    {
+     "name": "R0",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "分辨率低位"
+    },
+    {
+     "name": "F1",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "故障队列 00:1 01:2 10:4 11:6 次连续故障（Table 9）"
+    },
+    {
+     "name": "F0",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "同上"
+    },
+    {
+     "name": "POL",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "ALERT 极性 0:低有效 1:高有效"
+    },
+    {
+     "name": "TM",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0:比较器模式 1:中断模式（TMP101 才有中断态行为，TMP100 无 ALERT 引脚）"
+    },
+    {
+     "name": "SD",
+     "bits": "0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "1=关断模式"
+    }
+   ]
+  },
+  {
+   "name": "TLOW",
+   "addr": "0x02",
+   "access": "RW",
+   "reset": "0x4B00",
+   "desc": "低温阈值，复位 75°C。75°C 在默认 9 位下 = 150 = 0x96 左对齐 7 位 → 0x4B00；在 12 位下 = 1200 = 0x4B0 左对齐 4 位 → 同一个 0x4B00（两个分辨率读回相同，只有可写位宽度不同）",
+   "fields": [
+    {
+     "name": "L",
+     "bits": "15:7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "L[8:0] 9 位阈值（默认分辨率）"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "6:0",
+     "access": "UNSPEC",
+     "reset": 0,
+     "desc": "[unspec 变体] 恒 0，写忽略（RW 寄存器内的只读位）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行"
+    }
+   ]
+  },
+  {
+   "name": "THIGH",
+   "addr": "0x03",
+   "access": "RW",
+   "reset": "0x5000",
+   "desc": "高温阈值，复位 80°C = 160(9 位) = 0xA0 左对齐 7 位 = 0x5000；12 位口径 1280 = 0x500 左对齐 4 位同样 0x5000",
+   "fields": [
+    {
+     "name": "H",
+     "bits": "15:7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "H[8:0] 9 位阈值（默认分辨率）"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "6:0",
+     "access": "UNSPEC",
+     "reset": 0,
+     "desc": "[unspec 变体] 恒 0，写忽略",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行"
+    }
+   ]
+  }
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "外部 agent（Gemini 3.8 Flash）先交一版 IR+参考实现；其声称的『本地回归 10/10 全绿』不可核——文件未落盘，且其 IR 键名(chip/address/size/bitRange)与基类(d2d.rtl.base_sensor.BaseSensor)均与本 harness 契约不符，10 项检查名也不对应我这 6 项 IR 驱动断言。故本轮只采纳其事实、重写 IR 与参考实现，并按本项目纪律先跑本地回归。",
+  "adopted_facts": [
+   "CONFIG 复位读回 0x80：原文两句『power-up or reset value of the Configuration Register is all bits equal to 0』+『The OS/ALERT bit reads as 1 after power-up or reset value』——推导正确，已核实",
+   "R1/R0 = 可写、复位 00（9 位），与 TMP102 的 RO=11 形成对照：原文『The user can obtain 9, 10, 11, or 12 bits of resolution by addressing the Configuration Register and setting the resolution bits accordingly』，已核实",
+   "4 个数据寄存器（Table 5 标题为 'Pointer Addresses of the TMP100 and TMP101 Registers'）：纠正了此前 HANDOFF 与本会话早先的『2 寄存器最简芯片』措辞",
+   "TLOW/THIGH 复位 0x4B00/0x5000（75°C/80°C）：已核实，且两种分辨率口径得到同一读回值"
+  ],
+  "corrections_to_external": [
+   "TEMP/TLOW/THIGH 位域照抄了 TMP102 的 12-bit 布局（[15:4] 有效 + [3:0] 恒 0）。TMP100 默认 R1R0=00 是 9 位，手册明确未用低位恒 0 → 本 IR 改为 [15:7] 有效 + [6:0] 恒 0。这直接改变『RW 位域持久』与『RW 内只读位保护』两条断言的宽度"
+  ],
+  "open_questions": [
+   "Q1(T1 已按推荐编码，请对 PDF p.15-16 确认): TEMP/TLOW/THIGH 的位域按默认 9-bit 编码（[15:7] 有效、[6:0] 恒 0）。选 12-bit 会放宽可写位范围；两种写法复位读回相同，差别只在写全 1 后读回 0xFF80 还是 0xFFF0",
+   "Q2(T2): CONFIG 是 8 位寄存器，被 2 字节读时返回什么？MVP 约定『无论 nbytes=1/2 都只返回该 8 位值』；真实器件在 nbytes=2 时会指针自增读到 TLOW 高字节。请裁定是否入 Phase 1.5",
+   "Q3: OS/ALERT 编成 RW + read_as=1（默认态读 1）。TMP100 无 ALERT 引脚但内部比较器存在，ARA(0001_1001b) 行为与转换期间读 0 的动态语义 MVP 未断言",
+   "Q4: 分辨率切换（写 R1R0）后 TEMP/阈值位域宽度应随之变化——Phase 1.5 行为断言候选，本芯片是四颗里唯一能让这条可测的（TMP102 的 R1R0 是只读）",
+   "Q5: TM/SD 与 TMP101 的差异（TMP100 无中断模式行为）是否需要在 IR 里标 access 差异"
+  ]
+ }
+}

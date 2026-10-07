@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 4,
+  "i": 0,
+  "gen_s": 28.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_4_0/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.98s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] >> 8) & 0xFF\n        elif nbytes == 2:\n            return self.regs[addr]\n        else:\n            raise ValueError(\"Invalid nbytes for read\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x00:  # TEMP is read-only\n            return\n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data <<= 8\n            self.regs[addr] = (current_value & 0xFF) | data\n        elif nbytes == 2:\n            self.regs[addr] = data\n        else:\n            raise ValueError(\"Invalid nbytes for write\")\n"
+ },
+ {
+  "seed": 4,
+  "i": 1,
+  "gen_s": 55.9,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_4_1/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.97s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04X}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04X}\")\n\n        if addr == 0x00:  # TEMP is read-only\n            return\n\n        if nbytes == 1:\n            mask = 0xFF00\n            shift = 8\n        else:\n            mask = 0xFFFF\n            shift = 0\n\n        current_value = self.regs[addr]\n        new_value = (current_value & ~mask) | ((data << shift) & mask)\n        self.regs[addr] = new_value\n"
+ },
+ {
+  "seed": 4,
+  "i": 2,
+  "gen_s": 85.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_4_2/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 1.29s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        elif nbytes == 2:\n            return value\n        else:\n            raise ValueError(\"Unsupported nbytes value\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n\n        if addr == 0x00:  # TEMP is read-only\n            return\n\n        current_value = self.regs[addr]\n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        elif nbytes == 2:\n            mask = 0xFFFF\n        else:\n            raise ValueError(\"Unsupported nbytes value\")\n\n        new_value = (current_value & ~mask) | (data & mask)\n        self.regs[addr] = new_value\n"
+ },
+ {
+  "seed": 4,
+  "i": 3,
+  "gen_s": 111.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_4_3/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.95s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data = (current_value & 0x00FF) | (data << 8)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 5,
+  "i": 0,
+  "gen_s": 138.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_5_0/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.71s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00 if addr == 0x01 else 0xFFFF\n            self.regs[addr] = (self.regs[addr] & mask) | ((data << 8) & ~mask)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 5,
+  "i": 1,
+  "gen_s": 168.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_5_1/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 1.87s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    REG_TEMP = 0x00\n    REG_CONFIG = 0x01\n    REG_TLOW = 0x02\n    REG_THIGH = 0x03\n\n    def __init__(self):\n        super().__init__()\n        self.regs[self.REG_TEMP] = 0x0000  # 0°C\n        self.regs[self.REG_CONFIG] = 0x60A0  # Default configuration\n        self.regs[self.REG_TLOW] = 0x4B00  # Low threshold 75°C\n        self.regs[self.REG_THIGH] = 0x5000  # High threshold 80°C\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == self.REG_TEMP:\n            # Read-only register, ignore write\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        current_value = self.regs[addr]\n        new_value = (current_value & ~mask) | (data & mask)\n        self.regs[addr] = new_value\n"
+ },
+ {
+  "seed": 5,
+  "i": 2,
+  "gen_s": 196.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_5_2/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.70s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    REG_TEMP = 0x00\n    REG_CONFIG = 0x01\n    REG_TLOW = 0x02\n    REG_THIGH = 0x03\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            self.REG_TEMP: 0x0000,\n            self.REG_CONFIG: 0x60A0,\n            self.REG_TLOW: 0x4B00,\n            self.REG_THIGH: 0x5000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(\"Invalid register address\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(\"Invalid register address\")\n        \n        if addr == self.REG_TEMP or addr == self.REG_TLOW or addr == self.REG_THIGH:\n            return  # Read-only registers\n        \n        current_value = self.regs[addr]\n        if nbytes == 1:\n            mask = 0xFF << 8\n            data <<= 8\n            self.regs[addr] = (current_value & ~mask) | data\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 5,
+  "i": 3,
+  "gen_s": 225.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_5_3/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.95s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        elif nbytes == 2:\n            return value\n        else:\n            raise ValueError(\"nbytes must be 1 or 2\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data = (data << 8) & mask\n            self.regs[addr] = (self.regs[addr] & ~mask) | data\n        elif nbytes == 2:\n            self.regs[addr] = data\n        else:\n            raise ValueError(\"nbytes must be 1 or 2\")\n"
+ },
+ {
+  "seed": 6,
+  "i": 0,
+  "gen_s": 255.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_6_0/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 1.51s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        elif nbytes == 2:\n            return value\n        else:\n            raise ValueError(\"nbytes must be 1 or 2\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        elif nbytes == 2:\n            mask = 0xFFFF\n        else:\n            raise ValueError(\"nbytes must be 1 or 2\")\n        \n        current_value = self.regs[addr]\n        new_value = (current_value & ~mask) | (data & mask)\n        self.regs[addr] = new_value\n"
+ },
+ {
+  "seed": 6,
+  "i": 1,
+  "gen_s": 281.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_6_1/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.33s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data = (data << 8) | (current_value & 0x00FF)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 6,
+  "i": 2,
+  "gen_s": 307.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_6_2/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.26s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00 if (data & 0x80) else 0x00FF\n            self.regs[addr] = (self.regs[addr] & ~mask) | (data << 8 if (data & 0x80) else data)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 6,
+  "i": 3,
+  "gen_s": 333.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_tmp102kt_b_6_3/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n1 failed, 2 passed, 5 skipped in 0.92s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(\"Invalid register address\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(\"Invalid register address\")\n        \n        if addr == 0x00:  # TEMP is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            shift = 8\n        else:\n            mask = 0xFFFF\n            shift = 0\n        \n        current_value = self.regs[addr]\n        new_value = (current_value & ~mask) | ((data << shift) & mask)\n        self.regs[addr] = new_value\n"
+ }
+]

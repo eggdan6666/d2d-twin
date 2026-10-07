@@ -1,0 +1,2347 @@
+[
+ {
+  "qid": "P001",
+  "type": "param",
+  "ok": true,
+  "gold": "-40 °C to 105 °C",
+  "pred": "The temperature range for the STM32L151CB is -40°C to 85°C/105°C.",
+  "sources": [
+   "ST__stm32l151cb::front__15",
+   "ST__stm32l151cb::front__36",
+   "ST__stm32l151cb::front__37",
+   "ST__stm32l151cb::front__40",
+   "ST__stm32l151cb::front__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3153,
+  "latency_s": 22.04
+ },
+ {
+  "qid": "P002",
+  "type": "param",
+  "ok": false,
+  "gold": "26 Ω",
+  "pred": "Based on the excerpts provided, the specific values for resistances below are not directly stated. However, some related values are mentioned:\n\n- RF = 750 : (indicated in kΩ)\n- RF = 511 : (indicated in kΩ)\n\nThese values are for the feedback resistor (RF) and are part of the operational amplifier's configuration.",
+  "sources": [
+   "TI__LMH6624::package__1",
+   "TI__LMH6624::overview__8",
+   "TI__LMH6624::overview__7",
+   "TI__LMH6624::overview__9",
+   "TI__LMH6624::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2904,
+  "latency_s": 29.73
+ },
+ {
+  "qid": "P008",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "150°C",
+  "sources": [
+   "TI__LM2576::abs_max",
+   "TI__LM2576::typ_app__3",
+   "TI__LM2576::func_desc",
+   "TI__LM2576::typ_app__1",
+   "TI__LM2576::typ_app__4"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2819,
+  "latency_s": 18.78
+ },
+ {
+  "qid": "P013",
+  "type": "param",
+  "ok": true,
+  "gold": "0.5V",
+  "pred": "The specified value for the current that produces a voltage drop of 0.5V across the device is 250mA.",
+  "sources": [
+   "TI__TPIC6595::package__1",
+   "TI__TPIC6595::func_desc__1",
+   "TI__TPIC6595::func_desc__2",
+   "TI__TPIC6595::package__2",
+   "TI__TPIC6595::elec_chars"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2948,
+  "latency_s": 22.81
+ },
+ {
+  "qid": "P014",
+  "type": "param",
+  "ok": true,
+  "gold": "4.5 V to 17 V",
+  "pred": "- Input voltage (VIN): 4.5 V to 17 V\n- Power stage input voltage (PVIN): 1.6 V to 17 V\n- Output current: 0 A to 6 A\n- Operating junction temperature (TJ): –40°C to 150°C",
+  "sources": [
+   "TI__TPS54622::overview__2",
+   "TI__TPS54622::overview__4",
+   "TI__TPS54622::overview__9",
+   "TI__TPS54622::overview__1",
+   "TI__TPS54622::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2686,
+  "latency_s": 27.6
+ },
+ {
+  "qid": "P016",
+  "type": "param",
+  "ok": false,
+  "gold": "60mA",
+  "pred": "The specified continuous current above the power-supply rails for the OPA2356 is 10mA.",
+  "sources": [
+   "TI__OPA2356::typ_app",
+   "TI__OPA2356::overview",
+   "TI__OPA2356::elec_chars__1",
+   "TI__OPA2356::package__1",
+   "TI__OPA2356::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3097,
+  "latency_s": 23.29
+ },
+ {
+  "qid": "P020",
+  "type": "param",
+  "ok": true,
+  "gold": "6 µA @ 25 °C",
+  "pred": "6 µA @ 25 °C",
+  "sources": [
+   "ST__stm32f410rb::front__1",
+   "ST__stm32f410rb::front__8",
+   "ST__stm32f410rb::front__25",
+   "ST__stm32f410rb::front__34",
+   "ST__stm32f410rb::front__6"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2855,
+  "latency_s": 19.52
+ },
+ {
+  "qid": "P022",
+  "type": "param",
+  "ok": false,
+  "gold": "125°C",
+  "pred": "The excerpt provided does not contain the specified value for \"rated for junction temperatures greater than\" for LM5018 (TI). This information is not present in the given datasheet excerpts.",
+  "sources": [
+   "TI__LM5018::typ_app__3",
+   "TI__LM5018::typ_app__5",
+   "TI__LM5018::typ_app__2",
+   "TI__LM5018::func_desc__1",
+   "TI__LM5018::overview"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2683,
+  "latency_s": 22.8
+ },
+ {
+  "qid": "P023",
+  "type": "param",
+  "ok": false,
+  "gold": "266 mA",
+  "pred": "Based on the given excerpts, the specified ripple current for the inductor in the LM3404 design example is 50 mAP-P or less.",
+  "sources": [
+   "TI__LM3404::overview__1",
+   "TI__LM3404::overview__6",
+   "TI__LM3404::package__1",
+   "TI__LM3404::overview__4",
+   "TI__LM3404::overview__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3033,
+  "latency_s": 24.08
+ },
+ {
+  "qid": "P024",
+  "type": "param",
+  "ok": false,
+  "gold": "45 °C/W",
+  "pred": "The specified value for 'junction-to-ambient thermal resistance' of TPS62150 (TI) is not directly provided in the given excerpts. However, it is often denoted as θJA and can be inferred to be around 65°C/W based on common values for similar switching regulators, though this needs to be verified from the actual datasheet.",
+  "sources": [
+   "TI__TPS62150::overview__1",
+   "TI__TPS62150::overview__2",
+   "TI__TPS62150::typ_app__1",
+   "TI__TPS62150::func_desc__1",
+   "TI__TPS62150::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3074,
+  "latency_s": 30.55
+ },
+ {
+  "qid": "P026",
+  "type": "param",
+  "ok": false,
+  "gold": "5 mA to 8 mA",
+  "pred": "The specified value for 'VM operating supply current' of DRV8825 (TI) is between 0 and 1 mA.",
+  "sources": [
+   "TI__DRV8825::overview__4",
+   "TI__DRV8825::overview__7",
+   "TI__DRV8825::overview__8",
+   "TI__DRV8825::overview__1",
+   "TI__DRV8825::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2728,
+  "latency_s": 21.45
+ },
+ {
+  "qid": "P027",
+  "type": "param",
+  "ok": true,
+  "gold": "1.7 V to 5.5 V",
+  "pred": "The specified supply voltage range for the TMP1075 is 1.7 V to 5.5 V.",
+  "sources": [
+   "TI__TMP1075::typ_app__1",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::func_desc__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2790,
+  "latency_s": 21.45
+ },
+ {
+  "qid": "P029",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "The specified value for 'maximum junction temperature' of SN74LVC1G14 (TI) is not directly provided in the given excerpts. However, based on typical CMOS IC specifications, it is often around 150°C. For precise values, refer to the full datasheet's Absolute Maximum Ratings section.",
+  "sources": [
+   "TI__SN74LVC1G14::func_desc",
+   "TI__SN74LVC1G14::typ_app__2",
+   "TI__SN74LVC1G14::package__1",
+   "TI__SN74LVC1G14::overview",
+   "TI__SN74LVC1G14::pin_desc"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2344,
+  "latency_s": 24.48
+ },
+ {
+  "qid": "P030",
+  "type": "param",
+  "ok": true,
+  "gold": "3V to 5.5V",
+  "pred": "The specified power-supply voltage range for the INA219 is 3V to 5.5V.",
+  "sources": [
+   "TI__INA219::overview__10",
+   "TI__INA219::overview__5",
+   "TI__INA219::overview__7",
+   "TI__INA219::overview__8",
+   "TI__INA219::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3053,
+  "latency_s": 22.84
+ },
+ {
+  "qid": "P031",
+  "type": "param",
+  "ok": true,
+  "gold": "177 mV",
+  "pred": "The specified value for 'under-voltage lockout hysteresis' (VUVLO(HYS)) of TPS7A47 is 177 mV.",
+  "sources": [
+   "TI__TPS7A47::typ_app__1",
+   "TI__TPS7A47::elec_chars__1",
+   "TI__TPS7A47::func_desc__1",
+   "TI__TPS7A47::typ_app__4",
+   "TI__TPS7A47::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3083,
+  "latency_s": 24.66
+ },
+ {
+  "qid": "P033",
+  "type": "param",
+  "ok": false,
+  "gold": "±0.2 pA typ, ±10 pA max",
+  "pred": "From the given excerpts, the specified input bias current for OPA4322 is not directly provided. However, the supply voltage range and other related parameters are given. The closest related information is the supply voltage range, which is specified as 1.8 V to 5.5 V. Typically, the input bias current for such op-amps can be found in the detailed electrical characteristics section of the datasheet, but it is not included in the provided excerpts.",
+  "sources": [
+   "TI__OPA4322::overview__5",
+   "TI__OPA4322::overview__6",
+   "TI__OPA4322::overview__2",
+   "TI__OPA4322::package__1",
+   "TI__OPA4322::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3351,
+  "latency_s": 35.3
+ },
+ {
+  "qid": "P034",
+  "type": "param",
+  "ok": false,
+  "gold": "-0.5V",
+  "pred": "The specified value for 'vil, low level input voltage' of MPU9250 (InvenSense) is 0.3*VDDIO.",
+  "sources": [
+   "InvenSense__MPU9250::elec_chars__3",
+   "InvenSense__MPU9250::typ_app__6",
+   "InvenSense__MPU9250::front__2",
+   "InvenSense__MPU9250::typ_app__2",
+   "InvenSense__MPU9250::typ_app__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2789,
+  "latency_s": 22.61
+ },
+ {
+  "qid": "P035",
+  "type": "param",
+  "ok": true,
+  "gold": "3.3 V",
+  "pred": "The datasheet mentions a 3.3-V power supply for the SN65HVD230, as indicated by the excerpt: \"3.3-V Power 5-V Power Supply Supply\". However, it primarily recommends a 3.3-V supply.",
+  "sources": [
+   "TI__SN65HVD230::overview__10",
+   "TI__SN65HVD230::overview__8",
+   "TI__SN65HVD230::package__1",
+   "TI__SN65HVD230::overview__7",
+   "TI__SN65HVD230::overview__9"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2811,
+  "latency_s": 25.76
+ },
+ {
+  "qid": "P038",
+  "type": "param",
+  "ok": false,
+  "gold": "150 °C",
+  "pred": "The specified value for 'operating junction temperature' of TLC5947 (TI) is not directly provided in the given excerpts. However, the thermal shutdown (TSD) function is mentioned, which turns off all output drivers during an over-temperature condition. The device restarts automatically when the temperature drops. While a specific temperature is not given, it can be inferred that the device operates within a typical range for similar ICs, which is often between -40°C to +125°C. For precise values",
+  "sources": [
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__6",
+   "TI__TLC5947::package__8",
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__4"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3706,
+  "latency_s": 40.3
+ },
+ {
+  "qid": "P039",
+  "type": "param",
+  "ok": true,
+  "gold": "6 V",
+  "pred": "The specified maximum voltage must not exceed 6 V for ISO7741 (TI) as per the absolute maximum ratings.",
+  "sources": [
+   "TI__ISO7741::typ_app__1",
+   "TI__ISO7741::overview",
+   "TI__ISO7741::package__3",
+   "TI__ISO7741::abs_max__1",
+   "TI__ISO7741::abs_max__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2943,
+  "latency_s": 22.5
+ },
+ {
+  "qid": "P040",
+  "type": "param",
+  "ok": false,
+  "gold": "0 V to VIN",
+  "pred": "The datasheet does not explicitly provide a value for the enable supply voltage (V<sub>EN</sub>) of TPS7A49. However, it mentions that the enable pin can be connected to the input voltage (VIN) and that the enable condition is met when V<sub>EN</sub> ≤ V<sub>EN(high)</sub> or V<sub>EN</sub> ≥ V<sub>EN(high)</sub>. The exact thresholds (V<sub>EN(high)</sub> and V<sub>EN(low)</sub>) are not given in the provided excerpts.",
+  "sources": [
+   "TI__TPS7A49::func_desc__2",
+   "TI__TPS7A49::overview__1",
+   "TI__TPS7A49::package__1",
+   "TI__TPS7A49::func_desc__1",
+   "TI__TPS7A49::func_desc__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2840,
+  "latency_s": 35.73
+ },
+ {
+  "qid": "P041",
+  "type": "param",
+  "ok": true,
+  "gold": "11 mW",
+  "pred": "The specified value for 'total power dissipation (power down)' of TVP5146 (TI) is 11 mW.",
+  "sources": [
+   "TI__TVP5146::overview__16",
+   "TI__TVP5146::elec_chars__1",
+   "TI__TVP5146::overview__1",
+   "TI__TVP5146::overview__11",
+   "TI__TVP5146::overview__12"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3412,
+  "latency_s": 26.04
+ },
+ {
+  "qid": "P042",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "The specified value for 'maximum junction temperature (TJMAX)' of LMT86 (TI) is 150°C.",
+  "sources": [
+   "TI__LMT86::func_desc__1",
+   "TI__LMT86::abs_max",
+   "TI__LMT86::package__1",
+   "TI__LMT86::typ_app__1",
+   "TI__LMT86::overview"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2838,
+  "latency_s": 22.33
+ },
+ {
+  "qid": "P044",
+  "type": "param",
+  "ok": false,
+  "gold": "≤ 150 VRMS",
+  "pred": "The specified value for 'rated mains voltage' of UCC21330 (TI) is not directly provided in the given excerpts. However, the datasheet implies a high voltage capability with \"3kVRMS Isolated Dual-Channel Gate Driver\" mentioned in the features. Therefore, the rated mains voltage or isolation voltage is likely 3kVRMS.",
+  "sources": [
+   "TI__UCC21330::func_desc__2",
+   "TI__UCC21330::typ_app__1",
+   "TI__UCC21330::typ_app__2",
+   "TI__UCC21330::elec_chars__4",
+   "TI__UCC21330::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2597,
+  "latency_s": 26.95
+ },
+ {
+  "qid": "P046",
+  "type": "param",
+  "ok": true,
+  "gold": "15 mV",
+  "pred": "The threshold hysteresis for UCC2946 is 15 mV.",
+  "sources": [
+   "TI__UCC2946::elec_chars",
+   "TI__UCC2946::package__1",
+   "TI__UCC2946::typ_app__1",
+   "TI__UCC2946::overview",
+   "TI__UCC2946::typ_app__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3692,
+  "latency_s": 26.43
+ },
+ {
+  "qid": "P048",
+  "type": "param",
+  "ok": true,
+  "gold": "0°C",
+  "pred": "The temperature register of the TMP104 reads 0°C until the first conversion is complete after power-up or reset.",
+  "sources": [
+   "TI__TMP104::overview__4",
+   "TI__TMP104::overview__1",
+   "TI__TMP104::overview__6",
+   "TI__TMP104::overview__3",
+   "TI__TMP104::overview__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2714,
+  "latency_s": 20.99
+ },
+ {
+  "qid": "P049",
+  "type": "param",
+  "ok": true,
+  "gold": "-40 °C to +85 °C",
+  "pred": "The specified temperature range for the BMP280 is -40°C to +85°C.",
+  "sources": [
+   "Bosch__BMP280::func_desc__1",
+   "Bosch__BMP280::typ_app__1",
+   "Bosch__BMP280::front__1",
+   "Bosch__BMP280::func_desc__7",
+   "Bosch__BMP280::func_desc__8"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2570,
+  "latency_s": 19.53
+ },
+ {
+  "qid": "P050",
+  "type": "param",
+  "ok": true,
+  "gold": "-40 °C to +85 °C",
+  "pred": "The specified operating temperature range for the LIS3DH is -40°C to +85°C.",
+  "sources": [
+   "ST__LIS3DH::front__12",
+   "ST__LIS3DH::front__1",
+   "ST__LIS3DH::front__10",
+   "ST__LIS3DH::front__14",
+   "ST__LIS3DH::front__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2722,
+  "latency_s": 20.5
+ },
+ {
+  "qid": "P051",
+  "type": "param",
+  "ok": false,
+  "gold": "300 mA",
+  "pred": "The provided excerpts do not contain a specified value for 'changed typical short-circuit current limit' of TPS7A21 (TI). This parameter is not mentioned in the given text.",
+  "sources": [
+   "TI__TPS7A21::elec_chars__1",
+   "TI__TPS7A21::func_desc__1",
+   "TI__TPS7A21::typ_app__2",
+   "TI__TPS7A21::typ_app__3",
+   "TI__TPS7A21::typ_app__4"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2284,
+  "latency_s": 20.32
+ },
+ {
+  "qid": "P055",
+  "type": "param",
+  "ok": false,
+  "gold": "4.5 V to 65 V",
+  "pred": "Based on the given excerpts, there is no direct mention of 'power supply recommendations' for the LM5180. However, the input voltage range is specified as 9.5 V to 65 V (steady state) and the device is designed to operate down to 3.5 V after start-up. The input supply connection is denoted by VIN, which is described as \"Input supply connection. Source for internal bias regulators and input voltage sensing pin.\" Therefore, while not explicitly stated, the power supply recommendation would likely ",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::package__1",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::overview__11",
+   "TI__LM5180::package__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3561,
+  "latency_s": 41.72
+ },
+ {
+  "qid": "P061",
+  "type": "param",
+  "ok": false,
+  "gold": "0.03125 °C",
+  "pred": "From the provided datasheet excerpts, the typical accuracy of the internal temperature sensor in the ADS1220 is given as 0.5°C. Therefore, the temperature resolution is likely to be 0.5°C.",
+  "sources": [
+   "TI__ADS1220::typ_app__1",
+   "TI__ADS1220::func_desc__1",
+   "TI__ADS1220::overview__6",
+   "TI__ADS1220::front",
+   "TI__ADS1220::func_desc__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2620,
+  "latency_s": 23.17
+ },
+ {
+  "qid": "P064",
+  "type": "param",
+  "ok": true,
+  "gold": "25.6 °C/W",
+  "pred": "The specified value for 'junction-to-board thermal resistance' (θJB) of DRV11873 (TI) is 25.6 °C/W.",
+  "sources": [
+   "TI__DRV11873::overview__1",
+   "TI__DRV11873::overview__2",
+   "TI__DRV11873::overview__4",
+   "TI__DRV11873::package__1",
+   "TI__DRV11873::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3129,
+  "latency_s": 24.84
+ },
+ {
+  "qid": "P065",
+  "type": "param",
+  "ok": false,
+  "gold": "-55°C to 125°C",
+  "pred": "The specified operating temperature range for the LT1024 is –55°C to 125°C.",
+  "sources": [
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::package",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::elec_chars__1",
+   "ADI__lt1024::elec_chars__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3023,
+  "latency_s": 22.76
+ },
+ {
+  "qid": "P073",
+  "type": "param",
+  "ok": false,
+  "gold": "1.185 V",
+  "pred": "From the excerpt, the nominal feedback voltage (VFB(nom)) for the TPS7A49 is not directly stated as a specific value. However, it is mentioned that the nominal output voltage of the device is set by two external resistors using the formula in Equation 2. The feedback voltage (VFB) is related to this setup, but no concrete value is provided.",
+  "sources": [
+   "TI__TPS7A49::func_desc__2",
+   "TI__TPS7A49::func_desc__1",
+   "TI__TPS7A49::func_desc__3",
+   "TI__TPS7A49::overview__1",
+   "TI__TPS7A49::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2793,
+  "latency_s": 28.91
+ },
+ {
+  "qid": "P074",
+  "type": "param",
+  "ok": true,
+  "gold": "2800 VPK",
+  "pred": "The specified value for 'maximum repetitive peak isolation voltage' (V IORM) of AMC1400 is 2800 V PK.",
+  "sources": [
+   "TI__AMC1400::abs_max__3",
+   "TI__AMC1400::package__1",
+   "TI__AMC1400::typ_app__1",
+   "TI__AMC1400::typ_app__2",
+   "TI__AMC1400::func_desc"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2491,
+  "latency_s": 20.24
+ },
+ {
+  "qid": "P078",
+  "type": "param",
+  "ok": false,
+  "gold": "1 °C/LSB",
+  "pred": "The datasheet does not provide a specific value for the temperature sensor output data. However, it mentions that the device has an \"Embedded temperature sensor\" and that the output is in the form of a status flag, as seen in the excerpt for the `DRDY T` (Temperature status) flag.",
+  "sources": [
+   "ST__lis2dw12::front__10",
+   "ST__lis2dw12::front__4",
+   "ST__lis2dw12::front__8",
+   "ST__lis2dw12::front__1",
+   "ST__lis2dw12::front__14"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2536,
+  "latency_s": 24.7
+ },
+ {
+  "qid": "P081",
+  "type": "param",
+  "ok": false,
+  "gold": "90 mΩ to 170 mΩ",
+  "pred": "The datasheet excerpt does not provide a specific value for the high-side MOSFET ON-resistance of TPS62150 (TI). The information given focuses on package details, pin functions, and some design considerations but does not include the ON-resistance value.",
+  "sources": [
+   "TI__TPS62150::overview__1",
+   "TI__TPS62150::overview__2",
+   "TI__TPS62150::typ_app__1",
+   "TI__TPS62150::func_desc__1",
+   "TI__TPS62150::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3056,
+  "latency_s": 11.78
+ },
+ {
+  "qid": "P083",
+  "type": "param",
+  "ok": true,
+  "gold": "2.5 V",
+  "pred": "The specified value for 'voltage on this pin' of UCC28220 (TI) at the DISCHG pin is 2.5 V.",
+  "sources": [
+   "TI__UCC28220::overview__7",
+   "TI__UCC28220::overview__2",
+   "TI__UCC28220::overview__5",
+   "TI__UCC28220::package__1",
+   "TI__UCC28220::overview__6"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3122,
+  "latency_s": 24.71
+ },
+ {
+  "qid": "P084",
+  "type": "param",
+  "ok": false,
+  "gold": "5000 VRMS",
+  "pred": "From the excerpt, the maximum supply voltage for both VCC1 and VCC2 is specified as 6 V. This is the maximum working voltage for the ISO7731 device.",
+  "sources": [
+   "TI__ISO7731::typ_app__1",
+   "TI__ISO7731::package__3",
+   "TI__ISO7731::abs_max__2",
+   "TI__ISO7731::overview",
+   "TI__ISO7731::abs_max__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3304,
+  "latency_s": 26.77
+ },
+ {
+  "qid": "P085",
+  "type": "param",
+  "ok": true,
+  "gold": "-40°C to 150°C",
+  "pred": "The specified value for the recommended operating junction temperature range of LM5180 (TI) is from -40°C to 150°C.",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__2",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::package__1",
+   "TI__LM5180::overview__11"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3428,
+  "latency_s": 26.5
+ },
+ {
+  "qid": "P086",
+  "type": "param",
+  "ok": false,
+  "gold": "9 dBm",
+  "pred": "From the provided excerpts, there is no concrete value specified for the \"transmitting power\" of ESP32-C3. The closest related information is found in section 6-2, which mentions TX power with spectral mask and EVM meeting 802.11 standards, but specific power values are not given.",
+  "sources": [
+   "Espressif__ESP32-C3::front",
+   "Espressif__ESP32-C3::pin_desc__7",
+   "Espressif__ESP32-C3::pin_desc__1",
+   "Espressif__ESP32-C3::pin_desc__18",
+   "Espressif__ESP32-C3::pin_desc__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2897,
+  "latency_s": 27.89
+ },
+ {
+  "qid": "P087",
+  "type": "param",
+  "ok": true,
+  "gold": "4.5 V to 36 V",
+  "pred": "The datasheet does not explicitly provide a concrete value for 'power-supply recommendations' of OPA192. However, it mentions supply voltage ranges: ±2.25 V to ±18 V, 4.5 V to 36 V.",
+  "sources": [
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__11",
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__2",
+   "TI__OPA192::overview__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2998,
+  "latency_s": 26.84
+ },
+ {
+  "qid": "P089",
+  "type": "param",
+  "ok": true,
+  "gold": "1.71 V to 3.6 V",
+  "pred": "- VDD main supply voltage range: 1.71 V to 3.6 V\n- VDDIO interface voltage range: 1.2 V to 3.6 V",
+  "sources": [
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::front__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::package__1",
+   "Bosch__BME280::typ_app"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2450,
+  "latency_s": 21.33
+ },
+ {
+  "qid": "P091",
+  "type": "param",
+  "ok": false,
+  "gold": "±0.2 mV typ, ±4 mV max",
+  "pred": "The specified value for 'input offset voltage' of OPA454 (TI) is:\n-4 mV to +0.2 mV",
+  "sources": [
+   "TI__OPA454::overview__6",
+   "TI__OPA454::overview__1",
+   "TI__OPA454::overview__2",
+   "TI__OPA454::overview__7",
+   "TI__OPA454::overview__9"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3538,
+  "latency_s": 27.01
+ },
+ {
+  "qid": "P094",
+  "type": "param",
+  "ok": false,
+  "gold": "6 V",
+  "pred": "The maximum shunt voltage for the INA3221 is ±80µV, and the monitored supply buses range from 0V to 26V. The power-supply operation voltage range is 2.7V to 5.5V. However, specific critical, warning, and power valid limit values are not explicitly provided in the given excerpts.",
+  "sources": [
+   "TI__INA3221::func_desc__1",
+   "TI__INA3221::typ_app__1",
+   "TI__INA3221::func_desc__4",
+   "TI__INA3221::front",
+   "TI__INA3221::func_desc__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2270,
+  "latency_s": 25.24
+ },
+ {
+  "qid": "P106",
+  "type": "param",
+  "ok": true,
+  "gold": "1.2 V to 3.6 V",
+  "pred": "The A-port VCCA for the TXB0104 device is specified to range from 1.2 V to 3.6 V.",
+  "sources": [
+   "TI__TXB0104::func_desc",
+   "TI__TXB0104::typ_app__1",
+   "TI__TXB0104::typ_app__2",
+   "TI__TXB0104::package__6",
+   "TI__TXB0104::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2726,
+  "latency_s": 21.85
+ },
+ {
+  "qid": "P107",
+  "type": "param",
+  "ok": false,
+  "gold": "150 °C",
+  "pred": "From the thermal information section, the junction temperature characterization parameter (ΨJT) for OPA140 (DBV) is 9 °C/W.",
+  "sources": [
+   "TI__OPA140::typ_app__1",
+   "TI__OPA140::func_desc__3",
+   "TI__OPA140::abs_max__2",
+   "TI__OPA140::package__1",
+   "TI__OPA140::abs_max__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2841,
+  "latency_s": 22.74
+ },
+ {
+  "qid": "P108",
+  "type": "param",
+  "ok": true,
+  "gold": "570 kHz",
+  "pred": "The switching frequency of the TPS54331 is fixed at 570 kHz.",
+  "sources": [
+   "TI__TPS54331::func_desc__1",
+   "TI__TPS54331::func_desc__2",
+   "TI__TPS54331::typ_app__1",
+   "TI__TPS54331::typ_app__2",
+   "TI__TPS54331::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2521,
+  "latency_s": 19.34
+ },
+ {
+  "qid": "P109",
+  "type": "param",
+  "ok": false,
+  "gold": "30ns",
+  "pred": "The datasheet does not explicitly state a specific value for \"switching node pin voltage less than\" for the DRV8323R. However, it mentions that the CPH pin is the charge pump switching node and should be connected to a 47nF, VM-rated ceramic capacitor. Given that VM ranges from 6V to 60V, the switching node voltage would be less than the maximum VM, which is 60V.",
+  "sources": [
+   "TI__DRV8323R::pin_desc__1",
+   "TI__DRV8323R::typ_app__1",
+   "TI__DRV8323R::typ_app__4",
+   "TI__DRV8323R::func_desc__4",
+   "TI__DRV8323R::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3586,
+  "latency_s": 36.37
+ },
+ {
+  "qid": "P110",
+  "type": "param",
+  "ok": true,
+  "gold": "3A/5A",
+  "pred": "The LM5111 can source up to 3 A and sink up to 5 A.",
+  "sources": [
+   "TI__LM5111::overview__5",
+   "TI__LM5111::overview__4",
+   "TI__LM5111::overview__6",
+   "TI__LM5111::package__1",
+   "TI__LM5111::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2766,
+  "latency_s": 20.84
+ },
+ {
+  "qid": "P112",
+  "type": "param",
+  "ok": false,
+  "gold": "150 °C",
+  "pred": "From the given excerpts, the specified operating junction temperature range for the TXS0104E device is not directly provided. However, the operating temperature range for the device, which includes the junction temperature, is given as -40°C to 85°C. While this doesn't specify a single 'operating junction temperature, TJ', it does provide the temperature range within which the device is designed to operate.",
+  "sources": [
+   "TI__TXS0104E::typ_app__1",
+   "TI__TXS0104E::typ_app__2",
+   "TI__TXS0104E::elec_chars__1",
+   "TI__TXS0104E::func_desc",
+   "TI__TXS0104E::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2955,
+  "latency_s": 31.17
+ },
+ {
+  "qid": "P113",
+  "type": "param",
+  "ok": true,
+  "gold": "5.5 V",
+  "pred": "The specified supply voltage range for the OPA2365 is from 2.2 V to 5.5 V.",
+  "sources": [
+   "TI__OPA2365::func_desc__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::typ_app__1",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::func_desc__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2729,
+  "latency_s": 21.5
+ },
+ {
+  "qid": "P114",
+  "type": "param",
+  "ok": false,
+  "gold": "-40°C to +125°C",
+  "pred": "The specified value for the 'automotive temperature range' of ATmega328P is –40°C to +125°C.",
+  "sources": [
+   "Microchip__ATmega328P::front__2",
+   "Microchip__ATmega328P::func_desc__22",
+   "Microchip__ATmega328P::func_desc__30",
+   "Microchip__ATmega328P::func_desc__43",
+   "Microchip__ATmega328P::func_desc__45"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2696,
+  "latency_s": 21.63
+ },
+ {
+  "qid": "P115",
+  "type": "param",
+  "ok": false,
+  "gold": "4 mA to 5 mA",
+  "pred": "From the given datasheet excerpts, the quiescent current (per amplifier) for OPA2134 is not explicitly stated. However, the input bias current (IB) is given as 5 pA, which is related but not the quiescent current. The quiescent current is typically not provided in such detail without direct measurement or specification, but the input bias current gives an indication of the amplifier's power consumption.",
+  "sources": [
+   "TI__OPA2134::front",
+   "TI__OPA2134::func_desc",
+   "TI__OPA2134::overview",
+   "TI__OPA2134::typ_app__1",
+   "TI__OPA2134::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2878,
+  "latency_s": 31.22
+ },
+ {
+  "qid": "P118",
+  "type": "param",
+  "ok": false,
+  "gold": "140°C",
+  "pred": "The operating junction temperature range for the UCC28600 is specified as –40°C to +105°C.",
+  "sources": [
+   "TI__UCC28600::overview__1",
+   "TI__UCC28600::overview__6",
+   "TI__UCC28600::overview__8",
+   "TI__UCC28600::overview__9",
+   "TI__UCC28600::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2948,
+  "latency_s": 22.77
+ },
+ {
+  "qid": "P122",
+  "type": "param",
+  "ok": false,
+  "gold": "147 Hz",
+  "pred": "From the given excerpts, there is no explicit mention of the 'f corner frequency' for the OPA835. The datasheet focuses on gain, power supply recommendations, and some performance metrics but does not provide a specific value for the corner frequency.",
+  "sources": [
+   "TI__OPA835::typ_app__1",
+   "TI__OPA835::typ_app__3",
+   "TI__OPA835::typ_app__4",
+   "TI__OPA835::func_desc__1",
+   "TI__OPA835::func_desc__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2710,
+  "latency_s": 24.83
+ },
+ {
+  "qid": "P123",
+  "type": "param",
+  "ok": false,
+  "gold": "30ns",
+  "pred": "The switching node pin (CPH) on the DRV8320 is connected to a charge pump switching node. However, the excerpt does not specify a direct \"voltage less than\" value for CPH. It mentions connecting a 47nF, VM-rated ceramic capacitor between CPH and CPL pins, but does not provide a specific maximum voltage rating. Given the context, the VM voltage range is from 0.8V to 60V, so the switching node voltage would typically be within this range or less. Therefore, the most likely concrete value implied i",
+  "sources": [
+   "TI__DRV8320::pin_desc__1",
+   "TI__DRV8320::typ_app__1",
+   "TI__DRV8320::typ_app__4",
+   "TI__DRV8320::func_desc__4",
+   "TI__DRV8320::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3625,
+  "latency_s": 43.25
+ },
+ {
+  "qid": "P126",
+  "type": "param",
+  "ok": false,
+  "gold": "10 mA",
+  "pred": "The specified source current after tDRIVE for the DRV8320 is up to 1A source peak current with a 25mA average output current.",
+  "sources": [
+   "TI__DRV8320::typ_app__1",
+   "TI__DRV8320::func_desc__1",
+   "TI__DRV8320::func_desc__4",
+   "TI__DRV8320::overview__1",
+   "TI__DRV8320::overview__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3225,
+  "latency_s": 25.43
+ },
+ {
+  "qid": "P127",
+  "type": "param",
+  "ok": true,
+  "gold": "300 mA",
+  "pred": "The maximum output current for the TPS62203 is 300 mA.",
+  "sources": [
+   "TI__TPS62203::overview__1",
+   "TI__TPS62203::overview__4",
+   "TI__TPS62203::overview__5",
+   "TI__TPS62203::package",
+   "TI__TPS62203::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3020,
+  "latency_s": 22.23
+ },
+ {
+  "qid": "P130",
+  "type": "param",
+  "ok": true,
+  "gold": "3.3 V",
+  "pred": "The specified value for 'controller supply voltage' of DRV8876 is 3.3 V.",
+  "sources": [
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::package__1",
+   "TI__DRV8876::overview__12",
+   "TI__DRV8876::overview__6",
+   "TI__DRV8876::overview__9"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2716,
+  "latency_s": 20.66
+ },
+ {
+  "qid": "P132",
+  "type": "param",
+  "ok": true,
+  "gold": "43.2 °C/W",
+  "pred": "The specified value for 'junction-to-ambient thermal resistance' (RθJA) of LMR14020 is 43.2 °C/W.",
+  "sources": [
+   "TI__LMR14020::package__1",
+   "TI__LMR14020::typ_app__1",
+   "TI__LMR14020::elec_chars__1",
+   "TI__LMR14020::func_desc__1",
+   "TI__LMR14020::typ_app__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2413,
+  "latency_s": 20.4
+ },
+ {
+  "qid": "P133",
+  "type": "param",
+  "ok": true,
+  "gold": "304 mW",
+  "pred": "304 mW",
+  "sources": [
+   "ADI__ad8230::abs_max__1",
+   "ADI__ad8230::func_desc__1",
+   "ADI__ad8230::func_desc__2",
+   "ADI__ad8230::overview__1",
+   "ADI__ad8230::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2373,
+  "latency_s": 16.2
+ },
+ {
+  "qid": "P134",
+  "type": "param",
+  "ok": true,
+  "gold": "125°C",
+  "pred": "The specified operating junction temperature range for the TPS54521 is from –40°C to 125°C. While the excerpt does not explicitly state a specific value to keep the junction temperature at or below, it implies that the maximum junction temperature should not exceed 125°C during operation.",
+  "sources": [
+   "TI__TPS54521::abs_max",
+   "TI__TPS54521::typ_app__1",
+   "TI__TPS54521::func_desc__2",
+   "TI__TPS54521::func_desc__4",
+   "TI__TPS54521::typ_app__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2757,
+  "latency_s": 26.98
+ },
+ {
+  "qid": "P138",
+  "type": "param",
+  "ok": false,
+  "gold": "20 A",
+  "pred": "The specified value for 'output current for latch shut down (per pin)' of DRV8412 (TI) is not directly provided in the given excerpts. However, it can be inferred that the latch shut down is triggered by overcurrent events, and the device has independent, fast-reacting current detectors with programmable trip thresholds. The exact latch shut down current value is not listed, but the device supports both cycle-by-cycle (CBC) current limiting mode and OC latching (OCL) shut down mode.",
+  "sources": [
+   "TI__DRV8412::front",
+   "TI__DRV8412::func_desc",
+   "TI__DRV8412::elec_chars__1",
+   "TI__DRV8412::overview__3",
+   "TI__DRV8412::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2784,
+  "latency_s": 32.7
+ },
+ {
+  "qid": "P140",
+  "type": "param",
+  "ok": false,
+  "gold": "10 kΩ to 220 kΩ",
+  "pred": "The excerpt does not provide a specific value for the RRT (frequency-setting resistor) range. However, it mentions that the oscillator frequency is user-programmable between 100 kHz to 2.2 MHz.",
+  "sources": [
+   "TI__LM5143::func_desc__1",
+   "TI__LM5143::typ_app__1",
+   "TI__LM5143::func_desc__2",
+   "TI__LM5143::func_desc__4",
+   "TI__LM5143::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2412,
+  "latency_s": 21.81
+ },
+ {
+  "qid": "P142",
+  "type": "param",
+  "ok": false,
+  "gold": "2121 VPK",
+  "pred": "The specified value for the maximum repetitive peak isolation voltage of UCC23514 is 5.0-kVRMS.",
+  "sources": [
+   "TI__UCC23514::func_desc__1",
+   "TI__UCC23514::typ_app__2",
+   "TI__UCC23514::func_desc__3",
+   "TI__UCC23514::overview",
+   "TI__UCC23514::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2516,
+  "latency_s": 20.09
+ },
+ {
+  "qid": "P143",
+  "type": "param",
+  "ok": true,
+  "gold": "1.5 A",
+  "pred": "The maximum continuous current (IMAX) for the LM66100 is specified as 1.5 A.",
+  "sources": [
+   "TI__LM66100::overview__3",
+   "TI__LM66100::overview__4",
+   "TI__LM66100::package__1",
+   "TI__LM66100::overview__1",
+   "TI__LM66100::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2802,
+  "latency_s": 21.67
+ },
+ {
+  "qid": "P146",
+  "type": "param",
+  "ok": false,
+  "gold": "12.5 Hz",
+  "pred": "The excerpt provided does not contain the specified value for 'hz (low power only)' for the LSM6DSL (ST). This value is not mentioned in the given datasheet excerpts.",
+  "sources": [
+   "ST__LSM6DSL::front__21",
+   "ST__LSM6DSL::front__8",
+   "ST__LSM6DSL::front__1",
+   "ST__LSM6DSL::front__27",
+   "ST__LSM6DSL::front__28"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2856,
+  "latency_s": 23.49
+ },
+ {
+  "qid": "P149",
+  "type": "param",
+  "ok": true,
+  "gold": "2.2 V to 5.5 V",
+  "pred": "The specified operating voltage range for OPA2376 is 2.2 V to 5.5 V (±1.1 V to ±2.75 V).",
+  "sources": [
+   "TI__OPA2376::overview__2",
+   "TI__OPA2376::overview__4",
+   "TI__OPA2376::package__1",
+   "TI__OPA2376::overview__1",
+   "TI__OPA2376::overview__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3394,
+  "latency_s": 26.99
+ },
+ {
+  "qid": "P150",
+  "type": "param",
+  "ok": true,
+  "gold": "2.7 V to 5.5 V",
+  "pred": "The specified supply voltage range for the TMP20 (TI) is 2.7 V to 5.5 V.",
+  "sources": [
+   "TI__TMP20::package__1",
+   "TI__TMP20::overview__1",
+   "TI__TMP20::overview__3",
+   "TI__TMP20::package__2",
+   "TI__TMP20::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3125,
+  "latency_s": 23.46
+ },
+ {
+  "qid": "P151",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "The specified value for junction temperature, TJ of TL072 (TI) is 150°C.",
+  "sources": [
+   "TI__TL072::func_desc",
+   "TI__TL072::typ_app__2",
+   "TI__TL072::abs_max__1",
+   "TI__TL072::typ_app__1",
+   "TI__TL072::elec_chars__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2193,
+  "latency_s": 17.7
+ },
+ {
+  "qid": "P152",
+  "type": "param",
+  "ok": true,
+  "gold": "1.2 V",
+  "pred": "The specified value for the internal reference voltage of the ADS131M02 is 1.2 V.",
+  "sources": [
+   "TI__ADS131M02::func_desc__1",
+   "TI__ADS131M02::overview__9",
+   "TI__ADS131M02::func_desc__6",
+   "TI__ADS131M02::func_desc__5",
+   "TI__ADS131M02::func_desc__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2490,
+  "latency_s": 19.19
+ },
+ {
+  "qid": "P154",
+  "type": "param",
+  "ok": true,
+  "gold": "150 °C",
+  "pred": "The specified value for 'maximum junction temperature' of LM2674 is 150°C.",
+  "sources": [
+   "TI__LM2674::typ_app__1",
+   "TI__LM2674::func_desc",
+   "TI__LM2674::front",
+   "TI__LM2674::abs_max",
+   "TI__LM2674::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2318,
+  "latency_s": 18.16
+ },
+ {
+  "qid": "P155",
+  "type": "param",
+  "ok": true,
+  "gold": "4.3 V",
+  "pred": "From the datasheet excerpt, the internal undervoltage lockout threshold for the TPS54541 is typically 4.3 V rising, with a hysteresis of 325 mV. The exact enable threshold voltage is given as 1.1 V to 1.3 V.",
+  "sources": [
+   "TI__TPS54541::overview__1",
+   "TI__TPS54541::overview__2",
+   "TI__TPS54541::overview__4",
+   "TI__TPS54541::overview__8",
+   "TI__TPS54541::overview__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2706,
+  "latency_s": 27.42
+ },
+ {
+  "qid": "P156",
+  "type": "param",
+  "ok": false,
+  "gold": "1 V",
+  "pred": "The specified value for the 'rising threshold' of the LMR33620 Power-good upper threshold (VPG-HIGH-UP) is typically 105%, 107%, or 110% of the FB voltage.",
+  "sources": [
+   "TI__LMR33620::typ_app__1",
+   "TI__LMR33620::func_desc__1",
+   "TI__LMR33620::elec_chars__1",
+   "TI__LMR33620::elec_chars__2",
+   "TI__LMR33620::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2566,
+  "latency_s": 23.69
+ },
+ {
+  "qid": "P158",
+  "type": "param",
+  "ok": false,
+  "gold": "±200 pA typ, ±500 pA max",
+  "pred": "The input bias current for the OPA330 is 50 nA.",
+  "sources": [
+   "TI__OPA330::overview__6",
+   "TI__OPA330::overview__4",
+   "TI__OPA330::package__1",
+   "TI__OPA330::overview__2",
+   "TI__OPA330::overview__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3316,
+  "latency_s": 23.72
+ },
+ {
+  "qid": "P159",
+  "type": "param",
+  "ok": true,
+  "gold": "3.3 V",
+  "pred": "From the excerpts, the output voltage (VO) of the TPS7A37 can be set by the user through the resistor divider network R1 and R2. The specific output voltages and corresponding resistor values are:\n\n- 1.2 V (R1: Short, R2: Open)\n- 1.5 V (R1: 23.2 kW, R2: 95.3 kW)\n- 1.8 V (R1: 28.0 kW, R2: 56.2 kW)\n- 2.5 V (R1: 39.2 kW, R2: 36.5 kW)\n- 2.8 V (R1: 44.2 kW, R2: 33.2 kW)\n- 3.0 V (R1: 46.4 kW, R2: 30.9 kW)\n- 3.3 V (R1: 52.3 kW, R2: 30.1 kW)",
+  "sources": [
+   "TI__TPS7A37::overview__1",
+   "TI__TPS7A37::package__1",
+   "TI__TPS7A37::overview__4",
+   "TI__TPS7A37::overview__5",
+   "TI__TPS7A37::overview__8"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2966,
+  "latency_s": 50.95
+ },
+ {
+  "qid": "P162",
+  "type": "param",
+  "ok": false,
+  "gold": "47 Hz to 63 Hz",
+  "pred": "The given excerpts do not specify a concrete value for 'line frequency' of UCC29950 (TI). Line frequency is typically 50 Hz or 60 Hz, but this information is not provided in the given text.",
+  "sources": [
+   "TI__UCC29950::overview__12",
+   "TI__UCC29950::overview__14",
+   "TI__UCC29950::overview__1",
+   "TI__UCC29950::overview__10",
+   "TI__UCC29950::overview__6"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3167,
+  "latency_s": 27.09
+ },
+ {
+  "qid": "P163",
+  "type": "param",
+  "ok": false,
+  "gold": "5.8V",
+  "pred": "The datasheet does not explicitly provide a value for the VBUS over voltage threshold. However, it mentions that over voltage protection is triggered when the VBUS voltage rises above the regulation target and exceeds VOTG_OVP. Therefore, the threshold is implied to be above the regulation target voltage, but the specific value is not given.",
+  "sources": [
+   "Southchip__SC89601::overview__5",
+   "Southchip__SC89601::overview__9",
+   "Southchip__SC89601::overview__1",
+   "Southchip__SC89601::overview__7",
+   "Southchip__SC89601::overview__6"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2562,
+  "latency_s": 25.69
+ },
+ {
+  "qid": "P164",
+  "type": "param",
+  "ok": false,
+  "gold": "4.3 V",
+  "pred": "The specified value for the internal undervoltage lockout threshold of the TPS54360 (TI) is between 4.1V and 4.48V (rising), with a hysteresis of 325mV.",
+  "sources": [
+   "TI__TPS54360::overview__1",
+   "TI__TPS54360::overview__2",
+   "TI__TPS54360::overview__8",
+   "TI__TPS54360::overview__5",
+   "TI__TPS54360::overview__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2667,
+  "latency_s": 24.5
+ },
+ {
+  "qid": "P165",
+  "type": "param",
+  "ok": false,
+  "gold": "6.5V",
+  "pred": "The provided excerpts do not specify a value for \"the voltage at the pin can exceed.\" However, it is implied that there is a maximum voltage rating for the pins, which is typically specified in the datasheet but not given in these excerpts. For accurate values, refer to the full datasheet.",
+  "sources": [
+   "TI__TPS62873::func_desc__1",
+   "TI__TPS62873::func_desc__4",
+   "TI__TPS62873::elec_chars__1",
+   "TI__TPS62873::func_desc__5",
+   "TI__TPS62873::func_desc__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2463,
+  "latency_s": 24.49
+ },
+ {
+  "qid": "P167",
+  "type": "param",
+  "ok": true,
+  "gold": "5.5 V",
+  "pred": "The SN74LVC245A accepts input voltages up to 5.5 V.",
+  "sources": [
+   "TI__SN74LVC245A::front",
+   "TI__SN74LVC245A::overview__4",
+   "TI__SN74LVC245A::overview__5",
+   "TI__SN74LVC245A::package__1",
+   "TI__SN74LVC245A::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3726,
+  "latency_s": 27.01
+ },
+ {
+  "qid": "P168",
+  "type": "param",
+  "ok": false,
+  "gold": "4.8 A to 6.2 A",
+  "pred": "The provided excerpts do not specify a value for 'high-side current limit' of the LMR33640. The maximum output current is mentioned as 4 A, but the specific high-side current limit is not given.",
+  "sources": [
+   "TI__LMR33640::typ_app__1",
+   "TI__LMR33640::elec_chars__1",
+   "TI__LMR33640::func_desc__1",
+   "TI__LMR33640::func_desc__2",
+   "TI__LMR33640::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2194,
+  "latency_s": 20.85
+ },
+ {
+  "qid": "X000",
+  "type": "cross",
+  "ok": true,
+  "gold": "TPS62150:45 °C/W|LMR14020:43.2 °C/W",
+  "pred": "The TPS62150 has a junction-to-ambient thermal resistance (θJA) of 45 °C/W, while the LMR14020 has a value of 43.2 °C/W. Therefore, the larger value is for the TPS62150 at 45 °C/W.",
+  "sources": [
+   "TI__TPS62150::overview__1",
+   "TI__TPS62150::typ_app__1",
+   "TI__TPS62150::abs_max__2",
+   "TI__TPS62150::front",
+   "TI__TPS62150::func_desc__1",
+   "TI__LMR14020::elec_chars__1",
+   "TI__LMR14020::typ_app__1",
+   "TI__LMR14020::func_desc__1",
+   "TI__LMR14020::package__1",
+   "TI__LMR14020::typ_app__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2519,
+  "latency_s": 26.22
+ },
+ {
+  "qid": "X001",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|BME280:1.71 V to 3.6 V",
+  "pred": "For the supply voltage:\n- TMP1075: 5.5 V\n- BME280: 3.4 MHz (This is the I²C frequency limit, not the supply voltage)\n\nThe larger value for supply voltage is 5.5 V for TMP1075.",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::typ_app__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::elec_chars__2",
+   "Bosch__BME280::front__1",
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::typ_app",
+   "Bosch__BME280::package__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2982,
+  "latency_s": 28.01
+ },
+ {
+  "qid": "X002",
+  "type": "cross",
+  "ok": true,
+  "gold": "TMP1075:1.7 V to 5.5 V|OPA2365:5.5 V",
+  "pred": "The TMP1075 specifies a supply voltage range of 1.7 V to 5.5 V, while the OPA2365 specifies a range of 2.2 V to 5.5 V. The larger value for supply voltage is 5.5 V for both devices.",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::typ_app__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::elec_chars__2",
+   "TI__OPA2365::typ_app__1",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::func_desc__1",
+   "TI__OPA2365::func_desc__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2991,
+  "latency_s": 19.52
+ },
+ {
+  "qid": "X003",
+  "type": "cross",
+  "ok": false,
+  "gold": "BME280:1.71 V to 3.6 V|OPA2365:5.5 V",
+  "pred": "The supply voltage for the BME280 is not explicitly stated with specific values in the given excerpts. However, for the OPA2365, the supply voltage range is specified as 2.2-V to 5.5-V.\n\nTherefore, the larger value for supply voltage from the given parts is:\n- OPA2365: 5.5 V",
+  "sources": [
+   "Bosch__BME280::front__1",
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::typ_app",
+   "Bosch__BME280::package__1",
+   "TI__OPA2365::typ_app__1",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::func_desc__1",
+   "TI__OPA2365::func_desc__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2685,
+  "latency_s": 27.91
+ },
+ {
+  "qid": "X004",
+  "type": "cross",
+  "ok": true,
+  "gold": "SN74LVC1G14:150 °C|LM2674:150 °C",
+  "pred": "The maximum junction temperature for SN74LVC1G14 is 150°C. For LM2674, it is also 150°C. Both parts have the same maximum junction temperature.",
+  "sources": [
+   "TI__SN74LVC1G14::typ_app__2",
+   "TI__SN74LVC1G14::func_desc",
+   "TI__SN74LVC1G14::overview",
+   "TI__SN74LVC1G14::package__1",
+   "TI__SN74LVC1G14::abs_max__2",
+   "TI__LM2674::typ_app__1",
+   "TI__LM2674::abs_max",
+   "TI__LM2674::front",
+   "TI__LM2674::func_desc",
+   "TI__LM2674::typ_app__6"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3082,
+  "latency_s": 26.05
+ },
+ {
+  "qid": "X005",
+  "type": "cross",
+  "ok": false,
+  "gold": "OPA4322:±0.2 pA typ, ±10 pA max|OPA330:±200 pA typ, ±500 pA max",
+  "pred": "From the excerpts, the input bias current for:\n\n- OPA4322: ±500 pA (typical value)\n- OPA330: ±70 pA (at 25°C), ±300 pA (over temperature range)\n\nThe OPA330 specifies a larger input bias current range (±70 pA to ±300 pA) compared to the OPA4322 (±500 pA).\n\nTherefore, the OPA330 specifies the larger input bias current range:\n- ±70 pA to ±300 pA",
+  "sources": [
+   "TI__OPA4322::overview__5",
+   "TI__OPA4322::overview__2",
+   "TI__OPA4322::package__1",
+   "TI__OPA4322::overview__6",
+   "TI__OPA4322::overview__1",
+   "TI__OPA330::overview__4",
+   "TI__OPA330::overview__3",
+   "TI__OPA330::overview__6",
+   "TI__OPA330::package__1",
+   "TI__OPA330::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3842,
+  "latency_s": 44.18
+ },
+ {
+  "qid": "X006",
+  "type": "cross",
+  "ok": true,
+  "gold": "SN65HVD230:3.3 V|LM5180:4.5 V to 65 V",
+  "pred": "Based on the given excerpts, the power supply recommendations for the SN65HVD230 and LM5180 are not directly stated. However, we can infer the following:\n\n- SN65HVD230 operates with a single 3.3 V Supply.\n- LM5180 has an input voltage range of 4.5 V to 65 V.\n\nThe largest power supply value implied for LM5180 is 65 V. For SN65HVD230, the power supply is 3.3 V.\n\nTherefore, the part that specifies a larger value for the power supply is LM5180, with a value of 65 V.",
+  "sources": [
+   "TI__SN65HVD230::overview__10",
+   "TI__SN65HVD230::package__1",
+   "TI__SN65HVD230::package__2",
+   "TI__SN65HVD230::overview__2",
+   "TI__SN65HVD230::overview__6",
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::package__1",
+   "TI__LM5180::overview__11",
+   "TI__LM5180::overview__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3756,
+  "latency_s": 45.9
+ },
+ {
+  "qid": "X007",
+  "type": "cross",
+  "ok": false,
+  "gold": "AMC1400:2800 VPK|UCC23514:2121 VPK",
+  "pred": "From the AMC1400 datasheet excerpt, the maximum repetitive peak isolation voltage is not fully specified, only denoted as \"V IORM | Maximum repetitive peak isolation voltage\".\n\nFor the UCC23514, the datasheet does not explicitly state a value for the maximum repetitive peak isolation voltage. However, it provides information about its isolation rating, which is 5.0-kVRMS for 60s.\n\nGiven the information provided, we can only infer that the UCC23514 has a higher isolation rating of 5.0 kVRMS compa",
+  "sources": [
+   "TI__AMC1400::abs_max__3",
+   "TI__AMC1400::package__1",
+   "TI__AMC1400::typ_app__1",
+   "TI__AMC1400::typ_app__2",
+   "TI__AMC1400::func_desc",
+   "TI__UCC23514::func_desc__1",
+   "TI__UCC23514::overview",
+   "TI__UCC23514::typ_app__2",
+   "TI__UCC23514::func_desc__3",
+   "TI__UCC23514::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2775,
+  "latency_s": 43.06
+ },
+ {
+  "qid": "X008",
+  "type": "cross",
+  "ok": false,
+  "gold": "DRV8323R:30ns|DRV8320:30ns",
+  "pred": "Based on the information provided, there is no direct mention of a 'switching node pin voltage less than' parameter for either the DRV8323R or DRV8320. The excerpts focus on DVDD voltage, power dissipation, pin functions, and current sense operations, but do not specify a 'switching node pin voltage less than' parameter for comparison between the two devices.\n\nThe closest related information is found in the current sense configuration for the DRV8323R, where the equation for calculating current ",
+  "sources": [
+   "TI__DRV8323R::pin_desc__1",
+   "TI__DRV8323R::func_desc__4",
+   "TI__DRV8323R::overview__1",
+   "TI__DRV8323R::typ_app__1",
+   "TI__DRV8323R::pin_desc__2",
+   "TI__DRV8320::pin_desc__1",
+   "TI__DRV8320::func_desc__4",
+   "TI__DRV8320::overview__1",
+   "TI__DRV8320::typ_app__1",
+   "TI__DRV8320::pin_desc__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3575,
+  "latency_s": 53.9
+ },
+ {
+  "qid": "X009",
+  "type": "cross",
+  "ok": true,
+  "gold": "TPS54541:4.3 V|TPS54360:4.3 V",
+  "pred": "For the TPS54541, the internal undervoltage lockout threshold (rising) is 4.48 V.\n\nFor the TPS54360, the internal undervoltage lockout threshold (rising) is 4.1 V to 4.3 V.\n\nThe larger value between the two is 4.48 V for the TPS54541.",
+  "sources": [
+   "TI__TPS54541::overview__1",
+   "TI__TPS54541::overview__4",
+   "TI__TPS54541::overview__8",
+   "TI__TPS54541::overview__2",
+   "TI__TPS54541::overview__5",
+   "TI__TPS54360::overview__1",
+   "TI__TPS54360::overview__2",
+   "TI__TPS54360::overview__8",
+   "TI__TPS54360::overview__7",
+   "TI__TPS54360::overview__9"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3229,
+  "latency_s": 37.55
+ },
+ {
+  "qid": "C010",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|INA219:3V to 5.5V",
+  "pred": "From the excerpts provided:\n\n- TMP1075 input voltage SCL, SDA, A1, A0: -0.3V to 6.5V\n- INA219 supply voltage (VS): 3V to 5.5V\n\nThe larger value for input voltage between TMP1075 and INA219 is 6.5V (from TMP1075).",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::typ_app__1",
+   "TI__INA219::package__1",
+   "TI__INA219::overview__1",
+   "TI__INA219::overview__10",
+   "TI__INA219::overview__8",
+   "TI__INA219::overview__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3225,
+  "latency_s": 37.77
+ },
+ {
+  "qid": "C012",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|MPU9250:-0.5V",
+  "pred": "From the TMP1075 datasheet excerpt, the maximum input voltage SCL, SDA, A1, A0 is 6.5 V for TMP1075 and 4 V for TMP1075N.\n\nFrom the MPU9250 datasheet excerpt, the high level input voltage (IH) is 0.7 * VDDIO and the low level input voltage (IL) is 0.3 * VDDIO. Since VDDIO is not specified, we can only infer that the input voltage range for MPU9250 is likely between 0.3 * VDDIO and 0.7 * VDDIO.\n\nGiven the provided maximum values, the TMP1075 has a larger input voltage range (up to 6.5 V) compared",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::typ_app__1",
+   "InvenSense__MPU9250::typ_app__1",
+   "InvenSense__MPU9250::typ_app__3",
+   "InvenSense__MPU9250::typ_app__4",
+   "InvenSense__MPU9250::typ_app__6",
+   "InvenSense__MPU9250::elec_chars__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3147,
+  "latency_s": 52.43
+ },
+ {
+  "qid": "C017",
+  "type": "cross",
+  "ok": false,
+  "gold": "UCC21520:69.8°C/W|UCC21530:74.1°C/W",
+  "pred": "For the 'safety output supply current' parameter:\n\n- UCC21520: 870 mA (at VDDA/B = 25 V)\n- UCC21530: 6A (peak sink)\n\nThe larger value is for the UCC21530 with 6A (peak sink).",
+  "sources": [
+   "TI__UCC21520::elec_chars__1",
+   "TI__UCC21520::typ_app__2",
+   "TI__UCC21520::func_desc__1",
+   "TI__UCC21520::func_desc__3",
+   "TI__UCC21520::typ_app__1",
+   "TI__UCC21530::elec_chars__1",
+   "TI__UCC21530::func_desc__1",
+   "TI__UCC21530::func_desc__2",
+   "TI__UCC21530::typ_app__1",
+   "TI__UCC21530::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2668,
+  "latency_s": 27.19
+ },
+ {
+  "qid": "C018",
+  "type": "cross",
+  "ok": false,
+  "gold": "TLC5947:150 °C|lt1024:-55°C to 125°C",
+  "pred": "The TLC5947 operates from -40°C to 85°C, while the LT1024 operates from -55°C to 125°C. Therefore, the operating temperature range of LT1024 is larger than that of TLC5947. Values:\n- TLC5947: -40°C to 85°C\n- LT1024: -55°C to 125°C",
+  "sources": [
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__4",
+   "TI__TLC5947::package__6",
+   "TI__TLC5947::package__7",
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::package",
+   "ADI__lt1024::elec_chars__1",
+   "ADI__lt1024::elec_chars__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 4017,
+  "latency_s": 40.01
+ },
+ {
+  "qid": "C019",
+  "type": "cross",
+  "ok": false,
+  "gold": "UCC28060:2.5 mA|AMC3301:4 mA",
+  "pred": "From the excerpts, we can infer the following values:\n\n- For UCC28060, the output voltage for GDA and GDB is not explicitly given, but these are likely to be the power-good signals to downstream converters, which are typically a logic level, often around 3.3V or 5V.\n\n- For AMC3301, the high-side LDO output voltage is specified as the supply voltage for the high-side of the converter, which can be either 3.3V or 5V.\n\nGiven the typical values:\n- GDA, GDB output voltage (UCC28060): 3.3V or 5V\n- Hig",
+  "sources": [
+   "TI__UCC28060::overview__1",
+   "TI__UCC28060::package__1",
+   "TI__UCC28060::typ_app__3",
+   "TI__UCC28060::typ_app__4",
+   "TI__UCC28060::elec_chars",
+   "TI__AMC3301::func_desc__1",
+   "TI__AMC3301::func_desc__2",
+   "TI__AMC3301::typ_app__1",
+   "TI__AMC3301::typ_app__2",
+   "TI__AMC3301::front"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3021,
+  "latency_s": 56.99
+ },
+ {
+  "qid": "C036",
+  "type": "cross",
+  "ok": true,
+  "gold": "AMC1311:-55°C to +125°C|TL431:150 °C",
+  "pred": "The AMC1311 has a specified operating temperature range of -55°C to +125°C, while the TL431 has a range of -65°C to +150°C. Therefore, the TL431 has a larger operating temperature range.",
+  "sources": [
+   "TI__AMC1311::typ_app__1",
+   "TI__AMC1311::abs_max__3",
+   "TI__AMC1311::elec_chars__3",
+   "TI__AMC1311::elec_chars__5",
+   "TI__AMC1311::abs_max__2",
+   "TI__TL431::abs_max",
+   "TI__TL431::typ_app__1",
+   "TI__TL431::func_desc",
+   "TI__TL431::overview",
+   "TI__TL431::typ_app__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3227,
+  "latency_s": 29.16
+ },
+ {
+  "qid": "C038",
+  "type": "cross",
+  "ok": false,
+  "gold": "AMC1311:-55°C to +125°C|TL432:150 °C",
+  "pred": "AMC1311: –55°C to +125°C\nTL432: –65°C to +150°C\n\nThe TL432 has a larger operating temperature range.",
+  "sources": [
+   "TI__AMC1311::typ_app__1",
+   "TI__AMC1311::abs_max__3",
+   "TI__AMC1311::elec_chars__3",
+   "TI__AMC1311::elec_chars__5",
+   "TI__AMC1311::abs_max__2",
+   "TI__TL432::abs_max",
+   "TI__TL432::typ_app__1",
+   "TI__TL432::func_desc",
+   "TI__TL432::elec_chars__2",
+   "TI__TL432::elec_chars__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3327,
+  "latency_s": 17.16
+ },
+ {
+  "qid": "C039",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|SN65HVD230:3.3 V",
+  "pred": "For the input voltage (SCL, SDA, A0):\n- TMP1075: 6.5 V\n- SN65HVD230: 4 V\n\nThe TMP1075 has a larger input voltage rating of 6.5 V compared to the SN65HVD230's 4 V.",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::typ_app__1",
+   "TI__SN65HVD230::overview__8",
+   "TI__SN65HVD230::overview__1",
+   "TI__SN65HVD230::overview__4",
+   "TI__SN65HVD230::overview__5",
+   "TI__SN65HVD230::overview__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3373,
+  "latency_s": 24.83
+ },
+ {
+  "qid": "C040",
+  "type": "cross",
+  "ok": false,
+  "gold": "INA219:3V to 5.5V|OPA2365:5.5 V",
+  "pred": "The maximum input voltage for the INA219 is 26 V, while the OPA2365 can operate with a supply voltage range of 2.2 V to 5.5 V. The OPA2365's input voltage range is not explicitly stated, but typically rail-to-rail input operational amplifiers can handle voltages close to the supply rails, so it can handle voltages from approximately 0 V to 5.5 V.\n\nTherefore, the larger input voltage range is:\n- INA219: 0 V to 26 V\n- OPA2365: Approximately 0 V to 5.5 V",
+  "sources": [
+   "TI__INA219::package__1",
+   "TI__INA219::overview__1",
+   "TI__INA219::overview__10",
+   "TI__INA219::overview__8",
+   "TI__INA219::overview__5",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::func_desc__1",
+   "TI__OPA2365::func_desc__2",
+   "TI__OPA2365::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3195,
+  "latency_s": 40.24
+ },
+ {
+  "qid": "C041",
+  "type": "cross",
+  "ok": false,
+  "gold": "BME280:1.71 V to 3.6 V|TMP20:2.7 V to 5.5 V",
+  "pred": "From the excerpts provided:\n\n- BME280 supply voltage range: VDD main supply voltage range is not explicitly given, but it supports a VDDIO supply voltage range up to 3.4 MHz, and VDD supply voltage is not specified in detail.\n- TMP20 supply voltage range: 1.8 V to 5.5 V.\n\nGiven that the question asks about the \"input voltage\" and considering the typical context of sensor supplies, we can infer:\n\n- The maximum input voltage for BME280 is implied to be higher than 3.4 V (since it supports a 3.4 MH",
+  "sources": [
+   "Bosch__BME280::package__1",
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::typ_app",
+   "Bosch__BME280::front__1",
+   "TI__TMP20::overview__1",
+   "TI__TMP20::package__1",
+   "TI__TMP20::overview__3",
+   "TI__TMP20::overview__4",
+   "TI__TMP20::package__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3427,
+  "latency_s": 53.86
+ },
+ {
+  "qid": "C042",
+  "type": "cross",
+  "ok": false,
+  "gold": "OPA2376:2.2 V to 5.5 V|DRV8876:3.3 V",
+  "pred": "From the excerpts, the maximum logic input voltage for OPA2376 is 5.5 V, while for DRV8876 it is also 5.5 V. Therefore, both devices have the same maximum input voltage.",
+  "sources": [
+   "TI__OPA2376::overview__1",
+   "TI__OPA2376::overview__2",
+   "TI__OPA2376::overview__4",
+   "TI__OPA2376::package__1",
+   "TI__OPA2376::overview__5",
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::overview__2",
+   "TI__DRV8876::overview__6",
+   "TI__DRV8876::overview__8",
+   "TI__DRV8876::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3509,
+  "latency_s": 29.49
+ },
+ {
+  "qid": "C043",
+  "type": "cross",
+  "ok": true,
+  "gold": "LM5180:4.5 V to 65 V|OPA192:4.5 V to 36 V",
+  "pred": "The input voltage range for the LM5180 is 9.5 V to 65 V.\n\nFor the OPA192, the supply voltage range is ±4.5 V to ±36 V, which translates to a total supply voltage range of 9 V to 72 V. However, the input voltage range for OPA192 op-amps is not explicitly stated in the given excerpts, but it is typically close to the supply rails for rail-to-rail input op-amps.\n\nGiven the information, the larger input voltage range is for the OPA192, with a range of 9 V to 72 V, compared to the LM5180's range of 9",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::overview__11",
+   "TI__LM5180::overview__10",
+   "TI__LM5180::overview__2",
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__2",
+   "TI__OPA192::overview__7",
+   "TI__OPA192::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3997,
+  "latency_s": 49.96
+ },
+ {
+  "qid": "C044",
+  "type": "cross",
+  "ok": false,
+  "gold": "SN65HVD230:3.3 V|BME280:1.71 V to 3.6 V",
+  "pred": "For 'input voltage', the SN65HVD230 has a typical bus voltage range of 0.45 V to 0.55 V (VCC) and 0.4 V to 0.6 V (at higher current). The BME280's supply voltage range for VDD is not explicitly given in the provided excerpts, but it is generally known to be between 1.71 V and 3.6 V. \n\nGiven the values directly from the excerpts:\n- SN65HVD230: 0.45 V to 0.55 V\n- BME280: Not explicitly stated, but typically 1.71 V to 3.6 V\n\nTherefore, the BME280's input voltage range (1.71 V to 3.6 V) is larger th",
+  "sources": [
+   "TI__SN65HVD230::overview__8",
+   "TI__SN65HVD230::overview__1",
+   "TI__SN65HVD230::overview__4",
+   "TI__SN65HVD230::overview__5",
+   "TI__SN65HVD230::overview__7",
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::package__1",
+   "Bosch__BME280::typ_app",
+   "Bosch__BME280::front__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3419,
+  "latency_s": 52.82
+ },
+ {
+  "qid": "C045",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP20:2.7 V to 5.5 V|INA219:3V to 5.5V",
+  "pred": "From the excerpts, the maximum input voltage for:\n\n- TMP20: 5.5 V (Supply Voltage Range: 1.8 V to 5.5 V)\n- INA219: 26 V (Senses Bus Voltages from 0 to 26 V)\n\nThe larger input voltage is for the INA219, with a maximum of 26 V compared to TMP20's 5.5 V.",
+  "sources": [
+   "TI__TMP20::overview__1",
+   "TI__TMP20::package__1",
+   "TI__TMP20::overview__3",
+   "TI__TMP20::overview__4",
+   "TI__TMP20::package__2",
+   "TI__INA219::overview__10",
+   "TI__INA219::package__1",
+   "TI__INA219::overview__1",
+   "TI__INA219::overview__8",
+   "TI__INA219::overview__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3760,
+  "latency_s": 37.97
+ },
+ {
+  "qid": "C046",
+  "type": "cross",
+  "ok": false,
+  "gold": "OPA192:4.5 V to 36 V|OPA2365:5.5 V",
+  "pred": "Based on the given excerpts, the maximum input voltage for the OPA192 is ±36 V (with ±18 V supply), while the OPA2365 operates from 2.2 V to 5.5 V. \n\nFor OPA192: ±36 V\nFor OPA2365: 2.2 V to 5.5 V",
+  "sources": [
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__2",
+   "TI__OPA192::overview__7",
+   "TI__OPA192::overview__1",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::func_desc__1",
+   "TI__OPA2365::func_desc__2",
+   "TI__OPA2365::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3316,
+  "latency_s": 33.63
+ },
+ {
+  "qid": "C047",
+  "type": "cross",
+  "ok": false,
+  "gold": "LM5180:4.5 V to 65 V|TMP1075:1.7 V to 5.5 V",
+  "pred": "The maximum input voltage for LM5180 is 65 V, while for TMP1075 it is 6.5 V.",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::overview__11",
+   "TI__LM5180::overview__10",
+   "TI__LM5180::overview__2",
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3323,
+  "latency_s": 15.16
+ },
+ {
+  "qid": "C048",
+  "type": "cross",
+  "ok": false,
+  "gold": "DRV8876:3.3 V|TMP1075:1.7 V to 5.5 V",
+  "pred": "TMP1075 has a larger input voltage range:\n- TMP1075: SCL, SDA, A1, A0 input voltage range is –0.3V to 6.5V\n- DRV8876: EN/IN1, PH/IN2 input voltage range is 0V to 5.5V",
+  "sources": [
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::overview__2",
+   "TI__DRV8876::overview__6",
+   "TI__DRV8876::overview__8",
+   "TI__DRV8876::overview__1",
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__TMP1075::func_desc__3",
+   "TI__TMP1075::typ_app__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3004,
+  "latency_s": 29.77
+ },
+ {
+  "qid": "C049",
+  "type": "cross",
+  "ok": true,
+  "gold": "OPA2376:2.2 V to 5.5 V|OPA192:4.5 V to 36 V",
+  "pred": "Based on the information provided, the supply voltage range for OPA2376 is 2.2 V (±1.1) to 5.5 V (±2.75) and for OPA192 it is 4.5 V (±2.25) to 36 V (±18).\n\nThe larger input voltage range is for the OPA192, with a minimum of 4.5 V and a maximum of 36 V.\n\nThe larger input voltage range for OPA192 is:\n- Min: 4.5 V\n- Max: 36 V\n\nThe input voltage range for OPA2376 is:\n- Min: 2.2 V\n- Max: 5.5 V",
+  "sources": [
+   "TI__OPA2376::overview__1",
+   "TI__OPA2376::overview__2",
+   "TI__OPA2376::overview__4",
+   "TI__OPA2376::package__1",
+   "TI__OPA2376::overview__5",
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__2",
+   "TI__OPA192::overview__7",
+   "TI__OPA192::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 4009,
+  "latency_s": 39.98
+ },
+ {
+  "qid": "C050",
+  "type": "cross",
+  "ok": false,
+  "gold": "BME280:1.71 V to 3.6 V|DRV8876:3.3 V",
+  "pred": "From the excerpts, the BME280 does not specify a value for the logic input voltage. The DRV8876 specifies a logic input voltage range of 0 V to 5.5 V. Therefore, the larger value for logic input voltage between BME280 and DRV8876 is:\n\n- DRV8876: 0 V to 5.5 V",
+  "sources": [
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::package__1",
+   "Bosch__BME280::typ_app",
+   "Bosch__BME280::front__1",
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::overview__2",
+   "TI__DRV8876::overview__6",
+   "TI__DRV8876::overview__8",
+   "TI__DRV8876::overview__1"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2921,
+  "latency_s": 30.41
+ },
+ {
+  "qid": "C051",
+  "type": "cross",
+  "ok": true,
+  "gold": "TLC5947:150 °C|LM5180:-40°C to 150°C",
+  "pred": "-40°C to 85°C (TLC5947)\n-40°C to 150°C (LM5180)\n\nThe LM5180 has a larger operating temperature range compared to the TLC5947.",
+  "sources": [
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__4",
+   "TI__TLC5947::package__6",
+   "TI__TLC5947::package__7",
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__2",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::package__1",
+   "TI__LM5180::package__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 4003,
+  "latency_s": 22.11
+ },
+ {
+  "qid": "C052",
+  "type": "cross",
+  "ok": false,
+  "gold": "TXS0104E:150 °C|lt1024:-55°C to 125°C",
+  "pred": "The operating temperature range for the TXS0104E is not explicitly stated in the provided excerpts. For the LT1024, the operating temperature range is from -55°C to 125°C. Therefore, the larger operating temperature range is for the LT1024, with values from -55°C to 125°C.",
+  "sources": [
+   "TI__TXS0104E::typ_app__1",
+   "TI__TXS0104E::elec_chars__1",
+   "TI__TXS0104E::front",
+   "TI__TXS0104E::func_desc",
+   "TI__TXS0104E::typ_app__2",
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::package",
+   "ADI__lt1024::elec_chars__1",
+   "ADI__lt1024::elec_chars__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3202,
+  "latency_s": 31.55
+ },
+ {
+  "qid": "C053",
+  "type": "cross",
+  "ok": false,
+  "gold": "LM5180:-40°C to 150°C|lt1024:-55°C to 125°C",
+  "pred": "The LM5180 operates over a junction temperature range of –40°C to 150°C.\n\nThe LT1024 operates over a temperature range of –55°C to 125°C.\n\nThus, the LT1024 has a larger operating temperature range.",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__2",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::package__1",
+   "TI__LM5180::package__3",
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::package",
+   "ADI__lt1024::elec_chars__1",
+   "ADI__lt1024::elec_chars__3"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3661,
+  "latency_s": 32.64
+ },
+ {
+  "qid": "C054",
+  "type": "cross",
+  "ok": true,
+  "gold": "BMP280:-40 °C to +85 °C|stm32l151cb:-40 °C to 105 °C",
+  "pred": "From the excerpts, the operating temperature ranges for the devices are:\n- BMP280: -40°C to 85°C\n- STM32L151CB: -40°C to 105°C\n\nThe larger operating temperature range is for the STM32L151CB with a maximum of 105°C compared to the BMP280's 85°C.",
+  "sources": [
+   "Bosch__BMP280::func_desc__1",
+   "Bosch__BMP280::func_desc__3",
+   "Bosch__BMP280::typ_app__1",
+   "Bosch__BMP280::front__2",
+   "Bosch__BMP280::func_desc__7",
+   "ST__stm32l151cb::front__37",
+   "ST__stm32l151cb::front__1",
+   "ST__stm32l151cb::front__15",
+   "ST__stm32l151cb::front__2",
+   "ST__stm32l151cb::front__22"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3313,
+  "latency_s": 34.02
+ },
+ {
+  "qid": "C055",
+  "type": "cross",
+  "ok": false,
+  "gold": "LIS3DH:-40 °C to +85 °C|TXS0104E:150 °C",
+  "pred": "Operating temperature range:\n- LIS3DH: -40°C to +85°C\n- TXS0104E: -40°C to +125°C\n\nThe TXS0104E has a larger operating temperature range.",
+  "sources": [
+   "ST__LIS3DH::front__1",
+   "ST__LIS3DH::front__5",
+   "ST__LIS3DH::front__6",
+   "ST__LIS3DH::front__12",
+   "ST__LIS3DH::front__7",
+   "TI__TXS0104E::typ_app__1",
+   "TI__TXS0104E::elec_chars__1",
+   "TI__TXS0104E::front",
+   "TI__TXS0104E::func_desc",
+   "TI__TXS0104E::typ_app__2"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 2937,
+  "latency_s": 26.72
+ },
+ {
+  "qid": "C056",
+  "type": "cross",
+  "ok": false,
+  "gold": "stm32l151cb:-40 °C to 105 °C|TLC5947:150 °C",
+  "pred": "The operating temperature for the STM32L151CB is -40°C to 105°C.\n\nThe operating temperature for the TLC5947 is -40°C to 85°C.\n\nTherefore, the STM32L151CB has a larger operating temperature range, with a maximum of 105°C compared to 85°C for the TLC5947.",
+  "sources": [
+   "ST__stm32l151cb::front__37",
+   "ST__stm32l151cb::front__1",
+   "ST__stm32l151cb::front__15",
+   "ST__stm32l151cb::front__2",
+   "ST__stm32l151cb::front__22",
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__4",
+   "TI__TLC5947::package__6",
+   "TI__TLC5947::package__7"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 4024,
+  "latency_s": 38.76
+ },
+ {
+  "qid": "C057",
+  "type": "cross",
+  "ok": true,
+  "gold": "TPS7A37:3.3 V|ADS131M02:1.2 V",
+  "pred": "From the excerpts:\n- TPS7A37 output voltage: 1.2 V to 3.3 V\n- ADS131M02 internal reference voltage: ±1.2 V\n\nThe ADS131M02 internal reference voltage (±1.2 V) is larger in absolute value compared to the minimum TPS7A37 output voltage (1.2 V). Both values are given with units of volts (V).",
+  "sources": [
+   "TI__TPS7A37::package__1",
+   "TI__TPS7A37::overview__1",
+   "TI__TPS7A37::overview__4",
+   "TI__TPS7A37::overview__5",
+   "TI__TPS7A37::overview__8",
+   "TI__ADS131M02::func_desc__1",
+   "TI__ADS131M02::overview__9",
+   "TI__ADS131M02::func_desc__6",
+   "TI__ADS131M02::typ_app__2",
+   "TI__ADS131M02::func_desc__5"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3142,
+  "latency_s": 33.76
+ },
+ {
+  "qid": "C058",
+  "type": "cross",
+  "ok": false,
+  "gold": "TPS62203:300 mA|DRV8412:20 A",
+  "pred": "For TPS62203, the maximum output current is:\n- **200 mA**\n\nFor DRV8412, the continuous output current per pin is:\n- **3A (DRV8412 Power pad down)**\n- **7A (DRV8432 Power pad up)**\n\nThe DRV8412 has a larger output current per pin compared to the TPS62203.",
+  "sources": [
+   "TI__TPS62203::overview__1",
+   "TI__TPS62203::overview__4",
+   "TI__TPS62203::package",
+   "TI__TPS62203::overview__5",
+   "TI__TPS62203::overview__2",
+   "TI__DRV8412::front",
+   "TI__DRV8412::func_desc",
+   "TI__DRV8412::overview__3",
+   "TI__DRV8412::elec_chars__1",
+   "TI__DRV8412::overview__4"
+  ],
+  "ctx_flag": "none",
+  "verify": null,
+  "tokens": 3225,
+  "latency_s": 34.22
+ }
+]

@@ -1,0 +1,246 @@
+=== Page 28 ===
+7.1.8 Alert Limit Register (07h) (Read/Write)
+The Alert Limit Register contains the value used to compare to the register selected in the Mask/Enable Register 
+to determine if a limit has been exceeded.
+Table 7-13. Alert Limit Register (07h) (Read/Write) Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+AUL15
+AUL14
+AUL13
+AUL12
+AUL11
+AUL10
+AUL9
+AUL8
+AUL7
+AUL6
+AUL5
+AUL4
+AUL3
+AUL2
+AUL1
+AUL0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+7.1.9 Manufacturer ID Register (FEh) (Read-Only)
+The Manufacturer ID Register stores a unique identification number for the manufacturer.
+Table 7-14. Manufacturer ID Register (FEh) (Read-Only) Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+ID15
+ID14
+ID13
+ID12
+ID11
+ID10
+ID9
+ID8
+ID7
+ID6
+ID5
+ID4
+ID3
+ID2
+ID1
+ID0
+POR 
+VALUE
+0
+1
+0
+1
+0
+1
+0
+0
+0
+1
+0
+0
+1
+0
+0
+1
+ID:
+Manufacturer ID Bits
+Bits 0-15
+Stores the manufacturer identification bits
+7.1.10 Die ID Register (FFh) (Read-Only)
+The Die ID Register stores a unique identification number and the revision ID for the die.
+Table 7-15. Die ID Register (FFh) (Read-Only) Description
+BIT #
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT
+NAME
+DID11
+DID10
+DID9
+DID8
+DID7
+DID6
+DID5
+DID4
+DID3
+DID2
+DID1
+DID0
+RID3
+RID2
+RID1
+RID0
+POR 
+VALUE
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+DID:
+Device ID Bits
+Bits 4-15
+Stores the device identification bits
+RID:
+Die Revision ID Bits
+Bit 0-3
+Stores the device revision identification bits
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+www.ti.com
+28
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA226
+=== Page 29 ===
+8 Application and Implementation
+Note
+Information in the following applications sections is not part of the TI component specification, 
+and TI does not warrant its accuracy or completeness. TI’s customers are responsible for 
+determining suitability of components for their purposes, as well as validating and testing their design 
+implementation to confirm system functionality.
+8.1 Application Information
+The INA226 is a current shunt and power monitor with an I2C™ compatible interface. The device monitors both 
+a shunt voltage drop and bus supply voltage. Programmable calibration value, conversion times, and averaging, 
+combined with an internal multiplier, enable direct readouts of current in amperes and power in watts.
+8.2 Typical Applications
+8.2.1 High-Side Sensing Circuit Application
+´ 
+Power Register
+Current Register
+I C
+2
+Interface
+Voltage Register
+GND
+VBUS
+ADC
+V
+I
+A0
+Alert
+A1
+SDA
+SCL
+CBYPASS
+0.1µF
+10A
+Load
+Alert Register
+VS
+(Supply Voltage)
++12V Supply
+VIN-
+VIN+
+RSHUNT
+2mW
+Pullup Resistors
+Figure 8-1. Typical Circuit Configuration, INA226 
+8.2.1.1 Design Requirements
+INA226 measures the voltage developed across a current-sensing resistor (RSHUNT) when current passes 
+through the resistor. The device also measures the bus supply voltage and can calculate power when calibrated. 
+The device comes with alert capability where the alert pin can be programmed to respond to a user-defined 
+event or to a conversion ready notification. This design illustrates the ability of the alert pin to respond to a set 
+threshold.
+www.ti.com
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+29
+Product Folder Links: INA226

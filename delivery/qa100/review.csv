@@ -1,0 +1,230 @@
+﻿id,type,question,gold(校验/修正),evidence,verdict(ok/edit/drop),note,auto_flag
+P000,param,What is the specified value for 'supply voltage' of stm8s003f3 (ST)?,36411V,MS36411V1,drop,"gold取自料号数字(MS36411V1),非规格值",value_extreme
+P001,param,What is the specified value for 'junction temperature range' of stm32l151cb (ST)?,-40 °C to 105 °C,-40 °C ≤ TA ≤ 105°C,edit,"gold丢负号,按evidence补全为范围",
+P002,param,What is the specified value for 'resistances below' of LMH6624 (TI)?,26 Ω,resistances below 26 Ω,ok,,
+P003,param,What is the specified value for 'operating current' of UCC28600 (TI)?,130 kHz,"130 kHz, QR mode",drop,"130kHz是开关频率,非operating current",unit_mismatch(operating current:freq?expamp)
+P004,param,What is the specified value for '| current regulation | | | | | | |' of DRV8871 (TI)?,1 A,| Constant for calculating V current regulation (see ILIM Equation 1) | | I = 1 ,drop,I=1A是条件;行真值是常数59–69且单位残缺(已核语料),param_too_long
+P005,param,What is the specified value for 'vdda uvlo rising threshold' of LM5143 (TI)?,0 V,"VVCC rising, VVCCX = 0 V",drop,"0V是条件(VVCCX=0V),UVLO阈值真值不在evidence",
+P006,param,What is the specified value for '| current regulation | | | | | | |' of DRV8870 (TI)?,2.5 V,| A ISEN gain V | | VREF = 2.5 V | 9.4 10 10.4 | | | V/V |,drop,"gold 2.5V是VREF条件,行值是ISEN增益(V/V)",unit_mismatch(| current regulation | | | | | | |:volt?expamp);param_too_long
+P007,param,What is the specified value for '| uvlo thresholds | | | | | |' of LM5116 (TI)?,25°C,"Typical limits are for TJ = 25°C only, represent the most likely parametric norm",drop,"25°C是脚注条件,UVLO阈值不在evidence",unit_mismatch(| uvlo thresholds | | | | | |:temp?expvolt);param_too_long
+P008,param,"What is the specified value for 'maximum junction temperature, tj' of LM2576 (TI)?",150 °C,"Maximum junction temperature, TJ 150 °C",ok,,
+P009,param,What is the specified value for 'uvlo hysteresis sinking current' of LM5177 (TI)?,0.7 V,0.7 V ≤ V(EN/UVLO) < 1.22 V,drop,"0.7V是EN/UVLO电压条件,问的是电流",unit_mismatch(uvlo hysteresis sinking current:volt?expamp)
+P010,param,What is the specified value for 'temperature at' of LM393 (TI)?,3V,Temperature at 3V,drop,"参数名残缺,3V是图注条件非温度值",unit_mismatch(temperature at:volt?exptemp)
+P011,param,What is the specified value for 'power-up conditions' of m24c64-w (ST)?,0 V,The VCC voltage has to rise continuously from 0 V up to the minimum VCC operatin,drop,"'power-up conditions'非参数,0V是上电起点",
+P012,param,What is the specified value for 'motor voltage' of DRV8313 (TI)?,12 V,Brushless-DC motors are typically rated for a certain voltage (for example 12 V ,drop,"原文是电机举例(for example 12 V and 24 V),非芯片规格(已核语料)",
+P013,param,What is the specified value for 'the current produces a voltage drop' of TPIC6595 (TI)?,0.5V,The current produces a voltage drop of 0.5V,ok,,
+P014,param,What is the specified value for 'the power converter system.' of TPS54622 (TI)?,4.5 V to 17 V,"If tied together, the input voltage for VIN and PVIN can range from 4.5 V to 17 ",edit,补全范围上限,
+P015,param,What is the specified value for 'output voltage' of LM2596 (TI)?,7 V,"7 V ≤ VIN ≤ 40 V,",drop,"7V是VIN范围下限,问的却是output voltage",
+P016,param,What is the specified value for 'continuous currents above' of OPA2356 (TI)?,60mA,60mA are not recommended,ok,,
+P017,param,What is the specified value for 'en pin current' of LMR16030 (TI)?,50 mV,Enable threshold +50 mV,drop,"50mV是EN阈值迟滞,问的是en pin current",unit_mismatch(en pin current:other?expamp)
+P018,param,What is the specified value for 'gnd pin current' of LP2985 (TI)?,0.15 V,"VON/OFF < 0.15 V, VIN = 16 V, –40°C ≤ TJ ≤ 85°C",drop,"0.15V是ON/OFF阈值条件,问的是gnd pin current",unit_mismatch(gnd pin current:volt?expamp)
+P019,param,What is the specified value for 'operating conditions at power-up / power-down' of stm32l476rg (ST)?,24 a,The parameters given in Table 24 are derived from tests performed under the ambi,drop,"gold '24 a'来自'Table 24 are'断词,垃圾",
+P020,param,"What is the specified value for 'stop (flash in deep power down mode, slow wake-up time)' of stm32f410rb (ST)?",6 µA @ 25 °C,wake-up time): down to 6 µA @ 25 °C;,edit,"原gold 25°C是条件,真值为行内6 µA;参数名补全","unit_mismatch(stop (flash in deep power down mode, slow wake-up time):temp?exptime);param_too_long"
+P021,param,What is the specified value for 'absolute maximum ratings' of stm32f103c8 (ST)?,8 ma,"Stresses above the absolute maximum ratings listed in Table 6, Table 7, and Tabl",drop,gold 8ma不在evidence中,gold_not_in_evidence
+P022,param,What is the specified value for 'rated for junction temperatures greater than' of LM5018 (TI)?,125°C,rated for junction temperatures greater than 125°C,ok,,
+P023,param,What is the specified value for 'inductor current ripples can be calculated:' of LM3404 (TI)?,266 mA,ΔiL(TYP) = [(24 - 7.1) × 7.43 × 10-7] / 47 × 10-6 = 266 mAP-P,ok,,
+P024,param,What is the specified value for 'junction-to-ambient thermal resistance' of TPS62150 (TI)?,45 °C/W,Junction-to-ambient thermal resistance 45 °C/W,ok,,
+P025,param,What is the specified value for 'output low voltage' of HDC1080 (TI)?,3mA,Sink current 3mA,drop,"3mA是sink current条件,问的是output low voltage",unit_mismatch(output low voltage:amp?expvolt)
+P026,param,What is the specified value for 'VM operating supply current' of DRV8825 (TI)?,5 mA to 8 mA,| I VM operating supply current VM | | V = 24 V (VMx) | 5 8 | | | mA |,edit,"原gold 24V是条件;行内真值5–8 mA(VM=24V,MIN/TYP/MAX被解析合并)",
+P027,param,What is the specified value for 'supply voltage' of TMP1075 (TI)?,1.7 V to 5.5 V,1.7 V to 5.5 V,edit,补全范围,
+P028,param,What is the specified value for 'supply-voltage rejection ratio (δvcc±/δvio)' of NE5532 (TI)?,9 V,"VCC± = ±9 V to ±15 V, VO = 0",drop,"9V是VCC±条件,SVRR真值(dB)不在evidence",
+P029,param,What is the specified value for 'maximum junction temperature' of SN74LVC1G14 (TI)?,150 °C,Maximum junction temperature 150 °C,ok,,
+P030,param,What is the specified value for 'p/n power-supply voltage' of INA219 (TI)?,3V to 5.5V,3V to 5.5V,edit,补全范围,
+P031,param,What is the specified value for 'under-voltage lockout hysteresis' of TPS7A47 (TI)?,177 mV,Under-voltage lockout hysteresis 177 mV,ok,"误报:gold 177 mV 与 evidence 一致,预筛不认识 mV",unit_mismatch(under-voltage lockout hysteresis:other?expvolt)
+P032,param,What is the specified value for 'vin shutdown supply current' of TPS5430 (TI)?,0V,"Shutdown, ENA = 0V",drop,"0V是ENA条件,shutdown电流真值不在evidence",
+P033,param,What is the specified value for 'input bias current' of OPA4322 (TI)?,"±0.2 pA typ, ±10 pA max",| IB Input bias current | | | TA = 25°C | | ±0.2 ±10 | | | pA |,edit,清理参数名管道符;gold按行内±0.2/±10 pA补正(TA=25°C),unit_mismatch(input bias current:other?expamp)
+P034,param,"What is the specified value for 'vil, low level input voltage' of MPU9250 (InvenSense)?",-0.5V,-0.5V,edit,gold丢负号(VIL=-0.5V),
+P035,param,What is the specified value for 'power supply recommendations' of SN65HVD230 (TI)?,3.3 V,The SN65HVD23x 3.3 V CAN transceivers provide the interface between the 3.3 V µP,ok,,
+P036,param,What is the specified value for 'operating conditions at power-up / power-down' of stm32f302c8 (ST)?,24 a,The parameters given in Table 24 are derived from tests performed under the ambi,drop,"同P019,'24 a'断词垃圾",
+P037,param,What is the specified value for 'power-supply rejection (+psrr)' of THS3201 (TI)?,4.5 V,VS+ = 4.5 V to 5.5 V,drop,"4.5V是VS+条件,PSRR(dB)不在evidence,补范围救不了",unit_mismatch(power-supply rejection (+psrr):volt?expdb);gold_truncation
+P038,param,What is the specified value for 'operating junction temperature' of TLC5947 (TI)?,150 °C,Operating junction temperature 150 °C,ok,,
+P039,param,What is the specified value for 'maximum voltage must not exceed' of ISO7741 (TI)?,6 V,Maximum voltage must not exceed 6 V,ok,,
+P040,param,What is the specified value for 'enable supply voltage' of TPS7A49 (TI)?,0 V to VIN,Enable supply voltage 0 V,edit,"语料原文为 0 V to VIN,gold截断",unit_mismatch(enable supply voltage:other?expvolt)
+P041,param,What is the specified value for 'total power dissipation (power down)' of TVP5146 (TI)?,11 mW,Total power dissipation (power down) 11 mW,ok,,
+P042,param,What is the specified value for 'maximum junction temperature (tjmax)' of LMT86 (TI)?,150 °C,Maximum junction temperature (TJMAX) 150 °C,ok,,
+P043,param,What is the specified value for 'high-side supply current' of AMC1400 (TI)?,3.0 V,3.0 V ≤ VDD1 ≤ 3.6 V,drop,"3.0V是VDD1范围条件,问的是电流",unit_mismatch(high-side supply current:volt?expamp)
+P044,param,What is the specified value for 'rated mains voltage' of UCC21330 (TI)?,≤ 150 VRMS,Rated mains voltage ≤ 150 VRMS,edit,"参数名'overvoltage category'与gold不符,改为行内参数rated mains voltage",unit_mismatch(rated mains voltage:other?expvolt)
+P045,param,What is the specified value for 'open-loop voltage gain' of OPA4322 (TI)?,0.1 V,"0.1 V < VO < (V+) – 0.1 V, RL = 10 kΩ",drop,"0.1V是VO测试条件,gain真值不在evidence",
+P046,param,What is the specified value for 'threshold hysteresis' of UCC2946 (TI)?,15 mV,Threshold hysteresis 15 mV,ok,误报:gold 15 mV 与 evidence 一致,unit_mismatch(threshold hysteresis:other?expvolt)
+P047,param,What is the specified value for 'input bias current' of TPS62840 (TI)?,40°C,"MODE input, TJ = -40°C to 85°C",drop,"40°C是TJ条件,问的是input bias current",unit_mismatch(input bias current:temp?expamp);gold_truncation
+P048,param,What is the specified value for 'temperature register reads' of TMP104 (TI)?,0°C,Temperature Register reads 0°C,ok,,
+P049,param,What is the specified value for 'temperature range' of BMP280 (Bosch)?,-40 °C to +85 °C,-40 … +85 °C,edit,补全范围;清理参数名项目符号,
+P050,param,What is the specified value for 'operate over an extended temperature range' of LIS3DH (ST)?,-40 °C to +85 °C,from -40 °C to +85 °C.,edit,gold丢负号与上限,
+P051,param,What is the specified value for 'changed typical short-circuit current limit' of TPS7A21 (TI)?,300 mA,Changed typical short-circuit current limit from 300 mA,ok,,
+P052,param,What is the specified value for 'zero-glevel change vs. temperature' of iis328dq (ST)?,25°C,Excursion from 25°C,drop,"25°C是excursion起点,真值(mg/°C)不在evidence",unit_mismatch(zero-glevel change vs. temperature:temp?expvolt)
+P053,param,What is the specified value for 'current sourcing limit of ref pin' of UCC28782 (TI)?,20 V,"REF shorted to AGND, VVDD = 20 V",drop,"20V是VVDD条件,问的是current sourcing limit",unit_mismatch(current sourcing limit of ref pin:volt?expamp)
+P054,param,What is the specified value for 'power supply bypassing' of LMH6552 (TI)?,53 a,The P/N requires supply bypassing capacitors as illustrated in Figure 53 and Fig,drop,gold '53 a'来自'Figure 53 and'断词,
+P055,param,What is the specified value for 'power supply recommendations' of LM5180 (TI)?,4.5 V to 65 V,The P/N PSR flyback converter operates over a wide input voltage range from 4.5 V to 65 V,edit,"补全范围4.5–65V(已核语料原文),evidence同步补齐",
+P056,param,What is the specified value for 'input noise voltage' of lt1024 (ADI)?,0.1Hz,0.1Hz to 10Hz,drop,"0.1Hz–10Hz是噪声测量带宽,不是noise voltage值",unit_mismatch(input noise voltage:freq?expvolt);gold_truncation
+P057,param,What is the specified value for 'frequency' of TL431 (TI)?,9 µF,9 µF,drop,"9µF是电容值,问的是frequency",unit_mismatch(frequency:other?expfreq)
+P058,param,What is the specified value for 'io - output current (a)' of TPS54560 (TI)?,6V,6V,drop,"6V是条件,问的是output current(A)",unit_mismatch(io - output current (a):volt?expamp)
+P059,param,What is the specified value for 'low level output voltage' of LM92 (TI)?,3 mA,I OL = 3 mA,drop,"3mA是IOL条件,问的是output low voltage",unit_mismatch(low level output voltage:amp?expvolt)
+P060,param,What is the specified value for 'min/max over temperature' of OPA847 (TI)?,0°C,0°C to,drop,'MIN/MAX OVER TEMPERATURE'是表头非参数(已核语料),
+P061,param,What is the specified value for 'temperature resolution' of ADS1220 (TI)?,0.03125 °C,Temperature resolution 0.03125 °C,ok,,
+P062,param,What is the specified value for '| | | | output voltage |' of OPA860 (TI)?,2V,| R = 50 L V = 2V O | 0Ω PP | | | | | | | | | | | | | | |,drop,"2V出自图轴/条件,非output voltage规格(已核语料)",
+P063,param,What is the specified value for 'power stage' of TPS54318 (TI)?,13 A,13 A/V,drop,"行值是13 A/V,gold丢'/V'且参数名'power stage'无意义",
+P064,param,What is the specified value for 'junction-to-board thermal resistance' of DRV11873 (TI)?,25.6 °C/W,Junction-to-board thermal resistance 25.6 °C/W,ok,,
+P065,param,What is the specified value for 'operating temperature range' of lt1024 (ADI)?,-55°C to 125°C,P/N / P/N (OBSOLETE).....–55°C to 125°C,edit,gold丢负号与上限(–55°C to 125°C),
+P066,param,"What is the specified value for 'gda, gdb output voltage uv' of UCC28060 (TI)?",2.5 mA,"IGDA, IGDB = 2.5 mA",drop,"2.5mA是IGDA/IGDB电流,问的是voltage","unit_mismatch(gda, gdb output voltage uv:amp?expvolt)"
+P067,param,What is the specified value for 'vg turn-on threshold' of UCC24612 (TI)?,25°C,"VD falling, TJ = 25°C",drop,"25°C是TJ条件,阈值真值不在evidence",unit_mismatch(vg turn-on threshold:temp?expvolt)
+P068,param,What is the specified value for 'temperature high flag' of LM73 (TI)?,1 w,Bit is set to 1 when the measured temperature exceeds the THIGH limit stored in ,drop,gold '1 w'来自'set to 1 when'断词,unit_mismatch(temperature high flag:watt?exptemp)
+P069,param,What is the specified value for 'output voltage' of TPS63020 (TI)?,1 V,"1 V/div, DC",drop,"1V/div是示波器分度值,非output voltage",
+C000,cross,"For 'output current', which is larger: LM324 or OPA356? Give both values.",LM324:15V|OPA356:3V,"Source, VS = 15V, VO = V–, VID = 1V || FOR VS = 3V",drop,"15V/3V均为测试条件,电流真值不在evidence",
+C001,cross,"For 'quiescent current', which is larger: LM5175 or l6599? Give both values.",LM5175:1.1 V|l6599:1 V,"VEN/UVLO = 1.1 V, non-switching || Device ON, VSTBY = 1 V",drop,1.1V/1V是UVLO/VSTBY条件,
+C002,cross,"For 'quiescent current', which is larger: TMP101 or LM35? Give both values.",TMP101:400 kHz|LM35:40°C,"Serial bus active, SCL frequency = 400 kHz || –40°C ≤TJ ≤125°C",drop,400kHz/40°C均为条件,
+C003,cross,"For 'input voltage', which is larger: DRV8876 or l293d? Give both values.",DRV8876:3.3 V|l293d:7 V,3.3 V || Input Voltage 7 V,drop,"DRV8876侧3.3V是VCC供电(已核语料),与l293d输入电压不同义",
+C004,cross,"For 'output current', which is larger: TPS54560 or TPS7A02? Give both values.",TPS54560:6V|TPS7A02:1 mA,6V || 5 µA ≤ IOUT < 1 mA,drop,"TPS54560侧6V是条件,真值5A不在evidence",
+C005,cross,"For 'operating temperature', which is larger: TLC5947 or TXS0104E? Give both values.",TLC5947:150 °C|TXS0104E:150 °C,"Operating junction temperature 150 °C || Operating junction temperature, TJ 150 °C",drop,"both_equal且为junction temp,弱题",both_equal(trivial)
+C006,cross,"For 'quiescent current', which is larger: TPS5410 or LM5146? Give both values.",TPS5410:2 V|LM5146:1 V,"Non-switching, VSENSE = 2 V, PH pin open || VEN/UVLO = 1 V",drop,2V/1V是VSENSE/VEN条件,
+C007,cross,"For 'input voltage', which is larger: TPS7A49 or TPS7A05? Give both values.",TPS7A49:0 V|TPS7A05:0 V,Enable supply voltage 0 V || Enable supply voltage 0 V,drop,0V是EN条件且两侧相等,both_equal(trivial)
+C008,cross,"For 'output voltage', which is larger: UCC28060 or UCC28019? Give both values.",UCC28060:2.5 mA|UCC28019:40°C,"IGDA, IGDB = 2.5 mA || -40°C ≤TA ≤125°C",drop,两侧gold(mA/°C)与output voltage不符,
+C009,cross,"For 'input voltage', which is larger: LM5109 or l4981? Give both values.",LM5109:15V|l4981:3.5V,HB to HS operating voltage should be 15V || VMULT OUT = VSENSE = 3.5V,drop,l4981侧3.5V是VSENSE条件链,
+C010,cross,"For 'input voltage', which is larger: TMP1075 or INA219? Give both values.",TMP1075:1.7 V to 5.5 V|INA219:3V to 5.5V,1.7 V to 5.5 V || 3V to 5.5V,edit,两侧均补全范围,
+C011,cross,"For 'output voltage', which is larger: OPA860 or OPA847? Give both values.",OPA860:2V|OPA847:400Ω,| R = 50 L V = 2V O | 0Ω PP | | | | | | | | | | | | | | | || ≥ 400Ω Load,drop,OPA847侧400Ω是负载条件,
+C012,cross,"For 'input voltage', which is larger: TMP1075 or MPU9250? Give both values.",TMP1075:1.7 V to 5.5 V|MPU9250:-0.5V,1.7 V to 5.5 V || -0.5V,edit,TMP1075补范围;MPU9250补负号(VIL=-0.5V),
+C013,cross,"For 'input voltage', which is larger: lt1024 or OPA2365? Give both values.",lt1024:0.1Hz|OPA2365:5.5 V,0.1Hz to 10Hz || Supply voltage 5.5 V,drop,lt1024侧0.1–10Hz是噪声带宽,gold_truncation
+C014,cross,"For 'output current', which is larger: TPS54560 or TPS62203? Give both values.",TPS54560:6V|TPS62203:300 mA,6V || Output current 300 mA,drop,TPS54560侧6V是条件,
+C015,cross,"For 'output voltage', which is larger: OPA860 or OPA859? Give both values.",OPA860:2V|OPA859:3.3 V,"| R = 50 L V = 2V O | 0Ω PP | | | | | | | | | | | | | | | || VS+ = 3.3 V, TA = 25°C",drop,OPA859侧3.3V是VS+条件,
+C016,cross,"For 'input voltage', which is larger: TPS7A49 or LMR36520? Give both values.",TPS7A49:0 V|LMR36520:3.3 V,Enable supply voltage 0 V || | I Q-nonSW | Operating quiescent current (non- switching)(2),drop,"LMR36520侧3.3V不在evidence,TPS7A49侧0V是EN条件",
+C017,cross,"For 'junction-to-ambient thermal resistance', which is larger: UCC21520 or UCC21530? Give both values.",UCC21520:69.8°C/W|UCC21530:74.1°C/W,"Rθ JA = 69.8°C/W, VDDA/B = 15 V, TJ = || Rθ JA = 74.1°C/W, VDDA/B = 15 V, TJ =",edit,"问题参数名'output current'与gold(热阻)不符,改为热阻;两侧值均在evidence",
+C018,cross,"For 'operating temperature', which is larger: TLC5947 or lt1024? Give both values.",TLC5947:150 °C|lt1024:-55°C to 125°C,Operating junction temperature 150 °C || P/N / P/N (OBSOLETE).....–55°C to 125°C,edit,"lt1024侧丢负号与上限,补正",
+C019,cross,"For 'output current', which is larger: UCC28060 or AMC3301? Give both values.",UCC28060:2.5 mA|AMC3301:4 mA,"IGDA, IGDB = 2.5 mA || HLDO to HGND, 4 mA external load,",edit,"问题参数名'output voltage'与gold(电流值)不符,改为output current",
+C020,cross,"For 'input voltage', which is larger: LM5109 or LM5106? Give both values.",LM5109:15V|LM5106:15 V,HB to HS operating voltage should be 15V || HB to HS operating voltage should be 15 V,drop,both_equal弱题,both_equal(trivial)
+C021,cross,"For 'output voltage', which is larger: LM2596 or TPS63020? Give both values.",LM2596:7 V|TPS63020:1 V,"7 V ≤ VIN ≤ 40 V, || 1 V/div, DC",drop,"两侧均为条件(7V=VIN下限,1V=示波器分度)",
+C022,cross,"For 'output current', which is larger: DRV8412 or DRV8312? Give both values.",DRV8412:20 A|DRV8312:20 A,output current for latch shut down (per pin) 20 A || output current for latch shut down (p,drop,both_equal弱题,both_equal(trivial)
+C023,cross,"For 'switching frequency', which is larger: TPS54331 or LM5166? Give both values.",TPS54331:12 V|LM5166:169 kΩ,"| Switching frequency | V = 12 V, 25°C IN | 456 570 68 | | | 4 kHz | || Using Equation 4, ",drop,12V/169kΩ均为条件/元件值,
+C024,cross,"For 'quiescent current', which is larger: TMP101 or TMP117? Give both values.",TMP101:400 kHz|TMP117:1 Hz,"Serial bus active, SCL frequency = 400 kHz || Duty cycle 1 Hz, averaging mode off, serial ",drop,400kHz/1Hz均为条件,
+C025,cross,"For 'output current', which is larger: UCC21520 or UCC28063? Give both values.",UCC21520:69.8°C/W|UCC28063:54 µS,"Rθ JA = 69.8°C/W, VDDA/B = 15 V, TJ = || Transconduction 54 µS",drop,两侧参数(°C/W/µS)与output current不符,
+C026,cross,"For 'quiescent current', which is larger: OPA859 or OPA858? Give both values.",OPA859:5 V|OPA858:5 V,VS+ = 5 V || VS+ = 5 V,drop,5V均为VS+条件且相等,both_equal(trivial)
+C027,cross,"For 'input voltage', which is larger: lt1024 or TLV2316? Give both values.",lt1024:0.1Hz|TLV2316:5.5 V,0.1Hz to 10Hz || | VCM Common-mode voltage range | | | VS = 5.5 V | (V–) – 0.2 (V+) + 0.2 ,drop,"lt1024侧0.1–10Hz是噪声带宽,TLV2316侧是VCM条件",gold_truncation
+C028,cross,"For 'switching frequency', which is larger: TPS54331 or TPS54540? Give both values.",TPS54331:12 V|TPS54540:12 V,"| Switching frequency | V = 12 V, 25°C IN | 456 570 68 | | | 4 kHz | || 12 V, 25 C",drop,12V均为VIN条件且相等,both_equal(trivial)
+C029,cross,"For 'output current', which is larger: LM324 or OPA2356? Give both values.",LM324:15V|OPA2356:3V,"Source, VS = 15V, VO = V–, VID = 1V || FOR VS = 3V",drop,"同C000,两侧均为条件",
+P070,param,What is the specified value for 'min/max over temperature' of OPA860 (TI)?,0°C,0°C to,drop,MIN/MAX OVER TEMPERATURE 是表头非参数,
+P071,param,What is the specified value for 'minimum output voltage' of LM3404 (TI)?,300 ns,The minimum recommended on-time for the P/N and P/N devices is 300 ns. This lowe,drop,"300ns是最小导通时间,问的是minimum output voltage",unit_mismatch(minimum output voltage:time?expvolt)
+P072,param,What is the specified value for 'under voltage lockout vcc rising' of UCC23513 (TI)?,10mA,"VCC_Rising, IF=10mA",drop,"10mA是IF条件,VCC上升阈值不在evidence",unit_mismatch(under voltage lockout vcc rising:amp?expvolt)
+P073,param,What is the specified value for 'feedback voltage' of TPS7A49 (TI)?,1.185 V,Feedback voltage 1.185 V,ok,,
+P074,param,What is the specified value for 'maximum repetitive peak isolation voltage' of AMC1400 (TI)?,2800 VPK,At AC voltage 2800 V,edit,"参数名误取条件列'At AC voltage';语料行真身为VIORM隔离电压 2800 VPK,已改正",unit_mismatch(maximum repetitive peak isolation voltage:other?expvolt)
+P075,param,What is the specified value for 'vcci operating current' of UCC21530 (TI)?,500 kHz,(f = 500 kHz) current per channel,drop,"500kHz是f条件,电流真值不在evidence",unit_mismatch(vcci operating current:freq?expvolt)
+P076,param,What is the specified value for 'input current' of TMP103 (TI)?,0.3 V,0 < VIN < (V+) + 0.3 V,drop,"0.3V是VIN范围条件,问的是input current",unit_mismatch(input current:volt?expamp)
+P077,param,What is the specified value for 'negative (lowest) power supply' of OPA192 (TI)?,2192 a,Pin Functions: OPA2192 and OPA4192,drop,gold '2192 a'来自型号OPA2192断词,
+P078,param,What is the specified value for 'temperature sensor output data.' of lis2dw12 (ST)?,1 °C/LSB,The value is expressed as two’s complement sign. Sensitivity = 1°C/LSB,edit,补单位/LSB(evidence: Sensitivity = 1°C/LSB),unit_mismatch(temperature sensor output data.:other?exptemp)
+P079,param,What is the specified value for 'open-loop voltage gain' of OPA322 (TI)?,0.1 V,"0.1 V < VO < (V+) – 0.1 V, RL = 10 kΩ",drop,"0.1V是VO测试条件,gain真值不在evidence",
+P080,param,What is the specified value for 'temperature accuracy' of TMP175 (TI)?,40 °C,–40 °C to +125 °C,drop,是工作温度范围且丢负号;accuracy真值不在evidence,
+P081,param,What is the specified value for 'high-side MOSFET ON-resistance' of TPS62150 (TI)?,90 mΩ to 170 mΩ,| r DS(on) | High-side MOSFET ON-resistance | V ≥ 6 V IN | | 90 170 | | | mΩ |,edit,参数名误取'power switch'分区名;行值90/170 mΩ(条件VIN≥6V),
+P082,param,What is the specified value for 'under-voltage' of TNY274-280 (PowerIntegrations)?,1.0 V,1.0 V + VT,drop,"'1.0 V + VT'语义不完整,gold截断",
+P083,param,What is the specified value for 'voltage on this pin' of UCC28220 (TI)?,2.5 V,voltage on this pin is 2.5 V,ok,,
+P084,param,What is the specified value for 'maximum working voltage' of ISO7731 (TI)?,5000 VRMS,5000 VRMS (DW-16) and,edit,补单位RMS,unit_mismatch(maximum working voltage:other?expvolt)
+P085,param,What is the specified value for 'recommended operating junction temperature range' of LM5180 (TI)?,-40°C to 150°C,Over the recommended operating junction temperature range of –40°C to 150°C (unl,edit,参数名'absolute maximum ratings'错配;按行文改为工作结温范围并补全,
+P086,param,What is the specified value for 'transmitting power' of ESP32 (Espressif)?,9 dBm,• +9 dBm transmitting power,edit,参数名误取分区名;gold补dBm单位,
+P087,param,What is the specified value for 'power-supply recommendations' of OPA192 (TI)?,4.5 V to 36 V,The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma,edit,补全范围,
+P088,param,What is the specified value for '| input voltage range | | | | | | | |' of TLV2316 (TI)?,5.5 V,| VCM Common-mode voltage range | | | VS = 5.5 V | (V–) – 0.2 (V+) + 0.2 | | | V,drop,"5.5V是VS条件,行值是符号式VCM范围",param_too_long
+P089,param,What is the specified value for 'supply voltage' of BME280 (Bosch)?,1.71 V to 3.6 V,VDD main supply voltage range: 1.71 V to 3.6 V,edit,补全范围;清理参数名项目符号,
+P090,param,What is the specified value for 'rc network filters high-frequency noise.' of OPA340 (TI)?,500W,500W,drop,"'500W'疑为500Ω误析,参数名是句子残片",unit_mismatch(rc network filters high-frequency noise.:watt?expfreq)
+P091,param,What is the specified value for 'input offset voltage' of OPA454 (TI)?,"±0.2 mV typ, ±4 mV max",| VOS Input offset voltage | | | IO = 0 mA | ±0.2 ±4 | | | mV |,edit,清理参数名管道符;gold按行内±0.2/±4 mV补正(IO=0mA),unit_mismatch(input offset voltage:other?expvolt)
+P092,param,What is the specified value for 'input current' of TMP112 (TI)?,2 V,"V+ > 2 V, IOL = 3mA",drop,"2V是V+条件,问的是input current",unit_mismatch(input current:volt?expamp)
+P093,param,What is the specified value for '| power supply | | | | | | |' of OPA1688 (TI)?,0 A,| IQ | Quiescent current per amplifier | IO = 0 A | 1.6 1 | | | .8 mA 2 |,drop,"0A是IO条件,IQ行值解析残缺(1.6/1.8 mA无法确认)",param_too_long
+P094,param,"What is the specified value for 'critical, warning, power valid' of INA3221 (TI)?",6 V,"Critical, warning, power valid 6 V",ok,,
+P095,param,What is the specified value for '| supply voltage (vin pin) | | | | | | |' of LMR36520 (TI)?,3.3 V,| I Q-nonSW | Operating quiescent current (non- switching)(2) | V = 3.3 V (PFM v,drop,"3.3V是PFM条件,行值IQ不在evidence",param_too_long
+P096,param,What is the specified value for 'output buffer offset voltage' of TPS7A39 (TI)?,0.25V,VNR/SS = 0.25V to 1.2V,drop,"0.25–1.2V是VNR/SS条件,问的是offset voltage",gold_truncation
+P097,param,What is the specified value for 'open-loop voltage gain' of OPA188 (TI)?,0.5 V,(V–) + 0.5 V < VO < (V+) – 0.5 V,drop,"0.5V是VO测试条件,gain真值不在evidence",
+P098,param,What is the specified value for 'gnd pin current' of LP2985 (TI)?,0.3 V,"VON/OFF < 0.3 V, VIN = 16 V",drop,"0.3V是ON/OFF阈值条件,问的是gnd pin current",unit_mismatch(gnd pin current:volt?expamp)
+P099,param,What is the specified value for 'input current' of TMP102 (TI)?,3.6V,0 < VIN < 3.6V,drop,"3.6V是VIN范围条件,问的是input current",unit_mismatch(input current:volt?expamp)
+P100,param,What is the specified value for 'output voltage: p/n' of LM2576 (TI)?,6 V,"6 V ≤ VIN ≤ 40 V, 0.5 A ≤ ILOAD",drop,"6V是VIN范围条件,问的是output voltage",
+P101,param,What is the specified value for 'usb type-c power delivery controller' of stm32g071rb (ST)?,1 a,The device embeds two controllers (UCPD1 and UCPD2) compliant with USB Type-C Re,drop,gold '1 a'来自'UCPD1 and'断词,
+P102,param,What is the specified value for 'open-loop voltage gain' of OPA2325 (TI)?,0.1 V,"0.1 V < VO < (V+) – 0.1 V, RL = 10 kΩ",drop,0.1V是VO测试条件,
+P103,param,What is the specified value for 'input current' of TPS54540 (TI)?,50 mV,Enable threshold +50 mV,drop,"50mV是EN阈值迟滞,问的是input current",unit_mismatch(input current:other?expamp)
+P104,param,What is the specified value for 'cpu frequency (mhz' of stm32f407vg (ST)?,45 °C,-45 °C,drop,45°C与CPU频率错配,unit_mismatch(cpu frequency (mhz:temp?expfreq)
+P105,param,What is the specified value for 'power dissipation considerations (continued)' of LM5104 (TI)?,80V,Figure 19. Diode Power Dissipation VIN = 80V,drop,80V是图注VIN条件,unit_mismatch(power dissipation considerations (continued):volt?expwatt)
+P106,param,What is the specified value for 'A-port VCCA' of TXB0104 (TI)?,1.2 V to 3.6 V,A-port VCCA = 1.2 V to 3.6 V,edit,"参数名是句子残片,改为行内VCCA;补全范围",
+P107,param,What is the specified value for 'junction temperature' of OPA140 (TI)?,150 °C,Junction temperature 150 °C,ok,,
+P108,param,What is the specified value for 'switching frequency' of TPS54331 (TI)?,570 kHz,"| Switching frequency | V = 12 V, 25°C IN | 456 570 68 | | | 4 kHz |",edit,"原gold 12V是条件;行值456/570/684 kHz(已核语料),取typ 570 kHz",
+P109,param,What is the specified value for 'switching node pin voltage less than' of DRV8323R (TI)?,30ns,Switching node pin voltage less than 30ns,ok,,unit_mismatch(switching node pin voltage less than:time?expvolt)
+P110,param,What is the specified value for 'peak source/sink current' of LM5111 (TI)?,3A/5A,The P/N dual low side MOSFET driver is capable of sourcing/sinking 3A/5A peak cu,edit,"参数名是分区残片,改为行文中的驱动峰值电流3A/5A",
+P111,param,What is the specified value for 'holding current' of DRV8711 (TI)?,250 ns,250 ns 500 ns,drop,"250/500ns是时间值,问的是holding current",unit_mismatch(holding current:time?expamp)
+P112,param,"What is the specified value for 'operating junction temperature, tj' of TXS0104E (TI)?",150 °C,"Operating junction temperature, TJ 150 °C",ok,,
+P113,param,What is the specified value for 'supply voltage' of OPA2365 (TI)?,5.5 V,Supply voltage 5.5 V,ok,,
+P114,param,What is the specified value for 'automotive temperature range' of ATmega328P (Microchip)?,-40°C to +125°C,●Automotive temperature range: –40°C to +125°C,edit,gold丢负号与上限;参数名清理,
+P115,param,What is the specified value for 'quiescent current (per amplifier)' of OPA2134 (TI)?,4 mA to 5 mA,| I Q | Quiescent current (per amplifier) | I = 0mA O | | 4 5 | | | mA |,edit,清理参数名;gold按行内4/5 mA补正(IO=0mA),
+P116,param,What is the specified value for 'tpd across temperature at' of SN74LVC1G04 (TI)?,3.3V,TPD Across Temperature at 3.3V,drop,"3.3V是VCC条件,tpd真值不在evidence",unit_mismatch(tpd across temperature at:volt?exptemp)
+P117,param,What is the specified value for 'load current' of TPS7A02 (TI)?,1 mA,5 µA ≤ IOUT < 1 mA,drop,"1mA是低电流条件行,负载真值不在evidence",
+P118,param,What is the specified value for 'overtemperature' of UCC28600 (TI)?,140°C,Overtemperature lockout typically occurs when the substrate temperature reaches 140°C,edit,"gold正确但evidence字段截断,已按语料补全(140°C)",
+P119,param,What is the specified value for 'reference voltage' of UCC28019 (TI)?,40°C,-40°C ≤TA ≤125°C,drop,"40°C来自TA范围条件,reference voltage真值不在evidence",unit_mismatch(reference voltage:temp?expvolt)
+P120,param,What is the specified value for 'inductor current' of TPS63000 (TI)?,500 mA,500 mA/div,drop,500 mA/div是示波器分度,
+P121,param,What is the specified value for 'trig current' of NE555 (TI)?,0V,TRIG at 0V,drop,"0V是TRIG条件,trig current真值不在evidence",unit_mismatch(trig current:volt?expamp)
+P122,param,What is the specified value for 'f corner frequency' of OPA835 (TI)?,147 Hz,f corner frequency 147 Hz,ok,,
+P123,param,What is the specified value for 'switching node pin voltage less than' of DRV8320 (TI)?,30ns,Switching node pin voltage less than 30ns,ok,,unit_mismatch(switching node pin voltage less than:time?expvolt)
+P124,param,What is the specified value for 'voltage stability' of UCC28C51 (TI)?,12 V,12 V ≤ VVDD ≤ 25 V,drop,12–25V是Line regulation行的条件(已核语料),
+P125,param,What is the specified value for 'high-level threshold at en pin' of TLV62568 (TI)?,2.5 V,2.5 V ≤VIN ≤5.5 V,drop,"2.5V是VIN范围条件,EN阈值真值不在evidence",
+P126,param,What is the specified value for 'source current after tdrive' of DRV8320 (TI)?,10 mA,Source current after tDRIVE 10 mA,ok,,
+P127,param,What is the specified value for 'output current' of TPS62203 (TI)?,300 mA,Output current 300 mA,ok,,
+P128,param,What is the specified value for 'input voltage range that extends' of LMH6629 (TI)?,0.3 V,input voltage range that extends 0.3 V,ok,,
+P129,param,What is the specified value for 'dc power-supply sensitivity' of TMP112 (TI)?,40°C,–40°C to +125°C,drop,是温度范围且丢负号;灵敏度真值不在evidence,
+P130,param,What is the specified value for 'controller supply voltage' of DRV8876 (TI)?,3.3 V,3.3 V,ok,语料行确为 Controller supply voltage 3.3 V,
+P131,param,What is the specified value for 'input current' of TPS54340 (TI)?,50 mV,Enable threshold +50 mV,drop,50mV是EN阈值迟滞,unit_mismatch(input current:other?expamp)
+P132,param,What is the specified value for 'junction-to-ambient thermal resistance' of LMR14020 (TI)?,43.2 °C/W,Junction-to-ambient thermal resistance 43.2 °C/W,ok,,
+P133,param,What is the specified value for 'internal power dissipation' of ad8230 (ADI)?,304 mW,304 mW,ok,语料行确为 Internal Power Dissipation 304 mW,
+P134,param,What is the specified value for 'to keep the junction temperature at or below' of TPS54521 (TI)?,125°C,to keep the junction temperature at or below 125°C,ok,,param_too_long
+P135,param,What is the specified value for 'output current' of LM324 (TI)?,15V,"Source, VS = 15V, VO = V–, VID = 1V",drop,"15V是VS条件,电流真值不在evidence",unit_mismatch(output current:volt?expamp)
+P136,param,What is the specified value for 'min/max over temperature' of OPA2684 (TI)?,25°C,Boldface limits are tested at +25°C.,drop,25°C是脚注条件,
+P137,param,What is the specified value for 'tpd vs temperature at' of SN74AUP1G04 (TI)?,1.8 V,TPD vs Temperature at 1.8 V,drop,1.8V是VCC条件,
+P138,param,What is the specified value for 'output current for latch shut down (per pin)' of DRV8412 (TI)?,20 A,output current for latch shut down (per pin) 20 A,ok,,param_too_long
+P139,param,What is the specified value for 'frequency (mhz)' of OPA657 (TI)?,3dB,Gain (3dB/div),drop,3dB是图轴分度,unit_mismatch(frequency (mhz):db?expfreq)
+P140,param,What is the specified value for 'RRT (frequency-setting resistor) range' of LM5143 (TI)?,10 kΩ to 220 kΩ,10 kΩ < RRT < 220 kΩ,edit,参数名与单位错配;行值是RRT阻值范围10–220 kΩ,
+P141,param,What is the specified value for 'cpu frequency (mhz' of stm32f407ve (ST)?,45 °C,-45 °C,drop,"同P104,错配",unit_mismatch(cpu frequency (mhz:temp?expfreq)
+P142,param,"What is the specified value for 'maximum repetitive peak isolation voltage,' of UCC23514 (TI)?",2121 VPK,2121 VPK,edit,补单位PK,"unit_mismatch(maximum repetitive peak isolation voltage,:other?expvolt)"
+P143,param,What is the specified value for 'maximum continuous switch current' of LM66100 (TI)?,1.5 A,Maximum Continuous Switch Current 1.5 A,ok,,
+P144,param,What is the specified value for 'dbm of power for an' of ESP32-C6 (Espressif)?,802.11a,dBm of power for an 802.11a,drop,"802.11a是协议名,参数名是句子残片",
+P145,param,What is the specified value for 'start-up current source is ivc' of TPS23756 (TI)?,19.2 V,"TPS23754, VDD1 = 19.2 V, VC = 13.9 V",drop,19.2V是VDD1条件且属TPS23754行,unit_mismatch(start-up current source is ivc:volt?expamp)
+P146,param,What is the specified value for 'hz (low power only)' of LSM6DSL (ST)?,12.5 Hz,Hz (low power only) 12.5 Hz,ok,,
+P147,param,What is the specified value for 'dc power supply sensitivity' of TMP117 (TI)?,8 A,"One-shot mode, 8 Averages",drop,gold '8 A'来自'8 Averages'断词,
+P148,param,What is the specified value for '| input voltage range | | | | | | |' of OPA316 (TI)?,1.8 V,| VCM Common-mode voltage | | VS = 1.8 V to 2.5 V | (V–) – 0.2 (V+) | | | V |,drop,"1.8V是VS条件,行值是符号式VCM范围",param_too_long;gold_truncation
+P149,param,What is the specified value for 'operating voltage' of OPA2376 (TI)?,2.2 V to 5.5 V,The OPA376 family of amplifiers operates over a power-supply range of 2.2 V to 5.5 V,edit,"补全范围2.2–5.5V(已核语料),evidence同步补齐",
+P150,param,What is the specified value for 'supply voltage (VS)' of TMP20 (TI)?,2.7 V to 5.5 V,| V S S | pecified voltage | T = –55°C to 130°C A | 2.7 5.5 | | | V |,edit,原gold 55°C是条件;行值VS=2.7–5.5 V(TA=-55~130°C),
+P151,param,"What is the specified value for 'junction temperature, tj' of TL072 (TI)?",150 °C,"Junction temperature, TJ 150 °C",ok,,
+P152,param,What is the specified value for 'internal reference voltage' of ADS131M02 (TI)?,1.2 V,Internal reference voltage 1.2 V,ok,,
+P153,param,What is the specified value for 'power-on time' of OPA2325 (TI)?,0 V,"V+ = 0 V to 5 V, to 90% IQ level",drop,"0V是V+条件,power-on time真值不在evidence",unit_mismatch(power-on time:volt?exptime);gold_truncation
+P154,param,What is the specified value for 'maximum junction temperature' of LM2674 (TI)?,150 °C,Maximum junction temperature 150 °C,ok,,
+P155,param,What is the specified value for 'enable and adjusting undervoltage lockout' of TPS54541 (TI)?,4.3 V,The P/N device enables when the VIN pin voltage rises above 4.3 V and the EN pin,ok,,
+P156,param,What is the specified value for 'rising threshold' of LMR33620 (TI)?,1 V,Rising threshold 1 V,ok,,
+P157,param,What is the specified value for 'soft-start charging current' of TPS7A39 (TI)?,0.9V,VNR/SS = 0.9V,drop,0.9V是VNR/SS条件,unit_mismatch(soft-start charging current:volt?expamp)
+P158,param,What is the specified value for 'input bias current' of OPA330 (TI)?,"±200 pA typ, ±500 pA max",| IB Input bias current | | At 25°C | | | ±200 ±500 | | | pA |,edit,清理参数名;gold按行内±200/±500 pA补正(25°C),unit_mismatch(input bias current:other?expamp)
+P159,param,What is the specified value for 'output voltage' of TPS7A37 (TI)?,3.3 V,3.3 V,ok,语料行确为 Output voltage 3.3 V,
+P160,param,What is the specified value for 'vin quiescent current' of TPS5410 (TI)?,2 V,"Non-switching, VSENSE = 2 V, PH pin open",drop,"2V是VSENSE条件,IQ真值不在evidence",
+P161,param,What is the specified value for 'over temperature' of OPA335 (TI)?,100mV,"100mV < VO < (V+) – 100mV, RL = 10kΩ, VCM = VS/2",drop,100mV是VO测试条件,unit_mismatch(over temperature:other?exptemp)
+P162,param,What is the specified value for 'line frequency' of UCC29950 (TI)?,47 Hz to 63 Hz,47 Hz to 63 Hz,edit,补全范围,
+P163,param,What is the specified value for 'vbus over voltage threshold' of SC89601 (Southchip)?,5.8V,"5.8V, Rising edge",ok,,
+P164,param,What is the specified value for 'enable and adjusting undervoltage lockout' of TPS54360 (TI)?,4.3 V,The P/N is enabled when the VIN terminal voltage rises above 4.3 V and the EN te,ok,,
+P165,param,What is the specified value for 'the voltage at the pin can exceed the' of TPS62873 (TI)?,6.5V,The voltage at the pin can exceed the 6.5V,ok,,param_too_long
+P166,param,What is the specified value for 'supply current' of TPS564201 (TI)?,5 V,"VIN current, EN = 5 V, VFB = 1 V",drop,"5V是EN条件,supply current真值不在evidence",unit_mismatch(supply current:volt?expamp)
+P167,param,What is the specified value for 'inputs accept voltages' of SN74LVC245A (TI)?,5.5 V,Inputs Accept Voltages to 5.5 V,ok,,
+P168,param,What is the specified value for 'high-side current limit' of LMR33640 (TI)?,4.8 A to 6.2 A,| ISC | High-side current limit | P/N | 4.8 5.5 | | | 6.2 A |,edit,清理参数名;行值4.8/5.5/6.2 A取范围,
+P169,param,What is the specified value for 'thermal resistance junction pin' of viper37 (ST)?,1 W,(Dissipated power = 1 W),drop,"1W是耗散功率例子,与热阻错配",unit_mismatch(thermal resistance junction pin:watt?expthermres)
+C030,cross,"For 'output voltage', which is larger: SC8815 or GD25Q64E? Give both values.",SC8815:4.5V|GD25Q64E:0.2V,4.5V target || 0.2VCC to 0.7VCC,drop,"GD25Q64E侧0.2V是VCC相对阈值,与output voltage错配",
+C031,cross,"For 'output voltage', which is larger: LM2596 or TPS7A49? Give both values.",LM2596:7 V|TPS7A49:1.185 V,"7 V ≤ VIN ≤ 40 V, || Feedback voltage 1.185 V",drop,LM2596侧7V是VIN下限,
+C032,cross,"For 'output current', which is larger: LM75B or INA219? Give both values.",LM75B:10 mA|INA219:5 a,Output Sink Current 10 mA || The Power register content is internally calculated using Equ,drop,INA219侧'5 a'是断词垃圾,
+C033,cross,"For 'quiescent current', which is larger: TPS5410 or TPS5431? Give both values.",TPS5410:2 V|TPS5431:2V,"Non-switching, VSENSE = 2 V, PH pin open || Non-switching, VSENSE = 2V, PH pin open",drop,both_equal且均为VSENSE条件,both_equal(trivial)
+C034,cross,"For 'output voltage', which is larger: HDC1080 or LM92? Give both values.",HDC1080:3mA|LM92:3 mA,Sink current 3mA || I OL = 3 mA,drop,both_equal且均为sink current条件,both_equal(trivial)
+C035,cross,"For 'output voltage', which is larger: HDC1080 or ADS131M02? Give both values.",HDC1080:3mA|ADS131M02:1.2 V,Sink current 3mA || Internal reference voltage 1.2 V,drop,HDC1080侧3mA是sink current条件,
+C036,cross,"For 'operating temperature', which is larger: AMC1311 or TL431? Give both values.",AMC1311:-55°C to +125°C|TL431:150 °C,–55°C to +125°C || Operating Junction Temperature Range 150 °C,edit,"AMC1311侧丢负号与上限,补正",
+C037,cross,"For 'input voltage', which is larger: DRV8876 or DRV8874? Give both values.",DRV8876:3.3 V|DRV8874:24 V,3.3 V || 24 V,drop,"DRV8876侧3.3V是VCC、DRV8874侧24V是VM,不同义",
+C038,cross,"For 'operating temperature', which is larger: AMC1311 or TL432? Give both values.",AMC1311:-55°C to +125°C|TL432:150 °C,–55°C to +125°C || Operating Junction Temperature Range 150 °C,edit,"同C036,补负号与上限",
+C039,cross,"For 'input voltage', which is larger: TMP1075 or SN65HVD230? Give both values.",TMP1075:1.7 V to 5.5 V|SN65HVD230:3.3 V,1.7 V to 5.5 V || The SN65HVD23x 3.3 V CAN transceivers provide the interface between the 3.3 V µP,ok,,
+C040,cross,"For 'input voltage', which is larger: INA219 or OPA2365? Give both values.",INA219:3V to 5.5V|OPA2365:5.5 V,3V to 5.5V || Supply voltage 5.5 V,ok,,
+C041,cross,"For 'input voltage', which is larger: BME280 or TMP20? Give both values.",BME280:1.71 V to 3.6 V|TMP20:2.7 V to 5.5 V,VDD main supply voltage range: 1.71 V to 3.6 V || | V S S | pecified voltage | T = –55°C to 130°C A | 2.7 5.5 | | | V |,ok,,
+C042,cross,"For 'input voltage', which is larger: OPA2376 or DRV8876? Give both values.",OPA2376:2.2 V to 5.5 V|DRV8876:3.3 V,The OPA376 family of amplifiers operates over a power-supply range of 2.2 V to 5.5 V || 3.3 V,ok,,
+C043,cross,"For 'input voltage', which is larger: LM5180 or OPA192? Give both values.",LM5180:4.5 V to 65 V|OPA192:4.5 V to 36 V,The P/N PSR flyback converter operates over a wide input voltage range from 4.5 V to 65 V || The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma,ok,,
+C044,cross,"For 'input voltage', which is larger: SN65HVD230 or BME280? Give both values.",SN65HVD230:3.3 V|BME280:1.71 V to 3.6 V,The SN65HVD23x 3.3 V CAN transceivers provide the interface between the 3.3 V µP || VDD main supply voltage range: 1.71 V to 3.6 V,ok,,
+C045,cross,"For 'input voltage', which is larger: TMP20 or INA219? Give both values.",TMP20:2.7 V to 5.5 V|INA219:3V to 5.5V,| V S S | pecified voltage | T = –55°C to 130°C A | 2.7 5.5 | | | V | || 3V to 5.5V,ok,,
+C046,cross,"For 'input voltage', which is larger: OPA192 or OPA2365? Give both values.",OPA192:4.5 V to 36 V|OPA2365:5.5 V,The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma || Supply voltage 5.5 V,ok,,
+C047,cross,"For 'input voltage', which is larger: LM5180 or TMP1075? Give both values.",LM5180:4.5 V to 65 V|TMP1075:1.7 V to 5.5 V,The P/N PSR flyback converter operates over a wide input voltage range from 4.5 V to 65 V || 1.7 V to 5.5 V,ok,,
+C048,cross,"For 'input voltage', which is larger: DRV8876 or TMP1075? Give both values.",DRV8876:3.3 V|TMP1075:1.7 V to 5.5 V,3.3 V || 1.7 V to 5.5 V,ok,,
+C049,cross,"For 'input voltage', which is larger: OPA2376 or OPA192? Give both values.",OPA2376:2.2 V to 5.5 V|OPA192:4.5 V to 36 V,The OPA376 family of amplifiers operates over a power-supply range of 2.2 V to 5.5 V || The OPAx192 is specified for operation from 4.5 V to 36 V (±2.25 V to ±18 V); ma,ok,,
+C050,cross,"For 'input voltage', which is larger: BME280 or DRV8876? Give both values.",BME280:1.71 V to 3.6 V|DRV8876:3.3 V,VDD main supply voltage range: 1.71 V to 3.6 V || 3.3 V,ok,,
+C051,cross,"For 'operating temperature', which is larger: TLC5947 or LM5180? Give both values.",TLC5947:150 °C|LM5180:-40°C to 150°C,Operating junction temperature 150 °C || Over the recommended operating junction temperature range of –40°C to 150°C (unl,ok,,
+C052,cross,"For 'operating temperature', which is larger: TXS0104E or lt1024? Give both values.",TXS0104E:150 °C|lt1024:-55°C to 125°C,"Operating junction temperature, TJ 150 °C || P/N / P/N (OBSOLETE).....–55°C to 125°C",ok,,
+C053,cross,"For 'operating temperature', which is larger: LM5180 or lt1024? Give both values.",LM5180:-40°C to 150°C|lt1024:-55°C to 125°C,Over the recommended operating junction temperature range of –40°C to 150°C (unl || P/N / P/N (OBSOLETE).....–55°C to 125°C,ok,,
+C054,cross,"For 'operating temperature', which is larger: BMP280 or stm32l151cb? Give both values.",BMP280:-40 °C to +85 °C|stm32l151cb:-40 °C to 105 °C,-40 … +85 °C || -40 °C ≤ TA ≤ 105°C,ok,,
+C055,cross,"For 'operating temperature', which is larger: LIS3DH or TXS0104E? Give both values.",LIS3DH:-40 °C to +85 °C|TXS0104E:150 °C,"from -40 °C to +85 °C. || Operating junction temperature, TJ 150 °C",ok,,
+C056,cross,"For 'operating temperature', which is larger: stm32l151cb or TLC5947? Give both values.",stm32l151cb:-40 °C to 105 °C|TLC5947:150 °C,-40 °C ≤ TA ≤ 105°C || Operating junction temperature 150 °C,ok,,
+C057,cross,"For 'output voltage', which is larger: TPS7A37 or ADS131M02? Give both values.",TPS7A37:3.3 V|ADS131M02:1.2 V,3.3 V || Internal reference voltage 1.2 V,ok,,
+C058,cross,"For 'output current', which is larger: TPS62203 or DRV8412? Give both values.",TPS62203:300 mA|DRV8412:20 A,Output current 300 mA || output current for latch shut down (per pin) 20 A,ok,,

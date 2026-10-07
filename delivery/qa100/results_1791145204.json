@@ -1,0 +1,461 @@
+[
+ {
+  "qid": "C010",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|INA219:3V to 5.5V",
+  "pred": "TMP1075: 6.5 V\nINA219: 26 V",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__INA219::package__1",
+   "TI__INA219::overview__1",
+   "TI__INA219::overview__10"
+  ],
+  "tokens": 2908,
+  "latency_s": 43.28
+ },
+ {
+  "qid": "C012",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|MPU9250:-0.5V",
+  "pred": "For 'input voltage', the TMP1075 has a larger maximum value:\n- TMP1075: 6.5 V\n- MPU9250: No specific input voltage range provided in the given excerpts.",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "InvenSense__MPU9250::typ_app__1",
+   "InvenSense__MPU9250::typ_app__3",
+   "InvenSense__MPU9250::typ_app__4"
+  ],
+  "tokens": 2769,
+  "latency_s": 25.46
+ },
+ {
+  "qid": "C017",
+  "type": "cross",
+  "ok": true,
+  "gold": "UCC21520:69.8°C/W|UCC21530:74.1°C/W",
+  "pred": "The junction-to-ambient thermal resistance (R θJA) for UCC21520 is 69.8 °C/W, while for UCC21530 it is 74.1 °C/W. Therefore, UCC21530 has a larger junction-to-ambient thermal resistance.",
+  "sources": [
+   "TI__UCC21520::abs_max__2",
+   "TI__UCC21520::typ_app__1",
+   "TI__UCC21520::func_desc__3",
+   "TI__UCC21530::abs_max__2",
+   "TI__UCC21530::typ_app__1",
+   "TI__UCC21530::func_desc__2"
+  ],
+  "tokens": 2700,
+  "latency_s": 33.76
+ },
+ {
+  "qid": "C018",
+  "type": "cross",
+  "ok": false,
+  "gold": "TLC5947:150 °C|lt1024:-55°C to 125°C",
+  "pred": "For 'operating temperature':\n- TLC5947: 25°C\n- LT1024: -55°C to 125°C\n\nThe LT1024 has a larger operating temperature range.",
+  "sources": [
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__4",
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::package"
+  ],
+  "tokens": 3233,
+  "latency_s": 34.87
+ },
+ {
+  "qid": "C019",
+  "type": "cross",
+  "ok": false,
+  "gold": "UCC28060:2.5 mA|AMC3301:4 mA",
+  "pred": "The excerpts do not provide specific output current values for UCC28060 or AMC3301. Therefore, it is not possible to determine which has a larger output current based on the given information.",
+  "sources": [
+   "TI__UCC28060::package__1",
+   "TI__UCC28060::typ_app__1",
+   "TI__UCC28060::typ_app__3",
+   "TI__AMC3301::typ_app__1",
+   "TI__AMC3301::front",
+   "TI__AMC3301::func_desc__1"
+  ],
+  "tokens": 2206,
+  "latency_s": 23.53
+ },
+ {
+  "qid": "C036",
+  "type": "cross",
+  "ok": false,
+  "gold": "AMC1311:-55°C to +125°C|TL431:150 °C",
+  "pred": "AMC1311: -55°C to 125°C\nTL431: 0°C to 70°C or -40°C to 85°C (depending on the variant)",
+  "sources": [
+   "TI__AMC1311::typ_app__1",
+   "TI__AMC1311::abs_max__3",
+   "TI__AMC1311::elec_chars__3",
+   "TI__TL431::abs_max",
+   "TI__TL431::typ_app__1",
+   "TI__TL431::func_desc"
+  ],
+  "tokens": 2862,
+  "latency_s": 27.82
+ },
+ {
+  "qid": "C038",
+  "type": "cross",
+  "ok": false,
+  "gold": "AMC1311:-55°C to +125°C|TL432:150 °C",
+  "pred": "The operating temperature range for the AMC1311 is -55°C to 125°C.\n\nThe operating temperature range for the TL432 is -40°C to 85°C.\n\nTherefore, the AMC1311 has a larger operating temperature range.",
+  "sources": [
+   "TI__AMC1311::typ_app__1",
+   "TI__AMC1311::abs_max__3",
+   "TI__AMC1311::elec_chars__3",
+   "TI__TL432::abs_max",
+   "TI__TL432::typ_app__1",
+   "TI__TL432::func_desc"
+  ],
+  "tokens": 2874,
+  "latency_s": 22.03
+ },
+ {
+  "qid": "C039",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP1075:1.7 V to 5.5 V|SN65HVD230:3.3 V",
+  "pred": "TMP1075: 6.5 V\nSN65HVD230: 3.6 V\n\nThe TMP1075 has a larger input voltage range for SCL, SDA, A1, A0, which is 6.5 V, compared to the SN65HVD230, which is 3.6 V.",
+  "sources": [
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1",
+   "TI__SN65HVD230::overview__8",
+   "TI__SN65HVD230::overview__1",
+   "TI__SN65HVD230::overview__4"
+  ],
+  "tokens": 3299,
+  "latency_s": 29.58
+ },
+ {
+  "qid": "C040",
+  "type": "cross",
+  "ok": false,
+  "gold": "INA219:3V to 5.5V|OPA2365:5.5 V",
+  "pred": "For 'input voltage', the OPA2365 has a larger input voltage range. The OPA2365 has an input voltage range of 0 to 2.2 V beyond the supply rail, while the INA219 can sense bus voltages from 0 to 26 V.",
+  "sources": [
+   "TI__INA219::package__1",
+   "TI__INA219::overview__1",
+   "TI__INA219::overview__10",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::func_desc__1"
+  ],
+  "tokens": 2917,
+  "latency_s": 31.39
+ },
+ {
+  "qid": "C041",
+  "type": "cross",
+  "ok": false,
+  "gold": "BME280:1.71 V to 3.6 V|TMP20:2.7 V to 5.5 V",
+  "pred": "The input voltage range for the BME280 is 1.8 V to 5.5 V.\n\nThe TMP20 has an input voltage range of 1.8 V to 5.5 V.\n\nBoth devices have the same input voltage range, so neither is larger.",
+  "sources": [
+   "Bosch__BME280::package__1",
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "TI__TMP20::overview__1",
+   "TI__TMP20::package__1",
+   "TI__TMP20::overview__3"
+  ],
+  "tokens": 2914,
+  "latency_s": 30.47
+ },
+ {
+  "qid": "C042",
+  "type": "cross",
+  "ok": false,
+  "gold": "OPA2376:2.2 V to 5.5 V|DRV8876:3.3 V",
+  "pred": "For 'input voltage', the maximum value for OPA2376 is 5.5 V, while for DRV8876, the logic input voltage range is 0 to 5.5 V. Therefore, both have the same maximum input voltage of 5.5 V.",
+  "sources": [
+   "TI__OPA2376::overview__1",
+   "TI__OPA2376::overview__2",
+   "TI__OPA2376::overview__4",
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::overview__2",
+   "TI__DRV8876::overview__6"
+  ],
+  "tokens": 3232,
+  "latency_s": 38.08
+ },
+ {
+  "qid": "C043",
+  "type": "cross",
+  "ok": true,
+  "gold": "LM5180:4.5 V to 65 V|OPA192:4.5 V to 36 V",
+  "pred": "For 'input voltage':\n- LM5180: 4.5 V to 65 V\n- OPA192: 4.5 V to 36 V\n\nThe LM5180 has a larger input voltage range.",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::overview__11",
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__2"
+  ],
+  "tokens": 3356,
+  "latency_s": 47.5
+ },
+ {
+  "qid": "C044",
+  "type": "cross",
+  "ok": false,
+  "gold": "SN65HVD230:3.3 V|BME280:1.71 V to 3.6 V",
+  "pred": "For 'input voltage', the SN65HVD230 has a Vref range of 0.45 V to 0.55 V CC, while the BME280 does not specify an exact range but operates within a supply voltage range of 1.71 V to 3.6 V. Therefore, the BME280 has a larger input voltage range compared to the SN65HVD230.",
+  "sources": [
+   "TI__SN65HVD230::overview__8",
+   "TI__SN65HVD230::overview__1",
+   "TI__SN65HVD230::overview__4",
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::package__1"
+  ],
+  "tokens": 3129,
+  "latency_s": 50.03
+ },
+ {
+  "qid": "C045",
+  "type": "cross",
+  "ok": false,
+  "gold": "TMP20:2.7 V to 5.5 V|INA219:3V to 5.5V",
+  "pred": "For 'input voltage' or common-mode voltage:\n- TMP20: 26 V\n- INA219: 26 V\n\nThe maximum common-mode voltage for both TMP219 and INA219 is 26 V.",
+  "sources": [
+   "TI__TMP20::overview__1",
+   "TI__TMP20::package__1",
+   "TI__TMP20::overview__3",
+   "TI__INA219::overview__10",
+   "TI__INA219::package__1",
+   "TI__INA219::overview__1"
+  ],
+  "tokens": 3105,
+  "latency_s": 43.05
+ },
+ {
+  "qid": "C046",
+  "type": "cross",
+  "ok": true,
+  "gold": "OPA192:4.5 V to 36 V|OPA2365:5.5 V",
+  "pred": "For 'input voltage range':\n- OPA192: 4.5 V to 36 V\n- OPA2365: 2.2 V to 5.5 V\n\nThe OPA192 has a larger input voltage range.",
+  "sources": [
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__2",
+   "TI__OPA2365::elec_chars__1",
+   "TI__OPA2365::front",
+   "TI__OPA2365::func_desc__1"
+  ],
+  "tokens": 2990,
+  "latency_s": 39.84
+ },
+ {
+  "qid": "C047",
+  "type": "cross",
+  "ok": false,
+  "gold": "LM5180:4.5 V to 65 V|TMP1075:1.7 V to 5.5 V",
+  "pred": "LM5180: 9.5 V to 65 V  \nTMP1075: –0.3 V to 6.5 V",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__8",
+   "TI__LM5180::overview__11",
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1"
+  ],
+  "tokens": 3242,
+  "latency_s": 18.4
+ },
+ {
+  "qid": "C048",
+  "type": "cross",
+  "ok": false,
+  "gold": "DRV8876:3.3 V|TMP1075:1.7 V to 5.5 V",
+  "pred": "For 'input voltage', TMP1075 has a larger maximum value:\n- TMP1075: 6.5 V\n- DRV8876: 5.5 V",
+  "sources": [
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::overview__2",
+   "TI__DRV8876::overview__6",
+   "TI__TMP1075::abs_max",
+   "TI__TMP1075::overview__2",
+   "TI__TMP1075::func_desc__1"
+  ],
+  "tokens": 2822,
+  "latency_s": 32.68
+ },
+ {
+  "qid": "C049",
+  "type": "cross",
+  "ok": true,
+  "gold": "OPA2376:2.2 V to 5.5 V|OPA192:4.5 V to 36 V",
+  "pred": "For 'input voltage' (specifically the supply voltage range):\n- OPA2376: 2.2 V to 5.5 V\n- OPA192: 4.5 V to 36 V\n\nThe OPA192 has a larger supply voltage range.",
+  "sources": [
+   "TI__OPA2376::overview__1",
+   "TI__OPA2376::overview__2",
+   "TI__OPA2376::overview__4",
+   "TI__OPA192::package__1",
+   "TI__OPA192::overview__10",
+   "TI__OPA192::overview__2"
+  ],
+  "tokens": 3422,
+  "latency_s": 32.71
+ },
+ {
+  "qid": "C050",
+  "type": "cross",
+  "ok": false,
+  "gold": "BME280:1.71 V to 3.6 V|DRV8876:3.3 V",
+  "pred": "For 'input voltage', the BME280 has a logic input voltage range of 0 to 5.5 V, while the DRV8876 has a logic input voltage range of 0 to 5.5 V. Both have the same input voltage range.",
+  "sources": [
+   "Bosch__BME280::func_desc__1",
+   "Bosch__BME280::func_desc__2",
+   "Bosch__BME280::package__1",
+   "TI__DRV8876::overview__5",
+   "TI__DRV8876::overview__2",
+   "TI__DRV8876::overview__6"
+  ],
+  "tokens": 2654,
+  "latency_s": 43.87
+ },
+ {
+  "qid": "C051",
+  "type": "cross",
+  "ok": true,
+  "gold": "TLC5947:150 °C|LM5180:-40°C to 150°C",
+  "pred": "For 'operating temperature':\n- TLC5947: -40°C to 85°C\n- LM5180: -40°C to 150°C\n\nThe LM5180 has a larger operating temperature range.",
+  "sources": [
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__4",
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__2",
+   "TI__LM5180::overview__8"
+  ],
+  "tokens": 3729,
+  "latency_s": 37.2
+ },
+ {
+  "qid": "C052",
+  "type": "cross",
+  "ok": false,
+  "gold": "TXS0104E:150 °C|lt1024:-55°C to 125°C",
+  "pred": "TXS0104E: -40°C to 85°C\nlt1024: -55°C to 125°C",
+  "sources": [
+   "TI__TXS0104E::typ_app__1",
+   "TI__TXS0104E::elec_chars__1",
+   "TI__TXS0104E::front",
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::package"
+  ],
+  "tokens": 2820,
+  "latency_s": 29.55
+ },
+ {
+  "qid": "C053",
+  "type": "cross",
+  "ok": true,
+  "gold": "LM5180:-40°C to 150°C|lt1024:-55°C to 125°C",
+  "pred": "LM5180 operates from -40°C to 150°C.\nLT1024 operates from -55°C to 125°C.\n\nThe larger operating temperature range is for LM5180 with values -40°C to 150°C compared to LT1024's -55°C to 125°C.",
+  "sources": [
+   "TI__LM5180::overview__1",
+   "TI__LM5180::overview__2",
+   "TI__LM5180::overview__8",
+   "ADI__lt1024::elec_chars__4",
+   "ADI__lt1024::overview",
+   "ADI__lt1024::package"
+  ],
+  "tokens": 3147,
+  "latency_s": 55.23
+ },
+ {
+  "qid": "C054",
+  "type": "cross",
+  "ok": true,
+  "gold": "BMP280:-40 °C to +85 °C|stm32l151cb:-40 °C to 105 °C",
+  "pred": "The operating temperature range for the BMP280 is -40°C to 85°C.\n\nThe operating temperature range for the STM32L151CB is -40°C to 105°C.\n\nTherefore, the STM32L151CB has a larger operating temperature range.",
+  "sources": [
+   "Bosch__BMP280::func_desc__1",
+   "Bosch__BMP280::func_desc__3",
+   "Bosch__BMP280::typ_app__1",
+   "ST__stm32l151cb::front__37",
+   "ST__stm32l151cb::front__1",
+   "ST__stm32l151cb::front__15"
+  ],
+  "tokens": 2697,
+  "latency_s": 45.38
+ },
+ {
+  "qid": "C055",
+  "type": "cross",
+  "ok": false,
+  "gold": "LIS3DH:-40 °C to +85 °C|TXS0104E:150 °C",
+  "pred": "LIS3DH operating temperature range: -40°C to +85°C\nTXS0104E operating temperature range: -40°C to +85°C\n\nBoth have the same operating temperature range.",
+  "sources": [
+   "ST__LIS3DH::front__1",
+   "ST__LIS3DH::front__5",
+   "ST__LIS3DH::front__6",
+   "TI__TXS0104E::typ_app__1",
+   "TI__TXS0104E::elec_chars__1",
+   "TI__TXS0104E::front"
+  ],
+  "tokens": 2900,
+  "latency_s": 33.87
+ },
+ {
+  "qid": "C056",
+  "type": "cross",
+  "ok": false,
+  "gold": "stm32l151cb:-40 °C to 105 °C|TLC5947:150 °C",
+  "pred": "For 'operating temperature':\n- STM32L151CB: -40°C to 85°C\n- TLC5947: VCC = 3.0 V to 5.5 V (no explicit operating temperature range given in the provided excerpts)",
+  "sources": [
+   "ST__stm32l151cb::front__37",
+   "ST__stm32l151cb::front__1",
+   "ST__stm32l151cb::front__15",
+   "TI__TLC5947::overview",
+   "TI__TLC5947::package__1",
+   "TI__TLC5947::package__4"
+  ],
+  "tokens": 3463,
+  "latency_s": 48.56
+ },
+ {
+  "qid": "C057",
+  "type": "cross",
+  "ok": false,
+  "gold": "TPS7A37:3.3 V|ADS131M02:1.2 V",
+  "pred": "For 'output voltage':\n\n- TPS7A37: 2.5V\n- ADS131M02: 1.2V\n\nThe TPS7A37 has a higher output voltage of 2.5V compared to the ADS131M02's 1.2V.",
+  "sources": [
+   "TI__TPS7A37::package__1",
+   "TI__TPS7A37::overview__1",
+   "TI__TPS7A37::overview__4",
+   "TI__ADS131M02::func_desc__1",
+   "TI__ADS131M02::overview__9",
+   "TI__ADS131M02::func_desc__6"
+  ],
+  "tokens": 2672,
+  "latency_s": 45.25
+ },
+ {
+  "qid": "C058",
+  "type": "cross",
+  "ok": false,
+  "gold": "TPS62203:300 mA|DRV8412:20 A",
+  "pred": "For 'output current':\n\n- TPS62203: 300 mA\n- DRV8412: 7A (continuous) or 12A (peak)",
+  "sources": [
+   "TI__TPS62203::overview__4",
+   "TI__TPS62203::overview__1",
+   "TI__TPS62203::package",
+   "TI__DRV8412::front",
+   "TI__DRV8412::func_desc",
+   "TI__DRV8412::overview__4"
+  ],
+  "tokens": 2842,
+  "latency_s": 31.0
+ }
+]

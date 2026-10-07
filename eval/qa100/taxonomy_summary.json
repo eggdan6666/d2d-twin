@@ -1,0 +1,1235 @@
+{
+ "protocol": {
+  "matcher_levels": "L1=score2 逐字 / L3=同行 40 字符窗口 / L4=整段合并 40 字符窗口（头条用 L4）",
+  "normalization": "两侧 NFKC（Ω U+03A9 / OHM-SIGN U+2126 / ℃ U+2103）+ 数值尾零规范化",
+  "ladder": {
+   "gen_side": "值+单位在 ctx 仍错",
+   "retrieval_miss": "值+单位在本档、没进 ctx",
+   "binding_lost": "数值在本档但配不到单位＝表格扁平化结构丢失",
+   "collision_elsewhere": "本档无此数值、别档有",
+   "value_absent": "全语料无此数值＝真解析丢失"
+  },
+  "upstream": [
+   "retrieval_miss",
+   "binding_lost",
+   "collision_elsewhere",
+   "value_absent"
+  ],
+  "seed_defs": {
+   "all3": "3 个 seed 全错",
+   "maj": "≥2/3 seed 错"
+  },
+  "scope": "ctx(含 context_for_parts 的 per 字符截断) ⊂ doc(该型号全文档) ⊂ corpus(全语料)",
+  "caveat_model_independence": "类别只由「固定 k=5 检索出的 ctx + 语料文本」决定，与被测模型无关。因此「上游丢失率跨规模不变」接近同义反复，不能作为规模鲁棒性的证据；规模效应必须看 scale_rescue（哪些题被救回、属于哪一类）。"
+ },
+ "groups": [
+  {
+   "group": "DCU-3B",
+   "files": [
+    "results_dcu3b_kt_s1.json",
+    "results_dcu3b_kt_s2.json",
+    "results_dcu3b_kt_s3.json"
+   ],
+   "dataset": "datasheet_qa100_v3.json",
+   "k_inferred": 5,
+   "k_detect_rate": 1.0,
+   "n_seeds": 3,
+   "ctx_reconstruction_fidelity": 1.0,
+   "sources_identical_across_seeds": "360/360",
+   "note": "bf16+eager",
+   "status": "ok",
+   "n_question": 120,
+   "wrong": {
+    "any": 87,
+    "all3": 76,
+    "maj": 83
+   },
+   "dist": {
+    "any": {
+     "retrieval_miss": 48,
+     "gen_side": 29,
+     "binding_lost": 7,
+     "collision_elsewhere": 3
+    },
+    "all3": {
+     "retrieval_miss": 47,
+     "gen_side": 22,
+     "binding_lost": 5,
+     "collision_elsewhere": 2
+    },
+    "maj": {
+     "retrieval_miss": 48,
+     "gen_side": 26,
+     "binding_lost": 7,
+     "collision_elsewhere": 2
+    }
+   },
+   "dist_other_levels": {
+    "L1_strict": {
+     "retrieval_miss": 39,
+     "gen_side": 22,
+     "binding_lost": 23,
+     "collision_elsewhere": 3
+    },
+    "L3_line": {
+     "retrieval_miss": 50,
+     "gen_side": 25,
+     "binding_lost": 9,
+     "collision_elsewhere": 3
+    }
+   },
+   "n_level_sensitive": 31,
+   "shares_all_questions_pct": {
+    "gen_side": {
+     "count_all3": 22,
+     "share_of_all_questions_pct": 18.3,
+     "share_of_wrong_all3_pct": 28.9,
+     "wilson95CI_of_wrong_pct": [
+      20.0,
+      40.0
+     ]
+    },
+    "retrieval_miss": {
+     "count_all3": 47,
+     "share_of_all_questions_pct": 39.2,
+     "share_of_wrong_all3_pct": 61.8,
+     "wilson95CI_of_wrong_pct": [
+      50.6,
+      71.9
+     ]
+    },
+    "binding_lost": {
+     "count_all3": 5,
+     "share_of_all_questions_pct": 4.2,
+     "share_of_wrong_all3_pct": 6.6,
+     "wilson95CI_of_wrong_pct": [
+      2.8,
+      14.5
+     ]
+    },
+    "collision_elsewhere": {
+     "count_all3": 2,
+     "share_of_all_questions_pct": 1.7,
+     "share_of_wrong_all3_pct": 2.6,
+     "wilson95CI_of_wrong_pct": [
+      0.7,
+      9.1
+     ]
+    },
+    "value_absent": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      4.8
+     ]
+    },
+    "unjudgeable": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      4.8
+     ]
+    }
+   },
+   "upstream": {
+    "any": {
+     "count": 58,
+     "of_wrong": "58/87",
+     "share_of_wrong_pct": 66.7,
+     "wilson95CI_pct": [
+      56.2,
+      75.7
+     ],
+     "share_of_all_questions_pct": 48.3
+    },
+    "all3": {
+     "count": 54,
+     "of_wrong": "54/76",
+     "share_of_wrong_pct": 71.1,
+     "wilson95CI_pct": [
+      60.0,
+      80.0
+     ],
+     "share_of_all_questions_pct": 45.0
+    },
+    "maj": {
+     "count": 57,
+     "of_wrong": "57/83",
+     "share_of_wrong_pct": 68.7,
+     "wilson95CI_pct": [
+      58.1,
+      77.6
+     ],
+     "share_of_all_questions_pct": 47.5
+    }
+   },
+   "ok_but_value_not_in_ctx": 3
+  },
+  {
+   "group": "DCU-7B",
+   "files": [
+    "results_dcu7b_kt_s1.json",
+    "results_dcu7b_kt_s2.json",
+    "results_dcu7b_kt_s3.json"
+   ],
+   "dataset": "datasheet_qa100_v3.json",
+   "k_inferred": 5,
+   "k_detect_rate": 1.0,
+   "n_seeds": 3,
+   "ctx_reconstruction_fidelity": 1.0,
+   "sources_identical_across_seeds": "360/360",
+   "note": "bf16+eager",
+   "status": "ok",
+   "n_question": 120,
+   "wrong": {
+    "any": 80,
+    "all3": 73,
+    "maj": 78
+   },
+   "dist": {
+    "any": {
+     "retrieval_miss": 47,
+     "binding_lost": 7,
+     "gen_side": 22,
+     "collision_elsewhere": 4
+    },
+    "all3": {
+     "retrieval_miss": 46,
+     "binding_lost": 6,
+     "gen_side": 17,
+     "collision_elsewhere": 4
+    },
+    "maj": {
+     "retrieval_miss": 47,
+     "binding_lost": 6,
+     "gen_side": 21,
+     "collision_elsewhere": 4
+    }
+   },
+   "dist_other_levels": {
+    "L1_strict": {
+     "retrieval_miss": 36,
+     "binding_lost": 22,
+     "gen_side": 18,
+     "collision_elsewhere": 4
+    },
+    "L3_line": {
+     "retrieval_miss": 48,
+     "binding_lost": 9,
+     "gen_side": 19,
+     "collision_elsewhere": 4
+    }
+   },
+   "n_level_sensitive": 31,
+   "shares_all_questions_pct": {
+    "gen_side": {
+     "count_all3": 17,
+     "share_of_all_questions_pct": 14.2,
+     "share_of_wrong_all3_pct": 23.3,
+     "wilson95CI_of_wrong_pct": [
+      15.1,
+      34.2
+     ]
+    },
+    "retrieval_miss": {
+     "count_all3": 46,
+     "share_of_all_questions_pct": 38.3,
+     "share_of_wrong_all3_pct": 63.0,
+     "wilson95CI_of_wrong_pct": [
+      51.5,
+      73.2
+     ]
+    },
+    "binding_lost": {
+     "count_all3": 6,
+     "share_of_all_questions_pct": 5.0,
+     "share_of_wrong_all3_pct": 8.2,
+     "wilson95CI_of_wrong_pct": [
+      3.8,
+      16.8
+     ]
+    },
+    "collision_elsewhere": {
+     "count_all3": 4,
+     "share_of_all_questions_pct": 3.3,
+     "share_of_wrong_all3_pct": 5.5,
+     "wilson95CI_of_wrong_pct": [
+      2.2,
+      13.3
+     ]
+    },
+    "value_absent": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.0
+     ]
+    },
+    "unjudgeable": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.0
+     ]
+    }
+   },
+   "upstream": {
+    "any": {
+     "count": 58,
+     "of_wrong": "58/80",
+     "share_of_wrong_pct": 72.5,
+     "wilson95CI_pct": [
+      61.9,
+      81.1
+     ],
+     "share_of_all_questions_pct": 48.3
+    },
+    "all3": {
+     "count": 56,
+     "of_wrong": "56/73",
+     "share_of_wrong_pct": 76.7,
+     "wilson95CI_pct": [
+      65.8,
+      84.9
+     ],
+     "share_of_all_questions_pct": 46.7
+    },
+    "maj": {
+     "count": 57,
+     "of_wrong": "57/78",
+     "share_of_wrong_pct": 73.1,
+     "wilson95CI_pct": [
+      62.3,
+      81.7
+     ],
+     "share_of_all_questions_pct": 47.5
+    }
+   },
+   "ok_but_value_not_in_ctx": 3
+  },
+  {
+   "group": "DCU-14B",
+   "files": [
+    "results_dcu14b_kt_s1.json",
+    "results_dcu14b_kt_s2.json",
+    "results_dcu14b_kt_s3.json"
+   ],
+   "dataset": "datasheet_qa100_v3.json",
+   "k_inferred": 5,
+   "k_detect_rate": 1.0,
+   "n_seeds": 3,
+   "ctx_reconstruction_fidelity": 1.0,
+   "sources_identical_across_seeds": "360/360",
+   "note": "bf16+eager",
+   "status": "ok",
+   "n_question": 120,
+   "wrong": {
+    "any": 71,
+    "all3": 64,
+    "maj": 68
+   },
+   "dist": {
+    "any": {
+     "retrieval_miss": 46,
+     "binding_lost": 6,
+     "gen_side": 16,
+     "collision_elsewhere": 3
+    },
+    "all3": {
+     "retrieval_miss": 44,
+     "binding_lost": 5,
+     "gen_side": 13,
+     "collision_elsewhere": 2
+    },
+    "maj": {
+     "retrieval_miss": 46,
+     "binding_lost": 6,
+     "gen_side": 14,
+     "collision_elsewhere": 2
+    }
+   },
+   "dist_other_levels": {
+    "L1_strict": {
+     "retrieval_miss": 35,
+     "binding_lost": 20,
+     "gen_side": 13,
+     "collision_elsewhere": 3
+    },
+    "L3_line": {
+     "retrieval_miss": 45,
+     "binding_lost": 7,
+     "gen_side": 16,
+     "collision_elsewhere": 3
+    }
+   },
+   "n_level_sensitive": 31,
+   "shares_all_questions_pct": {
+    "gen_side": {
+     "count_all3": 13,
+     "share_of_all_questions_pct": 10.8,
+     "share_of_wrong_all3_pct": 20.3,
+     "wilson95CI_of_wrong_pct": [
+      12.3,
+      31.7
+     ]
+    },
+    "retrieval_miss": {
+     "count_all3": 44,
+     "share_of_all_questions_pct": 36.7,
+     "share_of_wrong_all3_pct": 68.8,
+     "wilson95CI_of_wrong_pct": [
+      56.6,
+      78.8
+     ]
+    },
+    "binding_lost": {
+     "count_all3": 5,
+     "share_of_all_questions_pct": 4.2,
+     "share_of_wrong_all3_pct": 7.8,
+     "wilson95CI_of_wrong_pct": [
+      3.4,
+      17.0
+     ]
+    },
+    "collision_elsewhere": {
+     "count_all3": 2,
+     "share_of_all_questions_pct": 1.7,
+     "share_of_wrong_all3_pct": 3.1,
+     "wilson95CI_of_wrong_pct": [
+      0.9,
+      10.7
+     ]
+    },
+    "value_absent": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.7
+     ]
+    },
+    "unjudgeable": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.7
+     ]
+    }
+   },
+   "upstream": {
+    "any": {
+     "count": 55,
+     "of_wrong": "55/71",
+     "share_of_wrong_pct": 77.5,
+     "wilson95CI_pct": [
+      66.5,
+      85.6
+     ],
+     "share_of_all_questions_pct": 45.8
+    },
+    "all3": {
+     "count": 51,
+     "of_wrong": "51/64",
+     "share_of_wrong_pct": 79.7,
+     "wilson95CI_pct": [
+      68.3,
+      87.7
+     ],
+     "share_of_all_questions_pct": 42.5
+    },
+    "maj": {
+     "count": 54,
+     "of_wrong": "54/68",
+     "share_of_wrong_pct": 79.4,
+     "wilson95CI_pct": [
+      68.4,
+      87.3
+     ],
+     "share_of_all_questions_pct": 45.0
+    }
+   },
+   "ok_but_value_not_in_ctx": 6
+  },
+  {
+   "group": "Local-3B-q4",
+   "files": [
+    "results_kt_rag3b_s1.json",
+    "results_kt_rag3b_s2.json",
+    "results_kt_rag3b_s3.json"
+   ],
+   "dataset": "datasheet_qa100_v3.json",
+   "k_inferred": 5,
+   "k_detect_rate": 1.0,
+   "n_seeds": 3,
+   "ctx_reconstruction_fidelity": 1.0,
+   "sources_identical_across_seeds": "360/360",
+   "note": "Ollama q4_K_M",
+   "status": "ok",
+   "n_question": 120,
+   "wrong": {
+    "any": 88,
+    "all3": 71,
+    "maj": 80
+   },
+   "dist": {
+    "any": {
+     "retrieval_miss": 48,
+     "gen_side": 30,
+     "binding_lost": 7,
+     "collision_elsewhere": 3
+    },
+    "all3": {
+     "retrieval_miss": 47,
+     "gen_side": 19,
+     "binding_lost": 3,
+     "collision_elsewhere": 2
+    },
+    "maj": {
+     "retrieval_miss": 48,
+     "gen_side": 24,
+     "binding_lost": 6,
+     "collision_elsewhere": 2
+    }
+   },
+   "dist_other_levels": {
+    "L1_strict": {
+     "retrieval_miss": 39,
+     "gen_side": 22,
+     "binding_lost": 24,
+     "collision_elsewhere": 3
+    },
+    "L3_line": {
+     "retrieval_miss": 51,
+     "gen_side": 25,
+     "binding_lost": 9,
+     "collision_elsewhere": 3
+    }
+   },
+   "n_level_sensitive": 31,
+   "shares_all_questions_pct": {
+    "gen_side": {
+     "count_all3": 19,
+     "share_of_all_questions_pct": 15.8,
+     "share_of_wrong_all3_pct": 26.8,
+     "wilson95CI_of_wrong_pct": [
+      17.9,
+      38.1
+     ]
+    },
+    "retrieval_miss": {
+     "count_all3": 47,
+     "share_of_all_questions_pct": 39.2,
+     "share_of_wrong_all3_pct": 66.2,
+     "wilson95CI_of_wrong_pct": [
+      54.6,
+      76.1
+     ]
+    },
+    "binding_lost": {
+     "count_all3": 3,
+     "share_of_all_questions_pct": 2.5,
+     "share_of_wrong_all3_pct": 4.2,
+     "wilson95CI_of_wrong_pct": [
+      1.4,
+      11.7
+     ]
+    },
+    "collision_elsewhere": {
+     "count_all3": 2,
+     "share_of_all_questions_pct": 1.7,
+     "share_of_wrong_all3_pct": 2.8,
+     "wilson95CI_of_wrong_pct": [
+      0.8,
+      9.7
+     ]
+    },
+    "value_absent": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.1
+     ]
+    },
+    "unjudgeable": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.1
+     ]
+    }
+   },
+   "upstream": {
+    "any": {
+     "count": 58,
+     "of_wrong": "58/88",
+     "share_of_wrong_pct": 65.9,
+     "wilson95CI_pct": [
+      55.5,
+      75.0
+     ],
+     "share_of_all_questions_pct": 48.3
+    },
+    "all3": {
+     "count": 52,
+     "of_wrong": "52/71",
+     "share_of_wrong_pct": 73.2,
+     "wilson95CI_pct": [
+      61.9,
+      82.1
+     ],
+     "share_of_all_questions_pct": 43.3
+    },
+    "maj": {
+     "count": 56,
+     "of_wrong": "56/80",
+     "share_of_wrong_pct": 70.0,
+     "wilson95CI_pct": [
+      59.2,
+      78.9
+     ],
+     "share_of_all_questions_pct": 46.7
+    }
+   },
+   "ok_but_value_not_in_ctx": 3
+  },
+  {
+   "group": "Local-7B-loose",
+   "files": [
+    "results_kt_rag7b_s1.json",
+    "results_kt_rag7b_s2.json",
+    "results_kt_rag7b_s3.json"
+   ],
+   "dataset": "datasheet_qa100_v3.json",
+   "k_inferred": 5,
+   "k_detect_rate": 1.0,
+   "n_seeds": 3,
+   "ctx_reconstruction_fidelity": 1.0,
+   "sources_identical_across_seeds": "360/360",
+   "note": "Ollama q4_K_M+loose",
+   "status": "ok",
+   "n_question": 120,
+   "wrong": {
+    "any": 76,
+    "all3": 63,
+    "maj": 71
+   },
+   "dist": {
+    "any": {
+     "retrieval_miss": 47,
+     "binding_lost": 5,
+     "gen_side": 20,
+     "collision_elsewhere": 4
+    },
+    "all3": {
+     "retrieval_miss": 46,
+     "binding_lost": 3,
+     "gen_side": 11,
+     "collision_elsewhere": 3
+    },
+    "maj": {
+     "retrieval_miss": 46,
+     "binding_lost": 4,
+     "gen_side": 17,
+     "collision_elsewhere": 4
+    }
+   },
+   "dist_other_levels": {
+    "L1_strict": {
+     "retrieval_miss": 37,
+     "gen_side": 16,
+     "binding_lost": 19,
+     "collision_elsewhere": 4
+    },
+    "L3_line": {
+     "retrieval_miss": 48,
+     "binding_lost": 7,
+     "gen_side": 17,
+     "collision_elsewhere": 4
+    }
+   },
+   "n_level_sensitive": 31,
+   "shares_all_questions_pct": {
+    "gen_side": {
+     "count_all3": 11,
+     "share_of_all_questions_pct": 9.2,
+     "share_of_wrong_all3_pct": 17.5,
+     "wilson95CI_of_wrong_pct": [
+      10.0,
+      28.6
+     ]
+    },
+    "retrieval_miss": {
+     "count_all3": 46,
+     "share_of_all_questions_pct": 38.3,
+     "share_of_wrong_all3_pct": 73.0,
+     "wilson95CI_of_wrong_pct": [
+      61.0,
+      82.4
+     ]
+    },
+    "binding_lost": {
+     "count_all3": 3,
+     "share_of_all_questions_pct": 2.5,
+     "share_of_wrong_all3_pct": 4.8,
+     "wilson95CI_of_wrong_pct": [
+      1.6,
+      13.1
+     ]
+    },
+    "collision_elsewhere": {
+     "count_all3": 3,
+     "share_of_all_questions_pct": 2.5,
+     "share_of_wrong_all3_pct": 4.8,
+     "wilson95CI_of_wrong_pct": [
+      1.6,
+      13.1
+     ]
+    },
+    "value_absent": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.7
+     ]
+    },
+    "unjudgeable": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      5.7
+     ]
+    }
+   },
+   "upstream": {
+    "any": {
+     "count": 56,
+     "of_wrong": "56/76",
+     "share_of_wrong_pct": 73.7,
+     "wilson95CI_pct": [
+      62.8,
+      82.3
+     ],
+     "share_of_all_questions_pct": 46.7
+    },
+    "all3": {
+     "count": 52,
+     "of_wrong": "52/63",
+     "share_of_wrong_pct": 82.5,
+     "wilson95CI_pct": [
+      71.4,
+      90.0
+     ],
+     "share_of_all_questions_pct": 43.3
+    },
+    "maj": {
+     "count": 54,
+     "of_wrong": "54/71",
+     "share_of_wrong_pct": 76.1,
+     "wilson95CI_pct": [
+      65.0,
+      84.5
+     ],
+     "share_of_all_questions_pct": 45.0
+    }
+   },
+   "ok_but_value_not_in_ctx": 5
+  },
+  {
+   "group": "API-rag",
+   "files": [
+    "results_v31_api_rag.json"
+   ],
+   "dataset": "datasheet_qa100_v3.json",
+   "k_inferred": 5,
+   "k_detect_rate": 1.0,
+   "n_seeds": 1,
+   "ctx_reconstruction_fidelity": 1.0,
+   "sources_identical_across_seeds": "120/120",
+   "note": "商用API 单seed",
+   "status": "ok",
+   "n_question": 120,
+   "wrong": {
+    "any": 76,
+    "all3": 76,
+    "maj": 76
+   },
+   "dist": {
+    "any": {
+     "retrieval_miss": 46,
+     "gen_side": 19,
+     "binding_lost": 7,
+     "collision_elsewhere": 4
+    },
+    "all3": {
+     "retrieval_miss": 46,
+     "gen_side": 19,
+     "binding_lost": 7,
+     "collision_elsewhere": 4
+    },
+    "maj": {
+     "retrieval_miss": 46,
+     "gen_side": 19,
+     "binding_lost": 7,
+     "collision_elsewhere": 4
+    }
+   },
+   "dist_other_levels": {
+    "L1_strict": {
+     "retrieval_miss": 35,
+     "gen_side": 14,
+     "binding_lost": 23,
+     "collision_elsewhere": 4
+    },
+    "L3_line": {
+     "retrieval_miss": 46,
+     "gen_side": 17,
+     "binding_lost": 9,
+     "collision_elsewhere": 4
+    }
+   },
+   "n_level_sensitive": 31,
+   "shares_all_questions_pct": {
+    "gen_side": {
+     "count_all3": 19,
+     "share_of_all_questions_pct": 15.8,
+     "share_of_wrong_all3_pct": 25.0,
+     "wilson95CI_of_wrong_pct": [
+      16.6,
+      35.8
+     ]
+    },
+    "retrieval_miss": {
+     "count_all3": 46,
+     "share_of_all_questions_pct": 38.3,
+     "share_of_wrong_all3_pct": 60.5,
+     "wilson95CI_of_wrong_pct": [
+      49.3,
+      70.8
+     ]
+    },
+    "binding_lost": {
+     "count_all3": 7,
+     "share_of_all_questions_pct": 5.8,
+     "share_of_wrong_all3_pct": 9.2,
+     "wilson95CI_of_wrong_pct": [
+      4.5,
+      17.8
+     ]
+    },
+    "collision_elsewhere": {
+     "count_all3": 4,
+     "share_of_all_questions_pct": 3.3,
+     "share_of_wrong_all3_pct": 5.3,
+     "wilson95CI_of_wrong_pct": [
+      2.1,
+      12.8
+     ]
+    },
+    "value_absent": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      4.8
+     ]
+    },
+    "unjudgeable": {
+     "count_all3": 0,
+     "share_of_all_questions_pct": 0.0,
+     "share_of_wrong_all3_pct": 0.0,
+     "wilson95CI_of_wrong_pct": [
+      0.0,
+      4.8
+     ]
+    }
+   },
+   "upstream": {
+    "any": {
+     "count": 57,
+     "of_wrong": "57/76",
+     "share_of_wrong_pct": 75.0,
+     "wilson95CI_pct": [
+      64.2,
+      83.4
+     ],
+     "share_of_all_questions_pct": 47.5
+    },
+    "all3": {
+     "count": 57,
+     "of_wrong": "57/76",
+     "share_of_wrong_pct": 75.0,
+     "wilson95CI_pct": [
+      64.2,
+      83.4
+     ],
+     "share_of_all_questions_pct": 47.5
+    },
+    "maj": {
+     "count": 57,
+     "of_wrong": "57/76",
+     "share_of_wrong_pct": 75.0,
+     "wilson95CI_pct": [
+      64.2,
+      83.4
+     ],
+     "share_of_all_questions_pct": 47.5
+    }
+   },
+   "ok_but_value_not_in_ctx": 4
+  },
+  {
+   "group": "App-7B-loose",
+   "files": [
+    "results_app36_7bloose.json"
+   ],
+   "dataset": "datasheet_qa100_v6.json",
+   "k_inferred": 3,
+   "k_detect_rate": 0.0,
+   "n_seeds": 1,
+   "ctx_reconstruction_fidelity": 0.0,
+   "sources_identical_across_seeds": "36/36",
+   "note": "app 题型批次三 36 题",
+   "status": "EXCLUDED: ctx 重构保真 <90%，当时检索协议与现 build_ctx 不同，无法断言「在不在模型眼前」"
+  }
+ ],
+ "invariance_tests": {
+  "DCU-3B vs DCU-7B | 上游丢失(除生成侧) [all3]": {
+   "n_paired": 120,
+   "A": 54,
+   "B": 56,
+   "share_A_pct": 45.0,
+   "share_B_pct": 46.7,
+   "discordant": [
+    3,
+    5
+   ],
+   "mcnemar_exact_p": 0.7266,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-7B | 上游丢失(除生成侧) [maj]": {
+   "n_paired": 120,
+   "A": 57,
+   "B": 57,
+   "share_A_pct": 47.5,
+   "share_B_pct": 47.5,
+   "discordant": [
+    3,
+    3
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-7B | 仅检索漏捞 [all3]": {
+   "n_paired": 120,
+   "A": 47,
+   "B": 46,
+   "share_A_pct": 39.2,
+   "share_B_pct": 38.3,
+   "discordant": [
+    2,
+    1
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-7B | 仅检索漏捞 [maj]": {
+   "n_paired": 120,
+   "A": 48,
+   "B": 47,
+   "share_A_pct": 40.0,
+   "share_B_pct": 39.2,
+   "discordant": [
+    1,
+    0
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-7B | 仅结构脱钩 binding_lost [all3]": {
+   "n_paired": 120,
+   "A": 5,
+   "B": 6,
+   "share_A_pct": 4.2,
+   "share_B_pct": 5.0,
+   "discordant": [
+    1,
+    2
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-7B | 仅结构脱钩 binding_lost [maj]": {
+   "n_paired": 120,
+   "A": 7,
+   "B": 6,
+   "share_A_pct": 5.8,
+   "share_B_pct": 5.0,
+   "discordant": [
+    2,
+    1
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-14B | 上游丢失(除生成侧) [all3]": {
+   "n_paired": 120,
+   "A": 54,
+   "B": 51,
+   "share_A_pct": 45.0,
+   "share_B_pct": 42.5,
+   "discordant": [
+    4,
+    1
+   ],
+   "mcnemar_exact_p": 0.375,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-14B | 上游丢失(除生成侧) [maj]": {
+   "n_paired": 120,
+   "A": 57,
+   "B": 54,
+   "share_A_pct": 47.5,
+   "share_B_pct": 45.0,
+   "discordant": [
+    3,
+    0
+   ],
+   "mcnemar_exact_p": 0.25,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-14B | 仅检索漏捞 [all3]": {
+   "n_paired": 120,
+   "A": 47,
+   "B": 44,
+   "share_A_pct": 39.2,
+   "share_B_pct": 36.7,
+   "discordant": [
+    3,
+    0
+   ],
+   "mcnemar_exact_p": 0.25,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-14B | 仅检索漏捞 [maj]": {
+   "n_paired": 120,
+   "A": 48,
+   "B": 46,
+   "share_A_pct": 40.0,
+   "share_B_pct": 38.3,
+   "discordant": [
+    2,
+    0
+   ],
+   "mcnemar_exact_p": 0.5,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-14B | 仅结构脱钩 binding_lost [all3]": {
+   "n_paired": 120,
+   "A": 5,
+   "B": 5,
+   "share_A_pct": 4.2,
+   "share_B_pct": 4.2,
+   "discordant": [
+    1,
+    1
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-3B vs DCU-14B | 仅结构脱钩 binding_lost [maj]": {
+   "n_paired": 120,
+   "A": 7,
+   "B": 6,
+   "share_A_pct": 5.8,
+   "share_B_pct": 5.0,
+   "discordant": [
+    1,
+    0
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-7B vs DCU-14B | 上游丢失(除生成侧) [all3]": {
+   "n_paired": 120,
+   "A": 56,
+   "B": 51,
+   "share_A_pct": 46.7,
+   "share_B_pct": 42.5,
+   "discordant": [
+    6,
+    1
+   ],
+   "mcnemar_exact_p": 0.125,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-7B vs DCU-14B | 上游丢失(除生成侧) [maj]": {
+   "n_paired": 120,
+   "A": 57,
+   "B": 54,
+   "share_A_pct": 47.5,
+   "share_B_pct": 45.0,
+   "discordant": [
+    4,
+    1
+   ],
+   "mcnemar_exact_p": 0.375,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-7B vs DCU-14B | 仅检索漏捞 [all3]": {
+   "n_paired": 120,
+   "A": 46,
+   "B": 44,
+   "share_A_pct": 38.3,
+   "share_B_pct": 36.7,
+   "discordant": [
+    3,
+    1
+   ],
+   "mcnemar_exact_p": 0.625,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-7B vs DCU-14B | 仅检索漏捞 [maj]": {
+   "n_paired": 120,
+   "A": 47,
+   "B": 46,
+   "share_A_pct": 39.2,
+   "share_B_pct": 38.3,
+   "discordant": [
+    1,
+    0
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-7B vs DCU-14B | 仅结构脱钩 binding_lost [all3]": {
+   "n_paired": 120,
+   "A": 6,
+   "B": 5,
+   "share_A_pct": 5.0,
+   "share_B_pct": 4.2,
+   "discordant": [
+    1,
+    0
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  },
+  "DCU-7B vs DCU-14B | 仅结构脱钩 binding_lost [maj]": {
+   "n_paired": 120,
+   "A": 6,
+   "B": 6,
+   "share_A_pct": 5.0,
+   "share_B_pct": 5.0,
+   "discordant": [
+    1,
+    1
+   ],
+   "mcnemar_exact_p": 1.0,
+   "verdict": "分辨不出（与「跨规模不变」一致）",
+   "interpret": "近似同义反复（类别与模型无关），规模效应看 scale_rescue"
+  }
+ },
+ "per_question_rows": 720,
+ "scale_rescue": {
+  "DCU-3B → DCU-7B": {
+   "rescued_total": 14,
+   "rescued_by_category": {
+    "gen_side": 11,
+    "binding_lost": 1,
+    "retrieval_miss": 2
+   },
+   "regressed_total": 11,
+   "regressed_by_category": {
+    "binding_lost": 2,
+    "collision_elsewhere": 2,
+    "retrieval_miss": 1,
+    "gen_side": 6
+   },
+   "net": 3,
+   "share_of_rescues_that_were_gen_side_pct": 78.6
+  },
+  "DCU-3B → DCU-14B": {
+   "rescued_total": 14,
+   "rescued_by_category": {
+    "gen_side": 10,
+    "binding_lost": 1,
+    "retrieval_miss": 3
+   },
+   "regressed_total": 2,
+   "regressed_by_category": {
+    "binding_lost": 1,
+    "gen_side": 1
+   },
+   "net": 12,
+   "share_of_rescues_that_were_gen_side_pct": 71.4
+  },
+  "Local-3B-q4 → Local-7B-loose": {
+   "rescued_total": 11,
+   "rescued_by_category": {
+    "gen_side": 10,
+    "retrieval_miss": 1
+   },
+   "regressed_total": 3,
+   "regressed_by_category": {
+    "gen_side": 2,
+    "collision_elsewhere": 1
+   },
+   "net": 8,
+   "share_of_rescues_that_were_gen_side_pct": 90.9
+  }
+ },
+ "resolution": {
+  "n_questions_per_model": 120,
+  "binomial_SE_at_42pct_pp": 4.51,
+  "single_model_95CI_halfwidth_pp": 8.8,
+  "paired_detectable_diff_pp": 12.5,
+  "statement": "per-question n=120 时单模型比例 95%CI 半宽≈8.8pp、同题配对可分辨差≈12.5pp；「跨规模纹丝不动」只能写成「差值低于 12pp 时检验不出」，不可写「完全不变」。"
+ },
+ "spotcheck": {
+  "n": 15,
+  "n_level_sensitive_total": 123,
+  "by_category": {
+   "binding_lost": 4,
+   "retrieval_miss": 5,
+   "gen_side": 3,
+   "collision_elsewhere": 3
+  }
+ }
+}
