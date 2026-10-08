@@ -16,7 +16,9 @@
   "TMP126",
   "LIS2DW12",
   "INA226",
-  "TMP461"
+  "TMP461",
+  "INA219",
+  "ADS1115"
  ],
  "n_samples_per_chip": 12,
  "note_denominator": "passed/applicable；SKIPPED 由 IR 声明决定，不计入分母；白送通过另列",
@@ -97,6 +99,16 @@
    "strict": 0,
    "relax": 0,
    "n": 12
+  },
+  "INA219": {
+   "strict": 2,
+   "relax": 2,
+   "n": 12
+  },
+  "ADS1115": {
+   "strict": 11,
+   "relax": 11,
+   "n": 12
   }
  },
  "per_chip_scored": {
@@ -159,6 +171,14 @@
   "TMP461": {
    "applicable": 48,
    "passed": 15
+  },
+  "INA219": {
+   "applicable": 48,
+   "passed": 36
+  },
+  "ADS1115": {
+   "applicable": 36,
+   "passed": 35
   }
  },
  "vacuous_excluded": [
@@ -226,10 +246,10 @@
    "test": "test_readonly_protection",
    "no": "③",
    "label": "RO write protection",
-   "clusters": 14,
-   "fail": 89,
-   "applicable": 168,
-   "rate": 53.0,
+   "clusters": 16,
+   "fail": 98,
+   "applicable": 192,
+   "rate": 51.0,
    "per_chip": [
     {
      "chip": "TMP1075",
@@ -314,25 +334,37 @@
      "fail": 9,
      "applicable": 12,
      "passed": 3
+    },
+    {
+     "chip": "INA219",
+     "fail": 9,
+     "applicable": 12,
+     "passed": 3
+    },
+    {
+     "chip": "ADS1115",
+     "fail": 0,
+     "applicable": 12,
+     "passed": 12
     }
    ],
    "binomial_ci_if_wrongly_independent": {
-    "lo": 45.4,
-    "hi": 60.5
+    "lo": 44.0,
+    "hi": 58.1
    },
    "ci": {
-    "clusters": 14,
-    "lo": 37.5,
-    "hi": 67.3
+    "clusters": 16,
+    "lo": 35.4,
+    "hi": 65.6
    }
   },
   "test_reset_values": {
    "test": "test_reset_values",
    "no": "②",
    "label": "Reset values",
-   "clusters": 15,
+   "clusters": 17,
    "fail": 0,
-   "applicable": 180,
+   "applicable": 204,
    "rate": 0.0,
    "per_chip": [
     {
@@ -424,6 +456,18 @@
      "fail": 0,
      "applicable": 12,
      "passed": 12
+    },
+    {
+     "chip": "INA219",
+     "fail": 0,
+     "applicable": 12,
+     "passed": 12
+    },
+    {
+     "chip": "ADS1115",
+     "fail": 0,
+     "applicable": 12,
+     "passed": 12
     }
    ],
    "binomial_ci_if_wrongly_independent": {
@@ -433,17 +477,17 @@
    "ci": null,
    "bound": {
     "method": "rule of three",
-    "upper_pct": 1.7
+    "upper_pct": 1.5
    }
   },
   "test_rw_field_persistence": {
    "test": "test_rw_field_persistence",
    "no": "④",
    "label": "RW bitfield persistence",
-   "clusters": 15,
-   "fail": 142,
-   "applicable": 180,
-   "rate": 78.9,
+   "clusters": 17,
+   "fail": 145,
+   "applicable": 204,
+   "rate": 71.1,
    "per_chip": [
     {
      "chip": "TMP1075",
@@ -534,16 +578,28 @@
      "fail": 12,
      "applicable": 12,
      "passed": 0
+    },
+    {
+     "chip": "INA219",
+     "fail": 2,
+     "applicable": 12,
+     "passed": 10
+    },
+    {
+     "chip": "ADS1115",
+     "fail": 1,
+     "applicable": 12,
+     "passed": 11
     }
    ],
    "binomial_ci_if_wrongly_independent": {
-    "lo": 72.9,
-    "hi": 84.9
+    "lo": 64.9,
+    "hi": 77.3
    },
    "ci": {
-    "clusters": 15,
-    "lo": 58.9,
-    "hi": 95.6
+    "clusters": 17,
+    "lo": 50.5,
+    "hi": 89.2
    }
   },
   "test_single_byte_semantics": {
@@ -602,10 +658,10 @@
    "test": "test_write_trigger_fields",
    "no": "⑤",
    "label": "Write-trigger / self-clearing bits",
-   "clusters": 8,
-   "fail": 60,
-   "applicable": 96,
-   "rate": 62.5,
+   "clusters": 9,
+   "fail": 61,
+   "applicable": 108,
+   "rate": 56.5,
    "per_chip": [
     {
      "chip": "TMP1075",
@@ -654,30 +710,36 @@
      "fail": 7,
      "applicable": 12,
      "passed": 5
+    },
+    {
+     "chip": "INA219",
+     "fail": 1,
+     "applicable": 12,
+     "passed": 11
     }
    ],
    "binomial_ci_if_wrongly_independent": {
-    "lo": 52.8,
-    "hi": 72.2
+    "lo": 47.1,
+    "hi": 65.8
    },
    "ci": {
-    "clusters": 8,
-    "lo": 42.7,
-    "hi": 81.2
+    "clusters": 9,
+    "lo": 36.1,
+    "hi": 75.0
    }
   }
  },
  "assertion4_split": {
-  "d4_applicable": 180,
-  "strict_fail": 142,
-  "relax_c_only_fail": 134,
-  "relax_cu_fail": 95,
-  "4a_documented_fail": 95,
+  "d4_applicable": 204,
+  "strict_fail": 145,
+  "relax_c_only_fail": 137,
+  "relax_cu_fail": 98,
+  "4a_documented_fail": 98,
   "4b_confirmed_convention_fail": 8,
   "4u_unverified_fail": 39,
-  "4a_pct": 52.8,
-  "4b_pct": 4.4,
-  "4u_pct": 21.7,
+  "4a_pct": 48.0,
+  "4b_pct": 3.9,
+  "4u_pct": 19.1,
   "4b_note": "④b＝只翻 tier=C 就能消掉的失败（文档确实没给逐位访问码，纯 Q0 约定）；④u＝再翻 UNVERIFIED 才多消掉的（证据未核，不计入能力结论）；④a＝两档都翻仍失败（真读不懂）",
   "4b_tier_breakdown": {
    "UNVERIFIED": 11,
@@ -706,12 +768,12 @@
   },
   "spearman": {
    "all_chips": {
-    "n_chips": 15,
+    "n_chips": 17,
     "features": {
      "regs": {
       "label": "寄存器数",
-      "rho": -0.749,
-      "p": 0.002,
+      "rho": -0.782,
+      "p": 0.0004,
       "method": "MC_perm(200000)",
       "values": {
        "TMP1075": 5,
@@ -728,13 +790,15 @@
        "TMP126": 9,
        "LIS2DW12": 15,
        "INA226": 10,
-       "TMP461": 24
+       "TMP461": 24,
+       "INA219": 6,
+       "ADS1115": 4
       }
      },
      "fields": {
       "label": "位域数",
-      "rho": -0.598,
-      "p": 0.0207,
+      "rho": -0.69,
+      "p": 0.003,
       "method": "MC_perm(200000)",
       "values": {
        "TMP1075": 14,
@@ -751,13 +815,15 @@
        "TMP126": 36,
        "LIS2DW12": 55,
        "INA226": 29,
-       "TMP461": 47
+       "TMP461": 47,
+       "INA219": 16,
+       "ADS1115": 12
       }
      },
      "special": {
       "label": "特殊语义寄存器数",
-      "rho": -0.84,
-      "p": 0.0002,
+      "rho": -0.841,
+      "p": 0.0001,
       "method": "MC_perm(200000)",
       "values": {
        "TMP1075": 3,
@@ -774,18 +840,20 @@
        "TMP126": 8,
        "LIS2DW12": 8,
        "INA226": 9,
-       "TMP461": 19
+       "TMP461": 19,
+       "INA219": 6,
+       "ADS1115": 1
       }
      }
     }
    },
    "excl_positive_control": {
-    "n_chips": 14,
+    "n_chips": 16,
     "features": {
      "regs": {
       "label": "寄存器数",
-      "rho": -0.704,
-      "p": 0.0065,
+      "rho": -0.752,
+      "p": 0.0013,
       "method": "MC_perm(200000)",
       "values": {
        "TMP1075": 5,
@@ -801,13 +869,15 @@
        "TMP126": 9,
        "LIS2DW12": 15,
        "INA226": 10,
-       "TMP461": 24
+       "TMP461": 24,
+       "INA219": 6,
+       "ADS1115": 4
       }
      },
      "fields": {
       "label": "位域数",
-      "rho": -0.527,
-      "p": 0.0552,
+      "rho": -0.661,
+      "p": 0.0067,
       "method": "MC_perm(200000)",
       "values": {
        "TMP1075": 14,
@@ -823,13 +893,15 @@
        "TMP126": 36,
        "LIS2DW12": 55,
        "INA226": 29,
-       "TMP461": 47
+       "TMP461": 47,
+       "INA219": 16,
+       "ADS1115": 12
       }
      },
      "special": {
       "label": "特殊语义寄存器数",
-      "rho": -0.803,
-      "p": 0.0009,
+      "rho": -0.809,
+      "p": 0.0003,
       "method": "MC_perm(200000)",
       "values": {
        "TMP1075": 3,
@@ -845,7 +917,9 @@
        "TMP126": 8,
        "LIS2DW12": 8,
        "INA226": 9,
-       "TMP461": 19
+       "TMP461": 19,
+       "INA219": 6,
+       "ADS1115": 1
       }
      }
     }
@@ -867,6 +941,8 @@
   "TMP126": 54.2,
   "LIS2DW12": 50.0,
   "INA226": 41.7,
-  "TMP461": 31.2
+  "TMP461": 31.2,
+  "INA219": 75.0,
+  "ADS1115": 97.2
  }
 }
