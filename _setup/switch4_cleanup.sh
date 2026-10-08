@@ -8,7 +8,7 @@ cd "E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答" || exit 1
 L=_out/switch4.log
 PY="C:/Users/ZhuanZ/AppData/Local/Programs/Python/Python311/python.exe"
 S="C:/Users/ZhuanZ/AppData/Local/Temp/ssh_dcu.py"
-export SSH_DCU_PASS='B2I5DJ54RZEYKEW' SSH_DCU_PORT=12461 MSYS_NO_PATHCONV=1 SSH_TIMEOUT=120 PYTHONIOENCODING=utf-8
+export SSH_DCU_PASS="${SSH_DCU_PASS:-}" SSH_DCU_PORT="${SSH_DCU_PORT:-12461}" MSYS_NO_PATHCONV=1 SSH_TIMEOUT=120 PYTHONIOENCODING=utf-8
 say(){ echo "[$(date +%H:%M:%S)] $*" | tee -a "$L"; }
 R(){ "$PY" -X utf8 "$S" run "$1"; }
 
