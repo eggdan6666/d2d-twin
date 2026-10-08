@@ -84,13 +84,13 @@
   },
   "LIS2DW12": {
    "strict": 1,
-   "relax": 1,
-   "n": 12
+   "relax": 5,
+   "n": 24
   },
   "INA226": {
    "strict": 0,
    "relax": 0,
-   "n": 12
+   "n": 24
   }
  },
  "per_chip_scored": {
@@ -143,12 +143,12 @@
    "passed": 47
   },
   "LIS2DW12": {
-   "applicable": 48,
-   "passed": 24
+   "applicable": 96,
+   "passed": 48
   },
   "INA226": {
-   "applicable": 48,
-   "passed": 20
+   "applicable": 96,
+   "passed": 41
   }
  },
  "vacuous_excluded": [
@@ -211,9 +211,9 @@
    "no": "③",
    "label": "RO write protection",
    "clusters": 13,
-   "fail": 139,
-   "applicable": 288,
-   "rate": 48.3,
+   "fail": 154,
+   "applicable": 312,
+   "rate": 49.4,
    "per_chip": [
     {
      "chip": "TMP1075",
@@ -283,25 +283,25 @@
     },
     {
      "chip": "LIS2DW12",
-     "fail": 10,
-     "applicable": 12,
-     "passed": 2
+     "fail": 16,
+     "applicable": 24,
+     "passed": 8
     },
     {
      "chip": "INA226",
-     "fail": 9,
-     "applicable": 12,
-     "passed": 3
+     "fail": 18,
+     "applicable": 24,
+     "passed": 6
     }
    ],
    "binomial_ci_if_wrongly_independent": {
-    "lo": 42.5,
-    "hi": 54.0
+    "lo": 43.8,
+    "hi": 54.9
    },
    "ci": {
     "clusters": 13,
-    "lo": 32.3,
-    "hi": 64.0
+    "lo": 34.0,
+    "hi": 63.8
    }
   },
   "test_reset_values": {
@@ -310,7 +310,7 @@
    "label": "Reset values",
    "clusters": 14,
    "fail": 0,
-   "applicable": 312,
+   "applicable": 336,
    "rate": 0.0,
    "per_chip": [
     {
@@ -388,14 +388,14 @@
     {
      "chip": "LIS2DW12",
      "fail": 0,
-     "applicable": 12,
-     "passed": 12
+     "applicable": 24,
+     "passed": 24
     },
     {
      "chip": "INA226",
      "fail": 0,
-     "applicable": 12,
-     "passed": 12
+     "applicable": 24,
+     "passed": 24
     }
    ],
    "binomial_ci_if_wrongly_independent": {
@@ -405,7 +405,7 @@
    "ci": null,
    "bound": {
     "method": "rule of three",
-    "upper_pct": 1.0
+    "upper_pct": 0.9
    }
   },
   "test_rw_field_persistence": {
@@ -413,9 +413,9 @@
    "no": "④",
    "label": "RW bitfield persistence",
    "clusters": 14,
-   "fail": 237,
-   "applicable": 312,
-   "rate": 76.0,
+   "fail": 260,
+   "applicable": 336,
+   "rate": 77.4,
    "per_chip": [
     {
      "chip": "TMP1075",
@@ -491,25 +491,25 @@
     },
     {
      "chip": "LIS2DW12",
-     "fail": 8,
-     "applicable": 12,
-     "passed": 4
+     "fail": 19,
+     "applicable": 24,
+     "passed": 5
     },
     {
      "chip": "INA226",
-     "fail": 12,
-     "applicable": 12,
+     "fail": 24,
+     "applicable": 24,
      "passed": 0
     }
    ],
    "binomial_ci_if_wrongly_independent": {
-    "lo": 71.2,
-    "hi": 80.7
+    "lo": 72.9,
+    "hi": 81.9
    },
    "ci": {
     "clusters": 14,
-    "lo": 52.0,
-    "hi": 96.9
+    "lo": 55.7,
+    "hi": 96.7
    }
   },
   "test_single_byte_semantics": {
@@ -569,9 +569,9 @@
    "no": "⑤",
    "label": "Write-trigger / self-clearing bits",
    "clusters": 8,
-   "fail": 98,
-   "applicable": 168,
-   "rate": 58.3,
+   "fail": 111,
+   "applicable": 192,
+   "rate": 57.8,
    "per_chip": [
     {
      "chip": "TMP1075",
@@ -611,38 +611,38 @@
     },
     {
      "chip": "LIS2DW12",
-     "fail": 6,
-     "applicable": 12,
-     "passed": 6
+     "fail": 13,
+     "applicable": 24,
+     "passed": 11
     },
     {
      "chip": "INA226",
-     "fail": 7,
-     "applicable": 12,
-     "passed": 5
+     "fail": 13,
+     "applicable": 24,
+     "passed": 11
     }
    ],
    "binomial_ci_if_wrongly_independent": {
-    "lo": 50.9,
-    "hi": 65.8
+    "lo": 50.8,
+    "hi": 64.8
    },
    "ci": {
     "clusters": 8,
-    "lo": 36.5,
-    "hi": 76.2
+    "lo": 39.1,
+    "hi": 74.0
    }
   }
  },
  "assertion4_split": {
-  "d4_applicable": 312,
-  "strict_fail": 237,
-  "relax_c_only_fail": 149,
-  "relax_cu_fail": 149,
-  "4a_documented_fail": 149,
-  "4b_confirmed_convention_fail": 88,
+  "d4_applicable": 336,
+  "strict_fail": 260,
+  "relax_c_only_fail": 164,
+  "relax_cu_fail": 164,
+  "4a_documented_fail": 164,
+  "4b_confirmed_convention_fail": 96,
   "4u_unverified_fail": 0,
-  "4a_pct": 47.8,
-  "4b_pct": 28.2,
+  "4a_pct": 48.8,
+  "4b_pct": 28.6,
   "4u_pct": 0.0,
   "4b_note": "④b＝只翻 tier=C 就能消掉的失败（文档确实没给逐位访问码，纯 Q0 约定）；④u＝再翻 UNVERIFIED 才多消掉的（证据未核，不计入能力结论）；④a＝两档都翻仍失败（真读不懂）",
   "4b_tier_breakdown": {
@@ -825,6 +825,6 @@
   "TPS23861": 31.2,
   "TMP126": 49.0,
   "LIS2DW12": 50.0,
-  "INA226": 41.7
+  "INA226": 42.7
  }
 }
