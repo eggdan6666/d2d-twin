@@ -1,0 +1,592 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = corpus/data/raw_pdf/TI/TMP461.pdf（SBOS722B，§8.6 Register Map p.17-23）。第 15 颗。具备 6 组读写别名（写地址≠读地址：03h/09h, 04h/0Ah, 05h/0Bh, 06h/0Ch, 07h/0Dh, 08h/0Eh），突破 ⑦ 读写别名 k=1 孤证；Status 寄存器具 read-to-clear 硬件特性；One-Shot 软触发（0Fh 只写）。",
+ "device": "TMP461",
+ "vendor": "TI",
+ "interface": "I2C/SMBus",
+ "reg_width": 8,
+ "i2c": {
+  "addresses_7bit": [
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B",
+   "0x4C",
+   "0x4D",
+   "0x4E",
+   "0x4F",
+   "0x50"
+  ],
+  "note": "A0/A1 3 态引脚（GND, Float, V+）组合出 9 组 7 位 I2C 从机地址（48h-50h）。§8.5.1.3 Table 3"
+ },
+ "registers": [
+  {
+   "name": "TEMP_LOCAL_HIGH",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "本地温度高字节（LT[11:4]，只读，1 LSB=1°C 补码）。上电复位值 00h",
+   "fields": [
+    {
+     "name": "LT_HIGH",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "本地温度高 8 位"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_REMOTE_HIGH",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "远端温度高字节（RT[11:4]，只读，1 LSB=1°C 补码）。上电复位值 00h",
+   "fields": [
+    {
+     "name": "RT_HIGH",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "远端温度高 8 位"
+    }
+   ]
+  },
+  {
+   "name": "STATUS",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "状态寄存器（§8.6.1.3，只读）。D7 为 ADC 转换状态；D6-D2 为限值与断线标志，手册注明读该寄存器即清除这 5 个标志（read-to-clear）；D1-D0 为 THERM 状态，自动复位",
+   "fields": [
+    {
+     "name": "BUSY",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0,
+     "desc": "1=ADC 转换中，0=空闲"
+    },
+    {
+     "name": "LHIGH",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "本地高温告警标志，读即清"
+    },
+    {
+     "name": "LLOW",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "本地低温告警标志，读即清"
+    },
+    {
+     "name": "RHIGH",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "远端高温告警标志，读即清"
+    },
+    {
+     "name": "RLOW",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "远端低温告警标志，读即清"
+    },
+    {
+     "name": "OPEN",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "read_action": "clear",
+     "desc": "远端二极管断线标志，读即清"
+    },
+    {
+     "name": "RTHRM",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0,
+     "desc": "远端 THERM 超温标志"
+    },
+    {
+     "name": "LTHRM",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "本地 THERM 超温标志"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x03",
+   "write_addr": "0x09",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "配置寄存器（§8.6.1.4）。读地址 03h，写地址 09h（触发断言⑦读写别名）。D4:D3 与 D1:D0 为保留位，明文规定恒 0",
+   "fields": [
+    {
+     "name": "MASK1",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0=使能 ALERT，1=屏蔽 ALERT"
+    },
+    {
+     "name": "SD",
+     "bits": "6",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0=连续转换，1=关断（Shutdown）"
+    },
+    {
+     "name": "ALERT_THERM2",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "0=引脚 7 设为 ALERT，1=引脚 7 设为 THERM2"
+    },
+    {
+     "name": "RSV_4_3",
+     "bits": "4:3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    },
+    {
+     "name": "RANGE",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "温度范围：0=-40°C~+127°C，1=-64°C~+191°C"
+    },
+    {
+     "name": "RSV_1_0",
+     "bits": "1:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    }
+   ]
+  },
+  {
+   "name": "CONV_RATE",
+   "addr": "0x04",
+   "write_addr": "0x0A",
+   "access": "RW",
+   "reset": "0x08",
+   "desc": "转换速率寄存器（§8.6.1.5）。读地址 04h，写地址 0Ah（读写别名）。默认 08h（16 SPS）",
+   "fields": [
+    {
+     "name": "RSV_7_4",
+     "bits": "7:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    },
+    {
+     "name": "CR",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 8,
+     "desc": "转换速率代码（00h-09h，默认 08h）"
+    }
+   ]
+  },
+  {
+   "name": "LOCAL_HIGH_LIMIT",
+   "addr": "0x05",
+   "write_addr": "0x0B",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "本地高温限值高字节（§8.6 Table 4）。读地址 05h，写地址 0Bh（读写别名）。默认 7Fh（127°C）",
+   "fields": [
+    {
+     "name": "LTHL",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "本地高温限值高字节（LTHL[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "LOCAL_LOW_LIMIT",
+   "addr": "0x06",
+   "write_addr": "0x0C",
+   "access": "RW",
+   "reset": "0x80",
+   "desc": "本地低温限值高字节（§8.6 Table 4）。读地址 06h，写地址 0Ch（读写别名）。默认 80h（-128°C）",
+   "fields": [
+    {
+     "name": "LTLL",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 128,
+     "desc": "本地低温限值高字节（LTLL[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_HIGH_LIMIT_HIGH",
+   "addr": "0x07",
+   "write_addr": "0x0D",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "远端高温限值高字节（§8.6 Table 4）。读地址 07h，写地址 0Dh（读写别名）。默认 7Fh（127°C）",
+   "fields": [
+    {
+     "name": "RTHL_HIGH",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "远端高温限值高字节（RTHL[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_LOW_LIMIT_HIGH",
+   "addr": "0x08",
+   "write_addr": "0x0E",
+   "access": "RW",
+   "reset": "0x80",
+   "desc": "远端低温限值高字节（§8.6 Table 4）。读地址 08h，写地址 0Eh（读写别名）。默认 80h（-128°C）",
+   "fields": [
+    {
+     "name": "RTLL_HIGH",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 128,
+     "desc": "远端低温限值高字节（RTLL[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "ONE_SHOT",
+   "addr": "0x0F",
+   "access": "W",
+   "reset": "0x00",
+   "desc": "单次转换启动寄存器（§8.6.1.6，只写）。关断模式下写任意数据启动一次转换。不作为软复位键",
+   "fields": [
+    {
+     "name": "START",
+     "bits": "7:0",
+     "access": "W",
+     "reset": 0,
+     "desc": "写任意值启动单次转换"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_REMOTE_LOW",
+   "addr": "0x10",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "远端温度低字节（RT[3:0] 位于高 4 位，只读，0.0625°C 分辨率）。低 4 位为 0",
+   "fields": [
+    {
+     "name": "RT_LOW",
+     "bits": "7:4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "远端温度小数部分（RT[3:0]）"
+    },
+    {
+     "name": "RSV_3_0",
+     "bits": "3:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "保留位，恒 0",
+     "tier": "C"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_OFFSET_HIGH",
+   "addr": "0x11",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "远端温度偏移高字节（RTOS[11:4]，§8.6.1.10）。默认 00h",
+   "fields": [
+    {
+     "name": "RTOS_HIGH",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "远端偏移高字节"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_OFFSET_LOW",
+   "addr": "0x12",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "远端温度偏移低字节（RTOS[3:0] 位于高 4 位）。低 4 位恒 0",
+   "fields": [
+    {
+     "name": "RTOS_LOW",
+     "bits": "7:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "远端偏移低 4 位"
+    },
+    {
+     "name": "RSV_3_0",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_HIGH_LIMIT_LOW",
+   "addr": "0x13",
+   "access": "RW",
+   "reset": "0xF0",
+   "desc": "远端高温限值低字节（RTHL[3:0] 位于高 4 位）。POR 默认 F0h",
+   "fields": [
+    {
+     "name": "RTHL_LOW",
+     "bits": "7:4",
+     "access": "RW",
+     "reset": 15,
+     "desc": "远端高温限值低 4 位（高半字节为 0xF）"
+    },
+    {
+     "name": "RSV_3_0",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_LOW_LIMIT_LOW",
+   "addr": "0x14",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "远端低温限值低字节（RTLL[3:0] 位于高 4 位）。默认 00h",
+   "fields": [
+    {
+     "name": "RTLL_LOW",
+     "bits": "7:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "远端低温限值低 4 位"
+    },
+    {
+     "name": "RSV_3_0",
+     "bits": "3:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_LOCAL_LOW",
+   "addr": "0x15",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "本地温度低字节（LT[3:0] 位于高 4 位，只读）。低 4 位为 0",
+   "fields": [
+    {
+     "name": "LT_LOW",
+     "bits": "7:4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "本地温度小数部分（LT[3:0]）"
+    },
+    {
+     "name": "RSV_3_0",
+     "bits": "3:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "保留位，恒 0",
+     "tier": "C"
+    }
+   ]
+  },
+  {
+   "name": "CHANNEL_ENABLE",
+   "addr": "0x16",
+   "access": "RW",
+   "reset": "0x03",
+   "desc": "通道使能寄存器（§8.6.1.7）。REN (bit 1) 远端使能，LEN (bit 0) 本地使能。默认 03h。高 6 位保留恒 0",
+   "fields": [
+    {
+     "name": "RSV_7_2",
+     "bits": "7:2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    },
+    {
+     "name": "REN",
+     "bits": "1",
+     "access": "RW",
+     "reset": 1,
+     "desc": "远端通道转换使能"
+    },
+    {
+     "name": "LEN",
+     "bits": "0",
+     "access": "RW",
+     "reset": 1,
+     "desc": "本地通道转换使能"
+    }
+   ]
+  },
+  {
+   "name": "REMOTE_THERM_LIMIT",
+   "addr": "0x19",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "远端 THERM 门限寄存器（§8.6 Table 4）。默认 7Fh（127°C）",
+   "fields": [
+    {
+     "name": "RTH",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "远端 THERM 门限（RTH[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "LOCAL_THERM_LIMIT",
+   "addr": "0x20",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "本地 THERM 门限寄存器（§8.6 Table 4）。默认 7Fh（127°C）",
+   "fields": [
+    {
+     "name": "LTH",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "本地 THERM 门限（LTH[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "THERM_HYSTERESIS",
+   "addr": "0x21",
+   "access": "RW",
+   "reset": "0x0A",
+   "desc": "THERM 迟滞寄存器（§8.6 Table 4）。默认 0Ah（10°C）",
+   "fields": [
+    {
+     "name": "HYS",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 10,
+     "desc": "THERM 迟滞温度（HYS[11:4]）"
+    }
+   ]
+  },
+  {
+   "name": "CONSECUTIVE_ALERT",
+   "addr": "0x22",
+   "access": "RW",
+   "reset": "0x01",
+   "desc": "连续告警判定寄存器（§8.6.1.8）。D3:D1 为连续违例次数代码 CONAL[2:0]；D0 硬连恒 1；高 4 位保留恒 0",
+   "fields": [
+    {
+     "name": "RSV_7_4",
+     "bits": "7:4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    },
+    {
+     "name": "CONAL",
+     "bits": "3:1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "连续越限计数：000b=1次, 001b=2次, 011b=3次, 111b=4次"
+    },
+    {
+     "name": "FIXED_1",
+     "bits": "0",
+     "access": "RO",
+     "reset": 1,
+     "desc": "硬件固定为 1（Table 4 POR=01h，bit 0 标 1）",
+     "tier": "A"
+    }
+   ]
+  },
+  {
+   "name": "N_FACTOR",
+   "addr": "0x23",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "η-因子校正寄存器（§8.6.1.9）。8 位补码，范围 -128 到 127。默认 00h",
+   "fields": [
+    {
+     "name": "NC",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "η-因子校正值（NC[7:0]）"
+    }
+   ]
+  },
+  {
+   "name": "DIGITAL_FILTER",
+   "addr": "0x24",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "数字滤波控制寄存器（§8.6 Table 4）。DF[1:0] 控制滤波级别，默认 00h（禁用）。高 6 位保留恒 0",
+   "fields": [
+    {
+     "name": "RSV_7_2",
+     "bits": "7:2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[relax 变体] 保留位，恒 0",
+     "tier": "C"
+    },
+    {
+     "name": "DF",
+     "bits": "1:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "数字滤波器配置：00b=禁用, 01b=Level 1, 10b=Level 2"
+    }
+   ]
+  },
+  {
+   "name": "MANUFACTURER_ID",
+   "addr": "0xFE",
+   "access": "RO",
+   "reset": "0x55",
+   "desc": "制造商识别码寄存器（§8.6.1.11，只读）。固定值 55h（TI 标识）",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 85,
+     "desc": "TI 制造商代码 55h"
+    }
+   ]
+  }
+ ]
+}

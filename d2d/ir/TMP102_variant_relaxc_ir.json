@@ -135,11 +135,11 @@
     {
      "name": "UNUSED",
      "bits": "3:0",
-     "access": "RW",
+     "access": "RO",
      "reset": 0,
-     "desc": "[仅 C 档变体] 恒 0",
-     "tier": "C",
-     "tier_evidence": "裁决(用户)：整文档文本层 0 处逐位访问码；p.8 唯一 prose 只覆盖 temperature register，不含 CONFIG 的 [3:0]"
+     "desc": "恒 0",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
     }
    ]
   },
@@ -160,11 +160,11 @@
     {
      "name": "UNUSED",
      "bits": "3:0",
-     "access": "RW",
+     "access": "RO",
      "reset": 0,
-     "desc": "[仅 C 档变体] 恒 0（EM=1 时 bit0 有意义）",
-     "tier": "C",
-     "tier_evidence": "同上：温度限值寄存器的 [3:0] 无逐位 Type"
+     "desc": "恒 0（EM=1 时 bit0 有意义）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
     }
    ]
   },
@@ -185,11 +185,11 @@
     {
      "name": "UNUSED",
      "bits": "3:0",
-     "access": "RW",
+     "access": "RO",
      "reset": 0,
-     "desc": "[仅 C 档变体] 恒 0（EM=1 时 bit0 有意义）",
-     "tier": "C",
-     "tier_evidence": "同上"
+     "desc": "恒 0（EM=1 时 bit0 有意义）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
     }
    ]
   }

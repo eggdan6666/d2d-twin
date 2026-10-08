@@ -17,7 +17,7 @@ from joblock import acquire
 
 LOG = os.path.join(ROOT, "_out", "ressample.log")
 CHIPS = ["TMP1075", "BMP280", "TMP102", "BME280", "TMP100", "INA3221", "HDC2021",
-         "TMP117", "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226"]
+         "TMP117", "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226", "TMP461"]
 
 
 def log(m):
