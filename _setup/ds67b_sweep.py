@@ -18,7 +18,7 @@ import chip_chain as cc
 ROOT = cc.ROOT
 MODEL_DS = "/root/private_data/models/deepseek-coder-6.7b-instruct"
 CHIPS = ["TMP1075", "BMP280", "TMP102", "BME280", "TMP100", "INA3221", "HDC2021",
-         "TMP117", "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226", "TMP461"]
+         "TMP117", "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226", "TMP461", "INA219"]
 LOG = os.path.join(ROOT, "_out", "ds67b.log")
 
 

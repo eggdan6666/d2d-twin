@@ -1,0 +1,204 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "第 16 颗。来源 = corpus/data/raw_pdf/TI/INA219.pdf（SBOS448G，p.18-24）。TI 电流/功率监测器经典三部曲（INA3221, INA226, INA219）之收官作。具备 CONFIG.RST 自清零软复位位（read_as: 0，断言 ⑤），直接用于同厂 IP 模板复用假说（R1）的第三点验证；CALIBRATION.FS0 具明文 void bit 恒 0 硬件强约束（Figure 27 脚注 1）。",
+ "device": "INA219",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x40",
+   "0x41",
+   "0x42",
+   "0x43",
+   "0x44",
+   "0x45",
+   "0x46",
+   "0x47",
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B",
+   "0x4C",
+   "0x4D",
+   "0x4E",
+   "0x4F"
+  ],
+  "note": "A0/A1 4 态引脚（GND, V+, SDA, SCL）组合出 16 个从机地址（40h-4Fh）。Table 1"
+ },
+ "registers": [
+  {
+   "name": "CONFIGURATION",
+   "addr": "0x00",
+   "access": "RW",
+   "reset": "0x399F",
+   "desc": "配置寄存器（p.18 Table 2，POR 二进制 00111001 10011111 = 399Fh）",
+   "fields": [
+    {
+     "name": "RST",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "软复位位。写 1 触发系统复位恢复出厂值，此位自动清零（this bit self-clears）"
+    },
+    {
+     "name": "RSV_14",
+     "bits": "14",
+     "access": "RW",
+     "reset": 0,
+     "tier": "B",
+     "tier_evidence": "Figure 19 位图标注 R/W-0",
+     "desc": "保留位，手册位图标注 R/W-0"
+    },
+    {
+     "name": "BRNG",
+     "bits": "13",
+     "access": "RW",
+     "reset": 1,
+     "desc": "总线电压量程：0=16V, 1=32V（默认 1）"
+    },
+    {
+     "name": "PG",
+     "bits": "12:11",
+     "access": "RW",
+     "reset": 3,
+     "desc": "PGA 增益与分流电压量程（默认 11b=÷8, ±320mV）"
+    },
+    {
+     "name": "BADC",
+     "bits": "10:7",
+     "access": "RW",
+     "reset": 3,
+     "desc": "总线 ADC 分辨率/采样平均（默认 0011b=12-bit）"
+    },
+    {
+     "name": "SADC",
+     "bits": "6:3",
+     "access": "RW",
+     "reset": 3,
+     "desc": "分流 ADC 分辨率/采样平均（默认 0011b=12-bit）"
+    },
+    {
+     "name": "MODE",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 7,
+     "desc": "工作模式（默认 111b=分流与总线连续测量）"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT_VOLTAGE",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "分流电压测量值（p.18 Table 2，TYPE=R，补码）",
+   "fields": [
+    {
+     "name": "SV",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "分流电压原始采样数据"
+    }
+   ]
+  },
+  {
+   "name": "BUS_VOLTAGE",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "总线电压测量值（p.18 Table 2，TYPE=R）",
+   "fields": [
+    {
+     "name": "BD",
+     "bits": "15:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "总线电压数据（13 位，LSB=4mV）"
+    },
+    {
+     "name": "RSV_2",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "tier": "A",
+     "tier_evidence": "Figure 23 位图标 —，正文注明读 0",
+     "desc": "保留位，恒读 0"
+    },
+    {
+     "name": "CNVR",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0,
+     "desc": "转换完成就绪标志"
+    },
+    {
+     "name": "OVF",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "算术溢出标志"
+    }
+   ]
+  },
+  {
+   "name": "POWER",
+   "addr": "0x03",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "功率计算值（p.18 Table 2，TYPE=R；因 CALIBRATION 上电为 0 故 POR=0000h）",
+   "fields": [
+    {
+     "name": "PWR",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "功率计算原始数据"
+    }
+   ]
+  },
+  {
+   "name": "CURRENT",
+   "addr": "0x04",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "电流计算值（p.18 Table 2，TYPE=R；因 CALIBRATION 上电为 0 故 POR=0000h）",
+   "fields": [
+    {
+     "name": "CURR",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "电流计算原始数据"
+    }
+   ]
+  },
+  {
+   "name": "CALIBRATION",
+   "addr": "0x05",
+   "access": "RW",
+   "reset": "0x0000",
+   "desc": "校准寄存器（p.23 §8.6.2.6）。bit 0 硬件固定恒 0（void bit），bits 15:1 设定满量程电流与 LSB",
+   "fields": [
+    {
+     "name": "FS",
+     "bits": "15:1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "满量程校准值（FS[15:1]）"
+    },
+    {
+     "name": "FS0",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "tier": "A",
+     "tier_evidence": "Figure 27 脚注 1：FS0 is a void bit and will always be 0. It is not possible to write a 1 to FS0.",
+     "desc": "无效空位，硬件恒为 0，写 1 无效"
+    }
+   ]
+  }
+ ]
+}
