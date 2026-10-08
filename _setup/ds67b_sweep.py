@@ -18,7 +18,7 @@ import chip_chain as cc
 ROOT = cc.ROOT
 MODEL_DS = "/root/private_data/models/deepseek-coder-6.7b-instruct"
 CHIPS = ["TMP1075", "BMP280", "TMP102", "BME280", "TMP100", "INA3221", "HDC2021",
-         "TMP117", "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226"]
+         "TMP117", "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226", "TMP461"]
 LOG = os.path.join(ROOT, "_out", "ds67b.log")
 
 
@@ -83,6 +83,7 @@ def sweep(ssh, part, n, seeds, hours_left):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true", help="只跑 1 份，验证 6.7B 能出码")
+    ap.add_argument("--parts", nargs="+", default=CHIPS, help="指定跑的芯片列表")
     ap.add_argument("--hours", type=float, default=3.0)
     args = ap.parse_args()
     t_end = time.time() + args.hours * 3600
@@ -92,7 +93,7 @@ def main():
         ok = sweep(ssh, "TMP102", 1, "1", 0.4)
         log("smoke 结果：%s" % ("可批跑" if ok else "失败，先别批跑"))
         return
-    for p in CHIPS:
+    for p in args.parts:
         if (t_end - time.time()) / 3600 < 0.25:
             log("剩余预算不足 15 分钟，停止接新活")
             break
