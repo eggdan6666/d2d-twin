@@ -34,9 +34,10 @@ TAGS = {"TMP1075": "kt", "BMP280": "bmp280kt", "TMP102": "tmp102kt", "BME280": "
         "LIS2DW12": "lis2dw12kt",
         "INA226": "ina226kt",
         "TMP461": "tmp461kt",
-        "INA219": "ina219kt"}
+        "INA219": "ina219kt",
+        "ADS1115": "ads1115kt"}
 ORDER = ["TMP1075", "BMP280", "TMP102", "BME280", "TMP100", "INA3221", "HDC2021", "TMP117",
-         "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226", "TMP461", "INA219"]
+         "ADS1220", "LM83", "TPS23861", "TMP126", "LIS2DW12", "INA226", "TMP461", "INA219", "ADS1115"]
 DIM = {  # 断言 → (编号, 论文里的名字)
     "test_reset_values": ("②", "Reset values"),
     "test_readonly_protection": ("③", "RO write protection"),

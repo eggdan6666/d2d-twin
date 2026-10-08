@@ -1,0 +1,140 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "第 17 颗。来源 = corpus/data/raw_pdf/TI/ADS1115.pdf（SBAS444D，p.24-28）。开源嵌入式领域最普及的 16 位 4 通道 I2C ADC。CONFIG 寄存器具非零复位值 8583h，阈值寄存器具备非零复位值 8000h 与 7FFFh；CONVERSION 为只读寄存器。",
+ "device": "ADS1115",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x48",
+   "0x49",
+   "0x4A",
+   "0x4B"
+  ],
+  "note": "ADDR 引脚连接 GND/VDD/SDA/SCL 对应 4 个从机地址（48h-4Bh）。Table 8-1"
+ },
+ "registers": [
+  {
+   "name": "CONVERSION",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "转换数据寄存器（p.24 §8.1.2，只读）。16 位补码转换结果，复位值 0000h",
+   "fields": [
+    {
+     "name": "D",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "16 位转换结果数据"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x01",
+   "access": "RW",
+   "reset": "0x8583",
+   "desc": "配置寄存器（p.24 §8.1.3，复位值 8583h）。控制工作模式、通道选择、量程、转换速率与比较器",
+   "fields": [
+    {
+     "name": "OS",
+     "bits": "15",
+     "access": "RW",
+     "reset": 1,
+     "desc": "运行状态/单次转换启动。写 1 启动单次转换，读 1 表示当前未在转换，读 0 表示正在转换"
+    },
+    {
+     "name": "MUX",
+     "bits": "14:12",
+     "access": "RW",
+     "reset": 0,
+     "desc": "输入多路复用配置（默认 000b = AINP:AIN0, AINN:AIN1 差分）"
+    },
+    {
+     "name": "PGA",
+     "bits": "11:9",
+     "access": "RW",
+     "reset": 2,
+     "desc": "可编程增益放大器量程（默认 010b = ±2.048V）"
+    },
+    {
+     "name": "MODE",
+     "bits": "8",
+     "access": "RW",
+     "reset": 1,
+     "desc": "工作模式：0=连续转换, 1=单次转换/低功耗（默认 1）"
+    },
+    {
+     "name": "DR",
+     "bits": "7:5",
+     "access": "RW",
+     "reset": 4,
+     "desc": "数据转换速率（默认 100b = 128 SPS）"
+    },
+    {
+     "name": "COMP_MODE",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "比较器模式：0=传统比较器, 1=窗口比较器"
+    },
+    {
+     "name": "COMP_POL",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "比较器极性：0=低电平有效, 1=高电平有效"
+    },
+    {
+     "name": "COMP_LAT",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "锁存比较器：0=非锁存, 1=锁存"
+    },
+    {
+     "name": "COMP_QUE",
+     "bits": "1:0",
+     "access": "RW",
+     "reset": 3,
+     "desc": "比较器队列控制（默认 11b = 禁用比较器）"
+    }
+   ]
+  },
+  {
+   "name": "LO_THRESH",
+   "addr": "0x02",
+   "access": "RW",
+   "reset": "0x8000",
+   "desc": "下阈值寄存器（p.26 §8.1.4，复位值 8000h）。比较器低限值，补码"
+   ,
+   "fields": [
+    {
+     "name": "THRESH",
+     "bits": "15:0",
+     "access": "RW",
+     "reset": 32768,
+     "desc": "下限阈值"
+    }
+   ]
+  },
+  {
+   "name": "HI_THRESH",
+   "addr": "0x03",
+   "access": "RW",
+   "reset": "0x7FFF",
+   "desc": "上阈值寄存器（p.26 §8.1.5，复位值 7FFFh）。比较器高限值，补码",
+   "fields": [
+    {
+     "name": "THRESH",
+     "bits": "15:0",
+     "access": "RW",
+     "reset": 32767,
+     "desc": "上限阈值"
+    }
+   ]
+  }
+ ]
+}
