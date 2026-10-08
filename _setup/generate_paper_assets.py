@@ -9,8 +9,10 @@ import matplotlib.pyplot as plt
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 FIG_DIR = os.path.join(ROOT, "_out", "figs")
 TEX_DIR = os.path.join(ROOT, "_out", "latex")
+ASSET_DIR = os.path.join(ROOT, "assets")
 os.makedirs(FIG_DIR, exist_ok=True)
 os.makedirs(TEX_DIR, exist_ok=True)
+os.makedirs(ASSET_DIR, exist_ok=True)
 
 # 设置学术风格绘图参数
 plt.rcParams['font.sans-serif'] = ['DejaVu Sans', 'Arial']
@@ -57,6 +59,7 @@ ax.annotate('Positive Control\n(Pure register file)', xy=(8, 100), xytext=(8, 10
 plt.tight_layout()
 fig1_path = os.path.join(FIG_DIR, "fig1_per_chip_passrate.png")
 fig.savefig(fig1_path)
+fig.savefig(os.path.join(ASSET_DIR, "fig1_per_chip_passrate.png"))
 plt.close(fig)
 print("[Asset] Generated:", fig1_path)
 
@@ -97,6 +100,7 @@ ax.legend(loc='upper right', frameon=True)
 plt.tight_layout()
 fig2_path = os.path.join(FIG_DIR, "fig2_spearman_complexity.png")
 fig.savefig(fig2_path)
+fig.savefig(os.path.join(ASSET_DIR, "fig2_spearman_complexity.png"))
 plt.close(fig)
 print("[Asset] Generated:", fig2_path)
 
@@ -146,6 +150,7 @@ ax.legend(loc='lower right', frameon=True)
 plt.tight_layout()
 fig3_path = os.path.join(FIG_DIR, "fig3_dimension_failure_rates.png")
 fig.savefig(fig3_path)
+fig.savefig(os.path.join(ASSET_DIR, "fig3_dimension_failure_rates.png"))
 plt.close(fig)
 print("[Asset] Generated:", fig3_path)
 

@@ -63,7 +63,8 @@ def run_sample(part, code, ir_name, workdir):
     env = dict(os.environ, D2D_IR=ir_name, PYTHONIOENCODING="utf-8")
     subprocess.run([sys.executable, "-m", "pytest", "test_d2d_blackbox.py", "-q", "--no-header",
                     "-p", "no:cacheprovider", "--junitxml", xj],
-                   cwd=workdir, env=env, capture_output=True, text=True, timeout=300)
+                   cwd=workdir, env=env, capture_output=True, text=True,
+                   encoding="utf-8", errors="replace", timeout=300)
     out = {}
     if os.path.exists(xj):
         for tc in ET.parse(xj).getroot().iter("testcase"):

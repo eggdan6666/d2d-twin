@@ -1,72 +1,213 @@
-# HD-Agent：基于分层记忆 RAG 的电子元器件 Datasheet 智能问答
+# D2D-Twin: Benchmarking LLMs on Datasheet-to-Digital-Twin Synthesis for Register-Level Peripheral Emulators
 
-面向消费级硬件（RTX 3050 Ti **4GB** 显存笔记本）的电子元器件 Datasheet 问答系统研究与评测基准。
-8 周研究计划的开源产出：**Datasheet-QA-100 评测集**（v3 120 题正式 / v6 168 题含应用电路档）、**456 篇结构化语料库（7579 章节切片）**、**分层记忆 RAG 全链路**与**可复现实验**。
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg" alt="Python"></a>
+  <a href="DATASET.md"><img src="https://img.shields.io/badge/Chips-17_ICs-orange.svg" alt="Benchmark Suite"></a>
+  <a href="d2d/eval/"><img src="https://img.shields.io/badge/Eval_Runs-612_Samples-purple.svg" alt="Evaluated Runs"></a>
+  <a href="d2d/eval/test_d2d_blackbox.py"><img src="https://img.shields.io/badge/Pytest_MD5-8cf0854d-success.svg" alt="Harness MD5"></a>
+  <a href="README_zh.md"><img src="https://img.shields.io/badge/Doc-%E4%B8%AD%E6%96%87%E8%AF%B4%E6%98%8E-red.svg" alt="Chinese Doc"></a>
+</p>
 
-## 核心结果（严格判分 `eval/qa100/score2.py`：数值含符号精确 + 单位强制 + 范围双端点）
+> **Deterministic, Zero-LLM-as-a-Judge Evaluation Benchmark for Code LLMs on Hardware Virtual Prototyping.**  
+> Evaluated across **17 representative peripheral ICs**, **612 synthesized code models**, and **8 behavioral specification dimensions**.
 
-| 结论 | 数字 | 来源 |
-|---|---|---|
-| MemTier 分层记忆复现（qwen2.5-3B，4GB 显存，LongMemEval-S 500 题） | **0.364**（论文 7B 参照 0.382） | `eval/REPORT_memtier_repro.md` |
-| 本地 RAG-7B-loose vs 商用 API + 同检索协议（QA-100 v3 120 题） | **41.7% vs 36.7%** | `results_v31_rag7b_loose.json` / `results_v31_api_rag.json` |
-| 7B-loose 重采样 temp=0.7 × 3 seeds | mean **41.7% ± 1.7pp**，95%CI [37.5, 45.8] | `results_kt_rag7b_s{1,2,3}.json` |
-| 3B 重采样同协议 | mean 33.6% ± 2.9pp，CI [26.3, 40.9] | `results_kt_rag3b_s{1,2,3}.json` |
-| **7B − 3B = 8.1pp 分辨不出**（Welch 差值 CI [−0.3, +16.4] 含 0） | 只可写"不劣于"，不可写"显著优于" | `eval/REPORT_ktrial.md` |
-| 查询路由（题面型号定位 → 文档内定向检索）增益 | **+16pp**，大于模型规模增益 | `REPORT_qa100_baseline.md` 协议 v3.1 节 |
-| 应用电路题分档（人工审校 48 题） | **档A 原理图图注 7/22 = 31.8%** ／ **档B 选型表 3/26 = 11.5%**（两档不可平均） | `eval/qa100/app_tier_summary.json` |
+---
 
-![Pareto: 成本 vs 准确率](eval/qa100/fig_pareto_cost.png)
-![Pareto: 延迟 vs 准确率](eval/qa100/fig_pareto_latency.png)
+## 📌 News & Highlights
 
-前沿只连**同协议（v3.1）同题集（v3 120 题）temp=0** 的 6 个配置；灰色 x 为旧协议 v3.0（上下文构造不同，1470 vs 2975 token/题），不参与前沿；误差棒是 temp=0.7×3 seeds 的 95%CI。数据表 `eval/qa100/pareto_summary.csv`，生成脚本 `_setup/pareto.py`（只读聚合）。
+- **[2026-10-08] Full 17-Chip Grand Slam Released**: 408 code samples for Qwen2.5-Coder-14B ($n=24$ per chip) and 204 code samples for DeepSeek-Coder-6.7B ($n=12$ per chip), totaling 612 samples fully evaluated.
+- **[2026-10-08] Zero LLM-as-a-Judge**: All evaluations are driven strictly by blackbox `pytest` total bus stimulus injection and state assertions (`MD5: 8cf0854d4779467bc8e472ee4fb97023`).
+- **[2026-10-08] Clean Q1c Ablation Completed**: Proved that reset value transcribing is a structural fidelity measure rather than semantic reasoning (failure rate collapses from 0% to 75%–100% when reset keys are scrubbed).
+- **[2026-10-08] Reproduce in 1 Second (Zero GPU)**: All evaluations, tables, and publication assets can be reproduced offline on CPU in seconds via `python run_benchmark.py`.
 
-**负结果同样入档**（避免后人重复踩）：提示词松绑对 3B 有效对 7B 交互反转；归属校验"原地重试修复"净增 0 题；混合路由 oracle 上界 18.9% < 纯 API 21.6%；cross 检索改 BM25 分桶劣于词重叠（已回滚）；LongMemEval 日期排序在该数据集上是恒等操作。详见 `eval/REPORT_qa100_baseline.md`。
+---
 
-## 目录结构
+## 🔍 Key Scientific Discoveries
+
 ```
-corpus/    语料层: scripts/{manifest,download,parse}.py + data/{raw_pdf,parsed,chunks,index}
-rag/       检索/记忆/编排层: hierarchical(三层检索) bm25 embed(bge/Ollama双后端)
-           llm(Ollama + SCNet OpenAI兼容) verify(归属校验) orchestrate(路由) answer/cli
-eval/      评测层: run_longmemeval.py + retrieval_ablation.py
-eval/qa100/ 出题与判分链: draft prescreen finalize rebuild_cross clean_gold gen_app_drafts
-           run score2 variance_probe hybrid_run + datasheet_qa100_v{3,5,6}.json + REPORT/results
-_setup/    一次性驱动与聚合脚本(默认 .gitignore 排除，见下"发布边界")
+[Datasheet PDF] ──> [Gold IR (JSON)] ──> [LLM (14B / 6.7B)] ──> [Python Emulator]
+                                                                        │
+[Universal Testbench (MD5: 8cf0854d)] ─────────────────────────────────▼
+                                                       [Deterministic Pytest Assertions]
 ```
 
-## 复现
+1. **Sub-register Bitfield Persistence Deficit**:
+   - Current Code LLMs predominantly model hardware registers as monolithic integers (`self.regs[addr] = val`).
+   - When writing to partial bitfields, models accidentally overwrite neighboring read-only or reserved bits, yielding a **49.2% failure rate in RO protection** and **71.1% failure rate in bitfield persistence** (with 47.5% confirmed as pure bitwise logic defects).
+2. **Read/Write Address Aliasing Blindness (100% Failure Rate)**:
+   - In industrial chips where read and write operations use distinct register addresses (e.g., LM83, TMP461), **both 14B and 6.7B models experienced a 100.0% failure rate** (48/48 across all seeds). LLMs fundamentally overlook cross-address state synchronization.
+3. **Vendor IP Template Contamination & Self-Clearing Fragility**:
+   - Across the Texas Instruments current monitor family (INA219, INA226, INA3221), models suffer a **53.7% failure rate** in self-clearing reset bits (`RST`), hallucinating identical template implementations regardless of chip-specific differences.
+4. **Complexity Collapse (Spearman $\rho = -0.828, p = 0.0001$)**:
+   - A statistically significant negative correlation exists between the number of special semantic registers (aliasing, self-clearing, soft-reset) and overall synthesis pass rates.
+
+---
+
+## 📊 Benchmark Leaderboard
+
+### Table 1: Main Benchmark Failure Breakdown (Qwen2.5-Coder-14B, $N=408$ Samples, $n=24$ per Chip)
+
+| # | Behavioral Specification Dimension | Clusters $k$ | Failed / Applicable | Fail Rate (%) | 95% Bootstrap CI / Bound |
+|:---:|:---|:---:|:---:|:---:|:---:|
+| **②** | Reset values baseline | 17 | 0 / 408 | **0.0%** | $\le 0.7\%$ (Rule of Three) |
+| **③** | Read-only (RO) write protection | 16 | 189 / 384 | **49.2%** | [34.9%, 62.5%] |
+| **④** | RW bitfield persistence | 17 | 290 / 408 | **71.1%** | [49.8%, 89.2%] |
+| **⑤** | Write-trigger / self-clearing bits | 9 | 116 / 216 | **53.7%** | [35.6%, 70.4%] |
+| **⑥** | Soft-reset key (write-only) | 2 | 18 / 48 | **37.5%** | [23.8%, 51.2%] ($k < 5$) |
+| **⑥s**| Single-byte bus semantics | 1 | 2 / 24 | **8.3%** | [0.0%, 19.4%] ($k < 5$) |
+| **⑦** | Read/write address aliasing | 2 | 48 / 48 | **100.0%** | [100.0%, 100.0%] ($k < 5$) |
+| **⑧** | Clear-on-read interrupt alias | 1 | 23 / 24 | **95.8%** | [87.8%, 100.0%] ($k < 5$) |
+
+> *Note on Dimension ④ Decoupling*: Failure rate (71.1%) is orthogonally decomposed into **④a Documented Bitfield Defect** (47.5%), **④b Industry Convention Gap** (3.9%), and **④u Unverified Bits** (19.6%), ensuring that unstated specification conventions are never conflated with model capability deficits.
+
+---
+
+### Table 2: Cross-Model Comparison Across 17 Peripherals ($N=612$ Total Samples)
+
+| Chip | Manufacturer | Primary Category | Regs | Qwen2.5-Coder-14B Pass% ($n=24$) | DeepSeek-Coder-6.7B Pass% ($n=12$) |
+|:---|:---|:---|:---:|:---:|:---:|
+| **TMP1075** | TI | Digital Temp Sensor | 5 | **77.5%** | 53.3% |
+| **TMP102** | TI | Low-Power Temp Sensor | 4 | **66.7%** | 36.1% |
+| **TMP100** | TI | Digital Temp Sensor | 4 | **72.9%** | 37.5% |
+| **TMP117** | TI | High-Precision Temp Sensor | 10 | **45.8%** | 27.1% |
+| **TMP126** | TI | High-Precision Temp Sensor | 9 | **49.0%** | 25.0% |
+| **TMP461** | TI | High-Accuracy Remote Temp | 24 | **33.3%** | 18.8% |
+| **LM83** | NSC / TI | 4-Channel Thermal Monitor | 14 | **33.3%** | 22.9% |
+| **HDC2021** | TI | Humidity & Temp Sensor | 20 | **38.5%** | 17.3% |
+| **BME280** | Bosch | Humidity, Pressure & Temp | 14 | **43.8%** | 29.2% |
+| **BMP280** | Bosch | Barometric Pressure & Temp | 11 | **75.0%** | 44.2% |
+| **INA219** | TI | Current & Power Monitor | 6 | **71.9%** | 27.1% |
+| **INA226** | TI | High-Side Current Monitor | 10 | **42.7%** | 29.2% |
+| **INA3221** | TI | 3-Channel Current Monitor | 20 | **54.2%** | 13.5% |
+| **ADS1115** | TI | 16-Bit Compact ADC | 4 | **95.8%** | 69.4% |
+| **ADS1220** | TI | 24-Bit Precision ADC (Positive Control) | 4 | **100.0%** | **100.0%** |
+| **LIS2DW12** | ST | 3-Axis Accelerometer | 15 | **50.0%** | 20.8% |
+| **TPS23861** | TI | Quad-Port PoE Controller | 19 | **31.2%** | 22.9% |
+
+---
+
+## 📈 Visual Benchmark Analysis
+
+<p align="center">
+  <img src="assets/fig1_per_chip_passrate.png" alt="Per-Chip Pass Rate" width="90%">
+  <br>
+  <em>Figure 1: Overall pass rate per chip across Qwen2.5-Coder-14B (n=24) and DeepSeek-Coder-6.7B (n=12).</em>
+</p>
+
+<p align="center">
+  <img src="assets/fig2_spearman_complexity.png" alt="Complexity vs Pass Rate" width="70%">
+  <br>
+  <em>Figure 2: Negative correlation between special register semantics and model pass rate (Spearman &rho; = -0.828, p = 0.0001).</em>
+</p>
+
+<p align="center">
+  <img src="assets/fig3_dimension_failure_rates.png" alt="Dimension Failure Rates" width="85%">
+  <br>
+  <em>Figure 3: Failure rates across 8 behavioral dimensions comparing 14B vs. 6.7B models.</em>
+</p>
+
+---
+
+## 🚀 Quickstart: Reproduce in 1 Minute (Zero GPU)
+
+You can verify the dataset integrity, run admission tests, and reproduce all benchmark tables directly on CPU without needing any GPU or API keys:
+
+### 1. Installation
+
 ```bash
-pip install pymupdf requests numpy matplotlib torch transformers   # 语料/评测/出图
-ollama pull qwen2.5:3b-instruct && ollama pull qwen2.5:7b-instruct-q4_K_M
+git clone https://github.com/your-username/d2d-twin.git
+cd d2d-twin
 
-python corpus/scripts/download.py && python corpus/scripts/parse.py     # 语料重建
-python rag/build_vectors.py                                             # 可选: 向量索引(约9min,CPU)
-export HF_HUB_OFFLINE=1                                                # 离线加载 bge
-python -m rag.cli "LM2596 absolute max input voltage" -k 5              # 检索冒烟
-
-# QA-100（--ds 必须显式给：不给时 run.py 会按"存在即最新"自动选数据集）
-python eval/qa100/run.py --ds eval/qa100/datasheet_qa100_v3.json \
-       --model qwen2.5:7b-instruct-q4_K_M --loose --tag rag7b_loose
-python eval/qa100/run.py --ds eval/qa100/datasheet_qa100_v6.json --only app --tag app48
-python eval/qa100/score2.py                                             # 离线重判已有 pred，零 GPU
-python _setup/pareto.py                                                 # 成本-准确率前沿图与表
-
-python eval/run_longmemeval.py --n 500 --k 3                            # LongMemEval-S
+# Install lightweight evaluation dependencies
+pip install -r requirements.txt
 ```
-商用 API 对照：`.env` 里放 `SCNET_API_KEY`（勿提交），`RAG_LLM_MODEL=scnet:<模型ID>`（模型 ID 大小写敏感）。
-实验固定量：seed=42 / temperature=0；方差协议另用 temperature=0.7 × 3 seeds 报告 mean±95%CI(t=4.303)。
 
-## 数据集
-- `datasheet_qa100_v3.json` — **120 题**（param 83 + cross 37），全部人工审校，**对外结论以此为准**
-- `datasheet_qa100_v5.json` — 132 题 = v3 + 应用电路 12 题（第一轮审校）
-- `datasheet_qa100_v6.json` — **168 题** = v5 + 应用电路 36 题（批次二审校）；app 48 题按取证章节分两档，见 `app_tier_summary.json`
-- `datasheet_qa100_v4.json` — 150 题，其中 30 道 app 为 **auto-draft 未经人工审校**（16 道经核实是型号字符串残片），仅作清洗前后对照，**不可用于结论**
-- 审校留痕：`review.csv`(229 行含 verdict) / `review_app*.csv` + 生成时原值 `review_app3.json`
-- 语料索引 `corpus/data/index/corpus_index.jsonl`（456 文档 / 7579 章节切片 / 厂商、年份元数据）
+### 2. Verify Harness Integrity & Print Summary Tables
 
-## 发布边界
-- `.gitignore` 排除：`.env`、`rag/.cache_*.pkl`、`corpus/data/{raw_pdf,parsed,chunks}`、`corpus/logs/`、`data/eval/`、`_setup/`
-- **`_setup/` 默认不入库**，但 `package.py`/`pareto.py`/`finalize_app.py` 是交付流水线的一部分 → 若要完整可复现的公开仓库，需把这三个脚本移到 `eval/` 或从 `.gitignore` 里白名单放行。交付包内的副本位于 `delivery/code/setup/`（README 中的图片路径按仓库根相对定位，在包内查看请改指 `../qa100/`）
-- 交付包不含 456 份 PDF 原件（0.98 GB），只含清单 `raw_pdf_manifest.json`；不含检索缓存，接手方按上面命令自重建
+```bash
+# Verify harness MD5 (8cf0854d4779467bc8e472ee4fb97023) and display Table 1 & Table 2
+python run_benchmark.py
+```
 
-## 许可
-Datasheet 版权归原作者/厂商所有，本仓库仅分发解析后的文本切片用于研究，不重新分发 PDF。代码 MIT。
+### 3. Run Blackbox Admission Tests on Reference Implementations
+
+```bash
+# Test all 17 golden reference simulators (executes in <1 second)
+python run_benchmark.py --test-ref all
+
+# Test a specific reference chip
+python run_benchmark.py --test-ref TMP1075
+```
+
+### 4. Regenerate Publication Charts & LaTeX Tables
+
+```bash
+# Regenerates PNG charts into assets/ and LaTeX tables into _out/latex/
+python run_benchmark.py --make-assets
+```
+
+---
+
+## 📂 Repository Structure
+
+```
+.
+├── LICENSE                      # Apache-2.0 License
+├── README.md                    # Official English documentation
+├── README_zh.md                 # Full Chinese documentation
+├── DATASET.md                   # Hugging Face Dataset Card & Chip Catalog
+├── requirements.txt             # Lightweight test & evaluation dependencies
+├── run_benchmark.py             # One-command verification and reproduction CLI
+├── assets/                      # High-resolution benchmark figures
+│   ├── fig1_per_chip_passrate.png
+│   ├── fig2_spearman_complexity.png
+│   └── fig3_dimension_failure_rates.png
+├── d2d/                         # D2D-Twin Benchmark Suite
+│   ├── ir/                      # 17 Gold IR JSON files (single-writer human curated)
+│   │   ├── TMP1075_gold_ir.json
+│   │   └── ...
+│   ├── rtl/                     # Base sensor classes & 17 Golden Reference Simulators
+│   │   ├── base_sensor.py
+│   │   ├── tmp1075_reference.py
+│   │   └── ...
+│   └── eval/                    # Testbench, main tables, and 612 code samples
+│       ├── test_d2d_blackbox.py # Universal pytest harness (MD5: 8cf0854d4779467bc8e472ee4fb97023)
+│       ├── main_table_n24.json  # Full evaluation records (14B, n=24)
+│       ├── main_table_ds67b.json# Full evaluation records (6.7B, n=12)
+│       └── results_gen_*.json   # Raw synthesized Python code samples
+├── rag/                         # Companion HD-Agent RAG System
+└── corpus/                      # Datasheet corpus parser scripts & manifests
+```
+
+---
+
+## 📚 Companion System: HD-Agent (Datasheet QA-100 RAG)
+
+Before synthesizing executable emulators, understanding datasheets requires reliable retrieval. Our companion subsystem, **HD-Agent**, features:
+- **Corpus**: 456 component datasheets across 7,579 section slices.
+- **QA-100 Benchmark**: 120 formally reviewed questions (param 83 + cross 37) under strict numerical and unit matching (`eval/qa100/score2.py`).
+- **Key Finding**: Retrieval and parsing losses account for **40%–45% of total errors**, demonstrating that LLMs cannot reliably synthesize models without structured intermediate representations (Gold IR).
+
+---
+
+## 📝 Citation
+
+If you use D2D-Twin or HD-Agent in your research, please cite:
+
+```bibtex
+@misc{d2dtwin2026,
+  title={D2D-Twin: Benchmarking Large Language Models on Datasheet-to-Digital-Twin Synthesis for Peripheral Hardware Emulators},
+  author={D2D-Twin Contributors},
+  year={2026},
+  howpublished={\url{https://github.com/your-username/d2d-twin}},
+  note={Deterministic Blackbox Pytest Benchmark across 17 Peripheral ICs}
+}
+```
+
+---
+
+## 📜 License & Disclaimers
+
+- The **D2D-Twin benchmark code, testbenches, and Gold IR datasets** are licensed under the [Apache 2.0 License](LICENSE).
+- Datasheet trademarks and copyright materials belong to their respective manufacturers (Texas Instruments, Bosch Sensortec, STMicroelectronics, National Semiconductor). This repository only distributes parsed structural metadata for academic evaluation and research purposes.

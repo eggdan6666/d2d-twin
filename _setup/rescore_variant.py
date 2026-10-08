@@ -87,7 +87,8 @@ def rescore(part, tag, ir_name, workdir, diag=False):
             if os.path.exists(dp):
                 os.remove(dp)
         r = subprocess.run([sys.executable, "-m", "pytest", "test_d2d_blackbox.py", "-q", "--no-header", "-p", "no:cacheprovider"],
-                           cwd=workdir, env=env, capture_output=True, text=True, timeout=300)
+                           cwd=workdir, env=env, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", timeout=300)
         out = (r.stdout or "")
         mf = re.search(r"(\d+) failed", out); mp = re.search(r"(\d+) passed", out)
         nf = int(mf.group(1)) if mf else 0

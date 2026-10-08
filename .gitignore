@@ -10,14 +10,23 @@ __pycache__/
 .pytest_cache/
 rag/.cache_*.pkl
 
-# Out directory and logs
+# Out directory, temporary sandboxes, and logs
 _out/
-d2d/eval/_sb_*/
-d2d/eval/_mt_*/
+d2d/eval/_*
+*.log
+*.err
+*.pid
+_setup/*.log
+_setup/*.err
+_setup/*.pid
 
-# Big deliverables / binary documents
+# Big deliverables / binary documents / application files
 *.zip
 *.docx
+*.exe
+delivery/*.pdf
+/*.pdf
+!d2d/parsed/**/*.pdf
 
 # Corpus (PDF files with copyright/licensing restrictions)
 corpus/
