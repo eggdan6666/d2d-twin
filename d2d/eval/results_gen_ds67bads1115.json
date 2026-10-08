@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 25.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_1_0/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.75s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 44.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_1_1/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 1.17s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 67.2,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.36s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in (0x01, 0x02, 0x03):  # CONFIG, LO_THRESH, HI_THRESH\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n            else:\n                self.regs[addr] = data\n        # CONVERSION is read-only, ignore writes\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 90.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_1_3/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 1.37s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            data = (data & 0xFF) << 8 | (self.regs[addr] & 0x00FF)\n        if addr in self.regs and nbytes == 2:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 113.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_2_0/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.53s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 132.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_2_1/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.55s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            data = (data & 0xFF) << 8 | (self.regs[addr] & 0x00FF)\n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 148.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_2_2/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.55s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        \n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 164.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_2_3/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        \n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data if nbytes == 2 else (data & 0xFF) << 8 | self.regs[addr] & 0xFF\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 182.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_3_0/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 1.67s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n            else:\n                self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 204.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_3_1/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.84s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 226.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_3_2/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            data = (data & 0xFF) << 8\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | data\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 247.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bads1115_3_3/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x01 and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data if nbytes == 2 else (data & 0xFF) | (self.regs[addr] & 0xFF00)\n"
+ }
+]

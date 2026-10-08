@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 4,
+  "i": 0,
+  "gen_s": 32.0,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.93s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs[0x00] = 0x0000  # CONVERSION\n        self.regs[0x01] = 0x8583  # CONFIG\n        self.regs[0x02] = 0x8000  # LO_THRESH\n        self.regs[0x03] = 0x7FFF  # HI_THRESH\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            self.regs[addr] = (self.regs[addr] & ~mask) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 4,
+  "i": 1,
+  "gen_s": 58.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 2.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | (data & mask)\n"
+ },
+ {
+  "seed": 4,
+  "i": 2,
+  "gen_s": 86.8,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.71s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs[0x00] = 0x0000  # CONVERSION\n        self.regs[0x01] = 0x8583  # CONFIG\n        self.regs[0x02] = 0x8000  # LO_THRESH\n        self.regs[0x03] = 0x7FFF  # HI_THRESH\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n\n        if addr == 0x00:  # CONVERSION (RO)\n            return\n\n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data = (current_value & 0x00FF) | ((data & 0xFF) << 8)\n\n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 4,
+  "i": 3,
+  "gen_s": 115.4,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.35s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF,  # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00 if (data & 0x80) else 0x00FF  # Handle sign extension for 1-byte writes\n            data = (self.regs[addr] & ~mask) | ((data << 8) if (data & 0x80) else data)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 5,
+  "i": 0,
+  "gen_s": 142.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.19s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs[0x00] = 0x0000  # CONVERSION\n        self.regs[0x01] = 0x8583  # CONFIG\n        self.regs[0x02] = 0x8000  # LO_THRESH\n        self.regs[0x03] = 0x7FFF  # HI_THRESH\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(\"Invalid register address\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(\"Invalid register address\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            data <<= 8\n            self.regs[addr] = (self.regs[addr] & ~mask) | data\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 5,
+  "i": 1,
+  "gen_s": 170.0,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.59s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            data <<= 8\n        else:\n            mask = 0xFFFF\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | (data & mask)\n"
+ },
+ {
+  "seed": 5,
+  "i": 2,
+  "gen_s": 202.7,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 1.39s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            current_value = self.regs[addr]\n            data = (data << 8) | (current_value & 0xFF)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 5,
+  "i": 3,
+  "gen_s": 228.4,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 2.74s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#x}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#x}\")\n        \n        if addr == 0x00:  # RO register\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            self.regs[addr] = (self.regs[addr] & ~mask) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 6,
+  "i": 0,
+  "gen_s": 256.9,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.89s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:#04x}\")\n        \n        if addr == 0x00:  # RO register, ignore write\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            shift = 8\n        else:\n            mask = 0xFFFF\n            shift = 0\n        \n        self.regs[addr] = (self.regs[addr] & ~mask) | ((data << shift) & mask)\n"
+ },
+ {
+  "seed": 6,
+  "i": 1,
+  "gen_s": 283.4,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 2.27s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs[0x00] = 0x0000  # CONVERSION\n        self.regs[0x01] = 0x8583  # CONFIG\n        self.regs[0x02] = 0x8000  # LO_THRESH\n        self.regs[0x03] = 0x7FFF  # HI_THRESH\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                return (value >> 8) & 0xFF\n            return value\n        raise ValueError(\"Invalid register address\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                current_value = self.regs[addr]\n                data = (current_value & 0x00FF) | ((data & 0xFF) << 8)\n            if addr != 0x00:  # CONVERSION is read-only\n                self.regs[addr] = data\n        else:\n            raise ValueError(\"Invalid register address\")\n"
+ },
+ {
+  "seed": 6,
+  "i": 2,
+  "gen_s": 312.0,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 3,
+  "tail": "...sssss                                                                 [100%]\n3 passed, 5 skipped in 0.68s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if addr == 0x00:  # CONVERSION is read-only\n            return\n        \n        if nbytes == 1:\n            mask = 0xFF00\n            self.regs[addr] = (self.regs[addr] & ~mask) | ((data << 8) & mask)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 6,
+  "i": 3,
+  "gen_s": 343.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ads1115kt_b_6_3/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ads1115kt_b_6_3/test_d2d_blackbox.py:160: AssertionError: CONFIG.MUX[14:12] 写全 1 后读回 0，期望 7（整寄存器 0x8583）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 1.39s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr:02X}\")\n        \n        if nbytes == 1:\n            mask = 0xFF << 8\n            data = (data << 8) & mask\n            value = self.regs[addr] & ~mask\n            self.regs[addr] = value | data\n        else:\n            self.regs[addr] = data & 0xFFFF\n\n        # CONFIG register is read-only except for OS bit\n        if addr == 0x01:\n            os_bit = self.regs[addr] & (1 << 15)\n            self.regs[addr] = 0x8583 | os_bit\n"
+ }
+]

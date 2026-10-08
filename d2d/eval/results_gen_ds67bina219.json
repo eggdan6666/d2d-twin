@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 28.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..FFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_0/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_0/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n2 failed, 2 passed, 4 skipped in 2.03s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,  # Configuration register\n            0x01: 0x0000,  # Shunt voltage register\n            0x02: 0x0000,  # Bus voltage register\n            0x03: 0x0000,  # Power register\n            0x04: 0x0000,  # Current register\n            0x05: 0x0000   # Calibration register\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in (0x00, 0x05) and nbytes == 1:  # RW fields and single byte writes\n            if addr == 0x00:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)  # Update only bits 15:8\n            else:\n                self.regs[addr] = (self.regs[addr] & 0xFF00) | data  # Update only bits 15:8\n        elif addr in (0x00, 0x05) and nbytes == 2:  # RW fields and double byte writes\n            self.regs[addr] = data\n        elif addr in (0x01, 0x02, 0x03, 0x04):  # RO fields and writes are ignored\n            pass\n        else:\n            raise ValueError(f\"Invalid register address: {addr}\")\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 50.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_1/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_1/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_1/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 1.02s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 69.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_2/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_2/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_2/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 2.29s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,  # CONFIGURATION\n            0x01: 0x0000,  # SHUNT_VOLTAGE\n            0x02: 0x0000,  # BUS_VOLTAGE\n            0x03: 0x0000,  # POWER\n            0x04: 0x0000,  # CURRENT\n            0x05: 0x0000   # CALIBRATION\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 94.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_3/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_3/test_d2d_blackbox.py:160: AssertionError: CONFIGURATION.RSV_14[14] 写全 1 后读回 0，期望 1（整寄存器 0x9f9f）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_1_3/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 1.16s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and nbytes == 2:\n            if addr in [0x00, 0x05]:  # CONFIGURATION and CALIBRATION\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n            else:\n                self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 118.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_0/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_0/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_0/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 2.74s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] & 0xFF00 == data << 8:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data if nbytes == 2 else (self.regs[addr] & 0xFF00) | (data & 0xFF)\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 144.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_1/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_1/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_1/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 2.00s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,  # CONFIGURATION\n            0x01: 0x0000,  # SHUNT_VOLTAGE\n            0x02: 0x0000,  # BUS_VOLTAGE\n            0x03: 0x0000,  # POWER\n            0x04: 0x0000,  # CURRENT\n            0x05: 0x0000   # CALIBRATION\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and nbytes == 2:\n            self.regs[addr] = data & 0xFFFF\n        elif addr in self.regs and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 168.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_2/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_2/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_2/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 2.30s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 192.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_3/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_3/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_2_3/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 0.98s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in [0x00, 0x05] and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        elif nbytes == 2:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 214.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_0/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_0/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_0/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 2.82s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 239.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_1/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_1/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_1/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 1.24s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 266.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_2/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa500\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_2/test_d2d_blackbox.py:160: AssertionError: CONFIGURATION.RSV_14[14] 写全 1 后读回 0，期望 1（整寄存器 0x9f9f）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_2/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 2.21s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] is not None and nbytes == 2:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        elif addr in self.regs and self.regs[addr] is not None and nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0xFF)\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 283.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFFssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_3/test_d2d_blackbox.py:123: AssertionError: SHUNT_VOLTAGE 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_3/test_d2d_blackbox.py:178: AssertionError: CALIBRATION.FS0[0] 是 RW 寄存器内的 RO 位：写全 1 后读回 1，期望复位值 0（整寄存器 0xffff）\n/root/private_data/d2d/eval/_sandbox_ds67bina219_3_3/test_d2d_blackbox.py:198: AssertionError: CONFIGURATION.RST 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: SHUNT...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CALI...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: CONF...\n3 failed, 1 passed, 4 skipped in 4.38s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass INA219_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x399F,\n            0x01: 0x0000,\n            0x02: 0x0000,\n            0x03: 0x0000,\n            0x04: 0x0000,\n            0x05: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ }
+]
