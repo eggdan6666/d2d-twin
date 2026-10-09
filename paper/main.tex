@@ -73,7 +73,7 @@ To address these challenges, we introduce \textbf{D2D-Twin} (\textit{Datasheet-t
 Our contributions are summarized as follows:
 \begin{itemize}
     \item \textbf{The D2D-Twin Benchmark}: We curate 17 industrial peripheral ICs spanning 6 functional domains, accompanied by Gold IRs, golden reference simulators (100\% testbench admission pass), and prompt templates.
-    \item \textbf{Eight Behavioral Dimensions \& Decoupling Model}: We formalize 8 rigorous behavioral verification dimensions. Crucially, we propose a three-bucket orthogonal decoupling model ($\text{\ding{175}a} / \text{\ding{175}b} / \text{\ding{175}u}$) that disentangles undocumented vendor convention gaps from true model logic defects.
+    \item \textbf{Eight Behavioral Dimensions \& Decoupling Model}: We formalize 8 rigorous behavioral verification dimensions. Crucially, we propose a three-bucket orthogonal decoupling model ($\text{D4a} / \text{D4b} / \text{D4u}$) that disentangles undocumented vendor convention gaps from true model logic defects.
     \item \textbf{Extensive Empirical Evaluation ($N=612$)}: We conduct 408 synthesizer evaluations on Qwen2.5-Coder-14B ($n=24$ per chip across 6 seeds) and 204 evaluations on DeepSeek-Coder-6.7B ($n=12$).
     \item \textbf{Key Scientific Discoveries}: We unveil four systemic blind spots in state-of-the-art code LLMs: Sub-register Bitfield Persistence Deficit, 100\% Read/Write Aliasing Blindness, Vendor IP Template Contamination, and Complexity Collapse.
     \item \textbf{Open-Source Release}: All test suites, Gold IRs, synthesis prompts, and 612 code models are released as an open-source suite under Apache-2.0.
@@ -123,22 +123,22 @@ The benchmark encompasses 17 commercially ubiquitous peripheral ICs:
 \subsection{The 8 Behavioral Verification Dimensions}
 D2D-Twin defines 8 orthogonal behavioral verification dimensions:
 \begin{itemize}
-    \item \textbf{② Reset values}: Upon power-on, verifies all non-runtime registers match specified reset states.
-    \item \textbf{③ RO write protection}: Injects inverted random bitmasks into read-only registers and asserts state immutability.
-    \item \textbf{④ RW bitfield persistence}: Modifies targeted RW bitfields while asserting adjacent untouched bits retain initial states.
-    \item \textbf{⑤ Write-trigger / self-clearing}: Asserts that writing 1 to trigger bits (e.g., one-shot conversions) causes the bit to immediately read back as 0.
-    \item \textbf{⑥ Soft-reset key}: Asserts write-only registers require exact magic byte sequences to initiate reset.
-    \item \textbf{⑥s Single-byte bus semantics}: Asserts byte-swapped partial write behavior on 16-bit registers.
-    \item \textbf{⑦ Read/write address aliasing}: Injects write transactions into a write address and verifies synchronized updates in the paired read address.
-    \item \textbf{⑧ Clear-on-read interrupt}: Asserts that reading an interrupt status register automatically flushes its pending flags.
+    \item \textbf{D2 Reset values}: Upon power-on, verifies all non-runtime registers match specified reset states.
+    \item \textbf{D3 RO write protection}: Injects inverted random bitmasks into read-only registers and asserts state immutability.
+    \item \textbf{D4 RW bitfield persistence}: Modifies targeted RW bitfields while asserting adjacent untouched bits retain initial states.
+    \item \textbf{D5 Write-trigger / self-clearing}: Asserts that writing 1 to trigger bits (e.g., one-shot conversions) causes the bit to immediately read back as 0.
+    \item \textbf{D6 Soft-reset key}: Asserts write-only registers require exact magic byte sequences to initiate reset.
+    \item \textbf{D6s Single-byte bus semantics}: Asserts byte-swapped partial write behavior on 16-bit registers.
+    \item \textbf{D7 Read/write address aliasing}: Injects write transactions into a write address and verifies synchronized updates in the paired read address.
+    \item \textbf{D8 Clear-on-read interrupt}: Asserts that reading an interrupt status register automatically flushes its pending flags.
 \end{itemize}
 
-\subsection{Orthogonal Decoupling Model ($\text{\ding{175}a} / \text{\ding{175}b} / \text{\ding{175}u}$)}
-Benchmarking must not penalize LLMs for unstated human conventions. In many datasheets, reserved bits have unspecified read/write behavior. D2D-Twin decouples Dimension ④ into three orthogonal buckets:
+\subsection{Orthogonal Decoupling Model ($\text{D4a} / \text{D4b} / \text{D4u}$)}
+Benchmarking must not penalize LLMs for unstated human conventions. In many datasheets, reserved bits have unspecified read/write behavior. D2D-Twin decouples Dimension D4 into three orthogonal buckets:
 \begin{itemize}
-    \item \textbf{Bucket ④a (Documented Defect)}: Both datasheet and Gold IR explicitly specify access policy. Failures here reflect true bitwise logic flaws.
-    \item \textbf{Bucket ④b (Confirmed Convention Gap)}: Undocumented reserved bits where industry convention defaults to read-0/write-ignore.
-    \item \textbf{Bucket ④u (Unverified Residual)}: Undetermined bits requiring further vendor verification.
+    \item \textbf{Bucket D4a (Documented Defect)}: Both datasheet and Gold IR explicitly specify access policy. Failures here reflect true bitwise logic flaws.
+    \item \textbf{Bucket D4b (Confirmed Convention Gap)}: Undocumented reserved bits where industry convention defaults to read-0/write-ignore.
+    \item \textbf{Bucket D4u (Unverified Residual)}: Undetermined bits requiring further vendor verification.
 \end{itemize}
 
 \section{Experimental Evaluation}
@@ -159,18 +159,18 @@ Statistical confidence intervals ($95\%$ CI) across chip clusters ($k$) were com
 \toprule
 Dimension & Specification Aspect & Clusters ($k$) & Fail / Applicable & Failure Rate (\%) & Inference Method & 95\% Conf. Interval \\
 \midrule
-② & Reset values & 17 & 0 / 408 & \textbf{0.0\%} & Rule of Three & $\le 0.7\%$ \\
-③ & RO write protection & 16 & 189 / 384 & \textbf{49.2\%} & Cluster Boot. & [34.9\%, 62.5\%] \\
-④ & RW bitfield persistence & 17 & 290 / 408 & \textbf{71.1\%} & Cluster Boot. & [49.8\%, 89.2\%] \\
-⑤ & Write-trigger / self-clearing bits & 9 & 116 / 216 & \textbf{53.7\%} & Cluster Boot. & [35.6\%, 70.4\%] \\
-⑥ & Soft-reset key (write-only) & 2 & 18 / 48 & \textbf{37.5\%} & Descriptive ($k=2$) & --- \\
-⑥s & Single-byte semantics & 1 & 2 / 24 & \textbf{8.3\%} & Descriptive ($k=1$) & --- \\
-⑦ & Read/write alias registers & 2 & 48 / 48 & \textbf{100.0\%} & Descriptive ($k=2$) & [100.0\%, 100.0\%] \\
-⑧ & Clear-on-read alias & 1 & 23 / 24 & \textbf{95.8\%} & Descriptive ($k=1$) & [87.8\%, 100.0\%] \\
+D2 & Reset values & 17 & 0 / 408 & \textbf{0.0\%} & Rule of Three & $\le 0.7\%$ \\
+D3 & RO write protection & 16 & 189 / 384 & \textbf{49.2\%} & Cluster Boot. & [34.9\%, 62.5\%] \\
+D4 & RW bitfield persistence & 17 & 290 / 408 & \textbf{71.1\%} & Cluster Boot. & [49.8\%, 89.2\%] \\
+D5 & Write-trigger / self-clearing bits & 9 & 116 / 216 & \textbf{53.7\%} & Cluster Boot. & [35.6\%, 70.4\%] \\
+D6 & Soft-reset key (write-only) & 2 & 18 / 48 & \textbf{37.5\%} & Descriptive ($k=2$) & --- \\
+D6s & Single-byte semantics & 1 & 2 / 24 & \textbf{8.3\%} & Descriptive ($k=1$) & --- \\
+D7 & Read/write alias registers & 2 & 48 / 48 & \textbf{100.0\%} & Descriptive ($k=2$) & [100.0\%, 100.0\%] \\
+D8 & Clear-on-read alias & 1 & 23 / 24 & \textbf{95.8\%} & Descriptive ($k=1$) & [87.8\%, 100.0\%] \\
 \midrule
-④a & Documented Bitfield Defect & 17 & 194 / 408 & \textbf{47.5\%} & Cluster Boot. & [32.1\%, 61.4\%] \\
-④b & Convention Gap & 9 & 16 / 408 & \textbf{3.9\%} & Descriptive ($k=9$) & --- \\
-④u & Unverified Residual & 9 & 80 / 408 & \textbf{19.6\%} & Descriptive ($k=9$) & --- \\
+D4a & Documented Bitfield Defect & 17 & 194 / 408 & \textbf{47.5\%} & Cluster Boot. & [32.1\%, 61.4\%] \\
+D4b & Convention Gap & 9 & 16 / 408 & \textbf{3.9\%} & Descriptive ($k=9$) & --- \\
+D4u & Unverified Residual & 9 & 80 / 408 & \textbf{19.6\%} & Descriptive ($k=9$) & --- \\
 \bottomrule
 \end{tabular}
 \end{table*}
@@ -183,16 +183,16 @@ Dimension & Specification Aspect & Clusters ($k$) & Fail / Applicable & Failure 
 \toprule
 Dimension & Qwen-14B ($n=24$) & DeepSeek-6.7B ($n=12$) \\
 \midrule
-② Reset values & 0.0\% & 14.7\% \\
-③ RO write protection & 49.2\% & 97.4\% \\
-④ RW bitfield persistence & 71.1\% & 78.9\% \\
-⑤ Write-trigger / self-clearing & 53.7\% & 84.4\% \\
-⑥ Soft-reset key (write-only) & 37.5\% & 84.6\% \\
-⑥s Single-byte semantics & 8.3\% & 46.7\% \\
-⑦ Read/write alias registers & \textbf{100.0\%} & \textbf{100.0\%} \\
-⑧ Clear-on-read alias & 95.8\% & 53.3\% \\
+D2 Reset values & 0.0\% & 14.7\% \\
+D3 RO write protection & 49.2\% & 97.4\% \\
+D4 RW bitfield persistence & 71.1\% & 78.9\% \\
+D5 Write-trigger / self-clearing & 53.7\% & 84.4\% \\
+D6 Soft-reset key (write-only) & 37.5\% & 84.6\% \\
+D6s Single-byte semantics & 8.3\% & 46.7\% \\
+D7 Read/write alias registers & \textbf{100.0\%} & \textbf{100.0\%} \\
+D8 Clear-on-read alias & 95.8\% & 53.3\% \\
 \midrule
-④a Documented Bitfield Defect & 47.5\% & 54.4\% \\
+D4a Documented Bitfield Defect & 47.5\% & 54.4\% \\
 Spearman $\rho$ (Special Regs) & \textbf{-0.828} ($p=0.0001$) & \textbf{-0.789} ($p=0.0003$) \\
 \bottomrule
 \end{tabular}
@@ -214,7 +214,7 @@ A critical observation across both models is the pervasive \textit{Monolithic In
 \begin{equation}
     \texttt{self.regs[addr]} \leftarrow \texttt{data}
 \end{equation}
-When writing to sub-register fields (e.g., bits [14:12]), the model fails to perform bitwise masking ($\texttt{val} = (\texttt{orig} \ \& \ \sim\texttt{mask}) \ | \ (\texttt{data} \ \& \ \texttt{mask})$). As a consequence, writes to RW fields inadvertently wipe out adjacent read-only status flags and configuration bits. Even when filtering out convention gaps (Bucket ④b) and unverified bits (Bucket ④u), the documented defect rate ④a remains staggering at \textbf{47.5\% in 14B} and \textbf{54.4\% in 6.7B}.
+When writing to sub-register fields (e.g., bits [14:12]), the model fails to perform bitwise masking ($\texttt{val} = (\texttt{orig} \ \& \ \sim\texttt{mask}) \ | \ (\texttt{data} \ \& \ \texttt{mask})$). As a consequence, writes to RW fields inadvertently wipe out adjacent read-only status flags and configuration bits. Even when filtering out convention gaps (Bucket D4b) and unverified bits (Bucket D4u), the documented defect rate D4a remains staggering at \textbf{47.5\% in 14B} and \textbf{54.4\% in 6.7B}.
 
 \subsection{Read/Write Address Aliasing Blindness}
 In devices like LM83 and TMP461, reading and writing to the same logical register occur at disjoint addresses (e.g., LM83: Local Temp High Limit is written at \texttt{0x0B} but read at \texttt{0x05}). 
@@ -228,9 +228,9 @@ Evaluating chips within the same manufacturer family uncovers striking template 
 As illustrated in Figure \ref{fig:complexity}, we observe an acute \textit{Complexity Collapse}. The number of special semantic registers (aliased, self-clearing, soft-reset) exhibits a statistically extreme negative Spearman rank correlation with overall synthesis pass rates ($\rho = -0.828, p = 0.0001$). For pure register files like ADS1220 (Positive Control), pass rate reaches 100.0\%; once non-standard bus behaviors enter the specification, synthesis accuracy collapses sharply below 40\%.
 
 \section{Ablation Study: Q1c Clean Arm}
-To verify whether Dimension ② (Reset values, 0.0\% fail) measures semantic reasoning or simple structured transcription, we designed the \textbf{Q1c Clean Ablation Arm}. We systematically stripped all explicit \texttt{reset} keys from the Gold IR and sanitized all descriptive text mentioning reset numbers across 4 chips (BME280, INA3221, LIS2DW12, ADS1220).
+To verify whether Dimension D2 (Reset values, 0.0\% fail) measures semantic reasoning or simple structured transcription, we designed the \textbf{Q1c Clean Ablation Arm}. We systematically stripped all explicit \texttt{reset} keys from the Gold IR and sanitized all descriptive text mentioning reset numbers across 4 chips (BME280, INA3221, LIS2DW12, ADS1220).
 
-Under the Q1c arm, the reset value failure rate immediately surged from \textbf{0.0\% to 75.0\%--100.0\%}. This proves that LLMs do not infer default hardware states from operational physics or bus semantics; rather, Dimension ② strictly benchmarks transcription fidelity from structured specifications.
+Under the Q1c arm, the reset value failure rate immediately surged from \textbf{0.0\% to 75.0\%--100.0\%}. This proves that LLMs do not infer default hardware states from operational physics or bus semantics; rather, Dimension D2 strictly benchmarks transcription fidelity from structured specifications.
 
 \section{Related Work}
 \textbf{LLMs for Hardware EDA}: Benchmarks such as VerilogEval \cite{thakur2023verilogeval} and RTLLM \cite{lu2024rtllm} pioneered evaluating LLMs on RTL synthesis. AutoChip \cite{blocklove2023chip} explored conversational feedback for hardware debugging. D2D-Twin differs fundamentally by targeting Python-level behavioral simulation prototypes rather than gate-level RTL.
