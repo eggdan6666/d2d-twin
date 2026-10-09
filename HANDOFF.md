@@ -81,35 +81,39 @@ pip install -r requirements.txt
 
 ### 3.3 核心启动与评测复现命令（精确到可复制）
 
-#### 1. 一键离线复现完整基准与生成图表（耗时 < 2 秒）
+#### 1. 一键离线复现完整基准（耗时 < 2 秒）
 ```bash
 python run_benchmark.py
 ```
 * **预期控制台输出**：
   ```text
   ======================================================================
-  D2D-Twin: Datasheet-to-Digital-Twin Benchmark Suite
-  Universal Blackbox Pytest Harness MD5: 8cf0854d4779467bc8e472ee4fb97023
+   D2D-Twin Benchmark: Deterministic Integrity Check
   ======================================================================
-  [+] Evaluated Chips: 17 ICs across 6 functional domains
-  [+] Evaluated Runs: 612 models (Qwen2.5-Coder-14B: 408, DeepSeek-Coder-6.7B: 204)
+    Harness File : d2d/eval/test_d2d_blackbox.py
+    Harness MD5  : 8cf0854d4779467bc8e472ee4fb97023 -> [MATCH]
+    Gold IRs     : 17/17 present
   ----------------------------------------------------------------------
-  Overall Synthesis Pass Rates:
-    - Qwen2.5-Coder-14B  (n=24): Pass Rate across chips
-    - DeepSeek-Coder-6.7B (n=12): Pass Rate across chips
-  Spearman Complexity Rank Correlation: rho = -0.828, p = 0.0001
-  [✓] All figures successfully regenerated in ./figures/
+   Table 1: Main Benchmark Failure Breakdown (Qwen2.5-Coder-14B, N=408 Samples)
+   Table 2: Cross-Model Comparison Across 17 Peripherals (N=612 Total Samples)
+   [Finding] Spearman rank correlation (Special Registers vs Pass Rate): rho = -0.828, p = 0.0001
   ======================================================================
   ```
-* **预期产物**：
-  - `figures/fig1_per_chip_passrate.png`（各芯片通过率横向对比）
-  - `figures/fig2_spearman_complexity.png`（特殊寄存器复杂度与通过率拟合图）
-  - `figures/fig3_dimension_failure_rates.png`（8 大维度错误分布热力/柱状图）
+
+该命令校验冻结 Harness、17 份 Gold IR，并显示已记录的两张汇总表。若需要重新生成出版级图表和 LaTeX 表格，另行执行：
+```bash
+python run_benchmark.py --make-assets
+```
+生成物位于 `assets/fig1_per_chip_passrate.png`、`assets/fig2_spearman_complexity.png`、
+`assets/fig3_dimension_failure_rates.png` 和 `_out/latex/`。
 
 #### 2. 对单颗芯片执行黑盒单元测试
 ```bash
-# 以 TMP100 为例，执行黑盒总线读写断言
-pytest d2d/eval/test_d2d_blackbox.py -k "TMP100" -v
+# 执行全部 17 颗金标参考仿真器的黑盒准入测试
+python run_benchmark.py --test-ref all
+
+# 以单颗芯片为例
+python run_benchmark.py --test-ref TMP100
 ```
 
 #### 3. 校验黑盒测试套件 MD5 完整性
@@ -149,7 +153,8 @@ e:\HD-Agent·分层记忆RAG的电子Dstasheet智能问答/
 │       ├── test_d2d_blackbox.py  # 【核心冻结】通用黑盒断言 Harness (MD5 锁定)
 │       ├── results_gen_qwen.json # Qwen2.5-Coder-14B 408 次评测明细
 │       └── results_gen_deepseek.json # DeepSeek-Coder-6.7B 204 次评测明细
-└── figures/                      # 生成的出版级图表导出目录
+├── assets/                       # 生成并随仓库发布的出版级图表
+└── _out/                         # 重新生成的图表与 LaTeX 表格输出
 ```
 
 ### 4.2 外设模拟器接口契约（Bus Protocol Contract）
@@ -269,7 +274,7 @@ class <ChipName>Emulator:
 ## 7. 给接手 AI 的第一项任务自检清单
 
 新接手 AI 在开始工作前，请先按以下顺序执行自检：
-1. 运行 `python run_benchmark.py`，确认控制台输出无报错，Spearman 秩相关系数正常输出，`figures/` 生成 3 张最新图表；
+1. 运行 `python run_benchmark.py`，确认 Harness MD5 与 17/17 Gold IR 完整性通过；需要刷新图表时再运行 `python run_benchmark.py --make-assets`，确认 `assets/` 与 `_out/latex/` 生成成功；
 2. 运行 MD5 校验命令，确保 `d2d/eval/test_d2d_blackbox.py` 的哈希值为 `8cf0854d4779467bc8e472ee4fb97023`；
 3. 阅读第 5 节的四大缺陷与踩坑记录，不得修改已冻结的测试断言逻辑；
 4. 若用户已完成背书，协助用户将 `d2d_paper.zip` 在 arXiv 上完成提交。
