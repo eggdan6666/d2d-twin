@@ -1,6 +1,8 @@
 # D2D-Twin：基于芯片数据手册生成寄存器级行为仿真器的大模型评估基准
 
 <p align="center">
+  <a href="https://doi.org/10.5281/zenodo.23262086"><img src="https://img.shields.io/badge/DOI-10.5281%2Fzenodo.23262086-blue.svg" alt="DOI"></a>
+  <a href="https://huggingface.co/datasets/eggdan666/d2d-twin"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Datasets-yellow" alt="Hugging Face"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg" alt="Python"></a>
   <a href="DATASET.md"><img src="https://img.shields.io/badge/芯片数-17_颗-orange.svg" alt="Benchmark Suite"></a>
@@ -201,11 +203,13 @@ python run_benchmark.py --make-assets
 如果您在科研或工程项目中使用了 D2D-Twin 或 HD-Agent，欢迎引用本项目：
 
 ```bibtex
-@misc{d2dtwin2026,
+@misc{lan2024d2dtwin,
   title={D2D-Twin: Benchmarking Large Language Models on Datasheet-to-Digital-Twin Synthesis for Peripheral Hardware Emulators},
-  author={D2D-Twin Contributors},
-  year={2026},
-  howpublished={\url{https://github.com/your-username/d2d-twin}},
+  author={Lan, Chengtong},
+  year={2024},
+  doi={10.5281/zenodo.23262086},
+  url={https://doi.org/10.5281/zenodo.23262086},
+  howpublished={\url{https://github.com/eggdan6666/d2d-twin}},
   note={Deterministic Blackbox Pytest Benchmark across 17 Peripheral ICs}
 }
 ```
