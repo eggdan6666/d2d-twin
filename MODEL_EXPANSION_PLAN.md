@@ -10,22 +10,23 @@ All new model weights are downloaded to the SCNet DCU node and loaded locally by
 |---|---|---|---|
 | Existing control | Qwen2.5-Coder-14B-Instruct | present on SCNet | Historical 14B control |
 | Existing control | DeepSeek-Coder-6.7B-Instruct | present on SCNet | Historical 6.7B control |
-| First new model | Qwen2.5-Coder-7B-Instruct | download after quota check | Same-family scale control; about 15 GB of safetensors |
-| Second new model | DeepSeek-Coder-V2-Lite-Instruct | optional, download only after cleanup/quantization plan | MoE comparison; 16B total/2.4B active, about 31.4 GB of safetensors |
+| First new model | Qwen2.5-Coder-3B-Instruct | **downloaded and smoke-tested** | Fits the remaining SCNet quota; first new local arm |
+| Deferred model | Qwen2.5-Coder-7B-Instruct | deferred | About 15 GB of safetensors; current 50 GB quota cannot hold it safely |
+| Deferred model | DeepSeek-Coder-V2-Lite-Instruct | deferred | About 31.4 GB of safetensors; requires quota expansion or cleanup |
 
-The two existing models remain the historical comparison arm. New models are first evaluated on the 32-chip roster; their scores are not merged into the historical 612-run tables.
+The two existing models remain the historical comparison arm. The current repository contains 20 formal IRs; the Qwen-3B arm is being evaluated on all 20. Its scores are kept as a separate new-model arm and are not merged into the historical 612-run tables.
 
 ## Sampling protocol
 
 ### Balanced screening arm
 
-- 32 chips per model;
+- 20 formal chips in the current IR roster (the protocol scales to 32 when the remaining IRs are admitted);
 - seeds `1,2,3`;
 - `--n 4` per seed, therefore 12 samples per chip/model;
 - `temperature=0.7`, `top_p=0.9`, `top_k=40`;
 - identical prompt, IR revision, harness MD5, and `max-new` for every model.
 
-This gives 384 samples per model and 1,536 samples for four models.
+For the current Qwen-3B run this gives 240 samples (20 × 3 × 4). A future 32-chip run gives 384 samples per model.
 
 ### Confirmatory arm
 
@@ -47,6 +48,8 @@ du -sh /root/private_data/models/* 2>/dev/null | sort -h
 ```
 
 Do not start a download if the model plus temporary download space would exceed the 50G quota. Download one model at a time, verify checksums, then serve/evaluate it before considering the next model.
+
+The first download gate passed on 2026-10-11: Qwen2.5-Coder-3B-Instruct completed ModelScope `SIZE_CHECK PASS`, occupies about 5.8 GB, and left about 3.3 GB free. The SCNet runtime requires `/opt/conda/bin/python` plus `LD_LIBRARY_PATH=/opt/dtk-25.04.1/hip/lib:/opt/dtk-25.04.1/lib:$LD_LIBRARY_PATH`.
 
 ## Acceptance gate
 
