@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 31.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_1_0/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 8\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 65.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 0,
+  "tail": "FFFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_1_1/test_d2d_blackbox.py:102: AssertionError: CTRL_REG0(0x1E) 复位值期望 0x10，实得 0x0\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_1_1/test_d2d_blackbox.py:123: AssertionError: OUT_X_L 是 RO：写脏数据后 0x0 → 0xa5\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_1_1/test_d2d_blackbox.py:160: AssertionError: CTRL_REG0.SDO_PU_DISC[7] 写全 1 后读回 0，期望 1（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_reset_values - AssertionError: CTRL_REG0(0x...\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: OUT_X...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CTRL...\n3 failed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr == 0x0F:\n            return self.regs[0x0F]\n        elif addr in [0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D]:\n            return self.regs[addr]\n        elif addr in [0x1E, 0x1F, 0x20, 0x23, 0x27]:\n            return self.regs[addr] & 0xFF00\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in [0x1E, 0x1F, 0x20, 0x23]:\n            self.regs[addr] = data & 0xFF00\n        elif addr == 0x27:\n            self.regs[0x27] = data & 0xFF\n        elif addr in [0x28, 0x29, 0x2A, 0x2B, 0x2C, 0x2D]:\n            self.regs[addr] = data & 0xFF\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 92.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_1_2/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 117.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_1_3/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 8  # The register width of the device\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 146.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_2_0/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 2:\n            return self.regs[addr]\n        elif nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 2:\n            self.regs[addr] = data\n        elif nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 167.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_2_1/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 188.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_2_2/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 2:\n            return self.regs[addr]\n        elif nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 2:\n            self.regs[addr] = data\n        elif nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 219.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_2_3/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 247.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_3_0/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 2:\n            return self.regs[addr]\n        elif nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 2:\n            self.regs[addr] = data\n        elif nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 271.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_3_1/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 295.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_3_2/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] & 0xFF00) >> 8\n            else:\n                return self.regs[addr]\n        else:\n            raise ValueError(f\"Invalid register address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n        else:\n            raise ValueError(f\"Invalid register address: {addr}\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 316.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_ds67b_lis3dh_3_3/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n"
+ }
+]
