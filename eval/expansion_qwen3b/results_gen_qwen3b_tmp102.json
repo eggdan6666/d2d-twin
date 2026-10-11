@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 20.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_0/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_0/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address {addr}\")\n        if nbytes == 1:\n            return self.regs[addr] & 0xFF\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address {addr}\")\n        if nbytes == 1:\n            self.regs[addr] &= ~(0xFF << 8)\n            self.regs[addr] |= (data & 0xFF) << 8\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 38.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_1/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_1/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 1.14s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Invalid address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid address: {addr}\")\n        \n        if nbytes == 2:\n            self.regs[addr] = data\n        elif nbytes == 1:\n            # Update bits 15:8 for 1-byte write\n            self.regs[addr] &= 0xFF00  # Clear bits 15:8\n            self.regs[addr] |= (data & 0xFF00) >> 8  # Shift upper 8 bits to lower 8 bits\n        else:\n            raise ValueError(\"Unsupported nbytes value\")\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 56.3,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_2/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_2/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid address: {addr}\")\n        \n        if nbytes == 1:\n            return (self.regs[addr] >> 8) & 0xFF\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid address: {addr}\")\n        \n        if nbytes == 1:\n            self.regs[addr] &= 0xFF00\n            self.regs[addr] |= (data >> 8) & 0xFF\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 72.9,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_3/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_1_3/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        # Initialize registers to their reset values\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                # Single byte access, return only bits 15:8\n                value &= 0xFF00\n            return value\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                # Single byte access, update only bits 15:8\n                data &= 0xFF00\n            self.regs[addr] = data\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 91.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_0/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_0/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                # Single-byte semantics: return only bits 15:8\n                return self.regs[addr] >> 8 & 0xFF\n            else:\n                # Full register read\n                return self.regs[addr]\n        else:\n            raise KeyError(f\"Register address {addr} not found\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                # Single-byte semantics: update only bits 15:8\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                # Full register write\n                self.regs[addr] = data\n        else:\n            raise KeyError(f\"Register address {addr} not found\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 107.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_1/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_1/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                return value >> 8 & 0xFF\n            return value\n        else:\n            raise ValueError(f\"Register address {addr} not found\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0xFF)\n            else:\n                self.regs[addr] = data\n        else:\n            raise ValueError(f\"Register address {addr} not found\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 124.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_2/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_2/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        # Initialize registers with their reset values\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000,  # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        # Return the current value of the specified register\n        return self.regs.get(addr, 0)\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        # Update the specified register with the new data\n        if addr in self.regs:\n            if nbytes == 1:\n                # Update only the bits 15:8 for single-byte access\n                self.regs[addr] &= 0xFF00  # Clear lower 8 bits\n                self.regs[addr] |= (data & 0xFF00) >> 8  # Set upper 8 bits\n            else:\n                # Update the entire register for multi-byte access\n                self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 142.2,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_3/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_2_3/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        # Initialize registers with their reset values\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid address: {addr}\")\n        \n        value = self.regs[addr]\n        if nbytes == 1:\n            return value >> 4\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid address: {addr}\")\n        \n        if nbytes == 1:\n            # Update only bits 15:8 for single-byte access\n            self.regs[addr] = (self.regs[addr] & 0xF00F) | (data << 4)\n        else:\n            # Write all 16 bits for full-register access\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 162.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_0/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_0/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        # Ensure we return only the requested number of bytes\n        if nbytes == 2:\n            return self.regs[addr]\n        elif nbytes == 1:\n            # Follow single_byte_semantics for 1-byte reads\n            return (self.regs[addr] >> 8) & 0xFF\n        else:\n            raise ValueError(\"Unsupported nbytes value\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 2:\n            # Write entire 16-bit register\n            self.regs[addr] = data\n        elif nbytes == 1:\n            # Update only bits 15:8 for 1-byte writes\n            self.regs[addr] &= 0xFF00 | (data & 0xFF)\n        else:\n            raise ValueError(\"Unsupported nbytes value\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 178.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_1/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_1/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr] & ((1 << nbytes * 8) - 1)\n        else:\n            raise KeyError(f\"Register {addr} does not exist\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                data &= 0xFF\n                self.regs[addr] &= ~(0xFF << (8 - nbytes))\n                self.regs[addr] |= data << (8 - nbytes)\n            else:\n                self.regs[addr] = data\n        else:\n            raise KeyError(f\"Register {addr} does not exist\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 195.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_2/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_2/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # TEMP\n            0x01: 0x60A0,  # CONFIG\n            0x02: 0x4B00,  # TLOW\n            0x03: 0x5000   # THIGH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 1:\n            return (self.regs[addr] >> 8) & 0xFF  # single_byte_semantics\n        \n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 210.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 1,
+  "tail": ".FFsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_3/test_d2d_blackbox.py:123: AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\n/root/private_data/d2d/eval/_sandbox_qwen3b_tmp102_3_3/test_d2d_blackbox.py:178: AssertionError: CONFIG.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP ...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\n2 failed, 1 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass TMP102_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        self.regs = {\n            0x00: 0x0000,  # TEMP reset\n            0x01: 0x60A0,  # CONFIG reset\n            0x02: 0x4B00,  # TLOW reset\n            0x03: 0x5000,  # THIGH reset\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            # Single-byte access follows single_byte_semantics\n            return (self.regs[addr] >> 8) & 0xFF\n        return self.regs.get(addr, 0)\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            # Single-byte access follows single_byte_semantics\n            self.regs[addr] &= 0x00FF\n            self.regs[addr] |= (data & 0xFF) << 8\n        else:\n            self.regs[addr] = data\n"
+ }
+]

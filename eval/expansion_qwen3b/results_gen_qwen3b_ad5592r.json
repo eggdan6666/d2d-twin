@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 26.5,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        # Initialize registers to their reset values\n        self.regs = {\n            0x1: 0x0000,\n            0x2: 0x0000,\n            0x3: 0x0000,\n            0x4: 0x0000,\n            0x5: 0x0000,\n            0x6: 0xFF,\n            0xF: 0x5AC\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Register {addr} not found\")\n        \n        if nbytes == 1:\n            # Return only the relevant bits based on single_byte_semantics\n            return self.regs[addr] & 0xFFFF\n        else:\n            # Return the full 16-bit register value\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Register {addr} not found\")\n        \n        if nbytes == 1:\n            # Only update the relevant bits based on single_byte_semantics\n            self.regs[addr] &= ~0xFF00\n            self.regs[addr] |= data & 0xFF00\n        else:\n            # Update the full 16-bit register value\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 45.4,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        # Initialize all registers to their reset values\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x0000   # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            # Return the current value of the register\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            # Update the register value\n            self.regs[addr] = data\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 66.2,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x0000   # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        reg_value = self.regs[addr]\n        if nbytes == 1:\n            # Return only bits 15:8 for single-byte reads\n            return reg_value >> 8\n        \n        return reg_value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 1:\n            # Update only bits 15:8 for single-byte writes\n            data &= 0xFF00\n            data |= (self.regs[addr] & 0x00FF)\n        \n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 88.4,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 3,
+  "tail": "F..ssss.                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ad5592r_1_3/test_d2d_blackbox.py:102: AssertionError: PULLDWN_CONFIG(0x6) 复位值期望 0x00ff，实得 0xff00\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_reset_values - AssertionError: PULLDWN_CONF...\n1 failed, 3 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.reset_registers()\n\n    def reset_registers(self):\n        self.regs[0x1] = 0x0000  # DAC_RD\n        self.regs[0x2] = 0x0000  # ADC_SEQ\n        self.regs[0x3] = 0x0000  # GEN_CTRL_REG\n        self.regs[0x4] = 0x0000  # ADC_CONFIG\n        self.regs[0x5] = 0x0000  # DAC_CONFIG\n        self.regs[0x6] = 0xFF00  # PULLDWN_CONFIG\n        self.regs[0xF] = 0x0000  # SW_RESET\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                return (value >> 8) & 0xFF  # single_byte_semantics\n            return value\n        return 0xFFFFFFFF  # default for unknown registers\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if addr == 0xF and data != 0x5AC:\n                return  # SW_RESET key must match exactly\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0xFF00) | (data & 0xFF)  # single_byte_semantics\n            else:\n                self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 106.0,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.11s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        self.regs = {\n            0x1: 0x0000,\n            0x2: 0x0000,\n            0x3: 0x0000,\n            0x4: 0x0000,\n            0x5: 0x0000,\n            0x6: 0x00FF,\n            0xF: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                return value >> 8 & 0xFF\n            return value\n        raise ValueError(f\"Register {addr} not found\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                # Update only bits 15:8\n                self.regs[addr] = (self.regs[addr] & 0xFF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n        else:\n            raise ValueError(f\"Register {addr} not found\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 134.9,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        # Initialize registers with their IR \"reset\" values\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x5AC   # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0xF and data == 0x5AC:\n            # SW_RESET: restore register and I/O defaults\n            self.regs = {\n                0x1: 0x0000,  # DAC_RD\n                0x2: 0x0000,  # ADC_SEQ\n                0x3: 0x0000,  # GEN_CTRL_REG\n                0x4: 0x0000,  # ADC_CONFIG\n                0x5: 0x0000,  # DAC_CONFIG\n                0x6: 0x00FF,  # PULLDWN_CONFIG\n                0xF: 0x5AC   # SW_RESET\n            }\n            return\n        if addr in self.regs:\n            if nbytes == 1:\n                # single_byte_semantics: update only bits 15:8\n                self.regs[addr] = (data & 0xFF) << 8 | (self.regs[addr] & 0xFF00)\n            else:\n                # full register write\n                self.regs[addr] = data\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 163.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        self.regs = {}\n        # Initialize registers to their reset values\n        for reg in self._get_registers():\n            self.regs[reg['addr']] = reg['reset']\n\n    def _get_registers(self):\n        return [\n            {'name': 'DAC_RD', 'addr': 0x1, 'access': 'RW', 'reset': 0x0000},\n            {'name': 'ADC_SEQ', 'addr': 0x2, 'access': 'RW', 'reset': 0x0000},\n            {'name': 'GEN_CTRL_REG', 'addr': 0x3, 'access': 'RW', 'reset': 0x0000},\n            {'name': 'ADC_CONFIG', 'addr': 0x4, 'access': 'RW', 'reset': 0x0000},\n            {'name': 'DAC_CONFIG', 'addr': 0x5, 'access': 'RW', 'reset': 0x0000},\n            {'name': 'PULLDWN_CONFIG', 'addr': 0x6, 'access': 'RW', 'reset': 0x00FF},\n            {'name': 'SW_RESET', 'addr': 0xF, 'access': 'W', 'reset': 0x0000}\n        ]\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Register {addr} not found.\")\n        value = self.regs[addr]\n        if nbytes == 1:\n            # Follow single_byte_semantics\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Register {addr} not found.\")\n        if nbytes == 1:\n            # Update only the relevant bits based on single_byte_semantics\n            self.regs[addr] = (self.regs[addr] & 0xFF00) | ((data >> 8) & 0xFF)\n        else:\n            # Update all bits\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 183.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 16-bit registers\n\n    def __init__(self):\n        # Initialize registers with their reset values\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x0000,  # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                return value & 0xFF  # Return only the least significant byte\n            return value\n        else:\n            raise ValueError(f\"Invalid register address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                data &= 0xFF  # Update only the least significant byte\n            self.regs[addr] = data\n        else:\n            raise ValueError(f\"Invalid register address: {addr}\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 214.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 3,
+  "tail": "...ssssF                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ad5592r_3_0/ad5592r_simulator.py:29: ValueError: SW_RESET code must be 0x5AC\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_write_only_reset_key - ValueError: SW_RESET...\n1 failed, 3 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x0000   # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            value = self.regs[addr]\n            if nbytes == 1:\n                return value >> 8 & 0xFF  # Follows IR.single_byte_semantics\n            return value\n        raise ValueError(f\"Unknown register address: {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if addr == 0xF:\n                # SW_RESET check\n                if data != 0x5AC:\n                    raise ValueError(\"SW_RESET code must be 0x5AC\")\n                # Reset registers and I/O defaults\n                self.regs = {\n                    0x1: 0x0000,  # DAC_RD\n                    0x2: 0x0000,  # ADC_SEQ\n                    0x3: 0x0000,  # GEN_CTRL_REG\n                    0x4: 0x0000,  # ADC_CONFIG\n                    0x5: 0x0000,  # DAC_CONFIG\n                    0x6: 0x00FF,  # PULLDWN_CONFIG\n                    0xF: 0x0000   # SW_RESET\n                }\n            else:\n                if nbytes == 1:\n                    # Update only bits 15:8\n                    self.regs[addr] = (self.regs[addr] & 0xFF) | ((data & 0xFF) << 8)\n                else:\n                    # Write all 16 bits\n                    self.regs[addr] = data\n        else:\n            raise ValueError(f\"Unknown register address: {addr}\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 236.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.58s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        # Initialize registers to their reset values\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x0000   # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            # Return the reset value if it's a read-only register\n            return self.regs[addr] & ((1 << self.REG_WIDTH) - 1)\n        else:\n            raise ValueError(f\"Invalid address {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            # Update the register with the written data\n            if nbytes == 1:\n                # Single-byte access; update bits 15:8\n                self.regs[addr] &= ~(0xFF << 8)\n                self.regs[addr] |= (data & 0xFF) << 8\n            else:\n                # Full register update\n                self.regs[addr] = data\n        else:\n            raise ValueError(f\"Invalid address {addr}\")\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 256.6,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        # Initialize registers with their reset values\n        self.regs = {\n            0x1: 0x0000,\n            0x2: 0x0000,\n            0x3: 0x0000,\n            0x4: 0x0000,\n            0x5: 0x0000,\n            0x6: 0x00FF,\n            0xF: 0x0000\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 1:\n            # Follow single-byte semantics\n            return (self.regs[addr] >> 8) & 0xFF\n        \n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if nbytes == 1:\n            # Follow single-byte semantics\n            self.regs[addr] = (self.regs[addr] & 0xFF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 273.3,
+  "code_extracted": true,
+  "rc": 0,
+  "passed": 4,
+  "tail": "...ssss.                                                                 [100%]\n4 passed, 4 skipped in 0.93s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass AD5592R_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        self.regs = {\n            0x1: 0x0000,  # DAC_RD\n            0x2: 0x0000,  # ADC_SEQ\n            0x3: 0x0000,  # GEN_CTRL_REG\n            0x4: 0x0000,  # ADC_CONFIG\n            0x5: 0x0000,  # DAC_CONFIG\n            0x6: 0x00FF,  # PULLDWN_CONFIG\n            0xF: 0x0000   # SW_RESET\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr] & ((1 << nbytes * 8) - 1)\n        return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                data &= 0xFF  # Update only bits 15:8\n            self.regs[addr] = data\n"
+ }
+]

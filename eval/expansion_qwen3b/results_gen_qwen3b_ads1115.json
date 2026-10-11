@@ -1,0 +1,122 @@
+[
+ {
+  "seed": 1,
+  "i": 0,
+  "gen_s": 28.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_1_0/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 本基准目标器件寄存器宽度（16 位为主）\n\n    def __init__(self):\n        # 初始化寄存器值为 IR 中的复位值\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        value = self.regs[addr]\n        if nbytes == 1:\n            return value >> 8  # 按照 IR.single_byte_semantics 返回 bits 15:8\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        if nbytes == 1:\n            # 按照 IR.single_byte_semantics 更新 bits 15:8\n            self.regs[addr] &= 0xFF00  # 清除低 8 位\n            self.regs[addr] |= (data & 0xFF00) >> 8\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 1,
+  "gen_s": 44.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_1_1/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.12s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION: reset value\n            0x01: 0x8583,  # CONFIG: reset value\n            0x02: 0x8000,  # LO_THRESH: reset value\n            0x03: 0x7FFF   # HI_THRESH: reset value\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Register {addr} does not exist.\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 2:\n                self.regs[addr] = data\n            elif nbytes == 1:\n                # Update only bits 15:8 for single-byte writes\n                self.regs[addr] &= 0xFF00 | (data & 0xFF)\n        else:\n            raise ValueError(f\"Register {addr} does not exist.\")\n"
+ },
+ {
+  "seed": 1,
+  "i": 2,
+  "gen_s": 62.6,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 0,
+  "tail": "'\n_________________ ERROR at setup of test_write_trigger_fields __________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'IR'\n_________________ ERROR at setup of test_single_byte_semantics _________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'IR'\n___________________ ERROR at setup of test_read_write_alias ____________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'IR'\n_____________________ ERROR at setup of test_clear_on_read _____________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'IR'\n_________________ ERROR at setup of test_write_only_reset_key __________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'IR'\n=========================== short test summary info ============================\nERROR test_d2d_blackbox.py::test_reset_values - AttributeError: 'ADS1115_Simu...\nERROR test_d2d_blackbox.py::test_readonly_protection - AttributeError: 'ADS11...\nERROR test_d2d_blackbox.py::test_rw_field_persistence - AttributeError: 'ADS1...\nERROR test_d2d_blackbox.py::test_write_trigger_fields - AttributeError: 'ADS1...\nERROR test_d2d_blackbox.py::test_single_byte_semantics - AttributeError: 'ADS...\nERROR test_d2d_blackbox.py::test_read_write_alias - AttributeError: 'ADS1115_...\nERROR test_d2d_blackbox.py::test_clear_on_read - AttributeError: 'ADS1115_Sim...\nERROR test_d2d_blackbox.py::test_write_only_reset_key - AttributeError: 'ADS1...\n8 errors in 1.38s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        self.regs = {}\n        self.reset_regs()\n\n    def reset_regs(self):\n        for reg in self.IR['registers']:\n            addr = reg['addr']\n            if reg['access'] == 'RW':\n                self.regs[addr] = reg['reset']\n            elif reg['access'] == 'RO':\n                self.regs[addr] = reg['reset']\n            else:\n                raise ValueError(f\"Invalid register access: {reg['access']}\")\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise KeyError(f\"Register address {addr} not found.\")\n        \n        if nbytes == 1:\n            # Follow single_byte_semantics\n            return (self.regs[addr] >> 8) & 0xFF\n        \n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise KeyError(f\"Register address {addr} not found.\")\n        \n        if nbytes == 1:\n            # Follow single_byte_semantics\n            self.regs[addr] &= 0xFF00\n            self.regs[addr] |= (data >> 8) & 0xFF\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 1,
+  "i": 3,
+  "gen_s": 82.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_1_3/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 1.22s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Unknown register address {addr}\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 2:\n                self.regs[addr] = data\n            elif nbytes == 1:\n                if addr in [0x01, 0x02, 0x03]:\n                    self.regs[addr] &= 0xFF00\n                    self.regs[addr] |= (data & 0xFF)\n                else:\n                    raise ValueError(\"nbytes=1 is not supported for this register\")\n        else:\n            raise ValueError(f\"Unknown register address {addr}\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 0,
+  "gen_s": 100.0,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 0,
+  "tail": "of test_write_trigger_fields __________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'registers'\n_________________ ERROR at setup of test_single_byte_semantics _________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'registers'\n___________________ ERROR at setup of test_read_write_alias ____________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'registers'\n_____________________ ERROR at setup of test_clear_on_read _____________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'registers'\n_________________ ERROR at setup of test_write_only_reset_key __________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'registers'\n=========================== short test summary info ============================\nERROR test_d2d_blackbox.py::test_reset_values - AttributeError: 'ADS1115_Simu...\nERROR test_d2d_blackbox.py::test_readonly_protection - AttributeError: 'ADS11...\nERROR test_d2d_blackbox.py::test_rw_field_persistence - AttributeError: 'ADS1...\nERROR test_d2d_blackbox.py::test_write_trigger_fields - AttributeError: 'ADS1...\nERROR test_d2d_blackbox.py::test_single_byte_semantics - AttributeError: 'ADS...\nERROR test_d2d_blackbox.py::test_read_write_alias - AttributeError: 'ADS1115_...\nERROR test_d2d_blackbox.py::test_clear_on_read - AttributeError: 'ADS1115_Sim...\nERROR test_d2d_blackbox.py::test_write_only_reset_key - AttributeError: 'ADS1...\n8 errors in 0.14s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        for reg in self.registers:\n            addr = reg[\"addr\"]\n            reset_value = reg.get(\"reset\", 0)\n            self.regs[addr] = reset_value\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Unknown register address: {addr}\")\n        \n        if nbytes == 2:\n            return self.regs[addr]\n        elif nbytes == 1:\n            return (self.regs[addr] >> 8) & 0xFF\n        else:\n            raise ValueError(\"Invalid number of bytes for read operation\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Unknown register address: {addr}\")\n        \n        if nbytes == 2:\n            self.regs[addr] = data\n        elif nbytes == 1:\n            self.regs[addr] &= 0xFF\n            self.regs[addr] |= (data << 8)\n        else:\n            raise ValueError(\"Invalid number of bytes for write operation\")\n"
+ },
+ {
+  "seed": 2,
+  "i": 1,
+  "gen_s": 121.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_2_1/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 本基准目标器件寄存器宽度（16 位为主）\n\n    def __init__(self):\n        # 初始化寄存器值为 IR 的 reset 值\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            # 根据 nbytes 返回相应的字节\n            if nbytes == 2:\n                return self.regs[addr]\n            elif nbytes == 1:\n                # 仅返回高 8 位\n                return (self.regs[addr] >> 8) & 0xFF\n        return 0  # 如果寄存器不存在或不支持 nbytes，则返回 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 2:\n                # 更新整个寄存器\n                self.regs[addr] = data\n            elif nbytes == 1:\n                # 更新高 8 位\n                self.regs[addr] &= 0x00FF  # 清除低 8 位\n                self.regs[addr] |= (data << 8)\n"
+ },
+ {
+  "seed": 2,
+  "i": 2,
+  "gen_s": 139.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 0,
+  "tail": "r_fields __________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'get_device_ir'\n_________________ ERROR at setup of test_single_byte_semantics _________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'get_device_ir'\n___________________ ERROR at setup of test_read_write_alias ____________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'get_device_ir'\n_____________________ ERROR at setup of test_clear_on_read _____________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'get_device_ir'\n_________________ ERROR at setup of test_write_only_reset_key __________________\nE   AttributeError: 'ADS1115_Simulator' object has no attribute 'get_device_ir'\n=========================== short test summary info ============================\nERROR test_d2d_blackbox.py::test_reset_values - AttributeError: 'ADS1115_Simu...\nERROR test_d2d_blackbox.py::test_readonly_protection - AttributeError: 'ADS11...\nERROR test_d2d_blackbox.py::test_rw_field_persistence - AttributeError: 'ADS1...\nERROR test_d2d_blackbox.py::test_write_trigger_fields - AttributeError: 'ADS1...\nERROR test_d2d_blackbox.py::test_single_byte_semantics - AttributeError: 'ADS...\nERROR test_d2d_blackbox.py::test_read_write_alias - AttributeError: 'ADS1115_...\nERROR test_d2d_blackbox.py::test_clear_on_read - AttributeError: 'ADS1115_Sim...\nERROR test_d2d_blackbox.py::test_write_only_reset_key - AttributeError: 'ADS1...\n8 errors in 0.15s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        for reg in self.get_device_ir()['registers']:\n            addr = reg['addr']\n            reset_value = reg['reset']\n            if reg['access'] == 'RO':\n                self.regs[addr] = reset_value\n            else:\n                self.regs[addr] = reset_value\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        value = self.regs[addr]\n        \n        if nbytes == 1:\n            # Single byte semantics: return only bits 15:8\n            value = (value >> 8) & 0xFF\n        \n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n        \n        if reg['access'] == 'RO':\n            # Ignore writes to RO registers\n            return\n        \n        if nbytes == 1:\n            # Single byte semantics: update only bits 15:8\n            data &= 0xFF\n            self.regs[addr] = (self.regs[addr] & 0xFF00) | data\n        else:\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 2,
+  "i": 3,
+  "gen_s": 156.7,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_2_3/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.32s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        # Initialize registers with their reset values\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF,  # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr]\n        else:\n            raise ValueError(f\"Register {addr} does not exist.\")\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Register {addr} does not exist.\")\n        \n        # Update register value only if access is 'RW'\n        if nbytes == 2:\n            self.regs[addr] = data\n        elif nbytes == 1:\n            # Follow single_byte_semantics for bytes 15:8\n            self.regs[addr] &= 0xFF00\n            self.regs[addr] |= (data & 0xFF)\n"
+ },
+ {
+  "seed": 3,
+  "i": 0,
+  "gen_s": 174.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_3_0/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 1.40s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        # Initialize registers with their reset values\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address {addr}\")\n        return self.regs[addr] & ((1 << self.REG_WIDTH) - 1)  # Apply 16-bit mask\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address {addr}\")\n        \n        if nbytes == 1:\n            # Only update bits 15:8 for 1-byte writes\n            data &= 0xFF00\n            self.regs[addr] &= ~0xFF00\n            self.regs[addr] |= data\n        else:\n            # Full register write for 2-byte writes\n            self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 1,
+  "gen_s": 193.1,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_3_1/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 1.54s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] >> 8) & 0xFF\n            return self.regs[addr]\n        return 0xFFFF  # Invalid address\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs:\n            if nbytes == 1:\n                self.regs[addr] &= 0xFF00\n                self.regs[addr] |= (data >> 8) & 0xFF\n            else:\n                self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 2,
+  "gen_s": 216.8,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_3_2/test_d2d_blackbox.py:123: AssertionError: CONVERSION 是 RO：写脏数据后 0x0 → 0xa5a5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: CONVE...\n1 failed, 2 passed, 5 skipped in 0.13s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 本基准目标器件寄存器宽度（16 位为主）\n\n    def __init__(self):\n        # 初始化所有寄存器为它们的默认值\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        # 检查寄存器是否在已知范围内\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n\n        # 获取寄存器的值\n        value = self.regs[addr]\n\n        # 如果读取的字节数是 1，则只返回寄存器的高 8 位\n        if nbytes == 1:\n            value &= 0xFF00\n\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        # 检查寄存器是否在已知范围内\n        if addr not in self.regs:\n            raise ValueError(f\"Invalid register address: {addr}\")\n\n        # 如果写入的字节数是 1，则只更新寄存器的高 8 位\n        if nbytes == 1:\n            data &= 0xFF\n\n        # 更新寄存器的值\n        self.regs[addr] = data\n"
+ },
+ {
+  "seed": 3,
+  "i": 3,
+  "gen_s": 241.5,
+  "code_extracted": true,
+  "rc": 1,
+  "passed": 2,
+  "tail": "..Fsssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_sandbox_qwen3b_ads1115_3_3/test_d2d_blackbox.py:160: AssertionError: LO_THRESH.THRESH[15:0] 写全 1 后读回 32768，期望 65535（整寄存器 0x8000）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: LO_T...\n1 failed, 2 passed, 5 skipped in 0.76s\n\n",
+  "code": "from base_sensor import BaseVirtualSensor\n\nclass ADS1115_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # 16-bit registers\n\n    def __init__(self):\n        # Initialize all registers with their reset values\n        self.regs = {\n            0x00: 0x0000,  # CONVERSION\n            0x01: 0x8583,  # CONFIG\n            0x02: 0x8000,  # LO_THRESH\n            0x03: 0x7FFF   # HI_THRESH\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        # Return the reset value of the register\n        return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        # If the register is read-only, return immediately\n        if addr in [0x00, 0x02, 0x03]:\n            return\n        # If nbytes is 1, update only the relevant bits\n        if nbytes == 1:\n            if addr == 0x01:\n                # Update only OS, MUX, PGA, MODE, DR fields\n                self.regs[addr] = (data & 0xF800) | (self.regs[addr] & 0x07FF)\n            elif addr == 0x02:\n                # Update only THRESH field\n                self.regs[addr] = (data & 0x00FF) | (self.regs[addr] & 0xFF00)\n            elif addr == 0x03:\n                # Update only THRESH field\n                self.regs[addr] = (data & 0x00FF) | (self.regs[addr] & 0xFF00)\n        else:\n            # For other registers, update the entire register\n            self.regs[addr] = data\n"
+ }
+]

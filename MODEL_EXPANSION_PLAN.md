@@ -51,6 +51,8 @@ Do not start a download if the model plus temporary download space would exceed 
 
 The first download gate passed on 2026-10-11: Qwen2.5-Coder-3B-Instruct completed ModelScope `SIZE_CHECK PASS`, occupies about 5.8 GB, and left about 3.3 GB free. The SCNet runtime requires `/opt/conda/bin/python` plus `LD_LIBRARY_PATH=/opt/dtk-25.04.1/hip/lib:/opt/dtk-25.04.1/lib:$LD_LIBRARY_PATH`.
 
+The 20-chip Qwen-3B screening completed with 240 generated samples. The raw JSON files and the derived summary are under `eval/expansion_qwen3b/`; the aggregate was 22/240 fully green (9.2%) with 239/240 code blocks extracted (99.6%). This is a separate expansion result, not a replacement for the historical model tables.
+
 ## Acceptance gate
 
 Each new model must pass a one-chip smoke test, then the 32-chip screening arm. A model is admitted to the comparison table only when its raw outputs, generation configuration, logs, and result JSON are archived together.
