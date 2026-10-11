@@ -12,6 +12,8 @@
 \usepackage{microtype}
 \usepackage{multirow}
 \usepackage{hyperref}
+% Compile robustly from either the paper/ directory or the repository root.
+\graphicspath{{figures/}{paper/figures/}}
 
 \hypersetup{
     colorlinks=true,
@@ -36,7 +38,7 @@ Email: 3086708928@qq.com}
 \begin{abstract}
 Virtual peripheral prototypes and register-level behavioral emulators serve as foundational infrastructure in modern electronic design automation (EDA) and embedded firmware development. While code-specialized Large Language Models (LLMs) have achieved remarkable success in general software generation and Verilog register-transfer-level (RTL) synthesis, their capacity to synthesize executable, register-accurate digital twins directly from technical datasheets remains largely uncharted. 
 
-In this paper, we introduce \textbf{D2D-Twin}, the first deterministic, zero-LLM-as-a-judge benchmark specifically designed to assess LLMs on datasheet-to-digital-twin synthesis for peripheral IC emulators. D2D-Twin curates 17 representative industrial peripheral ICs spanning sensors, precision ADCs, power monitors, motion controllers, and PoE interfaces. Grounded on single-writer, human-verified Gold Intermediate Representations (Gold IR), code LLMs are prompted to synthesize executable Python register emulators evaluated against a universal blackbox pytest harness (\texttt{MD5: 8cf0854d4779467bc8e472ee4fb97023}) across 8 behavioral specification dimensions.
+In this paper, we introduce \textbf{D2D-Twin}, to our knowledge the first deterministic, zero-LLM-as-a-judge benchmark specifically designed to assess LLMs on datasheet-to-digital-twin synthesis for peripheral IC emulators. D2D-Twin curates 17 representative industrial peripheral ICs spanning sensors, precision ADCs, power monitors, motion controllers, and PoE interfaces. Grounded on single-writer, human-verified Gold Intermediate Representations (Gold IR), code LLMs are prompted to synthesize executable Python register emulators evaluated against a universal blackbox pytest harness (\texttt{MD5: 8cf0854d4779467bc8e472ee4fb97023}) across 8 behavioral specification dimensions.
 
 Across 612 fully evaluated synthesizer runs ($N=408$ on Qwen2.5-Coder-14B at $n=24$, and $N=204$ on DeepSeek-Coder-6.7B at $n=12$), our empirical findings reveal critical architectural deficits in code LLMs: 
 (1) \textbf{Sub-register Bitfield Persistence Deficit}: models predominantly adopt a monolithic integer storage antipattern, leading to a 49.2\% failure rate in read-only protection and 71.1\% in bitfield persistence; 
@@ -60,7 +62,7 @@ Recently, Large Language Models (LLMs) fine-tuned on code, such as Qwen2.5-Coder
     \item \textbf{Subjectivity of LLM-as-a-Judge and Text QA}: Evaluations of technical document comprehension typically rely on text-based Question Answering (QA) or LLM-based grading. Such setups suffer from severe hallucinations, prompt sensitivity, and inability to verify operational execution.
 \end{enumerate}
 
-To understand the upstream bottleneck, our preliminary investigation across 456 commercial datasheets and 120 formally reviewed questions revealed that **retrieval and layout parsing losses account for 40\%--45\% of overall failures**, regardless of whether 3B, 7B, or 14B models are utilized. This empirical fact dictates that testing LLM reasoning requires decoupling noisy document parsing from downstream code synthesis.
+We audited 456 datasheets and 120 reviewed questions with three seeds per model. In the all3 subset, fixed-context value--unit taxonomy classified 54, 56, and 51 upstream-related questions for DCU-3B/7B/14B (45.0\%, 46.7\%, and 42.5\% of all questions). This diagnostic motivates Gold IR decoupling without establishing causality or scale invariance.
 
 \begin{figure}[t]
 \centering
@@ -68,7 +70,7 @@ To understand the upstream bottleneck, our preliminary investigation across 456 
 \caption{Overall per-chip pass rate across 17 peripheral ICs comparing Qwen2.5-Coder-14B ($n=24$) and DeepSeek-Coder-6.7B ($n=12$), comprising $N=612$ evaluated code models.}\label{fig:per_chip_passrate}
 \end{figure}
 
-To address these challenges, we introduce \textbf{D2D-Twin} (\textit{Datasheet-to-Digital-Twin Benchmark}), the first deterministic, zero-LLM-as-a-judge benchmark for hardware emulator synthesis. In D2D-Twin, human experts curate single-writer, rigorously verified Gold Intermediate Representations (Gold IR) directly from vendor datasheets. Code LLMs synthesize register-accurate Python virtual sensor classes implementing the bus contract. A universal, frozen testbench (\texttt{MD5: 8cf0854d4779467bc8e472ee4fb97023}) injects total bus read/write transactions into the synthesized modules and asserts state transitions via \texttt{pytest}.
+To address these challenges, we introduce \textbf{D2D-Twin} (\textit{Datasheet-to-Digital-Twin Benchmark}), to our knowledge the first deterministic, zero-LLM-as-a-judge benchmark for hardware emulator synthesis. In D2D-Twin, human experts curate single-writer, rigorously verified Gold Intermediate Representations (Gold IR) directly from vendor datasheets. Code LLMs synthesize register-accurate Python virtual sensor classes implementing the bus contract. A universal, frozen testbench (\texttt{MD5: 8cf0854d4779467bc8e472ee4fb97023}) injects total bus read/write transactions into the synthesized modules and asserts state transitions via \texttt{pytest}.
 
 Our contributions are summarized as follows:
 \begin{itemize}
@@ -133,7 +135,7 @@ D2D-Twin defines 8 orthogonal behavioral verification dimensions:
     \item \textbf{D8 Clear-on-read interrupt}: Asserts that reading an interrupt status register automatically flushes its pending flags.
 \end{itemize}
 
-\subsection{Orthogonal Decoupling Model ($\text{D4a} / \text{D4b} / \text{D4u}$)}
+\subsection{\texorpdfstring{Orthogonal Decoupling Model ($\text{D4a} / \text{D4b} / \text{D4u}$)}{Orthogonal Decoupling Model (D4a / D4b / D4u)}}
 Benchmarking must not penalize LLMs for unstated human conventions. In many datasheets, reserved bits have unspecified read/write behavior. D2D-Twin decouples Dimension D4 into three orthogonal buckets:
 \begin{itemize}
     \item \textbf{Bucket D4a (Documented Defect)}: Both datasheet and Gold IR explicitly specify access policy. Failures here reflect true bitwise logic flaws.
@@ -234,13 +236,40 @@ To verify whether Dimension D2 (Reset values, 0.0\% fail) measures semantic reas
 
 Under the Q1c arm, the reset value failure rate immediately surged from \textbf{0.0\% to 75.0\%--100.0\%}. This proves that LLMs do not infer default hardware states from operational physics or bus semantics; rather, Dimension D2 strictly benchmarks transcription fidelity from structured specifications.
 
-\section{Related Work}
-\textbf{LLMs for Hardware EDA}: Benchmarks such as VerilogEval \cite{thakur2023verilogeval} and RTLLM \cite{lu2024rtllm} pioneered evaluating LLMs on RTL synthesis. AutoChip \cite{blocklove2023chip} explored conversational feedback for hardware debugging. D2D-Twin differs fundamentally by targeting Python-level behavioral simulation prototypes rather than gate-level RTL.
+\section{Failure-Driven Repair Intervention}
+To test practical utility beyond diagnosis, we froze four pilot chips (LM83, TMP1075, BME280, ADS1115) and four held-out chips (INA219, TMP461, TPS23861, LIS2DW12). Starting from the same generated candidates, each model received one failure trace and was asked for a minimal patch; the unchanged harness accepted a patch only when its pass count strictly increased. An IR-constrained reference implementation reached all enabled assertions (16/16), while free-form repair was substantially less reliable.
 
-\textbf{Code Benchmark Rigor}: Following SWE-bench \cite{jimenez2024swebench}, D2D-Twin enforces deterministic, sandbox-isolated pytest execution, providing zero-variance ground truth without LLM-as-a-judge bias.
+\begin{table}[t]
+\centering
+\caption{Failure-driven minimal repair over eight chips. Success means a strict increase over the same baseline candidate; Wilson intervals are chip-level.}
+\label{tab:repair_intervention}
+\scriptsize
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{lrrrr}
+\toprule
+Model & Success & Regression & Unchanged & Rate (95\% CI) \\
+\midrule
+Qwen2.5-Coder-14B & 5/8 & 0/8 & 3/8 & 62.5\% [30.6,86.3] \\
+DeepSeek-Coder-6.7B & 1/8 & 1/8 & 6/8 & 12.5\% [2.2,47.1] \\
+\bottomrule
+\end{tabular}
+}%
+\end{table}
+
+Qwen improved BME280, ADS1115, INA219, TPS23861, and LIS2DW12; DeepSeek improved only LIS2DW12 and regressed once. This intervention is a small utility pilot rather than a replacement for the 612-run benchmark, but it demonstrates that deterministic failure traces and a hard test gate can turn diagnosis into measurable, reproducible repair progress.
+
+As a separate extension, we admitted three additional Gold IRs (AD5592R, LIS3DH, and MPU6050) only after independent source review, post-repair recheck, and reference-simulator admission. The extension generation arm contains 108 remote samples (Qwen-14B: $n=24$ per chip; DeepSeek-6.7B: $n=12$ per chip): 45 are all-green (AD5592R: 36/36, LIS3DH: 9/36, MPU6050: 0/36). These model outputs remain frozen as raw evidence. The IR-constrained reference implementations pass 11/13 enabled direct-register assertions and 10/10 supplemental protocol tests. In contrast, a structured method-only repair interface accepted the requested scope in 1/3 Qwen cases and 3/3 DeepSeek cases, yet produced 0/6 fully green repairs. Thus, reference-contract repair validates the extension without being counted as model capability or silently replacing failed generations.
+
+\section{Related Work}
+\textbf{LLMs for Hardware EDA}: VerilogEval \cite{thakur2023verilogeval}, RTLLM \cite{lu2024rtllm}, and AutoChip \cite{blocklove2023chip} evaluate RTL synthesis or hardware debugging. D2D-Twin targets Python-level peripheral behavior rather than synthesizable RTL.
+
+\textbf{Code Benchmark Rigor}: Like SWE-bench \cite{jimenez2024swebench}, D2D-Twin uses deterministic sandboxed pytest execution and avoids LLM-as-a-judge bias.
 
 \section{Conclusion}
-We presented D2D-Twin, the first deterministic benchmark for evaluating LLMs on datasheet-to-digital-twin synthesis across 17 peripheral ICs. Through 612 blackbox evaluations, D2D-Twin exposes deep structural deficiencies in modern code LLMs, notably bitfield persistence deficits, alias blindness, and template contamination. D2D-Twin establishes an actionable benchmark to bridge the gap between unstructured hardware documentation and executable virtual platforms.
+We presented D2D-Twin, a deterministic benchmark for datasheet-to-digital-twin synthesis across 17 peripheral ICs. Across 612 blackbox evaluations, it exposes bitfield persistence deficits, alias blindness, and template contamination. A separately reported, formally admitted three-chip extension demonstrates the same audit boundary: its reference implementations pass 11/13 enabled assertions and 10 supplemental protocol tests, whereas the 108 raw model generations achieve 45/108 all-green samples.
+
+\subsection*{Limitations and Applicability}
+The historical benchmark covers 17 ICs, two code LLMs, and 612 evaluations; the supplemental extension adds three formally reviewed Gold IRs and 108 separately analyzed generations. Results measure register-semantic synthesis under the Python bus contract, not silicon correctness or universal code generation. Generalization to other vendors, models, and hardware-in-the-loop settings remains future work.
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
