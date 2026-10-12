@@ -75,7 +75,7 @@ def main():
     manifest = {'status': 'REPAIR_CANDIDATE_NOT_PROMOTED', 'edits': edits,
                 'boundaries': ['No original generated code or score changed', 'No d2d/IR or frozen harness edited',
                                'Independent review pending; known protocol constraints remain open'],
-                'files': {str(p.relative_to(OUT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                'files': {p.relative_to(OUT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                           for folder in ('ir', 'rtl', 'harness', 'references')
                           for p in (OUT / folder).rglob('*') if p.is_file()}}
     (OUT / 'repair_manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8')

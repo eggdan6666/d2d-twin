@@ -148,7 +148,7 @@ def run_one(job):
             'passed': sum(t['status'] == 'passed' for t in tests), 'tests': tests,
             'original_rc': original.get('rc'), 'original_passed': original.get('passed'),
             'matches_original': (rc == original['rc'] and sum(t['status'] == 'passed' for t in tests) == original['passed']) if original else None,
-            'log_file': str((sandbox / 'pytest.log').relative_to(OUT)),
+            'log_file': (sandbox / 'pytest.log').relative_to(OUT).as_posix(),
             'input_extraction_failed': bool(original) and not original.get('code_extracted', False)}
 
 
