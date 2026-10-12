@@ -1,0 +1,102 @@
+{
+  "models": [
+    {
+      "model": "Qwen2.5-Coder-3B",
+      "chips": 20,
+      "samples": 240,
+      "green": 22,
+      "green_rate": 0.09166666666666666,
+      "extracted": 239,
+      "mean_passed_tests": 1.4791666666666667
+    },
+    {
+      "model": "DeepSeek-Coder-6.7B",
+      "chips": 20,
+      "samples": 240,
+      "green": 25,
+      "green_rate": 0.10416666666666667,
+      "extracted": 240,
+      "mean_passed_tests": 1.5166666666666666
+    },
+    {
+      "model": "Qwen2.5-Coder-14B",
+      "chips": 20,
+      "samples": 240,
+      "green": 48,
+      "green_rate": 0.2,
+      "extracted": 240,
+      "mean_passed_tests": 2.2958333333333334
+    }
+  ],
+  "ir_differences": [
+    {
+      "chip": "BME280",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "434595fdd1f3bef09d266cfe73e17cbe51d5b73701c5aefbcde23e8b42048d5e",
+      "current_sha256": "b6e741b8f068cdf4b0c58f7e1f6609ecfa43f3e83ad7a0e803c01d50598b3074"
+    },
+    {
+      "chip": "HDC2021",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "a29548fc495b1f29ec9005ab3e902c8009fdaca3e020abbac3c5747e2d35b6ef",
+      "current_sha256": "ab1b5f453be8e01895723fa35ef09fe517b06d569857780ae23b9dfa2ff13112"
+    },
+    {
+      "chip": "INA3221",
+      "kind": "SEMANTIC",
+      "archive_sha256": "40a1f463926c4b3485e7140919ecaa993326854e99910dff91dd3f0b6617cbef",
+      "current_sha256": "36cce4c1ff97b67df2478fa842e98612678aa68d3f3c1054f1c5a8262edc5f5a"
+    },
+    {
+      "chip": "LM83",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "5f5bd4661bc85f7e232bab7bd29bc08548046ab48d6429f0eddcb4bafd681bae",
+      "current_sha256": "71c05f0fc17510a8125d4e55bc8a8fa9fa63f3f093dc571f580b79f62b6bc16c"
+    },
+    {
+      "chip": "TMP100",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "366c34970f7e2042e64fe9e0d7e3b8528ac6eb6f1731c56f84e1d7c09c0503c3",
+      "current_sha256": "b22f854e3434a08d1d5813091444d15ae68a5a68d89fac845f65fcb44ac9a037"
+    },
+    {
+      "chip": "TMP102",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "c8950eee3707f6e1cf087e4f199023f9e1af17601bcb81b49080361460a417af",
+      "current_sha256": "e2b32fb52014a0320b433a3918c620fb19c023dfae7da217c434bd5a7daa7c52"
+    },
+    {
+      "chip": "TMP117",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "9f490605644151606cd328c7aacc18d4d2f127d3c486ff3f90aef9cfaf34f86f",
+      "current_sha256": "f5fa067143242f59d4eadcdf8837fad1588fb22d8c4c5bf1588abbac8bda11f6"
+    },
+    {
+      "chip": "TMP126",
+      "kind": "ANNOTATION_ONLY",
+      "archive_sha256": "17b24d0a7ec789707f9fcabdc86288a1ff90c2574da1ef75c68cfbed00cf2648",
+      "current_sha256": "a561e67425cbcb84ff2a930f5e8698c57f94acd75ef44ca99b2f6f8e9eff142a"
+    }
+  ],
+  "contrasts": [
+    {
+      "contrast": "Qwen2.5-Coder-14B minus Qwen2.5-Coder-3B",
+      "difference_pp": 10.83333333333333,
+      "chip_bootstrap_lower_pp": 3.3333333333333313,
+      "chip_bootstrap_upper_pp": 21.666666666666668
+    },
+    {
+      "contrast": "Qwen2.5-Coder-14B minus DeepSeek-Coder-6.7B",
+      "difference_pp": 9.583333333333332,
+      "chip_bootstrap_lower_pp": 2.4999999999999996,
+      "chip_bootstrap_upper_pp": 19.16666666666667
+    },
+    {
+      "contrast": "DeepSeek-Coder-6.7B minus Qwen2.5-Coder-3B",
+      "difference_pp": 1.2499999999999982,
+      "chip_bootstrap_lower_pp": 0.0,
+      "chip_bootstrap_upper_pp": 3.3333333333333326
+    }
+  ]
+}
+OUTPUT E:\HD-Agent���ֲ����RAG�ĵ���Dstasheet�����ʴ�\eval\model_comparison_20chip

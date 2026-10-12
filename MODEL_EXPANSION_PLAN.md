@@ -14,7 +14,7 @@ All new model weights are downloaded to the SCNet DCU node and loaded locally by
 | Deferred model | Qwen2.5-Coder-7B-Instruct | deferred | About 15 GB of safetensors; current 50 GB quota cannot hold it safely |
 | Deferred model | DeepSeek-Coder-V2-Lite-Instruct | deferred | About 31.4 GB of safetensors; requires quota expansion or cleanup |
 
-The two existing models remain the historical comparison arm. The current repository contains 20 formal IRs; the Qwen-3B arm is being evaluated on all 20. Its scores are kept as a separate new-model arm and are not merged into the historical 612-run tables.
+All three models have now completed the 20-chip exploratory screening, each with 240 samples. These results are kept separate from the historical 612-run tables. The verified 14B export is stored under `eval/expansion_qwen14b/`, and the descriptive comparison and provenance audit are under `eval/model_comparison_20chip/`.
 
 ## Sampling protocol
 
@@ -24,9 +24,13 @@ The two existing models remain the historical comparison arm. The current reposi
 - seeds `1,2,3`;
 - `--n 4` per seed, therefore 12 samples per chip/model;
 - `temperature=0.7`, `top_p=0.9`, `top_k=40`;
-- identical prompt, IR revision, harness MD5, and `max-new` for every model.
+- target protocol: identical prompt, IR revision, harness hash, and `max-new` for every model. Per-run input hashes were not saved for the earlier arms, so exact runtime input identity remains unverified.
 
 For the current Qwen-3B run this gives 240 samples (20 × 3 × 4). A future 32-chip run gives 384 samples per model.
+
+Verified raw results: Qwen-3B 22/240 (9.2%), DeepSeek-6.7B 25/240 (10.4%), Qwen-14B 48/240 (20.0%). The earlier screenshot-based 38/240 figure was a reading error and is superseded. DeepSeek is a cross-family control, not an intermediate point on a Qwen parameter-scale curve.
+
+The SCNet export differs from current local IRs for eight chips: seven annotation changes and one semantic correction (INA3221). Archive scoring and current-revision scoring must be retained separately. Publication claims require the provenance audit and revision sensitivity checks, rather than aggregate counts alone.
 
 ### Confirmatory arm
 

@@ -1,0 +1,57 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-statistical-reporting",
+  "project_id": null,
+  "paper_family": null,
+  "stage_id": null,
+  "task_id": null,
+  "task_status": "PROVISIONAL",
+  "inputs_reviewed": [
+    "E:\\\u8fc5\u96f7\u4e0b\u8f7d\\D2D_QWEN14B_RESULTS.zip",
+    "60 raw result JSON files"
+  ],
+  "outputs": [
+    "eval\\model_comparison_20chip\\analysis_plan.json",
+    "eval\\model_comparison_20chip\\execution.log",
+    "eval\\model_comparison_20chip\\execution_record.yaml",
+    "eval\\model_comparison_20chip\\expert_result.json",
+    "eval\\model_comparison_20chip\\exploratory_chip_bootstrap.csv",
+    "eval\\model_comparison_20chip\\failure_tail_counts.csv",
+    "eval\\model_comparison_20chip\\ina3221_current_ir.json",
+    "eval\\model_comparison_20chip\\ina3221_execution.log",
+    "eval\\model_comparison_20chip\\ina3221_pytest_logs.zip",
+    "eval\\model_comparison_20chip\\ina3221_sensitivity.json",
+    "eval\\model_comparison_20chip\\INA3221_SENSITIVITY.md",
+    "eval\\model_comparison_20chip\\MANUSCRIPT_DRAFT.md",
+    "eval\\model_comparison_20chip\\model_comparison.pdf",
+    "eval\\model_comparison_20chip\\model_comparison.png",
+    "eval\\model_comparison_20chip\\model_summary.csv",
+    "eval\\model_comparison_20chip\\per_chip_comparison.csv",
+    "eval\\model_comparison_20chip\\REPORT_three_models.md",
+    "eval\\model_comparison_20chip\\validation_manifest.json"
+  ],
+  "evidence_status": [
+    "VERIFIED_USER_MATERIAL",
+    "EXECUTED_LOCAL",
+    "PENDING_VERIFICATION: cross-arm runtime hashes"
+  ],
+  "assumptions": [
+    "fixed convenience roster; correlated trials within chips"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "all export hashes match",
+    "720 unique seed/index samples validated",
+    "real-data plots generated",
+    "72 INA3221 revision rechecks preserve original scores",
+    "Plot visually inspected without clipping or overlap"
+  ],
+  "conflicts": [
+    "Runtime input provenance incomplete; INA3221 original and revised scoring both retained"
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Freeze canonical IR and complete gold-standard and failure audits.",
+  "stage_acceptance_recommendation": "NOT_ASSESSED"
+}

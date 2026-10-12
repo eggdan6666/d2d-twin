@@ -1,0 +1,68 @@
+{
+  "schema": "d2d-ir-v1",
+  "schema_note": "来源 = corpus/data/raw_pdf/TI/ADS1220.pdf（SBAS501D）§8.6 Register Map p.42-46 的 PDF 原生文本层。第 9 颗，**定位是正对照（positive control）**：四个配置寄存器、位域全 R/W-0、复位全 00h，无任何 RO 寄存器、无 read_as、无 write-only 键。它的作用不是测能力，而是证明前面几颗的低分不是断言写坏了——若这颗接近满分而复杂颗崩，区分度成立。",
+  "device": "ADS1220",
+  "vendor": "TI",
+  "interface": "SPI",
+  "reg_width": 8,
+  "i2c": {
+    "addresses_7bit": [],
+    "note": "SPI 器件，寄存器用 5 位地址经 WREG/RREG 命令访问（§8.6.1）；地址与数据分阶段传输，不属帧内寻址 ⇒ 契合 read/write_register 契约。CS/SCLK 时序 MVP 不建模"
+  },
+  "registers": [
+    {
+      "name": "CONFIG0", "addr": "0x00", "access": "RW", "reset": "0x00",
+      "desc": "配置寄存器 0（§8.6.2.1 Figure 8-32，复位 00h，逐位 R/W）",
+      "fields": [
+        { "name": "MUX", "bits": "7:4", "access": "RW", "reset": 0, "desc": "输入多路选择。注意 1111b 是**非法编码值**（手册写 'Reserved'），不是保留位——MVP 不断言非法编码行为" },
+        { "name": "GAIN", "bits": "3:1", "access": "RW", "reset": 0, "desc": "PGA 增益；111b 为 Reserved 编码值" },
+        { "name": "PGA_BYPASS", "bits": "0", "access": "RW", "reset": 0, "desc": "1=旁路 PGA" }
+      ]
+    },
+    {
+      "name": "CONFIG1", "addr": "0x01", "access": "RW", "reset": "0x00",
+      "desc": "配置寄存器 1（§8.6.2.2，复位 00h）",
+      "fields": [
+        { "name": "DR", "bits": "7:5", "access": "RW", "reset": 0, "desc": "数据速率选择" },
+        { "name": "MODE", "bits": "4:3", "access": "RW", "reset": 0, "desc": "转换模式（正常/快速/单次…）" },
+        { "name": "CM", "bits": "2", "access": "RW", "reset": 0, "desc": "0=单端 1=差分" },
+        { "name": "TS", "bits": "1", "access": "RW", "reset": 0, "desc": "温度传感器使能" },
+        { "name": "BCS", "bits": "0", "access": "RW", "reset": 0, "desc": "传感器电流检测使能" }
+      ]
+    },
+    {
+      "name": "CONFIG2", "addr": "0x02", "access": "RW", "reset": "0x00",
+      "desc": "配置寄存器 2（§8.6.2.3，复位 00h）",
+      "fields": [
+        { "name": "VREF", "bits": "7:6", "access": "RW", "reset": 0, "desc": "基准选择；11b 为 Reserved 编码值" },
+        { "name": "FIFTY_SIXTY", "bits": "5:4", "access": "RW", "reset": 0, "desc": "50/60Hz 抑制" },
+        { "name": "PSW", "bits": "3", "access": "RW", "reset": 0, "desc": "功率开关 / 掉电模式" },
+        { "name": "IDAC", "bits": "2:0", "access": "RW", "reset": 0, "desc": "电流源幅度" }
+      ]
+    },
+    {
+      "name": "CONFIG3", "addr": "0x03", "access": "RW", "reset": "0x00",
+      "desc": "配置寄存器 3（§8.6.2.4，复位 00h）。**bit0 字段名就叫 RESERVED，但访问码是 R/W-0** —— 同一份 TI 文档里第 3 处『reserved 却可写』（前两处：INA3221 Mask/Enable bit15、HDC2021 MEAS_CONFIG bit3），且与同片内『1111b 是保留编码值』完全是两回事",
+      "fields": [
+        { "name": "I1MUX", "bits": "7:5", "access": "RW", "reset": 0, "desc": "IDAC1 通道选择" },
+        { "name": "I2MUX", "bits": "4:2", "access": "RW", "reset": 0, "desc": "IDAC2 通道选择" },
+        { "name": "DRDYM", "bits": "1", "access": "RW", "reset": 0, "desc": "数据就绪引脚模式" },
+        { "name": "RESERVED", "bits": "0", "access": "RW", "reset": 0, "desc": "名为 Reserved 但手册给 R/W-0 ⇒ 按 B 档编成可写" }
+      ]
+    }
+  ],
+  "excluded_blocks": [
+    "转换数据寄存器（RDAT 读回的 24 位结果）与器件 ID 不在四个配置寄存器地址空间内，MVP 不建模",
+    "所有『1111b / 111b / 11b : Reserved』是**非法编码值**（写进去行为未定义），不是保留位；MVP 不断言"
+  ],
+  "proofread_record": {
+    "date": "2026-10-07",
+    "method": "PDF 原生文本层逐位取 Figure 8-32~8-35 的 R/W-n 访问码与 [reset=00h]",
+    "erratum_found": "未发现手册错误。但这颗提供了 Q0 讨论的关键反例：**同一份文档里 RESERVED 有两层完全不同的含义**——字段名 RESERVED 可以是『可写位』（CONFIG3 bit0，标 R/W），而 '1111b: Reserved' 指的是『保留编码值』。把它们混成一类就会错",
+    "open_questions": [
+      "Q1: 这颗是可断言面最小的芯片（只有复位值 + RW 位域持久两条；RO 保护/写触发/软复位键按 IR 自动跳过）。作为正对照，预期接近满分；若显著不满分，说明 prompt 里的『纯寄存器堆默认』倾向不够，得回看任务书。",
+      "Q2: CONFIG3 bit0 的 RESERVED 按 R/W 编码（B 档）。若你认为 TI 本意是不可写，改 access 即可，重判免费。",
+      "Q3: 非法编码值（MUX=1111b 等）写入后读回什么，手册未定义 → 不属 MVP。"
+    ]
+  }
+}
