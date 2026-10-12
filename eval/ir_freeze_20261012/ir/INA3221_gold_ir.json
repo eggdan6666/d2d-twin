@@ -1,0 +1,665 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = corpus/data/raw_pdf/TI/INA3221.pdf（SBOS576C，p.24-37）的 PDF 原生文本层，非 MinerU 产物——TMP100/BME280 一线已证明解析层会改数字（0xB6→0x86），金标一律回原文取。第 6 颗芯片。",
+ "device": "INA3221",
+ "vendor": "TI",
+ "interface": "I2C",
+ "reg_width": 16,
+ "i2c": {
+  "addresses_7bit": [
+   "0x40",
+   "0x41",
+   "0x42",
+   "0x43"
+  ],
+  "note": "A0/A1 引脚四态（§7.4.1）；MVP 不建模总线地址",
+  "byte_order": "所有 16 位寄存器按两个 8 位字节传输（§8.2 首句：All 16-bit INA3221 registers are two 8-bit bytes via the I2C interface）"
+ },
+ "registers": [
+  {
+   "name": "CONFIG",
+   "addr": "0x00",
+   "access": "RW",
+   "reset": "0x7127",
+   "desc": "配置寄存器（§8.2.1 Table 8-3/8-4，p.26-27）。写本寄存器会中止进行中的转换。含 RST 软件复位位",
+   "fields": [
+    {
+     "name": "RST",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "read_as": 0,
+     "desc": "RST：写 1 触发与上电复位等效的系统复位，所有寄存器回默认值，且**该位自清零**（原文『This bit resets all registers to default values and self-clears』）→ 读恒 0"
+    },
+    {
+     "name": "CH1en",
+     "bits": "14",
+     "access": "RW",
+     "reset": 1,
+     "desc": "通道 1 使能，默认 1"
+    },
+    {
+     "name": "CH2en",
+     "bits": "13",
+     "access": "RW",
+     "reset": 1,
+     "desc": "通道 2 使能，默认 1"
+    },
+    {
+     "name": "CH3en",
+     "bits": "12",
+     "access": "RW",
+     "reset": 1,
+     "desc": "通道 3 使能，默认 1"
+    },
+    {
+     "name": "AVG",
+     "bits": "11:9",
+     "access": "RW",
+     "reset": 0,
+     "desc": "平均模式 000=1 … 111=1024 次"
+    },
+    {
+     "name": "VBUSCT",
+     "bits": "8:6",
+     "access": "RW",
+     "reset": 4,
+     "desc": "总线电压转换时间，默认 100b=1.1ms"
+    },
+    {
+     "name": "VSHCT",
+     "bits": "5:3",
+     "access": "RW",
+     "reset": 4,
+     "desc": "分流电压转换时间，默认 100b=1.1ms"
+    },
+    {
+     "name": "MODE",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 7,
+     "desc": "工作模式，默认 111=分流+总线连续；000/100=power-down"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT1",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "通道 1 分流电压（§8.2.2，12 位补码左对齐 bits14:3，低 3 位未用）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "SD",
+     "bits": "14:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "SD11..SD0 测量值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "VBUS1",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "通道 1 总线电压（§8.2.3）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "BD",
+     "bits": "14:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "BD11..BD0 测量值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT2",
+   "addr": "0x03",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "通道 2 分流电压（§8.2.4），格式同 SHUNT1",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "SD",
+     "bits": "14:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "测量值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "VBUS2",
+   "addr": "0x04",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "通道 2 总线电压（§8.2.5）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "BD",
+     "bits": "14:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "测量值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT3",
+   "addr": "0x05",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "通道 3 分流电压（§8.2.6）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "SD",
+     "bits": "14:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "测量值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "VBUS3",
+   "addr": "0x06",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "通道 3 总线电压（§8.2.7）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "BD",
+     "bits": "14:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "测量值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "CRIT1",
+   "addr": "0x07",
+   "access": "RW",
+   "reset": "0x7FF8",
+   "desc": "通道 1 临界告警门限（§8.2.8，13 位数据占 bits15:3，复位 0x7FF8）",
+   "fields": [
+    {
+     "name": "CL",
+     "bits": "15:3",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "C1L12..C1L0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.31 Table 8-18：『bits 2-0 Reserved  R/W  0h』——手册标 R/W，可写",
+     "tier": "B",
+     "tier_evidence": "PDF p.31 Table 8-18：『bits 2-0 Reserved  R/W  0h』——手册标 R/W，可写"
+    }
+   ]
+  },
+  {
+   "name": "WARN1",
+   "addr": "0x08",
+   "access": "RW",
+   "reset": "0x7FF8",
+   "desc": "通道 1 警告告警门限（§8.2.9）",
+   "fields": [
+    {
+     "name": "WL",
+     "bits": "15:3",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "W1L12..W1L0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.31：Warning-Alert Channel-1 Limit，bits 2-0 Reserved R/W 0h",
+     "tier": "B",
+     "tier_evidence": "PDF p.31：Warning-Alert Channel-1 Limit，bits 2-0 Reserved R/W 0h"
+    }
+   ]
+  },
+  {
+   "name": "CRIT2",
+   "addr": "0x09",
+   "access": "RW",
+   "reset": "0x7FF8",
+   "desc": "通道 2 临界告警门限（§8.2.10）",
+   "fields": [
+    {
+     "name": "CL",
+     "bits": "15:3",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "C2L12..C2L0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.31-32 同款表：bits 2-0 Reserved R/W 0h",
+     "tier": "B",
+     "tier_evidence": "PDF p.31-32 同款表：bits 2-0 Reserved R/W 0h"
+    }
+   ]
+  },
+  {
+   "name": "WARN2",
+   "addr": "0x0A",
+   "access": "RW",
+   "reset": "0x7FF8",
+   "desc": "通道 2 警告告警门限（§8.2.11）",
+   "fields": [
+    {
+     "name": "WL",
+     "bits": "15:3",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "W2L12..W2L0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.32：bits 2-0 Reserved R/W 0h",
+     "tier": "B",
+     "tier_evidence": "PDF p.32：bits 2-0 Reserved R/W 0h"
+    }
+   ]
+  },
+  {
+   "name": "CRIT3",
+   "addr": "0x0B",
+   "access": "RW",
+   "reset": "0x7FF8",
+   "desc": "通道 3 临界告警门限（§8.2.12）",
+   "fields": [
+    {
+     "name": "CL",
+     "bits": "15:3",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "C3L12..C3L0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.32 Table 8-25：bits 2-0 Reserved R/W 0h",
+     "tier": "B",
+     "tier_evidence": "PDF p.32 Table 8-25：bits 2-0 Reserved R/W 0h"
+    }
+   ]
+  },
+  {
+   "name": "WARN3",
+   "addr": "0x0C",
+   "access": "RW",
+   "reset": "0x7FF8",
+   "desc": "通道 3 警告告警门限（§8.2.13）",
+   "fields": [
+    {
+     "name": "WL",
+     "bits": "15:3",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "W3L12..W3L0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RW",
+     "reset": 0,
+     "desc": "[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.32：bits 2-0 Reserved R/W 0h",
+     "tier": "B",
+     "tier_evidence": "PDF p.32：bits 2-0 Reserved R/W 0h"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT_SUM",
+   "addr": "0x0D",
+   "access": "RO",
+   "reset": "0x0000",
+   "desc": "分流电压累加（§8.2.14，14 位占 bits14:1，bit0 未用）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位"
+    },
+    {
+     "name": "SV",
+     "bits": "14:1",
+     "access": "RO",
+     "reset": 0,
+     "desc": "累加值"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0"
+    }
+   ]
+  },
+  {
+   "name": "SHUNT_SUM_LIMIT",
+   "addr": "0x0E",
+   "access": "RW",
+   "reset": "0x7FFE",
+   "desc": "累加门限（§8.2.15，14 位占 bits15:1，bit0 未用，复位 0x7FFE）",
+   "fields": [
+    {
+     "name": "SVL",
+     "bits": "15:1",
+     "access": "RW",
+     "reset": 4095,
+     "desc": "SVL13..SVL0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "未用，读 0",
+     "tier": "A",
+     "tier_evidence": "PDF p.33 Table 8-31：『bits 0 Reserved  R  0h』——文档明说读 0"
+    }
+   ]
+  },
+  {
+   "name": "MASK_ENABLE",
+   "addr": "0x0F",
+   "access": "RW",
+   "reset": "0x0002",
+   "desc": "屏蔽/使能与标志寄存器（§8.2.16 Table 8-33/8-34，p.34-35）。**16 位全部标 R/W**，包括 bit15 的 Reserved（Table 8-33 给 RW-0）——与 10h/11h 的未用位标 R-0 不同，这颗芯片里两种写法并存，是刻意的区分点。复位 0x0002 = TCF=1",
+   "fields": [
+    {
+     "name": "RSVD15",
+     "bits": "15",
+     "access": "RW",
+     "reset": 0,
+     "desc": "Reserved，但手册标 R/W-0（可写！）"
+    },
+    {
+     "name": "SCC",
+     "bits": "14:12",
+     "access": "RW",
+     "reset": 0,
+     "desc": "累加通道选择 SCC1-3"
+    },
+    {
+     "name": "WEN",
+     "bits": "11",
+     "access": "RW",
+     "reset": 0,
+     "desc": "警告告警锁存使能"
+    },
+    {
+     "name": "CEN",
+     "bits": "10",
+     "access": "RW",
+     "reset": 0,
+     "desc": "临界告警锁存使能"
+    },
+    {
+     "name": "CF",
+     "bits": "9:7",
+     "access": "RO",
+     "reset": 0,
+     "desc": "临界告警标志 CF1-3——读 Mask/Enable 后清除（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）",
+     "read_action": "clear"
+    },
+    {
+     "name": "SF",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "累加告警标志，read-clear（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）",
+     "read_action": "clear"
+    },
+    {
+     "name": "WF",
+     "bits": "5:3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "警告告警标志 WF1-3，read-clear（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）",
+     "read_action": "clear"
+    },
+    {
+     "name": "PVF",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "desc": "电源有效标志（原文：不随读清除，PVF 要等告警条件消失、TCF 要断电才清 → 忠实编码为 RO 而非可写存储）"
+    },
+    {
+     "name": "TCF",
+     "bits": "1",
+     "access": "RO",
+     "reset": 1,
+     "desc": "时序控制标志——**上电即为 1**（复位值 0x0002 的来源，§7.4.2 p.15）（原文：不随读清除，PVF 要等告警条件消失、TCF 要断电才清 → 忠实编码为 RO 而非可写存储）"
+    },
+    {
+     "name": "CVRF",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "转换完成标志；写 CONFIG 或读 Mask/Enable 都会清除（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）",
+     "read_action": "clear"
+    }
+   ]
+  },
+  {
+   "name": "PV_UPPER",
+   "addr": "0x10",
+   "access": "RW",
+   "reset": "0x2710",
+   "desc": "电源有效上限（§8.2.17 Table 8-35/8-36；SIGN 标 R-0、bits14:3 标 R/W、bits2:0 标 R-0；复位 0x2710 = 10.000V，LSB 8mV → 字段值 0x4E2=1250）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位，R-0"
+    },
+    {
+     "name": "PVU",
+     "bits": "14:3",
+     "access": "RW",
+     "reset": 1250,
+     "desc": "PVU11-0，复位 4E2h"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，标 R-0",
+     "tier": "A",
+     "tier_evidence": "PDF p.35 Table 8-36：『2-0 Reserved  R  0h』"
+    }
+   ]
+  },
+  {
+   "name": "PV_LOWER",
+   "addr": "0x11",
+   "access": "RW",
+   "reset": "0x2328",
+   "desc": "电源有效下限（§8.2.18；复位 0x2328 = 9.000V → 字段值 0x465=1125）",
+   "fields": [
+    {
+     "name": "SIGN",
+     "bits": "15",
+     "access": "RO",
+     "reset": 0,
+     "desc": "符号位，R-0"
+    },
+    {
+     "name": "PVL",
+     "bits": "14:3",
+     "access": "RW",
+     "reset": 1125,
+     "desc": "PVL11-0"
+    },
+    {
+     "name": "UNUSED",
+     "bits": "2:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "Reserved，标 R-0",
+     "tier": "A",
+     "tier_evidence": "PDF p.36 Table 8-38 续表：『2-0 Reserved  R  0h』"
+    }
+   ]
+  },
+  {
+   "name": "MANUF_ID",
+   "addr": "0xFE",
+   "access": "RO",
+   "reset": "0x5449",
+   "desc": "厂商 ID（§8.2.20）= 0x5449（ASCII 'TI'），只读且复位即为此值",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 21577,
+     "desc": "0x5449"
+    }
+   ]
+  },
+  {
+   "name": "DIE_ID",
+   "addr": "0xFF",
+   "access": "RO",
+   "reset": "0x3220",
+   "desc": "芯片 ID（§8.2.21 Table 8-41）= 0x3220，只读，逐位 R-n 齐全",
+   "fields": [
+    {
+     "name": "DIE",
+     "bits": "15:0",
+     "access": "RO",
+     "reset": 12832,
+     "desc": "0x3220"
+    }
+   ]
+  }
+ ],
+ "excluded_blocks": [
+  "无 EEPROM/指针寄存器（与 TMP100/TMP102 不同）；I2C 地址由 A0/A1 引脚决定，不属寄存器堆"
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "金标直接取自 PDF 原生文本层（p.24-37），逐寄存器对 [reset=] 与 Table 8-3/8-33/8-35/8-41 的逐位 R-n 编码；MinerU 并行解析仅作 Phase 2 的对照素材，不参与金标",
+  "erratum_found": "未见解析层笔误（本次直接绕过了 MinerU）。但发现手册内部的两处易混点：①Mask/Enable 的 bit15『Reserved』标 **R/W**-0，而 10h/11h 的『Reserved』标 **R**-0——同为 reserved 却访问码不同，模型（和人）都容易一刀切；②CONFIG 的 RST 位写 1 后自清零并复位全部寄存器，与 BME280 的 0xE0 写键值软复位是两种不同机制（位级 vs 独立 W 寄存器）",
+  "open_questions": [
+   "Q1: RST（CONFIG bit15）按『写 1 自清零 + 复位全部寄存器』建模，read_as=0。是否另加一条『位级软复位级联』断言（会改变各芯片断言分母，需把已跑的 5 颗重算）——请裁决",
+   "Q2: Mask/Enable 的 CF/SF/WF/PVF/TCF/CVRF 是 read-clear（读该寄存器即清除标志），且 CVRF 也会被写 CONFIG 清除。MVP 参考实现**未**建模 read-clear（否则与现有 RW 持久断言冲突），是否进 Phase 1.5",
+   "Q3: Mask/Enable bit15 Reserved 按手册标 R/W 编码为可写；若你认为 TI 本意是不可写，请改 access",
+   "Q4: 测量寄存器（01h-06h、0Dh）复位 0x0000 且转换值依赖外部输入，MVP 只断言 RO 写保护、不断言数值语义",
+   "Q5: 0Eh/07h-0Ch 的位域按 Table 给定位宽（14/13 位）编码，未用位读 0；请对照 PDF p.31-34 确认未用位在写全 1 后确实保持 0"
+  ]
+ }
+}

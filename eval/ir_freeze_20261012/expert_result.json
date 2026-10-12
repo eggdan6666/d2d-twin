@@ -1,0 +1,77 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ir-source-contract-audit-20261012",
+  "task_status": "PARTIAL",
+  "inputs_reviewed": [
+    "20 current IRs",
+    "21 local PDF sources; high-risk pages inspected",
+    "720 raw generated samples",
+    "20 reference simulators",
+    "Frozen harness",
+    "Prior independent review and repair recheck"
+  ],
+  "outputs": [
+    "eval\\ir_freeze_20261012\\.gitattributes",
+    "eval\\ir_freeze_20261012\\applicable_dimension_outcomes.csv",
+    "eval\\ir_freeze_20261012\\dimension_outcomes.csv",
+    "eval\\ir_freeze_20261012\\execution.log",
+    "eval\\ir_freeze_20261012\\execution_error_samples.json",
+    "eval\\ir_freeze_20261012\\execution_manifest.json",
+    "eval\\ir_freeze_20261012\\existing_review_notes.md",
+    "eval\\ir_freeze_20261012\\FAILURE_ANALYSIS.md",
+    "eval\\ir_freeze_20261012\\field_inventory.csv",
+    "eval\\ir_freeze_20261012\\freeze_manifest.json",
+    "eval\\ir_freeze_20261012\\full_pytest_evidence.zip",
+    "eval\\ir_freeze_20261012\\full_recheck_results.json",
+    "eval\\ir_freeze_20261012\\reference_coverage.csv",
+    "eval\\ir_freeze_20261012\\schema_issues.json",
+    "eval\\ir_freeze_20261012\\score_changes.json",
+    "eval\\ir_freeze_20261012\\SOURCE_AUDIT.md",
+    "eval\\ir_freeze_20261012\\source_document_manifest.json",
+    "eval\\ir_freeze_20261012\\source_high_risk_extracts.txt",
+    "eval\\ir_freeze_20261012\\source_page_evidence.zip",
+    "eval\\ir_freeze_20261012\\summary.json",
+    "eval\\ir_freeze_20261012\\test_outcomes.csv",
+    "eval\\ir_freeze_20261012\\vacuous_reference_passes.json",
+    "eval\\ir_source_repair_candidate_20261012\\.gitattributes",
+    "eval\\ir_source_repair_candidate_20261012\\changed_samples.json",
+    "eval\\ir_source_repair_candidate_20261012\\execution.log",
+    "eval\\ir_source_repair_candidate_20261012\\repair_manifest.json",
+    "eval\\ir_source_repair_candidate_20261012\\REVIEW_PROMPT.md",
+    "eval\\ir_source_repair_candidate_20261012\\tmp100_pytest_evidence.zip",
+    "eval\\ir_source_repair_candidate_20261012\\tmp100_sensitivity.json"
+  ],
+  "evidence_status": [
+    "EXECUTED_LOCAL: 740 canonical-candidate rechecks plus 38 TMP100 sensitivity runs",
+    "VERIFIED_SOURCE: TMP100 threshold width and cited high-risk source pages",
+    "PENDING_VERIFICATION: exhaustive 572-field source certification and source conflicts"
+  ],
+  "assumptions": [
+    "CPU pytest execution follows the frozen test ordering and module-scope fixture",
+    "No hardware/electrical fidelity is inferred from reference admission"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "Harness MD5 preserved",
+    "All 720 green classifications reproduce",
+    "All 740 rechecks have eight JUnit cases",
+    "Original code and scores unchanged",
+    "Zero timeouts",
+    "Reference applicability excludes two vacuous passes"
+  ],
+  "conflicts": [
+    "INA3221 p.33 diagram versus field table",
+    "TMP117 p.32 revision bits R-x versus table reset zero",
+    "LIS3DH scoring exclusion versus all-ones stimulus"
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Implement and validate a separately versioned source-contract scoring protocol.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "readiness": "NOT_READY"
+}

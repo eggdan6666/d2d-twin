@@ -60,3 +60,9 @@ The 20-chip Qwen-3B screening completed with 240 generated samples. The raw JSON
 ## Acceptance gate
 
 Each new model must pass a one-chip smoke test, then the 32-chip screening arm. A model is admitted to the comparison table only when its raw outputs, generation configuration, logs, and result JSON are archived together.
+
+## Source-contract audit, 2026-10-12
+
+All 720 archived generations were rescored locally with the current frozen-candidate IR snapshot; fully passing totals stayed 22/240, 25/240 and 48/240. Twenty reference implementations also passed the frozen protocol, but two reported RO-protection passes were vacuous. Twelve field-reset inconsistencies and a source-confirmed TMP100 threshold-width error were found. A corrected TMP100 candidate was checked with 38 sensitivity runs; no model's fully passing total changed. LIS3DH's declared legal-value exclusions are not enforced by the historical harness. The full audit and logs are under `eval/ir_freeze_20261012/`; repair candidates are under `eval/ir_source_repair_candidate_20261012/`.
+
+The publication gate remains open. Establish a separately versioned source-contract evaluator and admit the repaired IRs before replacing manuscript tables or running a confirmatory GPU arm. Preserve original results and the frozen historical harness.

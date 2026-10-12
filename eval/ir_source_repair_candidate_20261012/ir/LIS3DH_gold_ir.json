@@ -1,0 +1,418 @@
+{
+  "schema": "d2d-ir-v1",
+  "schema_note": "正式 Gold IR；已通过独立来源审校和候选 simulator admission。ST LIS3DH DocID17530 Rev 2，Register mapping p.31-32，description p.33-48。只覆盖身份、主控制和三轴输出 MVP。",
+  "device": "LIS3DH",
+  "vendor": "ST",
+  "interface": "I2C/SPI",
+  "reg_width": 8,
+  "registers": [
+    {
+      "name": "WHO_AM_I",
+      "addr": "0x0F",
+      "access": "RO",
+      "reset": "0x33",
+      "desc": "Device identification; p.31,34",
+      "fields": [
+        {
+          "name": "ID",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 51,
+          "desc": "Fixed ID 0x33"
+        }
+      ]
+    },
+    {
+      "name": "CTRL_REG0",
+      "addr": "0x1E",
+      "access": "RW",
+      "reset": "0x10",
+      "desc": "SDO/SA0 pull-up control; p.31,34",
+      "fields": [
+        {
+          "name": "SDO_PU_DISC",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Disconnect SDO/SA0 pull-up"
+        },
+        {
+          "name": "FIXED_6",
+          "bits": "6",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Must remain at reset default for correct operation"
+        },
+        {
+          "name": "FIXED_5",
+          "bits": "5",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Must remain at reset default for correct operation"
+        },
+        {
+          "name": "FIXED_4",
+          "bits": "4",
+          "access": "UNSPEC",
+          "reset": 1,
+          "desc": "Must remain at reset default 1 for correct operation"
+        },
+        {
+          "name": "FIXED_3_0",
+          "bits": "3:0",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Must remain at reset default for correct operation"
+        }
+      ]
+    },
+    {
+      "name": "TEMP_CFG_REG",
+      "addr": "0x1F",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "Auxiliary ADC and temperature enable; p.31,34",
+      "fields": [
+        {
+          "name": "ADC_EN",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Enable auxiliary ADC"
+        },
+        {
+          "name": "TEMP_EN",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Enable temperature sensor"
+        },
+        {
+          "name": "FIXED_5_0",
+          "bits": "5:0",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Fixed zero bits"
+        }
+      ]
+    },
+    {
+      "name": "CTRL_REG1",
+      "addr": "0x20",
+      "access": "RW",
+      "reset": "0x07",
+      "desc": "ODR, low-power and axis enables; p.31,35",
+      "fields": [
+        {
+          "name": "ODR",
+          "bits": "7:4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Output data rate and power mode; Table 31 defines 0x0-0x9 only",
+          "legal_values": [
+            "0x0",
+            "0x1",
+            "0x2",
+            "0x3",
+            "0x4",
+            "0x5",
+            "0x6",
+            "0x7",
+            "0x8",
+            "0x9"
+          ],
+          "unsupported_values": [
+            "0xA",
+            "0xB",
+            "0xC",
+            "0xD",
+            "0xE",
+            "0xF"
+          ],
+          "unsupported_policy": "exclude_from_scoring_until_legal_value_constraints_are_supported"
+        },
+        {
+          "name": "LPen",
+          "bits": "3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Low-power mode"
+        },
+        {
+          "name": "Zen",
+          "bits": "2",
+          "access": "RW",
+          "reset": 1,
+          "desc": "Z-axis enable"
+        },
+        {
+          "name": "Yen",
+          "bits": "1",
+          "access": "RW",
+          "reset": 1,
+          "desc": "Y-axis enable"
+        },
+        {
+          "name": "Xen",
+          "bits": "0",
+          "access": "RW",
+          "reset": 1,
+          "desc": "X-axis enable"
+        }
+      ]
+    },
+    {
+      "name": "CTRL_REG4",
+      "addr": "0x23",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "BDU, endian, full scale, resolution and SPI mode; p.31,37",
+      "fields": [
+        {
+          "name": "BDU",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Block data update"
+        },
+        {
+          "name": "BLE",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Endian selection"
+        },
+        {
+          "name": "FS",
+          "bits": "5:4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Full-scale selection"
+        },
+        {
+          "name": "HR",
+          "bits": "3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "High-resolution mode"
+        },
+        {
+          "name": "ST",
+          "bits": "2:1",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Self-test mode; 11 is invalid/reserved and is not scored as ordinary RW persistence"
+        },
+        {
+          "name": "SIM",
+          "bits": "0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "3-wire SPI mode"
+        }
+      ]
+    },
+    {
+      "name": "STATUS_REG",
+      "addr": "0x27",
+      "access": "RO",
+      "desc": "XYZ availability and overrun flags; p.31,39",
+      "fields": [
+        {
+          "name": "ZYXOR",
+          "bits": "7",
+          "access": "RO",
+          "reset": 0,
+          "desc": "XYZ overrun"
+        },
+        {
+          "name": "ZOR",
+          "bits": "6",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Z overrun"
+        },
+        {
+          "name": "YOR",
+          "bits": "5",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Y overrun"
+        },
+        {
+          "name": "XOR",
+          "bits": "4",
+          "access": "RO",
+          "reset": 0,
+          "desc": "X overrun"
+        },
+        {
+          "name": "ZYXDA",
+          "bits": "3",
+          "access": "RO",
+          "reset": 0,
+          "desc": "XYZ data available"
+        },
+        {
+          "name": "ZDA",
+          "bits": "2",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Z data available"
+        },
+        {
+          "name": "YDA",
+          "bits": "1",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Y data available"
+        },
+        {
+          "name": "XDA",
+          "bits": "0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "X data available"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    },
+    {
+      "name": "OUT_X_L",
+      "addr": "0x28",
+      "access": "RO",
+      "desc": "X acceleration low byte; p.31,40",
+      "fields": [
+        {
+          "name": "DATA",
+          "bits": "7:0",
+          "access": "RO",
+          "desc": "Two's-complement left-justified output"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    },
+    {
+      "name": "OUT_X_H",
+      "addr": "0x29",
+      "access": "RO",
+      "desc": "X acceleration high byte; p.31,40",
+      "fields": [
+        {
+          "name": "DATA",
+          "bits": "7:0",
+          "access": "RO",
+          "desc": "Two's-complement left-justified output"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    },
+    {
+      "name": "OUT_Y_L",
+      "addr": "0x2A",
+      "access": "RO",
+      "desc": "Y acceleration low byte; p.31,40",
+      "fields": [
+        {
+          "name": "DATA",
+          "bits": "7:0",
+          "access": "RO",
+          "desc": "Two's-complement left-justified output"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    },
+    {
+      "name": "OUT_Y_H",
+      "addr": "0x2B",
+      "access": "RO",
+      "desc": "Y acceleration high byte; p.31,40",
+      "fields": [
+        {
+          "name": "DATA",
+          "bits": "7:0",
+          "access": "RO",
+          "desc": "Two's-complement left-justified output"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    },
+    {
+      "name": "OUT_Z_L",
+      "addr": "0x2C",
+      "access": "RO",
+      "desc": "Z acceleration low byte; p.31,40",
+      "fields": [
+        {
+          "name": "DATA",
+          "bits": "7:0",
+          "access": "RO",
+          "desc": "Two's-complement left-justified output"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    },
+    {
+      "name": "OUT_Z_H",
+      "addr": "0x2D",
+      "access": "RO",
+      "desc": "Z acceleration high byte; p.31,40",
+      "fields": [
+        {
+          "name": "DATA",
+          "bits": "7:0",
+          "access": "RO",
+          "desc": "Two's-complement left-justified output"
+        }
+      ],
+      "runtime_value": true,
+      "reset_policy": "UNSPECIFIED_RUNTIME_OUTPUT"
+    }
+  ],
+  "excluded_blocks": [
+    "Reserved addresses and undocumented values are excluded as instructed on p.32.",
+    "FIFO, interrupts, click and activity semantics are deferred because they require stateful event tests."
+  ],
+  "proofread_record": {
+    "date": "2026-10-10",
+    "method": "PDF text extraction plus page-level inspection of pages 31-40",
+    "erratum_found": "not checked by an independent reviewer",
+    "open_questions": [
+      "Independent review passed after removing static reset assertions for dynamic output registers and annotating ODR legal values."
+    ]
+  },
+  "address_encoding": {
+    "i2c": {
+      "addresses_7bit": [
+        "0x18",
+        "0x19"
+      ],
+      "note": "SAD=001100xb; SA0 selects LSB; p.25",
+      "auto_increment": "sub-address MSB; source pages 24-26"
+    },
+    "spi": {
+      "read_write_bit": "0",
+      "multi_byte_increment_bit": "1",
+      "register_address_bits": "7:2",
+      "source_pages": "27-30"
+    }
+  },
+  "semantic_exclusions": [
+    "Direct-register harness does not score BDU/BLE paired-output atomicity or byte order.",
+    "CTRL_REG4.ST[1:0]=11 is invalid and remains UNSPEC until legal-value constraints are supported.",
+    "CTRL_REG1.ODR values 0xA-0xF are undocumented/unsupported and are excluded from scoring."
+  ],
+  "admission_status": "FORMAL_GOLD_ADMITTED_2026-10-10",
+  "admission_evidence": {
+    "source_review": "INDEPENDENT_IR_REVIEW_SIGNOFF.md",
+    "post_repair_recheck": "POST_REPAIR_RECHECK.md",
+    "candidate_harness": "_setup/CANDIDATE_ADMISSION_REPORT.md",
+    "promotion_note": "Promoted after source PASS and isolated candidate simulator PASS; protocol extensions remain supplemental."
+  }
+}

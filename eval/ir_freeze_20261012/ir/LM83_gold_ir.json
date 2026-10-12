@@ -1,0 +1,404 @@
+{
+ "schema": "d2d-ir-v1",
+ "schema_note": "来源 = corpus/data/raw_pdf/TI/LM83.pdf（国家半导体 DS009277，§2.0 LM83 REGISTERS p.13-15）的 PDF 原生文本层。第 10 颗。此前我说『自动探针没找到地址表、待人眼复核』——复核结果：表在，是老式 NSC 版式（§2.1 COMMAND REGISTER 的命令字表 + 分节位表），我的正则只认 'Register Map' 才漏了。收回那句话。",
+ "device": "LM83",
+ "vendor": "TI/NSC",
+ "interface": "I2C/SMBus",
+ "reg_width": 8,
+ "i2c": {
+  "addresses_7bit": [
+   "0x2C"
+  ],
+  "note": "SMBus 命令字（Command Byte）即寄存器地址，地址与数据分阶段传输 ⇒ 契合 read/write_register 契约。§2.1"
+ },
+ "registers": [
+  {
+   "name": "TEMP_LOCAL",
+   "addr": "0x00",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "本地温度（RLT，§2.2，只读，1 LSB=1°C 补码）。上电默认 00h，首次转换前读到 0",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "温度字节"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_D2",
+   "addr": "0x01",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "二极管 2 远端温度（RD2RT，§2.2）",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "温度字节"
+    }
+   ]
+  },
+  {
+   "name": "SR1",
+   "addr": "0x02",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "状态寄存器 1（§2.3.1，只读）。**D7/D5/D3 明写『always set to 0 and reserved for future use』→ A 档硬证据**，与同一颗里的『保留地址该读回什么』（C 档，见 open_questions）形成对照",
+   "fields": [
+    {
+     "name": "LCRIT",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "本地临界告警"
+    },
+    {
+     "name": "D2CRIT",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D2 临界告警"
+    },
+    {
+     "name": "D2OPEN",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D2 断线"
+    },
+    {
+     "name": "RSV3",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（原文明写）"
+    },
+    {
+     "name": "D2RHIGH",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D2 高温"
+    },
+    {
+     "name": "RSV5",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（原文明写）"
+    },
+    {
+     "name": "LHIGH",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "本地高温"
+    },
+    {
+     "name": "RSV7",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（原文明写）"
+    }
+   ]
+  },
+  {
+   "name": "CONFIG",
+   "addr": "0x03",
+   "write_addr": "0x09",
+   "access": "RW",
+   "reset": "0x00",
+   "desc": "配置寄存器（§2.5）。**读地址 03h、写地址 09h 不同**（表头：Read Address 03h/Write Address 09h）→ 触发断言⑦读写别名。D6/D0 明写『always set to 0 and reserved… **A write of 1 will return a 0 when read**』→ A 档",
+   "fields": [
+    {
+     "name": "INT_MASK",
+     "bits": "7",
+     "access": "RW",
+     "reset": 0,
+     "desc": "INT 输出屏蔽"
+    },
+    {
+     "name": "RSV6",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0，写 1 读回 0（原话）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "PDF 文本层与解析稿都只有地址级表（p.13 命令寄存器表），RC 的位级 Type 未找到"
+    },
+    {
+     "name": "TCRIT_M_D1",
+     "bits": "5",
+     "access": "RW",
+     "reset": 0,
+     "desc": "D1 的 T_CRIT_A 屏蔽"
+    },
+    {
+     "name": "TCRIT_M_D2",
+     "bits": "4",
+     "access": "RW",
+     "reset": 0,
+     "desc": "D2 屏蔽"
+    },
+    {
+     "name": "TCRIT_M_D3",
+     "bits": "3",
+     "access": "RW",
+     "reset": 0,
+     "desc": "D3 屏蔽"
+    },
+    {
+     "name": "TCRIT_M_LOC",
+     "bits": "2",
+     "access": "RW",
+     "reset": 0,
+     "desc": "本地屏蔽"
+    },
+    {
+     "name": "INT_INV",
+     "bits": "1",
+     "access": "RW",
+     "reset": 0,
+     "desc": "INT 极性反转"
+    },
+    {
+     "name": "RSV0",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0，写 1 读回 0（原话）",
+     "tier": "UNVERIFIED",
+     "tier_evidence": "同上"
+    }
+   ]
+  },
+  {
+   "name": "LHS",
+   "addr": "0x05",
+   "write_addr": "0x0B",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "本地高温设定点（§2.6，读 05h/写 0Bh，上电默认 127°C = 7Fh——非零复位值）",
+   "fields": [
+    {
+     "name": "S",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "设定点，1 LSB=1°C 补码"
+    }
+   ]
+  },
+  {
+   "name": "D2RHS",
+   "addr": "0x07",
+   "write_addr": "0x0D",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "D2 高温设定点（§2.6，读 07h/写 0Dh，默认 7Fh）",
+   "fields": [
+    {
+     "name": "S",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "设定点"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_D1",
+   "addr": "0x30",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "D1 远端温度（RD1RT，§2.2）",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "温度字节"
+    }
+   ]
+  },
+  {
+   "name": "TEMP_D3",
+   "addr": "0x31",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "D3 远端温度（RD3RT，§2.2）",
+   "fields": [
+    {
+     "name": "T",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "温度字节"
+    }
+   ]
+  },
+  {
+   "name": "SR2",
+   "addr": "0x35",
+   "access": "RO",
+   "reset": "0x00",
+   "desc": "状态寄存器 2（§2.3.2，只读，D6/D3 明写恒 0）",
+   "fields": [
+    {
+     "name": "D1CRIT",
+     "bits": "0",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D1 临界"
+    },
+    {
+     "name": "D3CRIT",
+     "bits": "1",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D3 临界"
+    },
+    {
+     "name": "D3OPEN",
+     "bits": "2",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D3 断线"
+    },
+    {
+     "name": "RSV3",
+     "bits": "3",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（原文明写）"
+    },
+    {
+     "name": "D3RHIGH",
+     "bits": "4",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D3 高温"
+    },
+    {
+     "name": "D1OPEN",
+     "bits": "5",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D1 断线"
+    },
+    {
+     "name": "RSV6",
+     "bits": "6",
+     "access": "RO",
+     "reset": 0,
+     "desc": "恒 0（原文明写）"
+    },
+    {
+     "name": "D1RHIGH",
+     "bits": "7",
+     "access": "RO",
+     "reset": 0,
+     "desc": "D1 高温"
+    }
+   ]
+  },
+  {
+   "name": "D1RHS",
+   "addr": "0x38",
+   "write_addr": "0x50",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "D1 高温设定点（§2.6，读 38h/写 50h，默认 7Fh）",
+   "fields": [
+    {
+     "name": "S",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "设定点"
+    }
+   ]
+  },
+  {
+   "name": "D3RHS",
+   "addr": "0x3A",
+   "write_addr": "0x52",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "D3 高温设定点（§2.6，读 3Ah/写 52h，默认 7Fh）",
+   "fields": [
+    {
+     "name": "S",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "设定点"
+    }
+   ]
+  },
+  {
+   "name": "TCS",
+   "addr": "0x42",
+   "write_addr": "0x5A",
+   "access": "RW",
+   "reset": "0x7F",
+   "desc": "T_CRIT 设定点（§2.7，读 42h/写 5Ah，默认 7Fh = 127°C）",
+   "fields": [
+    {
+     "name": "S",
+     "bits": "7:0",
+     "access": "RW",
+     "reset": 127,
+     "desc": "设定点"
+    }
+   ]
+  },
+  {
+   "name": "MID",
+   "addr": "0xFE",
+   "access": "RO",
+   "reset": "0x01",
+   "desc": "厂商 ID（§2.4，读 0xFE，默认 01h）",
+   "fields": [
+    {
+     "name": "ID",
+     "bits": "7:0",
+     "access": "RO",
+     "reset": 1,
+     "desc": "0x01 = National"
+    }
+   ]
+  },
+  {
+   "name": "STEP_ID",
+   "addr": "0xFF",
+   "access": "RO",
+   "reset": "0x00",
+   "runtime_value": true,
+   "desc": "Stepping/Die Revision Code（§2.1 表末行 FFh）——**手册没给默认值**，属步进相关只读值，标 runtime_value 跳过复位值断言",
+   "fields": []
+  }
+ ],
+ "excluded_blocks": [
+  "大量保留地址（04h、06h、08h、0Ah、0Ch、0Eh-2Fh、32h-34h、36h-37h、39h、3Bh-41h、43h-4Fh、51h、53h-59h、5Bh、5Ch-6Fh、F0h-FDh）标 'Reserved for Future Use'，**手册没定义读回值**——按 Q0 的 C 档处理：不进寄存器表、不判分，见 open_questions Q2"
+ ],
+ "proofread_record": {
+  "date": "2026-10-07",
+  "method": "PDF 原生文本层 §2.1 命令字表（p.13-14）+ §2.2-2.7 位表（p.14-15）；每寄存器逐位抄 R/W 与默认值",
+  "erratum_found": "未见手册内部矛盾。这颗的价值在**同一份文档把『保留』分成两类**：①位级『always set to 0 and reserved for future use. A write of 1 will return a 0 when read』（SR1/SR2/CONFIG 的若干位）＝A 档，可断言；②地址级『Reserved for Future Use』（几十个地址）＝手册完全没说读回什么＝C 档，不可断言。这正好给 Q0 的三档分级提供同一芯片内的对照",
+  "open_questions": [
+   "Q1（新维度）: 6 个读写别名寄存器（03h/09h、05h/0Bh、07h/0Dh、38h/50h、3Ah/52h、42h/5Ah）由**新加的断言⑦**覆盖。要不要把它同时用于 BME280/BMP280 之类没有别名的芯片（会 skip，分母不变）？已默认如此",
+   "Q2（C 档）: 读保留地址（如 04h/06h/08h）返回什么，手册未定义 ⇒ 不入断言。是否要按『返回 0』约定并计分？（我不建议：那是我们在替手册编话）",
+   "Q3: 温度/设定点的补码量纲与 INT/T_CRIT_A 引脚行为属运行时语义，MVP 只断言权限、复位值与别名联动",
+   "Q4: 老版式文档（本份 p.13 表头是 <P7:P0> hex / <D7:D0> binary / decimal 三列）在解析层极易错位，是 Phase 2 结构保持解析的天然难题样本，建议保留作 MinerU/VLM 对照"
+  ]
+ }
+}

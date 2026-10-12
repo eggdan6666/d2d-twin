@@ -1,0 +1,3760 @@
+
+# TI/ADS1220.pdf
+
+
+## PDF page 33
+8.3.13 Temperature Sensor
+The ADS1220 offers an integrated precision temperature sensor. The temperature sensor mode is enabled by 
+setting bit TS = 1b in the configuration register. When in temperature sensor mode, the settings of configuration 
+register 0 have no effect and the device uses the internal reference for measurement, regardless of the selected 
+voltage reference source. Temperature readings follow the same process as the analog inputs for starting and 
+reading conversion results. Temperature data are represented as a 14-bit result that is left-justified within the 
+24-bit conversion data. Data are output starting with the most significant byte (MSB). When reading the three 
+data bytes, the first 14 bits are used to indicate the temperature measurement result. One 14-bit LSB equals 
+0.03125°C. Negative numbers are represented in binary two's complement format, as shown in Table 8-5.
+Table 8-5. 14-Bit Temperature Data Format
+TEMPERATURE (°C)
+DIGITAL OUTPUT (BINARY)
+HEX
+128
+01 0000 0000 0000b
+1000h
+127.96875
+00 1111 1111 1111b
+0FFFh
+100
+00 1100 1000 0000b
+0C80h
+75
+00 1001 0110 0000b
+0960h
+50
+00 0110 0100 0000b
+0640h
+25
+00 0011 0010 0000b
+0320h
+0.25
+00 0000 0000 1000b
+0008h
+0.03125
+00 0000 0000 0001b
+0001h
+0
+00 0000 0000 0000b
+0000h
+–0.25
+11 1111 1111 1000b
+3FF8h
+–25
+11 1100 1110 0000b
+3CE0h
+–40
+11 1011 0000 0000b
+3B00h
+8.3.13.1 Converting From Digital Codes to Temperature
+To convert from digital codes to temperature, first read the data bytes from the device and extract the 14-bit 
+temperature value by right-shifting the result. Figure 8-23 shows the 14-bit temperature sensor data alignment 
+within the 24-bit conversion result. The MSB of the 14-bit value determines the sign: 0b indicates a positive 
+temperature and 1b indicates a negative temperature. For positive temperatures convert the 14-bit binary value 
+to decimal and multiply the result by the temperature sensor LSB size, 0.03125°C. For negative temperatures, 
+the value is in two's compliment format. Invert all 14 bits and add 1b, convert to decimal, and multiply the result 
+by the negative temperature sensor LSB size, –0.03125°C.
+1. Positive temperature example: The device reads back 0960h: 0960h × 0.03125°C = 2400 × 0.03125°C = 75°C
+2. Negative temperature example: The device reads back 3CE0h: Subtract 1b and complement the result: 
+3CE0h → 0320h, 0320h × (–0.03125°C) = 800 × (–0.03125°C) = –25°C
+24-Bit Data From Temperature Sensor Measurement (Two's Complement)
+DATA MSB
+DATA MID
+DATA LSB
+0
+0
+0
+0
+1
+1
+0
+0
+1
+0
+0
+0
+0
+0
+X
+X
+X
+X
+X
+X
+X
+X
+X
+X
+14-Bit Temperature Sensor Data
+Figure 8-23. 14-Bit Temperature Sensor Data Alignment Within 24-Bit Conversion Result
+www.ti.com
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+33
+Product Folder Links: ADS1220
+
+
+## PDF page 42
+8.6 Register Map
+8.6.1 Configuration Registers
+The device has four 8-bit configuration registers that are accessible through the serial interface using the RREG 
+and WREG commands. After power-up or reset, all registers are set to the default values (which are all 00h). 
+All registers retain the values during power-down mode. Table 8-8 shows the register map of the configuration 
+registers.
+Table 8-8. Configuration Register Map
+REGISTER 
+(Hex)
+BIT 7
+BIT 6
+BIT 5
+BIT 4
+BIT 3
+BIT 2
+BIT 1
+BIT 0
+00h
+MUX[3:0]
+GAIN[2:0]
+PGA_BYPASS
+01h
+DR[2:0]
+MODE[1:0]
+CM
+TS
+BCS
+02h
+VREF[1:0]
+50/60[1:0]
+PSW
+IDAC[2:0]
+03h
+I1MUX[2:0]
+I2MUX[2:0]
+DRDYM
+RESERVED
+8.6.2 Register Descriptions
+Table 8-9 lists the access codes for the ADS1220 registers.
+Table 8-9. Register Access Type Codes
+Access Type
+Code
+Description
+R
+R
+Read
+R/W
+R/W
+Read-Write
+W
+W
+Write
+-n
+Value after reset or the default value
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026
+www.ti.com
+42
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: ADS1220
+
+
+## PDF page 43
+8.6.2.1 Configuration Register 0 (Address = 00h) [reset = 00h]
+Figure 8-32. Configuration Register 0
+7
+6
+5
+4
+3
+2
+1
+0
+MUX[3:0]
+GAIN[2:0]
+PGA_BYPASS
+R/W-0000b
+R/W-000b
+R/W-0b
+Table 8-10. Configuration Register 0 Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+7:4
+MUX[3:0]
+R/W
+0000b
+Input multiplexer configuration
+These bits configure the input multiplexer.
+For settings where AINN = AVSS, the PGA must be disabled (PGA_BYPASS = 1) 
+and only gains 1, 2, and 4 can be used.
+0000b : AINP = AIN0, AINN = AIN1
+0001b : AINP = AIN0, AINN = AIN2
+0010b : AINP = AIN0, AINN = AIN3
+0011b : AINP = AIN1, AINN = AIN2
+0100b : AINP = AIN1, AINN = AIN3
+0101b : AINP = AIN2, AINN = AIN3
+0110b : AINP = AIN1, AINN = AIN0
+0111b : AINP = AIN3, AINN = AIN2
+1000b : AINP = AIN0, AINN = AVSS
+1001b : AINP = AIN1, AINN = AVSS
+1010b : AINP = AIN2, AINN = AVSS
+1011b : AINP = AIN3, AINN = AVSS
+1100b : (VREFPx – VREFNx) / 4 monitor (PGA bypassed)
+1101b : (AVDD – AVSS) / 4 monitor (PGA bypassed)
+1110b : AINP and AINN shorted to (AVDD + AVSS) / 2
+1111b : Reserved
+3:1
+GAIN[2:0]
+R/W
+000b
+Gain configuration
+These bits configure the device gain.
+Gains 1, 2, and 4 can be used without the PGA. In this case, gain is obtained by a 
+switched-capacitor structure.
+000b : Gain = 1
+001b : Gain = 2
+010b : Gain = 4
+011b : Gain = 8
+100b : Gain = 16
+101b : Gain = 32
+110b : Gain = 64
+111b : Gain = 128
+0
+PGA_BYPASS
+R/W
+0b
+Disables and bypasses the internal low-noise PGA
+Disabling the PGA reduces overall power consumption and allows the common-
+mode voltage range (VCM) to span from AVSS – 0.1V to AVDD + 0.1V.
+The PGA can only be disabled for gains 1, 2, and 4.
+The PGA is always enabled for gain settings 8 to 128, regardless of the 
+PGA_BYPASS setting.
+0b : PGA enabled
+1b : PGA disabled and bypassed
+www.ti.com
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+43
+Product Folder Links: ADS1220
+
+
+## PDF page 44
+8.6.2.2 Configuration Register 1 (Address = 01h) [reset = 00h]
+Figure 8-33. Configuration Register 1
+7
+6
+5
+4
+3
+2
+1
+0
+DR[2:0]
+MODE[1:0]
+CM
+TS
+BCS
+R/W-000b
+R/W-00b
+R/W-0b
+R/W-0b
+R/W-0b
+Table 8-11. Configuration Register 1 Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+7:5
+DR[2:0]
+R/W
+000b
+Data rate
+These bits control the data rate setting depending on the selected operating 
+mode. Table 8-12 lists the bit settings for normal, duty-cycle, and turbo mode.
+4:3
+MODE[1:0]
+R/W
+00b
+Operating mode
+These bits control the operating mode the device operates in.
+00b : Normal mode (256kHz modulator clock)
+01b : Duty-cycle mode (internal duty cycle of 1:4)
+10b : Turbo mode (512kHz modulator clock)
+11b : Reserved
+2
+CM
+R/W
+0b
+Conversion mode
+This bit sets the conversion mode for the device.
+0b : Single-shot conversion mode
+1b : Continuous conversion mode
+1
+TS
+R/W
+0b
+Temperature sensor mode
+This bit enables the internal temperature sensor and puts the device in 
+temperature sensor mode.
+The settings of configuration register 0 have no effect and the device uses the 
+internal reference for measurement when temperature sensor mode is enabled.
+0b : Disables temperature sensor
+1b : Enables temperature sensor
+0
+BCS
+R/W
+0b
+Burn-out current sources
+This bit controls the 10µA, burn-out current sources.
+The burn-out current sources can be used to detect sensor faults such as wire 
+breaks and shorted sensors.
+0b : Current sources off
+1b : Current sources on
+Table 8-12. DR Bit Settings (1) 
+NORMAL MODE
+DUTY-CYCLE MODE
+TURBO MODE
+000b = 20SPS
+000b = 5SPS
+000b = 40SPS
+001b = 45SPS
+001b = 11.25SPS
+001b = 90SPS
+010b = 90SPS
+010b = 22.5SPS
+010b = 180SPS
+011b = 175SPS
+011b = 44SPS
+011b = 350SPS
+100b = 330SPS
+100b = 82.5SPS
+100b = 660SPS
+101b = 600SPS
+101b = 150SPS
+101b = 1200SPS
+110b = 1000SPS
+110b = 250SPS
+110b = 2000SPS
+111b = Reserved
+111b = Reserved
+111b = Reserved
+(1)
+Data rates provided are calculated using the internal oscillator or an external 4.096MHz clock. The data rates scale proportionally with 
+the external clock frequency when an external clock other than 4.096MHz is used.
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026
+www.ti.com
+44
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: ADS1220
+
+
+## PDF page 46
+8.6.2.4 Configuration Register 3 (Address = 03h) [reset = 00h]
+Figure 8-35. Configuration Register 3
+7
+6
+5
+4
+3
+2
+1
+0
+I1MUX[2:0]
+I2MUX[2:0]
+DRDYM
+RESERVED
+R/W-000b
+R/W-000b
+R/W-0b
+R/W-0b
+Table 8-14. Configuration Register 3 Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+7:5
+I1MUX[2:0]
+R/W
+000b
+IDAC1 routing configuration
+These bits select the channel where IDAC1 is routed to.
+000b : IDAC1 disabled
+001b : IDAC1 connected to AIN0/REFP1
+010b : IDAC1 connected to AIN1
+011b : IDAC1 connected to AIN2
+100b : IDAC1 connected to AIN3/REFN1
+101b : IDAC1 connected to REFP0
+110b : IDAC1 connected to REFN0
+111b : Reserved
+4:2
+I2MUX[2:0]
+R/W
+000b
+IDAC2 routing configuration
+These bits select the channel where IDAC2 is routed to.
+000b : IDAC2 disabled
+001b : IDAC2 connected to AIN0/REFP1
+010b : IDAC2 connected to AIN1
+011b : IDAC2 connected to AIN2
+100b : IDAC2 connected to AIN3/REFN1
+101b : IDAC2 connected to REFP0
+110b : IDAC2 connected to REFN0
+111b : Reserved
+1
+DRDYM
+R/W
+0b
+DRDY mode
+This bit controls the behavior of the DOUT/DRDY pin when new data are ready.
+0b : Only the dedicated DRDY pin is used to indicate when data are ready
+1b : Data ready is indicated simultaneously on DOUT/DRDY and DRDY
+0
+RESERVED
+R/W
+0b
+Reserved
+Always write 0b
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026
+www.ti.com
+46
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: ADS1220
+
+
+# ST/LIS3DH.pdf
+
+
+## PDF page 12
+Mechanical and electrical specifications
+LIS3DH
+12/54
+DocID17530 Rev 2
+2.2 
+Temperature sensor characteristics
+Vdd = 2.5 V, T = 25 °C unless otherwise noted (b)
+          
+2.3 
+Electrical characteristics
+Vdd = 2.5 V, T = 25 °C unless otherwise noted (c) 
+          
+b.
+The product is factory calibrated at 2.5 V. Temperature sensor operation is guaranteed in the range 2 V - 3.6 V.
+Table 5. Temperature sensor characteristics
+Symbol
+Parameter
+Test condition
+Min.
+Typ.(1)
+Max.
+Unit
+TSDr
+Temperature sensor output change vs 
+temperature
+1
+digit/°C(2)
+TODR
+Temperature refresh rate
+ODR
+Hz
+Top 
+Operating temperature range
+-40
++85
+°C
+1.
+Typical specifications are not guaranteed.
+2.
+8-bit resolution.
+c.
+The product is factory calibrated at 2.5 V. The operational power supply range is from 1.71 V to 3.6 V.
+Table 6. Electrical characteristics
+Symbol
+Parameter
+Test conditions
+Min.
+Typ.(1)
+Max.
+Unit
+Vdd
+Supply voltage
+1.71
+2.5
+3.6
+V
+Vdd_IO
+I/O pins supply voltage(2)
+1.71
+Vdd+0.1
+V
+Idd
+Current consumption in normal mode
+50 Hz ODR
+11
+μA
+Idd
+Current consumption in normal mode
+1 Hz ODR
+2
+μA
+IddLP
+Current consumption in low-power mode
+50 Hz ODR
+6
+μA
+IddPdn
+Current consumption in power-down 
+mode
+0.5
+μA
+VIH
+Digital high-level input voltage
+0.8*Vdd_IO
+V
+VIL
+Digital low-level input voltage
+0.2*Vdd_IO
+V
+VOH
+High-level output voltage
+0.9*Vdd_IO
+V
+VOL
+Low-level output voltage
+0.1*Vdd_IO
+V
+BW
+System bandwidth(3)
+ODR/2
+Hz
+Top
+Operating temperature range
+-40
++85
+°C
+1.
+Typical specification are not guaranteed.
+2.
+It is possible to remove Vdd maintaining Vdd_IO without blocking the communication busses, in this condition the 
+measurement chain is powered off.
+3.
+Refer to Table 25 for the ODR value and configuration.
+
+
+## PDF page 35
+DocID17530 Rev 2
+35/54
+LIS3DH
+Registers description
+54
+8.8 
+CTRL_REG1 (20h)
+ODR[3:0] is used to set the power mode and ODR selection. The following table indicates 
+the frequency of each combination of ODR[3:0].
+          
+Table 29. CTRL_REG1 register
+ODR3
+ODR2
+ODR1
+ODR0
+LPen
+Zen
+Yen
+Xen
+Table 30. CTRL_REG1 description 
+ODR[3:0]
+Data rate selection. Default value: 0000
+(0000: power-down mode; others: Refer to Table 31: Data rate configuration)
+LPen
+Low-power mode enable. Default value: 0
+(0: high-resolution mode / normal mode, 1: low-power mode)
+(Refer to section Section 3.2.1: High-resolution, normal mode, low-power mode)
+Zen
+Z-axis enable. Default value: 1
+(0: Z-axis disabled; 1: Z-axis enabled)
+Yen
+Y-axis enable. Default value: 1
+(0: Y-axis disabled; 1: Y-axis enabled)
+Xen
+X-axis enable. Default value: 1
+(0: X-axis disabled; 1: X-axis enabled)
+Table 31. Data rate configuration
+ODR3
+ODR2
+ODR1
+ODR0
+Power mode selection
+0
+0
+0
+0
+Power-down mode
+0
+0
+0
+1
+HR / Normal / Low-power mode (1 Hz)
+0
+0
+1
+0
+HR / Normal / Low-power mode (10 Hz)
+0
+0
+1
+1
+HR / Normal / Low-power mode (25 Hz)
+0
+1
+0
+0
+HR / Normal / Low-power mode (50 Hz)
+0
+1
+0
+1
+HR / Normal / Low-power mode (100 Hz)
+0
+1
+1
+0
+HR / Normal / Low-power mode (200 Hz)
+0
+1
+1
+1
+HR / Normal / Low-power mode (400 Hz)
+1
+0
+0
+0
+Low power mode (1.60 kHz)
+1
+0
+0
+1
+HR / normal (1.344 kHz);
+Low-power mode (5.376 kHz)
+
+
+# Bosch/BME280.pdf
+
+
+## PDF page 18
+ 
+ 
+Bosch Sensortec | BME280 Data sheet 
+18 | 60
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BME280-DS001-23 Revision_1.23_012022
+• 
+When the IIR filter is disabled, the temperature  resolution is 16 + (osrs_t – 1) bit, e.g. 18 bit 
+when osrs_t is set to ‘3’. 
+3.4.4 IIR filter 
+The humidity value inside the sensor does not fluctuate rapidly and does not require low pass filtering. 
+However, the environmental pressure is subject to many short-term changes, caused e.g. by 
+slamming of a door or window, or wind blowing into the sensor. To suppress these disturbances in the 
+output data without causing additional interface traffic and processor work load, the BME280 features 
+an internal IIR filter. It effectively reduces the bandwidth of the temperature and pressure output 
+signals10 and increases the resolution of the pressure and temperature output data to 20 bit. The 
+output of a next measurement step is filtered using the following formula: 
+ 
+data_filtered = data_filtered_old ⋅(filter_coefficient −1) + data_ADC
+filter_coefficient
+ 
+ 
+Data_filtered_old is the data coming from the current filter memory, and data_ADC is the data coming 
+from current ADC acquisition. Data_filtered is the new value of filter memory and the value that will be 
+sent to the output registers.  
+ 
+The IIR filter can be configured to different filter coefficients, which slows down the response to the 
+sensor inputs. Note that the response time with enabled IIR filter depends on the number of samples 
+generated, which means that the data output rate must be known to calculate the actual response 
+time. For register configuration, please refer to Table 28. A sample response time calculation is shown 
+in chapter 9.4. 
+Table 6: filter settings 
+Filter coefficient 
+Samples to reach ≥75 % 
+ of step response 
+Filter off 
+1 
+2 
+2 
+4 
+5 
+8 
+11 
+16 
+22 
+ 
+In order to find a suitable setting for filter, please consult chapter 3.5.  
+ 
+When writing to the register filter, the filter is reset. The next ADC values will the pass through the filter 
+unchanged and become the initial memory values for the filter. If temperature or pressure 
+measurements are skipped, the corresponding filter memory will be kept unchanged even though the 
+output registers are set to 0x80000. When the previously skipped measurement is re-enabled, the 
+output will be filtered using the filter memory from the last time when the measurement was not 
+skipped. If this is not desired, please write to the filter register in order to re-initialize the filter.  
+ 
+ 
+10 Since the BME280 does not sample continuously, filtering can suffer from signals with a frequency higher than the sampling 
+rate of the sensor. E.g. environmental fluctuations caused by windows being opened and closed might have a frequency <5 Hz. 
+Consequently, a sampling rate of ODR = 10 Hz is sufficient to obey the Nyquist theorem. 
+
+
+## PDF page 26
+ 
+ 
+Bosch Sensortec | BME280 Data sheet 
+26 | 60
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BME280-DS001-23 Revision_1.23_012022
+ 
+v_x1_u32r = (((((adc_H << 14) – (((BME280_S32_t)dig_H4) << 20) – (((BME280_S32_t)dig_H5) * 
+v_x1_u32r)) + ((BME280_S32_t)16384)) >> 15) * (((((((v_x1_u32r * 
+((BME280_S32_t)dig_H6)) >> 10) * (((v_x1_u32r * ((BME280_S32_t)dig_H3)) >> 11) + 
+((BME280_S32_t)32768))) >> 10) + ((BME280_S32_t)2097152)) * ((BME280_S32_t)dig_H2) + 
+8192) >> 14)); 
+ 
+v_x1_u32r = (v_x1_u32r – (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) * 
+((BME280_S32_t)dig_H1)) >> 4)); 
+ 
+v_x1_u32r = (v_x1_u32r < 0 ? 0 : v_x1_u32r);  
+ 
+v_x1_u32r = (v_x1_u32r > 419430400 ? 419430400 : v_x1_u32r); 
+ 
+ 
+return (BME280_U32_t)(v_x1_u32r>>12); 
+} 
+ 
+ 
+5. Global memory map and register description  
+5.1 General remarks 
+The entire communication with the device is performed by reading from and writing to registers. 
+Registers have a width of 8 bits. There are several registers which are reserved; they should not be 
+written to and no specific value is guaranteed when they are read. For details on the interface, consult 
+chapter 6.  
+5.2 Register compatibility to BMP280 
+The BME280 is downward register compatible to the BMP280, which means that the pressure and 
+temperature control and readout is identical to BMP280. However, the following exceptions have to be 
+considered:  
+Table 17: Register incompatibilities between BMP280 and BME280 
+Register 
+Bits 
+Content 
+BMP280 
+BME280 
+0xD0 “id” 
+7:0 
+chip_id 
+Read value is 
+0x56 / 0x57 (samples) 
+0x58 (mass production) 
+Read value is 0x60 
+0xF5 “config” 
+7:5 
+t_sb 
+‘110’: 2000 ms 
+‘111’: 4000 ms 
+‘110’: 10 ms 
+‘111’: 20 ms 
+0xF7…0xF9 “press” 
+19:0 
+press 
+Resolution (16…20 bit) 
+depends only on osrs_p 
+Without filter, resolution depends on 
+osrs_p; when using filter, resolution 
+is always 20 bit 
+0xFA…0xFC “temp” 
+19:0 
+temp 
+Resolution (16…20 bit) 
+only depends on osrs_t 
+Without filter, resolution depends on 
+osrs_t; when using filter, resolution is 
+always 20 bit 
+ 
+5.3 Memory map 
+The memory map is given in Table 18 below. Reserved registers are not shown.  
+
+
+## PDF page 27
+ 
+ 
+Bosch Sensortec | BME280 Data sheet 
+27 | 60
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BME280-DS001-23 Revision_1.23_012022
+Table 18: Memory map 
+Register Name
+Address
+ bit7
+ bit6
+ bit5
+ bit4
+ bit3
+ bit2
+ bit1
+ bit0
+Reset
+state
+hum_lsb
+0xFE
+0x00
+hum_msb
+0xFD
+0x80
+temp_xlsb
+0xFC
+0
+0
+0
+0
+0x00
+temp_lsb
+0xFB
+0x00
+temp_msb
+0xFA
+0x80
+press_xlsb
+0xF9
+0
+0
+0
+0
+0x00
+press_lsb
+0xF8
+0x00
+press_msb
+0xF7
+0x80
+config
+0xF5
+spi3w_en[0]
+0x00
+ctrl_meas
+0xF4
+0x00
+status
+0xF3
+measuring[0]
+im_update[0]
+0x00
+ctrl_hum
+0xF2
+0x00
+calib26..calib41
+0xE1…0xF0
+individual
+reset
+0xE0
+0x00
+id
+0xD0
+0x60
+calib00..calib25
+0x88…0xA1
+individual
+Registers: 
+Reserved
+registers
+Calibration 
+data
+Control
+registers
+Data
+registers
+Status
+registers
+Chip ID
+Reset
+Type: 
+do not 
+change
+read only 
+read / write
+read only
+read only
+read only
+write only
+hum_lsb<7:0>
+press_lsb<7:0>
+press_msb<7:0>
+mode[1:0]
+t_sb[2:0]
+press_xlsb<7:4>
+temp_xlsb<7:4>
+temp_lsb<7:0>
+temp_msb<7:0>
+calibration data
+chip_id[7:0]
+osrs_h[2:0]
+hum_msb<7:0>
+calibration data
+reset[7:0]
+osrs_p[2:0]
+filter[2:0]
+osrs_t[2:0]
+ 
+ 
+5.4 Register description 
+5.4.1 Register 0xD0 “id” 
+The “id” register contains the chip identification number chip_id[7:0], which is 0x60. This number can 
+be read as soon as the device finished the power-on-reset.  
+5.4.2 Register 0xE0 “reset” 
+The “reset” register contains the soft reset word reset[7:0]. If the value 0xB6 is written to the register, 
+the device is reset using the complete power-on-reset procedure. Writing other values than 0xB6 has 
+no effect. The readout value is always 0x00.  
+5.4.3 Register 0xF2 “ctrl_hum” 
+The “ctrl_hum” register sets the humidity data acquisition options of the device. Changes to this 
+register only become effective after a write operation to “ctrl_meas”.  
+
+
+## PDF page 30
+ 
+ 
+Bosch Sensortec | BME280 Data sheet 
+30 | 60
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BME280-DS001-23 Revision_1.23_012022
+5.4.6 Register 0xF5 “config” 
+The “config” register sets the rate, filter and interface options of the device. Writes to the “config” 
+register in normal mode may be ignored. In sleep mode writes are not ignored. 
+Table 26: Register 0xF5 “config” 
+Register 0xF5 
+“config” 
+Name 
+Description 
+Bit 7, 6, 5 
+t_sb[2:0] 
+Controls inactive duration tstandby in normal mode. 
+See Table 27 for settings and chapter 3.3.4 for 
+details. 
+Bit 4, 3, 2 
+filter[2:0] 
+Controls the time constant of the IIR filter. See Table 
+27 for settings and chapter 3.4.4 for details. 
+Bit 0 
+spi3w_en[0] 
+Enables 3-wire SPI interface when set to ‘1’. See 
+chapter 6.3 for details. 
+Table 27: t_sb settings 
+t_sb[2:0] 
+tstandby [ms] 
+000 
+0.5 
+001 
+62.5 
+010 
+125 
+011 
+250 
+100 
+500 
+101 
+1000 
+110 
+10 
+111 
+20 
+Table 28: filter settings 
+filter[2:0] 
+Filter coefficient 
+000 
+Filter off 
+001 
+2 
+010 
+4 
+011 
+8 
+100, others 
+16 
+ 
+5.4.7 Register 0xF7…0xF9 “press” (_msb, _lsb, _xlsb) 
+The “press” register contains the raw pressure measurement output data up[19:0]. For details on how 
+to read out the pressure and temperature information from the device, please consult chapter 4.  
+
+
+## PDF page 60
+ 
+ 
+Bosch Sensortec | BME280 Data sheet 
+60 | 60
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BME280-DS001-23 Revision_1.23_012022
+ 
+ 
+Bosch Sensortec GmbH 
+Gerhard-Kindler-Straße 9 
+72770 Reutlingen / Germany 
+contact@bosch-sensortec.com 
+www.bosch-sensortec.com 
+Modifications reserved 
+Document number: BST-BME280-DS001-24 
+Revision_1.24_022024 
+
+
+# Bosch/BMP280.pdf
+
+
+## PDF page 13
+ 
+ 
+Bosch Sensortec | BMP280 Data sheet 
+13 | 49 
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BMP280-DS001-26 Revision_1.26_102021 
+3.3.2 Temperature measurement 
+Temperature measurement can be enabled or skipped. Skipping the measurement could be useful to 
+measure pressure extremely rapidly. When enabled, several oversampling options exist. Each 
+oversampling step reduces noise and increases the output resolution by one bit, which is stored in the 
+XLSB data register 0xFC. Enabling/disabling the temperature measurement and oversampling setting 
+are selected through the osrs_t[2:0] bits in control register 0xF4.  
+Table 5: osrs_t settings 
+osrs_t[2:0] 
+Temperature oversampling 
+Typical temperature 
+resolution  
+000 
+Skipped 
+(output set to 0x80000) 
+–  
+001 
+×1 
+16 bit / 0.0050 °C 
+010 
+×2 
+17 bit / 0.0025 °C 
+011 
+×4 
+18 bit / 0.0012 °C 
+100 
+×8 
+19 bit / 0.0006 °C 
+101, 110, 111 
+×16 
+20 bit / 0.0003 °C 
+ 
+It is recommended to base the value of osrs_t on the selected value of osrs_p as per Table 4. 
+Temperature oversampling above ×2 is possible, but will not significantly improve the accuracy of the 
+pressure output any further. The reason for this is that the noise of the compensated pressure value 
+depends more on the raw pressure than on the raw temperature noise. Following the recommended 
+setting will result in an optimal noise-to-power ratio.  
+ 
+3.3.3 IIR filter 
+The environmental pressure is subject to many short-term changes, caused e.g. by slamming of a 
+door or window, or wind blowing into the sensor. To suppress these disturbances in the output data 
+without causing additional interface traffic and processor work load, the BMP280 features an internal 
+IIR filter. It effectively reduces the bandwidth of the output signals6. The output of a next measurement 
+step is filter using the following formula:  
+ 
+t
+coefficien
+filter
+ADC
+data
+t
+coefficien
+filter
+old
+filtered
+data
+filtered
+data
+_
+_
+)1
+_
+(
+_
+_
+_
++
+−
+⋅
+=
+  
+ 
+where data_filtered_old is the data coming from the previous acquisition, and data_ADC is the data 
+coming from the ADC before IIR filtering.  
+ 
+The IIR filter can be configured using the filter[2:0] bits in control register 0xF5 with the following 
+options:  
+ 
+6 Since most pressure sensors do not sample continuously, filtering can suffer from signals with a frequency higher than the 
+sampling rate of the sensor. E.g. environmental fluctuations caused by windows being opened and closed might have a frequency 
+<5 Hz. Consequently, a sampling rate of ODR = 10 Hz is sufficient to obey the Nyquist theorem. 
+
+
+## PDF page 24
+ 
+ 
+Bosch Sensortec | BMP280 Data sheet 
+24 | 49 
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BMP280-DS001-26 Revision_1.26_102021 
+4. Global memory map and register description 
+4.1 
+General remarks 
+All communication with the device is performed by reading from and writing to registers. Registers 
+have a width of 8 bits. There are several registers which are reserved; they should not be written to 
+and no specific value is guaranteed when they are read. For details on the interface, consult chapter 
+5.  
+4.2 
+Memory map 
+The memory map is given in Table 18 below. Reserved registers are not shown.  
+Table 18: Memory map 
+Register Name
+Address
+ bit7
+ bit6
+ bit5
+ bit4
+ bit3
+ bit2
+ bit1
+ bit0
+Reset
+state
+temp_xlsb
+0xFC
+0
+0
+0
+0
+0x00
+temp_lsb
+0xFB
+0x00
+temp_msb
+0xFA
+0x80
+press_xlsb
+0xF9
+0
+0
+0
+0
+0x00
+press_lsb
+0xF8
+0x00
+press_msb
+0xF7
+0x80
+config
+0xF5
+spi3w_en[0]
+0x00
+ctrl_meas
+0xF4
+0x00
+status
+0xF3
+measuring[0]
+im_update[0]
+0x00
+reset
+0xE0
+0x00
+id
+0xD0
+0x58
+calib25...calib00
+0xA1…0x88
+individual
+Registers: 
+Reserved
+registers
+Calibration 
+data
+Control
+registers
+Data
+registers
+Status
+registers
+Revision
+Reset
+Type: 
+do not 
+write
+read only 
+read / write
+read only
+read only
+read only
+write only
+calibration data
+press_xlsb<7:4>
+temp_xlsb<7:4>
+temp_lsb<7:0>
+temp_msb<7:0>
+chip_id[7:0]
+osrs_t[2:0]
+reset[7:0]
+press_lsb<7:0>
+press_msb<7:0>
+mode[1:0]
+t_sb[2:0]
+filter[2:0]
+osrs_p[2:0]
+ 
+ 
+4.3 Register description 
+4.3.1 Register 0xD0 “id” 
+The “id” register contains the chip identification number chip_id[7:0], which is 0x58. This number can 
+be read as soon as the device finished the power-on-reset.  
+4.3.2 Register 0xE0 “reset” 
+The “reset” register contains the soft reset word reset[7:0]. If the value 0xB6 is written to the register, 
+the device is reset using the complete power-on-reset procedure. Writing other values than 0xB6 has 
+no effect. The readout value is always 0x00.  
+ 
+ 
+
+
+## PDF page 26
+ 
+ 
+Bosch Sensortec | BMP280 Data sheet 
+26 | 49 
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BMP280-DS001-26 Revision_1.26_102021 
+Table 22: register settings osrs_t 
+osrs_t[2:0] 
+Temperature oversampling 
+000 
+Skipped (output set to 0x80000) 
+001 
+oversampling ×1 
+010 
+oversampling ×2 
+011 
+oversampling ×4 
+100 
+oversampling ×8 
+101, 110, 111 
+oversampling ×16 
+ 
+ 
+4.3.5 Register 0xF5 “config” 
+The “config” register sets the rate, filter and interface options of the device. Writes to the “config” 
+register in normal mode may be ignored. In sleep mode writes are not ignored. 
+Table 23: Register 0xF5 “config” 
+Register 0xF5 
+“config” 
+Name 
+Description 
+Bit 7, 6, 5 
+t_sb[2:0] 
+Controls inactive duration tstandby in normal mode. 
+See chapter 3.6.3 for details.  
+Bit 4, 3, 2 
+filter[2:0] 
+Controls the time constant of the IIR filter. See 
+chapter 3.3.3 for details. 
+Bit 0 
+spi3w_en[0] 
+Enables 3-wire SPI interface when set to ‘1’. See 
+chapter 5.3 for details.  
+ 
+4.3.6 Register 0xF7…0xF9 “press” (_msb, _lsb, _xlsb) 
+The “press” register contains the raw pressure measurement output data up[19:0]. For details on how 
+to read out the pressure and temperature information from the device, please consult chapter0.  
+Table 24: Register 0xF7 … 0xF9 “press” 
+Register 0xF7-
+0xF9 “press” 
+Name 
+Description 
+0xF7 
+press_msb[7:0] 
+Contains the MSB part up[19:12] of the raw pressure 
+measurement output data.  
+0xF8 
+press_lsb[7:0] 
+Contains the LSB part up[11:4] of the raw pressure 
+measurement output data.  
+0xF9 (bit 7, 6, 5, 4) 
+press_xlsb[3:0] 
+Contains the XLSB part up[3:0] of the raw pressure 
+measurement output data. Contents depend on 
+temperature resolution, see table 5.  
+ 
+4.3.7 Register 0xFA…0xFC “temp” (_msb, _lsb, _xlsb) 
+The “temp” register contains the raw temperature measurement output data ut[19:0]. For details on 
+how to read out the pressure and temperature information from the device, please consult chapter 0.  
+
+
+## PDF page 27
+ 
+ 
+Bosch Sensortec | BMP280 Data sheet 
+27 | 49 
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BMP280-DS001-26 Revision_1.26_102021 
+Table 25: Register 0xFA … 0xFC “temp” 
+Register 0xFA-
+0xFC “press” 
+Name 
+Description 
+0xFA 
+temp_msb[7:0] 
+Contains the MSB part ut[19:12] of the raw 
+temperature measurement output data.  
+0xFB 
+temp_lsb[7:0] 
+Contains the LSB part ut[11:4] of the raw 
+temperature measurement output data.  
+0xFC (bit 7, 6, 5, 4) 
+temp_xlsb[3:0] 
+Contains the XLSB part ut[3:0] of the raw 
+temperature measurement output data. Contents 
+depend on pressure resolution, see Table 4.  
+ 
+5. Digital interfaces 
+The BMP280 supports the I²C and SPI digital interfaces; it acts as a slave for both protocols. The I²C 
+interface supports the Standard, Fast and High Speed modes. The SPI interface supports both SPI 
+mode ‘00’ (CPOL = CPHA = ‘0’) and mode ‘11’ (CPOL = CPHA = ‘1’) in 4-wire and 3-wire configuration.  
+ 
+The following transactions are supported:  
+• 
+Single byte write 
+• 
+multiple byte write (using pairs of register addresses and register data) 
+• 
+single byte read 
+• 
+multiple byte read (using a single register address which is auto-incremented) 
+5.1 Interface selection 
+Interface selection is done automatically based on CSB (chip select) status. If CSB is connected to 
+VDDIO, the I²C interface is active. If CSB is pulled down, the SPI interface is activated. After CSB has 
+been pulled down once (regardless of whether any clock cycle occurred), the I²C interface is disabled 
+until the next power-on-reset. This is done in order to avoid inadvertently decoding SPI traffic to 
+another slave as I²C data. Since power-on-reset is only executed when both VDD and VDDIO are 
+established, there is no risk of incorrect protocol detection due to power-up sequence used. However, 
+if I²C is to be used and CSB is not directly connected to VDDIO but rather through a programmable pin, 
+it must be ensured that this pin already outputs the VDDIO level during power-on-reset of the device. If 
+this is not the case, the device will be locked in SPI mode and not respond to I²C commands.  
+5.2 I²C Interface 
+The I²C slave interface is compatible with Philips I²C Specification version 2.1. For detailed timings 
+refer to Table 27. All modes (standard, fast, high speed) are supported. SDA and SCL are not pure 
+open-drain. Both pads contain ESD protection diodes to VDDIO and GND. As the devices does not 
+perform clock stretching, the SCL structure is a high-Z input without drain capability. 
+ 
+ 
+
+
+## PDF page 30
+ 
+ 
+Bosch Sensortec | BMP280 Data sheet 
+30 | 49 
+Modifications reserved | Data subject to change without notice  
+Document number: BST-BMP280-DS001-26 Revision_1.26_102021 
+The SPI interface uses the following pins: 
+• 
+CSB:  chip select, active low 
+• 
+SCK: 
+serial clock 
+• 
+SDI: 
+serial data input; data input/output in 3-wire mode 
+• 
+SDO: serial data output; hi-Z in 3-wire mode 
+Refer to chapter 6 for connection instructions.  
+ 
+CSB is active low and has an integrated pull-up resistor. Data on SDI is latched by the device at SCK 
+rising edge and SDO is changed at SCK falling edge. Communication starts when CSB goes to low 
+and stops when CSB goes to high; during these transitions on CSB, SCK must be stable. The SPI 
+protocol is shown in Figure 9. For timing details, please review Table 28 
+.  
+ 
+CSB 
+SCK 
+SDI 
+RW 
+AD6 
+AD5 
+AD4 
+AD3 
+AD2 
+AD1 
+AD0 
+DI5 
+DI4 
+DI3 
+DI2 
+DI1 
+DI0 
+DI7 
+DI6 
+SDO 
+DO5 DO4 DO3 DO2 DO1 DO0 
+DO7 DO6 
+tri-state 
+ 
+Figure 9: SPI protocol (shown for mode ‘11’ in 4-wire configuration) 
+In SPI mode, only 7 bits of the register addresses are used; the MSB of register address is not used 
+and replaced by a read/write bit (RW = ‘0’ for write and RW = ‘1’ for read).  
+Example: address 0xF7 is accessed by using SPI register address 0x77. For write access, the byte 
+0x77 is transferred, for read access, the byte 0xF7 is transferred.  
+5.3.1 SPI write 
+Writing is done by lowering CSB and sending pairs control bytes and register data. The control bytes 
+consist of the SPI register address (= full register address without bit 7) and the write command (bit7 = 
+RW = ‘0’). Several pairs can be written without raising CSB. The transaction is ended by a raising 
+CSB. The SPI write protocol is depicted in Figure 10.  
+Start
+RW
+RW
+Stop
+0
+1
+1
+1
+0
+1
+0
+0
+bit7
+bit6
+bit5
+bit4
+bit3
+bit2
+bit1
+bit0
+0
+1
+1
+1
+0
+1
+0
+1
+bit7
+bit6
+bit5
+bit4
+bit3
+bit2
+bit1
+bit0
+Control byte
+CSB
+=
+1
+Data byte
+Register address (F5h)
+Data register - adress F5h
+Register address (F4h)
+CSB
+=
+0
+Control byte
+Data byte
+Data register - address F4h
+ 
+Figure 10: SPI multiple byte write (not auto-incremented) 
+5.3.2 SPI read 
+Reading is done by lowering CSB and first sending one control byte. The control bytes consist of the 
+SPI register address (= full register address without bit 7) and the read command (bit 7 = RW = ‘1’). 
+After writing the control byte, data is sent out of the SDO pin (SDI in 3-wire mode); the register address 
+is automatically incremented. The SPI read protocol is shown in Figure 11.  
+
+
+# TI/TMP102.pdf
+
+
+## PDF page 9
+Table 6-2. 12-Bit Temperature Data Format(1) 
+TEMPERATURE (°C)
+DIGITAL OUTPUT (BINARY)
+HEX
+128
+0111 1111 1111
+7FF
+127.9375
+0111 1111 1111
+7FF
+100
+0110 0100 0000
+640
+80
+0101 0000 0000
+500
+75
+0100 1011 0000
+4B0
+50
+0011 0010 0000
+320
+25
+0001 1001 0000
+190
+0.25
+0000 0000 0100
+004
+0
+0000 0000 0000
+000
+–0.25
+1111 1111 1100
+FFC
+–25
+1110 0111 0000
+E70
+–55
+1100 1001 0000
+C90
+(1)
+The resolution for the Temp ADC in Internal Temperature mode is 0.0625°C/count.
+Table 6-2 does not list all temperatures. Use the following rules to obtain the digital data format for a given 
+temperature or the temperature for a given digital data format.
+To convert positive temperatures to a digital data format:
+1.
+Divide the temperature by the resolution
+2.
+Convert the result to binary code with a 12-bit, left-justified format, and MSB = 0 to denote a positive sign.
+Example: (50°C) / (0.0625°C / LSB) = 800 = 320h = 0011 0010 0000
+To convert a positive digital data format to temperature:
+1.
+Convert the 12-bit, left-justified binary temperature result, with the MSB = 0 to denote a positive sign, to a 
+decimal number.
+2.
+Multiply the decimal number by the resolution to obtain the positive temperature.
+Example: 0011 0010 0000 = 320h = 800 × (0.0625°C / LSB) = 50°C
+To convert negative temperatures to a digital data format:
+1.
+Divide the absolute value of the temperature by the resolution, and convert the result to binary code with a 
+12-bit, left-justified format.
+2.
+Generate the twos complement of the result by complementing the binary number and adding one. Denote a 
+negative number with MSB = 1.
+Example: (|–25°C|) / (0.0625°C / LSB) = 400 = 190h = 0001 1001 0000
+Two's complement format: 1110 0110 1111 + 1 = 1110 0111 0000
+To convert a negative digital data format to temperature:
+1.
+Generate the twos compliment of the 12-bit, left-justified binary number of the temperature result (with 
+MSB = 1, denoting negative temperature result) by complementing the binary number and adding one. This 
+represents the binary number of the absolute value of the temperature.
+2.
+Convert to decimal number and multiply by the resolution to get the absolute temperature, then multiply by 
+–1 for the negative sign.
+Example: 1110 0111 0000 has twos compliment of 0001 1001 0000 = 0001 1000 1111 + 1
+Convert to temperature: 0001 1001 0000 = 190h = 400; 400 × (0.0625°C / LSB) = 25°C = (|–25°C|); (|–
+25°C|) × (–1) = –25°C
+Table 6-3. 13-Bit Temperature Data Format
+TEMPERATURE (°C)
+DIGITAL OUTPUT (BINARY)
+HEX
+150
+0 1001 0110 0000
+0960
+www.ti.com
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+Copyright © 2024 Texas Instruments Incorporated
+Submit Document Feedback
+9
+Product Folder Links: TMP102
+
+
+## PDF page 14
+1
+Start By
+Host
+ACK By
+Device
+ACK By
+Device
+Start By
+Host
+ACK By
+Device
+ACK By
+Host
+From
+Device
+1
+9
+1
+9
+1
+9
+1
+9
+SDA
+SCL
+0
+0
+1
+R/W
+0
+0
+0
+0
+0
+0
+P1
+P0
+…
+…
+…
+…
+SDA
+(Continued)
+SCL
+(Continued)
+SDA
+(Continued)
+SCL
+(Continued)
+R/W
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+Stop By
+Host
+ACK By
+Host
+From
+Device
+1
+9
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+Frame 1 Two-Wire Device Address Byte
+Frame 2 Pointer Register Byte
+Frame 4 Data Byte 1 Read Register
+Frame 3 Two-Wire Device Address Byte
+Frame 5 Data Byte 2 Read Register
+1
+0
+0
+1
+0
+0
+A1
+(1)
+A0
+(1)
+Stop By
+Host
+A1
+(1)
+A0
+(1)
+(2)
+(3)
+NOTE: (1) The value of A0 and A1 are determined by the ADD0 pin.
+            (2) Host should leave SDA high to terminate a single-byte read operation.
+            (3) Host should leave SDA high to terminate a two-byte read operation.
+Figure 6-3. Two-Wire Timing Diagram for Read Word Format
+Start By
+Host
+ACK By
+Device
+From
+Device
+NACK By
+Host
+Stop By
+Host
+1
+9
+1
+9
+SDA
+SCL
+ALERT
+0
+0
+0
+1
+1
+0
+0
+R/W
+1
+0
+0
+1
+Status
+Frame 2 Device Address Byte
+Frame 1 SMBus ALERT Response Address Byte
+A1
+A0
+(1)
+(1)
+NOTE: (1) The value of A0 and A1 are determined by the ADD0 pin.
+Figure 6-4. Timing Diagram for SMBus Alert
+6.4 Device Functional Modes
+6.4.1 Continuous-Conversion Mode
+The default mode of the TMP102 device is continuous conversion mode. During continuous-conversion mode, 
+the ADC performs continuous temperature conversions and stores each results to the temperature register, 
+overwriting the result from the previous conversion. The conversion rate bits, CR1 and CR0, configure the 
+TMP102 device for conversion rates of 0.25 Hz, 1 Hz, 4 Hz, or 8 Hz. The default rate is 4 Hz. The TMP102 
+device has a typical conversion time of 10 ms. To achieve different conversion rates, the TMP102 device makes 
+a conversion and then powers down to wait for the appropriate delay set by CR1 and CR0. Table 6-5 lists the 
+settings for CR1 and CR0.
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+www.ti.com
+14
+Submit Document Feedback
+Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TMP102
+
+
+## PDF page 15
+Table 6-5. Conversion Rate Settings
+CR1
+CR0
+CONVERSION RATE
+0
+0
+0.25 Hz
+0
+1
+1 Hz
+1
+0
+4 Hz (default)
+1
+1
+8 Hz
+After power-up or general-call reset, the TMP102 immediately starts a conversion, as shown in Figure 6-5. The 
+first result is available after 10 ms (typical). The active quiescent current during conversion is 55 μA (typical at 
++27°C). The quiescent current during delay is 2.6 μA (typical at +27°C).
+Start of
+Conversion
+Startup
+Delay(1)
+10ms
+10ms
+A.
+Delay is set by CR1 and CR0.
+Figure 6-5. Conversion Start
+6.4.2 Extended Mode (EM)
+The Extended-Mode bit configures the device for Normal mode operation (EM = 0) or Extended mode operation 
+(EM = 1). In Normal mode, the Temperature Register and high- and low-limit registers use a 12-bit data format. 
+Normal mode is used to make the TMP102 device compatible with the TMP75 device.
+Extended mode (EM = 1) allows measurement of temperatures above 128°C by configuring the Temperature 
+Register, and high- and low-limit registers for 13-bit data format.
+6.4.3 Shutdown Mode (SD)
+The Shutdown-mode bit saves maximum power by shutting down all device circuitry other than the serial 
+interface, reducing current consumption to typically less than 0.15 μA. Shutdown mode enables when the SD bit 
+is 1; the device shuts down when current conversion is completed. When SD is equal to 0, the device maintains 
+a continuous conversion state.
+6.4.4 One-Shot/Conversion Ready (OS)
+The TMP102 device features a one-shot temperature measurement mode. When the device is in Shutdown 
+Mode, writing a 1 to the OS bit starts a single temperature conversion. During the conversion, the OS bit reads 
+'0'. The device returns to the shutdown state at the completion of the single conversion. After the conversion, the 
+OS bit reads 1. This feature reduces power consumption in the TMP102 device when continuous temperature 
+monitoring is not required.
+As a result of the short conversion time, the TMP102 device achieves a higher conversion rate. A single 
+conversion typically takes 10 ms and a read can take place in less than 20 μs. When using One-Shot Mode, 80 
+or more conversions per second are possible.
+6.4.5 Thermostat Mode (TM)
+The thermostat-mode bit indicates to the device whether to operate in comparator mode (TM = 0) or Interrupt 
+mode (TM = 1).
+6.4.5.1 Comparator Mode (TM = 0)
+In Comparator mode (TM = 0), the Alert pin is activated when the temperature equals or exceeds the value in 
+the T(HIGH) register and remains active until the temperature falls below the value in the T(LOW) register. For more 
+information on the comparator mode, see the High- and Low-Limit Registers.
+www.ti.com
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+Copyright © 2024 Texas Instruments Incorporated
+Submit Document Feedback
+15
+Product Folder Links: TMP102
+
+
+## PDF page 17
+Table 6-8. Byte 1 of Temperature Register(1) 
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+T11
+T10
+T9
+T8
+T7
+T6
+T5
+T4
+(T12)
+(T11)
+(T10)
+(T9)
+(T8)
+(T7)
+(T6)
+(T5)
+(1)
+Extended mode 13-bit configuration shown in parenthesis.
+Table 6-9. Byte 2 of Temperature Register(1) 
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+T3
+T2
+T1
+T0
+0
+0
+0
+0
+(T4)
+(T3)
+(T2)
+(T1)
+(T0)
+(0)
+(0)
+(1)
+(1)
+Extended mode 13-bit configuration shown in parenthesis.
+6.5.3 Configuration Register
+The Configuration Register is a 16-bit read/write register used to store bits that control the operational modes 
+of the temperature sensor. Read/write operations are performed MSB first. Table 6-10 and Table 6-11 list the 
+format and the power-up or reset value of the configuration register. For compatibility, Table 6-10 and Table 6-11 
+correspond to the configuration register in the TMP75 device and TMP275 device (for more information see the 
+device data sheets, SBOS288 and SBOS363, respectively). All registers are updated byte by byte.
+Table 6-10. Byte 1 of Configuration and Power-Up or Reset Format
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+OS
+R1
+R0
+F1
+F0
+POL
+TM
+SD
+0
+1
+1
+0
+0
+0
+0
+0
+Table 6-11. Byte 2 of Configuration and Power-Up or Reset Format
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+CR1
+CR0
+AL
+EM
+0
+0
+0
+0
+1
+0
+1
+0
+0
+0
+0
+0
+6.5.3.1 Shutdown Mode (SD)
+The Shutdown-mode bit saves maximum power by shutting down all device circuitry other than the serial 
+interface, reducing current consumption to typically less than 0.5 μA. Shutdown mode enables when the SD bit 
+is 1; the device shuts down when current conversion is completed. When SD is equal to 0, the device maintains 
+a continuous conversion state
+6.5.3.2 Thermostat Mode (TM)
+The Thermostat mode bit indicates to the device whether to operate in Comparator mode (TM = 0) or Interrupt 
+mode (TM = 1). For more information on comparator and interrupt modes, see the High- and Low-Limit Registers 
+section.
+6.5.3.3 Polarity (POL)
+The polarity bit allows the user to adjust the polarity of the ALERT pin output. If the POL bit is set to 0 (default), 
+the ALERT pin becomes active low. When the POL bit is set to 1, the ALERT pin becomes active high and the 
+state of the ALERT pin is inverted. The operation of the ALERT pin in various modes is illustrated in Figure 6-7.
+www.ti.com
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+Copyright © 2024 Texas Instruments Incorporated
+Submit Document Feedback
+17
+Product Folder Links: TMP102
+
+
+## PDF page 18
+Measured
+Temperature
+THIGH
+TLOW
+Device ALERT PIN
+(Comparator Mode)
+POL = 0
+Device ALERT PIN
+(Interrupt Mode)
+POL = 0
+Device ALERT PIN
+(Comparator Mode)
+POL = 1
+Device ALERT PIN
+(Interrupt Mode)
+POL = 1
+Read
+Read
+Time
+Read
+Figure 6-7. Output Transfer Function Diagrams
+6.5.3.4 Fault Queue (F1/F0)
+A fault condition exists when the measured temperature exceeds the user-defined limits set in the THIGH and 
+TLOW registers. Additionally, the number of fault conditions required to generate an alert can be programmed 
+using the fault queue. The fault queue is provided to prevent a false alert as a result of environmental noise. 
+The fault queue requires consecutive fault measurements to trigger the alert function. Table 6-12 defines the 
+number of measured faults that can be programmed to trigger an alert condition in the device. For THIGH and 
+TLOW register format and byte order, see the High- and Low-Limit Registers section.
+Table 6-12. TMP102 Fault Settings
+F1
+F0
+CONSECUTIVE FAULTS
+0
+0
+1
+0
+1
+2
+1
+0
+4
+1
+1
+6
+6.5.3.5 Converter Resolution (R1/R0)
+The converter resolution bits, R1 and R0, are read-only bits. The TMP102 converter resolution is set at device 
+start-up to 11 which sets the temperature register to a 12 bit-resolution.
+6.5.3.6 One-Shot (OS)
+When the device is in Shutdown Mode, writing a 1 to the OS bit starts a single temperature conversion. During 
+the conversion, the OS bit reads '0'. The device returns to the shutdown state at the completion of the single 
+conversion. For more information on the one-shot conversion mode, see the One-Shot/Conversion Ready (OS) 
+section.
+6.5.3.7 EM Bit
+The Extended-Mode bit configures the device for Normal Mode operation (EM = 0) or Extended Mode operation 
+(EM = 1). In normal mode, the temperature register, high-limit register, and low-limit register use a 12-bit data 
+format. For more information on the extended mode, see the Extended Mode (EM) section.
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+www.ti.com
+18
+Submit Document Feedback
+Copyright © 2024 Texas Instruments Incorporated
+Product Folder Links: TMP102
+
+
+# TI/TMP117.pdf
+
+
+## PDF page 14
+7.4 Device Functional Modes
+The TMP117 can be configured to operate in various conversion modes by using the MOD[1:0] bits. These 
+modes provide flexibility to operate the device in the most power efficient way necessary for the intended 
+application.
+7.4.1 Continuous Conversion Mode
+When the MOD[1:0] bits are set to 00 or 10 in the configuration register, the device operates in continuous 
+conversion mode. The device continuously performs temperature conversions in this mode, as shown in Figure 
+7-3, and updates the temperature result register at the end of every active conversion. The user can read the 
+configuration register or the temperature result register to clear the Data_Ready flag. Therefore, the Data_Ready 
+flag can be used to determine when the conversion completes so that an external controller can synchronize 
+reading the result register with conversion result updates. The user can set the DR/nAlert_EN bit in the 
+configuration register to monitor the state of the Data_Ready flag on the ALERT pin.
+Every conversion cycle consists of an active conversion period followed by a standby period. The device 
+typically consumes 135 µA during active conversion and only 1.25 µA during the low-power standby period. 
+Figure 7-3 shows a current consumption profile of a conversion cycle while in continuous current mode. The 
+duration of the active conversion period and standby period can be configured using the CONV[2:0] and 
+AVG[1:0] bits in the configuration register, thereby allowing the average current consumption of the device to 
+be optimized based on the application requirements. Changing the conversion cycle period also affects the 
+temperature result update rate because the temperature result register is updated at the end of every active 
+conversion.
+Use Equation 1 to calculate the average current consumption of the device in continuous conversion mode.
+(Active Current Consumption
+Active Conversion Time) + (Standby Current Consumption
+Standby Time)
+Conversion Cycle Time
+u
+u
+(1)
+Active conversion time
+Conversion Cycle time Conversion Cycle time
+tStandby timet
+Start of conversion
+(Affected by averaging)
+Figure 7-3. Conversion Cycle Timing Diagram
+7.4.2 Shutdown Mode (SD)
+When the MOD[1:0] bits are set to 01 in the configuration register, the device instantly aborts the currently 
+running conversion and enters a low-power shutdown mode. In this mode, the device powers down all active 
+circuitry and can be used in conjunction with the OS mode to perform temperature conversions. Engineers 
+can use the TMP117 for battery-operated systems and other low-power consumption applications because the 
+device typically only consumes 250 nA in SD mode.
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+www.ti.com
+14
+Submit Document Feedback
+Copyright © 2022 Texas Instruments Incorporated
+Product Folder Links: TMP117
+
+
+## PDF page 15
+7.4.3 One-Shot Mode (OS)
+When MOD[1:0] bits are set to 11 in the configuration register, the TMP117 will run a temperature conversion 
+referred to as a one-shot conversion. After the device completes a one-shot conversion, the device goes to the 
+low-power shutdown mode. A one-shot conversion cycle, unlike the continuous conversion mode, only consists 
+of the active conversion time and no standby period. Thus, the duration of a one-shot conversion is only affected 
+by the AVG bit settings. The CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a 
+timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready 
+and ALERT flag in the configuration register is set. The Data_Ready flag can be used to determine when the 
+conversion completes. The user can perform an I2C read on the configuration register or temperature result 
+register to clear the Data_Ready flag. The user can also set the DR/nAlert_EN bit in the configuration register to 
+monitor the state of the Data_Ready flag on the ALERT pin.
+One-shot mode cannot be programmed to a default start-up mode. If the EEPROM is programmed to be in 
+one-shot mode on start-up, it will default to shutdown mode instead.
+Active conversion time
+Start of conversion
+(Affected by averaging)
+tShutdownt
+I2C Command
+Figure 7-4. One-Shot Timing Diagram With AVG[1:0] = 00
+7.4.4 Therm and Alert Modes
+The built-in therm and alert functions of the TMP117 can alert the user if the temperature has crossed a certain 
+temperature limit or if the device is within a certain temperature range. At the end of every conversion, including 
+averaging, the TMP117 compares the converted temperature result to the values stored in the low limit register 
+and high limit register. The device then either sets or clears the corresponding status flags in the configuration 
+register, as described in this section.
+www.ti.com
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+Copyright © 2022 Texas Instruments Incorporated
+Submit Document Feedback
+15
+Product Folder Links: TMP117
+
+
+## PDF page 16
+7.4.4.1 Alert Mode
+When the T/nA bit in the configuration register is set to 0, the device is in alert mode. In this mode, the device 
+compares the conversion result at the end of every conversion with the values in the low limit register and high 
+limit register. If the temperature result exceeds the value in the high limit register, the HIGH_Alert status flag in 
+the configuration register is set. On the other hand, if the temperature result is lower than the value in the low 
+limit register, the LOW_Alert status flag in the configuration register is set. As shown in Figure 7-5, the user can 
+run an I2C read from the configuration register to clear the status flags in alert mode.
+When a user configures the device in alert mode, it affects the behavior of the ALERT pin. The device asserts 
+the ALERT pin in this mode when either the HIGH_Alert or the LOW_Alert status flag is set, as shown in Figure 
+7-5. The user can either run an I2C read of the configuration register (which also clears the status flags) or run 
+an SMBus alert response command (see the SMBus Alert Function section) to deassert the ALERT pin. The 
+polarity of the ALERT pin can be changed by using the POL bit setting in the configuration register.
+This mode effectively makes the device behave like a window limit detector. Thus this mode can be used in 
+applications where detecting if the temperature goes outside of the specified range is necessary.
+High temperature limit
+Low temperature limit
+Temperature
+Temperature conversions
+HIGH_Alert Status Flag
+LOW_Alert Status Flag
+I2C Read
+ALERT pin (POL = 0)
+SMBus Alert Command
+Figure 7-5. Alert Mode Timing Diagram
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+www.ti.com
+16
+Submit Document Feedback
+Copyright © 2022 Texas Instruments Incorporated
+Product Folder Links: TMP117
+
+
+## PDF page 17
+7.4.4.2 Therm Mode
+When the T/nA bit in the configuration register is set to 1 the device is in therm mode. In this mode, the device 
+compares the conversion result at the end of every conversion with the values in the low limit register and high 
+limit register and sets the HIGH_Alert status flag in the configuration register if the temperature exceeds the 
+value in the high limit register. When set, the device clears the HIGH_Alert status flag if the conversion result 
+goes below the value in the low limit register. Thus, the difference between the high and low limits effectively 
+acts like a hysteresis. In this mode, the LOW_Alert status flag is disabled and always reads 0. Unlike the alert 
+mode, I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set 
+or cleared at the end of conversions based on the value of the temperature result compared to the high and low 
+limits.
+As in alert mode, configuring the device in therm mode also affects the behavior of the ALERT pin. In this mode, 
+the device asserts the ALERT pin if the HIGH_Alert status flag is set and deasserts the ALERT pin when the 
+HIGH_Alert status flag is cleared. In therm mode, the ALERT pin cannot be cleared by performing an I2C read 
+of the configuration register or by performing an SMBus alert response command. As in alert mode, the polarity 
+of the active state of the ALERT pin can be changed if the user adjusts the POL bit setting in the configuration 
+register.
+Thus, this mode effectively makes the device behave like a high-limit threshold detector. This mode can be used 
+in applications where detecting if the temperature has gone above a desired threshold is necessary. Figure 7-6 
+shows a timing diagram of this mode.
+High temperature limit
+Low temperature limit
+Temperature
+Temperature conversions
+HIGH_Alert Status Flag
+I2C Read
+ALERT pin (POL = 0)
+Figure 7-6. Therm Mode Timing Diagram
+www.ti.com
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+Copyright © 2022 Texas Instruments Incorporated
+Submit Document Feedback
+17
+Product Folder Links: TMP117
+
+
+## PDF page 27
+7.6.3 Configuration Register (address = 01h) [factory default reset = 0220h]
+Return to Register Map.
+Figure 7-14. Configuration Register
+15
+14
+13
+12
+11
+10
+9
+8
+HIGH_Alert
+LOW_Alert
+Data_Ready
+EEPROM_Busy
+MOD1(2)
+MOD0(1)
+CONV2(1)
+CONV1(1)
+R-0
+R-0
+R-0
+R-0
+R/W-0
+R/W-0
+R/W-1
+R/W-0
+7
+6
+5
+4
+3
+2
+1
+0
+CONV0(1)
+AVG1(1)
+AVG0(1)
+T/nA(1)
+POL(1)
+DR/Alert(1)
+Soft_Reset
+—
+R/W-0
+R/W-0
+R/W-1
+R/W-0
+R/W-0
+R/W-0
+R-0
+R-0
+Table 7-6. Configuration Register Field Descriptions
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+15
+HIGH_Alert
+R
+0
+High Alert flag:
+1: Set when the conversion result is higher than the high limit
+0: Cleared on read of configuration register
+Therm mode:
+1: Set when the conversion result is higher than the therm limit
+0: Cleared when the conversion result is lower than the 
+hysteresis
+14
+LOW_Alert
+R
+0
+Low Alert flag:
+1: Set when the conversion result is lower than the low limit
+0: Cleared when the configuration register is read
+Therm mode: Always set to 0
+13
+Data_Ready
+R
+0
+Data ready flag.
+This flag indicates that the conversion is complete and the 
+temperature register can be read. Every time the temperature 
+register or configuration register is read, this bit is cleared. This 
+bit is set at the end of the conversion when the temperature 
+register is updated. Data ready can be monitored on the ALERT 
+pin by setting bit 2 of the configuration register.
+12
+EEPROM_Busy
+R
+0
+EEPROM busy flag.
+The value of the flag indicates that the EEPROM is busy during 
+programming or power-up.
+11:10
+MOD[1:0]
+R/W
+0
+Set conversion mode.
+00: Continuous conversion (CC)
+01: Shutdown (SD)
+10: Continuous conversion (CC), Same as 00 (reads back = 00)
+11: One-shot conversion (OS)
+9:7
+CONV[2:0]
+R/W
+100
+Conversion cycle bit.
+See Table 7-7 for the standby time between conversions.
+6:5
+AVG[1:0]
+R/W
+01
+Conversion averaging modes. Determines the number of 
+conversion results that are collected and averaged before 
+updating the temperature register. The average is an 
+accumulated average and not a running average.
+00: No averaging
+01: 8 Averaged conversions
+10: 32 averaged conversions
+11: 64 averaged conversions
+4
+T/nA
+R/W
+0
+Therm/alert mode select.
+1: Therm mode
+0: Alert mode
+3
+POL
+R/W
+0
+ALERT pin polarity bit.
+1: Active high
+0: Active low
+2
+DR/Alert
+R/W
+0
+ALERT pin select bit.
+1: ALERT pin reflects the status of the data ready flag
+0: ALERT pin reflects the status of the alert flags
+www.ti.com
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+Copyright © 2022 Texas Instruments Incorporated
+Submit Document Feedback
+27
+Product Folder Links: TMP117
+
+
+# TI/INA3221.pdf
+
+
+## PDF page 24
+8 Register Maps
+The INA3221 uses a bank of registers for holding configuration settings, measurement results, minimum and 
+maximum limits, and status information. Table 8-1 summarizes the INA3221 registers; see the Functional Block 
+Diagram section for an illustration of the registers.
+8.1 Summary of Register Set
+Table 8-1. Summary of Register Set
+POINTER 
+ADDRESS 
+(Hex)
+REGISTER NAME
+DESCRIPTION
+POWER-ON RESET
+TYPE(1)
+BINARY
+HEX
+0
+Configuration
+All-register reset, shunt and bus voltage ADC conversion times and 
+averaging, operating mode.
+01110001 00100111
+7127
+R/ W
+1
+Channel-1 Shunt Voltage
+Averaged shunt voltage value.
+00000000 00000000
+0000
+R
+2
+Channel-1 Bus Voltage
+Averaged bus voltage value.
+00000000 00000000
+0000
+R
+3
+Channel-2 Shunt Voltage
+Averaged shunt voltage value.
+00000000 00000000
+0000
+R
+4
+Channel-2 Bus Voltage
+Averaged bus voltage value.
+00000000 00000000
+0000
+R
+5
+Channel-3 Shunt Voltage
+Averaged shunt voltage value.
+00000000 00000000
+0000
+R
+6
+Channel-3 Bus Voltage
+Averaged bus voltage value.
+00000000 00000000
+0000
+R
+7
+Channel-1 Critical Alert 
+Limit
+Contains limit value to compare each conversion value to determine 
+if the corresponding limit has been exceeded.
+01111111 11111000
+7FF8
+R/ W
+8
+Channel-1 Warning Alert 
+Limit
+Contains limit value to compare to averaged measurement to 
+determine if the corresponding limit has been exceeded.
+01111111 11111000
+7FF8
+R/ W
+9
+Channel-2 Critical Alert 
+Limit
+Contains limit value to compare each conversion value to determine 
+if the corresponding limit has been exceeded.
+01111111 11111000
+7FF8
+R/ W
+A
+Channel-2 Warning Alert 
+Limit
+Contains limit value to compare to averaged measurement to 
+determine if the corresponding limit has been exceeded.
+01111111 11111000
+7FF8
+R/ W
+B
+Channel-3 Critical Alert 
+Limit
+Contains limit value to compare each conversion value to determine 
+if the corresponding limit has been exceeded.
+01111111 11111000
+7FF8
+R/ W
+C
+Channel-3 Warning Alert 
+Limit
+Contains limit value to compare to averaged measurement to 
+determine if the corresponding limit has been exceeded.
+01111111 11111000
+7FF8
+R/ W
+D
+Shunt-Voltage Sum
+Contains the summed value of the each of the selected shunt 
+voltage conversions.
+00000000 00000000
+0000
+R
+E
+Shunt-Voltage Sum Limit
+Contains limit value to compare to the Shunt Voltage Sum register to 
+determine if the corresponding limit has been exceeded.
+01111111 11111110
+7FFE
+R/ W
+F
+Mask/Enable
+Alert configuration, alert status indication, summation control and 
+status.
+00000000 00000010
+0002
+R/ W
+10
+Power-Valid Upper Limit
+Contains limit value to compare all bus voltage conversions to 
+determine if the Power Valid level has been reached.
+00100111 00010000
+2710
+R/ W
+11
+Power-Valid Lower Limit
+Contains limit value to compare all bus voltage conversions to 
+determine if the any voltage rail has dropped below the Power Valid 
+range.
+00100011 00101000
+2328
+R/ W
+FE
+Manufacturer ID
+Contains unique manufacturer identification number.
+01010100 01001001
+5449
+R
+FF
+Die ID
+Contains unique die identification number.
+00110010 00100000
+3220
+R
+(1)
+Type: R = read-only, R/ W = read/write.
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+www.ti.com
+24
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA3221
+
+
+## PDF page 29
+8.2.4 Channel-2 Shunt-Voltage Register (address = 03h) [reset = 00h]
+This register contains the averaged shunt voltage measurement for channel 2. Full-scale range = 163.8mV 
+(decimal = 7FF8); LSB (SD0): 40μV. Although the input range is 26V, the full-scale range of the ADC scaling is 
+32.76V. Do not apply more than 26V.
+Table 8-9. Channel-2 Shunt-Voltage Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+SIGN
+SD11
+SD10
+SD9
+SD8
+SD7
+SD6
+SD5
+SD4
+SD3
+SD2
+SD1
+SD0
+—
+—
+—
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-10. Channel-2 Shunt-Voltage Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15
+SIGN
+R
+0h
+Sign bit.
+0 = positive number
+1 = negative number in twos complement format
+14-3
+SD11-0
+R
+0h
+Channel-2 shunt-voltage data bits
+2-0
+Reserved
+R
+0h
+Reserved
+8.2.5 Channel-2 Bus-Voltage Register (address = 04h) [reset = 00h]
+This register stores the bus voltage reading, VBUS, for channel 2. Full-scale range = 32.76V (decimal = 7FF8); 
+LSB (BD0) = 8mV. Although the input range is 26V, the full-scale range of the ADC scaling is 32.76V. Do not 
+apply more than 26V.
+Table 8-11. Channel-2 Bus-Voltage Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+SIGN
+BD11
+BD10
+BD9
+BD8
+BD7
+BD6
+BD5
+BD4
+BD3
+BD2
+BD1
+BD0
+—
+—
+—
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-12. Channel-2 Bus-Voltage Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15
+SIGN
+R
+0h
+Sign bit.
+0 = positive number
+1 = negative number in twos complement format
+14-3
+BD11-0
+R
+0h
+Channel-2 bus-voltage data bits
+2-0
+Reserved
+R
+0h
+Reserved
+www.ti.com
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+29
+Product Folder Links: INA3221
+
+
+## PDF page 30
+8.2.6 Channel-3 Shunt-Voltage Register (address = 05h) [reset = 00h]
+This register contains the averaged shunt voltage measurement for channel 3. Full-scale range = 163.8mV 
+(decimal = 7FF8); LSB (SD0): 40μV.
+Table 8-13. Channel-3 Shunt-Voltage Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+SIGN
+SD11
+SD10
+SD9
+SD8
+SD7
+SD6
+SD5
+SD4
+SD3
+SD2
+SD1
+SD0
+—
+—
+—
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-14. Channel-3 Shunt-Voltage Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15
+SIGN
+R
+0h
+Sign bit.
+0 = positive number
+1 = negative number in twos complement format
+14-3
+SD11-0
+R
+0h
+Channel-3 shunt-voltage data bits
+2-0
+Reserved
+R
+0h
+Reserved
+8.2.7 Channel-3 Bus-Voltage Register (address = 06h) [reset = 00h]
+This register stores the bus voltage reading, VBUS, for channel 3. Full-scale range = 32.76V (decimal = 7FF8); 
+LSB (BD0) = 8mV. Although the input range is 26V, the full-scale range of the ADC scaling is 32.76V. Do not 
+apply more than 26V.
+Table 8-15. Channel-3 Bus-Voltage Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+SIGN
+BD11
+BD10
+BD9
+BD8
+BD7
+BD6
+BD5
+BD4
+BD3
+BD2
+BD1
+BD0
+—
+—
+—
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-16. Channel-3 Bus-Voltage Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15
+SIGN
+R
+0h
+Sign bit.
+0 = positive number
+1 = negative number in twos complement format
+14-3
+BD11-0
+R
+0h
+Channel-3 bus-voltage data bits
+2-0
+Reserved
+R
+0h
+Reserved
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+www.ti.com
+30
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA3221
+
+
+## PDF page 31
+8.2.8 Channel-1 Critical-Alert Limit Register (address = 07h) [reset = 7FF8h]
+This register contains the value used to compare to each shunt voltage conversion on channel 1 to detect fast 
+overcurrent events.
+Table 8-17. Channel-1 Critical-Alert Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+C1L12
+C1L11
+C1L10
+C1L9
+C1L8
+C1L7
+C1L6
+C1L5
+C1L4
+C1L3
+C1L2
+C1L1
+C1L0
+—
+—
+—
+RW-0
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-0
+RW-0
+RW-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-18. Channel-1 Critical-Alert Limit Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15-3
+C1L12-0
+R/W
+FFFh
+Channel-1 critical-alert-limit data bits
+2-0
+Reserved
+R/W
+0h
+Reserved
+8.2.9 Warning-Alert Channel-1 Limit Register (address = 08h) [reset = 7FF8h]
+This register contains the value used to compare to the averaged shunt voltage value of channel 1 to detect a 
+longer duration overcurrent event.
+Table 8-19. Channel-1 Warning-Alert Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+W1L12 W1L11 W1L10
+W1L9
+W1L8
+W1L7
+W1L6
+W1L5
+W1L4
+W1L3
+W1L2
+W1L1
+W1L0
+—
+—
+—
+RW-0
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-0
+RW-0
+RW-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-20. Channel-1 Warning-Alert Limit Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15-3
+W1L12-0
+R/W
+FFFh
+Channel-1 warning-alert-limit data bits
+2-0
+Reserved
+R/W
+0h
+Reserved
+8.2.10 Channel-2 Critical-Alert Limit Register (address = 09h) [reset = 7FF8h]
+This register contains the value used to compare to each shunt voltage conversion on channel 2 to detect fast 
+overcurrent events.
+Table 8-21. Channel-2 Critical-Alert Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+C2L12
+C2L11
+C2L10
+C2L9
+C2L8
+C2L7
+C2L6
+C2L5
+C2L4
+C2L3
+C2L2
+C2L1
+C2L0
+—
+—
+—
+RW-0
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-0
+RW-0
+RW-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-22. Channel-2 Critical-Alert Limit Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15-3
+C2L12-0
+R/W
+FFFh
+Channel-2 critical-alert-limit data bits
+2-0
+Reserved
+R/W
+0h
+Reserved
+www.ti.com
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+Copyright © 2026 Texas Instruments Incorporated
+Submit Document Feedback
+31
+Product Folder Links: INA3221
+
+
+## PDF page 32
+8.2.11 Channel-2 Warning-Alert Limit Register (address = 0Ah) [reset = 7FF8h]
+This register contains the value used to compare to the averaged shunt voltage value of channel 2 to detect a 
+longer duration overcurrent event.
+Table 8-23. Channel-2 Warning-Alert Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+W2L12 W2L11 W2L10
+W2L9
+W2L8
+W2L7
+W2L6
+W2L5
+W2L4
+W2L3
+W2L2
+W2L1
+W2L0
+—
+—
+—
+RW-0
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-0
+RW-0
+RW-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-24. Channel-2 Warning-Alert Limit Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15-3
+W2L12-0
+R/W
+FFFh
+Channel-2 warning-alert-limit data bits
+2-0
+Reserved
+R/W
+0h
+Reserved
+8.2.12 Channel-3 Critical-Alert Limit Register (address = 0Bh) [reset = 7FF8h]
+This register contains the value used to compare to each shunt voltage conversion on channel 3 to detect fast 
+overcurrent events.
+Table 8-25. Channel-3 Critical-Alert Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+C3L12
+C3L11
+C3L10
+C3L9
+C3L8
+C3L7
+C3L6
+C3L5
+C3L4
+C3L3
+C3L2
+C3L1
+C3L0
+—
+—
+—
+RW-0
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-0
+RW-0
+RW-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-26. Channel-3 Critical-Alert Limit Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15-3
+C3L12-0
+R/W
+FFFh
+Channel-3 critical-alert-limit data bits
+2-0
+Reserved
+R/W
+0h
+Reserved
+8.2.13 Channel-3 Warning-Alert Limit Register (address = 0Ch) [reset = 7FF8h]
+This register contains the value used to compare to the averaged shunt voltage value of channel 3 to detect a 
+longer duration overcurrent event.
+Table 8-27. Channel-3 Warning-Alert Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+W3L12 W3L11 W3L10
+W3L9
+W3L8
+W3L7
+W3L6
+W3L5
+W3L4
+W3L3
+W3L2
+W3L1
+W3L0
+—
+—
+—
+RW-0
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-1
+RW-0
+RW-0
+RW-0
+LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+Table 8-28. Channel-3 Warning-Alert Limit Register Field Descriptions
+Bit
+Field
+Type
+Reset
+Description
+15-3
+W3L12-0
+R/W
+FFFh
+Channel-3 warning-alert limit data bits
+2-0
+Reserved
+R/W
+0h
+Reserved
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+www.ti.com
+32
+Submit Document Feedback
+Copyright © 2026 Texas Instruments Incorporated
+Product Folder Links: INA3221
+
+
+# TI/TPS23861.pdf
+
+
+## PDF page 2
+2
+TPS23861
+SLUSBX9I –MARCH 2014–REVISED JULY 2019
+www.ti.com
+Product Folder Links: TPS23861
+Submit Documentation Feedback
+Copyright © 2014–2019, Texas Instruments Incorporated
+Table of Contents
+1
+Features.................................................................. 1
+2
+Applications ........................................................... 1
+3
+Description ............................................................. 1
+4
+Revision History..................................................... 2
+5
+Pin Configuration and Functions......................... 5
+6
+Specifications......................................................... 6
+6.1
+Absolute Maximum Ratings ...................................... 6
+6.2
+ESD Ratings.............................................................. 6
+6.3
+Recommended Operating Conditions....................... 6
+6.4
+Thermal Information.................................................. 6
+6.5
+Electrical Characteristics........................................... 7
+6.6
+Timing Requirements.............................................. 11
+6.7
+Switching Characteristics........................................ 12
+6.8
+Typical Characteristics............................................ 16
+7
+Detailed Description ............................................ 21
+7.1
+Overview ................................................................. 21
+7.2
+Functional Block Diagram ....................................... 25
+7.3
+Feature Description................................................. 25
+7.4
+Device Functional Modes........................................ 40
+7.5
+Register Map – I2C-Addressable ............................ 45
+8
+Application and Implementation ........................ 85
+8.1
+Introduction to PoE ................................................. 85
+8.2
+Application Information............................................ 85
+8.3
+Typical Application .................................................. 87
+8.4
+System Examples ................................................... 93
+9
+Power Supply Recommendations...................... 97
+9.1
+VDD......................................................................... 97
+9.2
+VPWR ..................................................................... 97
+9.3
+VPWR-RESET Sequencing .................................... 97
+10
+Layout................................................................... 98
+10.1
+Layout Guidelines ................................................. 98
+10.2
+Layout Example .................................................... 99
+11
+Device and Documentation Support ............... 100
+11.1
+Documentation Support ..................................... 100
+11.2
+Receiving Notification of Documentation
+Updates.................................................................. 100
+11.3
+Community Resources........................................ 100
+11.4
+Trademarks......................................................... 100
+11.5
+Electrostatic Discharge Caution.......................... 100
+11.6
+Glossary.............................................................. 100
+12
+Mechanical, Packaging, and Orderable
+Information ......................................................... 100
+4
+Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+Changes from Revision H (November 2017) to Revision I
+Page
+•
+Added figure titles to the Application Curves........................................................................................................................ 92
+Changes from Revision G (October 2016) to Revision H
+Page
+•
+Deleted "or unknown" from Auto subsection ........................................................................................................................ 42
+•
+Deleted "and Auto Modes" from TSTART Indicators of Detect and Class Failures subsection........................................... 44
+•
+Changed fault conditions for Auto mode in Detect and Class Failure Indicators table ........................................................ 44
+•
+Added information to Step 2 in Start/ILIM Event Register subsection ................................................................................. 53
+Changes from Revision F (July 2016) to Revision G
+Page
+•
+Deleted the MAX value of 150 mA from IGO- in the Electrical Characteristics ........................................................................ 8
+Changes from Revision E (March 2016) to Revision F
+Page
+•
+Legacy Device Detection, Changed the paragraph, "in general,..." ..................................................................................... 30
+•
+Changed section From: Independent Operation when the Bit is Set To: Independent Operation when the AUTO Bit
+is Set..................................................................................................................................................................................... 34
+•
+I2C Slave Address and AUTO Bit Programming, Added NOTE: "When using I2C scan...".................................................. 37
+•
+Start/ILIM Event Register, Changed the third list item From: "Detect fault or classification unknown,.." To:
+"Overcurrent or class mismatch on second finger in Semi-Auto or Manual Mode." ........................................................... 53
+•
+Timing Configuration Register, Added new NOTE under TLIM[1:0]: " If ILIM and ICUT are set to same value..." ............ 61
+•
+Timing Configuration Register, Added new NOTE under TICUT[1:0]: " If ILIM and ICUT are set to same value...".......... 62
+•
+Two-Event Classification Register, Changed the second list item to include: "CLEn is set or a" ....................................... 67
+
+
+## PDF page 3
+3
+TPS23861
+www.ti.com
+SLUSBX9I –MARCH 2014–REVISED JULY 2019
+Product Folder Links: TPS23861
+Submit Documentation Feedback
+Copyright © 2014–2019, Texas Instruments Incorporated
+•
+Replaced Figure 58 .............................................................................................................................................................. 95
+Changes from Revision D (September 2015) to Revision E
+Page
+•
+Added note in Features, "Semi-Automatic Mode "................................................................................................................. 1
+•
+Updated Pin Functions table .................................................................................................................................................. 5
+•
+Added new Figure 37 .......................................................................................................................................................... 22
+•
+Added new Functional Block Diagram.................................................................................................................................. 25
+•
+Changed note in A/D Converter and I2C Interface .............................................................................................................. 32
+•
+Changed the Note in I2C Slave Address and AUTO Bit Programming ................................................................................ 35
+•
+Added note to I2C Slave Address and AUTO Bit Programming .......................................................................................... 35
+•
+Changed I2C slave address register note............................................................................................................................. 35
+•
+Added new Figure 43 ........................................................................................................................................................... 39
+•
+Added a note to Manual about type 2 power 2 event classification..................................................................................... 40
+•
+Added content to Semi-Auto................................................................................................................................................. 41
+•
+Added "PoEPn" column to Bits Description.......................................................................................................................... 70
+•
+Added a note to PoE Plus Register ..................................................................................................................................... 77
+Changes from Revision C (June 2015) to Revision D
+Page
+•
+Added reference note to Figure 5 and Figure 6 ................................................................................................................... 15
+•
+Changed RESET note to add addition reference link. ........................................................................................................ 23
+•
+Added SDAO pin note. ........................................................................................................................................................ 24
+•
+Changed I2C Slave Address and AUTO Bit Programming note. ......................................................................................... 35
+•
+Added Figure 42, I2C/SMBus Interface Slave Address Programming Protocol. ................................................................. 38
+•
+Added note 3 to Table 10..................................................................................................................................................... 45
+•
+Changed Connections on Unused Ports section.................................................................................................................. 86
+•
+Added reference link to the VPWR-RESET Sequencing note. ............................................................................................ 97
+Changes from Revision B (April 2015) to Revision C
+Page
+•
+Added Figure 5 and Figure 6................................................................................................................................................ 15
+•
+Changed Figure 36, Disconnected AIN pin from GND......................................................................................................... 22
+•
+Added SHTDWN note. ......................................................................................................................................................... 23
+•
+Added RESET note. ............................................................................................................................................................ 23
+•
+Added Device Power On Initialization section...................................................................................................................... 44
+•
+Added note 2 to Table 10..................................................................................................................................................... 45
+•
+Added Port n Status Register note....................................................................................................................................... 55
+•
+Added Operating Mode Register Command note. .............................................................................................................. 58
+•
+Added Operating Mode Register Bit Description note. ........................................................................................................ 58
+•
+Added Detect/Class Enable Register Command note. ....................................................................................................... 59
+•
+Added Detect/Class Restart Register Command note. ........................................................................................................ 64
+•
+Added Power Enable Register Command note.................................................................................................................... 65
+•
+Added Power Enable Register Bit Descriptions note. .......................................................................................................... 65
+•
+Added Reset Register Command note................................................................................................................................. 66
+•
+Added Reset Register Bit Descriptions note. ...................................................................................................................... 66
+•
+Changed Figure 46, Disconnected AIN pin from GND......................................................................................................... 85
+•
+Changed Figure 48, Disconnected AIN pin from GND......................................................................................................... 87
+
+
+## PDF page 4
+4
+TPS23861
+SLUSBX9I –MARCH 2014–REVISED JULY 2019
+www.ti.com
+Product Folder Links: TPS23861
+Submit Documentation Feedback
+Copyright © 2014–2019, Texas Instruments Incorporated
+•
+Changed Figure 49, Disconnected AIN pin from GND......................................................................................................... 88
+•
+Changed Figure 50, Disconnected AIN pin from GND......................................................................................................... 89
+•
+Changed QPn description in Per Port Components ............................................................................................................. 90
+•
+Changed maximum VDD supply current from 10 mA to 6 mA in first paragraph and changed wording in second
+paragraph of VDD................................................................................................................................................................. 97
+•
+Added VPWR-RESET Sequencing ...................................................................................................................................... 97
+Changes from Revision A (June, 2014) to Revision B
+Page
+•
+Changed VDD current consumption from 10 mA (MAX) to 6.0 mA (MAX)............................................................................ 7
+•
+Deleted Processor watchdog trip delay specification. .......................................................................................................... 11
+•
+Added When using the I2C interface note. .......................................................................................................................... 32
+•
+Added When using the I2C interface note. .......................................................................................................................... 35
+•
+Changed FULL SCALE VALUE from 146.2°C to 150°C (typical). ....................................................................................... 71
+•
+Changed LSB VALUE from 0.652°C to 7°C......................................................................................................................... 71
+•
+Added Temperature sensor performance note..................................................................................................................... 71
+Changes from Original (March 2014) to Revision A
+Page
+•
+Added full TPS23861 IEEE 802.3at Quad Port Power-over-Ethernet PSE Controller datasheet. ........................................ 1
+
+
+## PDF page 13
+SEN
+GATE
+0V
+0V
+VLIM
+VCUT
+tOVLD
+13
+TPS23861
+www.ti.com
+SLUSBX9I –MARCH 2014–REVISED JULY 2019
+Product Folder Links: TPS23861
+Submit Documentation Feedback
+Copyright © 2014–2019, Texas Instruments Incorporated
+Switching Characteristics (continued)
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+PARAMETER
+TEST CONDITIONS
+MIN
+TYP
+MAX
+UNIT
+ted
+Fault delay timing. Delay before
+next attempt to power a port
+following power removal due to
+fault condition
+ICUT , ILIM or start fault, Auto Mode,
+Semi-Auto Mode,
+CLDN = 0X, default as supplied
+0.8
+1
+1.2
+s
+ICUT , ILIM or start fault, Auto Mode,
+Semi-Auto Mode,
+CLDN = 10
+1.6
+2
+2.4
+s
+ICUT , ILIM or start fault, Auto Mode,
+Semi-Auto Mode,
+CLDN = 11
+3.2
+4
+4.8
+s
+tMPDO
+PD maintain power signature
+dropout time limit
+TDIS = 00, default as supplied
+300
+400
+ms
+TDIS = 01
+75
+100
+ms
+TDIS = 10
+150
+200
+ms
+TDIS = 11
+600
+800
+ms
+tD_off_SHDW
+N
+Gate turn-off time from SHTDWN
+input
+From SHTDWN to VGATEn < 1 V, VSENn =
+0 V
+1
+5
+µs
+tP_off_CMD
+Gate turn-off time from port off
+command
+From port off command to VGATEn < 1 V,
+VSENn = 0 V
+900
+µs
+tP_off_RST
+Gate turn-off time with RESET
+pin
+From RESET low to, VGATEn < 1 V, VSENn
+= 0 V
+1
+5
+µs
+tD_off_SEN
+Gate turn-off time from SENn
+input
+POEPn = 0,
+VDRAINn = 1 V , from VSENn pulsed to
+0.425 V
+0.9
+µs
+POEPn = 1,
+VDRAINn = 1 V , from VSENn pulsed to 0.62
+V
+0.9
+µs
+tPOR
+Device power-on-reset delay
+23
+ms
+tRESET
+Reset time duration from RESET
+pin
+1
+5
+µs
+Figure 2. Overcurrent Fault Timing
+
+
+## PDF page 33
+Write Cycle
+A6 A5 A4 A3 A2 A1 A0 R/W
+D7 D6 D5 D4 D3 D2 D1 D0
+Start Bit
+Slave Address
+R/W=0
+R/W
+Bit
+Data from
+Host to Slave
+Stop Bit
+Ack Bit
+Ack Bit
+Ack Bit
+C7 C6 C5 C4 C3 C2 C1 C0
+Command Code
+A6 A5 A4 A3 A2 A1 A0 R/W
+A6 A5 A4 A3 A2 A1 A0 R/W
+D7 D6 D5 D4 D3 D2 D1 D0
+R/W
+Bit
+Start Bit
+Slave Address
+R/W=0
+Command Code
+Slave Address
+R/W=1
+R/W
+Bit
+Data from
+Slave to Host
+Ack Bit
+Ack Bit
+Ack Bit
+NAck Bit
+Stop Bit
+C7 C6 C5 C4 C3 C2 C1 C0
+D7 D6 D5 D4 D3 D2 D1 D0
+1 Data Byte 
+Read Cycle
+2 Data Byte 
+Read Cycle
+SDAO
+A6 A5 A4 A3 A2 A1 A0 R/W
+A6 A5 A4 A3 A2 A1 A0R/W
+D7 D6 D5 D4 D3 D2 D1 D0
+R/W
+Bit
+Start Bit
+Slave Address
+R/W=0
+Command Code
+Slave Address
+R/W=1
+R/W
+Bit
+LSByte Data from
+Slave to Host
+Ack Bit
+Ack Bit
+ Bit
+SDAI
+NAck Bit
+Stop Bit
+C7 C6 C5 C4 C3 C2 C1 C0
+Ack
+ Bit
+Ack
+D7 D6 D5 D4 D3 D2 D1 D0
+D7 D6 D5 D4 D3 D2 D1 D0
+D7 D6 D5 D4 D3 D2 D1 D0
+SDAO
+SDAI
+SDAO
+SDAI
+Repeated 
+Start Bit
+Repeated 
+Start Bit
+MSByte Data from
+Slave to Host
+A6 A5 A4 A3 A2 A1 A0
+D7 D6 D5 D4 D3 D2 D1 D0
+Slave Address
+R/W=1
+R/W
+Bit
+Data from
+Slave to Host
+Start Bit
+Ack Bit
+NAck Bit
+Stop Bit
+D7 D6 D5 D4 D3 D2 D1 D0
+Quick Read Cycle 
+(latest addressed register)
+SDAO
+SDAI
+A6 A5 A4 A3 A2 A1 A0
+ARA Slave Address
+R/W=1
+R/W
+Bit
+Slave Address from
+Slave to Host
+Start Bit
+Ack Bit
+NAck Bit
+Stop Bit
+A6 A5 A4 A3 A2 A1
+A0
+Alert Response
+SDAO
+SDAI
+A6 A5 A4 A3 A2 A1
+A0
+R/W
+R/W
+33
+TPS23861
+www.ti.com
+SLUSBX9I –MARCH 2014–REVISED JULY 2019
+Product Folder Links: TPS23861
+Submit Documentation Feedback
+Copyright © 2014–2019, Texas Instruments Incorporated
+This content can be later used as a register address pointer during next quick read cycle register access. See
+Figure 40. This internal register is cleared at power on or through the RESET pin.
+Figure 40. I2C/SMBus Interface Read and Write Protocol

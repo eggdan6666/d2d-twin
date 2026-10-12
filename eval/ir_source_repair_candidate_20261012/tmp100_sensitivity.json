@@ -1,0 +1,2472 @@
+[
+  {
+    "model": "reference_repaired",
+    "chip": "TMP100",
+    "seed": 0,
+    "i": 0,
+    "rc": 0,
+    "code_sha256": "173adaf0a046237ad7e21102dc41c6b3469703101f8a76552acfaf73913dd7f4",
+    "seconds": 0.9540000000270084,
+    "passed": 4,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_repaired\\TMP100\\0_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_repaired\\TMP100\\0_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_repaired\\TMP100\\0_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_repaired\\TMP100\\0_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": null,
+    "original_passed": null,
+    "matches_original": null,
+    "log_file": "work\\reference_repaired\\TMP100\\0_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "reference_original",
+    "chip": "TMP100",
+    "seed": 0,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "66401e86b68c72ced97e8d1e6cc231dc5fec49fc44d3876cc7b2879c19ceee64",
+    "seconds": 1.2040000000270084,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.L[15:4] 写全 1 后读回 4088，期望 4095（整寄存器 0xff80）\nassert 4088 == 4095",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.L[15:4] 写全 1 后读回 4088，期望 4095（整寄存器 0xff80）\nE   assert 4088 == 4095"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_original\\TMP100\\0_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_original\\TMP100\\0_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_original\\TMP100\\0_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\reference_original\\TMP100\\0_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": null,
+    "original_passed": null,
+    "matches_original": null,
+    "log_file": "work\\reference_original\\TMP100\\0_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "2f4ec87e6f5d6911335d9f78f5f911deb176363a38b634ecdac4d43ab41fa21f",
+    "seconds": 1.2350000000442378,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\1_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "8d9bc5e40b40b7c1a0588f7c8dcd2404af66760950f0ec3d95018e14a7d3a20e",
+    "seconds": 1.2190000000409782,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa580\nassert (42368 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa580\nE   assert (42368 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.L[15:4] 写全 1 后读回 4088，期望 4095（整寄存器 0xff80）\nassert 4088 == 4095",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.L[15:4] 写全 1 后读回 4088，期望 4095（整寄存器 0xff80）\nE   assert 4088 == 4095"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": false,
+    "log_file": "work\\qwen3b\\TMP100\\1_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "634c3428f3430b895d7d32a9ba57af1f7f6a695b357d71945d0f1dba19363b2b",
+    "seconds": 1.1560000000172295,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\1_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "aac251ab2e8130da77aad43bbf1fc7176e9cc10a758ca24c6fed992bc1b29139",
+    "seconds": 1.1709999999729916,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\1_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\1_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "6b6e1227584981dd9c8e7886dcff2bb53ebfe420639f38fcf09b1242bb46bf60",
+    "seconds": 1.1410000000032596,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\2_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "cf5186567fe9b36129c8355f2b0a84777f6d5f5e6f1fb14345b1d97afeb9b21c",
+    "seconds": 1.1559999999590218,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\2_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "05d0fcd6d33c36eb81c21cce61ae6bb7157f339d6de12be04d6a1d9cafd48922",
+    "seconds": 1.0149999999557622,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\2_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "ad182b1fdb5dddf72ddd999df496b8a58f7e4efcdd06ed1a6044dcf452bfe218",
+    "seconds": 0.9689999999827705,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.L[15:4] 写全 1 后读回 1200，期望 4095（整寄存器 0x4b00）\nassert 1200 == 4095",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.L[15:4] 写全 1 后读回 1200，期望 4095（整寄存器 0x4b00）\nE   assert 1200 == 4095"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\2_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\2_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "9e004b3642981d6277dca2fdfc8aa2cf8eba91fa07862dda8b63d69bd16ef6c2",
+    "seconds": 1.0160000000032596,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\3_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "a21949e885ebd33a70de9675a177056304b5d75e2e5866d941f347899c03dfdc",
+    "seconds": 1.0160000000032596,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\3_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "719f35084fe7c18b165d0cf9056891c3df773b58cdb39f5b59ef12a6a8528fb0",
+    "seconds": 0.9690000000409782,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\3_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen3b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "fe5afcc224d632f6b1cf85bd2a44dc320bf1d8890a471b80614018d90d2a7459",
+    "seconds": 0.9679999999934807,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa500\nassert (42240 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa500\nE   assert (42240 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.L[15:4] 写全 1 后读回 3840，期望 4095（整寄存器 0xf000）\nassert 3840 == 4095",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.L[15:4] 写全 1 后读回 3840，期望 4095（整寄存器 0xf000）\nE   assert 3840 == 4095"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen3b\\TMP100\\3_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen3b\\TMP100\\3_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "f04ff43ea1a179fdd79381a5b9949f28985855f2e5d20dd7488bc18e7415ac01",
+    "seconds": 1.0,
+    "passed": 1,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:100: in test_reset_values\n    got = int(sensor.read_register(int(r[\"addr\"], 16))) & MASK\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:13: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:113: in test_readonly_protection\n    before = int(sensor.read_register(addr)) & MASK\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:13: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 1,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\1_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "9636f073f8060dba845a467c75a7de49c9d4098893bb5901b0a576e5fae2c052",
+    "seconds": 1.0,
+    "passed": 1,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:100: in test_reset_values\n    got = int(sensor.read_register(int(r[\"addr\"], 16))) & MASK\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:17: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:113: in test_readonly_protection\n    before = int(sensor.read_register(addr)) & MASK\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:17: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 1,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\1_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "7b899b15857b65a17548630d508b6d493298c833f189998226c1045f6911cea8",
+    "seconds": 0.9839999999967404,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\1_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "eae292a7805907ac109cfbcba09a15bcae505b88f1facd69e1e8a5e4cca85c60",
+    "seconds": 1.0630000000237487,
+    "passed": 1,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:100: in test_reset_values\n    got = int(sensor.read_register(int(r[\"addr\"], 16))) & MASK\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:12: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:113: in test_readonly_protection\n    before = int(sensor.read_register(addr)) & MASK\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:12: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\1_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 1,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\1_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "23bb10bd86800713577edd383db7b8a83c2cfec50a952e10ae383cf0d6759e7b",
+    "seconds": 0.9690000000409782,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\2_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "1200c986bdef31c27d7bba97c9c99182c680eeb37e5f23012df8dbe4350be28c",
+    "seconds": 0.9530000000377186,
+    "passed": 1,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:100: in test_reset_values\n    got = int(sensor.read_register(int(r[\"addr\"], 16))) & MASK\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:12: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:113: in test_readonly_protection\n    before = int(sensor.read_register(addr)) & MASK\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:12: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 1,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\2_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "121bd64fe18bdba952a006af16eb5fe06ddf8fe96d415f9e06ccc3253341d29d",
+    "seconds": 1.0,
+    "passed": 1,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:100: in test_reset_values\n    got = int(sensor.read_register(int(r[\"addr\"], 16))) & MASK\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:15: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "KeyError: 0",
+        "detail": "test_d2d_blackbox.py:113: in test_readonly_protection\n    before = int(sensor.read_register(addr)) & MASK\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^\ntmp100_simulator.py:15: in read_register\n    return self.regs[addr]\n           ^^^^^^^^^^^^^^^\nE   KeyError: 0"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 1,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\2_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "7d20716f37daeb4ae04e7600f4c7dea1dd9c37df6b18dabf47f54b6182c8d927",
+    "seconds": 1.0469999999622814,
+    "passed": 1,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "TypeError: argument of type 'int' is not iterable",
+        "detail": "test_d2d_blackbox.py:119: in test_readonly_protection\n    sensor.write_register(addr, dirty)\ntmp100_simulator.py:26: in write_register\n    if \"read_as\" in register and register[\"read_as\"] == data:\n       ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: argument of type 'int' is not iterable"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "TypeError: argument of type 'int' is not iterable",
+        "detail": "test_d2d_blackbox.py:156: in test_rw_field_persistence\n    sensor.write_register(wa, rst | fmask)\ntmp100_simulator.py:26: in write_register\n    if \"read_as\" in register and register[\"read_as\"] == data:\n       ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: argument of type 'int' is not iterable"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "failed",
+        "message": "TypeError: argument of type 'int' is not iterable",
+        "detail": "test_d2d_blackbox.py:195: in test_write_trigger_fields\n    sensor.write_register(addr, rst | fmask)\ntmp100_simulator.py:26: in write_register\n    if \"read_as\" in register and register[\"read_as\"] == data:\n       ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: argument of type 'int' is not iterable"
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\2_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 1,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\2_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "acc74675a720abee96d9912ad4664162e15943e20f5f7e8f8d5d74f061152bda",
+    "seconds": 1.0619999999762513,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\3_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "23bb10bd86800713577edd383db7b8a83c2cfec50a952e10ae383cf0d6759e7b",
+    "seconds": 1.0619999999762513,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\3_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "01517f1f560d676032009aa7247eb76854ccb7fb71ab9758552c88530df96a39",
+    "seconds": 0.9689999999827705,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\3_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "ds67b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "112d3a0407cce3dbe3ff54d9c3293c5bac0fd635f1b9687ba1017e432aa9963a",
+    "seconds": 1.0,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\ds67b\\TMP100\\3_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\ds67b\\TMP100\\3_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "bca2759b0fffb5d50560c1da131956dc8ccf1d7e05d837c3c5eb192ee8bb50fa",
+    "seconds": 0.9380000000237487,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\1_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "4a3b1ce1b4c239848fc7f1575c74892277ec6f5d241ac0c4ffffdc49cd7d0e23",
+    "seconds": 0.9849999999860302,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\1_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "2a816842135b86a31bc5657aaeb328cecf22986cf3b9600a037604902363a5d0",
+    "seconds": 1.077999999979511,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nassert 0 == 1",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nE   assert 0 == 1"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\1_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 1,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "1128a4e963f781717ddb372fd6dc579cf6280f0fc92bbdde2870eb706a0b5aed",
+    "seconds": 0.9690000000409782,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nassert 0 == 1",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nE   assert 0 == 1"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\1_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\1_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "23d547d3212d1187daeb3821919d6fdfefcfc15a2c40e9fdeac00265b4865918",
+    "seconds": 0.9679999999934807,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\2_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "d7d30fdcb781494ae5133877813ebfd316fa8d5cebb1d0b79c7899faf9e0532e",
+    "seconds": 0.9679999999934807,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\2_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "264607bd87947d32d5989a376b4778047b94e1cadddc66165b0cd72c997209ef",
+    "seconds": 0.9530000000377186,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nassert 0 == 1",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nE   assert 0 == 1"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\2_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 2,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "c2429ac15867837487369777e5ba93c0b423bb7fc29dc7c305bda2ae48e361b3",
+    "seconds": 1.0160000000032596,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "failed",
+        "message": "AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nassert (42405 & ~0) == (0 & ~0)",
+        "detail": "test_d2d_blackbox.py:123: in test_readonly_protection\n    assert (after & ~rc_mask) == (before & ~rc_mask), \\\nE   AssertionError: TEMP 是 RO：写脏数据后 0x0 → 0xa5a5\nE   assert (42405 & ~0) == (0 & ~0)"
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nassert 0 == 1",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: CONFIG.R1[6] 写全 1 后读回 0，期望 1（整寄存器 0x80）\nE   assert 0 == 1"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\2_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\2_3\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 0,
+    "rc": 1,
+    "code_sha256": "1e07f3e6d373fead7c8f5ee1777c51fbdc7d510f90cd34a10ec75ec65e2c91a2",
+    "seconds": 1.0,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_0\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_0\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_0\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_0\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\3_0\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 1,
+    "rc": 1,
+    "code_sha256": "55a65c97a649700cb6401d3f19ceeebde0823d423b31afbe495928f3a38a5b8e",
+    "seconds": 1.0160000000032596,
+    "passed": 2,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.L[15:4] 写全 1 后读回 1200，期望 4095（整寄存器 0x4b00）\nassert 1200 == 4095",
+        "detail": "test_d2d_blackbox.py:160: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.L[15:4] 写全 1 后读回 1200，期望 4095（整寄存器 0x4b00）\nE   assert 1200 == 4095"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "failed",
+        "message": "AssertionError: CONFIG.OS 写触发后读回 0，期望 1\nassert 0 == 1",
+        "detail": "test_d2d_blackbox.py:198: in test_write_trigger_fields\n    assert act == f[\"read_as\"], f\"{rn}.{f['name']} 写触发后读回 {act}，期望 {f['read_as']}\"\nE   AssertionError: CONFIG.OS 写触发后读回 0，期望 1\nE   assert 0 == 1"
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_1\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_1\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_1\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_1\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 2,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\3_1\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 2,
+    "rc": 1,
+    "code_sha256": "2979bf5be4146c59660d9706f73bc73ede42e57db8163ab1da7125f75deefbae",
+    "seconds": 0.9529999999795109,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_2\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_2\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_2\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_2\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\3_2\\pytest.log",
+    "input_extraction_failed": false
+  },
+  {
+    "model": "qwen14b",
+    "chip": "TMP100",
+    "seed": 3,
+    "i": 3,
+    "rc": 1,
+    "code_sha256": "cb6704d133ccc044b09a1f9583af367c4e23272095e209baa40bbf795b0ff75c",
+    "seconds": 0.875,
+    "passed": 3,
+    "tests": [
+      {
+        "test": "test_reset_values",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_readonly_protection",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_rw_field_persistence",
+        "status": "failed",
+        "message": "AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nassert 15 == 0",
+        "detail": "test_d2d_blackbox.py:178: in test_rw_field_persistence\n    assert act == exp, (\nE   AssertionError: TLOW.UNUSED[3:0] 是 RW 寄存器内的 RO 位：写全 1 后读回 15，期望复位值 0（整寄存器 0xffff）\nE   assert 15 == 0"
+      },
+      {
+        "test": "test_write_trigger_fields",
+        "status": "passed",
+        "message": "",
+        "detail": ""
+      },
+      {
+        "test": "test_single_byte_semantics",
+        "status": "skipped",
+        "message": "IR 未启用单字节语义",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_3\\test_d2d_blackbox.py:208: IR 未启用单字节语义"
+      },
+      {
+        "test": "test_read_write_alias",
+        "status": "skipped",
+        "message": "IR 无读写别名寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_3\\test_d2d_blackbox.py:231: IR 无读写别名寄存器"
+      },
+      {
+        "test": "test_clear_on_read",
+        "status": "skipped",
+        "message": "IR 无 Clear-on-Read 别名地址",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_3\\test_d2d_blackbox.py:268: IR 无 Clear-on-Read 别名地址"
+      },
+      {
+        "test": "test_write_only_reset_key",
+        "status": "skipped",
+        "message": "IR 无 write-only 寄存器",
+        "detail": "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\eval\\ir_source_repair_candidate_20261012\\work\\qwen14b\\TMP100\\3_3\\test_d2d_blackbox.py:291: IR 无 write-only 寄存器"
+      }
+    ],
+    "original_rc": 1,
+    "original_passed": 3,
+    "matches_original": true,
+    "log_file": "work\\qwen14b\\TMP100\\3_3\\pytest.log",
+    "input_extraction_failed": false
+  }
+]

@@ -1,0 +1,215 @@
+{
+  "status": "REPAIR_CANDIDATE_NOT_PROMOTED",
+  "edits": [
+    {
+      "chip": "INA3221",
+      "register": "SHUNT_SUM_LIMIT",
+      "field": "SVL",
+      "path": "fields.reset",
+      "before": 4095,
+      "after": 16383,
+      "source": "INA3221.pdf p.33 Table 8-31: diagram/reset agree; Table 8-32 conflicts",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "TLOW",
+      "field": "L",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 150,
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "THIGH",
+      "field": "H",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 160,
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP102",
+      "register": "TLOW",
+      "field": "L",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 1200,
+      "source": "TMP102.pdf p.19 Tables 6-13 to 6-16 and reset prose",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP102",
+      "register": "THIGH",
+      "field": "H",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 1280,
+      "source": "TMP102.pdf p.19 Tables 6-13 to 6-16 and reset prose",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "LLIM",
+      "field": "L",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 1200,
+      "source": "TMP1075.pdf p.23 Figures 7-14/7-15 and Tables 7-9/7-10",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "HLIM",
+      "field": "H",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 1280,
+      "source": "TMP1075.pdf p.23 Figures 7-14/7-15 and Tables 7-9/7-10",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP117",
+      "register": "TEMP",
+      "field": "T",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 32768,
+      "source": "TMP117.pdf pp.25-26,29,32 register map and field tables",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP117",
+      "register": "THIGH",
+      "field": "H",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 24576,
+      "source": "TMP117.pdf pp.25-26,29,32 register map and field tables",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP117",
+      "register": "TLOW",
+      "field": "L",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 32768,
+      "source": "TMP117.pdf pp.25-26,29,32 register map and field tables",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP117",
+      "register": "DEVICE_ID",
+      "field": "ID",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 279,
+      "source": "TMP117.pdf pp.25-26,29,32 register map and field tables",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TPS23861",
+      "register": "INTERRUPT",
+      "field": "FLAGS",
+      "path": "fields.reset",
+      "before": 0,
+      "after": 128,
+      "source": "TPS23861.pdf p.47 Interrupt Register POR row",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "TLOW",
+      "field": "L",
+      "path": "fields.bits",
+      "before": "15:7",
+      "after": "15:4",
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "TLOW",
+      "field": "L",
+      "path": "fields.reset_after_width_change",
+      "before": 150,
+      "after": 1200,
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "TLOW",
+      "field": "UNUSED",
+      "path": "fields.bits",
+      "before": "6:0",
+      "after": "3:0",
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "THIGH",
+      "field": "H",
+      "path": "fields.bits",
+      "before": "15:7",
+      "after": "15:4",
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "THIGH",
+      "field": "H",
+      "path": "fields.reset_after_width_change",
+      "before": 160,
+      "after": 1280,
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    },
+    {
+      "chip": "TMP100",
+      "register": "THIGH",
+      "field": "UNUSED",
+      "path": "fields.bits",
+      "before": "6:0",
+      "after": "3:0",
+      "source": "TMP100.pdf p.18 Tables 11-14 and final paragraph",
+      "status": "AI_SOURCE_REVIEWED_PENDING_INDEPENDENT_RECHECK"
+    }
+  ],
+  "boundaries": [
+    "No original generated code or score changed",
+    "No d2d/IR or frozen harness edited",
+    "Independent review pending; known protocol constraints remain open"
+  ],
+  "files": {
+    "ir\\AD5592R_gold_ir.json": "2cbc57183e2f028b877620d2b7c9a075923299d1b80a60a413db98d13a2fd4a7",
+    "ir\\ADS1115_gold_ir.json": "454d729501e6366feb3fa2344a2261db204201bf5fa9dffb4fef29dd4475e22d",
+    "ir\\ADS1220_gold_ir.json": "717c31123d58505f18c9a33c5a5bda46d51d9cb540faeb85d82feb493c4a6068",
+    "ir\\BME280_gold_ir.json": "ef329a8e9cbb6846663c3940b25282526679059bbf35de0fb14338fc970335fe",
+    "ir\\BMP280_gold_ir.json": "eb2dfbb04371a73246358771895735421d2c9e26f0d05f2f0db067a522097e29",
+    "ir\\HDC2021_gold_ir.json": "23c7229df25631417252021e10f826178592b7e310e303d254f7861961473c1e",
+    "ir\\INA219_gold_ir.json": "32f646f09b3d951ad345b2717cd70e676796d3f832ba2db4245434a4fa95839c",
+    "ir\\INA226_gold_ir.json": "1551280a203d691f951af04b08ad16bb78be3ab09cbf698f1b3d1ef5fa43aed8",
+    "ir\\INA3221_gold_ir.json": "f2a6bbee5d62fc50b504a19d3c2894e7c21df062a3e8ba4993c7207bfe5badc8",
+    "ir\\LIS2DW12_gold_ir.json": "28e3268bc5ae0b92090dae5651e982d3e17fa8fb0f79b728c3f8c7723172b18c",
+    "ir\\LIS3DH_gold_ir.json": "f102311d9b9a47272f5cbd55f816164339aa9ca46df8c9e2189b193a81d8221d",
+    "ir\\LM83_gold_ir.json": "49533294765a5befd1403f547852a6afccf59016dc6f09e823a3dc95d494ca9b",
+    "ir\\MPU6050_gold_ir.json": "18040d72b426fe1305e914b7a15c4202e3a9d04e668a4740d9a357fcc0efb858",
+    "ir\\TMP100_gold_ir.json": "8af7a518a1ca1a2f3e17ea2f99b14adea9e90a8f45d53a30e1380da195096ac9",
+    "ir\\TMP102_gold_ir.json": "db2c969d259764d695bb05202adcd5f7802b7ae5302555a0c9536cc38a2aaaed",
+    "ir\\TMP1075_gold_ir.json": "dbff43051c2839bfd1e25ac21e449d62338e3c22902506e6b774c6341e09626a",
+    "ir\\TMP117_gold_ir.json": "6d9d4a3c787b0b59a9049472448d0889e4e7f6e1ef31deed46cb2d3f5784e678",
+    "ir\\TMP126_gold_ir.json": "e32f8369f30b14e8ec319a680f6095ed500e253702a75c9eb1108f10e1808136",
+    "ir\\TMP461_gold_ir.json": "0174c780a5d625fb3a80fe66ab67bf7c4f242e69f89e2aec4521dc2dfaf44601",
+    "ir\\TPS23861_gold_ir.json": "44dd711a4624ff4cf330c6bcde890db25d416d1ab7e168b9135ed96471586afd",
+    "rtl\\base_sensor.py": "f8ecfe945ce2af43e8a243c49ccc8736e37e98b5080ac64e9d18c762a8098574",
+    "harness\\test_d2d_blackbox.py": "c46bb424adbb663afccd4925d29ba933fd514da4f8fe0714b2aa4b13f41c8a77",
+    "references\\tmp100_reference.py": "173adaf0a046237ad7e21102dc41c6b3469703101f8a76552acfaf73913dd7f4"
+  }
+}
