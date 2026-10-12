@@ -1,0 +1,86 @@
+[
+  {
+    "chip": "ADS1220",
+    "field": "CONFIG0.GAIN",
+    "before": "PGA 增益；111b 为 Reserved 编码值",
+    "after": "PGA gain: codes0..7 correspond to gain1..128; p.43 Table8-10"
+  },
+  {
+    "chip": "ADS1220",
+    "field": "CONFIG1.MODE",
+    "before": "转换模式（正常/快速/单次…）",
+    "after": "Operating mode: normal/duty-cycle/turbo codes0..2; code3 reserved; p.44"
+  },
+  {
+    "chip": "ADS1220",
+    "field": "CONFIG1.CM",
+    "before": "0=单端 1=差分",
+    "after": "0 single-shot, 1 continuous conversion; p.44 Table8-11"
+  },
+  {
+    "chip": "ADS1220",
+    "field": "CONFIG2.VREF",
+    "before": "基准选择；11b 为 Reserved 编码值",
+    "after": "Reference codes0..3 all defined; code3 analog supply; p.45 Table8-13"
+  },
+  {
+    "chip": "ADS1220",
+    "field": "CONFIG2.IDAC",
+    "before": "电流源幅度",
+    "after": "Codes0..7 all defined; code7=1500 microampere; p.45 Table8-13"
+  },
+  {
+    "chip": "ADS1220",
+    "field": "CONFIG3.RESERVED",
+    "before": "名为 Reserved 但手册给 R/W-0 ⇒ 按 B 档编成可写",
+    "after": "R/W-0 label plus explicit Always write0b; only0 input allowed, no writability scoring; p.46 Table8-14"
+  },
+  {
+    "chip": "BME280",
+    "field": "ctrl_meas.mode",
+    "before": "00:sleep 01:forced 10/11:normal",
+    "after": "00 sleep,01/10 forced,11 normal; forced completion outside static storage scoring; p.29 section5.4.5"
+  },
+  {
+    "chip": "BME280",
+    "field": "config.t_sb",
+    "before": "normal 待机时间 000:0.5ms 001:62.5ms 010:125ms 011:250ms 100:500ms 101:1000ms 110:2000ms 111:4000ms",
+    "after": "codes0..7 = 0.5/62.5/125/250/500/1000/10/20ms; p.30 Table27"
+  },
+  {
+    "chip": "TMP102",
+    "field": "CONFIG.CR1",
+    "before": "转换速率 00:0.25Hz 01:4Hz(默认) 10:8Hz 11:8Hz？见 §6.5.3.9 Table 6-5",
+    "after": "CR[1:0] codes00/01/10/11 = 0.25/1/4/8Hz; default10=4Hz; p.15 Table6-5"
+  },
+  {
+    "chip": "TMP102",
+    "field": "CONFIG.CR0",
+    "before": "同上",
+    "after": "Low bit of conversion rate; see CR1 corrected code table"
+  },
+  {
+    "chip": "TMP1075",
+    "field": "CFGR.F",
+    "before": "ALERT 触发连续故障数 00:1 01:2 10:3 11:4",
+    "after": "Fault queue codes00/01/10/11 = 1/2/3/4 for non-N TMP1075; N variant differs; p.22 Table7-8"
+  },
+  {
+    "chip": "TMP117",
+    "field": "CONFIG.MOD",
+    "before": "转换模式 00/10=连续(10 读回 00) 01=shutdown 11=one-shot",
+    "after": "MOD codes00 continuous,01 shutdown,10 continuous with readback00,11 one-shot; p.27 Table7-6"
+  },
+  {
+    "chip": "TMP117",
+    "field": "CONFIG.AVG",
+    "before": "平均次数 00=1 01=2 10=4 11=8，复位 01",
+    "after": "AVG codes0/1/2/3 = no averaging/8/32/64 conversions; p.27 Table7-6"
+  },
+  {
+    "chip": "TMP126",
+    "field": "CONFIG.CONV_PERIOD",
+    "before": "转换周期 000=6ms … 110=1s（默认）… 111=4s",
+    "after": "codes0..7 = 6/31.25/62.5/125/250/500ms/1/2s; code7=2s(0.5Hz); p.29 Table8-8"
+  }
+]

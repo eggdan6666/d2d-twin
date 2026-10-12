@@ -1,0 +1,19 @@
+contract_version: "1.0"
+expert_skill: sci-skills-presubmission-review
+project_id: d2d-twin
+paper_family: M
+stage_id: M4
+task_id: /root/protocol_review
+task_status: COMPLETE
+inputs_reviewed: ["source_policy.json", "SOURCE_POLICY_REVIEW.md", "LEGAL_DOMAIN_SUPPLEMENT.md", "INDEPENDENT_REPAIR_REVIEW.md", "20 v2 IR files", "coverage_plan.json", "protocol_rules.py", "test_d2d_protocol_v2.py", "run_protocol_v2.py", "reference_summary.json", "AD5592R p.29 text"]
+outputs: ["eval/protocol_v2_20261012/CODE_REVIEW.md", "eval/protocol_v2_20261012/tests/test_policy_regressions.py"]
+evidence_status: ["EXECUTED_LOCAL: 41 focused tests passed and reference admission hash binding verified", "VERIFIED_USER_MATERIAL for reviewed artifacts and final supplementary policy integration", "VERIFIED_SOURCE only for bounded AD5592R prose", "PENDING_VERIFICATION for broader source boundaries", "NOT_EXECUTED for model generation and hardware"]
+assumptions: ["Static source-contract MVP", "Independent AI code reviewer", "Synthetic fixtures are not experimental results", "Factory EEPROM scope follows independent review"]
+author_input_needed: []
+manual_actions: []
+quality_checks: ["41 tests passed", "Faulty COR return rejected", "No-op and any-key reset mutants rejected", "Unknown masks never create scored comparisons", "Stale execution evidence rejected", "Stale reference admission rejected", "Final supplementary policies read and aligned", "Current reference admission manifest binding and all listed input hashes verified"]
+conflicts: ["Existing INA3221 source conflict", "Existing TMP117 revision ambiguity"]
+conflict_resolution_status: UNRESOLVED
+merge_permission: orchestrator_only
+recommended_next_action: Rescore preserved samples under the admitted separately versioned finite-scope protocol, retain original scores, and report applicability/exclusions.
+stage_acceptance_recommendation: NOT_ASSESSED

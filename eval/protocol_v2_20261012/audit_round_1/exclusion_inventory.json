@@ -1,0 +1,845 @@
+[
+  {
+    "chip": "AD5592R",
+    "register": "DAC_RD",
+    "field": "RESERVED_10_5",
+    "bits": "10:5",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "AD5592R",
+    "register": "ADC_SEQ",
+    "field": "RESERVED_10",
+    "bits": "10",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "AD5592R",
+    "register": "GEN_CTRL_REG",
+    "field": "RESERVED_10",
+    "bits": "10",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "AD5592R",
+    "register": "GEN_CTRL_REG",
+    "field": "RESERVED_3_0",
+    "bits": "3:0",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "AD5592R",
+    "register": "ADC_CONFIG",
+    "field": "RESERVED_10_8",
+    "bits": "10:8",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "AD5592R",
+    "register": "DAC_CONFIG",
+    "field": "RESERVED_10_8",
+    "bits": "10:8",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "AD5592R",
+    "register": "PULLDWN_CONFIG",
+    "field": "RESERVED_10_8",
+    "bits": "10:8",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  {
+    "chip": "BME280",
+    "register": "ctrl_hum",
+    "field": "UNUSED",
+    "bits": "7:3",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Grey do-not-change/write bits",
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BME280.pdf Table18 p.27"
+  },
+  {
+    "chip": "BME280",
+    "register": "status",
+    "field": "UNUSED",
+    "bits": "7:4",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Grey source bit, no known readback oracle"
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BME280.pdf Table18 p.27"
+  },
+  {
+    "chip": "BME280",
+    "register": "status",
+    "field": "UNUSED2",
+    "bits": "2:1",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Grey source bit, no known readback oracle"
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BME280.pdf Table18 p.27"
+  },
+  {
+    "chip": "BME280",
+    "register": "ctrl_meas",
+    "field": "mode",
+    "bits": "1:0",
+    "ir_access": "RW",
+    "field_policy": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "test_values": [
+        0,
+        3
+      ],
+      "excluded_behavior": "Forced modes1/2 complete then return tosleep; no completion model"
+    },
+    "excluded_access_assertions": false,
+    "known_reset_bit_mask": "0x3",
+    "known_protection_bit_mask": "0x3",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BME280.pdf Table18 p.27",
+    "legal_values": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tested_values": [
+      0,
+      3
+    ]
+  },
+  {
+    "chip": "BME280",
+    "register": "config",
+    "field": "UNUSED",
+    "bits": "1",
+    "ir_access": "RW",
+    "field_policy": {
+      "exclude": "Grey do-not-change/write bit; no storage oracle",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x2",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BME280.pdf Table18 p.27"
+  },
+  {
+    "chip": "BMP280",
+    "register": "status",
+    "field": "UNUSED",
+    "bits": "7:4",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Grey source bit, no known readback oracle"
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BMP280.pdf Table18 p.24"
+  },
+  {
+    "chip": "BMP280",
+    "register": "status",
+    "field": "UNUSED2",
+    "bits": "2:1",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Grey source bit, no known readback oracle"
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BMP280.pdf Table18 p.24"
+  },
+  {
+    "chip": "BMP280",
+    "register": "ctrl_meas",
+    "field": "mode",
+    "bits": "1:0",
+    "ir_access": "RW",
+    "field_policy": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "test_values": [
+        0,
+        3
+      ],
+      "excluded_behavior": "Forced modes1/2 complete then return tosleep; no completion model"
+    },
+    "excluded_access_assertions": false,
+    "known_reset_bit_mask": "0x3",
+    "known_protection_bit_mask": "0x3",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BMP280.pdf Table18 p.24",
+    "legal_values": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tested_values": [
+      0,
+      3
+    ]
+  },
+  {
+    "chip": "BMP280",
+    "register": "config",
+    "field": "UNUSED",
+    "bits": "1",
+    "ir_access": "RW",
+    "field_policy": {
+      "exclude": "Grey do-not-change/write bit; no storage oracle",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x2",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "Bosch/BMP280.pdf Table18 p.24"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "STATUS",
+    "field": "UNUSED",
+    "bits": "2:0",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Reset0 known; access unspecified",
+      "known_reset": true,
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x7",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/HDC2021.pdf pp.23,25,31 Tables7-16,7-22,7-38"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "INTERRUPT_ENABLE",
+    "field": "UNUSED",
+    "bits": "2:0",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Reset0 known; access unspecified",
+      "known_reset": true,
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x7",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/HDC2021.pdf pp.23,25,31 Tables7-16,7-22,7-38"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "MEAS_CONFIG",
+    "field": "RSVD3",
+    "bits": "3",
+    "ir_access": "RW",
+    "field_policy": {
+      "exclude": "RW label known, no defined function; conservative scope",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x8",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/HDC2021.pdf pp.23,25,31 Tables7-16,7-22,7-38"
+  },
+  {
+    "chip": "INA3221",
+    "register": "SHUNT_SUM_LIMIT",
+    "field": "SVL",
+    "bits": "15:1",
+    "ir_access": "RW",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x8000",
+    "known_protection_bit_mask": "0x8000",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+  },
+  {
+    "chip": "INA3221",
+    "register": "SHUNT_SUM_LIMIT",
+    "field": "UNUSED",
+    "bits": "0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x1",
+    "known_protection_bit_mask": "0x1",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+  },
+  {
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "RSVD15",
+    "bits": "15",
+    "ir_access": "RW",
+    "field_policy": {
+      "exclude": "Reserved function unverified; keep default",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x8000",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "CTRL2",
+    "field": "BOOT",
+    "bits": "7",
+    "ir_access": "RW",
+    "field_policy": {
+      "exclude": "Self-clears after NVM operation; completion/timing not modeled",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x80",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/lis2dw12.pdf DS11811 Rev9 p.37 Table32 and BOOT description"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "CTRL2",
+    "field": "MUST_BE_ZERO",
+    "bits": "5",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Must write0; no oracle for illegal1",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x20",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/lis2dw12.pdf DS11811 Rev9 p.37 Table32 and BOOT description"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG0",
+    "field": "FIXED_6",
+    "bits": "6",
+    "ir_access": "UNSPEC",
+    "field_policy": {
+      "known_reset": true,
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x40",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG0",
+    "field": "FIXED_5",
+    "bits": "5",
+    "ir_access": "UNSPEC",
+    "field_policy": {
+      "known_reset": true,
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x20",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG0",
+    "field": "FIXED_4",
+    "bits": "4",
+    "ir_access": "UNSPEC",
+    "field_policy": {
+      "known_reset": true,
+      "fixed_write": 1
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x10",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG0",
+    "field": "FIXED_3_0",
+    "bits": "3:0",
+    "ir_access": "UNSPEC",
+    "field_policy": {
+      "known_reset": true,
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0xf",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "TEMP_CFG_REG",
+    "field": "FIXED_5_0",
+    "bits": "5:0",
+    "ir_access": "UNSPEC",
+    "field_policy": {
+      "known_reset": true,
+      "fixed_write": 0
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x3f",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG4",
+    "field": "ST",
+    "bits": "2:1",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+  },
+  {
+    "chip": "LM83",
+    "register": "CONFIG",
+    "field": "RSV6",
+    "bits": "6",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "LM83",
+    "register": "CONFIG",
+    "field": "RSV0",
+    "bits": "0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "MPU6050",
+    "register": "CONFIG",
+    "field": "RESERVED_7_6",
+    "bits": "7:6",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+  },
+  {
+    "chip": "MPU6050",
+    "register": "GYRO_CONFIG",
+    "field": "RESERVED_2_0",
+    "bits": "2:0",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+  },
+  {
+    "chip": "MPU6050",
+    "register": "ACCEL_CONFIG",
+    "field": "RESERVED_2_0",
+    "bits": "2:0",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+  },
+  {
+    "chip": "MPU6050",
+    "register": "PWR_MGMT_1",
+    "field": "DEVICE_RESET",
+    "bits": "7",
+    "ir_access": "RW",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+  },
+  {
+    "chip": "MPU6050",
+    "register": "PWR_MGMT_1",
+    "field": "RESERVED_4",
+    "bits": "4",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "bits": "6:0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "TMP102",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "bits": "3:0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "TMP102",
+    "register": "CONFIG",
+    "field": "UNUSED",
+    "bits": "3:0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "TMP102",
+    "register": "TLOW",
+    "field": "UNUSED",
+    "bits": "3:0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "TMP102",
+    "register": "THIGH",
+    "field": "UNUSED",
+    "bits": "3:0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "Inherited IR annotation; full review pending"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "MOD",
+    "bits": "11:10",
+    "ir_access": "RW",
+    "field_policy": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "test_values": [
+        0,
+        1,
+        2
+      ],
+      "excluded_behavior": "MOD3 one-shot completion/timing outside persistence oracle",
+      "readback_values": {
+        "2": 0
+      }
+    },
+    "excluded_access_assertions": false,
+    "known_reset_bit_mask": "0xc00",
+    "known_protection_bit_mask": "0xc00",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TMP117.pdf p.32 Figure7-22 versus Table7-15; factory EEPROM defaults assumed",
+    "legal_values": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "tested_values": [
+      0,
+      1,
+      2
+    ]
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "UNUSED",
+    "bits": "0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "TI/TMP117.pdf p.32 Figure7-22 versus Table7-15; factory EEPROM defaults assumed"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM_UL",
+    "field": "UNUSED",
+    "bits": "13:0",
+    "ir_access": "RO",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "TI/TMP117.pdf p.32 Figure7-22 versus Table7-15; factory EEPROM defaults assumed"
+  },
+  {
+    "chip": "TMP461",
+    "register": "CONFIG",
+    "field": "RSV_4_3",
+    "bits": "4:3",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Source requires default write0; no nonzero input oracle",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x18",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TMP461.pdf p.21 Tables7/8 and p.12 section8.3.4"
+  },
+  {
+    "chip": "TMP461",
+    "register": "CONFIG",
+    "field": "RSV_1_0",
+    "bits": "1:0",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Source requires default write0; no nonzero input oracle",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x3",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TMP461.pdf p.21 Tables7/8 and p.12 section8.3.4"
+  },
+  {
+    "chip": "TMP461",
+    "register": "CONSECUTIVE_ALERT",
+    "field": "FIXED_1",
+    "bits": "0",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Keep bit0=1 for listed register inputs",
+      "fixed_write": 1,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x1",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TMP461.pdf p.21 Tables7/8 and p.12 section8.3.4"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "RSV3",
+    "bits": "3",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Reserved reset unspecified; preserve fresh observed bits",
+      "preserve_write": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TPS23861.pdf p.63 R17[3:1] reset Reserved; p.68 R27[7:4] reset0"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "RSV2",
+    "bits": "2",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Reserved reset unspecified; preserve fresh observed bits",
+      "preserve_write": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TPS23861.pdf p.63 R17[3:1] reset Reserved; p.68 R27[7:4] reset0"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "ROM1",
+    "bits": "1",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Reserved reset unspecified; preserve fresh observed bits",
+      "preserve_write": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TPS23861.pdf p.63 R17[3:1] reset Reserved; p.68 R27[7:4] reset0"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "INTERRUPT_TIMER",
+    "field": "ROM",
+    "bits": "7:4",
+    "ir_access": "RO",
+    "field_policy": {
+      "exclude": "Must retain reset0; no nonzero input oracle",
+      "fixed_write": 0,
+      "known_reset": true
+    },
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0xf0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "BOUNDED_POLICY_REVIEW",
+    "source_locator": "TI/TPS23861.pdf p.63 R17[3:1] reset Reserved; p.68 R27[7:4] reset0"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "POE_PLUS",
+    "field": "RSVD_LO",
+    "bits": "3:0",
+    "ir_access": "UNSPEC",
+    "field_policy": {},
+    "excluded_access_assertions": true,
+    "known_reset_bit_mask": "0x0",
+    "known_protection_bit_mask": "0x0",
+    "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+    "source_locator": "TI/TPS23861.pdf p.63 R17[3:1] reset Reserved; p.68 R27[7:4] reset0"
+  }
+]

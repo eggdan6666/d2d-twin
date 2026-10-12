@@ -1,0 +1,13 @@
+# 最终有界协议验收
+
+最终协议：`2.0-candidate-20261012.1`。主任务实际执行：20/20参考准入，75聚合维度通过/85跳过；42回归用例通过；720模型样本完成重判，无超时。完整成绩以 summary.json 与当前哈希绑定的 model_execution_manifest.json 为准。
+
+独立CODE_REVIEW.md的41项/74维通过记录是当时检查点，不冒称其独立审查已覆盖后来主任务的MPU6050状态注解修正。主任务新增第42项故障夹具，确认已审校DEVICE_RESET不可因旧tier标记被跳过；精确source override只作用这一字段。该静态评分把完成后的复位作为原子事件，未验证实际等待时间。
+
+第一次错误候选执行的所有输入及原始输出均归档 audit_round_1/；archive_manifest.json可复核其字节。其“新增1个通过”已撤销；当前最终协议不存在新增全通过。27个原通过样本在非默认状态下暴露复位键未恢复寄存器的问题，日志可逐样本复查。
+
+原第一版冻结harness MD5保持 `8cf0854d4779467bc8e472ee4fb97023`；正式d2d/IR未由本任务修改，60个历史模型结果文件在运行前后SHA-256一致。历史主表和108次扩展队列未被本轮20芯片敏感性结果替换。
+
+有界实现与执行任务验收完成。全面来源准入未完成，仍为M4部分通过；当前第二版作为candidate评分及复现证据，尚不能称全部572字段、物理器件或论文投稿准入已通过。
+
+来源专家两份JSON的project/family/stage标签由既有派遣补齐，事实及PDF/IR证据哈希未变。legal_domain_supplement.json所记录的prior_review_dependency哈希对应metadata补齐前的来源报告，其精确版本仍保存在audit_round_1/source_policy_review.json；不是当前文件哈希校验失败或丢失证据。

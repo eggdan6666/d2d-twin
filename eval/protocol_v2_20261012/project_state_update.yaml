@@ -1,0 +1,13 @@
+project_id: "d2d-twin"
+diagnosed_stage: "M4"
+stage_status: "PARTIALLY_PASSED"
+scientific_readiness: "NOT_READY"
+protocol_task_status: "BOUNDED_COMPLETE"
+protocol_version: "2.0-candidate-20261012.1"
+regression_tests: "42 passed; 41 independent code-review tests plus1 final metadata override regression"
+reference_admission: "20/20,75 passed/85 skipped,1043 comparisons; not source certification"
+models: ["qwen3b: 13/240 full passes", "ds67b: 14/240 full passes", "qwen14b: 41/240 full passes"]
+blockers: ["All572 fields not independently source-certified", "Source conflicts and dynamic/conditional behavior outside current protocol", "Historical generation provenance incomplete"]
+next_action: "Complete20-chip source admission and freeze IR/policy/prompt/harness before new generation"
+evidence: ["REPORT.md", "STAGE_REVIEW.md", "CONFLICT_LEDGER.md", "NEXT_ACTION.md", "execution_record.yaml"]
+last_updated: "2026-10-12"

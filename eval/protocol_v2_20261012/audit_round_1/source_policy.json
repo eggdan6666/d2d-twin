@@ -1,0 +1,497 @@
+{
+  "protocol_version": "2.0-candidate-20261012",
+  "scope": "Prospective static register MVP, factory defaults, no analog or physical bus validation",
+  "default_rules": [
+    "UNSPEC and unverified access omitted from field scoring",
+    "Known reset and known access handled separately",
+    "Declared domains exhaustive except explicit temporal test_values exclusions; unconstrained fields boundary0/max only",
+    "Fresh instance for each stimulus; no cross-test shared state",
+    "Mandatory constant inputs are not writability evidence",
+    "Original8 aggregate dimensions, empty applicable sets skipped",
+    "Reset-key checks include one legal state perturbation"
+  ],
+  "source_certification": "Bounded reviewed repairs/policies, not certification of all572 fields",
+  "chips": {
+    "LIS3DH": {
+      "fields": {
+        "CTRL_REG1.ODR": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        "CTRL_REG0.FIXED_6": {
+          "known_reset": true,
+          "fixed_write": 0
+        },
+        "CTRL_REG0.FIXED_5": {
+          "known_reset": true,
+          "fixed_write": 0
+        },
+        "CTRL_REG0.FIXED_4": {
+          "known_reset": true,
+          "fixed_write": 1
+        },
+        "CTRL_REG0.FIXED_3_0": {
+          "known_reset": true,
+          "fixed_write": 0
+        },
+        "TEMP_CFG_REG.FIXED_5_0": {
+          "known_reset": true,
+          "fixed_write": 0
+        }
+      },
+      "constraints": [
+        {
+          "when": {
+            "CTRL_REG1.ODR": [
+              8
+            ]
+          },
+          "set": {
+            "CTRL_REG1.LPen": 1,
+            "CTRL_REG4.HR": 0
+          }
+        },
+        {
+          "when": {
+            "CTRL_REG4.HR": [
+              1
+            ]
+          },
+          "set": {
+            "CTRL_REG1.LPen": 0
+          }
+        }
+      ],
+      "source": "ST/LIS3DH.pdf pp.16,35,37 Tables10,31"
+    },
+    "ADS1220": {
+      "fields": {
+        "CONFIG0.MUX": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ]
+        },
+        "CONFIG1.MODE": {
+          "legal_values": [
+            0,
+            1,
+            2
+          ]
+        },
+        "CONFIG1.DR": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "CONFIG3.I1MUX": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "CONFIG3.I2MUX": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "CONFIG3.RESERVED": {
+          "legal_values": [
+            0
+          ],
+          "fixed_write": 0
+        }
+      },
+      "constraints": [
+        {
+          "when": {
+            "CONFIG0.MUX": [
+              8,
+              9,
+              10,
+              11
+            ]
+          },
+          "set": {
+            "CONFIG0.GAIN": 0,
+            "CONFIG0.PGA_BYPASS": 1
+          }
+        },
+        {
+          "when": {
+            "CONFIG0.MUX": [
+              12,
+              13
+            ]
+          },
+          "set": {
+            "CONFIG0.PGA_BYPASS": 1
+          }
+        },
+        {
+          "when": {
+            "CONFIG2.FIFTY_SIXTY": [
+              1,
+              2,
+              3
+            ]
+          },
+          "set": {
+            "CONFIG1.MODE": 0,
+            "CONFIG1.DR": 0
+          }
+        }
+      ],
+      "source": "TI/ADS1220.pdf SBAS501D pp.43-46 Tables8-10..8-14"
+    },
+    "TMP117": {
+      "registers": {
+        "DEVICE_ID": {
+          "known_mask": "0x0FFF"
+        }
+      },
+      "fields": {
+        "CONFIG.MOD": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "test_values": [
+            0,
+            1,
+            2
+          ],
+          "excluded_behavior": "MOD3 one-shot completion/timing outside persistence oracle",
+          "readback_values": {
+            "2": 0
+          }
+        }
+      },
+      "source": "TI/TMP117.pdf p.32 Figure7-22 versus Table7-15; factory EEPROM defaults assumed"
+    },
+    "INA3221": {
+      "registers": {
+        "SHUNT_SUM_LIMIT": {
+          "known_mask": "0x8001",
+          "exclude_writes": "Unresolved source access/reset conflict"
+        }
+      },
+      "fields": {
+        "MASK_ENABLE.RSVD15": {
+          "exclude": "Reserved function unverified; keep default",
+          "fixed_write": 0,
+          "known_reset": true
+        }
+      },
+      "source": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+    },
+    "LIS2DW12": {
+      "fields": {
+        "CTRL1.ODR": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        "CTRL1.MODE": {
+          "legal_values": [
+            0,
+            1,
+            2
+          ]
+        },
+        "FIFO_CTRL.FMODE": {
+          "legal_values": [
+            0,
+            1,
+            3,
+            4,
+            6
+          ]
+        },
+        "CTRL2.MUST_BE_ZERO": {
+          "exclude": "Must write0; no oracle for illegal1",
+          "fixed_write": 0,
+          "known_reset": true
+        },
+        "CTRL2.BOOT": {
+          "exclude": "Self-clears after NVM operation; completion/timing not modeled",
+          "fixed_write": 0,
+          "known_reset": true
+        }
+      },
+      "source": "ST/lis2dw12.pdf DS11811 Rev9 p.37 Table32 and BOOT description"
+    },
+    "TMP461": {
+      "fields": {
+        "CONV_RATE.CR": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9
+          ]
+        },
+        "CONSECUTIVE_ALERT.CONAL": {
+          "legal_values": [
+            0,
+            1,
+            3,
+            7
+          ]
+        },
+        "DIGITAL_FILTER.DF": {
+          "legal_values": [
+            0,
+            1,
+            2
+          ]
+        },
+        "CONFIG.RSV_4_3": {
+          "exclude": "Source requires default write0; no nonzero input oracle",
+          "fixed_write": 0,
+          "known_reset": true
+        },
+        "CONFIG.RSV_1_0": {
+          "exclude": "Source requires default write0; no nonzero input oracle",
+          "fixed_write": 0,
+          "known_reset": true
+        },
+        "CONSECUTIVE_ALERT.FIXED_1": {
+          "exclude": "Keep bit0=1 for listed register inputs",
+          "fixed_write": 1,
+          "known_reset": true
+        }
+      },
+      "source": "TI/TMP461.pdf p.21 Tables7/8 and p.12 section8.3.4"
+    },
+    "MPU6050": {
+      "fields": {
+        "CONFIG.DLPF_CFG": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        },
+        "PWR_MGMT_1.CLKSEL": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ]
+        }
+      },
+      "source": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    "AD5592R": {
+      "fields": {
+        "DAC_RD.DAC_RD_EN": {
+          "legal_values": [
+            0,
+            3
+          ]
+        }
+      },
+      "source": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    "TPS23861": {
+      "fields": {
+        "GENERAL_MASK.RSV3": {
+          "exclude": "Reserved reset unspecified; preserve fresh observed bits",
+          "preserve_write": true
+        },
+        "GENERAL_MASK.RSV2": {
+          "exclude": "Reserved reset unspecified; preserve fresh observed bits",
+          "preserve_write": true
+        },
+        "GENERAL_MASK.ROM1": {
+          "exclude": "Reserved reset unspecified; preserve fresh observed bits",
+          "preserve_write": true
+        },
+        "INTERRUPT_TIMER.ROM": {
+          "exclude": "Must retain reset0; no nonzero input oracle",
+          "fixed_write": 0,
+          "known_reset": true
+        }
+      },
+      "source": "TI/TPS23861.pdf p.63 R17[3:1] reset Reserved; p.68 R27[7:4] reset0"
+    },
+    "HDC2021": {
+      "fields": {
+        "STATUS.UNUSED": {
+          "exclude": "Reset0 known; access unspecified",
+          "known_reset": true,
+          "fixed_write": 0
+        },
+        "INTERRUPT_ENABLE.UNUSED": {
+          "exclude": "Reset0 known; access unspecified",
+          "known_reset": true,
+          "fixed_write": 0
+        },
+        "MEAS_CONFIG.TACC": {
+          "legal_values": [
+            0,
+            1,
+            2
+          ]
+        },
+        "MEAS_CONFIG.HACC": {
+          "legal_values": [
+            0,
+            1,
+            2
+          ]
+        },
+        "MEAS_CONFIG.MEAS_CONF": {
+          "legal_values": [
+            0,
+            1
+          ]
+        },
+        "MEAS_CONFIG.RSVD3": {
+          "exclude": "RW label known, no defined function; conservative scope",
+          "fixed_write": 0,
+          "known_reset": true
+        }
+      },
+      "source": "TI/HDC2021.pdf pp.23,25,31 Tables7-16,7-22,7-38"
+    },
+    "BME280": {
+      "fields": {
+        "config.UNUSED": {
+          "exclude": "Grey do-not-change/write bit; no storage oracle",
+          "fixed_write": 0,
+          "known_reset": true
+        },
+        "status.UNUSED": {
+          "exclude": "Grey source bit, no known readback oracle"
+        },
+        "status.UNUSED2": {
+          "exclude": "Grey source bit, no known readback oracle"
+        },
+        "ctrl_hum.UNUSED": {
+          "exclude": "Grey do-not-change/write bits",
+          "fixed_write": 0
+        },
+        "press_xlsb.UNUSED": {
+          "verified_access": true,
+          "known_reset": true,
+          "source": "p.27 Table18 explicit RO zero bits"
+        },
+        "temp_xlsb.UNUSED": {
+          "verified_access": true,
+          "known_reset": true,
+          "source": "p.27 Table18 explicit RO zero bits"
+        },
+        "ctrl_meas.mode": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "test_values": [
+            0,
+            3
+          ],
+          "excluded_behavior": "Forced modes1/2 complete then return tosleep; no completion model"
+        }
+      },
+      "source": "Bosch/BME280.pdf Table18 p.27"
+    },
+    "BMP280": {
+      "fields": {
+        "config.UNUSED": {
+          "exclude": "Grey do-not-change/write bit; no storage oracle",
+          "fixed_write": 0,
+          "known_reset": true
+        },
+        "status.UNUSED": {
+          "exclude": "Grey source bit, no known readback oracle"
+        },
+        "status.UNUSED2": {
+          "exclude": "Grey source bit, no known readback oracle"
+        },
+        "ctrl_meas.mode": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "test_values": [
+            0,
+            3
+          ],
+          "excluded_behavior": "Forced modes1/2 complete then return tosleep; no completion model"
+        }
+      },
+      "source": "Bosch/BMP280.pdf Table18 p.24"
+    }
+  }
+}
