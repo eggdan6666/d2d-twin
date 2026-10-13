@@ -1,0 +1,488 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lis3dh-v35/source_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/ST/LIS3DH.pdf complete54page PDF text; critical tables visual",
+    "eval/independent_source_admission_20261012/field_evidence.json and audit_bundle_manifest.json exact frozen identity",
+    "eval/lis3dh_semantics_v35_20261013/source_review_task.json",
+    "Project-local expert core resources and playbook"
+  ],
+  "outputs": [
+    "eval/lis3dh_semantics_v35_20261013/source_review.md",
+    "eval/lis3dh_semantics_v35_20261013/source_review.json"
+  ],
+  "evidence_status": [
+    "VERIFIED_SOURCE: exact54page manufacturer datasheet and six visual page inspections",
+    "EXECUTED_LOCAL: PDF SHA256, frozen ledger manifest hash and8field/8dimension/sourceidentity checks, extraction/rendering",
+    "NOT_EXECUTED: implementation, runtime tests, admission, physicalbus/acceleration/selftest verification"
+  ],
+  "assumptions": [
+    "Common source event scope simultaneousXYZ, allaxesenabled, BDU0, FIFOoff, filterbypass, ST0, legalsettledmode",
+    "STATUS rawbyte storage is not a wholebyte oracle while bit0unknown",
+    "Source-qualified logicalevents are supplied stimuli, not actual accelerometer measurements",
+    "Eight repaired dimensions remain oneSTaccess plus sevenSTATUSreset; supporting clauses do not enlarge denominator"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "Exact PDF SHA matches all8 sourceREPAIR rows",
+    "Frozen field_evidence SHA matches auditmanifest",
+    "Exactly8 fields8repairdimensions:1access7reset",
+    "All54pages extracted/read; visual16/17/31/37/39/40",
+    "Table47 missing XDA visually confirmed",
+    "Readclear, aggregation and BDU pending decisions not silently invented",
+    "No oldIR/frozenharness/results changed"
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "LIS3DH-C-XDA-OMITTED",
+      "type": "SOURCE_OMISSION",
+      "claim": "XDA bit0 initial/default and dynamic semantics",
+      "locators": [
+        "p.39 Tables46-47"
+      ],
+      "competing": [
+        "Table46 names XDA",
+        "Table47 stops at YDA and omits XDA description/default"
+      ],
+      "resolution": "UNRESOLVED; initial STATUS knownmaskFE and XDA remains unknown throughout common source; no borrowing AUX1DA or sibling-chip facts."
+    },
+    {
+      "conflict_id": "LIS3DH-C-STATUS-READ-HISTORY",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "STATUS DA/OR clearing or preservation on STATUS/output reads",
+      "locators": [
+        "p.39 Table47",
+        "p.40 sections8.16-8.18",
+        "p.38 Table41",
+        "p.42 section8.22"
+      ],
+      "competing": [
+        "DA and OR described as available/overwrite states",
+        "No readclear event/byte order/halfword condition for STATUS; other interrupts explicitly specify clears"
+      ],
+      "resolution": "UNRESOLVED; source common profile ends numeric STATUS oracle at first observed read; thereafter unknown/guard, not zero or preservation. Candidate explicit profiles do not constitute manufacturer verification."
+    },
+    {
+      "conflict_id": "LIS3DH-C-AGGREGATE",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "ZYXDA/ZYXOR for partial-axis/mixed-read histories",
+      "locators": [
+        "p.39 Table47"
+      ],
+      "competing": [
+        "XYZ new set wording",
+        "No Boolean OR/AND or mixed-axis truth table"
+      ],
+      "resolution": "UNRESOLVED; support simultaneous XYZ samples only. Do not generalize all-axis witness to OR/AND aggregation."
+    },
+    {
+      "conflict_id": "LIS3DH-C-BDU-RELEASE",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "BDU pair reading and blocked sample release selection/granularity",
+      "locators": [
+        "p.37 Table38",
+        "p.40 sections8.16-8.18"
+      ],
+      "competing": [
+        "Hold until MSB and LSB reading explicit",
+        "Pending sample policy, next-ODR release and axis/group granularity omitted"
+      ],
+      "resolution": "UNRESOLVED; verify hold before complete pair only as supporting bounded clause; post-pair selection and status effect excluded. Deterministic candidate interpretation must be labelled abstraction."
+    },
+    {
+      "conflict_id": "LIS3DH-C-ST-PHYSICAL",
+      "type": "ABSTRACTION_GAP",
+      "claim": "RW self-test code versus actual physical response/settling",
+      "locators": [
+        "p.17 section3.2.2",
+        "pp.10-11 Table4notes5-7",
+        "p.37 Table39"
+      ],
+      "competing": [
+        "Legal configuredST storage defined",
+        "Output responds to electrostatic test-force with sample settling, source prose singleSTbit simplification"
+      ],
+      "resolution": "UNRESOLVED as physical capability; use explicit two-bit Table39 for storage, leave response/sign/calibration/executed sample-settling out. Do not claim ST code persistence proves accelerometer self-test."
+    },
+    {
+      "conflict_id": "LIS3DH-C-ACTIVE-MODE-HISTORY",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "Output/STATUS/unread history across active ODR/mode/BLE changes",
+      "locators": [
+        "p.16 Table10",
+        "p.17 Table11",
+        "p.35 Table31",
+        "p.37 Table38"
+      ],
+      "competing": [
+        "Mode-dependent width, BLE restrictions and settling listed",
+        "No full atomic old/new register and unread STATUS transition truth table"
+      ],
+      "resolution": "UNRESOLVED; only quiescent legal setup before qualified samples, disallow active reinterpretation; source turn-on values metadata, not executed timer proof."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Implement and independently replay eight bounded repair dimensions with FE-only default oracles and source-unknown post-read histories before source admission.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "source": {
+    "path": "corpus/data/raw_pdf/ST/LIS3DH.pdf",
+    "manual_version": "DocID17530 Rev 2, December2016, revision date12-Dec-2016",
+    "sha256": "852bfcf1a993f04cc147f26a26612a22fdc307c234f3e53d2c24c850ad421533",
+    "pdf_pages": 54,
+    "reviewed_printed_pages": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54
+    ],
+    "visual_pages": [
+      16,
+      17,
+      31,
+      37,
+      39,
+      40
+    ]
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.31 Table21",
+        "p.37 section8.11 Tables37-38"
+      ],
+      "rule": "CTRL_REG4 address23 is RW. ST occupies bits2:1 and default00; legal code storage/readback may be tested while maintaining legal neighboring mode/interface settings. UNSPEC is an old audit exclusion label, not the manufacturer access type."
+    },
+    {
+      "id": "C2",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.37 Table39"
+      ],
+      "rule": "ST00 disabled, ST01 self-test0, ST10 self-test1. ST11 row is --, not an ordinary legal RW persistence test. Rejecting it at an adapter boundary does not assert silicon ignores or resets that code."
+    },
+    {
+      "id": "C3",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.39 Tables46-47",
+        "p.31 Table21"
+      ],
+      "rule": "STATUS address27 is read-only Output in the summary, but Table47 explicitly gives zero defaults for ZYXOR7 ZOR6 YOR5 XOR4 ZYXDA3 ZDA2 YDA1. Known default maskFE, expected0, only at initial settled boot/default boundary before qualified sample events. Bit0 XDA has no description/default in Table47 and is not part of known reset mask."
+    },
+    {
+      "id": "C4",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.17 section3.2.2",
+        "pp.10-11 Table4 notes5-7",
+        "p.37 Table39"
+      ],
+      "rule": "Self-test produces electrostatic acceleration and a physical output difference; the source settling requirement is two samples low-power/normal or eight high-resolution. Legal ST storage is not completion, analog response, sign/amplitude or timing certification. Qualified output sample events with ST nonzero need not be modeled by this bounded task."
+    },
+    {
+      "id": "C5",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.39 Table47",
+        "p.19 section3.4"
+      ],
+      "rule": "YDA/ZDA indicate new data available for their axes, ZYXDA indicates a new set available. Qualified simultaneous XYZ completion in bypass/no-read/no-history-change scope may establish these known bits1. XDA is excluded because its row is absent. No arbitrary partial-axis aggregation oracle follows."
+    },
+    {
+      "id": "C6",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.39 Table47",
+        "p.37 Table38 BDU"
+      ],
+      "rule": "Per-axis overrun indicates newly generated data overwrote previous axis data; ZYXOR indicates a new set overwrote previous set. Two qualified simultaneous XYZ completed samples with BDU0 and no intervening output/status reads support overwrite witness at FE mask. BDU-blocked nonwrites must not be called output overwrites; exact post-read flag history not specified."
+    },
+    {
+      "id": "C7",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.40 sections8.16-8.18",
+        "p.16 Table10",
+        "p.37 Table38 BLE and Table37note1"
+      ],
+      "rule": "Acceleration outputs are signed two-complement left-justified. Qualified integer codes use8/10/12 significant bits for low-power/normal/high-resolution respectively. BLE0 lower-addressLSB, BLE1 lower-addressMSB; BLE can activate only high-resolution. Source format clauses are supporting scope, not eight new repaired output fields, not mg-to-code calibration."
+    },
+    {
+      "id": "C8",
+      "class": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "locators": [
+        "p.37 Table38 BDU"
+      ],
+      "rule": "BDU0 continuous update; BDU1 output registers not updated until MSB and LSB reading. This proves hold-until-both-read boundary, not precise pending/latest/next sample release, per-axis versus whole-XYZ granularity, duplicate-half read policy or post-release STATUS clear behavior."
+    },
+    {
+      "id": "C9",
+      "class": "VERIFIED_SOURCE",
+      "locators": [
+        "p.16 Table10",
+        "p.17 Table11",
+        "p.35 Table31"
+      ],
+      "rule": "Legal LPen/HR pairs are10 low-power,00 normal,01 high-resolution;11 not allowed. ODR0 power-down,1-7 allthree modes,8 low-power only,9 high-resolution/normal1.344kHz or low-power5.376kHz;10-15 undefined. Settled qualified logical sample events do not execute wall-clock turn-on/ODR scheduling or active-history mode transition."
+    },
+    {
+      "id": "C10",
+      "class": "ABSTRACTION_ASSUMPTION",
+      "locators": [
+        "Task evidence boundaries",
+        "pp.24-30 digitalinterfaces",
+        "pp.10-15 physical/electrical specifications"
+      ],
+      "rule": "Register/event adapter only. Use quiescent legal configuration, allaxes enabled, FIFO off/bypass, filter bypass, ST0 for qualified sample scenarios. No actual I2C ACK/frame/SPI/electrical/physical acceleration/self-test/clock certification; out-of-scope errors constrain benchmark input only."
+    },
+    {
+      "id": "C11",
+      "class": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "locators": [
+        "p.39 Tables46-47",
+        "p.37 Table38",
+        "p.40 sections8.16-8.18",
+        "p.38 Table41",
+        "p.42 section8.22",
+        "p.45 section8.26"
+      ],
+      "rule": "Reviewed Rev2 STATUS descriptions do not specify how STATUS or any output-byte/pair read clears or preserves DA/OR bits. Explicit INT1/INT2 source-register readclear provisions belong to other registers and cannot be transferred to STATUS. No common-source post-read reset/retention oracle after first observed read."
+    },
+    {
+      "id": "C12",
+      "class": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "locators": [
+        "p.39 Table47"
+      ],
+      "rule": "ZYXDA and ZYXOR prose refers to XYZ/new set without explicit OR/AND truth table for independently updated/read/disabled axes. Simultaneous allaxis no-read cases have common outcome; partial or mixed-history cases must be excluded or labelled hypothesis."
+    }
+  ],
+  "field_closure_advice": [
+    {
+      "field": "CTRL_REG4.ST",
+      "claims": [
+        "C1",
+        "C2",
+        "C4",
+        "C9",
+        "C10"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "exact legal ST00/01/10 RW field storage",
+        "rejectST11 atcontractboundary withoutsiliconoracle",
+        "preserve legalneighboring settings anddefaultST00",
+        "do not claim physicalselftest completion/response"
+      ]
+    },
+    {
+      "field": "STATUS_REG.XOR",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    },
+    {
+      "field": "STATUS_REG.YDA",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    },
+    {
+      "field": "STATUS_REG.YOR",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    },
+    {
+      "field": "STATUS_REG.ZDA",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    },
+    {
+      "field": "STATUS_REG.ZOR",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    },
+    {
+      "field": "STATUS_REG.ZYXDA",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    },
+    {
+      "field": "STATUS_REG.ZYXOR",
+      "claims": [
+        "C3",
+        "C5",
+        "C6",
+        "C10",
+        "C11",
+        "C12"
+      ],
+      "status": "REPAIR_PENDING_EXECUTION",
+      "checks": [
+        "known initial/reset bit zero beforequalifiedevents",
+        "wholeSTATUS knownmaskFE notFF",
+        "XDA remainsoutside repairedscope",
+        "qualified simultaneousXYZ nonzero DA/OR witness excludesreadhistory",
+        "no postread reset/preservation promotion"
+      ]
+    }
+  ],
+  "denominator": {
+    "repair_fields": 8,
+    "repair_dimensions": 8,
+    "access": 1,
+    "reset": 7,
+    "whole_field_promotions": 0
+  },
+  "excluded_claims": [
+    "XDA default/event guarantee",
+    "DA/OR exact reset or preservation on output/status reads",
+    "OR-vs-AND partialaxis aggregation",
+    "BDU pending/latest release or exactpair granularity",
+    "Physicalselftest response/sign/amplitude/calibration",
+    "Wallclock ODR/turnon timers andactiveconfig history",
+    "Real I2C/SPI frames/ACK/electrical conditions",
+    "OtherSTATUS_AUX/FIFO/interrupt fields added to thisrepair scope"
+  ]
+}

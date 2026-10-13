@@ -1,0 +1,39 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lis3dh-v35/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "LIS3DH eight source REPAIR fields eight repair dimensions bounded implementation",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/tmp461_semantics_v34_20261013",
+    "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+  ],
+  "expected_outputs": [
+    "code_review.md",
+    "code_review.json"
+  ],
+  "evidence_boundaries": [
+    "Original PDF facts only",
+    "Retain unknown/physical exclusions",
+    "No old artifacts or model results modified"
+  ],
+  "acceptance_checks": [
+    "Exactly8REPAIRfields8dimensions",
+    "CTRL_REG4.ST legalRW access",
+    "STATUS knownreset maskFE before events",
+    "Dataavailable/overrun controlledsamples andoutputreads",
+    "Sourceidentity and exactevidence replay"
+  ],
+  "known_missing_items": [
+    "No physical I2C/SPI/accelerometer/selftest/timing certification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

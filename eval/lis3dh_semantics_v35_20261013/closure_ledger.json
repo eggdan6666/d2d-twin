@@ -1,0 +1,445 @@
+[
+  {
+    "inventory_field_id": "LIS3DH.CTRL_REG4.ST",
+    "dimension": "access",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C4",
+      "C9",
+      "C10"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C2": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C9": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "legal_st_access"
+      ],
+      "C2": [
+        "legal_st_access",
+        "source_scope_guards"
+      ],
+      "C4": [
+        "selftest_response_boundary"
+      ],
+      "C9": [
+        "source_scope_guards",
+        "nominal_odr_table"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.XOR",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.YDA",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.YOR",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZDA",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZOR",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZYXDA",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZYXOR",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C5",
+      "C6",
+      "C10",
+      "C11",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C10": "ABSTRACTION_ASSUMPTION",
+      "C11": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "settled_default",
+        "power_on_defaults"
+      ],
+      "C5": [
+        "simultaneous_new_set"
+      ],
+      "C6": [
+        "simultaneous_overwrite"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "common_read_boundary"
+      ],
+      "C12": [
+        "common_read_boundary",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "LIS3DH-C-XDA-OMITTED",
+      "LIS3DH-C-STATUS-READ-HISTORY",
+      "LIS3DH-C-AGGREGATE",
+      "LIS3DH-C-BDU-RELEASE",
+      "LIS3DH-C-ST-PHYSICAL",
+      "LIS3DH-C-ACTIVE-MODE-HISTORY"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Sevenknown defaultbits andlegalSTaccess; qualifiedXYZ events; postreadstatus unknown; readconsumption/BDU-release exploratory; no physical/full-source certification"
+  }
+]

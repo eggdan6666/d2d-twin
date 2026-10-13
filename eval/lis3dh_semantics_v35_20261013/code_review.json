@@ -1,0 +1,190 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lis3dh-v35/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/ST/LIS3DH.pdf DocID17530 Rev2 printed pp11,16-17,31-32,37,39-40; visual37/39",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "eval/lis3dh_semantics_v35_20261013/source_review.json",
+    "eval/lis3dh_semantics_v35_20261013/lis3dh.py",
+    "eval/lis3dh_semantics_v35_20261013/scenarios.py",
+    "eval/lis3dh_semantics_v35_20261013/admission.py",
+    "eval/lis3dh_semantics_v35_20261013/scenario_execution.json",
+    "eval/lis3dh_semantics_v35_20261013/closure_ledger.json",
+    "eval/lis3dh_semantics_v35_20261013/admission_gate.json",
+    "eval/lis3dh_semantics_v35_20261013/execution_manifest.json"
+  ],
+  "outputs": [
+    "code_review.md",
+    "code_review.json",
+    "code_acceptance_checklist.md",
+    "tests/test_independent_lis3dh.py",
+    "tests/record_independent_execution.py",
+    "tests/package_code_review.py",
+    "independent_code_execution.json",
+    "independent_code_execution.log",
+    "independent_code_results.xml"
+  ],
+  "evidence_status": [
+    "VERIFIED_SOURCE: primary specification independently read; tables37-39 and46-47 visually inspected.",
+    "EXECUTED_LOCAL: 173 independent tests passed; 9 synthetic faults detected; 28 proof/source corruption variants rejected.",
+    "EXECUTED_LOCAL: 9 missing-scenario fixtures remain partial; saved scenario and eight closure rows replay exactly.",
+    "VERIFIED_USER_MATERIAL: historical preservation record reviewed; recorder independently confirms frozen harness MD5.",
+    "NOT_EXECUTED: real I2C/SPI, MEMS acceleration, physical self-test, clock timing, model generation or whole source admission."
+  ],
+  "assumptions": [
+    "Primary source does not define XDA reset/event oracle: known STATUS maskFE in both profiles.",
+    "Main coherent sample events are supplied logical stimuli, not physical measurements; seven-bit status knowledge ends at first status/output observation.",
+    "Candidate ANY aggregate and two distinct output-byte consumption rules are explicit hypotheses; no manufacturer promotion.",
+    "Only settled legal mode, all-axis, FIFO/filter-bypass stimuli; ST physical responses, active mode histories and BDU pending selection excluded.",
+    "Strict precision-grid stimuli are scoped input qualification rather than evidence of all physical output low bits."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "173/173 actual tests; zero errors/failures/skips.",
+    "Exactly eight source REPAIR fields/eight dimensions: oneSTaccess andsevenSTATUSreset.",
+    "ST00/01/10 RW persistence preserves legal adjacent controls; ST11 rejects atomically.",
+    "Cold STATUS FE zero, XDA unknown, dynamic outputs unknown; no full-byte fabrication.",
+    "Controlled coherent pre-read DA/overrun witnesses; first main status/output read invalidates subsequent numeric status knowledge.",
+    "Normal/high-resolution/low-power source-format scoped stimuli; malformed/outside-profile operations reject without trace/state mutation.",
+    "Candidate paired reads, both orders, repeated half reads, partial masked reads, other-axis preservation and interleaved samples tested.",
+    "Source PDF and frozen field authority rehashed; altered identities, claims, traces/checks and execution-kind relabelling rejected.",
+    "All eight ledger rows keep whole_field_promoted=false and whole_dimension_closed=false."
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "LIS3DH-C-XDA-OMITTED",
+      "type": "SOURCE_OMISSION",
+      "claim": "XDA bit0 initial/default and dynamic semantics",
+      "locators": [
+        "p.39 Tables46-47"
+      ],
+      "competing": [
+        "Table46 names XDA",
+        "Table47 stops at YDA and omits XDA description/default"
+      ],
+      "resolution": "UNRESOLVED; initial STATUS knownmaskFE and XDA remains unknown throughout common source; no borrowing AUX1DA or sibling-chip facts."
+    },
+    {
+      "conflict_id": "LIS3DH-C-STATUS-READ-HISTORY",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "STATUS DA/OR clearing or preservation on STATUS/output reads",
+      "locators": [
+        "p.39 Table47",
+        "p.40 sections8.16-8.18",
+        "p.38 Table41",
+        "p.42 section8.22"
+      ],
+      "competing": [
+        "DA and OR described as available/overwrite states",
+        "No readclear event/byte order/halfword condition for STATUS; other interrupts explicitly specify clears"
+      ],
+      "resolution": "UNRESOLVED; source common profile ends numeric STATUS oracle at first observed read; thereafter unknown/guard, not zero or preservation. Candidate explicit profiles do not constitute manufacturer verification."
+    },
+    {
+      "conflict_id": "LIS3DH-C-AGGREGATE",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "ZYXDA/ZYXOR for partial-axis/mixed-read histories",
+      "locators": [
+        "p.39 Table47"
+      ],
+      "competing": [
+        "XYZ new set wording",
+        "No Boolean OR/AND or mixed-axis truth table"
+      ],
+      "resolution": "UNRESOLVED; support simultaneous XYZ samples only. Do not generalize all-axis witness to OR/AND aggregation."
+    },
+    {
+      "conflict_id": "LIS3DH-C-BDU-RELEASE",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "BDU pair reading and blocked sample release selection/granularity",
+      "locators": [
+        "p.37 Table38",
+        "p.40 sections8.16-8.18"
+      ],
+      "competing": [
+        "Hold until MSB and LSB reading explicit",
+        "Pending sample policy, next-ODR release and axis/group granularity omitted"
+      ],
+      "resolution": "UNRESOLVED; verify hold before complete pair only as supporting bounded clause; post-pair selection and status effect excluded. Deterministic candidate interpretation must be labelled abstraction."
+    },
+    {
+      "conflict_id": "LIS3DH-C-ST-PHYSICAL",
+      "type": "ABSTRACTION_GAP",
+      "claim": "RW self-test code versus actual physical response/settling",
+      "locators": [
+        "p.17 section3.2.2",
+        "pp.10-11 Table4notes5-7",
+        "p.37 Table39"
+      ],
+      "competing": [
+        "Legal configuredST storage defined",
+        "Output responds to electrostatic test-force with sample settling, source prose singleSTbit simplification"
+      ],
+      "resolution": "UNRESOLVED as physical capability; use explicit two-bit Table39 for storage, leave response/sign/calibration/executed sample-settling out. Do not claim ST code persistence proves accelerometer self-test."
+    },
+    {
+      "conflict_id": "LIS3DH-C-ACTIVE-MODE-HISTORY",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "Output/STATUS/unread history across active ODR/mode/BLE changes",
+      "locators": [
+        "p.16 Table10",
+        "p.17 Table11",
+        "p.35 Table31",
+        "p.37 Table38"
+      ],
+      "competing": [
+        "Mode-dependent width, BLE restrictions and settling listed",
+        "No full atomic old/new register and unread STATUS transition truth table"
+      ],
+      "resolution": "UNRESOLVED; only quiescent legal setup before qualified samples, disallow active reinterpretation; source turn-on values metadata, not executed timer proof."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Orchestrator verify the accepted LIS3DH bytes and continue remaining frozen REPAIR obligations while formal generation stays blocked.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "review_date": "2026-10-13",
+  "readiness": "CONDITIONALLY_READY_FOR_DECLARED_LIS3DH_SCOPE_ONLY",
+  "paper_submission_readiness": "NOT_READY",
+  "bounded_implementation_recommendation": "PASS_CANDIDATE",
+  "independent_test_counts": {
+    "tests": 173,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 173
+  },
+  "synthetic_runtime_faults": 9,
+  "proof_corruption_rejections": 28,
+  "source_conflict_ids": [
+    "LIS3DH-C-XDA-OMITTED",
+    "LIS3DH-C-STATUS-READ-HISTORY",
+    "LIS3DH-C-AGGREGATE",
+    "LIS3DH-C-BDU-RELEASE",
+    "LIS3DH-C-ST-PHYSICAL",
+    "LIS3DH-C-ACTIVE-MODE-HISTORY"
+  ],
+  "reviewed_input_sha256": {
+    "eval/lis3dh_semantics_v35_20261013/lis3dh.py": "314babd2ffa911b64be6509afa27d40bc8b65ad2e85d88920b95ffe21fa2404a",
+    "eval/lis3dh_semantics_v35_20261013/scenarios.py": "e9bd1e851e5f095729e52c3d812fadcad3ce8a67b86ae8fcab4ca08b5d1630d5",
+    "eval/lis3dh_semantics_v35_20261013/admission.py": "2341ffc96d579820f56046a93b544171e360302ebf2ef9fb301a889e82f69c3d",
+    "eval/lis3dh_semantics_v35_20261013/source_review.json": "9d9f08852ec00fe529bee396495019bb7d26a8fa471ffd47f82f10ec58db69cc",
+    "corpus/data/raw_pdf/ST/LIS3DH.pdf": "852bfcf1a993f04cc147f26a26612a22fdc307c234f3e53d2c24c850ad421533",
+    "_setup/run_lis3dh_v35.py": "c37b857a82ae3a7f04e401e6ed0ce04352c80eb404fe75f64fbc88f9511c72a1",
+    "eval/lis3dh_semantics_v35_20261013/scenario_execution.json": "fa4ae4f89b39ba1a0826449e9021cc4e8f06d917e0d9d7cc187bd678221e4314",
+    "eval/lis3dh_semantics_v35_20261013/closure_ledger.json": "99415493a324e17f4641b9cd892bd0da14f7ca9a1884b0b16773238ae08f231b",
+    "eval/lis3dh_semantics_v35_20261013/admission_gate.json": "bd0fe420477bbe83a70dbc28ce8ec1a162e241413ec386c5fedcf09fcb876507",
+    "eval/lis3dh_semantics_v35_20261013/preservation_verification.json": "7eb4abcdc9e18a26da91f3f302afe5d4365958b4f03099d16c834e82e2cece13",
+    "eval/lis3dh_semantics_v35_20261013/tests/test_independent_lis3dh.py": "323031772bdf40eeb3eafa004d83feed36229abd2248c7e7cde7ac03e6c42e2a",
+    "eval/lis3dh_semantics_v35_20261013/tests/record_independent_execution.py": "f0693ecbc28053a30b87bf7a3832eb052602e11327e751601715aa451cb06ead",
+    "eval/lis3dh_semantics_v35_20261013/execution_manifest.json": "dc6551ccab476903ea7e3605cde0cb0f23427e7c4b7f15992c098a60863aa973",
+    "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+    "eval/semantic_protocol_v3_20261012/runtime.py": "ddeb772ee87bbfe126fe4bf379ef3eb824072a2ff2083f39787a7ccea1399b9c"
+  }
+}
