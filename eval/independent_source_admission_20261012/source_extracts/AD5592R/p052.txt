@@ -1,0 +1,52 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Temperature Reading Format
+
+Name: TMP_SENSE_RESULT
+
+Temperature Reading.
+
+
+
+
+
+Table 31. Bit Descriptions for TMP_SENSE_RESULT
+Bits              Bit Name                         Description
+
+[15:12]       TEMPSENSE_ADDR               Temperature Indicator Address.
+                                           The address is 0b1000 for the temperature reading readback.
+[11:0]         ADC_DATA                            12-bit ADC result.
+
+
+DAC Data Read Back Format
+
+Name: DAC_DATA_RD
+
+Read back the 12-bit DAC Input Register Data.
+
+
+
+
+
+Table 32. Bit Descriptions for DAC_DATA_RD
+Bits              Bit Name             Description
+
+15          MSB               MSB. This bit is read as 1 during DAC register read back.
+[14:12]       DAC_ADDR        DAC Address.
+                                       000: DAC0.
+                                       001: DAC1.
+                                       010: DAC2.
+                                         011: DAC3.
+                                       100: DAC4.
+                                       101: DAC5.
+                                         110: DAC6.
+                                          111: DAC7.
+[11:0]         DAC_DATA              12-bit DAC Input Register Data.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 52 of 54

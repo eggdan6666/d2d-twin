@@ -1,0 +1,62 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+8.3.2  Four Port, Auto Mode Application
+
+                                                     VDD                      VPWR
+
+                                                           CVDD               TPS23861PW              CVPWR
+                  VPWR                                              1 VDD       VPWR 28                             VPWR                   P2   P3
+
+  RJ45   +                                                                  2  RESET          N/C 27                                                           +   RJ45
+  &      CP3        DP3A                                                                                                                          DP2A       CP2     &
+                                                                           3  SCL         AOUT 26
+ XFMR              -                      FP3                                                                                                              FP2                                  -  XFMR
+                                                                           4  SDAI           AIN 25
+                              QP3                                          5 SDAO     SHTDWN 24                                 QP2
+              DP3B                                                                                                                                         DP2B
+                                                                           6  INT            A3 23                                                              (Optional)           (Optional)
+                      RS3B     RS3A                                         7 DGND      AGND 22                                   RS2A     RS2B
+                                                                    RSEN3
+                                                                           8  SEN3        GATE2 21
+                                                                  RDRN3                                  RDRN2
+                      RS4B     RS4A                                         9  DRAIN3     DRAIN2 20                                   RS1A     RS1B                                                                                                            RSEN2
+           (Optional)                                                                                                                                                                   (Optional)
+                                                                           10 GATE3        SEN2 19
+              DP4B                                                                                                                                         DP1B
+                              QP4                                         11 KSENSB     KSENSA 18                                 QP1
+                                                                    RSEN4                                                                                          P1   P4
+                                                                           12 SEN4        GATE1 17
+                                                                  RDRN4                                  RDRN1              -                      FP4                                                                                                                                                 FP1                                  -   RJ45  RJ45
+                                                                           13 DRAIN4     DRAIN1 16
+                                                                                                                        &  &                                                                                                                                                   DP1A       CP1          CP4        DP4A                                                                                                            RSEN1
+ XFMR                                                                                                                                                                +  XFMR        +                                                                           14 GATE4        SEN1 15
+
+                  VPWR                                                                                 VPWR
+
+                                                                                                                                                                                                              Copyright © 2016, Texas Instruments Incorporated
+
+                             Figure 49. Four Port Auto Mode Application
+
+8.3.2.1  Design Requirements
+
+The design for the four port Auto Mode application is the same as for the two port design scaled up by two. In
+addition, the four port application does not require port reset so the RESET pin may be connected directly to
+VDD.
+
+                                    Table 13. Design Parameters
+
+                DESIGN PARAMETER                                    VALUE
+
+                         Operating mode                                                  Auto Mode
+
+                     Number/type of ports                                             Four type 2 ports
+
+
+
+
+
+88     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

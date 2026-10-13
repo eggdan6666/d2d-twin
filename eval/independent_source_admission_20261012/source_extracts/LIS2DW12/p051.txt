@@ -1,0 +1,50 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.29    TAP_SRC (39h)
+            Tap source register (R)
+
+
+                                                 Table 79. TAP_SRC register
+
+                                      SINGLE_    DOUBLE_
+                   0         TAP_IA                            TAP_SIGN     X_TAP      Y_TAP       Z_TAP
+                                      TAP        TAP
+
+
+                                            Table 80. TAP_SRC register description
+
+                               Tap event status
+             TAP_IA
+                                           (0: tap event not detected; 1: tap event detected)
+
+                                     Single-tap event status
+            SINGLE_TAP
+                                           (0: single-tap event not detected; 1: single-tap event detected)
+
+                                  Double-tap event status
+           DOUBLE_TAP
+                                           (0: double-tap event not detected; 1: double-tap event detected)
+
+                                 Sign of acceleration detected by tap event
+            TAP_SIGN
+                                           (0: positive sign of acceleration detected; 1: negative sign of acceleration detected)
+
+                               Tap event detection status on X-axis
+            X_TAP
+                                           (0: tap event on X not detected; 1: tap event on X-axis is detected)
+
+                               Tap event detection status on Y-axis
+            Y_TAP
+                                           (0: tap event on Y not detected; 1: tap event on Y-axis is detected)
+
+                               Tap event detection status on Z-axis
+            Z_TAP
+                                           (0: tap event on Z not detected; 1: tap event on Z-axis is detected)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 51/65

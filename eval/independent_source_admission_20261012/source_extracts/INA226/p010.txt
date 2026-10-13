@@ -1,0 +1,69 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+6 Detailed Description
+ 6.1 Overview
+The INA226 is a digital current sense amplifier with an I2C- and SMBus-compatible interface. The device
+ provides digital current, voltage, and power readings necessary for accurate decision-making in precisely-
+ controlled systems. Programmable registers allow flexible configuration for measurement resolution as well as
+ continuous-versus-triggered operation. Detailed register information appears at the end of this data sheet. See
+ the Functional Block Diagram section for a block diagram of the INA226 device.
+
+ 6.2 Functional Block Diagram
+
+
+                                                                          Power (1)
+
+
+                                                                      Bus Voltage (1)
+                                                                      ´
+
+                                                                                      Current (1)
+                            Shunt Voltage
+                                Channel
+                                          ADC
+                           Bus Voltage
+                                Channel
+                                                                                                    Calibration(2)
+                                                                      ´
+
+                                                                            Shunt Voltage(1)
+
+
+                                                                            Data Registers
+
+      (1) Read-only
+      (2) Read/write
+
+ 6.3 Feature Description
+ 6.3.1 Basic ADC Functions
+
+The INA226 device performs two measurements on the power-supply bus of interest. The voltage developed
+ from the load current that flows through a shunt resistor creates a shunt voltage that is measured at the IN+ and
+ IN– pins. The device can also measure the power supply bus voltage by connecting this voltage to the VBUS
+ pin. The differential shunt voltage is measured with respect to the IN– pin while the bus voltage is measured with
+ respect to ground.
+
+The device is typically powered by a separate supply that can range from 2.7V to 5.5V. The bus that is being
+ monitored can range in voltage from 0V to 36V. Based on the fixed 1.25mV LSB for the Bus Voltage Register
+ that a full-scale register results in a 40.96V value.
+
+                                           Note
+
+    Do not apply more than 36V of actual voltage to the input pins.
+
+ There are no special considerations for power-supply sequencing because the common-mode input range and
+ power-supply voltage are independent of each other; therefore, the bus voltage can be present with the supply
+ voltage off, and reciprocally.
+
+The device takes two measurements, shunt voltage and bus voltage. The device then converts these
+measurements to current, based on the Calibration Register value, and then calculates power. Refer to
+ the Programming the Calibration Register section for additional information on programming the Calibration
+ Register.
+
+
+
+
+10    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

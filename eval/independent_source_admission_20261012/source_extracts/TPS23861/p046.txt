@@ -1,0 +1,100 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+Register Map – I2C-Addressable (continued)
+
+                  Table 10. I2C-Addressable Register Set Summary (1)(2) (continued)
+
+        REGISTER OR CMD                       I2C   DATA
+       COMMAND                RST STATE                       FIELD DESCRIPTION
+ CODE                R/W   BYTE
+         NAME
+
+  2E               RO            0000,0000                               Input voltage: LSByte
+         Input Voltage               2
+  2F               RO            0000,0000         -            -                 Input voltage: MSByte (bits 13 to 8)
+
+  30               RO            0000,0000                              Port 1 current: LSByte
+         Port 1 Current              2
+  31               RO            0000,0000         -            -                Port 1 current: MSByte (bits 13 to 8)
+
+  32               RO            0000,0000                              Port 1 voltage: LSByte
+         Port 1 Voltage              2
+  33               RO            0000,0000         -            -                Port 1 voltage: MSByte (bits 13 to 8)
+
+  34               RO            0000,0000                              Port 2 current: LSByte
+         Port 2 Current              2
+  35               RO            0000,0000         -            -                Port 2 current: MSByte (bits 13 to 8)
+
+  36               RO            0000,0000                              Port 2 voltage: LSByte
+         Port 2 Voltage              2
+  37               RO            0000,0000         -            -                Port 2 voltage: MSByte (bits 13 to 8)
+
+  38               RO            0000,0000                              Port 3 current: LSByte
+         Port 3 Current              2
+  39               RO            0000,0000         -            -                Port 3 current: MSByte (bits 13 to 8)
+
+  3A               RO            0000,0000                              Port 3 voltage: LSByte
+         Port 3 Voltage              2
+  3B               RO            0000,0000         -            -                Port 3 voltage: MSByte (bits 13 to 8)
+
+  3C               RO            0000,0000                              Port 4 current: LSByte
+         Port 4 Current              2
+  3D               RO            0000,0000         -            -                Port 4 current: MSByte (bits 13 to 8)
+
+  3E               RO            0000,0000                              Port 4 voltage: LSByte
+         Port 4 Voltage              2
+  3F               RO            0000,0000         -            -                Port 4 voltage: MSByte (bits 13 to 8)
+
+  40   PoE Plus        R/W     1        0000,----   POEP4  POEP3  POEP2  POEP1        -            -            -            -
+
+        Firmware                    RRRR,RRR
+  41               RO      1                                           Firmware revision
+         Revision                      R
+  42    I2C Watchdog     R/W     1     0001,0110         -            -            -            Watchdog disable        WDS
+
+  43   Device ID        R/W     1      111,sr[4:0]       Device ID number                    Silicon revision number
+
+        Cool Down/Gate
+  45                 R/W     1     0000,0000      CLDN      IGATE        -            -            -            -            -
+         Drive
+
+  60    Port 1 Detect     RO            0000,0000                            Port 1 resistance: LSByte
+                                 2
+  61   Resistance      RO            0000,0000       RS1                  Port 1 resistance: MSByte (bits 13 to 8)
+
+  62    Port 2 Detect     RO            0000,0000                            Port 2 resistance: LSByte
+                                 2
+  63   Resistance      RO            0000,0000       RS2                  Port 2 resistance: MSByte (bits 13 to 8)
+
+  64    Port 3 Detect     RO            0000,0000                            Port 3 resistance: LSByte
+                                 2
+  65   Resistance      RO            0000,0000       RS3                  Port 3 resistance: MSByte (bits 13 to 8)
+
+  66    Port 4 Detect     RO            0000,0000                            Port 4 resistance: LSByte
+                                 2
+  67   Resistance      RO            0000,0000       RS4                  Port 4 resistance: MSByte (bits 13 to 8)
+
+  68    Port 1 Detect     RO            0000,0000                       Port 1 voltage difference (bits 7 to 0)
+         Voltage                    2                                                            Port 1 voltage difference: MSByte
+  69    Difference       RO            0000,0000             VDS1                                    (bits 11 to 8)
+
+  6A    Port 2 Detect     RO            0000,0000                       Port 2 voltage difference (bits 7 to 0)
+         Voltage                    2                                                            Port 2 voltage difference: MSByte
+  6B    Difference       RO            0000,0000             VDS2                                    (bits 11 to 8)
+
+  6C    Port 3 Detect     RO            0000,0000                       Port 3 voltage difference (bits 7 to 0)
+         Voltage                    2                                                            Port 3 voltage difference: MSByte
+  6D    Difference       RO            0000,0000             VDS3                                    (bits 11 to 8)
+
+  6E    Port 4 Detect     RO            0000,0000                       Port 4 voltage difference (bits 7 to 0)
+         Voltage                    2                                                            Port 4 voltage difference: MSByte
+  6F    Difference       RO            0000,0000             VDS4                                    (bits 11 to 8)
+
+
+
+
+46     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,65 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.4  Device Functional Modes
+
+Four operating modes are defined as follows. Operating mode is controlled for each port through the Port n
+Mode field in the Operating Mode Register. Operating mode codes appear in Operating Mode Register.
+
+7.4.1  Off
+
+Port n will not detect, classify or power on. When the operating mode of port n is set to Off the following takes
+place.
+•   Port voltage and current are monitored continuously. The results are reported in the Port n Voltage and Port n
+   Current Registers.
+•  The CLSCn and the DETCn bits in the Detection Event register are cleared.
+•  The Port n Status register is cleared.
+•  The CLEn and the DETEn bits in the Detect/Class Enable register are cleared.
+•  The DISFn and the ICUTn bits in the Fault Event Register are cleared.
+•  The ILIMn and STRTn bits in the Start/ILIM Event register are cleared.
+•    If the port was powered on when the operating mode is set to Off, the port is shut off, and the following
+   occurs.
+   –  The PGCn and the PECn bits in the Power Event Register are set.
+   –  The PGn and PEn bits in the Power Status register are cleared.
+
+7.4.2  Manual
+
+
+                                  NOTE
+            In order to meet the IEEE 802.3at standard, PWONn bit should be set within 22 ms after
+            classification is completed if two-event classification is applied.
+
+
+There is no automatic change of state. A single detection or classification event may be initiated by writing to the
+appropriate bit of the Detect/Class Restart Register which is a pushbutton register. Furthermore, setting the
+DETEn bit initiates one detect cycle for Port n; setting the CLEn bit initiates one classify cycle for Port n. The
+number of classification events depend on the classification status of the first classification event and the setting
+of the TECLENn field as shown in Table 7.
+
+                       Table 7. Number of Classification Events in Manual Mode
+
+       CLASSIFICATION STATUS                                                TOTAL NUMBER
+                                       VALUE OF TECLENn
+   OF FIRST CLASSIFICATION EVENT                                      OF CLASSIFICATION EVENTS
+
+     Class 0, Class 1, Class 2 or Class 3                  XX                               One
+
+                                                   X0                               One
+                  Class 4
+                                                   X1                               Two
+
+In manual mode, writing to the pushbutton PWONn bit powers on Port n immediately.
+
+
+                                  NOTE
+            In Manual mode, the ICUTn and PoEPn fields are not set automatically. They must be set
+          by the host. Furthermore, there is no cool-down period in manual mode.
+
+
+
+
+
+40     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

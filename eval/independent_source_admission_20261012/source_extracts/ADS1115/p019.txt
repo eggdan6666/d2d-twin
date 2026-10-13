@@ -1,0 +1,59 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 7.5 Programming
+ 7.5.1 I2C Interface
+The ADS111x communicate through an I2C interface. I2C is a two-wire open-drain interface that supports
+ multiple devices and controllers on a single bus. Devices on the I2C bus only drive the bus lines low by
+ connecting them to ground; the devices never drive the bus lines high. Instead, the bus wires are pulled high
+ by pullup resistors, so the bus wires are always high when no device is driving them low. As a result of
+ this configuration, two devices cannot conflict.  If two devices drive the bus simultaneously, there is no driver
+ contention.
+ Communication on the I2C bus always takes place between two devices, one acting as the controller and the
+ other as the target. Both the controller and target can read and write, but the target can only do so under the
+ direction of the controller. Some I2C devices can act as a controller or target, but the ADS111x can only act as a
+ target device.
+An I2C bus consists of two lines: SDA and SCL. SDA carries data; SCL provides the clock. All data are
+ transmitted across the I2C bus in groups of eight bits. To send a bit on the I2C bus, drive the SDA line to the
+ appropriate level while SCL is low (a low on SDA indicates the bit is zero; a high indicates the bit is one). After
+ the SDA line settles, the SCL line is brought high, then low. This pulse on SCL clocks the SDA bit into the
+ receiver shift register. If the I2C bus is held idle for more than 25 ms, the bus times out.
+The I2C bus is bidirectional; that is, the SDA line is used for both transmitting and receiving data. When the
+ controller reads from a target, the target drives the data line; when the controller writes to a target, the controller
+ drives the data line. The controller always drives the clock line. The ADS111x cannot act as a controller, and
+ therefore can never drive SCL.
+
+Most of the time the bus is idle; no communication occurs, and both lines are high. When communication takes
+ place, the bus is active. Only a controller device can start a communication and initiate a START condition
+on the bus. Normally, the data line is only allowed to change state when the clock line is low. If the data line
+changes state when the clock line is high, this change is either a START condition or a STOP condition. A
+START condition occurs when the clock line is high, and the data line goes from high to low. A STOP condition
+ occurs when the clock line is high, and the data line goes from low to high.
+
+ After the controller issues a START condition, the controller sends a byte that indicates which target device to
+communicate with. This byte is called the address byte. Each device on an I2C bus has a unique 7-bit address
+ that the device responds to. The controller sends an address in the address byte, together with a bit that
+ indicates whether the controller wishes to read from or write to the target device.
+ Every byte (address and data) transmitted on the I2C bus is acknowledged with an acknowledge bit. When the
+ controller finishes sending a byte (eight data bits) to a target, the controller stops driving SDA and waits for the
+ target to acknowledge the byte. The target acknowledges the byte by pulling SDA low. The controller then sends
+a clock pulse to clock the acknowledge bit. Similarly, when the controller completes reading a byte, the controller
+ pulls SDA low to acknowledge this completion to the target. The controller then sends a clock pulse to clock the
+ bit. The controller always drives the clock line.
+
+ If a device is not present on the bus, and the controller attempts to address the device, the controller receives
+a not-acknowledge because no device is present at that address to pull the line low. A not-acknowledge is
+ performed by simply leaving SDA high during an acknowledge cycle.
+
+When the controller has finished communicating with a target, the controller can issue a STOP condition. When
+a STOP condition is issued, the bus becomes idle again. The controller can also issue another START condition.
+When a START condition is issued while the bus is active, this condition is called a repeated start condition.
+The Timing Requirements section shows a timing diagram for the ADS111x I2C communication.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

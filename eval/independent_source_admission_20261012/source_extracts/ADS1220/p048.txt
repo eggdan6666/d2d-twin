@@ -1,0 +1,81 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 9.1.2 Analog Input Filtering
+
+ Analog input filtering serves two purposes: first, to limit the effect of aliasing during the sampling process and
+ second, to reduce external noise from being a part of the measurement.
+
+As with any sampled system, aliasing can occur if proper antialias filtering is not in place. Aliasing occurs when
+ frequency components are present in the input signal that are higher than half the sampling frequency of the
+ADC (also known as the Nyquist frequency). These frequency components are folded back and show up in
+ the actual frequency band of interest below half the sampling frequency. Inside a ΔΣ ADC, the input signal is
+sampled at the modulator frequency fMOD and not at the output data rate. The filter response of the digital filter
+ repeats at multiples of the sampling frequency (fMOD), as shown in Figure 9-2. Signals or noise up to a frequency
+where the filter response repeats are attenuated to a certain amount by the digital filter depending on the filter
+ architecture. Any frequency components present in the input signal around the modulator frequency or multiples
+ thereof are not attenuated and alias back into the band of interest, unless attenuated by an external analog filter.
+
+                     Magnitude
+
+
+
+
+                          Sensor
+                              Signal
+
+                                                                                        Unwanted
+                                         Unwanted                                                Signals
+                                                  Signals
+
+
+
+
+                                 Output                                f(MOD)/2                                               f(MOD)    Frequency
+                              Data Rate
+
+
+
+
+                     Magnitude
+
+                                                Digital Filter
+
+
+                                                                       Aliasing of
+                                                    Unwanted Signals
+
+
+
+
+
+                                 Output                                f(MOD)/2                                               f(MOD)    Frequency
+                              Data Rate
+
+
+
+
+                     Magnitude
+
+
+
+                                                                                External
+                                                                                 Antialiasing Filter
+                                                                                       Roll-Off
+
+
+
+
+
+                                 Output                                f(MOD)/2                                               f(MOD)    Frequency
+                              Data Rate
+
+                                    Figure 9-2. Effect of Aliasing
+
+
+
+
+
+48    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

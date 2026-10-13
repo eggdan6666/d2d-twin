@@ -1,0 +1,29 @@
+REGISTER DAC_RD @ 0x1 reset=0x0000 access=RW runtime=None DESC=DAC readback selection; p.36
+  DAC_RD_EN[4:3] RW reset=0 read_as=None read_action=None tier=None DESC=Enable DAC input-register readback
+  DAC_CH_SEL[2:0] RW reset=0 read_as=None read_action=None tier=None DESC=Select DAC channel 0-7
+  RESERVED_10_5[10:5] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bits; set to zero
+REGISTER ADC_SEQ @ 0x2 reset=0x0000 access=RW runtime=None DESC=ADC conversion sequence; p.37-38
+  REP[9] RW reset=0 read_as=None read_action=None tier=None DESC=Repeat sequence
+  TEMP[8] RW reset=0 read_as=None read_action=None tier=None DESC=Include temperature indicator
+  ADC_CH_MASK[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=Enable ADC0-ADC7
+  RESERVED_10[10] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bit; set to zero
+REGISTER GEN_CTRL_REG @ 0x3 reset=0x0000 access=RW runtime=None DESC=General-purpose DAC/ADC control; p.38-39
+  ADC_BUF_PRECH[9] RW reset=0 read_as=None read_action=None tier=None DESC=ADC buffer precharge
+  ADC_BUF_EN[8] RW reset=0 read_as=None read_action=None tier=None DESC=ADC buffer enable
+  IO_LOCK[7] RW reset=0 read_as=None read_action=None tier=None DESC=Lock I/O configuration
+  ALL_DAC[6] RW reset=0 read_as=None read_action=None tier=None DESC=Apply future DAC write to all DAC channels
+  ADC_RANGE[5] RW reset=0 read_as=None read_action=None tier=None DESC=ADC input range
+  DAC_RANGE[4] RW reset=0 read_as=None read_action=None tier=None DESC=DAC output range
+  RESERVED_10[10] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bit; set to zero
+  RESERVED_3_0[3:0] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bits; set to zero
+REGISTER ADC_CONFIG @ 0x4 reset=0x0000 access=RW runtime=None DESC=ADC pin configuration; p.39-40
+  ADC_PIN_MASK[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=Select I/O0-I/O7 as ADC inputs
+  RESERVED_10_8[10:8] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bits; set to zero
+REGISTER DAC_CONFIG @ 0x5 reset=0x0000 access=RW runtime=None DESC=DAC pin configuration; p.40-41
+  DAC_PIN_MASK[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=Select I/O0-I/O7 as DAC outputs
+  RESERVED_10_8[10:8] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bits; set to zero
+REGISTER PULLDWN_CONFIG @ 0x6 reset=0x00FF access=RW runtime=None DESC=85 kOhm pull-down configuration; p.41-42
+  PULL_DWN_MASK[7:0] RW reset=255 read_as=None read_action=None tier=None DESC=Enable pull-down on I/O0-I/O7
+  RESERVED_10_8[10:8] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved command-data bits; set to zero
+REGISTER SW_RESET @ 0xF reset=0x0000 access=W runtime=None DESC=Software reset command; write 10110101100 to bits 10:0; p.50
+  SW_RESET_CODE[10:0] W reset=0 read_as=None read_action=None tier=None DESC=Reset code

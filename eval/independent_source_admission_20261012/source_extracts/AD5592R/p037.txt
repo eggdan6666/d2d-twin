@@ -1,0 +1,45 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 15. Bit Descriptions for DAC_RD (Continued)
+Bits            Bit Name              Description                                                                                              Default Value
+
+                                         111: DAC7.
+
+
+ADC Sequence Register
+
+Name: ADC_SEQ
+
+Selects ADCs for conversion.
+
+
+
+
+
+Table 16. Bit Descriptions for ADC_SEQ
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b0010.                                                             0x2
+10         RESERVED         Reserved. Set this bit to 0.                                                                           0x0
+9          REP           ADC sequence repetition.                                                                           0x0
+                                         0: Sequence repetition disabled.
+                                         1: Sequence repetition enabled.
+8          TEMP               Include temperature indicator in ADC sequence.                                                         0x0
+                                         0: Disable temperature indicator readback.
+                                         1: Enable temperature indicator readback.
+7          ADC7                Include the ADC7 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+6          ADC6                Include the ADC6 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+5          ADC5                Include the ADC5 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+4          ADC4                Include the ADC4 channel in conversion sequence.                                                      0x0
+
+
+analog.com                                                                                         Rev. H | 37 of 54

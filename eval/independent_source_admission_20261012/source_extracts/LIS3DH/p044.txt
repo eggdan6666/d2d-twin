@@ -1,0 +1,62 @@
+Registers description                                                      LIS3DH
+
+8.25   INT2_CFG (34h)
+
+                                      Table 62. INT2_CFG register
+
+              AOI       6D       ZHIE      ZLIE      YHIE      YLIE      XHIE      XLIE
+
+
+                                    Table 63. INT2_CFG description
+                    AND/OR combination of interrupt events. Default value: 0
+           AOI
+                           (see Table 64)
+          6D             6-direction detection function enabled. Default value: 0. Refer to Table 64.
+                         Enable interrupt generation on Z high event. Default value: 0
+            ZHIE           (0: disable interrupt request;
+                                1: enable interrupt request on measured accel. value higher than preset threshold)
+                         Enable interrupt generation on Z low event. Default value: 0
+             ZLIE            (0: disable interrupt request;
+                                1: enable interrupt request on measured accel. value lower than preset threshold)
+                         Enable interrupt generation on Y high event. Default value: 0
+           YHIE           (0: disable interrupt request;
+                                1: enable interrupt request on measured accel. value higher than preset threshold)
+                         Enable interrupt generation on Y low event. Default value: 0
+            YLIE           (0: disable interrupt request;
+                                1: enable interrupt request on measured accel. value lower than preset threshold)
+                         Enable interrupt generation on X high event. Default value: 0
+           XHIE           (0: disable interrupt request;
+                                1: enable interrupt request on measured accel. value higher than preset threshold)
+                         Enable interrupt generation on X low event. Default value: 0
+            XLIE           (0: disable interrupt request;
+                                1: enable interrupt request on measured accel. value lower than preset threshold)
+
+
+          The content of this register is loaded at boot.
+
+        A write operation to this address is possible only after system boot.
+
+                                        Table 64. Interrupt mode
+
+             AOI     6D                                   Interrupt mode
+
+               0       0                OR combination of interrupt events
+
+               0       1                              6-direction movement recognition
+
+               1       0                 AND combination of interrupt events
+
+               1       1                               6-direction position recognition
+
+
+          The difference between AOI-6D = ‘01’ and AOI-6D = ‘11’.
+
+          AOI-6D = ‘01’ is movement recognition. An interrupt is generated when the orientation
+          moves from an unknown zone to a known zone. The interrupt signal remains for a duration
+         ODR.
+
+          AOI-6D = ‘11’ is direction recognition. An interrupt is generated when the orientation is
+             inside a known zone. The interrupt signal remains while the orientation is inside the zone.
+
+
+44/54                                  DocID17530 Rev 2

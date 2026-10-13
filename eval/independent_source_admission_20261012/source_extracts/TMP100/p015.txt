@@ -1,0 +1,71 @@
+                                                                           TMP100, TMP101
+
+www.ti.com                                                                   SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+
+7.5  Programming
+
+7.5.1  Pointer Register
+
+Figure 10 shows the internal register structure of the TMP100 and TMP101 devices. The 8-bit Pointer Register of
+the TMP100 and TMP101 devices is used to address a given data register. The Pointer Register uses the two
+LSBs to identify which of the data registers respond to a read or write command. Table 4 identifies the bits of the
+Pointer Register byte. Table 5 describes the pointer address of the registers available in the TMP100 and
+TMP101 devices. The power-up reset value of P1 and P0 is 00.
+
+
+                                                                  Pointer
+                                                               Register
+
+
+
+
+                                               Temperature
+                                                       Register
+
+
+
+                                                                         SCL
+                                                      Configuration
+                                                       Register
+                                                                                        I/O
+                                                                                   Control
+                                                                                       Interface
+                                               TLOW
+                                                       Register
+                                                                      SDA
+
+
+                                                        THIGH
+                                                       Register
+
+                   Figure 10. Internal Register Structure of the TMP100 and TMP101
+
+7.5.1.1  Pointer Register Byte (pointer = N/A) [reset = 00h]
+
+                                   Table 4. Pointer Register Byte
+
+     P7           P6           P5           P4           P3           P2           P1           P0
+
+       0             0             0             0             0             0                   Register Bits
+
+
+7.5.1.2  Pointer Addresses of the TMP100 and TMP101 Registers
+
+                   Table 5. Pointer Addresses of the TMP100 and TMP101 Registers
+
+      P1             P0           TYPE                             REGISTER
+
+        0               0       R only, default                            Temperature Register
+
+        0               1            R/W                                    Configuration Register
+
+        1               0            R/W                                TLOW Register
+        1               1            R/W                                     THIGH Register
+
+
+
+
+
+Copyright © 2002–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     15
+
+                                              Product Folder Links: TMP100 TMP101

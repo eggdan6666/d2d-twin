@@ -1,0 +1,39 @@
+REGISTER id @ 0xD0 reset=0x60 access=RO runtime=None DESC=chip_id[7:0]=0x60，上电复位完成后即可读，§5.4.1
+  chip_id[7:0] RO reset=96 read_as=None read_action=None tier=None DESC=固定 0x60
+REGISTER reset @ 0xE0 reset=0x00 access=W runtime=None DESC=软复位寄存器，§5.4.2（erratum 见 proofread_record）
+  reset[7:0] W reset=0 read_as=None read_action=None tier=None DESC=软复位字，键值 0xB6
+REGISTER ctrl_hum @ 0xF2 reset=0x00 access=RW runtime=None DESC=湿度过采样控制，§5.4.3。注意：对本寄存器的写入只有在其后再写 ctrl_meas 才生效（Phase 1.5 行为语义）
+  osrs_h[2:0] RW reset=0 read_as=None read_action=None tier=None DESC=000:skipped(输出 0x8000) 001:x1 010:x2 011:x4 100:x8 101+:x16
+  UNUSED[7:3] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0
+REGISTER status @ 0xF3 reset=0x00 access=RO runtime=None DESC=器件状态位，§5.4.4
+  measuring[3] RO reset=0 read_as=None read_action=None tier=None DESC=转换进行中为 1
+  im_update[0] RO reset=0 read_as=None read_action=None tier=None DESC=NVM 拷贝期间为 1
+  UNUSED[7:4] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0
+  UNUSED2[2:1] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0
+REGISTER ctrl_meas @ 0xF4 reset=0x00 access=RW runtime=None DESC=控制寄存器：过采样+模式，§5.4.5
+  osrs_t[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=温度过采样 000:skipped 001:x1 010:x2 011:x4 100:x8 101+:x16
+  osrs_p[4:2] RW reset=0 read_as=None read_action=None tier=None DESC=气压过采样同上
+  mode[1:0] RW reset=0 read_as=None read_action=None tier=None DESC=00 sleep,01/10 forced,11 normal; forced completion outside static storage scoring; p.29 section5.4.5
+REGISTER config @ 0xF5 reset=0x00 access=RW runtime=None DESC=速率/滤波/接口选项，§5.4.6。normal 模式下写可能被忽略（MVP 断言均在 sleep 态执行）
+  t_sb[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=codes0..7 = 0.5/62.5/125/250/500/1000/10/20ms; p.30 Table27
+  filter[4:2] RW reset=0 read_as=None read_action=None tier=None DESC=IIR 滤波 000:off 001:x2 010:x4 011:x8 100:x16
+  UNUSED[1] RW reset=0 read_as=None read_action=None tier=None DESC=not used
+  spi3w_en[0] RW reset=0 read_as=None read_action=None tier=None DESC=3 线 SPI 使能（I2C 下无作用）
+REGISTER press_msb @ 0xF7 reset=0x80 access=RO runtime=None DESC=raw 压力 up[19:12]，§5.4.7
+  press_msb[7:0] RO reset=128 read_as=None read_action=None tier=None DESC=up[19:12]
+REGISTER press_lsb @ 0xF8 reset=0x00 access=RO runtime=None DESC=raw 压力 up[11:4]
+  press_lsb[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=up[11:4]
+REGISTER press_xlsb @ 0xF9 reset=0x00 access=RO runtime=None DESC=raw 压力 up[3:0]（高 4 位有效）
+  press_xlsb[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=up[3:0]
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0
+REGISTER temp_msb @ 0xFA reset=0x80 access=RO runtime=None DESC=raw 温度 ut[19:12]，§5.4.8
+  temp_msb[7:0] RO reset=128 read_as=None read_action=None tier=None DESC=ut[19:12]
+REGISTER temp_lsb @ 0xFB reset=0x00 access=RO runtime=None DESC=raw 温度 ut[11:4]
+  temp_lsb[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=ut[11:4]
+REGISTER temp_xlsb @ 0xFC reset=0x00 access=RO runtime=None DESC=raw 温度 ut[3:0]（高 4 位有效）
+  temp_xlsb[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=ut[3:0]
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0
+REGISTER hum_msb @ 0xFD reset=0x80 access=RO runtime=None DESC=raw 湿度 uh[15:8]，§5.4.9
+  hum_msb[7:0] RO reset=128 read_as=None read_action=None tier=None DESC=uh[15:8]
+REGISTER hum_lsb @ 0xFE reset=0x00 access=RO runtime=None DESC=raw 湿度 uh[7:0]
+  hum_lsb[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=uh[7:0]

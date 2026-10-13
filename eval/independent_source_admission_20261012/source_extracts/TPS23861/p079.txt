@@ -1,0 +1,52 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.33  Cool Down/Gate Drive Register
+
+Command = 45h with 1 Data Byte, R/W
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME             CLDN           IGATE
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+These bits are applicable to all four ports.
+
+Bit Descriptions
+
+CLDN: Fault Cool-Down Timer Programming Field. Following a Start, ICUT or ILIM, a port shuts down, and the
+cool-down timer counts down. Until the timer counts down to 0, the port will not be allowed to be powered on if
+the port is in Semi-Auto or Auto Mode. If in Manual Mode, the port can be powered on immediately with a push-
+button command by writing to PWONn in the Power Enable Register. The cool-down timer is cancelled by power-
+on reset, device reset or port reset (see Reset Register).
+
+The field programming is:
+
+
+                        CLDN[1:0]                             NOMINAL COOL-DOWN TIMER PERIOD
+
+                         0X                                                      1 s
+
+                           10                                                      2 s
+
+                           11                                                      4 s
+
+IGATE: GATE Pull-Up Current Bit. IGATE sets the gate pull-up current.
+
+
+                       IGATE                              NOMINAL GATE PULLUP CURRENT (µA)
+
+                            0                                                       50
+
+                            1                                                       25
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     79
+
+                                                 Product Folder Links: TPS23861

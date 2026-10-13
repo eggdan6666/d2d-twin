@@ -1,0 +1,69 @@
+LIS3DH                                                                Registers description
+
+8.26   INT2_SRC (35h)
+
+
+                                      Table 65. INT2_SRC register
+
+                0          IA       ZH       ZL      YH       YL      XH       XL
+
+
+                                    Table 66. INT2_SRC description
+                           Interrupt active. Default value: 0
+              IA
+                             (0: no interrupt has been generated; 1: one or more interrupts have been generated)
+
+                  Z high. Default value: 0
+          ZH
+                             (0: no interrupt, 1: Z high event has occurred)
+
+                  Z low. Default value: 0
+           ZL
+                             (0: no interrupt; 1: Z low event has occurred)
+
+                 Y high. Default value: 0
+          YH
+                             (0: no interrupt, 1: Y high event has occurred)
+
+                 Y low. Default value: 0
+           YL
+                             (0: no interrupt, 1: Y low event has occurred)
+
+                 X high. Default value: 0
+          XH
+                             (0: no interrupt, 1: X high event has occurred)
+
+                 X low. Default value: 0
+           XL
+                             (0: no interrupt, 1: X low event has occurred)
+
+
+              Interrupt 2 source register. Read-only register.
+
+           Reading at this address clears the INT2_SRC (35h) IA bit (and the interrupt signal on the
+          INT2 pin) and allows the refresh of data in the INT2_SRC (35h) register if the latched option
+          was chosen.
+
+
+8.27    INT2_THS (36h)
+
+                                      Table 67. INT2_THS register
+
+                0      THS6     THS5     THS4     THS3     THS2     THS1     THS0
+
+
+                                    Table 68. INT2_THS description
+                                    Interrupt 2 threshold. Default value: 000 0000
+
+                          1 LSb = 16 mg @ FS = ±2 g
+             THS[6:0]       1 LSb = 32 mg @ FS = ±4 g
+                          1 LSb = 62 mg @ FS = ±8 g
+                          1 LSb = 186 mg @ FS = ±16 g
+
+
+
+
+
+                                      DocID17530 Rev 2                                      45/54
+
+                                                                                                                            54

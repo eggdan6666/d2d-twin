@@ -1,0 +1,69 @@
+Bosch Sensortec | BMP280 Data sheet                                                          28 | 49
+
+
+
+
+
+                                                           VDDIO
+
+
+
+
+                              SDI /SCL                                              high-z level shifter
+
+
+                                                                              output driver (only for SDI)
+
+
+
+                                    GND      GND
+
+                                               Figure 6: SDI/SCK ESD drawing
+
+       The 7-bit device address is 111011x. The 6 MSB bits are fixed. The last bit is changeable by SDO
+        value and can be changed during operation. Connecting SDO to GND results in slave address
+       1110110 (0x76); connection it to VDDIO results in slave address 1110111 (0x77), which is the same as
+       BMP180’s I²C address. The SDO pin cannot be left floating; if left floating, the I²C address will be
+        undefined.
+
+       The I²C interface uses the following pins:
+            •  SCK:   serial clock (SCL)
+            •   SDI:   data (SDA)
+            •  SDO:  Slave address LSB (GND = ‘0’, VDDIO = ‘1’)
+      CSB must be connected to VDDIO to select I²C interface. SDI is bi-directional with open drain to GND: it
+       must be externally connected to VDDIO via a pull up resistor. Refer to chapter 6 for connection
+         instructions.
+
+       The following abbreviations will be used in the I²C protocol figures:
+            •  S               Start
+            •  P            Stop
+            •  ACKS        Acknowledge by slave
+            •  ACKM        Acknowledge by master
+            •  NACKM       Not acknowledge by master
+
+        5.2.1  I²C write
+         Writing is done by sending the slave address in write mode (RW = ‘0’), resulting in slave address
+       111011X0 (‘X’ is determined by state of SDO pin. Then the master sends pairs of register addresses
+       and register data. The transaction is ended by a stop condition. This is depicted in Figure 7.
+
+                                                                                Control byte                                  Data byte
+
+                          Start          Slave Address     RW ACKS         Register address (A0h)      ACKS           Register data - address A0h        ACKS
+
+
+                  S    1   1   1   0   1   1  X   0          1   0   1   0   0   0   0   0             bit7   bit6   bit5   bit4   bit3   bit2   bit1  bit0     …
+
+                                                                                Control byte                                  Data byte
+
+                                                                                  Register address (A1h)      ACKS           Register data - address A1h        ACKS  Stop
+
+
+                                …    1   0   1   0   0   0   0   1             bit7   bit6   bit5   bit4   bit3   bit2   bit1  bit0        P
+
+                                    Figure 7: I²C multiple byte write (not auto-incremented)
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

@@ -1,0 +1,81 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+
+
+
+                                                                                                         THIGH
+                                          Measured
+                                            Temperature
+
+                                                                                           TLOW
+
+
+
+
+                                   Device ALERT PIN
+                                     (Comparator Mode)
+                                    POL = 0
+
+                                   Device ALERT PIN
+                                                  (Interrupt Mode)
+                                    POL = 0
+
+                                   Device ALERT PIN
+                                     (Comparator Mode)
+                                    POL = 1
+                                   Device ALERT PIN
+                                                  (Interrupt Mode)
+                                    POL = 1
+
+
+
+
+                                                          Read       Read      Read
+
+                                                                         Time
+
+                            Figure 6-7. Output Transfer Function Diagrams
+
+ 6.5.3.4 Fault Queue (F1/F0)
+
+A fault condition exists when the measured temperature exceeds the user-defined limits set in the THIGH and
+TLOW registers. Additionally, the number of fault conditions required to generate an alert can be programmed
+ using the fault queue. The fault queue is provided to prevent a false alert as a result of environmental noise.
+The fault queue requires consecutive fault measurements to trigger the alert function. Table 6-12 defines the
+number of measured faults that can be programmed to trigger an alert condition in the device. For THIGH and
+TLOW register format and byte order, see the High- and Low-Limit Registers section.
+                                  Table 6-12. TMP102 Fault Settings
+                       F1                  F0                 CONSECUTIVE FAULTS
+
+                         0                    0                               1
+
+                         0                    1                               2
+
+                         1                    0                               4
+
+                         1                    1                               6
+
+ 6.5.3.5 Converter Resolution (R1/R0)
+
+The converter resolution bits, R1 and R0, are read-only bits. The TMP102 converter resolution is set at device
+ start-up to 11 which sets the temperature register to a 12 bit-resolution.
+
+ 6.5.3.6 One-Shot (OS)
+
+When the device is in Shutdown Mode, writing a 1 to the OS bit starts a single temperature conversion. During
+ the conversion, the OS bit reads '0'. The device returns to the shutdown state at the completion of the single
+ conversion. For more information on the one-shot conversion mode, see the One-Shot/Conversion Ready (OS)
+ section.
+
+ 6.5.3.7 EM Bit
+
+The Extended-Mode bit configures the device for Normal Mode operation (EM = 0) or Extended Mode operation
+(EM = 1). In normal mode, the temperature register, high-limit register, and low-limit register use a 12-bit data
+ format. For more information on the extended mode, see the Extended Mode (EM) section.
+
+
+
+18    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

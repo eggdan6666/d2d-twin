@@ -1,0 +1,3150 @@
+[
+  {
+    "chip": "BMP280",
+    "register": "ctrl_meas",
+    "field": "mode",
+    "property": "desc",
+    "old": "00:sleep 01:forced 10/11:normal",
+    "new": "00 sleep, 01/10 forced, 11 normal; forced returns to sleep after measurement; Table10 p.15",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": "Table10",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/BMP280_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": null,
+    "property": "desc",
+    "old": "温度结果，二进制补码，左对齐；默认分辨率 R1R0=00 → 9 位、1 LSB=0.5°C，占 bits[15:7]，未用低位恒 0（§7.3.1 与 §7.5.1.2 前文：『For 9-, 10-, or 11-bit resolution, the MSBs in the Temperature Register are used with the unused least significant bits equal to zero』）；上电读到 0°C 直至首次转换完成",
+    "new": "Twelve-bit read-only register at bits15:4, bits3:0 zero. Effective conversion resolution selected by R1:R0=9/10/11/12bits; at POR default9bits, unneeded result LSBs zero until higher resolution selected. Result0 before first conversion completes.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "T",
+    "property": "bits",
+    "old": "15:7",
+    "new": "15:4",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "T",
+    "property": "desc",
+    "old": "T[8:0] 9 位温度（默认分辨率）",
+    "new": "Full twelve-bit register format; R1:R0 selects effective ADC resolution and zeros unused LSBs.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "bits",
+    "old": "6:0",
+    "new": "3:0",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "desc",
+    "old": "恒 0（R1R0=11 时才扩展为 [15:4] 12 位）",
+    "new": "Low four bits always zero in the twelve-bit temperature register format; bits6:4 belong to conversion data.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "tier",
+    "old": "UNVERIFIED",
+    "new": "SOURCE_EXPLICIT_ZERO",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "tier_evidence",
+    "old": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行",
+    "new": "Table7 p.16 explicitly shows bits3:0 zero; effective resolution unused LSBs from §7.3.1 p.9.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "CONFIG",
+    "field": "OS",
+    "property": "read_as",
+    "old": 1,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "§7.5.3.6",
+        "excerpt": ""
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP100",
+    "register": "CONFIG",
+    "field": "OS",
+    "property": "desc",
+    "old": "OS/ALERT：关断态写 1 触发单次转换；读为比较器状态——POL=0 时常态读 1，连续故障达 THIGH 后读 0（§7.4.2）。默认态（温度 0°C < THIGH）读 1，故复位读回 0x80",
+    "new": "Write1 triggers one-shot only when SD1. Read reports comparator state with POL inversion; not an invariant1 and not a conversion-busy bit.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "§7.5.3.6",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP100_gold_ir.json"
+  },
+  {
+    "chip": "TMP102",
+    "register": "TLOW",
+    "field": "UNUSED",
+    "property": "desc",
+    "old": "恒 0（EM=1 时 bit0 有意义）",
+    "new": "Normal EM0: bits3:0 zero; Extended EM1: bit3 is threshold data, bits2:0 remain zero (Tables6-14/6-16).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table6-14",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 20,
+        "printed_page": "20",
+        "table": "Table6-16",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP102_gold_ir.json"
+  },
+  {
+    "chip": "TMP102",
+    "register": "THIGH",
+    "field": "UNUSED",
+    "property": "desc",
+    "old": "恒 0（EM=1 时 bit0 有意义）",
+    "new": "Normal EM0: bits3:0 zero; Extended EM1: bit3 is threshold data, bits2:0 remain zero (Tables6-14/6-16).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table6-14",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 20,
+        "printed_page": "20",
+        "table": "Table6-16",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/TMP102_gold_ir.json"
+  },
+  {
+    "chip": "BMP280",
+    "register": "press_xlsb",
+    "field": null,
+    "property": "desc",
+    "old": "raw 压力 up[3:0]（低 4 位有效，其余恒 0）",
+    "new": "Raw output low four data bits occupy register bits7:4; bits3:0 are explicitly RO zero (Table18 p.24).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Table18",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/BMP280_gold_ir.json"
+  },
+  {
+    "chip": "BMP280",
+    "register": "temp_xlsb",
+    "field": null,
+    "property": "desc",
+    "old": "raw 温度 ut[3:0]（低 4 位有效，其余恒 0）",
+    "new": "Raw output low four data bits occupy register bits7:4; bits3:0 are explicitly RO zero (Table18 p.24).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Table18",
+        "excerpt": ""
+      }
+    ],
+    "applied_to": "candidate_ir/BMP280_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "HIGH_ALERT",
+    "property": "desc",
+    "old": "高温标志，R；读 CONFIG 后清除（Table 7-6）",
+    "new": "R, reset 0. In Alert mode (T/nA=0), read CONFIG clears HIGH_Alert; in Therm mode (T/nA=1), CONFIG read does not clear, temperature conversion > high limit sets and < low limit clears. Dynamic event model required.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is higher than the high limit 0: Cleared on read of configuration register Therm mode: 1: Set when the conversion result is higher than the therm limit 0:"
+      },
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": null,
+        "section": "§7.4.4.2",
+        "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "LOW_ALERT",
+    "property": "desc",
+    "old": "低温标志，R；读 CONFIG 后清除",
+    "new": "R, reset 0. In Alert mode (T/nA=0), read CONFIG clears LOW_Alert; in Therm mode (T/nA=1), always reads 0. No unconditional read-clear annotation.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "LOW_Alert R 0 Low Alert flag: 1: Set when the conversion result is lower than the low limit 0: Cleared when the configuration register is read Therm mode: Always set to 0 13 Data_Ready R 0 Data ready flag. This flag indi"
+      },
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": null,
+        "section": "§7.4.4.2",
+        "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "HIGH_ALERT",
+    "property": "read_action",
+    "old": "clear",
+    "new": "conditional_clear",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is higher than the high limit 0: Cleared on read of configuration register Therm mode: 1: Set when the conversion result is higher than the therm limit 0:"
+      },
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": null,
+        "section": "§7.4.4.2",
+        "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "LOW_ALERT",
+    "property": "read_action",
+    "old": "clear",
+    "new": "conditional_clear",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "LOW_Alert R 0 Low Alert flag: 1: Set when the conversion result is lower than the low limit 0: Cleared when the configuration register is read Therm mode: Always set to 0 13 Data_Ready R 0 Data ready flag. This flag indi"
+      },
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": null,
+        "section": "§7.4.4.2",
+        "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "CONV",
+    "property": "desc",
+    "old": "转换周期 CONV2-0，复位 100b（T/nA=0 时 0.25Hz…）",
+    "new": "CONV codes 000..111 all defined. Table7-7 continuous cycle time depends on AVG: default CONV=100 gives 1s for all AVG settings; 101/110/111 give4/8/16s. One-shot duration depends on AVG and is independent of CONV.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-7",
+        "section": null,
+        "excerpt": "Conversion Cycle Time in CC Mode CONV[2:0] AVG[1:0] = 00 AVG[1:0] = 01 AVG[1:0] = 10 AVG[1:0] = 11 000 15.5 ms 125 ms 500 ms 1 s 001 125 ms 125 ms 500 ms 1 s 010 250 ms 250 ms 500 ms 1 s 011 500 ms 500 ms 500 ms 1 s 100 "
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.4.3",
+        "excerpt": "CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready and ALERT flag in the configur"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "EEPROM_BUSY",
+    "property": "desc",
+    "old": "EEPROM 忙标志，R",
+    "new": "R status, mirror of EEPROM_UL[14]. Busy=1 while POR EEPROM loading or programming;0 means ready. POR loading approximately1.5ms; programming a cell typically7ms. Reads do not clear Busy; wait Busy=0 before next programming write.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM_UL",
+    "field": "EEPROM_BUSY",
+    "property": "desc",
+    "old": "忙标志，R-0",
+    "new": "R status, mirror of CONFIG[12]. Busy=1 while POR reset load or programming;0 means ready. Not a read-clear field. Reset0 applies after POR load complete.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM_UL",
+    "field": "EUN",
+    "property": "desc",
+    "old": "EEPROM unlock（写 1 允许编程 EEPROM 单元）",
+    "new": "EUN0: writes to EEPROM mapped addresses update volatile digital registers but do not program EEPROM. EUN1: writes to programmable registers program backing EEPROM only when ready. Wait Busy0 before further writes; general-call reset clears EUN and reloads EEPROM.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.1-2",
+        "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "This command also clears the EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the device to perform temperature conversions when the EEPROM is unlocked. 18 Submit Docu"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM_UL",
+    "field": null,
+    "property": "desc",
+    "old": "EEPROM 解锁寄存器（§7.6.6 Figure 7-17）：bit15 EUN 为 R/W-0，bit14 EEPROM_Busy 与 bits13:0 全标 **R-0**。真实器件上 EEPROM1-3 的写只有在 EUN=1 时才生效——该 gating 语义 MVP 未断言（见 Q1）",
+    "new": "EEPROM unlock: EUN[15] R/W0; Busy[14] R0 and mirror CONFIG[12]; Reserved[13:0] R0. Locked writes to EEPROM addresses still update volatile digital registers; EUN1 permits NVM programming when Busy0. Programming typical7ms, no writes until Busy0.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "EEPROM unlock. 0: EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.1-2",
+        "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "This command also clears the EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the device to perform temperature conversions when the EEPROM is unlocked. 18 Submit Docu"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "EEPROM busy. This flag is the mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to ac"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.1",
+        "excerpt": "While the POR sequence is being executed, the EEPROM_Busy status flag in the EEPROM unlock register is set. During production, the EEPROM in the TMP117 is programmed with reset values as shown in Table 7-3. The Programmi"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "performing power-up on reset load 13:0 — R 0 Not used 7.6.7 EEPROM1 Register (address = 05h) [reset = XXXXh] The EEPROM1 register is a 16-bit register that be used as a scratch pad by the customer to store general- purpo"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "13:0 — R 0 Not used 7.6.7 EEPROM1 Register (address = 05h) [reset = XXXXh] The EEPROM1 register is a 16-bit register that be used as a scratch pad by the customer to store general- purpose data. This register has a corre"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "SOFT_RESET",
+    "property": "desc",
+    "old": "软件复位位：写 1 触发 2ms 软复位、**该位永远读回 0**（Table 7-6 p.28 标 R/W；Figure 7-14 p.27 误标 R-0，见 erratum_found）",
+    "new": "Same-file unresolved source conflict: Figure7-14 bit1 is R0, Table7-6 continued is R/W0 and says write1 triggers2ms software reset and always reads0. Any table-text-priority action profile is explicitly conditional; no official erratum established.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Figure 7-14",
+        "section": null,
+        "excerpt": "Soft_Reset — R/W-0 R/W-0 R/W-1 R/W-0 R/W-0 R/W-0 R-0 R-0 Table 7-6. Configuration Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15 HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is highe"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "Software reset bit. When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "DEVICE_ID",
+    "field": "ID",
+    "property": "desc",
+    "old": "0x0117",
+    "new": "RO aggregate ID contains revision[15:12] and DID[11:0]. DID117h is consistent; revision reset is Figure7-22 R-x versus Table7-15 0h. Main comparison mask0FFF across reset/snapshots; retain source conflict.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Figure 7-22",
+        "section": null,
+        "excerpt": "Rev3 Rev2 Rev1 Rev0 DID11 DID10 DID9 DID8 R-x R-x R-x R-x R-0 R-0 R-0 R-1 7 6 5 4 3 2 1 0 DID7 DID6 DID5 DID4 DID3 DID2 DID1 DID0 R-0 R-0 R-0 R-1 R-0 R-1 R-1 R-1 Table 7-15. Device ID Register Field Descriptions BIT FIEL"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "Indicates the revision number. 11:0 DID[11:0] R 117h Indicates the device ID. 32 Submit Document Feedback Copyright © 2022 Texas Instruments Incorporated Product Folder Links: TMP117"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "DEVICE_ID",
+    "field": null,
+    "property": "desc",
+    "old": "器件 ID（§7.6.10）= 0117h，只读且复位即为此值——又一个『RO 但复位值非零』的抄表用例",
+    "new": "RO device ID register: low12 DID117h known; upper4 revision bits unresolved R-x/0h source conflict. Full0117h is conditional revision0 profile, not an unconditional cross-revision reset value.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "DID[11:0] R 117h Indicates the device ID. 32 Submit Document Feedback Copyright © 2022 Texas Instruments Incorporated Product Folder Links: TMP117"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Figure 7-22",
+        "section": null,
+        "excerpt": "Rev3 Rev2 Rev1 Rev0 DID11 DID10 DID9 DID8 R-x R-x R-x R-x R-0 R-0 R-0 R-1 7 6 5 4 3 2 1 0 DID7 DID6 DID5 DID4 DID3 DID2 DID1 DID0 R-0 R-0 R-0 R-1 R-0 R-1 R-1 R-1 Table 7-15. Device ID Register Field Descriptions BIT FIEL"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "Indicates the revision number. 11:0 DID[11:0] R 117h Indicates the device ID. 32 Submit Document Feedback Copyright © 2022 Texas Instruments Incorporated Product Folder Links: TMP117"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": null,
+    "property": "desc",
+    "old": "配置寄存器（§7.6.3 Figure 7-14 p.27 + Table 7-6 p.27-28），出厂复位 0220h（bit9 CONV2=1、bit5 AVG0=1）。bit15:12 是**只读标志位**（HIGH/LOW_Alert、Data_Ready、EEPROM_Busy），其中前三位是 read-to-clear（见 Q2）",
+    "new": "Factory CONFIG0220h with EEPROM-backed mask07FC; MOD1 is nonpersistent. HIGH/LOW read clear only in Alert mode T/nA0; Therm mode has threshold/hysteresis HIGH and LOW0, CONFIG read does not clear alert flags. DATA_READY clears on CONFIG or TEMP reads; Busy mirrors unlock Busy and is temporal. Soft_Reset Figure/table access conflict retained.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is higher than the high limit 0: Cleared on read of configuration register Therm mode: 1: Set when the conversion result is higher than the therm limit 0:"
+      },
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": null,
+        "section": "§7.4.4.2",
+        "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "LOW_Alert R 0 Low Alert flag: 1: Set when the conversion result is lower than the low limit 0: Cleared when the configuration register is read Therm mode: Always set to 0 13 Data_Ready R 0 Data ready flag. This flag indi"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "Data_Ready R 0 Data ready flag. This flag indicates that the conversion is complete and the temperature register can be read. Every time the temperature register or configuration register is read, this bit is cleared. Th"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "Data ready flag. This flag indicates that the conversion is complete and the temperature register can be read. Every time the temperature register or configuration register is read, this bit is cleared. This bit is set a"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "EEPROM_Busy R 0 EEPROM busy flag. The value of the flag indicates that the EEPROM is busy during programming or power-up. 11:10 MOD[1:0] R/W 0 Set conversion mode. 00: Continuous conversion (CC) 01: Shutdown (SD) 10: Con"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.1",
+        "excerpt": "While the POR sequence is being executed, the EEPROM_Busy status flag in the EEPROM unlock register is set. During production, the EEPROM in the TMP117 is programmed with reset values as shown in Table 7-3. The Programmi"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "performing power-up on reset load 13:0 — R 0 Not used 7.6.7 EEPROM1 Register (address = 05h) [reset = XXXXh] The EEPROM1 register is a 16-bit register that be used as a scratch pad by the customer to store general- purpo"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "MOD[1:0] R/W 0 Set conversion mode. 00: Continuous conversion (CC) 01: Shutdown (SD) 10: Continuous conversion (CC), Same as 00 (reads back = 00) 11: One-shot conversion (OS) 9:7 CONV[2:0] R/W 100 Conversion cycle bit. S"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3 note (1)",
+        "section": null,
+        "excerpt": "This value is stored in Electrically-Erasable, Programmable Read-Only Memory (EEPROM) during device manufacturing. The device reset value can be changed by writing the relevant code in the EEPROM cells (see the EEPROM Ov"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Figure 7-14 notes (1)-(2)",
+        "section": null,
+        "excerpt": "These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous conversion mode"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.1-2",
+        "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "reads back = 00) 11: One-shot conversion (OS) 9:7 CONV[2:0] R/W 100 Conversion cycle bit. See Table 7-7 for the standby time between conversions. 6:5 AVG[1:0] R/W 01 Conversion averaging modes. Determines the number of c"
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.4.3",
+        "excerpt": "After the device completes a one-shot conversion, the device goes to the low-power shutdown mode. A one-shot conversion cycle, unlike the continuous conversion mode, only consists of the active conversion time and no sta"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "CONV[2:0] R/W 100 Conversion cycle bit. See Table 7-7 for the standby time between conversions. 6:5 AVG[1:0] R/W 01 Conversion averaging modes. Determines the number of conversion results that are collected and averaged "
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-7",
+        "section": null,
+        "excerpt": "Conversion Cycle Time in CC Mode CONV[2:0] AVG[1:0] = 00 AVG[1:0] = 01 AVG[1:0] = 10 AVG[1:0] = 11 000 15.5 ms 125 ms 500 ms 1 s 001 125 ms 125 ms 500 ms 1 s 010 250 ms 250 ms 500 ms 1 s 011 500 ms 500 ms 500 ms 1 s 100 "
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.4.3",
+        "excerpt": "CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready and ALERT flag in the configur"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "AVG[1:0] R/W 01 Conversion averaging modes. Determines the number of conversion results that are collected and averaged before updating the temperature register. The average is an accumulated average and not a running av"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "accumulated average and not a running average. 00: No averaging 01: 8 Averaged conversions 10: 32 averaged conversions 11: 64 averaged conversions 4 T/nA R/W 0 Therm/alert mode select. 1: Therm mode 0: Alert mode 3 POL R"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "T/nA R/W 0 Therm/alert mode select. 1: Therm mode 0: Alert mode 3 POL R/W 0 ALERT pin polarity bit. 1: Active high 0: Active low 2 DR/Alert R/W 0 ALERT pin select bit. 1: ALERT pin reflects the status of the data ready f"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "POL R/W 0 ALERT pin polarity bit. 1: Active high 0: Active low 2 DR/Alert R/W 0 ALERT pin select bit. 1: ALERT pin reflects the status of the data ready flag 0: ALERT pin reflects the status of the alert flags Copyright "
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "DR/Alert R/W 0 ALERT pin select bit. 1: ALERT pin reflects the status of the data ready flag 0: ALERT pin reflects the status of the alert flags Copyright © 2022 Texas Instruments Incorporated Submit Document Feedback 27"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 (continued)",
+        "section": null,
+        "excerpt": "Software reset bit. When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Figure 7-14",
+        "section": null,
+        "excerpt": "Soft_Reset — R/W-0 R/W-0 R/W-1 R/W-0 R/W-0 R/W-0 R-0 R-0 Table 7-6. Configuration Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15 HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is highe"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "Software reset bit. When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit c"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 (continued)",
+        "section": null,
+        "excerpt": "Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous co"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "TEMP_OFFSET",
+    "field": "OFF",
+    "property": "desc",
+    "old": "补码偏移",
+    "new": "16-bit signed temperature offset; saturates result at temperature output range limits. Factory reset0 is EEPROM-backed per Table7-3 note1, so programmed EEPROM can change its reset.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-13",
+        "section": null,
+        "excerpt": "Temperature offset data from system calibration. Copyright © 2022 Texas Instruments Incorporated Submit Document Feedback 31 Product Folder Links: TMP117"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3 note (1)",
+        "section": null,
+        "excerpt": "This value is stored in Electrically-Erasable, Programmable Read-Only Memory (EEPROM) during device manufacturing. The device reset value can be changed by writing the relevant code in the EEPROM cells (see the EEPROM Ov"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Figure 7-14 notes (1)-(2)",
+        "section": null,
+        "excerpt": "These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous conversion mode"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM1",
+    "field": null,
+    "property": "desc",
+    "old": "通用 EEPROM1（§7.6.7）——**复位值来自出厂 EEPROM，手册写 xxxxh**，故标 runtime_value 跳过复位值断言；字段留空＝不参与位域断言（见 Q3）",
+    "new": "16-bit R/W volatile scratch register backed by programmable EEPROM. Locked(EUN0) writes update volatile register and are readable but do not burn EEPROM; unlocked(EUN1) writes program backing memory. Reset loads persistent manufacturing/user contents, numerical value unknown. No writes during Busy. EEPROM2 additionally has conflicting reset0000 title vs detailedxxxx/diagramR/W-x, retained unresolved.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-11",
+        "section": null,
+        "excerpt": "Table 7-11. EEPROM1 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. To support NIST traceability do not delete or re-program this reg"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ],
+    "application_scope": "candidate input only; old IR remains preserved",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM2",
+    "field": null,
+    "property": "desc",
+    "old": "通用 EEPROM2，同上",
+    "new": "16-bit R/W volatile scratch register backed by programmable EEPROM. Locked(EUN0) writes update volatile register and are readable but do not burn EEPROM; unlocked(EUN1) writes program backing memory. Reset loads persistent manufacturing/user contents, numerical value unknown. No writes during Busy. EEPROM2 additionally has conflicting reset0000 title vs detailedxxxx/diagramR/W-x, retained unresolved.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-12",
+        "section": null,
+        "excerpt": "Table 7-12. EEPROM2 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§7.6.8 title",
+        "excerpt": "[reset = 0000h] This register function the same as the EEPROM1 register. Return to Register Map. Figure 7-19. EEPROM2 Register 15 14 13 12 11 10 9 8 D15 D14 D13 D12 D11 D10 D9 D8 R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3",
+        "section": null,
+        "excerpt": "EEPROM2 EEPROM2 register Go 07h R/W 0000h(1) Temp_Offset Temperature offset register Go 08h R/W xxxxh(1) EEPROM3 EEPROM3 register Go 0Fh R 0117h Device_ID Device ID register Go (1) This value is stored in Electrically-Er"
+      }
+    ],
+    "application_scope": "candidate input only; old IR remains preserved",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM3",
+    "field": null,
+    "property": "desc",
+    "old": "通用 EEPROM3，同 EEPROM1",
+    "new": "16-bit R/W volatile scratch register backed by programmable EEPROM. Locked(EUN0) writes update volatile register and are readable but do not burn EEPROM; unlocked(EUN1) writes program backing memory. Reset loads persistent manufacturing/user contents, numerical value unknown. No writes during Busy. EEPROM2 additionally has conflicting reset0000 title vs detailedxxxx/diagramR/W-x, retained unresolved.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-14",
+        "section": null,
+        "excerpt": "Table 7-14. EEPROM3 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register is used as a scratch pad. To support NIST traceability, do not delete or re-program this regist"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ],
+    "application_scope": "candidate input only; old IR remains preserved",
+    "applied_to": "candidate_ir/TMP117_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "CONFIGURATION",
+    "field": "RST",
+    "property": "desc",
+    "old": "软复位位。写 1 触发系统复位恢复出厂值，此位自动清零（this bit self-clears）",
+    "new": "Write1 requests system reset and the bit self-clears. Compare default registers and RST0 only after reset completion; instantaneous always0 is an explicit atomic-model assumption.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table 3 / Figure 19",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. BRNG: Bus Voltage Range Bit 13 0 = 16V FSR 1 = 32V FSR ("
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "CONFIGURATION",
+    "field": "RST",
+    "property": "read_as",
+    "old": 0,
+    "new": null,
+    "certainty": "ABSTRACTION_ASSUMPTION",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table 3 / Figure 19",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. BRNG: Bus Voltage Range Bit 13 0 = 16V FSR 1 = 32V FSR ("
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "RST",
+    "property": "desc",
+    "old": "p.23 原文『Setting this bit to 1 generates a system reset that is the same as power-on reset. Resets all registers to default values; **this bit self-clears**.』⇒ 写触发 + 自清零（⑤）",
+    "new": "Write1 requests system reset and the bit self-clears. Compare default registers and RST0 only after reset completion; instantaneous always0 is an explicit atomic-model assumption.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "§7.1.1 RST",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "RST",
+    "property": "read_as",
+    "old": 0,
+    "new": null,
+    "certainty": "ABSTRACTION_ASSUMPTION",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "§7.1.1 RST",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA3221",
+    "register": "CONFIG",
+    "field": "RST",
+    "property": "desc",
+    "old": "RST：写 1 触发与上电复位等效的系统复位，所有寄存器回默认值，且**该位自清零**（原文『This bit resets all registers to default values and self-clears』）→ 读恒 0",
+    "new": "Write1 requests system reset and the bit self-clears. Compare default registers and RST0 only after reset completion; instantaneous always0 is an explicit atomic-model assumption. INA3221 software reset holds PV output until power-valid detection finishes.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 8-4",
+        "section": null,
+        "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "This bit does not clear until the condition that caused the alert is removed, and the PV pin has cleared. 1 TCF R/W 11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin "
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.3.3",
+        "excerpt": "holds the output of the PV pin until the power-valid detection sequence completes. The Power-Valid Upper Limit and Power-Valid Lower limit registers return to the default state when the software reset has been issued. Th"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA3221_gold_ir.json"
+  },
+  {
+    "chip": "INA3221",
+    "register": "CONFIG",
+    "field": "RST",
+    "property": "read_as",
+    "old": 0,
+    "new": null,
+    "certainty": "ABSTRACTION_ASSUMPTION",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 8-4",
+        "section": null,
+        "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA3221_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "SHUNT_VOLTAGE",
+    "field": "SV",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "BD",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "RSV_2",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "CNVR",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "OVF",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "SHUNT_VOLTAGE",
+    "field": null,
+    "property": "reset",
+    "old": "0x0000",
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": null,
+    "property": "reset",
+    "old": "0x0000",
+    "new": null,
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24 / §8.6.3.2",
+        "section": null,
+        "excerpt": "Bus Voltage register stores the most recent bus voltage reading, VBUS. At full-scale range = 32 V (decimal = 8000, hex = 1F40), and LSB = 4 mV. Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 B"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24 / §8.6.3.2",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current flowing 04 Current(2) 00000000 00000000 0000 R through the shunt re"
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24 / §8.6.3.2",
+        "section": null,
+        "excerpt": "CNVR: Conversion Ready Bit 1 Although the data from the last conversion can be read at any time, the INA219 Conversion Ready bit (CNVR) indicates when data from a conversion is available in the data output registers. The"
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Power Measurement Current and bus voltage are converted at different points in time, depending on the resolution and averagin"
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Writing a new mode into the Operating Mode bits in the Configuration Register (except for Power-Down or Disable) 2.) Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Writing to the Configuration register, except when configuring the MODE bits for power down or ADC off (disable) modes • Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Powe"
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24 / §8.6.3.2",
+        "section": null,
+        "excerpt": "OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 Power Register (address = 03"
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2 OVF",
+        "excerpt": "Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 Power Register (address = 03h) [reset = 00h] Full-scale range and LSB are set by the Calibration regist"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "RSV_2",
+    "property": "desc",
+    "old": "保留位，恒读 0",
+    "new": "Unlabeled bit2 of read-only BUS_VOLTAGE. Numeric POR and always-zero behavior are not specified in Table2/Figure24; exclude these oracles.",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current flowing 04 Current(2) 00000000 00000000 0000 R through the shunt re"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "CNVR",
+    "property": "desc",
+    "old": "转换完成就绪标志",
+    "new": "Hardware conversion-ready after conversions/averaging/multiplication. Register detail p23 says POWER read clears and active new MODE write clears; p10 instead says Status read/convert pin and any CONFIG write. Preserve unresolved source conflict; select no single unconditional read-clear oracle.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Power Measurement Current and bus voltage are converted at different points in time, depending on the resolution and averagin"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA219_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "UNNAMED_14_12",
+    "property": "access",
+    "old": "RO",
+    "new": "UNSPEC",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-2",
+        "section": null,
+        "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "UNNAMED_14_12",
+    "property": "desc",
+    "old": "未命名保留位，POR=100b",
+    "new": "Unlabeled reserved positions with defined POR bits in a register-level R/W table. No per-bit RO or hardwired read constant is specified. Preserve reset values in legal writes; exclude nondefault access assertions.",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-2",
+        "section": null,
+        "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "CALIBRATION",
+    "field": "UNNAMED_15",
+    "property": "access",
+    "old": "RO",
+    "new": "UNSPEC",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 7-11",
+        "section": null,
+        "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "CALIBRATION",
+    "field": "UNNAMED_15",
+    "property": "desc",
+    "old": "未命名保留位",
+    "new": "Unlabeled reserved positions with defined POR bits in a register-level R/W table. No per-bit RO or hardwired read constant is specified. Preserve reset values in legal writes; exclude nondefault access assertions.",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 7-11",
+        "section": null,
+        "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "UNNAMED_9_5",
+    "property": "access",
+    "old": "RO",
+    "new": "UNSPEC",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 7-12 / §7.1.7",
+        "section": null,
+        "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "UNNAMED_9_5",
+    "property": "desc",
+    "old": "未命名保留位 ×5",
+    "new": "Unlabeled reserved positions with defined POR bits in a register-level R/W table. No per-bit RO or hardwired read constant is specified. Preserve reset values in legal writes; exclude nondefault access assertions.",
+    "certainty": "UNDEFINED_BEHAVIOR",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 7-12 / §7.1.7",
+        "section": null,
+        "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "CVRF",
+    "property": "desc",
+    "old": "Conversion Ready Flag（硬件置位，未建模）",
+    "new": "Hardware managed. Set after all conversions/averaging/multiplications complete; reading MASK_ENABLE clears, CONFIG write clears except MODE0/4 powerdown. No ordinary RW persistence.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 CVRF",
+        "excerpt": "Conversion Ready Flag bit clears under the following conditions: 1.) Writing to the Configuration Register (except for Power-Down selection) 2.) Reading the Mask/Enable Register OVF: Math Overflow Flag Bit 2 This bit is "
+      },
+      {
+        "pdf_page": 11,
+        "printed_page": "11",
+        "table": null,
+        "section": "§6.3.1",
+        "excerpt": "Conversion Ready flag (CVRF) bit is set after all conversions, averaging, and multiplication operations are complete. The Conversion Ready flag (CVRF) bit clears under these conditions: • Writing to the Configuration Reg"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "AFF",
+    "property": "desc",
+    "old": "Alert Function Flag（硬件置位，未建模）",
+    "new": "Hardware managed. LEN1: MASK_ENABLE read clears latched AFF. LEN0: next no-alert conversion clears. CONFIG-write clear conflicts between p13 and p27; quarantine that action pending explicit profile.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table": null,
+        "section": "§6.3.1.2",
+        "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read. The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every bus voltage co"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared following the next conversion that does not result in an Alert conditi"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA226",
+    "register": "DIE_ID",
+    "field": "ID",
+    "property": "desc",
+    "old": null,
+    "new": "RO identification. Table7-1 gives2260/2261 by country-of-origin; Table7-15 POR row is all0. Preserve source conflict and exclude fixed numeric reset in main profile. Do not treat source-table selection as official erratum.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-1 note (3)",
+        "section": null,
+        "excerpt": "Die COO: 2260 = USA or Japan, 2261 = USA 7.1.1 Configuration Register (00h) (Read/Write) Table 7-2. Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE DID: Device ID Bits Bits 4-15 Stores the device identification bits RID: Die Revision ID Bits Bit 0-3 Stores the device revision identification bits 28 Submit Document Feedback C"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA226_gold_ir.json"
+  },
+  {
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "TCF",
+    "property": "desc",
+    "old": "时序控制标志——**上电即为 1**（复位值 0x0002 的来源，§7.4.2 p.15）（原文：不随读清除，PVF 要等告警条件消失、TCF 要断电才清 → 忠实编码为 RO 而非可写存储）",
+    "new": "Hardware timing-control status with original R/W source label. Not read-clear; reinitialized on power cycle or software reset. Default high/RW1/register0002 support bit1, but detailed reset literal11h is inconsistent and retained as a source representation conflict.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-33",
+        "section": null,
+        "excerpt": "RW-1 RW-0 LEGEND: R/W = Read/Write; R = Read only; -n = value after reset Table 8-34. Mask/Enable Register Field Descriptions Bit Field Type Reset Description 15 Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation cha"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. Th"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA3221_gold_ir.json"
+  },
+  {
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "CVRF",
+    "property": "desc",
+    "old": "转换完成标志；写 CONFIG 或读 Mask/Enable 都会清除（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）",
+    "new": "Hardware conversion-ready, original source R/W label. Set when all enabled channel conversions complete. MASK_ENABLE read clears; CONFIG write clears except powerdown/disable MODE0/4. No ordinary software-written status persistence.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": "Table 8-34 continued",
+        "section": null,
+        "excerpt": "Conversion ready clears under the following conditions: 1. Writing the Configuration register (except for power-down or disable-mode selections). 2. Reading the Mask/Enable register. 8.2.17 Power-valid Upper-limit Regist"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA3221_gold_ir.json"
+  },
+  {
+    "chip": "INA3221",
+    "register": "SHUNT_SUM_LIMIT",
+    "field": "SVL",
+    "property": "desc",
+    "old": "SVL13..SVL0",
+    "new": "Inventory aggregate[15:1] contains source SIGN[15] plus SVL[14:1]. Table8-31 RW/reset7FFE conflicts with Table8-32 R/reset0. Main profile reset checks only registermask8001; all0E write/protection oracles excluded. Retain source conflict.",
+    "certainty": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-31",
+        "section": null,
+        "excerpt": "Table 8-31. Shunt-Voltage Sum-Limit Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 SIGN SVL13 SVL12 SVL11 SVL10 SVL9 SVL8 SVL7 SVL6 SVL5 SVL4 SVL3 SVL2 SVL1 SVL0 — RW-0 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 R"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-32",
+        "section": null,
+        "excerpt": "Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions Bit Field Type Reset Description 15 SIGN R 0h Sign bit. 0 = positive number 1 = negative number in twos complement format 14-1 SVL13-0 R 0h Shunt-voltage su"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/INA3221_gold_ir.json"
+  },
+  {
+    "chip": "ADS1115",
+    "register": "CONFIG",
+    "field": "OS",
+    "property": "desc",
+    "old": "运行状态/单次转换启动。写 1 启动单次转换，读 1 表示当前未在转换，读 0 表示正在转换",
+    "new": "Operational status/action, not ordinary storedRW. Write0 no effect; write1 in powerdown starts one conversion, write1 while converting no effect. Read0=converting/read1=idle. Use MODE1 idle prerequisite and completion event, not write-equals-read persistence.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 8-3",
+        "section": null,
+        "excerpt": "OS can only be written when in power-down state and has no effect when a conversion is ongoing. When writing: 15 OS R/W 1b 0b : No effect 1b : Start a single conversion (when in power-down state) When reading: 0b : Devic"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1115_gold_ir.json"
+  },
+  {
+    "chip": "ADS1115",
+    "register": "CONFIG",
+    "field": "COMP_LAT",
+    "property": "desc",
+    "old": "锁存比较器：0=非锁存, 1=锁存",
+    "new": "0 nonlatching,1 latching comparator. Reading CONVERSION or successful SMBus alert response clears asserted latched ALERT/RDY output; COMP_LAT configuration field does not itself read-clear.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": null,
+        "section": "§7.3.7",
+        "excerpt": "This latched assertion can only be cleared by issuing an SMBus alert response or by reading the Conversion register. The ALERT/RDY pin can be configured as active high or active low by the COMP_POL bit in the Config regi"
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 8-3 continued",
+        "section": null,
+        "excerpt": "remains latched until conversion data are read by the controller or an appropriate SMBus alert response is sent by the controller. The device responds with an address, and is the lowest address currently asserting the AL"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1115_gold_ir.json"
+  },
+  {
+    "chip": "ADS1220",
+    "register": "CONFIG2",
+    "field": "PSW",
+    "property": "desc",
+    "old": "功率开关 / 掉电模式",
+    "new": "Low-side switch control:0 open,1 closes on START/SYNC and opens on POWERDOWN. In single-shot mode switch remains closed between conversions if PSW1; single conversion completion does not open it.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.9",
+        "excerpt": "switch stays closed between conversions in single-shot conversion mode in case the PSW bit is set to 1b. The switch can be opened at any time by setting the PSW bit to 0b. By default, the switch is always open. 8.3.10 Se"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1220_gold_ir.json"
+  },
+  {
+    "chip": "ADS1220",
+    "register": "CONFIG0",
+    "field": null,
+    "property": "conversion_write_side_effect",
+    "old": null,
+    "new": {
+      "single_shot_write": "starts/restarts one conversion",
+      "write_during_conversion": "restarts current conversion",
+      "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+      "continuous_start": "CM1 followed by START/SYNC"
+    },
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table": "Table 8-10",
+        "section": null,
+        "excerpt": "Input multiplexer configuration These bits configure the input multiplexer. For settings where AINN = AVSS, the PGA must be disabled (PGA_BYPASS = 1) and only gains 1, 2, and 4 can be used. 0000b : AINP = AIN0, AINN = AI"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": null,
+        "section": "§8.4.2.1-2",
+        "excerpt": "every write access to any configuration register also starts a new conversion. Writing to any configuration register while a conversion is ongoing functions as a new START/SYNC command that stops the current conversion a"
+      },
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": null,
+        "section": "§8.4.3.4",
+        "excerpt": "Writing to any configuration register wakes up the device as well, but only starts a single conversion regardless of the selected conversion mode (CM). Copyright © 2026 Texas Instruments Incorporated Submit Document Feed"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table": "Table 8-10",
+        "section": null,
+        "excerpt": "For settings where AINN = AVSS, the PGA must be disabled (PGA_BYPASS = 1) and only gains 1, 2, and 4 can be used. 0000b : AINP = AIN0, AINN = AIN1 0001b : AINP = AIN0, AINN = AIN2 0010b : AINP = AIN0, AINN = AIN3 0011b :"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table": "Table 8-10",
+        "section": null,
+        "excerpt": "VREFPx – VREFNx) / 4 monitor (PGA bypassed) 1101b : (AVDD – AVSS) / 4 monitor (PGA bypassed) 1110b : AINP and AINN shorted to (AVDD + AVSS) / 2 1111b : Reserved Gain configuration These bits configure the device gain. Ga"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": null,
+        "section": "§8.3.13",
+        "excerpt": "settings of configuration register 0 have no effect and the device uses the internal reference for measurement, regardless of the selected voltage reference source. Temperature readings follow the same process as the ana"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table": "Table 8-10",
+        "section": null,
+        "excerpt": "Gain configuration These bits configure the device gain. Gains 1, 2, and 4 can be used without the PGA. In this case, gain is obtained by a switched-capacitor structure. 000b : Gain = 1 001b : Gain = 2 3:1 GAIN[2:0] R/W "
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table": "Table 8-10",
+        "section": null,
+        "excerpt": "Disables and bypasses the internal low-noise PGA Disabling the PGA reduces overall power consumption and allows the common- mode voltage range (VCM) to span from AVSS – 0.1V to AVDD + 0.1V. The PGA can only be disabled f"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table": "Table 8-10",
+        "section": null,
+        "excerpt": "PGA is always enabled for gain settings 8 to 128, regardless of the PGA_BYPASS setting. 0b : PGA enabled 1b : PGA disabled and bypassed Copyright © 2026 Texas Instruments Incorporated Submit Document Feedback 43 Product "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1220_gold_ir.json"
+  },
+  {
+    "chip": "ADS1220",
+    "register": "CONFIG1",
+    "field": null,
+    "property": "conversion_write_side_effect",
+    "old": null,
+    "new": {
+      "single_shot_write": "starts/restarts one conversion",
+      "write_during_conversion": "restarts current conversion",
+      "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+      "continuous_start": "CM1 followed by START/SYNC"
+    },
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table": "Table 8-11",
+        "section": null,
+        "excerpt": "Data rate 7:5 DR[2:0] R/W 000b These bits control the data rate setting depending on the selected operating mode. Table 8-12 lists the bit settings for normal, duty-cycle, and turbo mode. Operating mode These bits contro"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": null,
+        "section": "§8.4.2.1-2",
+        "excerpt": "every write access to any configuration register also starts a new conversion. Writing to any configuration register while a conversion is ongoing functions as a new START/SYNC command that stops the current conversion a"
+      },
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": null,
+        "section": "§8.4.3.4",
+        "excerpt": "Writing to any configuration register wakes up the device as well, but only starts a single conversion regardless of the selected conversion mode (CM). Copyright © 2026 Texas Instruments Incorporated Submit Document Feed"
+      },
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table": "Table 8-11",
+        "section": null,
+        "excerpt": "operating mode. Table 8-12 lists the bit settings for normal, duty-cycle, and turbo mode. Operating mode These bits control the operating mode the device operates in. 00b : Normal mode (256kHz modulator clock) 4:3 MODE[1"
+      },
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table": "Table 8-11",
+        "section": null,
+        "excerpt": "Conversion mode This bit sets the conversion mode for the device. 2 CM R/W 0b 0b : Single-shot conversion mode 1b : Continuous conversion mode Temperature sensor mode This bit enables the internal temperature sensor and "
+      },
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table": "Table 8-11",
+        "section": null,
+        "excerpt": "Temperature sensor mode This bit enables the internal temperature sensor and puts the device in temperature sensor mode. 1 TS R/W 0b The settings of configuration register 0 have no effect and the device uses the interna"
+      },
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table": "Table 8-11",
+        "section": null,
+        "excerpt": "Burn-out current sources This bit controls the 10µA, burn-out current sources. The burn-out current sources can be used to detect sensor faults such as wire 0 BCS R/W 0b breaks and shorted sensors. 0b : Current sources o"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1220_gold_ir.json"
+  },
+  {
+    "chip": "ADS1220",
+    "register": "CONFIG2",
+    "field": null,
+    "property": "conversion_write_side_effect",
+    "old": null,
+    "new": {
+      "single_shot_write": "starts/restarts one conversion",
+      "write_during_conversion": "restarts current conversion",
+      "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+      "continuous_start": "CM1 followed by START/SYNC"
+    },
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": "45",
+        "table": "Table 8-13",
+        "section": null,
+        "excerpt": "Voltage reference selection These bits select the voltage reference source that is used for the conversion. 00b : Internal 2.048V reference selected 7:6 VREF[1:0] R/W 00b 01b : External reference selected using dedicated"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": null,
+        "section": "§8.4.2.1-2",
+        "excerpt": "every write access to any configuration register also starts a new conversion. Writing to any configuration register while a conversion is ongoing functions as a new START/SYNC command that stops the current conversion a"
+      },
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": null,
+        "section": "§8.4.3.4",
+        "excerpt": "Writing to any configuration register wakes up the device as well, but only starts a single conversion regardless of the selected conversion mode (CM). Copyright © 2026 Texas Instruments Incorporated Submit Document Feed"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": null,
+        "section": "§8.3.13",
+        "excerpt": "settings of configuration register 0 have no effect and the device uses the internal reference for measurement, regardless of the selected voltage reference source. Temperature readings follow the same process as the ana"
+      },
+      {
+        "pdf_page": 45,
+        "printed_page": "45",
+        "table": "Table 8-13",
+        "section": null,
+        "excerpt": "FIR filter configuration These bits configure the filter coefficients for the internal FIR filter. Only use these bits together with the 20SPS setting in normal mode and the 5SPS setting in duty-cycle mode. Set to 00b fo"
+      },
+      {
+        "pdf_page": 45,
+        "printed_page": "45",
+        "table": "Table 8-13",
+        "section": null,
+        "excerpt": "Only use these bits together with the 20SPS setting in normal mode and the 5SPS setting in duty-cycle mode. Set to 00b for all other data rates. 5:4 50/60[1:0] R/W 00b 00b : No 50Hz or 60Hz rejection 01b : Simultaneous 5"
+      },
+      {
+        "pdf_page": 45,
+        "printed_page": "45",
+        "table": "Table 8-13",
+        "section": null,
+        "excerpt": "Low-side power switch configuration This bit configures the behavior of the low-side switch connected between AIN3/ REFN1 and AVSS. 3 PSW R/W 0h 0b : Switch is always open 1b : Switch automatically closes when the START/"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.9",
+        "excerpt": "switch stays closed between conversions in single-shot conversion mode in case the PSW bit is set to 1b. The switch can be opened at any time by setting the PSW bit to 0b. By default, the switch is always open. 8.3.10 Se"
+      },
+      {
+        "pdf_page": 45,
+        "printed_page": "45",
+        "table": "Table 8-13",
+        "section": null,
+        "excerpt": "IDAC current setting These bits set the current for both IDAC1 and IDAC2 excitation current sources. 000b : Off 001b : 10µA 010b : 50µA 2:0 IDAC[2:0] R/W 0h 011b : 100µA 100b : 250µA 101b : 500µA 110b : 1000µA 111b : 150"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.8",
+        "excerpt": "IDACs require up to 200µs to start up after the IDAC current is programmed to the respective value using the IDAC[2:0] bits. Set the IDAC current to the respective value using the IDAC[2:0] bits and then select the routi"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.8",
+        "excerpt": "IDACs remain active between any two conversions if the IDAC[2:0] bits are set to a value other than 000b. However, the IDACs are powered down whenever the POWERDOWN command is issued. The analog supply current increases "
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1220_gold_ir.json"
+  },
+  {
+    "chip": "ADS1220",
+    "register": "CONFIG3",
+    "field": null,
+    "property": "conversion_write_side_effect",
+    "old": null,
+    "new": {
+      "single_shot_write": "starts/restarts one conversion",
+      "write_during_conversion": "restarts current conversion",
+      "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+      "continuous_start": "CM1 followed by START/SYNC"
+    },
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 46,
+        "printed_page": "46",
+        "table": "Table 8-14",
+        "section": null,
+        "excerpt": "IDAC1 routing configuration These bits select the channel where IDAC1 is routed to. 000b : IDAC1 disabled 001b : IDAC1 connected to AIN0/REFP1 010b : IDAC1 connected to AIN1 7:5 I1MUX[2:0] R/W 000b 011b : IDAC1 connected"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": null,
+        "section": "§8.4.2.1-2",
+        "excerpt": "every write access to any configuration register also starts a new conversion. Writing to any configuration register while a conversion is ongoing functions as a new START/SYNC command that stops the current conversion a"
+      },
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": null,
+        "section": "§8.4.3.4",
+        "excerpt": "Writing to any configuration register wakes up the device as well, but only starts a single conversion regardless of the selected conversion mode (CM). Copyright © 2026 Texas Instruments Incorporated Submit Document Feed"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.8",
+        "excerpt": "Set the IDAC current to the respective value using the IDAC[2:0] bits and then select the routing for each IDAC (I1MUX[2:0], I2MUX[2:0]) thereafter. In single-shot conversion mode, the IDACs remain active between any two"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.8",
+        "excerpt": "compliance voltage of the IDACs. In other words, limit the voltage on the pin where the IDAC is routed to ≤ (AVDD – 0.9V), otherwise the specified accuracy of the IDAC current is not met. For three-wire RTD applications,"
+      },
+      {
+        "pdf_page": 46,
+        "printed_page": "46",
+        "table": "Table 8-14",
+        "section": null,
+        "excerpt": "IDAC2 routing configuration These bits select the channel where IDAC2 is routed to. 000b : IDAC2 disabled 001b : IDAC2 connected to AIN0/REFP1 010b : IDAC2 connected to AIN1 4:2 I2MUX[2:0] R/W 000b 011b : IDAC2 connected"
+      },
+      {
+        "pdf_page": 46,
+        "printed_page": "46",
+        "table": "Table 8-14",
+        "section": null,
+        "excerpt": "DRDY mode This bit controls the behavior of the DOUT/DRDY pin when new data are ready. 1 DRDYM R/W 0b 0b : Only the dedicated DRDY pin is used to indicate when data are ready 1b : Data ready is indicated simultaneously o"
+      },
+      {
+        "pdf_page": 46,
+        "printed_page": "46",
+        "table": "Table 8-14",
+        "section": null,
+        "excerpt": "Always write 0b 46 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: ADS1220"
+      }
+    ],
+    "application_scope": "candidate input only; never apply to old IR or historical model prompts",
+    "applied_to": "candidate_ir/ADS1220_gold_ir.json"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "TEMP_3_0",
+    "property": "bits",
+    "old": "3:0",
+    "new": "7:4",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS2DW12_gold_ir.json"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_7_4",
+    "property": "bits",
+    "old": "7:4",
+    "new": "3:0",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS2DW12_gold_ir.json"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_7_4",
+    "property": "name",
+    "old": "ZERO_7_4",
+    "new": "ZERO_3_0",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS2DW12_gold_ir.json"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "CTRL2",
+    "field": "MUST_BE_ZERO",
+    "property": "access",
+    "old": "RO",
+    "new": "UNSPEC",
+    "certainty": "ABSTRACTION_ASSUMPTION_FOR_UNDEFINED_ACCESS",
+    "locators": [
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table32 footnote",
+        "excerpt": "This bit must be set to 0",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS2DW12_gold_ir.json"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "WAKE_UP_SRC",
+    "field": "FF_IA",
+    "property": "desc",
+    "old": "自由落体事件标志，读清除",
+    "new": "Free-fall event status. Reading ALL_INT_SRC resets related interrupt function flags routed to INT pads; unqualified self read-clear is not specified in reviewed source.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "§8.28",
+        "excerpt": "Free-fall event detection status",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 53,
+        "printed_page": "53",
+        "table_or_section": "§8.31",
+        "excerpt": "Reading this register, all related interrupt function flags",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS2DW12_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG4",
+    "field": "ST",
+    "property": "access",
+    "old": "UNSPEC",
+    "new": "RW",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table_or_section": "Table21",
+        "excerpt": "CTRL_REG4",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Tables38–39",
+        "excerpt": "Self-test enable",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "AD5592R",
+    "register": null,
+    "field": null,
+    "property": "address_encoding.reserved_command_data_bits",
+    "old": "10:9 are reserved for control writes; logical fields below cover register data bits.",
+    "new": "Per-register command definitions prevail provisionally; Table10 generic bits10:9 statement conflicts with REP9 and SW_RESET key10:0. No official erratum verified.",
+    "certainty": "SOURCE_CONFLICT_PRESERVED_NO_UNIQUE_ASSIGNMENT",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "Table10",
+        "excerpt": "Bits[10:9] are reserved",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table16",
+        "excerpt": "REP",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "Table28",
+        "excerpt": "10110101100: Reset",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/AD5592R_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZYXOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZYXOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "YOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "YOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "XOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "XOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZYXDA",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZYXDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZDA",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "YDA",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "YDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata.",
+    "applied_to": "candidate_ir/LIS3DH_gold_ir.json"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "TEMP_3_0",
+    "property": "desc",
+    "old": "Table 22 位图里 [7:4] 标 0（无行名）⇒ 文档明示读 0",
+    "new": "Temperature bitsTEMP3:0 occupy bus bits7:4. OUT_T_H/OUT_T_L form left-justified12bit two's complement output; low4 bits read0.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "applied_to": "candidate_ir/LIS2DW12_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "BUSY",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LHIGH",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LLOW",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RHIGH",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RLOW",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "OPEN",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RTHRM",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LTHRM",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "ONE_SHOT",
+    "field": "START",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "N/A 0F N/A X X X X X X X X One-Shot Start Register(1)"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "POE_PLUS",
+    "field": "RSVD_LO",
+    "property": "reset",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 46,
+        "printed_page": 46,
+        "table_or_section": "Table 10",
+        "excerpt": "0000,----"
+      },
+      {
+        "pdf_page": 77,
+        "printed_page": 77,
+        "table_or_section": "§7.5.29",
+        "excerpt": "RESET or POR VALUE 0 0 0 0"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": null,
+    "property": "reset",
+    "old": "0x00",
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "N/A"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": null,
+    "property": "runtime_value",
+    "old": null,
+    "new": true,
+    "certainty": "ABSTRACTION_ASSUMPTION",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "N/A"
+      }
+    ],
+    "op": "add",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "ONE_SHOT",
+    "field": null,
+    "property": "reset",
+    "old": "0x00",
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "N/A"
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "ONE_SHOT",
+    "field": null,
+    "property": "runtime_value",
+    "old": null,
+    "new": true,
+    "certainty": "ABSTRACTION_ASSUMPTION",
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table 4",
+        "excerpt": "N/A"
+      }
+    ],
+    "op": "add",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "MEAS_CONFIG",
+    "field": "MEAS_TRIG",
+    "property": "desc",
+    "old": "写 1 启动单次测量；转换完成后硬件清 0——MVP 不建模转换过程，见 Q3",
+    "new": "写1在CC模式下启动测量；测量开始时自清0；转换完成由DRDY_STATUS表示。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": 31,
+        "table_or_section": "Table 7-38",
+        "excerpt": "self-clears to 0 once the measurement starts."
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/HDC2021_gold_ir.json"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "DEVICE_CONFIG",
+    "field": "INT_MODE",
+    "property": "desc",
+    "old": "0=数据就绪模式 1=中断模式",
+    "new": "0=Clear-on-read mode；1=Comparator mode，改变threshold status与DRDY/INT输出。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": 30,
+        "table_or_section": "Table 7-36",
+        "excerpt": "1 = Comparator mode"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/HDC2021_gold_ir.json"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "DEVICE_CONFIG",
+    "field": "SOFT_RES",
+    "property": "desc",
+    "old": "写 1 触发软复位（所有寄存器回默认值），该位自清零 → 读恒 0",
+    "new": "写1触发软复位，在RESET完成后自清0；完成前读值不能视为恒0。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": 30,
+        "table_or_section": "Table 7-36",
+        "excerpt": "This bit self-clears after RESET."
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/HDC2021_gold_ir.json"
+  },
+  {
+    "chip": "HDC2021",
+    "register": "DEVICE_CONFIG",
+    "field": "SOFT_RES",
+    "property": "read_as",
+    "old": 0,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": 30,
+        "table_or_section": "Table 7-36",
+        "excerpt": "This bit self-clears after RESET."
+      }
+    ],
+    "op": "remove",
+    "applied_to": "candidate_ir/HDC2021_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LHIGH",
+    "property": "desc",
+    "old": "本地高温告警标志，读即清",
+    "new": "动态RO告警旗：ALERT模式读STATUS且致因已消失后清；THERM2模式仅OPEN保持读清，温度告警模式依正文。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3 / Table5 note1",
+        "excerpt": "provided that the condition that caused the setting of the flags is not present"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LLOW",
+    "property": "desc",
+    "old": "本地低温告警标志，读即清",
+    "new": "动态RO告警旗：ALERT模式读STATUS且致因已消失后清；THERM2模式仅OPEN保持读清，温度告警模式依正文。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3 / Table5 note1",
+        "excerpt": "provided that the condition that caused the setting of the flags is not present"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RHIGH",
+    "property": "desc",
+    "old": "远端高温告警标志，读即清",
+    "new": "动态RO告警旗：ALERT模式读STATUS且致因已消失后清；THERM2模式仅OPEN保持读清，温度告警模式依正文。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3 / Table5 note1",
+        "excerpt": "provided that the condition that caused the setting of the flags is not present"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RLOW",
+    "property": "desc",
+    "old": "远端低温告警标志，读即清",
+    "new": "动态RO告警旗：ALERT模式读STATUS且致因已消失后清；THERM2模式仅OPEN保持读清，温度告警模式依正文。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3 / Table5 note1",
+        "excerpt": "provided that the condition that caused the setting of the flags is not present"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "OPEN",
+    "property": "desc",
+    "old": "远端二极管断线标志，读即清",
+    "new": "动态RO告警旗：ALERT模式读STATUS且致因已消失后清；THERM2模式仅OPEN保持读清，温度告警模式依正文。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3 / Table5 note1",
+        "excerpt": "provided that the condition that caused the setting of the flags is not present"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TMP461_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "M250",
+    "property": "desc",
+    "old": "250ms 定时模式",
+    "new": "Current-sense-resistor-selection：1=250mΩ，0=255mΩ；选择ICUT/classification look-up tables。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16",
+        "excerpt": "Current-sense-resistor-selection bit."
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "ROM1",
+    "property": "desc",
+    "old": "记号 R = ROM 编程位（读器件版本），不可写",
+    "new": "R17[1] reserved，详细初值Reserved与总览80h粒度冲突；保持新实例观测初值，不解释为ROM/revision。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table10 note1",
+        "excerpt": "Bits labeled \"R\" are reserved."
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16",
+        "excerpt": "R17[1]"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "INTERRUPT_TIMER",
+    "field": "ROM",
+    "property": "desc",
+    "old": "记号 R = ROM 位",
+    "new": "R27[7:4] reserved，RESET/POR明确0，写入保持0；非ROM，无非法写后行为保证。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 68,
+        "printed_page": 68,
+        "table_or_section": "§7.5.22",
+        "excerpt": "Reserved: Bits R27[7:4]"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "SUPPLY_EVENT",
+    "field": "VDUV",
+    "property": "desc",
+    "old": "电压检测未启用 = 1（POR 即 1）",
+    "new": "VDD UVLO事件；POR置1，VDD低于VUVDD_F置1；CoR地址0Bh清。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 54,
+        "printed_page": 54,
+        "table_or_section": "§7.5.7",
+        "excerpt": "VDUV: Indicates that a VDD UVLO occurred."
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "SUPPLY_EVENT",
+    "field": "VPUV",
+    "property": "desc",
+    "old": "同上",
+    "new": "VPWR UVLO事件；POR置1，VPWR低于VPUV_F置1；RESET输入行为需按供电轨。",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 54,
+        "printed_page": 54,
+        "table_or_section": "§7.5.7",
+        "excerpt": "VPUV: Indicates that a VPWR UVLO occurred."
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  },
+  {
+    "chip": "TPS23861",
+    "register": "FIRMWARE_REV",
+    "field": null,
+    "property": "addr",
+    "old": "0xFE",
+    "new": "0x41",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 77,
+        "printed_page": 77,
+        "table_or_section": "§7.5.30",
+        "excerpt": "Command = 41h with 1 Data Byte, Read Only"
+      }
+    ],
+    "op": "replace",
+    "applied_to": "candidate_ir/TPS23861_gold_ir.json"
+  }
+]

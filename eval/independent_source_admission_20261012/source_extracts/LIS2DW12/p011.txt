@@ -1,0 +1,82 @@
+                                                              LIS2DW12
+                                                                                   Mechanical and electrical specifications
+
+
+                         Table 8. I²C high-speed mode specifications at 1 MHz and 3.4 MHz
+
+     Mode      Symbol                                Parameter                                 Min    Max  Unit
+
+                        fSCL   SCL clock frequency                                                         0       1  MHz
+
+                       tHD;STA  Hold time (repeated) START condition                                          260          -
+
+                    tLOW   Low period of the SCL clock                                                  500          -
+
+                       tHIGH   High period of the SCL clock                                                 260          -
+
+                       tSU;STA  Setup time for a repeated START condition                                      260          -
+
+                      tHD;DAT  Data hold time                                                              0           -
+
+                       tSU;DAT  Data setup time                                                            50           -    ns
+
+                          trDA    Rise time of SDA signal                                                                                           -      120
+
+                           tfDA    Fall time of SDA signal                                                                                            -      120
+ Fast mode plus(1)
+                            trCL    Rise time of SCL signal                                                         20*Vdd/5.5  120
+
+                             tfCL     Fall time of SCL signal                                                          20*Vdd/5.5  120
+
+                      tSU;STO  Setup time for STOP condition                                                260          -
+
+                   Cb    Capacitive load for each bus line                                                                               -      550  pF
+
+                       tVD;DAT  Data valid time                                                                                                       -      450   ns
+
+                      tVD;ACK  Data valid acknowledge time                                                                                    -      450
+
+                     VnL    Noise margin at low level                                                      0.1Vdd       -   V
+
+                   VnH   Noise margin at high level                                                     0.2Vdd       -
+
+                         tSP    Pulse width of spikes that must be suppressed by the input filter                       0      50   ns
+
+                      fSCLH  SCLH clock frequency                                                       0       3.4  MHz
+
+                       tSU;STA  Setup time for a repeated START condition                                      160          -
+
+                       tHD;STA  Hold time (repeated) START condition                                          160          -
+
+                    tLOW   Low period of the SCLH clock                                                 160          -
+
+                       tHIGH   High period of the SCLH clock                                                 60           -
+
+                       tSU;DAT  Data setup time                                                            10           -
+
+                      tHD;DAT  Data hold time                                                              0      70
+                                                                                                                     ns                            trCL    Rise time of SCLH signal                                                     10      40
+ High-speed mode(1)                             Rise time of SCLH signal after a repeated START condition and after an
+                           trCL1                                                                            10      80                           acknowledge bit
+
+                             tfCL     Fall time of SCLH signal                                                     10      40
+
+                          trDA    Rise time of SDAH signal                                                     10      80
+
+                           tfDA    Fall time of SDAH signal                                                     10      80
+
+                      tSU;STO  Setup time for STOP condition                                                160          -
+
+                   Cb    Capacitive load for each bus line                                                                               -      100  pF
+
+                   VnH   Noise margin at high level                                                     0.2Vdd       -   V
+
+                         tSP    Pulse width of spikes that must be suppressed by the input filter                       0      10   ns
+
+1.  Data based on characterization, not tested in production.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 11/65

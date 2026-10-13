@@ -1,0 +1,22 @@
+Data Sheet                               AD5592R
+
+PIN CONFIGURATIONS AND FUNCTION DESCRIPTIONS
+
+Table 8. AD5592R Pin Function Descriptions (Continued)
+                Pin No.
+WLCSP      LFCSP     TSSOP      Mnemonic   Description
+D2           7           9         SDO        Data Out. Logic output. The conversion results from the ADC, register reads, and temperature sensor
+                                                              information are provided on this output as a serial data stream. The bits are clocked out on the rising edge of the
+                                          SCLK input. The MSB is placed on the SDO pin on the falling edge of SYNC. Because the SCLK can idle high
+                                                              or low, the next bit is clocked out on the first rising edge of SCLK that follows a falling edge SCLK while SYNC is
+                                                       low (see Figure 4).
+D3           6           8            VREF         Reference Input/Output. When the internal reference is enabled, the 2.5 V reference voltage is available on
+                                                                       this pin. A 0.1 µF capacitor connected from the VREF pin to GND is recommended to achieve the specified
+                                                      performance from the AD5592R. When the internal reference is disabled, an external reference must be applied
+                                                                   to this pin. The voltage range for the external reference is 1 V to VDD.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 14 of 54

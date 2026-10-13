@@ -1,0 +1,47 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 19. Bit Descriptions for DAC_CONFIG (Continued)
+Bits            Bit Name           Description                                                                                                Default Value
+
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+4          DAC4                Select the I/O4 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+3          DAC3                Select the I/O3 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+2          DAC2                Select the I/O2 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+1          DAC1                Select the I/O1 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+0          DAC0                Select the I/O0 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+
+
+Pull-Down Configuration Register
+
+Name: PULLDWN_CONFIG
+
+Selects which pins have an 85 kΩ pull-down resistor to GND.
+
+
+
+
+
+Table 20. Bit Descriptions for PULLDWN_CONFIG
+Bits            Bit Name               Description                                                                                            Default Value
+
+15         MSB                   Set this bit to 0.                                                                                0x0
+[14:11]      REG_ADDR             Register address. Set these bits to 0b0110.                                                          0x6
+[10:8]       RESERVED            Reserved. Set these bits to 0b000.                                                                 0x0
+7          PULL_DWN_7          Set the I/O7 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+
+
+analog.com                                                                                         Rev. H | 41 of 54

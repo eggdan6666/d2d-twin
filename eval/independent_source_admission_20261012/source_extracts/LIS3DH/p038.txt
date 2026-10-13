@@ -1,0 +1,62 @@
+Registers description                                                      LIS3DH
+
+8.12   CTRL_REG5 (24h)
+
+                                     Table 40. CTRL_REG5 register
+
+           BOOT   FIFO_EN       --        --    LIR_INT1   D4D_INT1    LIR_INT2     D4D_INT2
+
+                                   Table 41. CTRL_REG5 description
+
+         BOOT             Reboot memory content. Default value: 0
+                                           (0: normal mode; 1: reboot memory content)
+
+           FIFO_EN          FIFO enable. Default value: 0
+                                           (0: FIFO disable; 1: FIFO enable)
+
+            LIR_INT1            Latch interrupt request on INT1_SRC register, with INT1_SRC (31h) register
+                                    cleared by reading INT1_SRC (31h) itself. Default value: 0.
+                                           (0: interrupt request not latched; 1: interrupt request latched)
+
+           D4D_INT1        4D enable: 4D detection is enabled on INT1 when 6D bit on INT1_CFG is set
+                                        to 1.
+
+            LIR_INT2            Latch interrupt request on INT2_SRC (35h) register, with INT2_SRC (35h)
+                                        register cleared by reading INT2_SRC (35h) itself. Default value: 0
+                                           (0: interrupt request not latched; 1: interrupt request latched)
+
+           D4D_INT2        4D enable: 4D detection is enabled on INT2 pin when 6D bit on INT2_CFG
+                                    (34h) is set to 1.
+
+
+8.13   CTRL_REG6 (25h)
+
+                                     Table 42. CTRL_REG6 register
+
+             I2_CLICK     I2_IA1    I2_IA2   I2_BOOT    I2_ACT     - -     INT_POLARITY  -
+
+                                   Table 43. CTRL_REG6 description
+
+             I2_CLICK         Click interrupt on INT2 pin. Default value: 0
+                                       (0: disabled; 1: enabled)
+
+               I2_IA1          Enable interrupt 1 function on INT2 pin. Default value: 0
+                                       (0: function disabled; 1: function enabled)
+
+               I2_IA2          Enable interrupt 2 function on INT2 pin. Default value: 0
+                                       (0: function disabled; 1: function enabled)
+
+            I2_BOOT       Enable boot on INT2 pin. Default value: 0
+                                       (0: disabled; 1:enabled)
+
+             I2_ACT         Enable activity interrupt on INT2 pin. Default value: 0
+                                       (0: disabled; 1:enabled)
+
+            INT_POLARITY  INT1 and INT2 pin polarity. Default value: 0
+                                       (0: active-high; 1: active-low)
+
+
+
+
+
+38/54                                  DocID17530 Rev 2

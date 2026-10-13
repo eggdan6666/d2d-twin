@@ -1,0 +1,30 @@
+REGISTER TEMP @ 0x00 reset=0x8000 access=RO runtime=None DESC=温度结果（§7.6.2 Table 7-5）。16 位只读、补码、1 LSB=7.8125 m°C；**复位后读 8000h（= −256°C）直至首次转换完成**——本基准少见的非零 RO 复位值
+  T[15:0] RO reset=32768 read_as=None read_action=None tier=None DESC=T[15:0]（复位值按整寄存器 8000h 断言，字段级不设 read_as）
+REGISTER CONFIG @ 0x01 reset=0x0220 access=RW runtime=None DESC=配置寄存器（§7.6.3 Figure 7-14 p.27 + Table 7-6 p.27-28），出厂复位 0220h（bit9 CONV2=1、bit5 AVG0=1）。bit15:12 是**只读标志位**（HIGH/LOW_Alert、Data_Ready、EEPROM_Busy），其中前三位是 read-to-clear（见 Q2）
+  HIGH_ALERT[15] RO reset=0 read_as=None read_action=clear tier=None DESC=高温标志，R；读 CONFIG 后清除（Table 7-6）
+  LOW_ALERT[14] RO reset=0 read_as=None read_action=clear tier=None DESC=低温标志，R；读 CONFIG 后清除
+  DATA_READY[13] RO reset=0 read_as=None read_action=clear tier=None DESC=转换完成标志，R；**读 TEMP 或 CONFIG 都会清除**
+  EEPROM_BUSY[12] RO reset=0 read_as=None read_action=None tier=None DESC=EEPROM 忙标志，R
+  MOD[11:10] RW reset=0 read_as=None read_action=None tier=None DESC=MOD codes00 continuous,01 shutdown,10 continuous with readback00,11 one-shot; p.27 Table7-6
+  CONV[9:7] RW reset=4 read_as=None read_action=None tier=None DESC=转换周期 CONV2-0，复位 100b（T/nA=0 时 0.25Hz…）
+  AVG[6:5] RW reset=1 read_as=None read_action=None tier=None DESC=AVG codes0/1/2/3 = no averaging/8/32/64 conversions; p.27 Table7-6
+  TNA[4] RW reset=0 read_as=None read_action=None tier=None DESC=0=Alert 模式 1=Thermometer 模式
+  POL[3] RW reset=0 read_as=None read_action=None tier=None DESC=ALERT/DRDY 极性
+  DR_ALERT[2] RW reset=0 read_as=None read_action=None tier=None DESC=引脚功能选择 DRDY vs Alert
+  SOFT_RESET[1] RW reset=0 read_as=0 read_action=None tier=None DESC=软件复位位：写 1 触发 2ms 软复位、**该位永远读回 0**（Table 7-6 p.28 标 R/W；Figure 7-14 p.27 误标 R-0，见 erratum_found）
+  UNUSED[0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=未用，R-0
+REGISTER THIGH @ 0x02 reset=0x6000 access=RW runtime=None DESC=高温门限（§7.6.4 Figure 7-15，16 位全 R/W，出厂 6000h 来自 EEPROM）
+  H[15:0] RW reset=24576 read_as=None read_action=None tier=None DESC=H[15:0]，补码，1 LSB=7.8125 m°C
+REGISTER TLOW @ 0x03 reset=0x8000 access=RW runtime=None DESC=低温门限（§7.6.5，出厂 8000h 来自 EEPROM）
+  L[15:0] RW reset=32768 read_as=None read_action=None tier=None DESC=L[15:0]
+REGISTER EEPROM_UL @ 0x04 reset=0x0000 access=RW runtime=None DESC=EEPROM 解锁寄存器（§7.6.6 Figure 7-17）：bit15 EUN 为 R/W-0，bit14 EEPROM_Busy 与 bits13:0 全标 **R-0**。真实器件上 EEPROM1-3 的写只有在 EUN=1 时才生效——该 gating 语义 MVP 未断言（见 Q1）
+  EUN[15] RW reset=0 read_as=None read_action=None tier=None DESC=EEPROM unlock（写 1 允许编程 EEPROM 单元）
+  EEPROM_BUSY[14] RO reset=0 read_as=None read_action=None tier=None DESC=忙标志，R-0
+  UNUSED[13:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=R-0 全 14 位保留
+REGISTER EEPROM1 @ 0x05 reset=0x0000 access=RW runtime=True DESC=通用 EEPROM1（§7.6.7）——**复位值来自出厂 EEPROM，手册写 xxxxh**，故标 runtime_value 跳过复位值断言；字段留空＝不参与位域断言（见 Q3）
+REGISTER EEPROM2 @ 0x06 reset=0x0000 access=RW runtime=True DESC=通用 EEPROM2，同上
+REGISTER TEMP_OFFSET @ 0x07 reset=0x0000 access=RW runtime=None DESC=温度偏移（§7.6.8，16 位 R/W，复位 0000h）
+  OFF[15:0] RW reset=0 read_as=None read_action=None tier=None DESC=补码偏移
+REGISTER EEPROM3 @ 0x08 reset=0x0000 access=RW runtime=True DESC=通用 EEPROM3，同 EEPROM1
+REGISTER DEVICE_ID @ 0x0F reset=0x0117 access=RO runtime=None DESC=器件 ID（§7.6.10）= 0117h，只读且复位即为此值——又一个『RO 但复位值非零』的抄表用例
+  ID[15:0] RO reset=279 read_as=None read_action=None tier=None DESC=0x0117

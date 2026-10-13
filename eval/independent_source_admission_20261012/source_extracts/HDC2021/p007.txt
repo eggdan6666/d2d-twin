@@ -1,0 +1,32 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+                      PARAMETER                                MIN        TYP       MAX   UNIT
+
+ SUPPLY RAIL
+ tPOR      Power-On Reset or Software Reset Duration(1)                                                                3.5   ms
+
+ (1)   This parameter is specified by design and/or characterization and is not tested in production
+ (2)   After this period, the first clock pulse is generated
+ (3)   Time for data signal from SCL low to SDA output (high to low, depending on which is worse)
+ (4)   Time for acknowledement signal from SCL low to SDA output (high or low, depending on which is worse)
+ 6.7 Timing Diagram
+
+                                                     tR
+           P         S        tLOW                  tHD:DAT          tHIGH                                   Sr                                                P
+    SCL
+ VIH(MIN)
+ VIL(MAX)
+                                                                                           tF                                        tSU:STA                                                                         tSU:STO
+                                                                                                          tSU:DAT                                      tHD:STA
+ VIH(MIN)
+ VIL(MAX)
+   SDA
+                     tBUF
+                                   Figure 6-1. I2C Timing Diagram
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback     7

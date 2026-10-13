@@ -1,0 +1,57 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.26  Input Voltage Register
+
+Command = 2Eh with 2 Data Byte (LSByte first, MSByte second), Read Only
+
+LSB: 2Eh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                   Input Voltage[7:0]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+MSB: 2Fh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                               Input Voltage[13:8]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Bit Descriptions
+Data conversion result. The I2C data transmission is a 2-byte transfer.
+
+Input Voltage[13:0]: 14-bit Data conversion result of input voltage. The update rate is approximately 1 per
+second.
+
+The equation defining the voltage measured is:
+   V N u VSTEP
+
+    where
+              •  V = input voltage, V
+              •  N = 14 bit value in input voltage register
+              •   VSTEP = LSB value                                                                                                  (3)
+
+
+            MODE                       FULL SCALE VALUE                    LSB VALUE
+
+                 Any                                  60 V                                    3.662 mV
+
+
+
+                                  NOTE
+         The measurement is made between VPWR and AGND.
+
+
+
+
+
+72     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

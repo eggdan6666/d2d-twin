@@ -1,0 +1,416 @@
+[
+  {
+    "id": "PT-HDC-TRIGGER-START",
+    "chip": "HDC2021",
+    "targets": [
+      "MEAS_CONFIG.MEAS_TRIG"
+    ],
+    "problem": "旧注释把开始自清写成完成自清，v2无触发完成模型时仍可能按RW持久性错判。",
+    "old": "self-clear on conversion complete / ordinary RW",
+    "candidate_rule": {
+      "self_clear_event": "measurement starts",
+      "completion": "DRDY_STATUS conversion complete",
+      "exclude_trigger1_from_storage_persistence": true
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": 31,
+        "table_or_section": "Table7-38",
+        "excerpt": "self-clears to 0 once the measurement starts."
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-HDC-STATUS-MODES",
+    "chip": "HDC2021",
+    "targets": [
+      "STATUS.DRDY_STATUS",
+      "STATUS.TH_STATUS",
+      "STATUS.TL_STATUS",
+      "STATUS.HH_STATUS",
+      "STATUS.HL_STATUS",
+      "DEVICE_CONFIG.INT_MODE"
+    ],
+    "problem": "漏掉DRDY多读地址清零和threshold comparator模式，旧INT_MODE描述错误。",
+    "old": "no read_action; 0 data-ready/1 interrupt",
+    "candidate_rule": {
+      "DRDY_clear_reads": [
+        "0x00",
+        "0x01",
+        "0x02",
+        "0x03",
+        "0x04"
+      ],
+      "threshold_clear": "readSTATUS with INT_MODE0",
+      "comparator": "INT_MODE1 current result",
+      "pin_gate": "DRDY_INT_EN and interrupt enable; DRDY pin also INT_MODE0"
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": 23,
+        "table_or_section": "§7.6.5",
+        "excerpt": "The bit is cleared when the Status Register (0x04) is read."
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": 30,
+        "table_or_section": "Table7-36",
+        "excerpt": "1 = Comparator mode"
+      },
+      {
+        "pdf_page": 14,
+        "printed_page": 14,
+        "table_or_section": "§7.3.5.2.1",
+        "excerpt": "reflects the current temperature conversion result."
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-HDC-SOFTRESET",
+    "chip": "HDC2021",
+    "targets": [
+      "DEVICE_CONFIG.SOFT_RES"
+    ],
+    "problem": "self clear after RESET不能推出每次读恒0；旧read_as=0隐藏动作区间。",
+    "old": {
+      "read_as": 0
+    },
+    "candidate_rule": {
+      "read_zero_condition": "reset_complete",
+      "reset_latency_max_ms": 3.5,
+      "atomic_reset": "explicit benchmark abstraction only"
+    },
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": 30,
+        "table_or_section": "Table7-36",
+        "excerpt": "self-clears after RESET."
+      },
+      {
+        "pdf_page": 7,
+        "printed_page": 7,
+        "table_or_section": "tPOR",
+        "excerpt": "3.5"
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TMP461-NO-POR",
+    "chip": "TMP461",
+    "targets": [
+      "STATUS.*",
+      "ONE_SHOT.START"
+    ],
+    "problem": "Table4 STATUS与ONE_SHOT POR=N/A，候选reset=00及各字段0缺来源。",
+    "old": {
+      "register_reset": "0x00",
+      "field_reset": 0
+    },
+    "candidate_rule": {
+      "remove_resets": true,
+      "runtime_status": true,
+      "one_shot_not_stored": true
+    },
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": 17,
+        "table_or_section": "Table4",
+        "excerpt": "N/A"
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TMP461-CONDITIONAL-CLEAR",
+    "chip": "TMP461",
+    "targets": [
+      "STATUS.LHIGH",
+      "STATUS.LLOW",
+      "STATUS.RHIGH",
+      "STATUS.RLOW",
+      "STATUS.OPEN",
+      "CONFIG.ALERT_THERM2"
+    ],
+    "problem": "read-clear遗漏cause-retired和模式条件；读STATUS不清ALERT interrupt latch。",
+    "old": "read_action=clear unconditional",
+    "candidate_rule": {
+      "mode_dependent_clear": true,
+      "cause_absent_required": true,
+      "ALERT_service": "master reads sensor address only when flags reset and condition absent",
+      "THERM2_mask": "0x04 latched read-clear only"
+    },
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3 / Table5 note1",
+        "excerpt": "Only bit 2 (OPEN) stays high"
+      },
+      {
+        "pdf_page": 19,
+        "printed_page": 19,
+        "table_or_section": "§8.6.1.3",
+        "excerpt": "is not reset by reading the status register."
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TMP461-PAIR-LATCH",
+    "chip": "TMP461",
+    "targets": [
+      "TEMP_LOCAL_HIGH.*",
+      "TEMP_LOCAL_LOW.*",
+      "TEMP_REMOTE_HIGH.*",
+      "TEMP_REMOTE_LOW.*"
+    ],
+    "problem": "单次RO读回比较不能验证conversion动态或跨字节配对锁存。",
+    "old": "no paired conversion model",
+    "candidate_rule": {
+      "dynamic_masks": true,
+      "event_injection": true,
+      "high_then_low_next_read": true,
+      "third_register_read_breaks_pair_guarantee": true
+    },
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": 18,
+        "table_or_section": "§8.6.1.2",
+        "excerpt": "only until another register is read."
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-LM83-STATUS-READ",
+    "chip": "LM83",
+    "targets": [
+      "SR1.*",
+      "SR2.*"
+    ],
+    "problem": "温度告警读清/输出解除条件与Figure图注粒度存在差异；OPEN缺独立read-clear定义。",
+    "old": "no read action / RO snapshots",
+    "candidate_rule": {
+      "safe_read_clear": "inject alarm, retire fault, freeze conversion, read containing status",
+      "active_fault_postclear_timing": "exclude",
+      "OPEN_readclear": "exclude absent explicit source"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures4–7",
+        "excerpt": "Status Register Bits are reset by a read"
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TPS-ALIAS-EVENTS",
+    "chip": "TPS23861",
+    "targets": [
+      "POWER_EVENT.EV",
+      "DETECT_EVENT.EV",
+      "FAULT_EVENT.EV",
+      "START_EVENT.EV",
+      "SUPPLY_EVENT.*",
+      "INTERRUPT.FLAGS"
+    ],
+    "problem": "CoR返回/清零需区分五个alias与完整summary依赖；默认0的事件读0再读0没有非零覆盖。",
+    "old": "all reset snapshots or empty readclear evidence",
+    "candidate_rule": {
+      "alias_map": {
+        "POWER_EVENT": "0x03",
+        "DETECT_EVENT": "0x05",
+        "FAULT_EVENT": "0x07",
+        "START_EVENT": "0x09",
+        "SUPPLY_EVENT": "0x0B"
+      },
+      "nonzero_event_injection": true,
+      "clear_returns_preclear_data": true,
+      "summary_recompute": true,
+      "port_off_and_RESP_side_effects": true
+    },
+    "locators": [
+      {
+        "pdf_page": 50,
+        "printed_page": 50,
+        "table_or_section": "§7.5.3",
+        "excerpt": "Clear-on-Read command clears all bits"
+      },
+      {
+        "pdf_page": 66,
+        "printed_page": 66,
+        "table_or_section": "§7.5.19",
+        "excerpt": "CLRAIN clears all event registers"
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TPS-SUPPLY-RESET",
+    "chip": "TPS23861",
+    "targets": [
+      "SUPPLY_EVENT.VDUV",
+      "SUPPLY_EVENT.VPUV",
+      "SUPPLY_EVENT.TSD"
+    ],
+    "problem": "原IR把UVLO说成检测未启用，且POR30h不可推广为任何RESET/RESAL都同值。",
+    "old": "VDUV/VPUV detection not enabled; reset30h",
+    "candidate_rule": {
+      "POR": "0x30",
+      "UVLO": "supply events",
+      "RESET_pin_and_RESAL": "supply rails explicit"
+    },
+    "locators": [
+      {
+        "pdf_page": 54,
+        "printed_page": 54,
+        "table_or_section": "§7.5.7",
+        "excerpt": "VDUV: Indicates that a VDD UVLO occurred."
+      },
+      {
+        "pdf_page": 66,
+        "printed_page": 66,
+        "table_or_section": "§7.5.19",
+        "excerpt": "follow the state of VDD and VPWR supply rails."
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "TPS23861_R17_SOURCE_GRANULARITY_CONFLICT",
+    "chip": "TPS23861",
+    "targets": [
+      "GENERAL_MASK.RSV3",
+      "GENERAL_MASK.RSV2",
+      "GENERAL_MASK.ROM1"
+    ],
+    "problem": "总览80h与详细Reserved初值粒度冲突保持；ROM1功能是误释。",
+    "old": "numeric0 / RO / ROM revision",
+    "candidate_rule": {
+      "known_reset_mask": "0xF1",
+      "preserve_write_mask": "0x0E",
+      "exclude_access_mask": "0x0E",
+      "source_conflict": "UNRESOLVED",
+      "not_official_erratum": true
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16",
+        "excerpt": "Reserved"
+      }
+    ],
+    "severity": "BLOCKER"
+  },
+  {
+    "id": "PT-TPS-M250-RESERVED",
+    "chip": "TPS23861",
+    "targets": [
+      "GENERAL_MASK.M250",
+      "INTERRUPT_TIMER.ROM"
+    ],
+    "problem": "M250是250mΩ电阻选择，R27高位Reserved非ROM；名称错误可误导生成。",
+    "old": "M250 250ms timer / ROM",
+    "candidate_rule": {
+      "M250": "250/255mohm sense resistor selector",
+      "R27": "reserved reset0 fixed-write0 no illegal-write oracle"
+    },
+    "locators": [
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16",
+        "excerpt": "Current-sense-resistor-selection bit."
+      },
+      {
+        "pdf_page": 68,
+        "printed_page": 68,
+        "table_or_section": "§7.5.22",
+        "excerpt": "reserved for future use."
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TPS-POEP-AUTO",
+    "chip": "TPS23861",
+    "targets": [
+      "POE_PLUS.POEP"
+    ],
+    "problem": "Auto class识别在power-on前改POEP；普通RW恒持久oracle可能误判正确硬件。",
+    "old": "unconditional RW persistence",
+    "candidate_rule": {
+      "freeze_manual_or_semi_auto_for_storage": true,
+      "Auto_class4_set": true,
+      "Auto_class0_to3_clear": true,
+      "match_ICUT": "functional prerequisite"
+    },
+    "locators": [
+      {
+        "pdf_page": 77,
+        "printed_page": 77,
+        "table_or_section": "§7.5.29",
+        "excerpt": "the bit is set when in Auto Mode"
+      },
+      {
+        "pdf_page": 42,
+        "printed_page": 42,
+        "table_or_section": "§7.4.4",
+        "excerpt": "PoEP fields are set automatically"
+      }
+    ],
+    "severity": "MAJOR"
+  },
+  {
+    "id": "PT-TPS-FIRMWARE-ADDRESS",
+    "chip": "TPS23861",
+    "targets": [
+      "FIRMWARE_REV (no inventory field)"
+    ],
+    "problem": "候选IR地址FEh，原始手册Table10与§7.5.30为41h。",
+    "old": "0xFE",
+    "candidate_rule": {
+      "address": "0x41",
+      "runtime_revision": true,
+      "do_not_fabricate_default": true
+    },
+    "locators": [
+      {
+        "pdf_page": 46,
+        "printed_page": 46,
+        "table_or_section": "Table10",
+        "excerpt": "Firmware"
+      },
+      {
+        "pdf_page": 77,
+        "printed_page": 77,
+        "table_or_section": "§7.5.30",
+        "excerpt": "Command = 41h with 1 Data Byte, Read Only"
+      }
+    ],
+    "severity": "MAJOR"
+  }
+]

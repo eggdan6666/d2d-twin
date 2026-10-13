@@ -1,0 +1,64 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+ 8.3 Power Supply Recommendations
+
+The input circuitry of the device can accurately measure signals on common-mode voltages beyond the power
+ supply voltage, VVS. For example, the voltage applied to the VVS power supply terminal can be 5V, whereas the
+ load power-supply voltage being monitored (the common-mode voltage) can be as high as 36V. Note also that
+ the device can withstand the full 0V to 36V range at the input terminals, regardless of whether the device has
+power applied or not.
+
+ Place the required power-supply bypass capacitors as close as possible to the supply and ground terminals of
+ the device to provide stability. A typical value for this supply bypass capacitor is 0.1μF. Applications with noisy or
+ high-impedance power supplies can require additional decoupling capacitors to reject power-supply noise.
+
+ 8.4 Layout
+ 8.4.1 Layout Guidelines
+
+ Connect the input pins (IN+ and IN-) to the sensing resistor using a Kelvin connection or a 4-wire connection.
+These connection techniques verify that only the current-sensing resistor impedance  is detected between
+ the input pins. Poor routing of the current-sensing resistor commonly results in additional resistance present
+between the input pins. Given the very low ohmic value of the current-sensing resistor, any additional high-
+ current carrying impedance causes significant measurement errors. Place the power-supply bypass capacitor as
+ close as possible to the supply and ground pins.
+
+ 8.4.2 Layout Example
+
+
+
+
+
+                                              A1             IN+
+
+                                                                                                       Sense/Shunt
+                                                                                                                       Resistor                                              A0              IN±
+
+                                                                                                       (1)
+
+                                                                     Alert       VBUS
+                             Alert output
+      (Can be left floating if unused)
+                                         SDA       GND
+
+                     I2C/SMBUS                SCL          VS               Supply bypass                                                                                                        capacitor                              interface
+
+
+
+
+
+                                                                                            Via to Ground Plane
+
+                                                                                            Via to Power Plane
+
+      (1) connect the VBUS pin to the power supply rail.
+
+                                 Figure 8-4. INA226 Layout Example
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    31
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,73 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+8.3.5  Sensor Fault
+
+The TMP461 device can sense a fault at the D+ input resulting from an incorrect diode connection. The TMP461
+device can also sense an open circuit. Short-circuit conditions return a value of –64°C. The detection circuitry
+consists of a voltage comparator that  trips when the voltage at D+ exceeds (V+) – 0.3 V  (typical). The
+comparator output is continuously checked during a conversion. If a fault is detected, then OPEN (bit 2) in the
+status register is set to 1.
+
+When not using the remote sensor with the TMP461 device, the D+ and D– inputs must be connected together
+to prevent meaningless fault warnings.
+
+8.3.6  ALERT and THERM Functions
+
+Operation of the ALERT (pin 7) and THERM (pin 4) interrupts is shown in Figure 13. Operation of the THERM
+(pin 4) and THERM2 (pin 7) interrupts is shown in Figure 14. The ALERT and THERM pin setting is determined
+by bit 5 of the configuration register.
+
+The hysteresis value is stored in the THERM hysteresis register and applies to both the THERM and THERM2
+interrupts. The value of the CONAL[2:0] bits in the consecutive ALERT register (see Table 4) determines the
+number of limit violations before the ALERT pin is tripped. The default value is 000b and corresponds to one
+violation, 001b programs two consecutive violations, 011b programs three consecutive violations, and 111b
+programs four consecutive violations. The CONAL[2:0] bits provide additional filtering for the ALERT pin state.
+
+
+           Temperature Conversion Complete                                                                 Temperature Conversion Complete
+
+      150                                                                                              150
+
+      140                                                                                              140
+
+      130                                                                                              130
+
+      120                                                                                              120
+ (°C)  110                                             THERM Limit                    (°C)  110                                              THERM Limit
+      100                                             THERM Limit - Hysteresis       100                                              THERM Limit - Hysteresis
+      90                                                                                               90
+                                                                                                                              THERM2 Limit    Temperature                                                                        High Temperature Limit                Temperature   80      80
+                                                                                                                              THERM2 Limit - Hysteresis
+      70                                                            Measured                    70                                                            Measured
+      60                                                               Temperature                  60                                                               Temperature
+      50                                                                                               50
+                                     Time                                                                                     Time
+                                                        ALERT output
+                                                                           serviced by master
+   ALERT                                                                  THERM2
+
+  THERM                                                                THERM
+
+
+          Figure 13. ALERT and THERM Interrupt Operation              Figure 14. THERM and THERM2 Interrupt Operation
+
+
+8.4  Device Functional Modes
+
+8.4.1  Shutdown Mode (SD)
+
+The TMP461 shutdown mode enables the user to save maximum power by shutting down all device circuitry
+other than the serial interface, and reducing current consumption to typically less than 3 μA; see Figure 10
+(Shutdown Quiescent Current vs Supply Voltage). Shutdown mode is enabled when the SD bit (bit 6) of the
+configuration register is high; the device shuts down after the current conversion is finished. When the SD bit is
+low, the device maintains a continuous-conversion state.
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     13
+
+                                                  Product Folder Links: TMP461

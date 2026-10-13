@@ -1,0 +1,70 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.21    TAP_THS_Y (31h)
+
+
+                                                Table 61. TAP_THS_Y register
+
+                TAP_        TAP_        TAP_        TAP_       TAP_       TAP_       TAP_       TAP_
+              PRIOR_2     PRIOR_1     PRIOR_0     THSY_4     THSY_3     THSY_2     THSY_1     THSY_0
+
+
+                                           Table 62. TAP_THS_Y register description
+
+              TAP_PRIOR_[2:0]   Selection of priority axis for tap detection (see Table 63. Selection of axis priority for tap detection)
+
+              TAP_THSY_[4:0]    Threshold for tap recognition @ FS = ±2 g on Y direction
+
+
+                                      Table 63. Selection of axis priority for tap detection
+
+                      TAP_PRIOR_[2:0]             Max priority             Mid priority            Min priority
+
+                            000                      X                  Y                    Z
+
+                            001                      Y                  X                    Z
+
+                            010                      X                    Z                  Y
+
+                             011                        Z                  Y                  X
+
+                            100                      X                  Y                    Z
+
+                            101                      Y                    Z                  X
+
+                             110                        Z                  X                  Y
+
+                               111                        Z                  Y                  X
+
+8.22    TAP_THS_Z (32h)
+
+
+                                                Table 64. TAP_THS_Z register
+
+              TAP_X_      TAP_Y_      TAP_Z_       TAP_        TAP_        TAP_        TAP_        TAP_
+              EN        EN        EN       THSZ_4      THSZ_3      THSZ_2      THSZ_1      THSZ_0
+
+
+                                           Table 65. TAP_THS_Z register description
+
+                                         Enables X direction in tap recognition
+            TAP_X_EN
+                                                       (0: disabled; 1: enabled)
+
+                                         Enables Y direction in tap recognition
+            TAP_Y_EN
+                                                       (0: disabled; 1: enabled)
+
+                                         Enables Z direction in tap recognition
+            TAP_Z_EN
+                                                       (0: disabled; 1: enabled)
+
+              TAP_THSZ_[4:0]             Threshold for tap recognition @ FS = ±2 g on Z direction
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 46/65

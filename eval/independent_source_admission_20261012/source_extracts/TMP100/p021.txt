@@ -1,0 +1,71 @@
+                                                                           TMP100, TMP101
+
+www.ti.com                                                                   SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+
+9 Power Supply Recommendations
+
+The TMP100 and TMP101 devices operate with power supply in the range of 2.7 V to 5.5 V. A power-supply
+bypass capacitor is required for stability; place this capacitor as close as possible to the supply and ground pins
+of the device. A typical value for this supply bypass capacitor is 0.01 μF. Applications with noisy or high-
+impedance power supplies can require additional decoupling capacitors to reject power-supply noise.
+
+
+10  Layout
+
+10.1  Layout Guidelines
+
+Place the power-supply bypass capacitor as close as possible to the supply and ground pins. The recommended
+value of this bypass capacitor is 0.01 μF. Additional decoupling capacitance can be added to compensate for
+noisy or high-impedance power supplies. Pull up the open-drain output pins SDA , SCL, and ALERT (TMP101)
+through 5-kΩ pullup resistors.
+
+10.2  Layout Examples
+
+                                                        Via to Power or Ground Plane
+
+                                                        Via to Internal Layer
+
+
+
+
+
+                                          Pull-Up Resistors
+
+
+
+
+
+                                         SCL         SDA
+
+                                    GND        ADD0
+                                                                                                     Supply Voltage
+
+                                        ADD1          V+
+                                                                                                 Supply Bypass
+                                                                                                          Capacitor
+
+
+
+
+                                                  Ground Plane for
+                                                     Thermal Coupling
+                                                                    to Heat Source
+
+                         Serial Bus Traces
+
+
+                                                       Heat Source
+
+
+
+
+
+                                 Figure 15. TMP100 Layout Example
+
+
+
+
+
+Copyright © 2002–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     21
+
+                                              Product Folder Links: TMP100 TMP101

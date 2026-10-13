@@ -1,0 +1,90 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ Minimum and maximum specifications apply from TA = –40°C to +125°C. Typical specifications are at TA = 25°C.
+ All specifications are at AVDD = 3.3V, AVSS = 0V, DVDD = 3.3V, PGA enabled, DR = 20SPS, and external VREF = 2.5V
+ (unless otherwise noted).
+
+          PARAMETER                       TEST CONDITIONS                     MIN        TYP       MAX   UNIT
+
+ TEMPERATURE SENSOR
+
+            Conversion resolution                                                                            14                      Bits
+
+            Temperature resolution                                                                            0.03125                 °C
+
+                                     TA = 0°C to +75°C                                            –0.5         ±0.25            0.5
+            Accuracy                                                                                                        °C
+                                     TA = –40°C to +125°C                                     –1           ±0.5            1
+
+            Accuracy vs analog supply
+                                                                                                             0.0625           0.25    °C/V
+             voltage
+
+ LOW-SIDE POWER SWITCH
+
+ RON       On-resistance                                                                                                  3.5            5.5   Ω
+
+             Current through switch                                                                                        30   mA
+
+ DIGITAL INPUTS/OUTPUTS
+
+ VIH         High-level input voltage                                                                  0.7 DVDD                DVDD    V
+  VIL         Low-level input voltage                                            DGND                     0.3 DVDD    V
+ VOH        High-level output voltage       IOH = 3mA                                                0.8 DVDD                         V
+ VOL        Low-level output voltage        IOL = 3mA                                                                               0.2 DVDD    V
+  IH          Input leakage, high            VIH = 5.5V                                             –10                        10    µA
+  IL          Input leakage, low              VIL = DGND                                            –10                        10    µA
+
+ POWER SUPPLY
+
+                                     Power-down mode                                                              0.1            3
+
+                                           Duty-cycle mode, PGA disabled                                          65
+
+                                           Duty-cycle mode, gain = 1 to 16                                          95
+
+                                           Duty-cycle mode, gain = 32                                               115
+
+                                           Duty-cycle mode, gain = 64, 128                                         135
+
+                                      Normal mode, PGA disabled                                            240
+  IAVDD      Analog supply current(2)       Normal mode, gain = 1 to 16                                            340          490    µA
+
+                                      Normal mode, gain = 32                                               425
+
+                                      Normal mode, gain = 64, 128                                           510
+
+                                       Turbo mode, PGA disabled                                             360
+
+                                       Turbo mode, gain = 1 to 16                                             540
+
+                                       Turbo mode, gain = 32                                                715
+
+                                       Turbo mode, gain = 64, 128                                            890
+
+                                     Power-down mode                                                              0.3            5
+
+                                           Duty-cycle mode                                                      55
+ IDVDD       Digital supply current(2)                                                                                    µA
+                                      Normal mode                                                         75          110
+
+                                       Turbo mode                                                          95
+
+                                           Duty-cycle mode, PGA disabled                                                  0.4
+ PD       Power dissipation(2)          Normal mode, gain = 1 to 16                                                     1.4          mW
+
+                                       Turbo mode, gain = 1 to 16                                                      2.1
+
+ (1)  Minimum and maximum values are verified by design and characterization data.
+ (2)   Internal voltage reference selected, internal oscillator enabled, IDACs turned off, and continuous conversion mode.
+      Analog supply current increases by 70µA, (typ) normal mode, turbo mode when selecting an external reference.
+      Analog supply current increases by 190µA (typ) when enabling the IDACs (excludes the actual IDAC current).
+
+
+
+
+
+8     Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

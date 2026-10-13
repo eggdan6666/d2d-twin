@@ -1,0 +1,54 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.5.6 Interfacing with Multiple Devices
+
+When connecting multiple ADS1220 devices to a single SPI bus, SCLK, DIN, and DOUT/DRDY can be safely
+ shared by using a dedicated chip-select (CS) line for each SPI-enabled device. When CS transitions high for
+ the respective device, DOUT/DRDY enters a 3-state mode. Therefore, DOUT/DRDY cannot be used to indicate
+when new data are available if CS is high, regardless of the DRDYM bit setting in the configuration register. Only
+ the dedicated DRDY pin indicates that new data are available, because the DRDY pin is actively driven even
+when CS is high.
+
+ In some cases the DRDY pin cannot be interfaced to the microcontroller. This scenario can occur  if there are
+ insufficient GPIO channels available on the microcontroller or if the serial interface must be galvanically isolated
+and thus the amount of channels must be limited. Therefore, to evaluate when a new conversion of one of
+ the devices is ready, the microcontroller can periodically drop CS to the respective device and poll the state of
+ the DOUT/DRDY pin. When CS goes low, the DOUT/DRDY pin immediately drives either high or low, provided
+ that the DRDYM bit is configured to 1b. If the DOUT/DRDY line drives low, when CS is taken low, new data
+ are currently available. If the DOUT/DRDY line drives high, no new data are available. This procedure requires
+ that DOUT/DRDY is high after reading each conversion result and before taking CS high. To make sure DOUT/
+DRDY is taken high, send 8 additional SCLKs with DIN held low after each data read operation. DOUT/DRDY
+ reads high during the eight SCLKs after the conversion result is read, as shown in Figure 8-31. Alternatively,
+ valid data can be retrieved from the device at any time without concern of data corruption by using the RDATA
+command.
+
+
+                                                     §
+       CS
+              §
+                                        1            9           17           25
+      SCLK
+              §                                      §
+
+                 Hi-Z    §
+DOUT/DRDY                         DATA MSB     DATA     DATA LSB          §
+              §
+
+
+              §                                      §
+     DRDY                                                                                                  Next Data Ready
+
+
+        DIN
+              §                                      §
+
+          Figure 8-31. Example of Taking DOUT/DRDY High After Reading a Conversion Result
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    41
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,51 @@
+Bosch Sensortec | BME280 Data sheet                                            14 | 60
+
+3. Functional description
+3.1  Block diagram
+Figure 2 shows a simplified block diagram of the BME280:
+
+                                                           VDD                          VDDIO
+
+                                                 Voltage     Voltage
+                                                     regulator    reference     Pressure                      Pressure                 (analog &      sensing                         front-end                        digital)                                  SDI      element                                                                                                                                                I
+                                                                        n
+      Humidity                                                                                                                                                t                       Humidity                                                                       SDO                                  ADC      sensing                         front-end                                             e
+      element                                                         Logic            r
+                                                                                                                                                f   Temperature                                                             SCK                   Temperature                                           a      sensing                         front-end                                                  c      element                                                                        e                                                                          CSB
+                                           OSC POR NVM
+
+                                                    GND
+
+Figure 2: Block diagram of BME280
+
+3.2  Power management
+The BME280 has two distinct power supply pins
+    •   VDD is the main power supply for all internal analog and digital functional blocks
+    •   VDDIO is a separate power supply pin used for the supply of the digital interface
+
+A power-on reset (POR) generator is built in; it resets the logic part and the register values after both
+VDD and VDDIO reach their minimum levels. There are no limitations on slope and sequence of raising
+the VDD and VDDIO levels. After powering up, the sensor settles in sleep mode (described in chapter
+3.3.2).
+
+It is prohibited to keep any interface pin (SDI, SDO, SCK or CSB) at a logical high level when VDDIO is
+switched off. Such a configuration can permanently damage the device due an excessive current flow
+through the ESD protection diodes.
+
+If VDDIO is supplied, but VDD is not, the interface pins are kept at a high-Z level. The bus can therefore
+already be used freely before the BME280 VDD supply is established.
+
+Resetting the sensor is possible by cycling VDD level or by writing a soft reset command. Cycling the
+VDDIO level will not cause a reset.
+3.3  Sensor modes
+The BME280 offers three sensor modes: sleep mode, forced mode and normal mode. These can be
+selected using the mode[1:0] setting (see chapter 5.4.5). The available modes are:
+
+    •   Sleep mode: no operation, all registers accessible, lowest power, selected after startup
+    •   Forced mode: perform one measurement, store results and return to sleep mode
+    •  Normal mode: perpetual cycling of measurements and inactive periods.
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

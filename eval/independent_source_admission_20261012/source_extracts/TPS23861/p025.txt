@@ -1,0 +1,93 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.2  Functional Block Diagram
+
+
+
+                           VDD                                                                       VPWR
+
+
+
+
+
+                                                                                                                            VDD UVLO
+                                                                                                                                                                                                               Internal Rails
+                                                                                                                                              Good
+
+                                                     SHTDWN Direct Shutdown for Ports                                                PG
+                  PG
+   RESET                       RST Block                                                                                                              Port 2-4 Analog Control Functions                                 VPWR
+ SHTDWN                                                                                                                                                        Port 1 Analog Control Functions             IDET =
+                                             RST to Blks                                                                                                                                   160/270/                     PD LOAD
+    AOUT
+                                 AIN/AOUT Mux                                                                                        Foldback Schedulers            SHTDWN/POR       540uA
+       AIN                                                                                                                                                                                               Ilim                                                   DRAINx
+                                                                                                                                             Fast Ishort Protection
+                                                                                                                                                                                  Enable
+                                                                                                                                                                   dv/dt Ramping Control             Gm                        GATEx                                                                       Conditioners                                                                                                                    Rapid Overload Recovery                     Driver
+                                          Byte                                   EE                                 NVM                                                             18 V           Processor                                                                                                                         2X                                                                                                                                     Power       A3    IO                     7-Bit1                                          Address/Including
+                                         State                                                of                                       A3                                                     Pin                                                                                                                                            Class                                                                                                                                                             Current                                               Discrete                                                                                                                                                                  Limit                                           SENx
+                                                                                                                                         Class Port Voltage Control
+     SDAI
+                                                                                                                                                                                                                                        0.255
+    SDAO                            I2C Interface                                                                                        IPORT     320-Hz LPF
+                                                                                                                                                                         KSENSEA,B
+     SCL                                          IF                                                                               14-Bit                                                                                                      ADC           Select    ICLASS                                                                                                                                                          (Current)
+                              SCL Watchdog               Bus                                                                                                                                                           Range      BIT
+                                                                                                            Register File                      Variable Averager
+       INT
+
+
+                                                                                                                                                           Vdisco                                                                                                                                                                   Vport        PORT DIFF AMP   DRAIN1±4V48                                                                                                                                                                                                                                                                                                                                                      Select    Vds                 4:1 MUX      DRAIN1±4
+                                                       SHTDWN                                                       14-Bit ADC         VEE       V48
+                                                                                                                                                        (Voltage)           Range  Temp          PTAT Diodes
+                                                                                                                                                        BIT            Analog BIT MUX
+                                                                                                                                                  Variable Averager
+
+
+                                                                                                                                 Analog Test                                                                 AIN
+
+
+
+7.3  Feature Description
+
+7.3.1  Detection Resistance Measurement
+
+The detect resistance can be measured and reported in the Port n Detect Resistance Register. Fourteen bits of
+resistance information are reported in two bytes. Useful range of measurement is 500 Ω to 55 kΩ. Resolution (1
+LSB) is approximately 11 Ω. Measurement repeatability is on the order of ±200 Ω. Additionally, in the MSB of the
+resistance register (Port n Resistance: MSByte) the RSn field reports whether a low-resistance circuit, open
+circuit or MOSFET short fault is detected.
+
+Before detection begins, the TPS23861 backs-off for up to 400 ms to allow the port voltage to drop below 2.8 V.
+This will allow any PD on the port to reset prior to an attempt to detect, classify and apply power to the PD.
+
+                                    Table 1. RSn Field Encoding
+
+          RSn1                     RSn0                DETECT STATUS             RSTEP BIT WEIGHT
+              0                           0                            Other                      11.0966 Ω/bit
+
+              0                           1                     Low (< 2 kΩ)               Additional detect 4.625 Ω/bit
+
+              1                           0                     Open circuit                      N/A
+
+              1                           1                MOSFET short fault                   N/A
+
+
+7.3.2  Physical Layer Classification
+
+Whether one or two classification events will be executed depends on the operating mode and the value of the
+TECLENn field in the Two-Event Classification Register. See Device Functional Modes for details.
+
+See Figure 38 and Figure 39 for illustrations of the voltage on the Power Interface (PI) during single-event
+(802.3af) and 2-event (802.3at) classification.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     25
+
+                                                 Product Folder Links: TPS23861

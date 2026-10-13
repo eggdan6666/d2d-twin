@@ -1,0 +1,55 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+Overview (continued)
+
+SEN1- SEN4: Port 1-2 current sense input relative to KSENSA, and port 3-4 current sense relative to KSENSB.
+A differential measurement is performed using KSENSA and KSENSB Kelvin point connection.  It monitors the
+external MOSFET current by use of either a 255-mΩ (two 510 mΩ in parallel) or a 250-mΩ (four 1 Ω in parallel)
+current-sense resistors connected to AGND. Used by current foldback engine and also during classification. Can
+be used to perform load current monitoring via A/D conversion.
+
+
+                                  NOTE
+        A classification is done while using the external MOSFET so performing a classification on
+         more than one port at the same time is possible without exceeding dissipation in the
+         TPS23861.
+
+
+For the current limit with foldback function, there is an internal 2-µs analog filter on the SEN1-4 pins to provide
+glitch filtering. For measurements through an A/D converter, an anti-aliasing filter is present on the SEN1-4 pins.
+This includes the port-powered current monitoring and disconnect. If the port is not used, tie SENn to AGND.
+
+VDD: 3.3-V logic power supply input.
+
+VPWR: High-voltage power supply input. Nominally 48 V.
+
+7.1.2  I2C Detailed Pin Description
+AIN: Used to program the I2C slave device address. This pin is internally pulled up to VDD. See I2C Slave
+Address and AUTO Bit Programming for more details.
+AOUT: Used to program the I2C slave device address for multiple devices. See I2C Slave Address and AUTO Bit
+Programming for more details. AOUT is open drain.
+A3: I2C A3 address input, used during normal operation and during slave address programming. This pin is
+internally pulled up to VDD.
+
+INT: Interrupt output. This pin asserts low when a bit in the interrupt register is asserted. This pin is updated
+between I2C transactions. This output is open-drain. Interrupt functional diagram is shown in Figure 43.
+SCL: Serial clock input for I2C bus. Requires an external pull-up resistor to VDD.
+SDAI: Serial data input for I2C bus. Requires an external pull-up resistor to VDD. This pin can be connected to
+SDAO for non-isolated systems. See Figure 50.
+SDAO: Open-drain I2C bus output data line. Requires an external resistive pull up. The TPS23861 uses separate
+SDAO and SDAI lines to allow optoisolated I2C interface. SDAO can be connected to SDAI for non-isolated
+systems.
+
+
+                                  NOTE
+          Both VPWR and VDD must be present for proper system level I2C operation.
+
+
+
+
+
+24     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

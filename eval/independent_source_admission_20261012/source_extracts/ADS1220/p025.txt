@@ -1,0 +1,58 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ Figure 8-7 and Figure 8-8 show examples of both fully-differential and pseudo-differential signals, respectively.
+
+
+                                                                                     AINP
+
+                            AINP                                  VCM
+                                                                                                 100 mV
+                                   VCM
+    1.0 V                                   100 mV         1.0 V
+                                                                                   AINN
+
+                            AINN
+
+
+     0 V                                                   0 V
+      Figure 8-7. Fully-Differential Input Signal          Figure 8-8. Pseudo-Differential Input Signal
+
+
+
+                                           Note
+
+    Remember, common-mode voltage requirements with PGA enabled (Equation 12 to Equation 14) are
+     as follows:
+       •  VCMMIN ≥ AVSS + ¼ (AVDD – AVSS)
+       •  VCMMIN ≥ AVSS + 0.2V + ½ Gain × VINMAX
+       •  VCMMAX ≤ AVDD – 0.2V – ½ Gain × VINMAX
+
+
+ 8.3.2.2 Bypassing the PGA
+
+ At gains of 1, 2, and 4, set the PGA_BYPASS bit in the configuration register to disable and bypass the
+ low-noise PGA. Disabling the PGA lowers the overall power consumption and also removes the restrictions of
+ Equation 12 through Equation 14 for the common-mode input voltage range, VCM. The usable absolute and
+common-mode input voltage range is (AVSS – 0.1V ≤ VAINx, VCM ≤ AVDD + 0.1V) when the PGA is disabled.
+ To measure single-ended signals that are referenced to AVSS (AINP = VIN, AINN = AVSS), the PGA must be
+ bypassed. Configure the device for single-ended measurements by either connecting one of the analog inputs to
+AVSS externally or by using the internal AVSS connection of the multiplexer (MUX[3:0] settings 1000b through
+ 1011b). The PGA is always enabled for gain settings greater than 4, regardless of the PGA_BYPASS setting.
+
+When the PGA is disabled, the device uses a buffered switched-capacitor stage to obtain gains 1, 2, and 4.
+An internal buffer in front of the switched-capacitor stage ensures that the effect on the input loading resulting
+ from the capacitor charging and discharging is minimal. See Figure 6-21 to Figure 6-26 for the typical values
+ of absolute input currents (current flowing into or out of each input) and differential input currents (difference in
+ absolute current between positive and negative input) when the PGA is disabled.
+
+ For signal sources with high output impedance, external buffering can still be necessary. Active buffers introduce
+ noise and also introduce offset and gain errors. Consider all of these factors in high-accuracy applications.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    25
+
+                                                  Product Folder Links: ADS1220

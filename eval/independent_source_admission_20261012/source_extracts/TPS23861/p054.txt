@@ -1,0 +1,67 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.7  Supply Event Register
+
+Command = 0Ah with 1 Data Byte, Read Only
+
+Command = 0Bh with 1 Data Byte, Clear on Read
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         TSD               -       VDUV     VPUV              -                  -                  -                  -
+
+     POR VALUE           0          0          1          1          0          0          0          0
+
+Active high, each bit corresponds to a particular event that occurred.
+
+A read at each location (0Ah or 0Bh) returns the same register data with the exception that the Clear-on-Read
+command clears all bits of the register.
+
+If this register is causing the INT pin to be activated, this Clear-on-Read releases the INT pin.
+
+Any active bit has an impact on Interrupt Register as indicated in the Interrupt Register description.
+
+Bit Descriptions
+
+TSD: Indicates that a thermal shutdown occurred. When there is thermal shutdown, all ports are powered off and
+are put in Off Mode. The TPS23861 internal circuitry continues to operate however, including the A/D converters.
+Note that at as soon as the internal temperature has decreased below the low threshold, the ports can be
+powered on regardless of the status of the TSD bit.
+
+1 = Thermal shutdown occurred.
+
+0 = No thermal shutdown occurred.
+
+VDUV: Indicates that a VDD UVLO occurred. VDUV is set following a power-on reset or if the voltage at the VDD
+pin falls below VUVDD_F
+
+1 = VDD UVLO occurred.
+
+0 = No VDD UVLO occurred.
+
+VPUV: Indicates that a VPWR UVLO occurred. VPUV is set following a power-on reset or  if the voltage at the
+VPWR pin falls below VPUV_F.
+
+1 = VPWR undervoltage occurred.
+
+0 = No VPWR undervoltage occurred.
+
+
+                                  NOTE
+                  If the RESET input is pulled low during normal operation, VPUV is set  if VPWR is below
+               its UVLO threshold. There is no impact on VDUV since VDD is maintained.
+
+When VPWR drops below VPUV_F but not as low as VUVLOPW_F all ports are powered off as  if a push-button off
+was executed. (Same as writing 1 to POFFn in Power Enable Register.) When VPWR undervoltage (below
+VUVLOPW_F) occurs, all ports are powered off, and there is a power-on reset.
+
+
+
+
+
+54     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,89 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 9.2.2 3-Wire RTD Measurement (–200°C to +850°C)
+
+The ADS1220 integrates all necessary features (such as dual-matched programmable current sources, buffered
+ reference inputs, and a PGA) to ease the implementation of ratiometric 2-, 3-, and 4-wire RTD measurements.
+ Figure 9-6 shows a typical implementation of a ratiometric 3-wire RTD measurement using the excitation current
+ sources integrated in the device to excite the RTD as well as to implement automatic RTD lead-resistance
+ compensation.
+
+                                                                                                     IIDAC1 + IIDAC2                                                           RREF
+
+
+
+
+                                                                                                            3.3V                            RF3          RF4        3.3V
+
+
+                                                                                                                                CCM3       CDIF2      CCM4
+                                                                                               0.1µF                                                                         0.1µF
+
+
+
+                 RLEAD3                                                                          10 A to  AVDD           REFP0           REFN0      DVDD
+                                                                                          1.5mA
+                                                          CCM2
+                       RLEAD2                      RF2                    AIN0                                          2.048V             Reference         ADS1220
+                                                                                                                       Reference         MUX
+
+ 3-Wire RTD                                                         CDIF1
+                       RLEAD1                      RF1                    AIN1
+                                                                                                                                    CS
+                                                                                                   AINP
+                                                                                                                                                                                                             Digital Filter        SCLK
+                                                          CCM1                                                                                                                                                     and                                                               MUX              PGA                         24-Bit
+                                                                                                         ADC                                                                                                                                                           SPI            DIN
+                                                                  AIN2                                                                                                   Interface         DOUT/DRDY
+                                                                                                 AINN
+                                                                     (IDAC1)                                                                          DRDY
+
+
+                                                                  AIN3                                          Precision                     Low-Drift
+                                                                                                                Temperature
+                                                                     (IDAC2)                                     Sensor                       Oscillator
+
+
+
+
+                                                                                        AVSS                      CLK         DGND
+
+
+                                Figure 9-6. 3-Wire RTD Measurement
+
+ 9.2.2.1 Design Requirements
+
+                                   Table 9-3. Design Requirements
+                       DESIGN PARAMETER                         VALUE
+
+                                Supply voltage                                     3.3V
+
+                                Update rate                            20 readings per second
+
+                          RTD type                                         3-wire Pt100
+
+                     Maximum RTD lead resistance                         15Ω
+
+                      RTD excitation current                             500µA
+
+                        Temperature measurement range                     –200°C to +850°C
+                    Measurement accuracy at TA = 25°C(1)                          ±0.2°C
+
+                    (1)   Not accounting for error of RTD;
+                           offset calibration is performed with RRTD = 100Ω; no gain calibration.
+
+ 9.2.2.2 Detailed Design Procedure
+
+The circuit in Figure 9-6 employs a ratiometric measurement approach. In other words, the sensor signal (that
+ is, the voltage across the RTD in this case) and the reference voltage for the ADC are derived from the same
+ excitation source. Therefore, errors resulting from temperature drift or noise of the excitation source cancel
+because these errors are common to both the sensor signal and the reference.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    55
+
+                                                  Product Folder Links: ADS1220

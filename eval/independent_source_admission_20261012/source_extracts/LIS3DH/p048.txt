@@ -1,0 +1,59 @@
+Registers description                                                      LIS3DH
+
+8.33   TIME_LATENCY (3Ch)
+
+
+                                   Table 79. TIME_LATENCY register
+
+           TLA7     TLA6     TLA5     TLA4     TLA3     TLA2     TLA1     TLA0
+
+                                 Table 80. TIME_LATENCY description
+
+              TLA[7:0]          Click time latency. Default value: 0000 0000
+
+
+8.34    TIME WINDOW (3Dh)
+
+
+                                   Table 81. TIME_WINDOW register
+
+         TW7     TW6     TW5     TW4     TW3     TW2     TW1     TW0
+
+                                  Table 82. TIME_WINDOW description
+
+             TW[7:0]           Click time window
+
+
+8.35   ACT_THS (3Eh)
+
+                                      Table 83. ACT_THS register
+
+                    --          Acth6      Acth5      Acth4      Acth3      Acth2      Acth1      Acth0
+
+
+                                    Table 84. ACT_THS description
+
+               Acth[6:0]         Sleep-to-wake, return-to-sleep activation threshold in low-power mode
+                          1 LSb = 16 mg @ FS = ±2 g
+                          1 LSb = 32 mg @ FS = ±4 g
+                          1 LSb = 62 mg @ FS = ±8 g
+                          1 LSb = 186 mg @ FS = ±16 g
+
+
+8.36   ACT_DUR (3Fh)
+
+                                      Table 85. ACT_DUR register
+
+            ActD7     ActD6     ActD5     ActD4     ActD3     ActD2     ActD1     ActD0
+
+
+                                    Table 86. ACT_DUR description
+
+              ActD[7:0]        Sleep-to-wake, return-to-sleep duration
+                          1 LSb = (8*1[LSb]+1)/ODR
+
+
+
+
+
+48/54                                  DocID17530 Rev 2

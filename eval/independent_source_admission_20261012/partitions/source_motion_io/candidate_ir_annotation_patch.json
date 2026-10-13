@@ -1,0 +1,63 @@
+[
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "TEMP_3_0",
+    "attribute": "bits",
+    "old": "3:0",
+    "candidate": "7:4",
+    "finding_id": "MOTION-LIS2-TEMP-NIBBLE"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_7_4",
+    "attribute": "bits",
+    "old": "7:4",
+    "candidate": "3:0",
+    "finding_id": "MOTION-LIS2-TEMP-NIBBLE"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_7_4",
+    "attribute": "name",
+    "old": "ZERO_7_4",
+    "candidate": "ZERO_3_0",
+    "finding_id": "MOTION-LIS2-TEMP-NIBBLE"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "CTRL2",
+    "field": "MUST_BE_ZERO",
+    "attribute": "access",
+    "old": "RO",
+    "candidate": "UNSPEC",
+    "finding_id": "MOTION-LIS2-MBZ-ACCESS"
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "WAKE_UP_SRC",
+    "field": "FF_IA",
+    "attribute": "desc",
+    "old": "自由落体事件标志，读清除",
+    "candidate": "Free-fall event status. Reading ALL_INT_SRC resets related interrupt function flags routed to INT pads; unqualified self read-clear is not specified in reviewed source.",
+    "finding_id": "MOTION-LIS2-WAKE-CLEAR"
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG4",
+    "field": "ST",
+    "attribute": "access",
+    "old": "UNSPEC",
+    "candidate": "RW",
+    "finding_id": "MOTION-LIS3-ST-ACCESS"
+  },
+  {
+    "chip": "AD5592R",
+    "attribute": "address_encoding.reserved_command_data_bits",
+    "old": "10:9 are reserved for control writes; logical fields below cover register data bits.",
+    "candidate": "Per-register command definitions prevail provisionally; Table10 generic bits10:9 statement conflicts with REP9 and SW_RESET key10:0. No official erratum verified.",
+    "finding_id": "MOTION-AD-COMMAND-FORMAT-SOURCE"
+  }
+]

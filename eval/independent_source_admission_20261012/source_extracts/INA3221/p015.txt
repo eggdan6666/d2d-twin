@@ -1,0 +1,35 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+The timing control alert function is only monitored at power-up or when a software reset is issued by setting
+ the reset bit (RST, bit 15) in the Configuration register. The timing control alert function timing is based on the
+ default device settings at power-up. Writing to the Configuration register before the timing control alert function
+ completes the full sequence results in disabling the timing control alert until power is cycled or a software reset is
+ issued.
+
+ 7.3.2.5 Default Settings
+
+The default register power-up states are listed in the Register Maps section. These registers are volatile;  if
+programmed to a value other than the default values shown in Table 8-1, the registers must be reprogrammed
+ every time the device powers up.
+
+ 7.3.3 Software Reset
+
+The INA3221 features a software reset that reinitializes the device and register settings to default power-up
+ values without having to cycle power to the device. Use bit 15 (RST) of the Configuration register to perform a
+ software reset. Setting RST reinitializes all registers and settings to the default power state with the exception of
+ the power-valid output state.
+
+ If a software reset is issued, the INA3221 holds the output of the PV pin until the power-valid detection sequence
+ completes. The Power-Valid Upper Limit and Power-Valid Lower limit registers return to the default state when
+ the software reset has been issued. Therefore, any reprogrammed limit registers are reset, resulting in the
+ original power-valid thresholds validating the power-valid conditions. This architecture prevents interruption to
+ circuitry connected to the power valid output during a software reset event.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    15
+
+                                                  Product Folder Links: INA3221

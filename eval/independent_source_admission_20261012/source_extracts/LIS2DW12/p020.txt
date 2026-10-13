@@ -1,0 +1,53 @@
+                                                              LIS2DW12
+                                                                                                                Application hints
+
+
+                                           Table 12. Internal pin status
+
+ Pin #  Name                                 Function                                             Pin status
+
+       SCL    I²C serial clock (SCL)
+  1                                                                                                     Default: open drain
+       SPC   SPI serial port clock (SPC)
+
+                Enable SPI
+
+                  I²C/SPI mode selection
+  2    CS                                                                                           Default: input with internal pull-up(1)
+                    1: SPI idle mode / I²C communication enabled
+
+                    0: SPI communication mode / I²C disabled
+
+      SDO    Serial data output (SDO)
+  3                                                                                                     Default: input with internal pull-up
+       SA0    I²C less significant bit of the device address (SA0)
+
+       SDA    I²C serial data (SDA)
+
+  4     SDI    SPI serial data input (SDI)                                                            Default: (SDA) input open drain
+
+      SDO    3-wire interface serial data output (SDO)
+
+  5    NC     Internally not connected. Can be tied to VDD, VDDIO, or GND.
+
+  6   GND   0 V supply
+
+  7    RES   Connect to GND
+
+  8   GND   0 V supply
+
+  9    VDD   Power supply
+
+  10   VDD_IO  Power supply for I/O pins
+
+  11    INT2    Interrupt pin 2. Clock input when selected in single data conversion on-demand.     Default: push-pull output forced to Gnd
+
+  12    INT1    Interrupt pin 1                                                                        Default: push-pull output forced to Gnd
+
+1.  In order to disable the internal pull-up on the CS pin, write 1 to the CS_PU_DISC bit in CTRL2 (21h).
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 20/65

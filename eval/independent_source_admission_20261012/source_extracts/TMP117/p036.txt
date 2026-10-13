@@ -1,0 +1,64 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+10 Layout
+ 10.1 Layout Guidelines
+
+                                           Note
+
+     To achieve a high precision temperature reading for a rigid PCB, do not solder down the thermal pad.
+     For a flexible PCB, the user can solder the thermal pad to increase board level reliability. If thermal
+     pad is soldered it should be connected to the ground or left floating.
+
+ For more information on board layout, refer to the related Precise temperature measurements with TMP116 and
+TMP117 (SNOA986) and Wearable temperature-sensing layout considerations optimized for thermal response
+ (SNIA021) application reports on ti.com.
+
+ Place the power-supply bypass capacitor as close as possible to the supply and ground pins. The recommended
+ value of this bypass capacitor is 0.1 μF. In some cases, the pullup resistor can be the heat source, therefore,
+ maintain some distance between the resistor and the device.
+
+Mount the TMP117 on the PCB pad to provide the minimum thermal resistance to the measured object surface
+ or to the surrounding air. The recommended PCB layout minimizes the device self-heating effect, reduces the
+ time delay as temperature changes, and minimizes the temperature offset between the device and the object.
+
+ 1.  Soldering the TMP117 thermal pad to the PCB minimizes the thermal resistance to the PCB, reduces
+    the response time as temperature changes and minimizes the temperature offset between the device and
+    measured object. Simultaneously the soldering of the thermal pad will, however, introduce mechanical stress
+     that can be a source of additional measurement error. For cases when system calibration is not planned,
+     TI recommends not soldering the thermal pad to the PCB. Due to the small thermal mass of the device,
+    not soldering the thermal pad will have a minimal impact on the described characteristics. Manual device
+     soldering to the PCB creates additional mechanical stress on the package, therefore to prevent precision
+    degradation a standard PCB reflow oven process is highly recommended.
+ 2.   If the device is used to measure solid surface temperature:
+      •  Use PCB with minimal thickness.
+      •  Prevent PCB bending which can create a mechanical stress to package.
+      •  Cover bottom of the PCB with copper plane.
+      •  Remove bottom solder mask and cover exposed copper with gold layer if possible.
+      •  Use thermal conductive paste between PCB and object surface.
+      •    If PCB has unused internal layers, extend these layers under the sensor.
+      •  Minimize amount of copper wires on top of the board.
+      •  To minimize temperature “leakage” to surrounding air locate sensor in place with minimal air movement.
+        Horizontal surfaces are preferable.
+      •  To minimize temperature offset due to “leakage” to surrounding air cover sensor with thermo isolating
+       foam, tape or at least cover with a stain.
+ 3.   If the device is used to measure moving air temperature:
+      •  Because moving air temperature usually has a lot of fluctuations the PCB increased thermal mass
+       reduces measurement noise.
+      •  Design PCB soldering pads bigger than usual, especially package corner pads.
+      •  Use a PCB with thicker copper layers if possible.
+      •  Cover both side of unused board space with copper layer.
+      •  Place PCB vertically along air flow.
+ 4.   If the device is used to measure still air temperature:
+      •  Miniaturize the board to reduce thermal mass. Smaller thermal mass results in faster thermal response.
+      •  Place two copper planes of equal size to the top and bottom of the exposed pad.
+      •  Remove the top solder mask.
+      •  To prevent oxidation, cover any exposed copper with solder paste.
+      •  Thermal isolation is required to avoid thermal coupling from heat source components through the PCB.
+      •  Avoid running the copper plane underneath the temperature sensor.
+
+
+
+36    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

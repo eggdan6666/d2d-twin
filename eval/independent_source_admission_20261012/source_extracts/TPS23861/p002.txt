@@ -1,0 +1,88 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+                                Table of Contents
+
+  1    Features.................................................................. 1               8.1  Introduction to PoE ................................................. 85
+  2   Applications ........................................................... 1               8.2  Application Information............................................ 85
+  3   Description ............................................................. 1               8.3  Typical Application .................................................. 87
+                                                                               8.4  System Examples ................................................... 93  4   Revision History..................................................... 2
+                                                       9  Power Supply Recommendations...................... 97  5   Pin Configuration and Functions......................... 5
+                                                                               9.1   VDD......................................................................... 97
+  6    Specifications......................................................... 6
+                                                                               9.2 VPWR ..................................................................... 97
+        6.1  Absolute Maximum Ratings ...................................... 6
+                                                                               9.3 VPWR-RESET Sequencing .................................... 97
+        6.2 ESD Ratings.............................................................. 6
+                                                       10   Layout................................................................... 98        6.3  Recommended Operating Conditions....................... 6
+                                                                            10.1  Layout Guidelines ................................................. 98
+        6.4  Thermal Information.................................................. 6
+                                                                            10.2  Layout Example .................................................... 99
+        6.5  Electrical Characteristics........................................... 7
+        6.6  Timing Requirements.............................................. 11       11  Device and Documentation Support ............... 100
+        6.7  Switching Characteristics........................................ 12              11.1  Documentation Support  ..................................... 100
+        6.8  Typical Characteristics............................................ 16              11.2  Receiving Notification of Documentation
+                                                                                                                                 Updates.................................................................. 100
+  7   Detailed Description ............................................ 21
+                                                                            11.3  Community Resources........................................ 100
+        7.1  Overview ................................................................. 21
+                                                                            11.4   Trademarks......................................................... 100
+        7.2  Functional Block Diagram ....................................... 25
+                                                                            11.5  Electrostatic Discharge Caution.......................... 100
+        7.3  Feature Description................................................. 25
+                                                                            11.6   Glossary.............................................................. 100
+        7.4  Device Functional Modes........................................ 40
+                                                       12  Mechanical, Packaging, and Orderable
+        7.5  Register Map – I2C-Addressable ............................ 45
+                                                                 Information ......................................................... 100
+  8   Application and Implementation ........................ 85
+
+
+4  Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+
+Changes from Revision H (November 2017) to Revision I                                             Page
+
+•  Added figure titles to the Application Curves........................................................................................................................ 92
+
+
+
+Changes from Revision G (October 2016) to Revision H                                              Page
+
+•   Deleted "or unknown" from Auto subsection ........................................................................................................................ 42
+
+•   Deleted "and Auto Modes" from TSTART Indicators of Detect and Class Failures subsection........................................... 44
+
+•  Changed fault conditions for Auto mode in Detect and Class Failure Indicators table ........................................................ 44
+
+•  Added information to Step 2 in Start/ILIM Event Register subsection ................................................................................. 53
+
+
+
+Changes from Revision F (July 2016) to Revision G                                                 Page
+
+•   Deleted the MAX value of 150 mA from IGO- in the Electrical Characteristics ........................................................................ 8
+
+
+Changes from Revision E (March 2016) to Revision F                                                Page
+
+•  Legacy Device Detection, Changed the paragraph, "in general,..." ..................................................................................... 30
+
+•  Changed section From: Independent Operation when the Bit is Set To: Independent Operation when the AUTO Bit
+     is Set..................................................................................................................................................................................... 34
+•   I2C Slave Address and AUTO Bit Programming, Added NOTE: "When using I2C scan...".................................................. 37
+
+•   Start/ILIM Event Register, Changed the third list item From: "Detect fault or classification unknown,.." To:
+    "Overcurrent or class mismatch on second finger in Semi-Auto or Manual Mode."  ........................................................... 53
+
+•   Timing Configuration Register, Added new NOTE under TLIM[1:0]: " If ILIM and ICUT are set to same value..." ............ 61
+
+•   Timing Configuration Register, Added new NOTE under TICUT[1:0]: " If ILIM and ICUT are set to same value...".......... 62
+
+•  Two-Event Classification Register, Changed the second list item to include: "CLEn is set or a"  ....................................... 67
+
+2      Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

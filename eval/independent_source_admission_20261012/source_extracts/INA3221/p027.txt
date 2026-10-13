@@ -1,0 +1,25 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+                    Table 8-4. Configuration Register Field Descriptions (continued)
+     Bit     Field                          Type     Reset      Description
+
+     2-0    MODE3-1                   R/W     7h          Operating mode. These bits select continuous, single-shot
+                                                                                   (triggered), or power-down mode of operation. These bits default
+                                                                                 to continuous shunt and bus mode.
+                                                             000 = Power-down
+                                                             001 = Shunt voltage, single-shot (triggered)
+                                                             010 = Bus voltage, single-shot (triggered)
+                                                                011 = Shunt and bus, single-shot (triggered)
+                                                             100 = Power-down
+                                                             101 = Shunt voltage, continuous
+                                                                110 = Bus voltage, continuous
+                                                                   111 = Shunt and bus, continuous (default)
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    27
+
+                                                  Product Folder Links: INA3221

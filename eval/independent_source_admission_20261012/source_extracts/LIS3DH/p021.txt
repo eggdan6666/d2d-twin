@@ -1,0 +1,65 @@
+LIS3DH                                                                     Application hints
+
+
+
+                                 Table 13. Internal pin status
+
+ Pin#   Name                    Function                                Pin status
+
+  1    Vdd_IO  Power supply for I/O pins
+
+  2     NC     Not connected
+
+  3     NC     Not connected
+        SCL    I2C serial clock (SCL)
+  4                                                                      Default: input high impedance
+       SPC    SPI serial port clock (SPC)
+
+  5    GND    0 V supply
+       SDA    I2C serial data (SDA)
+  6      SDI    SPI serial data input (SDI)                           Default: (SDA) input high impedance
+       SDO    3-wire interface serial data output (SDO)
+
+       SDO    SPI serial data output (SDO)
+  7                                                                      Default: input with internal pull-up(1)
+        SA0    I2C less significant bit of the device address (SA0)
+
+                 SPI enable
+                   I2C/SPI mode selection:
+  8     CS                                                           Default: input high impedance
+                      1: SPI idle mode / I2C communication enabled
+                      0: SPI communication mode / I2C disabled
+
+  9      INT2     Inertial interrupt 2                                   Default: push-pull output forced to GND
+
+  10    RES    Connect to GND
+
+  11     INT1     Inertial interrupt 1                                   Default: push-pull output forced to GND
+
+  12    GND    0 V supply
+
+  13    ADC3    Analog-to-digital converter input 3                   Default: input high impedance
+
+  14     Vdd    Power supply
+
+  15    ADC2    Analog-to-digital converter input 2                   Default: input high impedance
+
+  16    ADC1    Analog-to-digital converter input 1                   Default: input high impedance
+
+1.  In order to disable the internal pull-up on the SDO/SA0 pin, write 90h in CTRL_REG0 (1Eh).
+
+4.1     Soldering information
+          The LGA package is compliant with the ECOPACK®, RoHS and “Green” standard.
+                     It is qualified for soldering heat resistance according to JEDEC J-STD-020.
+
+           Leave “Pin 1 Indicator” unconnected during soldering.
+
+          Land pattern and soldering recommendations are available at www.st.com.
+
+
+
+
+
+                                       DocID17530 Rev 2                                      21/54
+
+                                                                                                                            54

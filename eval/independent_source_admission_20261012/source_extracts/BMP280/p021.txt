@@ -1,0 +1,56 @@
+Bosch Sensortec | BMP280 Data sheet                                                          21 | 49
+
+
+
+
+         Table 16: Computational requirements for compensation formulas
+        Compensation of    Number of clock cycles (ARM Cortex-M3)
+
+                          32 bit integer   64 bit integer   Double precision
+            Temperature        ~46            –           ~2400 7
+             Pressure         ~112 8        ~1400         ~5400 7
+
+       3.11.2 Trimming parameter readout
+       The trimming parameters are programmed into the devices’ non-volatile memory (NVM) during
+        production and cannot be altered by the customer. Each compensation word is a 16-bit signed or
+       unsigned integer value stored in two’s complement. As the memory is organized into 8-bit words, two
+       words must always be combined in order to represent the compensation word. The 8-bit registers are
+      named calib00…calib25 and are stored at memory addresses 0x88…0xA1. The corresponding
+       compensation words are named dig_T# for temperature compensation related values and dig_P# for
+        pressure compensation related values. The mapping is shown in Table 17.
+
+        Table 17: Compensation parameter storage, naming and data type
+
+              Register       Register     Data type
+            Address       content
+          LSB / MSB
+           0x88 / 0x89       dig_T1     unsigned short
+           0x8A / 0x8B       dig_T2      signed short
+          0x8C / 0x8D       dig_T3      signed short
+           0x8E / 0x8F       dig_P1     unsigned short
+           0x90 / 0x91       dig_P2      signed short
+           0x92 / 0x93       dig_P3      signed short
+           0x94 / 0x95       dig_P4      signed short
+           0x96 / 0x97       dig_P5      signed short
+           0x98 / 0x99       dig_P6      signed short
+           0x9A / 0x9B       dig_P7      signed short
+          0x9C / 0x9D       dig_P8      signed short
+           0x9E / 0x9F       dig_P9      signed short
+           0xA0 / 0xA1      reserved       reserved
+
+       3.11.3 Compensation formula
+       Please note that it is strongly advised to use the API available from Bosch Sensortec to perform
+        readout and compensation. If this is not wanted, the code below can be applied at the user’s risk. Both
+        pressure and temperature values are expected to be received in 20 bit format, positive, stored in a 32
+           bit signed integer.
+
+       The variable t_fine (signed 32 bit) carries a fine resolution temperature value over to the pressure
+       compensation formula and could be implemented as a global variable.
+
+
+
+             7 Use only recommended for high-level programming languages like Matlab™ or LabVIEW™
+             8 Use only recommended for 8-bit micro controllers
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

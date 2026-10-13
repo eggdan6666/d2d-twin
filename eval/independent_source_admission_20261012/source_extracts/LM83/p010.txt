@@ -1,0 +1,44 @@
+1.0 Functional Description (Continued)         Local and remote temperature diodes are sampled in se-     LM83                                                       quence by the A/D converter. The T_CRIT_A output and the
+Register flags are updated at the completion of a conversion,       Status Register flags are updated at the completion of a con-
+which occurs approximately 60 ms after a temperature diode        version. T_CRIT_A and the Status Register flags are reset
+is sampled. INT is deactivated when the Status Register,       only after the Status Register is read and  if a temperature
+containing the set bit, is read and a temperature reading is       conversion is below the T_CRIT setpoint, as shown in Figure
+less than or equal to it’s corresponding HIGH setpoint, as       6. Figure 7 shows a  simplified  logic diagram  of  the
+shown in Figure 4. Figure 5shows a simplified logic diagram      T_CRIT_A and related circuitry.
+for the INT output and related circuitry.
+
+
+
+
+
+                                                                                                                                                                    DS101058-6
+                                                                                * Note: Status Register Bits are reset by a read of Status Register where
+                                                                                                            bit is located.
+                                                                     DS101058-14       FIGURE 6. T_CRIT_A Temperature Response Diagram
+* Note: Status Register Bits are reset by a read of Status Register where          with remote diode 1 and local temperature masked.
+bit is located.
+ FIGURE 4. INT Temperature Response Diagram with
+        D2RHS and D3RHS set to 127˚C.
+
+
+
+
+
+                                                                      DS101058-21
+ FIGURE 5. INT output related circuitry logic diagram                                                                                   DS101058-20
+                                                  FIGURE 7. T_CRIT_A output related circuitry logic
+The INT output can be disabled by setting the INT mask bit,                           diagram
+D7, of the configuration register. INT can be programmed to                                                           Located in the Configuration Register are the mask bits for
+be active high or low by the state of the INT inversion bit, D1,                                                       each temperature reading, seeSection2.5. When a mask bit
+in the configuration register. A “0” would program INT to be                                                                                   is set, its corresponding status flag will not propagate to the
+active low. INT is an open-drain output.                                                   T_CRIT_A output, but will still be set in the Status Registers.
+                                                                   Setting all four mask bits or programming the T_CRIT set-1.3 T_CRIT_A OUTPUT and T_CRIT LIMIT                                                                     point to 127˚C will disable the T_CRIT_A output.
+T_CRIT_A is activated when any temperature reading is
+greater than the limit preset in the critical temperature set-       1.4 POWER ON RESET DEFAULT STATES
+point register (T_CRIT), as shown in Figure 6. The Status                                                LM83 always powers up to these known default states:
+Registers can be read to determine which event caused the
+                                                                        1.  Command Register set to 00halarm. A bit in the Status Registers is set high to indicate
+which temperature reading exceeded the T_CRIT setpoint        2.  Local Temperature set to 0˚C
+temperature and caused the alarm, see Section 2.3.
+
+                                                           9                                                     www.national.com

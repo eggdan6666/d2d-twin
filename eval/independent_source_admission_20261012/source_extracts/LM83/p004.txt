@@ -1,0 +1,23 @@
+Pin Description (Continued)                                                                                              LM83
+
+      Label              Pin #               Function                           Typical Connection
+                                     Diode Return Current        To all Diode Junction Cathodes using a star      D−                4                                       Sink                          connection to pin. Must float when not used.
+                                       User-Set SMBus (I2C)        Ground (Low, “0”), VCC (High, “1”) or open  ADD0–ADD1            10, 6                                     Address Inputs                (“TRI-LEVEL”)
+    GND                  7, 8        Power Supply Ground        Ground
+                                       Manufacturing test pins.         Left floating. PC board traces may be routed
+                                                                      through the pads for these pins, although the
+                                                              components that drive these traces should share     NC                9, 13, 15                                                                         the same supply as the LM83 so that the Absolute
+                                                      Maximum Rating, Voltage at Any Pin, is not
+                                                                                 violated.
+                                              Interrupt Output,                 Pull Up Resistor, Controller Interrupt or Alert Line       INT               11                                        open-drain
+                              SMBus (I2C) Serial          From and to Controller, Pull-Up Resistor
+    SMBData            12           Bi-Directional Data Line,
+                                        open-drain output
+   SMBCLK             14       SMBus (I2C) Clock Input      From Controller, Pull-Up Resistor
+                                                  Critical Temperature             Pull Up Resistor, Controller Interrupt Line or    T_CRIT_A            16                                        Alarm, open-drain output      System Shutdown
+
+
+
+
+
+                                                           3                                                     www.national.com

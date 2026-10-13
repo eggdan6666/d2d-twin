@@ -1,0 +1,41 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+6.5   Electrical Specifications, Continued
+Typical Operating Circuit of Section 7.2, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or
+VDD, TA = 25°C
+
+ Parameters                            Conditions                                 Typical              Units   Notes
+ Primary I2C I/O (SCL, SDA)
+  VIL, LOW-Level Input Voltage            MPU-6000                                   -0.5 to 0.3*VDD         V
+  VIH, HIGH-Level Input Voltage           MPU-6000                        0.7*VDD to VDD + 0.5V       V
+  Vhys, Hysteresis                      MPU-6000                              0.1*VDD            V
+ VIL, LOW Level Input Voltage           MPU-6050                             -0.5V to 0.3*VLOGIC        V
+ VIH, HIGH-Level Input Voltage          MPU-6050                     0.7*VLOGIC to VLOGIC + 0.5V    V
+ Vhys, Hysteresis                     MPU-6050                            0.1*VLOGIC          V
+ VOL1, LOW-Level Output Voltage        3mA sink current                         0 to 0.4            V
+  IOL, LOW-Level Output Current            VOL = 0.4V                                 3            mA
+                                        VOL = 0.6V                                 5            mA
+ Output Leakage Current                                                         100              nA
+  tof, Output Fall Time from VIHmax to VILmax    Cb bus capacitance in pF                 20+0.1Cb to 250           ns
+  CI, Capacitance for Each I/O pin                                                < 10               pF
+ Auxiliary I2C I/O (AUX_CL, AUX_DA)     MPU-6050: AUX_VDDIO=0
+  VIL, LOW-Level Input Voltage                                                     -0.5V to 0.3*VLOGIC        V
+  VIH, HIGH-Level Input Voltage                                                0.7*VLOGIC to          V
+                                                                VLOGIC + 0.5V
+  Vhys, Hysteresis                                                            0.1*VLOGIC          V
+ VOL1, LOW-Level Output Voltage         VLOGIC > 2V; 1mA sink current             0 to 0.4            V
+ VOL3, LOW-Level Output Voltage         VLOGIC < 2V; 1mA sink current          0 to 0.2*VLOGIC         V
+  IOL, LOW-Level Output Current            VOL = 0.4V                                 1            mA
+                                        VOL = 0.6V                                 1            mA
+ Output Leakage Current                                                         100              nA
+  tof, Output Fall Time from VIHmax to VILmax     Cb bus capacitance in pF                20+0.1Cb to 250           ns
+  CI, Capacitance for Each I/O pin                                                < 10               pF
+
+
+
+
+
+                                           16 of 52

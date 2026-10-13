@@ -1,0 +1,78 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 9.1.2 Single-Ended Inputs
+
+The ADS1113 and ADS1114 can measure one, and the ADS1115 up to  four, single-ended signals. The
+ADS1113 and ADS1114 can measure single-ended signals by connecting AIN1 to GND externally. The ADS1115
+measures single-ended signals by appropriate configuration of the MUX[2:0] bits in the Config register. Figure
+ 9-2 shows a single-ended connection scheme for ADS1115. The single-ended signal ranges from 0 V up to
+ positive supply or +FS, whichever is lower. Negative voltages cannot be applied to these devices because the
+ADS111x can only accept positive voltages with respect to ground. The ADS111x do not lose linearity within the
+ input range.
+
+The ADS111x offer a differential input voltage range of ±FSR. Single-ended configurations use only one-half
+ of the full-scale input voltage range. Differential configurations maximize the dynamic range of the ADC and
+ provide better common-mode noise rejection than single-ended configurations.
+
+                                                                        VDD
+
+
+
+
+
+                                                                               10                                     Output Codes
+                                                   ADS1115                                                         SCL                                  0-32767
+
+
+                                                              1 ADDR            SDA  9
+
+                                                              2  ALERT/RDY        VDD  8
+
+                                                              3 GND                AIN3  7                0.1 F (typ)
+
+                                                              4  AIN0                AIN2  6
+
+
+                                                                  AIN1
+                                                                    5
+
+
+                                                                                                                             Inputs Selected
+                                                                                                                  from Configuration
+                                                                                                                          Register
+
+
+
+    NOTE: Digital pin connections are omitted for clarity.
+
+                              Figure 9-2. Measuring Single-Ended Inputs
+
+The ADS1115 also allows AIN3 to serve as a common point for measurements by the appropriate setting of
+ the MUX[2:0] bits. AIN0, AIN1, and AIN2 can all be measured with respect to AIN3. In this configuration, the
+ADS1115 operates with inputs, where AIN3 serves as the common point. This ability improves the usable range
+ over the single-ended configuration because negative differential voltages are allowed when
+GND < V(AIN3) < VDD; however, common-mode noise attenuation is not offered.
+ 9.1.3 Input Protection
+
+The ADS111x are fabricated in a small-geometry, low-voltage process. The analog inputs feature protection
+ diodes to the supply rails. However, the current-handling ability of these diodes is limited, and the ADS111x
+ can be permanently damaged by analog input voltages that exceed approximately 300mV beyond the rails for
+ extended periods. One way to protect against overvoltage is to place current-limiting resistors on the input lines.
+The ADS111x analog inputs can withstand continuous currents as large as 10mA.
+
+ 9.1.4 Unused Inputs and Outputs
+
+ Follow the guidelines below for the connection of unused device pins:
+
+ •  Either float unused analog inputs, or tie unused analog inputs to GND.
+ •  Either float NC (not connected) pins, or tie the NC pins to GND.
+ •    If the ALERT/RDY output pin is not used, leave the pin unconnected or tie the pin to VDD using a weak
+    pullup resistor.
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    29
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

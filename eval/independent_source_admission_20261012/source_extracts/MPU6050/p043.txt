@@ -1,0 +1,64 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+11.4 Assembly Precautions
+
+11.4.1 Gyroscope Surface Mount Guidelines
+
+InvenSense MEMS Gyros sense rate of rotation. In addition, gyroscopes sense mechanical stress coming
+from the printed circuit board (PCB). This PCB stress can be minimized by adhering to certain design rules:
+
+When using MEMS gyroscope components in plastic packages, PCB mounting and assembly can cause
+package stress. This package stress in turn can affect the output offset and its value over a wide range of
+temperatures. This stress is caused by the mismatch between the Coefficient of Linear Thermal Expansion
+(CTE) of the package material and the PCB. Care must be taken to avoid package stress due to mounting.
+
+Traces connected to pads should be as symmetric as possible. Maximizing symmetry and balance for pad
+connection will help component self alignment and will lead to better control of solder paste reduction after
+reflow.
+
+Any material used in the surface mount assembly process of the MEMS gyroscope should be free of
+restricted RoHS elements or compounds. Pb-free solders should be used for assembly.
+
+
+11.4.2 Exposed Die Pad Precautions
+
+The MPU-60X0 has very low active and standby current consumption. The exposed die pad is not required
+for heat sinking, and should not be soldered to the PCB. Failure to adhere to  this rule can induce
+performance changes due to package thermo-mechanical stress. There is no electrical connection between
+the pad and the CMOS.
+
+
+11.4.3  Trace Routing
+
+Routing traces or vias under the gyro package such that they run under the exposed die pad is prohibited.
+Routed active signals may harmonically couple with the gyro MEMS devices, compromising gyro response.
+These devices are designed with the drive frequencies as follows: X = 33±3Khz, Y = 30±3Khz, and
+Z=27±3Khz. To avoid harmonic coupling don’t route active signals in non-shielded signal planes directly
+below, or above the gyro package. Note: For best performance, design a ground plane under the e-pad to
+reduce PCB signal noise from the board on which the gyro device is mounted. If the gyro device is stacked
+under an adjacent PCB board, design a ground plane directly above the gyro device to shield active signals
+from the adjacent PCB board.
+
+
+11.4.4 Component Placement
+
+Do not place large insertion components such as keyboard or similar buttons, connectors, or shielding boxes
+at a distance of less than 6 mm from the MEMS gyro. Maintain generally accepted industry design practices
+for component placement near the MPU-60X0 to prevent noise coupling and thermo-mechanical stress.
+
+
+11.4.5 PCB Mounting and Cross-Axis Sensitivity
+
+Orientation errors of the gyroscope and accelerometer mounted to the printed circuit board can cause cross-
+axis  sensitivity  in which one gyro or accel responds  to  rotation or acceleration about another  axis,
+respectively. For example, the X-axis gyroscope may respond to rotation about the Y or Z axes. The
+orientation mounting errors are illustrated in the figure below.
+
+
+
+
+
+                                           43 of 52

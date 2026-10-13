@@ -1,0 +1,58 @@
+Data Sheet                               AD5592R
+
+ABSOLUTE MAXIMUM RATINGS
+
+TA = 25 °C, unless otherwise noted. Transient currents of up to 100      Do not use θJA, θJC, and θJB thermal resistances to perform direct
+mA do not cause SCR latch-up.                                        calculation/measurement of the die temperature because doing so
+                                                                                results in incorrect values. The thermal resistances assume 100%Table 5.
+                                                                                of the power that is dissipated along the specified path between the
+Parameter                                Rating                        measurement points. The thermal resistances are directly depend-
+VDD to GND                                 −0.3 V to + 7 V                      ent on the PCB design and environment.
+VLOGIC to GND                               −0.3 V to + 7 V
+                                                                                                                        If direct measurement of the package is required, the ΨJT and ΨJBAnalog Input Voltage to GND                  −0.3 V to VDD + 0.3 V                                                                      values must be used because they more accurately reflect the true
+AD5592R
+                                                                      thermal dissipation paths.
+   Digital Input Voltage to GND                −0.3 V to VDD + 0.3 V
+   Digital Output Voltage to GND               −0.3 V to VDD + 0.3 V                θJC must only be used where an external heat sink is attached
+AD5592R-1                                                                          directly to the package.
+   Digital Input Voltage to GND                −0.3 V to VLOGIC + 0.3 V            System level thermal simulation is highly recommended.
+   Digital Output Voltage to GND               −0.3 V to VLOGIC + 0.3 V
+                                                                   For more details about the thermal resistances, refer to JE-VREF to GND                                −0.3 V to VDD + 0.3 V
+                                                             DEC51-12: Guidelines for Reporting and Using Electronic PackageOperating Temperature Range               −40 °C (TA) to +125 °C (TJ)
+                                                                Thermal Information.Storage Temperature Range                −65 °C to +150 °C
+Junction Temperature (TJ max)               150 °C                               Table 6. Thermal Resistance
+Lead Temperature                     JEDEC industry standard              Package Type      θJA      θJB       θJC-TOP  ΨJT     ΨJB      Unit
+   Soldering                              J-STD-020                                                                             CP-16-32           92.4     39.6     48.2      0.9       37.4     °C/W
+Stresses at or above those listed under Absolute Maximum Ratings        RU-16            127      60.2     42.2      2.6       59.1     °C/W
+may cause permanent damage to the product. This is a stress              CB-16-3            103.2    64      0       0       78      °C/W
+rating only; functional operation of the product at these or any other                                        ELECTROSTATIC DISCHARGE (ESD) RATINGS
+conditions above those indicated in the operational section of this
+specification is not implied. Operation beyond the maximum operat-      The following ESD information is provided for handling of ESD-sen-
+ing conditions for extended periods may affect product reliability.             sitive devices in an ESD protected area only.
+THERMAL RESISTANCE                            Human body model (HBM) per ANSI/ESDA/JEDEC JS-001.
+Thermal performance is directly linked to printed circuit board               Field induced charged device model (FICDM) per ANSI/ESDA/JE-
+(PCB) design and operating environment. Careful attention to PCB      DEC JS-002.
+thermal design is required.
+                                     ESD Ratings for AD5592R/AD5592R-1
+Thermal characteristics are specified for the worst-case conditions,
+that is, a device soldered in a circuit board for surface-mount pack-         Table 7. AD5592R/AD5592R-1, 16-Ball WLCSP, 16-Lead LFCSP, and 16-Lead
+ages. Thermal resistance values specified in Table 6 are simulated       TSSOP
+based on JEDEC specifications using a 2S2P thermal test board         ESD Model        Withstand Voltage (V)               Class
+(see JEDEC JESD51), except for θJC-TOP, which uses a JEDEC 1S      HBM             1000                         1C
+test board.                                                        FICDM            1250                         C3
+θJA is the junction to ambient thermal resistance, measured in a      ESD CAUTION
+JEDEC natural convection environment.
+                                                                         ESD (electrostatic discharge) sensitive device. Charged devi-
+θJC is the junction to case thermal resistance, measured at the cen-                          ces and circuit boards can discharge without detection. Although
+ter of the package top surface, with an infinite heat sink attached to                                    this product features patented or proprietary protection circuitry,
+the package surface.                                                                 damage may occur on devices subjected to high energy ESD.
+θJB is the junction to board thermal resistance, measured at a point                                Therefore, proper ESD precautions should be taken to avoid
+on the board 1mm from the package edge, along the package                                       performance degradation or loss of functionality.
+centerline, measured in a JEDEC θJB environment.
+ΨJB is the junction to board thermal characterization parameter,
+measured in a JEDEC natural convection environment.
+ΨJT is the junction to package top thermal characterization parame-
+ter, measured in a JEDEC natural convection environment.
+
+
+analog.com                                                                                         Rev. H | 12 of 54

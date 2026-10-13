@@ -1,0 +1,64 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+Typical Application (continued)
+
+For η = 1.004 and T(°C) = 100°C:
+                § 1.004  1.008 ·
+    TERR = ¨                ¸ u 273.15  100qC                ©   1.008     ¹
+    TERR   1.48qC                                                                                                             (5)
+
+If a discrete transistor is used as the remote temperature sensor with the TMP461, the best accuracy can be
+achieved by selecting the transistor according to the following criteria:
+ 1. Base-emitter voltage is > 0.25 V at 7.5 μA, at the highest-sensed temperature.
+ 2. Base-emitter voltage is < 0.95 V at 120 μA, at the lowest-sensed temperature.
+ 3. Base resistance is < 100 Ω.
+ 4. Tight control of VBE characteristics indicated by small variations in hFE (that is, 50 to 150).
+
+Based on this criteria, two recommended small-signal transistors are the 2N3904 (NPN) or 2N3906 (PNP).
+
+9.2.2  Detailed Design Procedure
+
+The local temperature sensor inside the TMP461 device monitors the ambient air around the device. The thermal
+time constant for the TMP461 device is approximately two seconds. This constant implies that if the ambient air
+changes quickly by 100°C, then the TMP461 device takes approximately 10 seconds (that is, five thermal time
+constants) to settle to within 1°C of the final value. In most applications, the TMP461 package is in electrical, and
+therefore thermal, contact with the printed circuit board (PCB), as well as subjected to forced airflow. The
+accuracy  of the measured temperature  directly depends on how accurately the PCB and forced  airflow
+temperatures represent the temperature  that the TMP461  is measuring.  Additionally, the  internal power
+dissipation of the TMP461 can cause the temperature to rise above the ambient or PCB temperature. The
+internal power dissipated as a result of exciting the remote temperature sensor is negligible because of the small
+currents used. Equation 6 can be used to calculate the average conversion current for power dissipation and
+self-heating based on the number  of conversions per second and temperature sensor channel enabled.
+Equation 7 shows an example with local and remote sensor channels enabled and 16 conversions per second;
+see the Electrical Characteristics table for typical values required for these calculations. For a 3.3-V supply and a
+conversion rate of 16 conversions per second, the TMP461 device dissipates 0.531 mW (PDIQ = 3.3 V × 161 μA)
+when both the remote and local channels are enabled.
+
+Average Conversion Current    Local ADC Conversion Time  ˜ Conversions per Second  ˜ Local Active IQ
+                        Remote ADC Conversion Time  ˜ Conversions per Second  ˜ Remote Active IQ
+                           Standby Mode IQ   ˜ ¬ª1   Local ADC Conversion Time  Remote ADC Conversion Time  ˜ Conversions per Second º¼
+                                                                                                                                      (6)
+                                                    § 16 ·
+    Average Conversion Current   15 ms ¨    ¸ ˜ 240 $                                                    © s ¹
+                                                      § 16 ·
+                              15 ms  ˜ ¨    ¸ ˜ 400 $                                                      © s ¹
+                                                      ª                         § 16 · º
+                              15 $   ˜ «     PV    PV  ˜ ¨    ¸ »                                                      ¬                         © s ¹ ¼
+                             161 $                                                                                 (7)
+
+The temperature measurement accuracy of the TMP461 device depends on the remote and local temperature
+sensor being at the same temperature as the system point being monitored. If the temperature sensor is not in
+good thermal contact with the part of the system being monitored, then there is a delay between the sensor
+response and the system changing temperature. This delay is usually not a concern for remote temperature-
+sensing applications that use a substrate transistor (or a small, SOT23 transistor) placed close to the device
+being monitored.
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     25
+
+                                                  Product Folder Links: TMP461

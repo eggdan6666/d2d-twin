@@ -1,0 +1,1257 @@
+{
+  "tmp117_eeprom": {
+    "status": "PASS",
+    "assertions": 11,
+    "checks": [
+      {
+        "clause": "EUN0 permits volatile scratch write",
+        "actual": 4660,
+        "expected": 4660
+      },
+      {
+        "clause": "POR load busy in CONFIG",
+        "actual": 4096,
+        "expected": 4096
+      },
+      {
+        "clause": "POR busy mirror",
+        "actual": 16384,
+        "expected": 16384
+      },
+      {
+        "clause": "POR reloads factory NVM; POR write ignored",
+        "actual": 24576,
+        "expected": 24576
+      },
+      {
+        "clause": "Programming sets Busy",
+        "actual": 4096,
+        "expected": 4096
+      },
+      {
+        "clause": "Programming busy mirror",
+        "actual": 16384,
+        "expected": 16384
+      },
+      {
+        "clause": "No response oracle for prohibited programming-busy write",
+        "outside_contract": true
+      },
+      {
+        "clause": "Busy clears only on explicit completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Completion clears Busy mirror",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "POR restores programmed NVM instead of last volatile value",
+        "actual": 9029,
+        "expected": 9029
+      },
+      {
+        "clause": "POR locks EEPROM",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "THIGH",
+        "value": 4660
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "THIGH",
+        "value": 4660,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "por_started",
+        "payload": {}
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 4640,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "EEPROM_UL",
+        "value": 16384,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "THIGH",
+        "value": 22136
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "por_load_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "THIGH",
+        "value": 24576,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "EEPROM_UL",
+        "value": 32768
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "THIGH",
+        "value": 9029
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 4640,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "EEPROM_UL",
+        "value": 49152,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "TLOW",
+        "value": 17767
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "eeprom_program_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 544,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "EEPROM_UL",
+        "value": 32768,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "EEPROM_UL",
+        "value": 0
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "THIGH",
+        "value": 13398
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "por_started",
+        "payload": {}
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "por_load_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "THIGH",
+        "value": 9029,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "EEPROM_UL",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      }
+    ]
+  },
+  "tmp117_flags": {
+    "status": "PASS",
+    "assertions": 7,
+    "checks": [
+      {
+        "clause": "Alert CONFIG returns nonzero preclear HIGH+DR",
+        "actual": 40960,
+        "expected": 40960
+      },
+      {
+        "clause": "Alert CONFIG clears HIGH+DR",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "TEMP clears DR but retains LOW for CONFIG preclear return",
+        "actual": 16384,
+        "expected": 16384
+      },
+      {
+        "clause": "THERM nonzero HIGH and LOW=0",
+        "actual": 32768,
+        "expected": 32768
+      },
+      {
+        "clause": "THERM CONFIG read does not clear HIGH",
+        "actual": 32768,
+        "expected": 32768
+      },
+      {
+        "clause": "THERM hysteresis retains HIGH between limits",
+        "actual": 32768,
+        "expected": 32768
+      },
+      {
+        "clause": "THERM clears HIGH after qualifying below-low conversion",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "THIGH",
+        "value": 8192
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "TLOW",
+        "value": 6144
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "qualifying_conversion_completed",
+        "payload": {
+          "temperature_code": 8448
+        }
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 41504,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 544,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "qualifying_conversion_completed",
+        "payload": {
+          "temperature_code": 5888
+        }
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "TEMP",
+        "value": 5888,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 16928,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 560
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "qualifying_conversion_completed",
+        "payload": {
+          "temperature_code": 8448
+        }
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 41520,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 33328,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "qualifying_conversion_completed",
+        "payload": {
+          "temperature_code": 6400
+        }
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 41520,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP117",
+        "op": "event",
+        "name": "qualifying_conversion_completed",
+        "payload": {
+          "temperature_code": 5888
+        }
+      },
+      {
+        "chip": "TMP117",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 8752,
+        "transaction": "single",
+        "auto_increment": false
+      }
+    ]
+  },
+  "tmp126_read_clear": {
+    "status": "PASS",
+    "assertions": 7,
+    "checks": [
+      {
+        "clause": "Auto-increment returns nonzero flags",
+        "actual": 166,
+        "expected": 166
+      },
+      {
+        "clause": "Auto-increment preserves flags",
+        "actual": 166,
+        "expected": 166
+      },
+      {
+        "clause": "Single read returns preclear flags",
+        "actual": 166,
+        "expected": 166
+      },
+      {
+        "clause": "Single read without increment clears flags",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Completed one-shot produces nonzero DR",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "TEMP_RESULT read clears DR across registers",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Comparator to interrupt clears Alert_Status",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "qualifying_flag_event",
+        "payload": {
+          "fields": [
+            "CRC_FLAG",
+            "SLEW_FLAG",
+            "THIGH_FLAG",
+            "TLOW_FLAG"
+          ]
+        }
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 166,
+        "transaction": "single",
+        "auto_increment": true
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 166,
+        "transaction": "burst",
+        "auto_increment": true
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 166,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP126",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 22
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": true
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": true
+      },
+      {
+        "chip": "TMP126",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 38
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "qualifying_flag_event",
+        "payload": {
+          "fields": [
+            "CRC_FLAG"
+          ]
+        }
+      },
+      {
+        "chip": "TMP126",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 6
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": true
+      }
+    ]
+  },
+  "tmp126_average": {
+    "status": "PASS",
+    "assertions": 5,
+    "checks": [
+      {
+        "clause": "ONE_SHOT readback zero does not mean completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Seven conversions do not complete eight-sample average",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "MODE remains active before completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Eighth conversion sets DR",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "Completed one-shot returns to shutdown",
+        "actual": 8,
+        "expected": 8
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 150
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 134,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": true
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 134,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "TMP126",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {}
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": true
+      },
+      {
+        "chip": "TMP126",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 142,
+        "transaction": "single",
+        "auto_increment": false
+      }
+    ]
+  },
+  "hdc_start_complete": {
+    "status": "PASS",
+    "assertions": 6,
+    "checks": [
+      {
+        "clause": "Trigger request is not data ready",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Completion cannot precede start",
+        "outside_contract": true
+      },
+      {
+        "clause": "Trigger self-clears at measurement start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Started conversion has not completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "STATUS returns nonzero preclear DRDY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUS clears DRDY",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      }
+    ]
+  },
+  "hdc_cross_read": {
+    "status": "PASS",
+    "assertions": 4,
+    "checks": [
+      {
+        "clause": "TEMP_LOW read clears DRDY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "TEMP_HIGH read clears DRDY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "HUM_LOW read clears DRDY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "HUM_HIGH read clears DRDY",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "HUM_LOW",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {}
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "HDC2021",
+        "op": "read",
+        "register": "STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      }
+    ]
+  },
+  "bosch_commit": {
+    "status": "PASS",
+    "assertions": 5,
+    "checks": [
+      {
+        "clause": "Humidity register receives new setting",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "Humidity setting inactive before ctrl_meas commit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "ctrl_meas commits pending humidity",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "Legal config write in sleep persists",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "Normal config writes may be ignored; no deterministic response oracle",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "ctrl_hum",
+        "value": 2
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "ctrl_hum",
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "ctrl_meas",
+        "value": 36
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "config",
+        "value": 4
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "config",
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "ctrl_meas",
+        "value": 39
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "config",
+        "value": 8
+      }
+    ]
+  },
+  "bosch_forced": {
+    "status": "PASS",
+    "assertions": 16,
+    "checks": [
+      {
+        "clause": "Forced measurement is pending",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "No config stimulus during pending measurement",
+        "outside_contract": true
+      },
+      {
+        "clause": "Completed measurement is not pending",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Both forced codes return to sleep on completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Forced measurement is pending",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "No config stimulus during pending measurement",
+        "outside_contract": true
+      },
+      {
+        "clause": "Completed measurement is not pending",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Both forced codes return to sleep on completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Forced measurement is pending",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "No config stimulus during pending measurement",
+        "outside_contract": true
+      },
+      {
+        "clause": "Completed measurement is not pending",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Both forced codes return to sleep on completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Forced measurement is pending",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "No config stimulus during pending measurement",
+        "outside_contract": true
+      },
+      {
+        "clause": "Completed measurement is not pending",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Both forced codes return to sleep on completion",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "ctrl_meas",
+        "value": 37
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "status",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "config",
+        "value": 4
+      },
+      {
+        "chip": "BME280",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {}
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "status",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "ctrl_meas",
+        "value": 36,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "ctrl_meas",
+        "value": 38
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "status",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "write",
+        "register": "config",
+        "value": 4
+      },
+      {
+        "chip": "BME280",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {}
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "status",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BME280",
+        "op": "read",
+        "register": "ctrl_meas",
+        "value": 36,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BMP280",
+        "op": "write",
+        "register": "ctrl_meas",
+        "value": 37
+      },
+      {
+        "chip": "BMP280",
+        "op": "read",
+        "register": "status",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BMP280",
+        "op": "write",
+        "register": "config",
+        "value": 4
+      },
+      {
+        "chip": "BMP280",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {}
+      },
+      {
+        "chip": "BMP280",
+        "op": "read",
+        "register": "status",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BMP280",
+        "op": "read",
+        "register": "ctrl_meas",
+        "value": 36,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BMP280",
+        "op": "write",
+        "register": "ctrl_meas",
+        "value": 38
+      },
+      {
+        "chip": "BMP280",
+        "op": "read",
+        "register": "status",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BMP280",
+        "op": "write",
+        "register": "config",
+        "value": 4
+      },
+      {
+        "chip": "BMP280",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {}
+      },
+      {
+        "chip": "BMP280",
+        "op": "read",
+        "register": "status",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false
+      },
+      {
+        "chip": "BMP280",
+        "op": "read",
+        "register": "ctrl_meas",
+        "value": 36,
+        "transaction": "single",
+        "auto_increment": false
+      }
+    ]
+  }
+}

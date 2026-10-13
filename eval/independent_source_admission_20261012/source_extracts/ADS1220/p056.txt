@@ -1,0 +1,65 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ To implement a ratiometric 3-wire RTD measurement using the device, IDAC1 is routed to one of the leads of the
+RTD and IDAC2 is routed to the second RTD lead. Both currents have the same value, which is programmable
+ by the IDAC[2:0] bits in the configuration register. The device is designed such that both IDAC values are closely
+ matched, even across temperature. The sum of both currents flows through a precision, low-drift reference
+ resistor, RREF. The voltage, VREF, generated across the reference resistor (as shown in Equation 18) is used as
+ the ADC reference voltage. Equation 18 reduces to Equation 19 because IIDAC1 = IIDAC2.
+
+    VREF = (IIDAC1 + IIDAC2) × RREF                                                                         (18)
+
+    VREF = 2 × IIDAC1 × RREF                                                                              (19)
+
+ To simplify the following discussion, the individual lead resistance values of the RTD (RLEADx) are set to zero.
+ Only IDAC1 excites the RTD to produce a voltage (VRTD) proportional to the temperature-dependable RTD value
+and the IDAC1 value, as shown in Equation 20.
+
+    VRTD = RRTD (at temperature) × IIDAC1                                                                      (20)
+
+The device internally amplifies the voltage across the RTD using the PGA and compares the resulting voltage
+ against the reference voltage to produce a digital output code proportional to Equation 21 through Equation 23:
+
+    Code ∝ VRTD × Gain / VREF                                                                            (21)
+
+    Code ∝ (RRTD (at temperature) × IIDAC1 × Gain) / (2 × IIDAC1 × RREF)                                            (22)
+
+    Code ∝ (RRTD (at temperature) × Gain) / (2 × RREF)                                                          (23)
+
+As can be seen from Equation 23, the output code only depends on the value of the RTD, the PGA gain, and
+ the reference resistor (RREF), but not on the IDAC1 value. The absolute accuracy and temperature drift of the
+ excitation current therefore does not matter. However, because the value of the reference resistor directly affects
+ the measurement result, choosing a reference resistor with a very low temperature coefficient is important to limit
+ errors introduced by the temperature drift of RREF.
+The second IDAC2 is used to compensate for errors introduced by the voltage drop across the lead resistance
+ of the RTD. All three leads of a 3-wire RTD typically have the same length and, thus, the same lead resistance.
+ Also, IDAC1 and IDAC2 have the same value. Taking the lead resistance into account, the differential voltage
+ (VIN) across the ADC inputs, AIN0 and AIN1, is calculated using Equation 24:
+
+     VIN = IIDAC1 × (RRTD + RLEAD1) – IIDAC2 × RLEAD2                                                         (24)
+
+When RLEAD1 = RLEAD2 and IIDAC1 = IIDAC2, Equation 24 reduces to Equation 25:
+
+     VIN = IIDAC1 × RRTD                                                                                   (25)
+
+ In other words, the measurement error resulting from the voltage drop across the RTD lead resistance is
+ compensated, as long as the lead resistance values and the IDAC values are well matched.
+
+A first-order differential and common-mode RC filter (RF1, RF2, CDIF1, CCM1, and CCM2) is placed on the ADC
+ inputs, as well as on the reference inputs (RF3, RF4, CDIF2, CCM3, and CCM4). The same guidelines for designing
+ the input filter apply as described in the Thermocouple Measurement section. Match the corner frequencies
+ of the input and reference  filter for best performance. More detailed information on matching the input and
+ reference  filter can be found in the RTD Ratiometric Measurements and Filtering Using the ADS1148 and
+ADS1248 application note.
+
+The reference resistor RREF not only serves to generate the reference voltage for the device, but also sets the
+common-mode voltage of the RTD to within the specified common-mode voltage range of the PGA.
+
+
+
+
+
+56    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,61 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ In some applications, the integrated temperature sensor of the ADS1220 cannot be used (for example,  if the
+ accuracy is not high enough or if the device cannot be placed close enough to the cold junction). The additional
+ analog input channels of the device can be used in this case to measure the cold-junction temperature with a
+ thermistor, RTD, or an analog temperature sensor.
+
+ To get an approximation of the achievable temperature resolution, the rms-Noise of the ADS1220 at Gain =
+32 and DR = 20SPS (0.23µVrms) is divided by the average sensitivity of a K-type thermocouple (41µV/°C), as
+shown in Equation 17.
+
+     Temperature Resolution = 0.23µV / 41µV/°C = 0.006°C                                                   (17)
+
+The register settings for this design are shown in Table 9-2.
+
+                                     Table 9-2. Register Settings
+               REGISTER     SETTING                      DESCRIPTION
+                    00h          0Ah      AINP = AIN0, AINN = AIN1, gain = 32, PGA enabled
+                    01h           04h     DR = 20SPS, normal mode, continuous conversion mode
+
+                    02h           10h        Internal voltage reference, simultaneous 50Hz and 60Hz rejection
+
+                    03h           00h     No IDACs used
+
+ 9.2.1.3 Application Curves
+
+ Figure 9-4 and Figure 9-5 show the measurement results. The measurements are taken at TA = T(CJ) = 25°C. A
+ system offset calibration is performed at T(TC) = 25°C, which translates to a V(TC) = 0V when T(CJ) = 25°C. No
+ gain calibration is implemented. The data in Figure 9-4 are taken using a precision voltage source as the input
+ signal instead of a thermocouple. The respective temperature measurement error in Figure 9-5 is calculated
+ from the data in Figure 9-4 using the NIST tables.
+
+The design meets the required temperature measurement accuracy given in Table 9-1. The measurement
+ error shown in Figure 9-5 does not include the error of the thermocouple and the measurement error of the
+ cold-junction temperature. Those two error sources are in general larger than 0.2°C and therefore, in many
+ cases, dominate the overall system measurement accuracy.
+
+
+             0.01                                                                                  0.2
+
+
+               (mV)  0.005                                                                                                                                                (°C)  0.1
+                  Error                                                                                                                                                                                                     Error
+                                         Measurement -0.0050                                                                                                                                                                                                                                                                                                                                                                                                            Measurement  -0.10
+
+
+
+
+             -0.01                                                                                       -0.2
+                -10      0       10      20      30      40      50                     -200     0     200    400    600    800    1000   1200
+                              Thermocouple Voltage (mV)                D002                                       Temperature (°C)                     D001
+    Figure 9-4. Voltage Measurement Error vs VTC    Figure 9-5. Temperature Measurement Error vs TTC
+
+
+
+
+
+54    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

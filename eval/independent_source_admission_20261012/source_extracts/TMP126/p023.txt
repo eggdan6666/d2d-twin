@@ -1,0 +1,76 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+
+                     Controller controls SIO line
+
+
+                    Peripheral controls SIO line
+
+
+
+       CS
+
+
+
+     SIO       Command     Read Data     Read Data      CRC
+
+
+
+
+
+                  CRC determined by Command Word and Data Block
+
+                                   Figure 8-16. CRC Enabled Read
+
+ 8.5.2.5.1 Cyclic Redundancy Check Implementation
+
+ Table 8-2 defines the CRC calculation rule.
+
+                                      Table 8-2. CRC Rule Table
+                 Temperature                                                         Digital Output
+
+              CRC Width                                                 16 bits
+                    Polynomial                                              X16 + X12 + X5 + 1 (1021h)
+
+                          Initial seed value                                           FFFFh
+
+                  Input data reflected                                         No
+
+                Result data reflected                                         No
+
+              XOR value                                                 0000h
+
+                   Example                                CRC of 0xABCD = 0xD46A
+
+
+ Figure 8-17 shows the CRC Module block diagram. The CRC calculation is done on the command word and the
+ data block. The module consists of a 16-bit shift register and 3 exclusive-OR gates. The register starts with the
+seed value FFFFh and the module performs an XOR function and shifts its content until the last bit of the register
+ string is used. The final value of the shift register checksum is output onto the SIO line by the TMP126 at the end
+ of the data block for the host to validate the transaction.
+
+
+
+
+XOR  +       C15 C14 C13 C12      +       C11 C10 C9  C8  C7  C6  C5      +       C4  C3  C2  C1  C0
+
+                             XOR                               XOR
+
+
+
+
+
+                                   Data Block
+
+            MSB                                LSB
+
+                                      Figure 8-17. CRC Module
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    23
+
+                                                  Product Folder Links: TMP126

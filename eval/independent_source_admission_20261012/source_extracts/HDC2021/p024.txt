@@ -1,0 +1,55 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.6 Temperature MAX (Address: 0x05)
+
+                        Table 7-17. Temperature MAX Register (Address: 0x05)
+
+       7             6             5             4             3             2             1             0
+
+                                          TEMPERATUREMAX[7:0]
+
+                           Table 7-18. Temperature Max Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     [HEX]                    DESCRIPTION
+     [7:0]   TEMPERATUREMAX[7:0]       R       0         Maximum temperature measurement data (one-shot mode only)
+
+
+ This register implements temperature peak detector function. The register stores the highest temperature value
+ converted after the last reset (power-on reset or software reset).
+
+The temperature can be calculated from the output data using Equation 5:
+
+                            § TEMPERATURE [7 : 0] ·
+    Temperature ( qC)   ¨             8             ¸ u 165  40                            ©        2              ¹                                                                    (5)
+
+ 7.6.7 Humidity MAX (Address: 0x06)
+
+                          Table 7-19. Humidity MAX Register (Address: 0x06)
+
+       7             6             5             4             3             2             1             0
+
+                                                HUMIDITYMAX[7:0]
+
+                             Table 7-20. Humidity MAX Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]    HUMIDITYMAX[7:0]           R       0         Maximum humidity measurement data (one-shot mode only)
+
+
+ This register implements humidity peak detector function. The register stores the highest humidity value
+ converted after the last reset (power-on reset or software reset).
+
+The humidity can be calculated from the output data using Equation 6:
+
+                                                     § 100 ·
+    Humidity (%RH)  HUMIDITYMAX > 7 : 0 @ u¨  8 ¸                                                     © 2  ¹                                                                 (6)
+
+
+
+
+
+24    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

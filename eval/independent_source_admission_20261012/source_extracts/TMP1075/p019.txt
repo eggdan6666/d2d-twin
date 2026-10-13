@@ -1,0 +1,85 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+                            1                                        9     1                                         9
+
+             SCL
+
+
+
+
+            SDA         0    0    0    0    0    0    0   R/W      1  0    0    0    0    0   1    1      0
+
+                         Start By                                  ACK By                           From      ACK By   Stop By
+                      Host                                             Device                                Host        Device     Host
+
+                                     Frame 1 Address Byte                              Frame 2 Command Byte
+
+                       Figure 7-7. General-Call Reset Command Timing Diagram
+
+
+
+             ALERT
+
+
+                              1                                        9    1                                        9
+
+              SCL
+
+
+
+
+
+             SDA         0    0    0    1    1    0    0  R/W         1    0   A4   A3   A2   A1   A0   Status
+
+                           Start By                                  ACK By                           From     NACK By  Stop By
+                       Host                                               Device                               Device         Host     Host
+
+                            Frame 1 SMBus ALERT Response Address Byte                  Frame 2 Device Address Byte
+
+                             Figure 7-8. Timing Diagram for SMBus Alert
+
+ 7.4 Device Functional Modes
+ 7.4.1 Shutdown Mode (SD)
+
+Shutdown mode (SD) of the TMP1075 device allows the user to conserve power by shutting down all device
+ circuitry except the serial interface, which significantly reduces the current consumption. SD is initiated when the
+SD bit in the configuration register is set to 1. When SD is equal to 0, the device stays in continuous conversion
+mode.
+
+ 7.4.2 One-Shot Mode (OS)
+
+The TMP1075 features a one-shot mode (OS) temperature measurement. When the device is in shutdown
+mode, writing 1 to the OS bit starts a single temperature conversion. The device returns to the shutdown state
+ at the completion of the single conversion. This feature is useful to reduce power consumption in the TMP1075
+when continuous temperature monitoring is not required.
+
+When the configuration register is read, the OS bit always reads 0 on TMP1075 non-N orderables. On the
+TMP1075N orderable, the OS bit reads back 0 during the one-shot conversion and 1 after the conversion cycle.
+
+ 7.4.3 Continuous Conversion Mode (CC)
+
+When the device is operating in continuous conversion mode (SD=0), every conversion cycle consists of an
+ active conversion, followed by a standby (see Figure 7-9). The device consumes a higher current during an
+ active conversion, and lower current during standby. Active conversion time is 5.5 ms (TMP1075N: 10 ms)
+ before the part goes in standby. Table 7-8 shows the list of conversion cycle configured using [R1:R0] bits in the
+ configuration register.
+
+                                                                         1 Conversion Cycle
+
+                                                                                                Ac ve Conversion
+                                                                                     Standby
+
+                                                             Ac ve
+                                                                Conversion me                             Ac ve
+                                                                                                          Conversion me
+
+                                                                                    Start-Up          Start of
+                                                                                             Conversion
+
+                                Figure 7-9. Conversion Rate Diagram
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+
+                                                  Product Folder Links: TMP1075

@@ -1,0 +1,70 @@
+                               Product        Sample &         Technical            Tools &          Support &
+                                Folder         Buy            Documents         Software        Community
+
+
+                                                                                   INA219
+
+                                                                      SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+       INA219 Zerø-Drift, Bidirectional Current/Power Monitor With I2C Interface
+
+1  Features                              3  Description
+1•  Senses Bus Voltages from 0 to 26 V               The INA219 is a current shunt and power monitor
+                                                           with an  I2C- or SMBUS-compatible  interface. The
+•  Reports Current, Voltage, and Power                                                       device monitors both shunt voltage drop and bus
+•  16 Programmable Addresses                         supply voltage, with programmable conversion times
+•  High Accuracy: 0.5% (Maximum) Over              and   filtering. A  programmable  calibration  value,
+   Temperature (INA219B)                          combined with an internal multiplier, enables direct
+                                                      readouts  of  current  in  amperes.  An  additional
+•   Filtering Options
+                                                             multiplying register calculates power  in watts. The
+•   Calibration Registers                                    I2C-  or  SMBUS-compatible  interface  features 16
+•  SOT23-8 and SOIC-8 Packages                    programmable addresses.
+
+                                              The INA219 is available in two grades: A and B. The
+2  Applications                          B grade version has higher accuracy and higher
+•  Servers                                                precision specifications.
+•  Telecom Equipment                            The INA219 senses across shunts on buses that can
+•  Notebook Computers                                 vary from 0 to 26 V. The device uses a single 3- to
+                                                       5.5-V supply, drawing a maximum of 1 mA of supply
+•  Power Management                                                              current. The INA219 operates from –40°C to 125°C.
+•   Battery Chargers
+•  Welding Equipment                                            Device Information(1)
+•  Power Supplies                                   PART NUMBER     PACKAGE    BODY SIZE (NOM)
+•  Test Equipment                                         INA219           SOIC (8)            3.91 mm × 4.90 mm
+                                                                          SOT-23 (8)          1.63 mm × 2.90 mm
+
+                                                                                  (1) For all available packages, see the orderable addendum at
+                                                                            the end of the data sheet.
+
+                                          Simplified Schematic
+
+                                                          VS
+                VIN+ VIN-                                        (Supply Voltage)
+
+
+                                 INA219
+
+                                        ´       Power Register
+                                                                                                                         Data
+
+                                                                                                                                                                                             I2 C-/SMBUS-         CLK
+                                                                                  Current Register             Compatible
+                                                                                                                            Interface           A0
+                       PGA           ADC
+                                                                                  Voltage Register                             A1
+
+
+
+
+
+           GND
+
+
+
+
+
+1
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+        intellectual property matters and other important disclaimers. PRODUCTION DATA.

@@ -1,0 +1,39 @@
+REGISTER CONFIG @ 0x00 reset=0x4127 access=RW runtime=None DESC=配置寄存器（p.22 Table 7-2；POR 二进制 01000001 00100111 = 4127h，TYPE 列寄存器级 R/W）
+  RST[15] RW reset=0 read_as=0 read_action=None tier=None DESC=p.23 原文『Setting this bit to 1 generates a system reset that is the same as power-on reset. Resets all registers to default values; **this bit self-clears**.』⇒ 写触发 + 自清零（⑤）
+  UNNAMED_14_12[14:12] RO reset=4 read_as=None read_action=None tier=C DESC=未命名保留位，POR=100b
+  AVG[11:9] RW reset=0 read_as=None read_action=None tier=None DESC=平均模式 000=1 … 111=1024（Table 7-3，默认 000）
+  VBUSCT[8:6] RW reset=4 read_as=None read_action=None tier=None DESC=总线电压转换时间（Table 7-4，默认 100b=1.1ms）
+  VSHCT[5:3] RW reset=4 read_as=None read_action=None tier=None DESC=分流电压转换时间（Table 7-5，默认 100b=1.1ms）
+  MODE[2:0] RW reset=7 read_as=None read_action=None tier=None DESC=工作模式，默认 111 = 分流+总线连续测量
+REGISTER SHUNT_VOLTAGE @ 0x01 reset=0x0000 access=RO runtime=None DESC=分流电压测量值（p.22 Table 7-1，TYPE=R；有符号）
+  SV[15:0] RO reset=0 read_as=None read_action=None tier=None DESC=15 位幅值 + 符号；未建模 ADC 输入，恒为复位值
+REGISTER BUS_VOLTAGE @ 0x02 reset=0x0000 access=RO runtime=None DESC=总线电压测量值（p.22 Table 7-1，TYPE=R）
+  RESERVED_15[15] RO reset=0 read_as=None read_action=None tier=A DESC=符号位恒 0
+  BV[14:0] RO reset=0 read_as=None read_action=None tier=None DESC=总线电压幅值， LSB 由量程决定
+REGISTER POWER @ 0x03 reset=0x0000 access=RO runtime=None DESC=功率寄存器（p.26 Table 7-9，PD15..PD0 全具名，TYPE=R；脚注 2：因 CALIBRATION 默认 0 故 POR=0）
+  PD[15:0] RO reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER CURRENT @ 0x04 reset=0x0000 access=RO runtime=None DESC=电流寄存器（p.26 Table 7-10，D15=CSIGN 具名符号位 + CD14..CD0，TYPE=R）
+  CSIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=Table 7-10 明确给名 CSIGN（符号），非保留位
+  CD[14:0] RO reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER CALIBRATION @ 0x05 reset=0x0000 access=RW runtime=None DESC=校准寄存器（p.26 Table 7-11，TYPE=R/W）
+  UNNAMED_15[15] RO reset=0 read_as=None read_action=None tier=C DESC=未命名保留位
+  FS[14:0] RW reset=0 read_as=None read_action=None tier=None DESC=校准系数 FS14..FS0
+REGISTER MASK_ENABLE @ 0x06 reset=0x0000 access=RW runtime=None DESC=屏蔽/使能寄存器（p.26 Table 7-12，TYPE=R/W）。AFF/CVRF/OVF 是硬件标志位；**本基准不建模转换与告警通路**，故它们在参考实现里恒为 0，也不声明 read_action（加了不改变判分，见 proofread_record）
+  SOL[15] RW reset=0 read_as=None read_action=None tier=None DESC=
+  SUL[14] RW reset=0 read_as=None read_action=None tier=None DESC=
+  BOL[13] RW reset=0 read_as=None read_action=None tier=None DESC=
+  BUL[12] RW reset=0 read_as=None read_action=None tier=None DESC=
+  POL[11] RW reset=0 read_as=None read_action=None tier=None DESC=
+  CNVR[10] RW reset=0 read_as=None read_action=None tier=None DESC=Conversion Ready 使能（注意：D10 是**具名可写位**，不是标志位）
+  UNNAMED_9_5[9:5] RO reset=0 read_as=None read_action=None tier=C DESC=未命名保留位 ×5
+  AFF[4] RO reset=0 read_as=None read_action=None tier=None DESC=Alert Function Flag（硬件置位，未建模）
+  CVRF[3] RO reset=0 read_as=None read_action=None tier=None DESC=Conversion Ready Flag（硬件置位，未建模）
+  OVF[2] RO reset=0 read_as=None read_action=None tier=None DESC=Overrange Flag（硬件置位，未建模）
+  APOL[1] RW reset=0 read_as=None read_action=None tier=None DESC=
+  LEN[0] RW reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER ALERT_LIMIT @ 0x07 reset=0x0000 access=RW runtime=None DESC=告警门限（p.22 Table 7-1，TYPE=R/W，POR 0000h）
+  AUL[15:0] RW reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER MANUFACTURER_ID @ 0xFE reset=0x5449 access=RO runtime=None DESC=厂商 ID = 0x5449（ASCII 'TI'），p.22 Table 7-1，TYPE=R ⇒ ② 的硬断言点
+  ID[15:0] RO reset=21577 read_as=None read_action=None tier=None DESC=
+REGISTER DIE_ID @ 0xFF reset=0x2260 access=RO runtime=True DESC=芯片 ID。p.22 Table 7-1 脚注 (3)：**Die COO: 2260 = USA or Japan, 2261 = USA** ⇒ 复位值随封装产地而变，不是唯一确定值
+  ID[15:0] RO reset=8800 read_as=None read_action=None tier=None DESC=

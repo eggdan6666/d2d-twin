@@ -1,0 +1,67 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.29 PoE Plus Register
+
+Command = 40h with 1 Data Byte, R/W
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         PoEP4     PoEP3     PoEP2     PoEP1
+
+ RESET or POR VALUE       0          0          0          0
+
+The POEPn bit can be set or cleared by the host processor over the I2C interface. Additionally, the bit is set
+when in Auto Mode before the port is powered on following the recognition of a valid Class 4 PD. Likewise, the
+POEPn bit is cleared before the port is powered on when in Auto Mode and a Class 0, 1, 2 or 3 PD is
+recognized.
+
+One POEPn bit supports each port. When the POEPn bit for a port is set:
+•  2 x ILIM foldback curve is applied to a port when the port is powered on. See Figure 58.
+•  The short-circuit protection threshold (ILIM) for the FET is increased by a factor of 2.5 with respect to the
+   POEPn-bit-cleared value.
+•  The tLIM value is selectable via the TLIM timer field in the Timing Configuration Register.
+
+Likewise, when the POEPn bit for a port is cleared:
+•  1 x ILIM foldback curve is applied to a port when the port is powered on. See Figure 58.
+•  The short-circuit protection threshold (ILIM) for the FET is reduced to a value of 40% of the POEPn-bit-set
+   value.
+•  The tLIM value is set to 60 ms.
+
+The inrush-foldback behavior is not affected by the setting of the POEPn bit. See Figure 57.
+
+Bit Descriptions
+
+PoEPn: PoE+ bits. Setting this bit causes the 2 x ILIM foldback curve to be applied to Port n.
+1 = Use 2 x ILIM foldback curve on Port n.
+0 = Use 1 x ILIM foldback curve on Port n.
+
+                                  NOTE
+        PoEPn bit should be set according to ICUT value for host to ensure the ICUT and ILIM
+            relationship. See Table 15
+
+
+7.5.30  Firmware Revision Register
+
+Command = 41h with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                                  FRV
+
+ RESET or POR VALUE     R        R        R        R        R               RRR
+
+Bit Descriptions
+
+FRV[2:0]: Firmware revision number.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     77
+
+                                                 Product Folder Links: TPS23861

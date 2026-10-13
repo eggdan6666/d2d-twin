@@ -1,0 +1,83 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 7.4.4 Thermostat Mode (TM)
+
+The thermostat mode bit indicates whether ALERT pin operates in comparator mode (TM = 0) or interrupt mode
+(TM = 1). ALERT pin mode is controlled by TM (bit 9) of the configuration register. Any write to the TM bit
+changes the ALERT pin to a none active condition, clears the faults count, and clears the alert interrupt history
+on the TMP1075 non-N orderables. The ALERT pin can be disabled in both comparator and interrupt modes if
+ both limit registers are set to the rail values TLOW = –128°C and THIGH = +127.9375°C on the TMP1075 non-N
+ orderables.
+
+ 7.4.4.1 Comparator Mode (TM = 0)
+
+ In comparator mode (TM = 0), the ALERT pin becomes active when the temperature equals or exceeds the
+ value in THIGH for a consecutive number of Fault Queue bits [F1:F0]. The ALERT pin remains active until the
+ temperature falls below the indicated TLOW value for the same number of faults.
+The difference between the two limits acts as a hysteresis on the comparator output, and a fault counter
+ prevents false alerts as a result of system noise. The SMBus Alert response function  is ignored in the
+ comparator mode.
+
+ 7.4.4.2 Interrupt Mode (TM = 1)
+
+ In interrupt mode (TM = 1), the device starts to compare temperature readings with the high limit register value.
+The ALERT pin becomes active when the temperature equals or exceeds THIGH for a consecutive number of
+ conversions as set by the Fault Queue bits [F1:F0]. The ALERT pin remains active until the pin is cleared by
+one of three events: a read of any register, a successful SMBus Alert response, or a shutdown command. After
+ the ALERT pin is cleared, the device starts to compare temperature readings with the TLOW. The ALERT pin
+becomes active again only when the temperature drops below TLOW for a consecutive number of conversions
+ as set by the Fault Queue bits. The ALERT pin remains active until cleared by any of the same three clearing
+ events. After the ALERT pin is cleared by one of the events, the cycle repeats and the device resumes to
+compare the temperature to THIGH. The interrupt mode history is cleared by a change in the TM=0 bit, setting the
+ device to SD mode, or resetting the device on the TMP1075 non-N orderables.
+
+ 7.4.4.3 Polarity Mode (POL)
+
+The polarity bit allows the user to adjust the polarity of the ALERT pin output. If the POL bit is set to 0 (default),
+ the ALERT pin becomes active low. When POL bit is set to 1, the ALERT pin becomes active high and the state
+ of the ALERT pin is inverted. Figure 7-10 shows the operation of the ALERT pin in various modes.
+
+
+
+
+                                                                                                                       THIGH
+                                                    Measured
+                                                     Temperature
+
+                                                                                                       TLOW
+
+
+
+
+
+                                            ALERT PIN
+                                                (ComparatorMode)
+                                               POL=0
+
+                                            ALERT PIN
+                                                          (InterruptMode)
+                                               POL=0
+
+                                            ALERT PIN
+                                                (ComparatorMode)
+                                               POL=1
+
+                                            ALERT PIN
+                                                          (InterruptMode)
+                                               POL=1
+
+
+
+
+                                                                    Read        Read       Read
+
+                                                                                   Time
+
+                           Figure 7-10. Output Transfer Function Diagrams
+
+
+
+20    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

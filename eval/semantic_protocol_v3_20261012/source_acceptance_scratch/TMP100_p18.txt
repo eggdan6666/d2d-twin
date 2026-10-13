@@ -1,0 +1,109 @@
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7.5.3.6
+OS/ALERT (OS)
+The TMP100 and TMP101 devices feature a One-Shot Temperature Measurement Mode. When the device is in
+Shutdown Mode, writing 1 to the OS/ALERT bit starts a single temperature conversion. The device returns to the
+shutdown state at the completion of the single conversion. This feature is useful to reduce power consumption in
+the TMP100 and TMP101 when continuous temperature monitoring is not required.
+Reading the OS/ALERT bit provides information about the Comparator Mode status. The state of the POL bit
+inverts the polarity of data returned from the OS/ALERT bit. For POL = 0, the OS/ALERT reads as 1 until the
+temperature equals or exceeds THIGH for the programmed number of consecutive faults, causing the OS/ALERT
+bit to read as 0. The OS/ALERT bit continues to read as 0 until the temperature falls below TLOW for the
+programmed number of consecutive faults when the OS/ALERT bit again reads as 1. The status of the TM bit
+does not affect the status of the OS/ALERT bit.
+7.5.4
+High- and Low-Limit Registers
+In Comparator Mode (TM = 0), the ALERT pin of the TMP101 becomes active when the temperature equals or
+exceeds the value in THIGH and generates a consecutive number of faults according to fault bits F1 and F0. The
+ALERT pin remains active until the temperature falls below the indicated TLOW value for the same number of
+faults.
+In Interrupt Mode (TM = 1) the ALERT pin becomes active when the temperature equals or exceeds THIGH for a
+consecutive number of fault conditions. The ALERT pin remains active until a read operation of any register
+occurs or the device successfully responds to the SMBus Alert Response Address. The ALERT pin is also
+cleared if the device is placed in Shutdown Mode. When the ALERT pin is cleared, it only becomes active again
+by the temperature falling below TLOW. When the temperature falls below TLOW, the ALERT pin becomes active
+and remains active until cleared by a read operation of any register or a successful response to the SMBus Alert
+Response Address. When the ALERT pin is cleared, the above cycle repeats with the ALERT pin becoming
+active when the temperature equals or exceeds THIGH. The ALERT pin can also be cleared by resetting the
+device with the General Call Reset command. This action also clears the state of the internal registers in the
+device, returning the device to Comparator Mode (TM = 0).
+Both operational modes are represented in Figure 11. Table 11, Table 12, Table 13, and Table 14 describe the
+format for the THIGH and TLOW registers. Power-up reset values for THIGH and TLOW are: THIGH = 80°C and TLOW =
+75°C. The format of the data for THIGH and TLOW is the same as for the Temperature Register.
+Table 11. Byte 1 of the THIGH Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+H11
+H10
+H9
+H8
+H7
+H6
+H5
+H4
+Table 12. Byte 2 of the THIGH Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+H3
+H2
+H1
+H0
+0
+0
+0
+0
+Table 13. Byte 1 of the TLOW Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+L11
+L10
+L9
+L8
+L7
+L6
+L5
+L4
+Table 14. Byte 2 of the TLOW Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+L3
+L2
+L1
+L0
+0
+0
+0
+0
+All 12 bits for the Temperature, THIGH, and TLOW registers are used in the comparisons for the ALERT function for
+all converter resolutions. The three LSBs in THIGH and TLOW can affect the ALERT output even if the converter is
+configured for 9-bit resolution.
+18
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101

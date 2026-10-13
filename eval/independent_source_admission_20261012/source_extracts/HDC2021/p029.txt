@@ -1,0 +1,52 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.13 Humidity Threshold LOW (Address 0x0C)
+
+                     Table 7-31. Humidity Threshold LOW Register (Address 0x0C)
+
+       7             6             5             4             3             2             1             0
+
+                                            HUMI_THRES_LOW[7:0]
+
+                    Table 7-32. Humidity Threshold LOW Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   HUMI_THRES_LOW[7:0]         R/W     0           Humidity threshold LOW value
+
+
+The Humidity Threshold LOW register configures the humidity threshold setting for interrupt generation if the
+HL_ENABLE interrupt is enabled. The threshold value can be calculated with using Equation 9:
+
+                                            § HUMI_THRES_LOW [7 : 0] ·
+    Humidity threashold low (%RH)   ¨               8               ¸ u 100                                            ©          2                ¹                                               (9)
+
+ 7.6.14 Humidity Threshold HIGH (Address 0x0D)
+
+                    Table 7-33. Humidity Threshold HIGH Register (Address: 0x0D)
+
+       7             6             5             4             3             2             1             0
+
+                                             HUMI_THRES_HIGH[7:0]
+
+                   Table 7-34. Humidity Threshold HIGH Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]    HUMI_THRES_HIGH[7:0]        R/W     FF          Humidity threshold HIGH value
+
+
+The Humidity Threshold HIGH register configures the temperature threshold setting for interrupt generation if the
+HH_ENABLE interrupt is enabled. The threshold value can be calculated using Equation 10:
+
+                                          § HUMI_THRES_HIGH [7 : 0] ·
+    Humidity threshold high (%RH)   ¨               8               ¸ u 100                                          ©          2                ¹                                         (10)
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    29

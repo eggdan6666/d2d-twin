@@ -1,0 +1,80 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 7.5.2 Writing To and Reading From the INA3221
+
+ To access a specific INA3221 register, write the appropriate value to the register pointer. See Table 8-1 for a
+ complete list of registers and corresponding addresses. The value for the register pointer, as shown in Figure
+ 7-9, is the first byte transferred after the target address byte with the R/ W bit low. Every write operation to the
+INA3221 requires a register pointer value.
+
+                         1                                    9    1                                    9
+
+
+         SCL
+
+
+
+
+
+         SDA          1    0    0    0    0    0   A0   R/W     D7  D6  D5  D4  D3  D2  D1  D0
+
+
+                    Start By                              ACK By                             ACK By     Stop By
+                  Controller                                        Device                                        Device     Controller
+
+                         Frame 1: Two-Wire Target Address Byte(1)               Frame 2: Register Pointer Byte
+
+
+ A.  The value of the Target Address Byte is determined by the A0 pin setting; see Table 7-1.
+
+                               Figure 7-9. Typical Register Pointer Set
+
+ Register writes begin with the first byte transmitted by the controller. This byte is the target address, with the
+ R/ W bit low. The INA3221 then acknowledges receipt of a valid address. The next byte transmitted by the
+ controller is the register address that data are written to. This register address value updates the register pointer
+ to the desired register. The next two bytes are written to the register addressed by the register pointer. The
+INA3221 acknowledges receipt of each data byte. The controller terminates data transfer by generating a start or
+ stop condition.
+
+When reading from the INA3221, the last value stored in the register pointer by a write operation determines
+ which register is read during a read operation. To change the register pointer for a read operation, write a
+new value to the register pointer. This write is accomplished by issuing a target address byte with the R/ W
+ bit low, followed by the register pointer byte. No additional data are required. The controller then generates a
+ start condition and sends the target address byte with the R/ W bit high to initiate the read command. The next
+ byte is transmitted by the target and is the most significant byte of the register indicated by the register pointer.
+ This byte is followed by an acknowledge from the controller; then the target transmits the least significant byte.
+The controller acknowledges receipt of the data byte. The controller terminates data transfer by generating a
+ not-acknowledge after receiving any data byte, or generating a start or stop condition. If repeated reads from the
+same register are desired, continually sending the register pointer bytes is not necessary; the INA3221 retains
+ the register pointer value until the value is changed by the next write operation.
+
+ Figure 7-10 and Figure 7-11 show the write and read operation timing diagrams, respectively. Note that register
+ bytes are sent most-significant byte first, followed by the least significant byte.
+
+                        1                                    9    1                                    9    1                                    9
+
+
+         SCL
+
+
+
+
+
+        SDA          1    0    0    0    0    0   A0   R/W    D15 D14 D13 D12 D11 D10  D9  D8      D7  D6  D5  D4  D3  D2  D1  D0
+
+
+                   Start By                              ACK By                              ACK By                               ACK By    Stop By
+                  Controller                                        Device                                         Device                                          Device    Controller
+
+                         Frame 1: Two-Wire Target Address Byte (1)                  Frame 2: Data MSByte                           Frame 3: Data LSByte
+
+ A.  The value of the target address byte is determined by the A0 pin setting; see Table 7-1.
+
+                          Figure 7-10. Timing Diagram for Write Word Format
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    21
+
+                                                  Product Folder Links: INA3221

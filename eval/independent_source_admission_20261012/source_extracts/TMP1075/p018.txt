@@ -1,0 +1,92 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+
+                                    1                                        9    1                                        9
+                    SCL                                 «
+
+
+                   SDA         1    0   A4   A3   A2   A1  A0  R/W        0    0    0    0   P3   P2   P1   P0   «
+
+                                    Start By                                 ACK By                                ACK By
+                               Host                                               Device                                            Device
+
+                                       Frame 1 Two-Wire Device Address Byte                     Frame 2 Pointer Register Byte
+
+
+                                    1                                        9    1                                         9
+                    SCL                                  «
+                     (Continued)
+
+
+
+
+                   SDA                                         «
+                                    1    0   A4   A3   A2   A1   A0  R/W       D15  D14  D13  D12  D11  D10  D9  D8
+                     (Continued)
+
+                                    Start By                                  ACK By                           From          ACK By
+                               Host                                               Device                               Device              Host
+
+                                       Frame 3 Two-Wire Device Address Byte                  Frame 4 Data Byte 1 Read Register
+
+
+                              1                                        9
+                    SCL
+                     (Continued)
+
+
+
+
+                   SDA
+                          D7  D6   D5   D4   D3   D2   D1   D0
+                     (Continued)
+
+                                               From             ACK By   Stop By
+                                                     Device                 Host      Host
+
+                                      Frame 5 Data Byte 2 Read Register
+
+                      Figure 7-5. Two-Wire Timing Diagram for Read Word Format
+
+
+                       1                                         9     1                                         9
+        SCL                                 «
+
+
+        SDA         1    0   A4   A3   A2   A1   A0  R/W        0    0    0    0   P3   P2   P1   P0   «
+
+                  Start By                                 ACK By                                ACK By
+                 Host                                               Device                                             Device
+
+                          Frame 1 Two-Wire Device Address Byte                     Frame 2 Pointer Register Byte
+
+
+                       1                                         9    1                                         9
+
+        SCL
+     (Continued)
+
+
+
+
+        SDA
+                       1    0   A4   A3   A2   A1   A0  R/W       D15  D14  D13  D12  D11  D10  D9   D8
+     (Continued)
+
+                  Start By                                  ACK By                            From      NACK By     Stop By
+                Host                                               Device                              Device         Host         Host
+
+                          Frame 3 Two-Wire Device Address Byte                   Frame 4 Data Byte 1 Read Register
+
+                                                                                                     Copyright © 2017, Texas Instruments Incorporated
+
+                   Figure 7-6. Two-Wire Timing Diagram for Read Single Byte Format
+
+
+
+
+
+18    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

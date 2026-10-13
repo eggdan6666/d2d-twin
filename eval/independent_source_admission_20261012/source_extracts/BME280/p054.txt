@@ -1,0 +1,24 @@
+Bosch Sensortec | BME280 Data sheet                                            54 | 60
+
+
+10.2 Function return codes
+A list of the possible function return codes can be found below.
+
+    0    Sensor OK
+   10    Communication error or wrong device found
+   20    Trimming data out of bound
+   30    Temperature bond wire failure or MEMS defect
+   31    Pressure bond wire failure or MEMS defect
+   40     Implausible temperature (default limits: 0…40°C)
+   41     Implausible pressure (default limits: 900…1100 hPa)
+   42     Implausible humidity (default limits: 20...80 %rH)
+
+Error testing is done in ascending error code sequence. This means that if e.g. a trimming data error is
+detected (code 20), the temperature plausibility (code 40) is not checked anymore. Instead, error code
+20 is returned and no others tests are performed.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

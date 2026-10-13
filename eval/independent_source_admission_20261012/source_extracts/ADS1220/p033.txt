@@ -1,0 +1,77 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.3.13 Temperature Sensor
+
+The ADS1220 offers an integrated precision temperature sensor. The temperature sensor mode is enabled by
+ setting bit TS = 1b in the configuration register. When in temperature sensor mode, the settings of configuration
+ register 0 have no effect and the device uses the internal reference for measurement, regardless of the selected
+ voltage reference source. Temperature readings follow the same process as the analog inputs for starting and
+ reading conversion results. Temperature data are represented as a 14-bit result that is left-justified within the
+ 24-bit conversion data. Data are output starting with the most significant byte (MSB). When reading the three
+ data bytes, the first 14 bits are used to indicate the temperature measurement result. One 14-bit LSB equals
+ 0.03125°C. Negative numbers are represented in binary two's complement format, as shown in Table 8-5.
+
+                              Table 8-5. 14-Bit Temperature Data Format
+             TEMPERATURE (°C)           DIGITAL OUTPUT (BINARY)               HEX
+
+                        128                      01 0000 0000 0000b                     1000h
+
+                      127.96875                    00 1111 1111 1111b                    0FFFh
+
+                        100                      00 1100 1000 0000b                    0C80h
+
+                        75                      00 1001 0110 0000b                     0960h
+
+                        50                      00 0110 0100 0000b                     0640h
+
+                        25                      00 0011 0010 0000b                     0320h
+
+                           0.25                      00 0000 0000 1000b                     0008h
+
+                        0.03125                    00 0000 0000 0001b                     0001h
+
+                         0                       00 0000 0000 0000b                     0000h
+
+                         –0.25                       11 1111 1111 1000b                    3FF8h
+
+                        –25                        11 1100 1110 0000b                   3CE0h
+
+                        –40                       11 1011 0000 0000b                    3B00h
+
+ 8.3.13.1 Converting From Digital Codes to Temperature
+
+ To convert from digital codes to temperature, first read the data bytes from the device and extract the 14-bit
+ temperature value by right-shifting the result. Figure 8-23 shows the 14-bit temperature sensor data alignment
+ within the 24-bit conversion result. The MSB of the 14-bit value determines the sign: 0b indicates a positive
+ temperature and 1b indicates a negative temperature. For positive temperatures convert the 14-bit binary value
+ to decimal and multiply the result by the temperature sensor LSB size, 0.03125°C. For negative temperatures,
+ the value is in two's compliment format. Invert all 14 bits and add 1b, convert to decimal, and multiply the result
+ by the negative temperature sensor LSB size, –0.03125°C.
+
+ 1. Positive temperature example: The device reads back 0960h: 0960h × 0.03125°C = 2400 × 0.03125°C = 75°C
+
+ 2. Negative temperature example: The device reads back 3CE0h: Subtract 1b and complement the result:
+3CE0h → 0320h, 0320h × (–0.03125°C) = 800 × (–0.03125°C) = –25°C
+
+
+                                   24-Bit Data From Temperature Sensor Measurement (Two's Complement)
+
+                 DATA MSB                     DATA MID                     DATA LSB
+
+          0   0   0   0   1   1   0   0   1   0   0   0   0   0  X  X  X  X  X  X  X  X  X  X
+
+
+
+
+                              14-Bit Temperature Sensor Data
+
+         Figure 8-23. 14-Bit Temperature Sensor Data Alignment Within 24-Bit Conversion Result
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    33
+
+                                                  Product Folder Links: ADS1220

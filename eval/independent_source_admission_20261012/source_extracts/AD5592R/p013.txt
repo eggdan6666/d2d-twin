@@ -1,0 +1,41 @@
+Data Sheet                               AD5592R
+
+PIN CONFIGURATIONS AND FUNCTION DESCRIPTIONS
+
+
+
+
+
+            Figure 6. AD5592R 16-Ball WLCSP Pin Configuration                               Figure 8. AD5592R 16-Lead TSSOP Pin Configuration
+
+
+
+
+
+           Figure 7. AD5592R 16-Lead LFCSP Pin Configuration
+
+Table 8. AD5592R Pin Function Descriptions
+                Pin No.
+WLCSP      LFCSP     TSSOP      Mnemonic   Description
+A1           13          15          SDI         Data In. Logic input. Data that is to be written to the DACs and control registers is provided on this input and is
+                                                         clocked into the register on the falling edge of SCLK.
+A2           14          16         SCLK         Serial Clock Input. Data is clocked into the input shift register on the falling edge of the serial clock input. Data
+                                                    can be transferred at rates of up to 50 MHz when writing to the DACs. SCLK has a maximum speed of 20 MHz
+                                              when performing a conversion or clocking data from the AD5592R.
+A3           15          1         RESET      Asynchronous Reset Pin. Tie this pin high for normal operation. When this pin is brought low, the AD5592R is
+                                                              reset to its default configuration.
+A4           16          2         SYNC        Synchronization. Active low control input. SYNC is the frame synchronization signal for the input data. When
+                                        SYNC goes low, data is transferred in on the falling edges of the next 16 clocks.
+B1           12          14        GND        Ground Reference Point for All Circuitry on the AD5592R.
+B2            11           13            I/O7          Input/Output 7. This pin can be configured as a DAC, ADC, or general-purpose digital input or output. The
+                                                               function of this pin is determined by programming the I/Ox pin configuration registers (see Table 11 and Table
+                                                                12). I/O7 can also be configured as a BUSY signal to indicate when an ADC conversion is taking place (see
+                                                          Table 22).
+B3, C4, C3,     2, 3, 4, 5, 8,    4, 5, 6, 7, 10,  I/O0 to I/O6   Input/Output 0 Through Input/Output 6. These pins can be independently configured as DACs, ADCs, or
+C2, D1, D4,     9, 10           11, 12                      general-purpose digital inputs or outputs. The function of each pin is determined by programming the I/Ox pin
+C1                                                            configuration registers (see Table 11 and Table 12).
+B4           1           3           VDD         Power Supply Input. The AD5592R operates from 2.7 V to 5.5 V, and this pin must be decoupled with a 0.1 µF
+                                                              capacitor to GND.
+
+
+analog.com                                                                                         Rev. H | 13 of 54

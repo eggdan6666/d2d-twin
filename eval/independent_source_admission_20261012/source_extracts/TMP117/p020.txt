@@ -1,0 +1,79 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.5.2 Pointer Register
+
+ Figure 7-8 shows the internal register structure of the TMP117. The 8-bit pointer register of the device is used to
+ address a given data register. The reset value is 00.
+
+
+                                                                  Pointer
+                                                                Register
+
+
+
+
+                                                 Temperature
+                                                        Register
+
+
+
+                                                                          SCL
+                                                      Configuration
+                                                        Register
+                                                                                        I/O
+                                                                                   Control
+                                                                                       Interface
+                                               TLOW
+                                                       Register
+                                                                      SDA
+
+
+                                                       THIGH
+                                                       Register
+
+
+
+
+
+                                   EEPROM1 to 4
+
+
+                               Figure 7-8. Internal Register Structures
+
+ 7.5.3 I2C and SMBus Interface
+ 7.5.3.1 Serial Interface
+The TMP117 operates as a slave device only on the two-wire, SMBus and I2C interface-compatible bus.
+ Connections to the bus are made through the open-drain I/O lines and the SDA and SCL pins. The SDA and
+SCL pins feature integrated spike-suppression filters and Schmitt triggers to minimize the effects of input spikes
+and bus noise. The device supports the transmission protocol for fast (1 kHz to 400 kHz) mode. Register bytes
+ are sent with the most significant byte first, followed by the least significant byte.
+
+ 7.5.3.1.1 Bus Overview
+
+The device that initiates the transfer is called a master, and the devices controlled by the master are slaves. The
+ bus must be controlled by a master device that generates the serial clock (SCL), controls the bus access, and
+ generates the START and STOP conditions.
+
+ To address a specific device, a START condition is initiated, indicated by pulling the data line (SDA) from a high-
+ to low-logic level when the SCL pin is high. All slaves on the bus shift in the slave address byte on the rising
+edge of the clock, and the last bit indicates whether a read or write operation is intended. During the ninth clock
+ pulse, the addressed slave generates an acknowledge and pulls the SDA pin low to respond to the master.
+
+A data transfer is then initiated and sent over eight clock pulses followed by an acknowledge bit. During the data
+ transfer, the SDA pin must remain stable when the SCL pin is high because any change in the SDA pin when the
+SCL pin is high is interpreted as a START or STOP signal.
+
+When all data are transferred, the master generates a repeated START condition or a STOP condition.
+
+ •  TMP117 will ignore any I2C traffic until a START condition is observed
+ •  TMP117 I2C state machine resets every time it sees a STOP condition
+ •  TMP117 must not be connected to an I2C bus during active communication.
+
+
+
+
+
+20    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

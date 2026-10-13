@@ -1,0 +1,73 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+ 8.2 Typical Application
+
+                                                                                                   Supply Voltage
+                                                                                             1.7V to 5.5V (TMP1075)
+                                                                                          1.62V to 3.6V (TMP1075N)
+
+
+                                                                Pullup Resistors
+                                                             5k                               Supply Bypass
+                                                                                                         Capacitor
+                                                                                                   0.01µF
+
+
+                                                    SDA                V+
+
+                                                                        A0
+                           Two-Wire                        SCL
+                          Host Controller
+                                                                         A1*
+
+                                                         ALERT
+                                                                         A2*
+
+                                             GND
+
+                                                                   *Pin is not available on
+                                                         TMP1075N
+
+                                   Figure 8-1. Typical Connections
+
+ 8.2.1 Design Requirements
+
+The recommended value for the pullup resistor is 5 kΩ. In some applications, the pullup resistor can be lower or
+ higher than 5 kΩ, but the maximum current through the pullup current is recommended to not exceed 3 mA on
+ the SCL and SDA pins. The SCL, SDA, A0, and A1, lines can be pulled up to a supply that is higher than V+.
+The ALERT line can be pulled up to a supply higher than V+ on the TMP1075 non-N orderables. The A2 pin can
+ only be connected to GND or V+. When the ALERT pin is not used, the pin can either be connected GND or left
+ floating.
+
+ 8.2.2 Detailed Design Procedure
+
+ Place the TMP1075 device in close proximity to the heat source that must be monitored with a proper layout
+ for good thermal coupling. This placement verifies that temperature changes are captured within the shortest
+ possible time interval. To maintain accuracy in applications that require air or surface temperature measurement,
+ take care to isolate the package and leads from ambient air temperature. A thermally-conductive adhesive is
+ helpful in achieving accurate surface temperature measurement.
+
+ 8.2.2.1 Migrating From the xx75 Device Family
+
+The TMP1075 is designed specifically to be a pin-to-pin compatible replacement with xx75 family of devices.
+ This includes considerations for software compatibility. The two byte registers of the TMP1075 dynamically
+ support single byte read or write, meaning that replacing older xx75 standard temperature sensors do not require
+ any updates to existing code.
+
+ 8.2.3 Application Curve
+
+ For application curves, see Table 8-1:
+
+                                     Table 8-1. Table of Graphs
+                      FIGURE                                                  TITLE
+
+                            Figure 6-10                              Sampling Period Change vs. Temperature (1.7 V to 5.5 V)
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    25
+
+                                                  Product Folder Links: TMP1075

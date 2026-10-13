@@ -1,0 +1,76 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+8.4  Device Functional Modes
+
+8.4.1  Filtering and Input Considerations
+
+Measuring current is often noisy, and such noise can be difficult to define. The INA219 offers several options for
+filtering by choosing resolution and averaging in the Configuration register. These filtering options can be set
+independently for either voltage or current measurement.
+
+The internal ADC is based on a delta-sigma (ΔΣ) front-end with a 500-kHz (±30%) typical sampling rate. This
+architecture has good inherent noise rejection; however, transients that occur at or very close to the sampling
+rate harmonics can cause problems. Because these signals are at 1 MHz and higher, they can be dealt with by
+incorporating filtering at the input of the INA219. The high frequency enables the use of low-value series resistors
+on the  filter for negligible effects on measurement accuracy. In general,  filtering the INA219 input  is only
+necessary if there are transients at exact harmonics of the 500-kHz (±30%) sampling rate (>1 MHz). Filter using
+the lowest possible series resistance and ceramic capacitor. Recommended values are 0.1 to 1 μF. Figure 14
+shows the INA219 with an additional filter added at the input.
+
+                     RSHUNT
+        Supply                     Load
+
+
+    R FILTER 10W            R FILTER 10W
+                                                   Supply Voltage
+
+
+                                                                                                                                                         3.3V Supply
+      0.1 m F to 1m F
+Ceramic Capacitor
+
+                          VIN+  VIN-                         VS                                                      INA219
+
+                                            ´       Power Register                                                        Data (SDA)
+
+                                                                                                                                                                                                         I2 C-/SMBUS-                                  Clock (SCL)
+                                                                                         Current Register             Compatible
+                                                                                                                                   Interface             A0
+                            PGA           ADC
+                                                                                         Voltage Register                               A1
+
+
+
+
+
+                   GND
+
+
+                                Figure 14. INA219 With Input Filtering
+
+
+Overload conditions are another consideration for the INA219 inputs. The INA219 inputs are specified to tolerate
+26 V across the inputs. A large differential scenario might be a short to ground on the load side of the shunt. This
+type of event can result in  full power-supply voltage across the shunt (as long the power supply or energy
+storage capacitors support  it).  It must be remembered that removing a short to ground can result in inductive
+kickbacks that could exceed the 26-V differential and common-mode rating of the INA219. Inductive kickback
+voltages are best dealt with by zener-type transient-absorbing devices combined with sufficient energy storage
+capacitance.
+
+In applications that do not have large energy storage electrolytics on one or both sides of the shunt, an input
+overstress condition may result from an excessive dV/dt of the voltage applied to the input. A hard physical short
+is the most likely cause of this event, particularly in applications with no large electrolytics present. This problem
+occurs because an excessive dV/dt can activate the ESD protection in the INA219 in systems where large
+currents are available. Testing has demonstrated that the addition of 10-Ωresistors in series with each input of
+the INA219 sufficiently protects the inputs against dV/dt failure up to the 26-V rating of the INA219. These
+resistors have no significant effect on accuracy.
+
+
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     11
+
+                                                   Product Folder Links: INA219

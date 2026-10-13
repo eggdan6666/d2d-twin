@@ -1,0 +1,58 @@
+TMP100, TMP101
+
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015                                                                 www.ti.com
+
+7  Detailed Description
+
+7.1  Overview
+
+The TMP100 and TMP101 devices are digital temperature sensors optimal for thermal management and thermal
+protection applications. The TMP100 and TMP101 devices are Two-Wire, SMBus, and I2C interface-compatible.
+These devices are specified over a operating temperature range of −55°C to 125°C. The Functional Block
+Diagram section shows the internal block diagrams of the TMP100 and TMP101 devices.
+
+The temperature sensor in the TMP100 and TMP101 devices is the chip itself. Thermal paths run through the
+package leads as well as the plastic package. The package leads provide the primary thermal path because of
+the lower thermal resistance of the metal. The GND pin of the TMP100 or TMP101 is directly connected to the
+metal lead frame, and is the best choice for thermal input.
+
+7.2  Functional Block Diagram
+
+
+
+         Temperature                                                       Temperature
+
+
+                           Diode                                                           Diode
+                   1                         Control    6                           1                         Control    6
+          SCL           Temp.                      SDA          SCL          Temp.                      SDA
+                                                Logic                                                                Logic
+                          Sensor                                                         Sensor
+
+
+
+                        ∆Σ                                                      ∆Σ
+                   2                            Serial     5                           2                            Serial     5
+        GND         ADC                       ADD0       GND         ADC                       ADD0
+                                                    Interface                                                                    Interface
+                           Converter                                                            Converter
+
+
+
+
+                                                Config                                                               Config
+                   3                               4                           3                               4
+        ADD1        OSC           and Temp        V+         ALERT        OSC          and Temp        V+
+                                                Register                                                                Register
+
+
+
+                            TMP100                                               TMP101
+
+
+
+
+
+8      Submit Documentation Feedback                                                     Copyright © 2002–2015, Texas Instruments Incorporated
+
+                                              Product Folder Links: TMP100 TMP101

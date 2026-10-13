@@ -1,0 +1,48 @@
+Bosch Sensortec | BMP280 Data sheet                                                          19 | 49
+
+
+        3.8.2  Measurement rate in normal mode
+       The following table explains which measurement rates can be expected in normal mode based on
+        oversampling setting and tstandby.
+
+                               Table 14: typical output data Rate (ODR) in normal mode [Hz]
+          Oversampling                                                tstandby [ms]
+               setting
+                                 0.5      62.5    125    250     500     1000     2000     4000
+            Ultra low power     166.67    14.71    7.66    3.91     1.98      0.99      0.50      0.25
+          Low power       125.00    14.29    7.55    3.88     1.97      0.99      0.50      0.25
+             Standard        83.33    13.51    7.33    3.82     1.96      0.99      0.50      0.25
+               resolution
+          High resolution     50.00    12.20    6.92    3.71     1.92      0.98      0.50      0.25
+               Ultra high        26.32    10.00    6.15    3.48     1.86      0.96      0.49      0.25
+               resolution
+
+
+                      Table 15: Sensor timing according to recommended settings (based on use cases)
+          Use case     Mode     Over-    osrs_p    osrs_t      IIR    Timing   ODR   BW
+                                 sampling                                filter               [Hz]     [Hz]
+                                        setting                           coeff.                  (see       (see
+                                                                                      (see                      3.8.2)      3.3.3)
+                                                                                                   3.3.3)
+         handheld device   Normal    Ultra high    ×16      ×2       4        tstandby =    10.0     0.92
+         low-power (e.g.               resolution                                62.5 ms
+             Android)
+         handheld device   Normal   Standard     ×4       ×1      16       tstandby =    83.3     1.75
+          dynamic (e.g.                resolution                                  0.5 ms
+             Android)
+            Weather      Forced    Ultra low     ×1       ×1        Off      1/min     1/60        full
+            monitoring               power
+           (lowest power)
+           Elevator / floor    Normal   Standard     ×4       ×1       4        tstandby =     7.3     0.67
+            change                   resolution                            125 ms
+              detection
+         Drop detection    Normal     Low       ×2       ×1        Off       tstandby =    125         full
+                                   power                                    0.5 ms
+              Indoor       Normal    Ultra high    ×16      ×2      16       tstandby =    26.3     0.55
+             navigation                  resolution                                  0.5 ms
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

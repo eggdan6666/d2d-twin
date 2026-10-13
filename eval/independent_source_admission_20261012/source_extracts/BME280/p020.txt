@@ -1,0 +1,43 @@
+Bosch Sensortec | BME280 Data sheet                                            20 | 60
+
+
+Table 8: Settings and performance for humidity sensing
+
+                     Suggested settings for weather monitoring
+ Sensor mode                     forced mode, 1 sample / second
+ Oversampling settings            pressure ×0, temperature ×1, humidity ×1
+  IIR filter settings                           filter off
+                         Performance for suggested settings
+ Current consumption              2.9 µA
+ RMS Noise                      0.07 %RH
+ Data output rate               1 Hz
+
+3.5.3  Indoor navigation
+Lowest possible altitude noise is needed. A very low bandwidth is preferred. Increased power
+consumption is tolerated. Humidity is measured to help detect room changes. This setting is
+suggested for the Android settings ‘SENSOR_DELAY_NORMAL’ and ‘SENSOR_DELAY_UI’.
+
+Table 9: Settings and performance for indoor navigation
+
+                       Suggested settings for indoor navigation
+ Sensor mode                   normal mode, tstandby = 0.5 ms
+ Oversampling settings            pressure ×16, temperature ×2, humidity ×1
+  IIR filter settings                            filter coefficient 16
+                         Performance for suggested settings
+ Current consumption            633 µA
+ RMS Noise                       0.2 Pa / 1.7 cm
+ Data output rate               25Hz
+  Filter bandwidth                  0.53 Hz
+ Response time (75%)             0.9 s
+
+3.5.4  Gaming
+Low altitude noise is needed. The required bandwidth is ~2 Hz in order to respond quickly to altitude
+changes (e.g. be able to dodge a flying monster in a game). Increased power consumption is
+tolerated. Humidity sensor is disabled. This setting is suggested for the Android settings
+‘SENSOR_DELAY_GAMING’ and ‘SENSOR_DELAY_FASTEST’.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

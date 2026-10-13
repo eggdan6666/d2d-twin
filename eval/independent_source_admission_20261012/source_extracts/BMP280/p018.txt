@@ -1,0 +1,46 @@
+Bosch Sensortec | BMP280 Data sheet                                                          18 | 49
+
+
+       3.7   Current consumption
+       The current consumption depends on ODR and oversampling setting. The values given below are
+        normalized to an ODR of 1 Hz. The actual consumption at a given ODR can be calculated by
+         multiplying the consumption in Table 12 with the ODR used. The actual ODR is defined either by the
+        frequency at which the user sets forced measurements or by oversampling and tstandby settings in
+       normal mode in Table 14.
+
+                                             Table 12: Current consumption
+         Oversampling setting     Pressure      Temperature     IDD [µA] @ 1 Hz forced mode
+                               oversampling   oversampling
+                                                              Typ         Max
+                Ultra low power           ×1            ×1             2.74           4.16
+            Low power             ×2            ×1             4.17           6.27
+           Standard resolution         ×4            ×1             7.02          10.50
+             High resolution           ×8            ×1             12.7          18.95
+             Ultra high resolution         ×16            ×2             24.8          36.85
+
+
+       3.8   Measurement timings
+       The rate at which measurements can be performed in forced mode depends on the oversampling
+         settings osrs_t and osrs_p. The rate at which they are performed in normal mode depends on the
+        oversampling setting settings osrs_t and osrs_p and the standby time tstandby. In the following table the
+         resulting ODRs are given only for the suggested osrs combinations.
+        3.8.1  Measurement time
+       The following table explains the typical and maximum measurement time based on selected
+        oversampling setting. The minimum achievable frequency is determined by the maximum
+       measurement time.
+
+                                              Table 13: Measurement time
+           Oversampling       Pressure      Temperature    Measurement   Measurement
+                setting        oversampling    oversampling      time [ms]         rate [Hz]
+                                                         Typ    Max    Typ    Min
+             Ultra low power          ×1             ×1           5.5      6.4     181.8   155.6
+           Low power           ×2             ×1           7.5      8.7     133.3   114.6
+         Standard resolution        ×4             ×1          11.5     13.3     87.0    75.0
+           High resolution          ×8             ×1          19.5     22.5     51.3    44.4
+           Ultra high resolution       ×16             ×2          37.5     43.2     26.7    23.1
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

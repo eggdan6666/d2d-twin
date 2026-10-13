@@ -1,0 +1,86 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.3 Feature Description
+ 8.3.1 Multiplexer
+
+ Figure 8-1 shows the flexible input multiplexer of the device. Either four single-ended signals, two differential
+ signals, or a combination of two single-ended signals and one differential signal can be measured. Use the
+ MUX[3:0] bits in the configuration register to configure the multiplexer. When single-ended signals are measured,
+ the negative ADC input (AINN) is internally connected to AVSS by a switch within the multiplexer. For system-
+ monitoring purposes, the analog supply (AVDD – AVSS) / 4 or the currently-selected external reference voltage
+ (VREFPx – VREFNx) / 4 can be selected as inputs to the ADC. The multiplexer also offers the possibility to route
+ any of the two programmable current sources to any analog input (AINx) or to any dedicated reference pin
+(REFP0, REFN0).
+
+
+
+                                                                                              System Monitors
+
+
+                                                                                                                                                (V(REFPx) – V(REFNx)) / 4
+
+
+
+                                                                                            (AVDD – AVSS) / 4
+
+
+                                AVDD       AVDD
+
+                                        IDAC1       IDAC2                                    (AVDD + AVSS) / 2
+
+
+
+              AVDD      AVSS
+
+
+
+ AIN0/REFP1
+
+              AVDD      AVSS
+                                                                              AVDD
+
+
+       AIN1
+                                                                                                                 Burnout Current Source (10µA)
+              AVDD      AVSS
+
+
+
+       AIN2
+                                                                                                  AINP              AVDD      AVSS
+                                                                                       PGA           To ADC
+
+                                                                                                AINN
+ AIN3/REFN1
+
+              AVDD      AVSS
+
+
+     REFP0                                                                                                    Burnout Current Source (10µA)
+
+              AVDD      AVSS
+
+
+                                                                       AVSS       AVSS
+
+    REFN0
+
+
+
+                                 Figure 8-1. Analog Input Multiplexer
+
+ Electrostatic discharge (ESD) diodes to AVDD and AVSS protect the inputs. To prevent the ESD diodes from
+ turning on, the absolute voltage on any input must stay within the range provided by Equation 3:
+
+    AVSS – 0.3V < V(AINx) < AVDD + 0.3V                                                                          (3)
+
+ If the voltages on the input pins have any potential to violate these conditions, external Schottky clamp diodes
+ or series resistors can be required to limit the input current to safe values (see the Absolute Maximum Ratings
+ table). Overdriving an unused input on the device can affect conversions taking place on other input pins.
+
+
+
+20    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

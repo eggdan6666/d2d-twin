@@ -1,0 +1,78 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+6.5  Electrical Characteristics
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+            PARAMETER                    TEST CONDITIONS            MIN      TYP     MAX   UNIT
+
+ INPUT SUPPLY VPWR
+
+ IVPWR      VPWR current consumption        VVPWR = 57 V                                           3.5         7   mA
+ VUVLOPW_F   VPWR UVLO falling threshold        Internal oscillator stops operating          14.5                   17.5    V
+
+          VPWR Undervoltage falling
+ VPUV_F                                     VPUV for port de-assertion                25        26.5        28    V                threshold
+
+ VUVLOPW_R   VPWR UVLO rising threshold                                                15.5                   18.5    V
+
+ INPUT SUPPLY VDD
+
+ IVDD       VDD current consumption                                                          5         6   mA
+ VUVDD_F     VDD UVLO falling threshold         For port turn off                          2         2.2         2.4    V
+ VUVDD_R    VDD UVLO rising threshold                                                      2.4         2.6         2.8    V
+ VUVDD_HYS     Hysteresis VDD UVLO(1)                                                                    0.4             V
+
+ DETECTION
+
+                                                              First detection point,
+                                                                               145       160       190    µA
+                                         VVPWR – VDRAINn = 0 V
+
+                                           2nd detection point,
+ IDET           Detection current                                                     235       270       300    µA                                         VVPWR – VDRAINn = 0 V
+
+                                               High Current detection point,
+                                                                               490       540       585    µA
+                                         VVPWR – VDRAINn = 0 V
+ ΔIDET        2nd – 1st detection currents         At VVPWR – VDRAINn = 0 V                98       110       118    µA
+ Vdetect       Open circuit detection voltage      VVPWR – VDRAINn                         17.5        19        22    V
+ RREJ_LOW     Rejected resistance low range                                                0.85                  15    kΩ
+ RREJ_HI       Rejected resistance high range                                          33                  50    kΩ
+ RACCEPT      Accepted resistance range                                              19        25        26.5    kΩ
+ RSHORT       Shorted port threshold                                                                     350    Ω
+ ROPEN       Open port threshold                                                   55                      kΩ
+
+ CLASSIFICATION
+
+                                         VVPWR – VDRAINn, VSENn ≥0 mV , VCLASS         Classification voltage                                                        15.5        18.5        20.5    V                                                                             Iport ≥180 µA,
+ ICLASS_Lim      Classification current limit         VVPWR – VDRAINn = 0 V                             70        90   mA
+
+                                                Class 0-1                              5                   8   mA
+
+                                                Class 1-2                             13                  16   mA
+
+ ICLASS_TH      Classification threshold current      Class 2-3                             21                  25   mA
+
+                                                Class 3-4                             31                  35   mA
+
+                                                Class 4- overcurrent                     45                  51   mA
+
+                                           4 mA ≥Iport ≥180 µA, VVPWR – VMARK       Mark voltage                                                          7                  10    V                                                 VDRAINn
+ IMARK_Lim     Mark sinking current Limit         VVPWR – VDRAINn = 0 V                   10        70        90   mA
+
+(1)  These parameters are provided for reference only, and do not constitute part of TI's published specifications for purposes of TI's product
+     warranty.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback      7
+
+                                                 Product Folder Links: TPS23861

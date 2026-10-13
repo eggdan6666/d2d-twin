@@ -1,0 +1,72 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+                        Table 6-3. 13-Bit Temperature Data Format (continued)
+         TEMPERATURE (°C)                 DIGITAL OUTPUT (BINARY)                   HEX
+
+                  128                             0 1000 0000 0000                            0800
+
+                 127.9375                           0 0111 1111 1111                           07FF
+
+                  100                             0 0110 0100 0000                            0640
+
+                  80                             0 0101 0000 0000                            0500
+
+                  75                             0 0100 1011 0000                           04B0
+
+                  50                             0 0011 0010 0000                            0320
+
+                  25                             0 0001 1001 0000                            0190
+
+                    0.25                            0 0000 0000 0100                            0004
+
+                   0                              0 0000 0000 0000                            0000
+
+                   –0.25                            1 1111 1111 1100                         1FFC
+
+                  –25                             1 1110 0111 0000                           1E70
+
+                  –55                             1 1100 1001 0000                          1C90
+
+ 6.3.2 Serial Interface
+
+The TMP102 device operates as a target device only on the two-wire bus and SMBus. Connections to the bus
+ are made through the open-drain I/O lines, SDA and SCL. The SDA and SCL pins feature integrated spike
+ suppression filters and Schmitt triggers to minimize the effects of input spikes and bus noise. The TMP102
+ device supports the transmission protocol for both fast (1 kHz to 400 kHz) and high-speed (1 kHz to 2.85 MHz)
+modes. All data bytes are transmitted MSB first.
+
+ 6.3.3 Bus Overview
+
+The device that initiates the transfer is called a controller, and the devices controlled by the controller are called
+ targets. The bus must be controlled by a controller device that generates the serial clock (SCL), controls the bus
+ access, and generates the START and STOP conditions.
+
+ To address a specific device, a START condition is initiated, indicated by pulling the data-line (SDA) from a high
+ to low logic level when SCL is high. All targets on the bus shift in the target address byte on the rising edge of
+ the clock, with the last bit indicating whether a read or write operation is intended. During the ninth clock pulse,
+ the target being addressed responds to the controller by generating an acknowledge and by pulling SDA pin low.
+
+A data transfer is then initiated and sent over eight clock pulses followed by an acknowledge bit. During the data
+ transfer the SDA pin must remain stable when SCL is high, because any change in SDA pin when SCL pin is
+ high is interpreted as a START signal or STOP signal.
+
+When all data have been transferred, the controller generates a STOP condition indicated by pulling SDA pin
+ from low to high, when the SCL pin is high.
+
+ 6.3.4 Serial Bus Address
+
+ To communicate with the TMP102, the controller must first address target devices via a target address byte. The
+ target address byte consists of seven address bits, and a direction bit indicating the intent of executing a read or
+ write operation.
+
+The TMP102 features an address pin to allow up to four devices to be addressed on a single bus. Table 6-4
+ describes the pin logic levels used to properly connect up to four devices.
+
+
+
+
+
+10    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

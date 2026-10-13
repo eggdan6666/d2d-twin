@@ -1,0 +1,70 @@
+REGISTER OUT_T_L @ 0x0D reset=0x00 access=RO runtime=None DESC=温度低字节（p.35 Table 23）TEMP[3:0] 有效，[7:4] 读 0
+  TEMP_3_0[3:0] RO reset=0 read_as=None read_action=None tier=A DESC=Table 22 位图里 [7:4] 标 0（无行名）⇒ 文档明示读 0
+  ZERO_7_4[7:4] RO reset=0 read_as=None read_action=None tier=A DESC=Table 22 位图直接写 0，无字段名、无访问码列
+REGISTER OUT_T_H @ 0x0E reset=0x00 access=RO runtime=None DESC=温度高字节（p.35 Table 24/25）TEMP[11:4]，与 OUT_T_L 组成 16-bit 补码，0 LSB=25°C，灵敏度 16 LSB/°C
+  TEMP_11_4[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=8 位全命名，无保留位
+REGISTER WHO_AM_I @ 0x0F reset=0x44 access=RO runtime=None DESC=器件 ID（p.33 寄存器地图默认 01000100 = 0x44）。**非零复位值**，② 的硬断言点
+  ID[7:0] RO reset=68 read_as=None read_action=None tier=None DESC=固定 0x44
+REGISTER CTRL1 @ 0x20 reset=0x00 access=RW runtime=None DESC=p.36 Table 27/28：ODR3 ODR2 ODR1 ODR0 MODE1 MODE0 LP_MODE1 LP_MODE0 —— 8 位全命名
+  ODR[7:4] RW reset=0 read_as=None read_action=None tier=None DESC=输出数据率与功耗模式选择（Table 29）
+  MODE[3:2] RW reset=0 read_as=None read_action=None tier=None DESC=模式选择（Table 30）
+  LP_MODE[1:0] RW reset=0 read_as=None read_action=None tier=None DESC=低功耗模式选择（Table 31）
+REGISTER CTRL2 @ 0x21 reset=0x04 access=RW runtime=None DESC=p.37 Table 32/33：BOOT SOFT_RESET 0(1) CS_PU_DISC BDU IF_ADD_INC I2C_DISABLE SIM；默认 0000 0100（IF_ADD_INC=1）。**本颗最有价值的寄存器**：一个自清零软复位位 + 一个脚注『must be set to 0』的无访问码位
+  BOOT[7] RW reset=0 read_as=None read_action=None tier=None DESC=写 1 从 NVM 重载校准参数
+  SOFT_RESET[6] RW reset=0 read_as=0 read_action=None tier=None DESC=ST 叫 SOFT_RESET（不是 SW_RESET）。写 1 复位后**自动回 0** ⇒ ⑤ 写触发/自清零；解析稿里 0 命中，只有 PDF 文本层有
+  MUST_BE_ZERO[5] RO reset=0 read_as=None read_action=None tier=C DESC=位图里无字段名，脚注要求保持 0
+  CS_PU_DISC[4] RW reset=0 read_as=None read_action=None tier=None DESC=片选上拉断开
+  BDU[3] RW reset=0 read_as=None read_action=None tier=None DESC=块数据更新
+  IF_ADD_INC[2] RW reset=1 read_as=None read_action=None tier=None DESC=地址自增，默认 1（决定复位值 0x04）
+  I2C_DISABLE[1] RW reset=0 read_as=None read_action=None tier=None DESC=禁用 I2C
+  SIM[0] RW reset=0 read_as=None read_action=None tier=None DESC=SPI 三线/四线选择
+REGISTER CTRL4_INT1_PAD_CTRL @ 0x23 reset=0x00 access=RW runtime=None DESC=p.39 Table 36/37：INT1_6D / SINGLE_TAP / WU / FF / TAP / DIFF5 / FTH / DRDY，8 位全命名
+  INT1_6D[7] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_SINGLE_TAP[6] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_WU[5] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_FF[4] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_TAP[3] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_DIFF5[2] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_FTH[1] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT1_DRDY[0] RW reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER CTRL5_INT2_PAD_CTRL @ 0x24 reset=0x00 access=RW runtime=None DESC=p.40 Table 38/39：INT2_SLEEP_STATE / SLEEP_CHG / BOOT / DRDY_T / OVR / DIFF5 / FTH / DRDY
+  INT2_SLEEP_STATE[7] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_SLEEP_CHG[6] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_BOOT[5] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_DRDY_T[4] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_OVR[3] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_DIFF5[2] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_FTH[1] RW reset=0 read_as=None read_action=None tier=None DESC=
+  INT2_DRDY[0] RW reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER OUT_T @ 0x26 reset=0x00 access=RO runtime=None DESC=p.42 Table 43/44：8 位温度输出，1°C/LSB，25°C 为 0 LSB
+  TEMP_7_0[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER STATUS @ 0x27 reset=0x00 access=RO runtime=None DESC=p.45 Table 45/46：FIFO_THS WU_IA SLEEP_STATE DOUBLE_TAP SINGLE_TAP 6D_IA FF_IA DRDY，8 位全命名（只读）
+  FIFO_THS[7] RO reset=0 read_as=None read_action=None tier=None DESC=
+  WU_IA[6] RO reset=0 read_as=None read_action=None tier=None DESC=
+  SLEEP_STATE[5] RO reset=0 read_as=None read_action=None tier=None DESC=
+  DOUBLE_TAP[4] RO reset=0 read_as=None read_action=None tier=None DESC=
+  SINGLE_TAP[3] RO reset=0 read_as=None read_action=None tier=None DESC=
+  SIXD_IA[2] RO reset=0 read_as=None read_action=None tier=None DESC=
+  FF_IA[1] RO reset=0 read_as=None read_action=None tier=None DESC=
+  DRDY[0] RO reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER FIFO_CTRL @ 0x2E reset=0x00 access=RW runtime=None DESC=p.44 Table 53/54：FMode2 FMode1 FMode0 FTH4..FTH0，8 位全命名；FMode 默认 000
+  FMODE[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=FIFO 模式选择（Table 55）
+  FTH[4:0] RW reset=0 read_as=None read_action=None tier=None DESC=FIFO 阈值水位
+REGISTER FIFO_SAMPLES @ 0x2F reset=0x00 access=RO runtime=None DESC=p.45 Table 56/57：FIFO_FTH FIFO_OVR Diff5..Diff0（只读）
+  FIFO_FTH[7] RO reset=0 read_as=None read_action=None tier=None DESC=
+  FIFO_OVR[6] RO reset=0 read_as=None read_action=None tier=None DESC=
+  DIFF[5:0] RO reset=0 read_as=None read_action=None tier=None DESC=未读样点数，100000=满 32 样点
+REGISTER WAKE_UP_SRC @ 0x38 reset=0x00 access=RO runtime=None DESC=p.50 Table 77/78：位图前两格写『0』，其后 FF_IA SLEEP_STATE_IA WU_IA X_WU Y_WU Z_WU。ST 的中断标志是**锁存、读该寄存器即清除**
+  ZERO_7_6[7:6] RO reset=0 read_as=None read_action=None tier=C DESC=位图标 0
+  FF_IA[5] RO reset=0 read_as=None read_action=clear tier=None DESC=自由落体事件标志，读清除
+  SLEEP_STATE_IA[4] RO reset=0 read_as=None read_action=clear tier=None DESC=
+  WU_IA[3] RO reset=0 read_as=None read_action=clear tier=None DESC=
+  X_WU[2] RO reset=0 read_as=None read_action=clear tier=None DESC=
+  Y_WU[1] RO reset=0 read_as=None read_action=clear tier=None DESC=
+  Z_WU[0] RO reset=0 read_as=None read_action=clear tier=None DESC=
+REGISTER X_OFS_USR @ 0x3C reset=0x00 access=RW runtime=None DESC=p.54 Table 85/86：X_OFS_USR[7:0] 二补码用户偏移（权重由 CTRL7.USR_OFF_W 决定）
+  X_OFS_USR[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER Y_OFS_USR @ 0x3D reset=0x00 access=RW runtime=None DESC=p.54 Table 87/88，同 X
+  Y_OFS_USR[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=
+REGISTER Z_OFS_USR @ 0x3E reset=0x00 access=RW runtime=None DESC=p.54-55 Table 89/90，同 X
+  Z_OFS_USR[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=

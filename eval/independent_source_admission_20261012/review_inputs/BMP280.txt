@@ -1,0 +1,32 @@
+REGISTER id @ 0xD0 reset=0x58 access=RO runtime=None DESC=chip_id[7:0]=0x58，上电复位完成后即可读，§4.3.1
+  chip_id[7:0] RO reset=88 read_as=None read_action=None tier=None DESC=固定 0x58
+REGISTER reset @ 0xE0 reset=0x00 access=W runtime=None DESC=软复位寄存器，§4.3.2
+  reset[7:0] W reset=0 read_as=None read_action=None tier=None DESC=软复位字，键值 0xB6
+REGISTER status @ 0xF3 reset=0x00 access=RO runtime=None DESC=器件状态位，§4.3.3
+  measuring[3] RO reset=0 read_as=None read_action=None tier=None DESC=转换进行中自动置 1，结果转入数据寄存器后回 0
+  im_update[0] RO reset=0 read_as=None read_action=None tier=None DESC=NVM 数据拷贝到映像寄存器期间为 1
+  UNUSED[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=not used
+  UNUSED2[2:1] RO reset=0 read_as=None read_action=None tier=None DESC=not used
+REGISTER ctrl_meas @ 0xF4 reset=0x00 access=RW runtime=None DESC=控制寄存器：过采样+模式，§4.3.4
+  osrs_t[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=温度过采样 000:skipped 001:x1 010:x2 011:x4 100:x8 101:x16,110/111:同101
+  osrs_p[4:2] RW reset=0 read_as=None read_action=None tier=None DESC=气压过采样 000:skipped 001:x1 010:x2 011:x4 100:x8 101:x16,110/111:同101
+  mode[1:0] RW reset=0 read_as=None read_action=None tier=None DESC=00:sleep 01:forced 10/11:normal
+REGISTER config @ 0xF5 reset=0x00 access=RW runtime=None DESC=速率/滤波/接口选项，§4.3.5。注意：normal 模式下写可能被忽略，sleep 模式下不被忽略——MVP 断言均在复位(sleep)态执行
+  t_sb[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=normal 模式待机时间 000:0.5ms 001:62.5ms 010:125ms 011:250ms 100:500ms 101:1000ms 110:2000ms 111:4000ms
+  filter[4:2] RW reset=0 read_as=None read_action=None tier=None DESC=IIR 滤波系数 000:off 001:x2 010:x4 011:x8 100:x16
+  UNUSED[1] RW reset=0 read_as=None read_action=None tier=None DESC=not used
+  spi3w_en[0] RW reset=0 read_as=None read_action=None tier=None DESC=置 1 启用 3 线 SPI（I2C 访问下无作用）
+REGISTER press_msb @ 0xF7 reset=0x80 access=RO runtime=None DESC=raw 压力 up[19:12]，§4.3.6
+  press_msb[7:0] RO reset=128 read_as=None read_action=None tier=None DESC=up[19:12]
+REGISTER press_lsb @ 0xF8 reset=0x00 access=RO runtime=None DESC=raw 压力 up[11:4]
+  press_lsb[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=up[11:4]
+REGISTER press_xlsb @ 0xF9 reset=0x00 access=RO runtime=None DESC=raw 压力 up[3:0]（低 4 位有效，其余恒 0）
+  press_xlsb[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=up[3:0]
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0
+REGISTER temp_msb @ 0xFA reset=0x80 access=RO runtime=None DESC=raw 温度 ut[19:12]，§4.3.7
+  temp_msb[7:0] RO reset=128 read_as=None read_action=None tier=None DESC=ut[19:12]
+REGISTER temp_lsb @ 0xFB reset=0x00 access=RO runtime=None DESC=raw 温度 ut[11:4]
+  temp_lsb[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=ut[11:4]
+REGISTER temp_xlsb @ 0xFC reset=0x00 access=RO runtime=None DESC=raw 温度 ut[3:0]（低 4 位有效，其余恒 0）
+  temp_xlsb[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=ut[3:0]
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0

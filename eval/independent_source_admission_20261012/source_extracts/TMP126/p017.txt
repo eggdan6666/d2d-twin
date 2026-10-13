@@ -1,0 +1,86 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.4.4.2 Comparator Mode
+
+When the INT_COMP bit in the Configuration register is set to 0, the device is in comparator mode. Changing
+ the device to Comparator mode from Interrupt mode will immediately clear the Alert_Status register and reset
+ the ALERT pin. The TMP126 will then behave as described in this section at the next temperature conversion.
+ In this mode, the device compares the temperature result at the end of every conversion with the limit registers.
+ If the flag is enabled to assert the ALERT, the ALERT will reflect the status bit of the limits. For example, if the
+ THigh_Flag alert is enabled and the THigh_Limit is exceeded, the ALERT will assert while the THigh_Status
+ bit is 1.  If the THigh_Flag alert is not enabled in the Alert_Enable register, the ALERT will not assert when
+ THigh_Status bit is 1.
+
+ After a conversion below the Hysteresis the Status bit will be set to '0' and the ALERT will de-assert. Unlike the
+ interrupt mode, the ALERT behavior is not affected when reading the Alert_Status register. If the Alert flag is
+ disabled in the Alert_Enable register, the ALERT pin will de-assert immediately if the respective bit is causing an
+ alert. If there are two statuses that are affecting the ALERT such as a THigh_Limit and Slew_Rate_Limit and one
+ of the alerts is disabled, the ALERT will remain asserted until the other limit is not exceeded. For example, if the
+ALERT has asserted due to a high slew rate and a high temperature and the slew rate alert is then disabled, the
+ALERT will only de-assert when the temperature drops below the hysteresis value. If both alerts were disabled
+ the ALERT would then de-assert.
+
+ Thus, this mode effectively makes the device behave like a high-limit threshold detector. This mode can be used
+ in applications where detecting  if the temperature has exceeded a desired threshold is necessary. Figure 8-8
+shows a timing diagram of this mode.
+
+                                                                                                      Slew_Rate_Limit
+
+                                                                                                               THigh_Limit
+                                                                                                               THigh_Limit ± THigh_Hyst
+
+
+
+              Temperature
+
+
+
+                                                                                                         TLow_Limit + TLow_Hyst
+
+                                                                                                         TLow_Limit
+
+
+
+
+    Temperature conversions
+
+
+              THigh_Status
+
+
+
+                THigh_Flag
+
+
+
+              TLow_Status
+
+
+
+               TLow_Flag
+
+
+
+               Slew_Status
+
+
+
+                 Slew_Flag
+
+
+
+                ALERT
+
+
+
+                 SPI Read
+
+
+                            Figure 8-8. Comparator Mode Timing Diagram
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    17
+
+                                                  Product Folder Links: TMP126

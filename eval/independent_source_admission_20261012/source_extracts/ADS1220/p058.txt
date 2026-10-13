@@ -1,0 +1,49 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ VCMMIN must meet two requirements: Equation 14 requires VCMMIN to be larger than AVDD  / 4 = 3.3V  / 4 =
+ 0.825V and Equation 12 requires VCMMIN to meet Equation 32:
+
+    VCMMIN ≥ AVSS + 0.2V + ½ Gain × VINMAX = 0V + 0.2V + ( ½ × 8 × 195.5mV) = 982mV                       (32)
+
+ Both restrictions are satisfied in this design with a VCMMIN = 1.65V.
+The largest common-mode voltage occurs at the highest measurement temperature (850°C) and is calculated
+ using Equation 33 and Equation 34.
+
+    VCMMAX = VREF + (IIDAC1 + IIDAC2) × RLEAD3 + IIDAC2 × RLEAD2 + ½ IIDAC1 × RRTD (at 850°C)                      (33)
+
+    VCMMAX = 1.65V + 1mA × 15Ω + 500µA × 15Ω + ½ × 500µA × 391Ω = 1.77V                                (34)
+
+VCMMAX does meet the requirement given by Equation 13, which in this design equates to Equation 35:
+
+    VCMMAX ≤ AVDD – 0.2V – ½ Gain × VINMAX = 3.3V – 0.2V – ( ½ × 8 × 195.5mV) = 2.318V                    (35)
+
+ Finally, the maximum voltage that can occur on input AIN1 must be calculated to determine  if the compliance
+ voltage (AVDD – 0.9V = 3.3V – 0.9V = 2.4V) of IDAC1 is met. The voltage on input AIN0 is smaller than the one
+on input AIN1. Equation 36 and Equation 37 show that the voltage on AIN1 is less than 2.4V, even when taking
+ the worst-case lead resistance into account.
+
+     VAIN1 (MAX) = VREF + (IIDAC1 + IIDAC2) × RLEAD3 + IIDAC1 × (RRTD (at 850°C) + RLEAD1)                            (36)
+
+     VAIN1 (MAX) = 1.65V + 1mA × 15Ω + 500µA × (391Ω + 15Ω) = 1.868V                                       (37)
+
+The register settings for this design are shown in Table 9-4.
+
+                                     Table 9-4. Register Settings
+               REGISTER     SETTING                      DESCRIPTION
+                    00h           66h      AINP = AIN1, AINN = AIN0, gain = 8, PGA enabled
+                    01h           04h     DR = 20SPS, normal mode, continuous conversion mode
+
+                                                    External reference (REFP0, REFN0), simultaneous 50Hz and 60Hz
+                    02h           55h
+                                                           rejection, IDAC = 500µA
+
+                    03h           70h      IDAC1 = AIN2, IDAC2 = AIN3
+
+
+
+
+
+58    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

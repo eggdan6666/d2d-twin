@@ -1,0 +1,73 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 7.3.2.2 Serial Bus Address
+
+ To communicate with the TMP1075, the host must first address devices through an address byte. The device
+ address byte consists of seven address bits and a direction bit indicating the intent of executing a read or write
+ operation.
+
+The TMP1075 features three address pins to allow up to 32 devices (TMP1075N: 4) to be addressed on a single
+ bus interface. Table 7-2 and Table 7-3 describe the pin logic levels used to configure the TMP1075 I2C address.
+The state of pins A0, A1, and A2 is sampled on every bus communication and must be set prior to any activity on
+ the interface.
+
+                               Table 7-2. TMP1075 Address Pins State
+      A2           A1          A0        7-BIT ADDRESS         A2           A1           A0           7-BIT ADDRESS
+
+       0              0          SDA          1000000              0          SDA         SDA             1010000
+
+       0              0          SCL          1000001              0          SDA          SCL             1010001
+
+       0              1          SDA          1000010              0           SCL         SDA             1010010
+
+       0              1          SCL           1000011              0           SCL          SCL             1010011
+
+       1              0          SDA          1000100              1          SDA         SDA             1010100
+
+       1              0          SCL          1000101              1          SDA          SCL             1010101
+
+       1              1          SDA          1000110              1           SCL         SDA             1010110
+
+       1              1          SCL           1000111              1           SCL          SCL             1010111
+
+       0              0             0            1001000              0          SDA             0              1011000
+
+       0              0             1            1001001              0          SDA             1              1011001
+
+       0              1             0            1001010              0           SCL             0              1011010
+
+       0              1             1            1001011              0           SCL             1               1011011
+
+       1              0             0            1001100              1          SDA             0               1011100
+
+       1              0             1            1001101              1          SDA             1               1011101
+
+       1              1             0            1001110              1           SCL             0               1011110
+
+       1              1             1            1001111              1           SCL             1               1011111
+
+                               Table 7-3. TMP1075N Address Pins State
+                       A0                                                              7-BIT ADDRESS
+
+                           0                                                            1001000
+
+                           1                                                            1001001
+
+                     SDA                                                           1001010
+
+                      SCL                                                            1001011
+
+
+ 7.3.2.3 Pointer Register
+
+ Figure 7-2 shows the internal register structure of the TMP1075, and Table 7-5 lists the pointer addresses of the
+ register map. Table 7-4 shows that the register map reset value of the pointer register is 00h.
+
+
+
+
+
+14    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

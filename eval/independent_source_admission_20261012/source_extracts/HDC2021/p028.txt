@@ -1,0 +1,51 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.11 Temperature Threshold LOW (Address 0x0A)
+
+                   Table 7-27. Temperature Threshold LOW Register (Address: 0x0A)
+
+       7             6             5             4             3             2             1             0
+
+                                           TEMP_THRES_LOW[7:0]
+
+                      Table 7-28. Temperature Threshold LOW Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+     [7:0]   TEMP_THRES_LOW[7:0]        R/W     1          Temperature threshold LOW value
+
+
+The Temperature Threshold LOW register configures the temperature threshold setting for interrupt generation if
+ the TL_ENABLE interrupt is enabled. The threshold value can be calculated using Equation 7:
+
+                                            § TEMP_THRES_LOW [7 : 0] ·
+    Temperature threshold low ( qC)   ¨               8               ¸ u 165  40                                            ©          2                ¹                                             (7)
+
+ 7.6.12 Temperature Threshold HIGH (Address 0x0B)
+
+                   Table 7-29. Temperature Threshold HIGH Register (Address 0x0B)
+
+       7             6             5             4             3             2             1             0
+
+                                            TEMP_THRES_HIGH[7:0]
+
+                  Table 7-30. Temperature Threshold HIGH Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]    TEMP_THRES_HIGH[7:0]        R/W     FF         Temperature threshold HIGH value
+
+
+The Temperature Threshold HIGH register configures the temperature threshold setting for interrupt generation if
+ the TH_ENABLE interrupt is enabled. The threshold value can be calculated using Equation 8:
+
+                                             § TEMP_THRES_HIGH [7 : 0] ·
+    Temperature threshold high ( qC)   ¨               8               ¸ u 165  40                                             ©          2                 ¹                                            (8)
+
+
+
+
+
+28    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

@@ -1,0 +1,65 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+The voltages at the PGA inputs (AINP and AINN) can be expressed as Equation 8 and Equation 9:
+
+     VAINP = VCM + ½ VIN                                                                                           (8)
+
+     VAINN = VCM – ½ VIN                                                                                           (9)
+
+The output voltages (VOUTP and VOUTN) can then be calculated as Equation 10 and Equation 11:
+
+    VOUTP = VCM + ½ Gain × VIN                                                                          (10)
+
+    VOUTN = VCM – ½ Gain × VIN                                                                              (11)
+
+The requirements for the output voltages of amplifiers A1 and A2 (Equation 6) can now be translated into
+ requirements for the input common-mode voltage range using Equation 10 and Equation 11, which are given in
+ Equation 12 and Equation 13:
+
+    VCMMIN ≥ AVSS + 0.2V + ½ Gain × VINMAX                                                              (12)
+
+    VCMMAX ≤ AVDD – 0.2V – ½ Gain × VINMAX                                                              (13)
+
+ To calculate the minimum and maximum common-mode voltage limits, the maximum differential input voltage
+ (VINMAX) that occurs in the application must be used. VINMAX can be less than the maximum possible FS value.
+ In addition to Equation 12, the minimum VCM must also meet Equation 14 because of the specific design
+ implementation of the PGA.
+
+    VCMMIN ≥ AVSS + ¼ (AVDD – AVSS)                                                                   (14)
+
+ Figure 8-4 and Figure 8-5 show a graphical representation of the common-mode voltage limits for AVDD = 3.3V
+and AVSS = 0V, with gain = 1 and gain = 16, respectively.
+
+
+          3.30                                                                        3.30
+
+
+          2.75                                                                        2.75
+
+           (V) 2.20                                                                                                     (V) 2.20
+
+
+          1.65                                                                        1.65                  Range                                                                                                                                                                                    Range
+                    AVDD / 4                                               AVDD / 4
+         VCM 1.10                                                                                      VCM 1.10
+
+
+          0.55                                                                        0.55
+
+
+          0.00                                                                        0.00
+               0.0       0.5       1.0       1.5       2.0       2.5       3.0                  0.00     0.03     0.06     0.09     0.12     0.15     0.18
+
+                                            VIN (V)                                  C009                                               VIN (V)                                  C008
+                     AVDD = 3.3V                                     AVDD = 3.3V
+
+      Figure 8-4. Common-Mode Voltage Limits          Figure 8-5. Common-Mode Voltage Limits
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    23
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,65 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+7 Detailed Description
+ 7.1 Overview
+
+The TMP1075 device is a digital temperature sensor that is designed for thermal management and thermal
+ protection applications. The TMP1075 is a SMBus and is I2C interface-compatible. The device is also capable
+ of coexisting in an I3C bus when in Mixed Fast Mode. The TMP1075 non-N orderables are specified over
+a temperature range of −55°C to 125°C and the TMP1075N orderable is specified over the −40°C to 125°C
+ temperature range. Figure 7-1 shows an internal block diagram of TMP1075 device.
+
+The temperature sensor thermal path runs through the package leads as well as the plastic package. The leads
+ provide the primary thermal path due to the lower thermal resistance of the metal.
+
+ 7.2 Functional Block Diagram
+
+                                                           V+
+
+
+
+
+
+            A2*
+
+          A0, A1*
+                                                       Serial
+          SCL                                                                                  V+                                                     Interface
+         SDA                                                  Register                                                         Bank                 **
+
+
+                                                                                                   ALERT
+
+
+
+                                                                                            Oscillator        Control
+                                                                                                 Logic
+
+
+                                        Internal
+                                Thermal
+                            BJT Sensor
+
+
+                                    Temperature
+                                      Sensor            ADC
+                                                Circuitry
+
+
+
+
+
+                                                 GND
+            *Pin is not available on TMP1075N
+           ** ESD Diode only in TMP1075N
+
+                                Figure 7-1. Functional Block Diagram
+
+
+
+
+
+12    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

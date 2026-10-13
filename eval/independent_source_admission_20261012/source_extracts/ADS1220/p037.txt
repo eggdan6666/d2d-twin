@@ -1,0 +1,67 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.5.2 Data Format
+
+The device provides 24 bits of data in binary two's complement format. Use Equation 15 to calculate the size of
+one code (LSB).
+
+    1LSB = (2 × VREF / Gain) / 224 = +FS / 223                                                               (15)
+
+A positive full-scale input [VIN ≥ (+FS – 1LSB) = (VREF / Gain – 1LSB)] produces an output code of 7FFFFFh and
+a negative full-scale input (VIN ≤ –FS = –VREF / Gain) produces an output code of 800000h. The output clips at
+ these codes for signals that exceed full-scale.
+
+ Table 8-6 summarizes the ideal output codes for different input signals.
+
+                           Table 8-6. Ideal Output Code versus Input Signal
+                                INPUT SIGNAL, VIN
+                                        (AINP – AINN)           IDEAL OUTPUT CODE(1)
+                                   ≥ FS (223 – 1) / 223                7FFFFFh
+                                  FS / 223                     000001h
+
+                                          0                        000000h
+                                   –FS / 223                   FFFFFFh
+
+                                         ≤ –FS                      800000h
+
+                                       (1)   Excludes the effects of noise, INL, offset, and gain errors.
+
+Mapping of the analog input signal to the output codes is shown in Figure 8-24.
+
+
+                                   7FFFFFh
+
+                                   7FFFFEh
+               ¼
+                                                                             Code  000000h000001h
+
+                                   FFFFFFh                                                                                                                   Output
+               ¼
+
+                                      800001h
+
+                                      800000h
+
+                                             -FS     ¼  0 ¼            FS
+
+                                                                                Input Voltage VIN
+                                                      2 23 - 1                       2 23 - 1
+                                              -FS                       FS
+                                                                     223                                223
+
+                                Figure 8-24. Code Transition Diagram
+
+                                           Note
+
+     Single-ended signal measurements, where VAINN = 0V and VAINP = 0V to +FS, only use the positive
+     code range from 000000h to 7FFFFFh. However, because of device offset, the ADS1220 can  still
+      output negative codes when VAINP is close to 0V.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    37
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,56 @@
+Registers description                                                      LIS3DH
+
+8.16   OUT_X_L (28h), OUT_X_H (29h)
+
+            X-axis acceleration data. The value is expressed as two’s complement left-justified.
+           Please refer to Section 3.2.1: High-resolution, normal mode, low-power mode.
+
+
+8.17   OUT_Y_L (2Ah), OUT_Y_H (2Bh)
+
+             Y-axis acceleration data. The value is expressed as two’s complement left-justified.
+           Please refer to Section 3.2.1: High-resolution, normal mode, low-power mode.
+
+
+8.18   OUT_Z_L (2Ch), OUT_Z_H (2Dh)
+
+            Z-axis acceleration data. The value is expressed as two’s complement left-justified.
+           Please refer to Section 3.2.1: High-resolution, normal mode, low-power mode.
+
+
+8.19   FIFO_CTRL_REG (2Eh)
+
+
+                                     Table 48. REFERENCE register
+
+          FM1      FM0      TR        FTH4     FTH3     FTH2     FTH1     FTH0
+
+
+                               Table 49. REFERENCE register description
+
+              FM[1:0]      FIFO mode selection. Default value: 00 (see Table 50)
+
+          TR            Trigger selection. Default value: 0
+                                  (0: trigger event allows triggering signal on INT1
+                                1: trigger event allows triggering signal on INT2)
+
+              FTH[4:0]      Default value: 00000
+
+
+                                   Table 50. FIFO mode configuration
+
+                FM1              FM0                           Self test mode
+
+            0                   0                   Bypass mode
+
+            0                   1                   FIFO mode
+
+            1                   0                    Stream mode
+
+            1                   1                     Stream-to-FIFO
+
+
+
+
+
+40/54                                  DocID17530 Rev 2

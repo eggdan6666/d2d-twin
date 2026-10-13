@@ -1,0 +1,139 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           8 of 46  
+   
+Addr  
+(Hex) 
+Addr 
+(Dec.) 
+Register Name 
+Serial 
+I/F 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+67 
+103 
+I2C_MST_DELAY_CT
+RL 
+R/W 
+DELAY_ES 
+_SHADOW 
+- 
+- 
+I2C_SLV4 
+_DLY_EN 
+I2C_SLV3 
+_DLY_EN 
+I2C_SLV2 
+_DLY_EN 
+I2C_SLV1 
+_DLY_EN 
+I2C_SLV0 
+_DLY_EN 
+68 
+104 
+SIGNAL_PATH_RES
+ET 
+R/W 
+- 
+- 
+- 
+- 
+- 
+GYRO 
+_RESET 
+ACCEL 
+_RESET 
+TEMP 
+_RESET 
+6A 
+106 
+USER_CTRL 
+R/W 
+- 
+FIFO_EN 
+I2C_MST 
+_EN 
+I2C_IF 
+_DIS 
+- 
+FIFO 
+_RESET 
+I2C_MST 
+_RESET 
+SIG_COND 
+_RESET 
+6B 
+107 
+PWR_MGMT_1 
+R/W 
+DEVICE 
+_RESET 
+SLEEP 
+CYCLE 
+- 
+TEMP_DIS 
+CLKSEL[2:0] 
+6C 
+108 
+PWR_MGMT_2 
+R/W 
+LP_WAKE_CTRL[1:0] 
+STBY_XA 
+STBY_YA 
+STBY_ZA 
+STBY_XG 
+STBY_YG 
+STBY_ZG 
+72 
+114 
+FIFO_COUNTH 
+R/W 
+FIFO_COUNT[15:8] 
+73 
+115 
+FIFO_COUNTL  
+R/W 
+FIFO_COUNT[7:0] 
+74 
+116 
+FIFO_R_W  
+R/W 
+FIFO_DATA[7:0] 
+75 
+117 
+WHO_AM_I 
+R 
+- 
+WHO_AM_I[6:1] 
+- 
+ 
+ 
+Note: Register Names ending in _H and _L contain the high and low bytes, respectively, of an internal 
+register value.   
+ 
+In the detailed register tables that follow, register names are in capital letters, while register values are in 
+capital letters and italicized.  For example, the ACCEL_XOUT_H register (Register 59) contains the 8 most 
+significant bits, ACCEL_XOUT[15:8], of the 16-bit X-Axis accelerometer measurement, ACCEL_XOUT. 
+ 
+ 
+The reset value is 0x00 for all registers other than the registers below. 
+ 
+ 
+Register 107: 0x40. 
+ 
+Register 117: 0x68.  
+ 
+ 

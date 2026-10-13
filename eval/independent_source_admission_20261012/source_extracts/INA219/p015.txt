@@ -1,0 +1,21 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+pointer. This byte is followed by an Acknowledge from the master; then the slave transmits the least significant
+byte. The master acknowledges receipt of the data byte. The master may terminate data transfer by generating a
+Not-Acknowledge after receiving any data byte, or generating a START or STOP condition.  If repeated reads
+from the same register are desired, it is not necessary to continually send the register pointer bytes; the INA219
+retains the register pointer value until it is changed by the next write operation.
+
+Figure 15 and Figure 16 show write and read operation timing diagrams, respectively. Note that register bytes
+are sent most-significant byte first, followed by the least significant byte. Figure 17 shows the timing diagram for
+the SMBus Alert response operation. Figure 18 shows a typical register pointer configuration.
+
+
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     15
+
+                                                   Product Folder Links: INA219

@@ -1,0 +1,54 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+5 Pin Configuration and Functions
+
+
+                                                                                                           1            2
+
+          SCL  1          6 SDA
+
+        GND  2                        Thermal  5  V+                                 A        SDA        SCL
+                       Pad        ALERT  3          4  ADD0
+
+
+                                                                               B         V+       GND
+   Figure 5-1. DRV Package 6-Pin WSON Top View
+
+
+
+
+                                                                         C        ADD0      ALERT
+
+
+
+
+                                                                                                                               Not to scale
+                                                   Figure 5-2. YBG Package 6-Pin DSBGA Top View
+
+                                      Table 5-1. Pin Functions
+                 PIN
+                                  TYPE                          DESCRIPTION
+ NAME      WSON     DSBGA
+
+ ADD0          4          C1                      I      Address select. Connect to GND, V+, SDA, or SCL.
+
+                                                 Over temperature alert or data-ready signal. This open-drain output requires a
+ ALERT          3          C2        O
+                                                            pullup resistor.
+
+ GND           2          B2      —     Ground
+
+ SCL            1          A2                       I       Serial clock
+
+ SDA            6          A1             I/O      Serial data input and open-drain output. Requires a pullup resistor.
+
+ V+             5          B1                       I      Supply voltage
+
+
+
+
+
+4     Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

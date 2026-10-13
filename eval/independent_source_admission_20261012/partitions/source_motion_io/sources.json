@@ -1,0 +1,106 @@
+{
+  "sources": [
+    {
+      "chip": "AD5592R",
+      "path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+      "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+      "manual_version": "AD5592R/AD5592R-1 Data Sheet Rev. H",
+      "pdf_pages": 54,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false
+    },
+    {
+      "chip": "LIS3DH",
+      "path": "corpus/data/raw_pdf/ST/LIS3DH.pdf",
+      "sha256": "852bfcf1a993f04cc147f26a26612a22fdc307c234f3e53d2c24c850ad421533",
+      "manual_version": "DocID17530 Rev 2",
+      "pdf_pages": 54,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false
+    },
+    {
+      "chip": "LIS2DW12",
+      "path": "corpus/data/raw_pdf/ST/lis2dw12.pdf",
+      "sha256": "5208623aa91c63a33be0e930518c20f5210c4eb76932350f35369687ae1d0dd5",
+      "manual_version": "DS11811 Rev 9",
+      "pdf_pages": 65,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false
+    },
+    {
+      "chip": "MPU6050",
+      "path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+      "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+      "manual_version": "RM-MPU-6000A-00 Revision 4.2; 08/19/2013",
+      "pdf_pages": 46,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false
+    },
+    {
+      "chip": "MPU6050",
+      "path": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+      "sha256": "a4fdf69590b8cbab1cf0a5bcd359327b0ac022061fb233855aff2e191e7e3584",
+      "manual_version": "PS-MPU-6000A-00 Revision 3.4; 08/19/2013",
+      "pdf_pages": 52,
+      "source_role": "SUPPLEMENTARY_PRODUCT_SPECIFICATION",
+      "source_depth": "full local PDF available; scope and electrical characteristics read",
+      "official_current_download_verified": false,
+      "note": "prepare.py initial device-name match was supplementary PS, not RM. RM p.40 and PS p.40 are different sections; never exchange their locators."
+    }
+  ],
+  "inputs_reviewed": [
+    {
+      "path": "eval/protocol_v2_20261012/REPORT.md",
+      "sha256": "83e4534f34309e0a4a8158f28c20d96cdc0bf48fbd8e91f533362f198d1def16",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/SOURCE_POLICY_REVIEW.md",
+      "sha256": "66abbf099d2dd223c43775424cd7cab16246bbc800f3a0d30df3a2ada23ba63d",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/LEGAL_DOMAIN_SUPPLEMENT.md",
+      "sha256": "6e4c8169d753b2b81f4153b1bc24bd4fde65bdfdaee276a46901520a40b8a7c0",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/INDEPENDENT_REPAIR_REVIEW.md",
+      "sha256": "eb6b037032a0c1371736940c3fac751f0618f40dcebfe8cf4dcf08f08c400869",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/source_policy.json",
+      "sha256": "dd2460abbe0feb4c39bce7a5effc9feaf99b8b7733bffde722497a9993f466b3",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/field_policy_inventory.json",
+      "sha256": "3e196ee069a6043ceaeb4f04fe61314e0bf2ed071582175b8bb70f5382e54fa2",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/protocol_manifest.json",
+      "sha256": "c090ed8562428c17c2b888f22fe2cefca4e9a4b212a0f76bb8e61831f124e1b8",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    }
+  ],
+  "read_scope": "full local source available; assigned register detail/default and dependency pages reviewed, not every analog spec claim certified",
+  "source_manifest_initial_match_repair": "MPU6050 source selected by device filename is supplementary PS; RM mirror used for source locators",
+  "visually_reviewed_pages": [
+    "LIS2DW12 p.35 Table22",
+    "LIS3DH p.39 Tables46–47",
+    "MPU6050 RM p.6 overview"
+  ]
+}

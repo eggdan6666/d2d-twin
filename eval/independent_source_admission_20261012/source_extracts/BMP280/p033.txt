@@ -1,0 +1,66 @@
+Bosch Sensortec | BMP280 Data sheet                                                          33 | 49
+
+
+
+                                                 Table 27: I²C timings
+         Parameter            Symbol        Condition         Min      Typ     Max     Units
+        SDI setup time                tSU;DAT    S&F Mode              160                       ns
+                                HS mode               30                        ns
+        SDI hold time                 tHD;DAT    S&F Mode, Cb≤100 pF     80                        ns
+                                  S&F Mode, Cb≤400 pF     90                        ns
+                                HS mode, Cb≤100 pF      18                115    ns
+                                HS mode, Cb≤400 pF      24               150    ns
+      SCK low pulse              tLOW     HS mode, Cb≤100 pF     160                       ns
+                                                VDDIO = 1.62 V
+      SCK low pulse              tLOW     HS mode, Cb≤100 pF     210                       ns
+                                                VDDIO = 1.2 V
+
+       The above-mentioned I2C specific timings correspond to the following internal added delays:
+           •   Input delay between SDI and SCK inputs: SDI is more delayed than SCK by typically
+            100 ns in Standard and Fast Modes and by typically 20 ns in High Speed Mode.
+           •  Output delay from SCK falling edge to SDI output propagation is typically 140 ns in
+             Standard and Fast Modes and typically 70 ns in High Speed Mode.
+
+        5.4.3  SPI timings
+       The SPI timing diagram is in Figure 13, while the corresponding values are given in
+         Table 28. All timings apply both to 4- and 3-wire SPI.
+
+                                       T_setup_csb                                                                                                T_hold_csb
+
+                  CSB
+
+
+
+
+                                                                                                             T_low_sck   T_high_sck
+
+                  SCK
+
+
+
+
+
+                      SDI
+
+
+
+
+
+                                                    T_setup_sdi                        T_hold_sdi
+                 SDO
+
+
+
+
+
+                                                                                                         T_delay_sdo
+
+
+
+                                                Figure 13: SPI timing diagram
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

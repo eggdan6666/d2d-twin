@@ -1,0 +1,49 @@
+Bosch Sensortec | BMP280 Data sheet                                                          16 | 49
+
+
+        selected again. This is similar to BMP180 operation. Forced mode is recommended for applications
+       which require low sampling rate or host-based synchronization.
+
+                                                         current                                                osrs_t   osrs_p
+                           IDDP
+                            IDDT
+
+               TTPPPP       TTPPPP
+
+
+
+                          IDDSB                           IDDSL                                                                   MeasurementMeasurementMeasurementMeasurementMeasurementMeasurement                                                                          MeasurementMeasurementMeasurementMeasurementMeasurementMeasurement
+
+                                                                                                    time                               Write               POR           Mode[1:0] = 01       Data readout    Mode[1:0] = 01                                 settings
+                                            Figure 3: Forced mode timing diagram
+
+        3.6.3  Normal mode
+      Normal mode 16ontinuously cycles between an (active) measurement period and an
+        (inactive) standby period, whose time is defined by tstandby. The current in the standby period
+         (IDDSB) is slightly higher than in sleep mode. After setting the mode,measurement and filter
+        options, the last measurement results can be obtained from the data registers without the
+      need of further write accesses. Normal mode is recommended when using the IIR filter, and
+        useful for applications in which short-term disturbances (e.g. blowing into the sensor) should
+      be filtered.
+                                                         current                                                osrs_t   osrs_p             tstandby
+                           IDDP
+                            IDDT
+
+               TTPPPP      TTPPPP
+
+
+
+                          IDDSB                           IDDSL                                                                   MeasurementMeasurementMeasurementMeasurementMeasurementMeasurement                                                                  MeasurementMeasurementMeasurementMeasurementMeasurementMeasurement
+
+                                                                                                    time                               Write               POR           Mode[1:0] = 11                     Data readout                                 settings                                                             when needed
+                                            Figure 4: Normal mode timing diagram
+
+
+       The standby time is determined by the contents of the t_sb[2:0] bits in control register 0xF5 according
+         to the table below:
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

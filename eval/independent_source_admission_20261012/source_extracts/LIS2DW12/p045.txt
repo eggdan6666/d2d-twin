@@ -1,0 +1,72 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.19    FIFO_SAMPLES (2Fh)
+          FIFO_SAMPLES control register (R)
+
+
+                                              Table 56. FIFO_SAMPLES register
+
+              FIFO_FTH    FIFO_OVR         Diff5            Diff4            Diff3            Diff2            Diff1            Diff0
+
+
+                                         Table 57. FIFO_SAMPLES register description
+
+                            FIFO threshold status flag
+
+             FIFO_FTH         (0: FIFO filling is lower than threshold level;
+
+                                      1: FIFO filling is equal to or higher than the threshold level.)
+
+                            FIFO overrun status
+
+            FIFO_OVR         (0: FIFO is not completely filled;
+
+                                      1: FIFO is completely filled and at least one sample has been overwritten)
+
+                               Represents the number of unread samples stored in FIFO.
+                    Diff[5:0]
+                              (000000 = FIFO empty; 100000 = FIFO full, 32 unread samples).
+
+8.20    TAP_THS_X (30h)
+            Enables 4D configuration and configures TAP threshold (R/W)
+
+
+                                                Table 58. TAP_THS_X register
+
+                                                   TAP_        TAP_        TAP_        TAP_        TAP_
+              4D_EN     6D_THS1    6D_THS0
+                                                THSX_4     THSX_3     THSX_2     THSX_1     THSX_0
+
+
+                                           Table 59. TAP_THS_X register description
+
+                                Enables 4D detection portrait/landscape position
+
+            4D_EN               (0: no position detected;
+
+                                        1: portrait/landscape detection and face-up/face-down position enabled).
+
+              6D_THS[1:0]       Thresholds for 4D/6D function @ FS = ±2 g (refer to Table 60. 4D/6D threshold setting FS @ ±2 g)
+
+              TAP_THSX_[4:0]   Threshold for TAP recognition @ FS = ±2 g on X direction
+
+
+                                          Table 60. 4D/6D threshold setting FS @ ±2 g
+
+                        6D_THS[1:0]                                  Threshold decoding (degrees)
+
+                           00                                            6 (80 degrees)
+
+                           01                                               11 (70 degrees)
+
+                           10                                            16 (60 degrees)
+
+                             11                                            21 (50 degrees)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 45/65

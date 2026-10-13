@@ -1,0 +1,50 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.35    CTRL7 (3Fh)
+
+
+                                                   Table 91. CTRL7 register
+
+             DRDY_     INT2_ON_   INTERRUPTS   USR_OFF   USR_OFF     USR_      HP_REF     LPASS_
+             PULSED       INT1      _ENABLE    _ON_OUT   _ON_WU    OFF _W     _MODE      ON6D
+
+
+                                             Table 92. CTRL7 register description
+
+                                      Switches between latched and pulsed mode for data ready interrupt
+           DRDY_PULSED
+                                                 (0: latched mode is used; 1: pulsed mode enabled for data-ready)
+
+                                         Signal routing
+             INT2_ON_INT1
+                                                 (1: all signals available only on INT2 are routed to INT1)
+
+            INTERRUPTS_ENABLE  Enables interrupts
+
+                                     Enables application of user offset value in accelerometer output data registers
+           USR_OFF_ON_OUT
+                             FDS bit in CTRL6 (25h) must be set to 0 logic (low-pass path selected).
+
+           USR_OFF_ON_WU     Enables application of user offset value on accelerometer data for wake-up function only
+
+                                         Selects the weight of the user offset words specified by X_OFS_USR_[7:0], Y_OFS_USR_[7:0],
+           USR_OFF_W          and Z_OFS_USR_[7:0] bits
+                                                 (0: 977 µg/LSB; 1: 15.6 mg/LSB)
+
+                                     Enables high-pass filter reference mode
+
+           HP_REF_MODE           (0: high-pass filter reference mode disabled (default);
+
+                                              1: high-pass filter reference mode enabled)
+
+                                                 (0: ODR/2 low-pass filtered data sent to 6D interrupt function (default);
+            LPASS_ON6D
+                                              1: LPF2 output data sent to 6D interrupt function)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 55/65

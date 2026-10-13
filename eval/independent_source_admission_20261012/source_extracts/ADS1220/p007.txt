@@ -1,0 +1,102 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 6.5 Electrical Characteristics
+
+ Minimum and maximum specifications apply from TA = –40°C to +125°C. Typical specifications are at TA = 25°C.
+ All specifications are at AVDD = 3.3V, AVSS = 0V, DVDD = 3.3V, PGA enabled, DR = 20SPS, and external VREF = 2.5V
+ (unless otherwise noted).
+
+          PARAMETER                       TEST CONDITIONS                     MIN        TYP       MAX   UNIT
+
+ ANALOG INPUTS
+
+            Absolute input current                                                        See the Typical Characteristics
+
+               Differential input current                                                      See the Typical Characteristics
+
+ SYSTEM PERFORMANCE
+
+             Resolution (no missing codes)                                                        24                                       Bits
+
+                                      Normal mode                                                20, 45, 90, 175, 330, 600, 1000
+
+ DR       Data rate                      Duty-cycle mode                                                 5, 11.25, 22.5, 44, 82.5, 150, 250        SPS
+
+                                       Turbo mode                                                40, 90, 180, 350, 660, 1200, 2000
+
+            Noise (input-referred)                                                      See the Noise Performance section
+ INL         Integral nonlinearity          Gain = 1 to 128, VCM = 0.5 AVDD, best fit(1)                   –15           ±6           15  ppmFSR
+
+                             PGA disabled, gain = 1 to 4, differential inputs                               ±4
+
+ VIO         Input offset voltage           Gain = 1, differential inputs, TA = 25°C                       –30           ±4           30    µV
+
+                                      Gain = 2 to 128, differential inputs                                         ±4
+
+                             PGA disabled, gain = 1 to 4                                                  0.25
+              Offset drift                  Gain = 1 to 128, TA = –40°C to +85°C(1)                                       0.08            0.3   µV/°C
+
+                                      Gain = 1 to 128                                                             0.25
+
+              Offset match                Match between any two inputs                                          ±20               µV
+
+                             PGA disabled, gain = 1 to 4                                        ±0.015%
+           Gain error
+                                      Gain = 1 to 128, TA = 25°C                             –0.1%      ±0.015%        0.1%
+
+                             PGA disabled, gain = 1 to 4                                              1
+           Gain drift                                                                                                       ppm/°C
+                                      Gain = 1 to 128(1)                                                      1            4
+
+                                   50Hz ±3%, DR = 20SPS, external CLK, 50/60 bit =
+                                                                                          105
+                                    10b
+
+                                   60Hz ±3%, DR = 20SPS, external CLK, 50/60 bit = NMRR    Normal-mode rejection ratio(1)                                                       105                           dB
+                                      11b
+
+                                   50Hz or 60Hz ±3%, DR = 20SPS,
+                                                                                           90
+                                              external CLK, 50/60 bit = 01b
+
+                                           At dc, gain = 1                                           90          105
+ CMRR    Common-mode rejection ratio  fCM = 50Hz, DR = 2000SPS(1)                               95          115               dB
+                                          fCM = 60Hz, DR = 2000SPS(1)                               95          115
+                              AVDD at dc, VCM = 0.5 AVDD, gain = 1                        80          105
+ PSRR     Power-supply rejection ratio                                                                                  dB
+                             DVDD at dc, VCM = 0.5 AVDD, gain = 1(1)                     100          115
+
+ INTERNAL VOLTAGE REFERENCE
+
+                  Initial accuracy              TA = 25°C                                                 2.045         2.048         2.051    V
+            Reference drift(1)                                                                                 5           30  ppm/°C
+
+            Long-term drift              1000 hours                                                            110              ppm
+
+ VOLTAGE REFERENCE INPUTS
+
+            Reference input current      REFP0 = VREF, REFN0 = AVSS                                         ±10               nA
+
+ INTERNAL OSCILLATOR
+
+              Internal oscillator accuracy    Normal mode                                   –2%        ±1%        2%
+
+ EXCITATION CURRENT SOURCES (IDACs)
+
+             Current settings                                                                            10, 50, 100, 250, 500, 1000, 1500        µA
+
+           Compliance voltage               All current settings                                                AVDD – 0.9    V
+
+            Accuracy                           All current settings, each IDAC                        –6%        ±1%        6%
+
+             Current match              Between IDACs (not valid for 10µA setting)                              ±0.3%
+
+            Temperature drift            Each IDAC (not valid for 10µA setting)                                     50               ppm/°C
+
+            Temperature drift matching    Between IDACs (not valid for 10µA setting)                                 10               ppm/°C
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback     7
+
+                                                  Product Folder Links: ADS1220

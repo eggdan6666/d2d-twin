@@ -1,0 +1,84 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+7 Detailed Description
+ 7.1 Overview
+
+The ADS111x devices are very small, low-power, 16-bit, delta-sigma (ΔΣ) analog-to-digital converters (ADCs).
+The ADS111x consist of a ΔΣ ADC core with an internal voltage reference, a clock oscillator, and an I2C
+ interface. The ADS1114 and ADS1115 also integrate a programmable gain amplifier (PGA) and a programmable
+ digital comparator. Figure 7-1, Figure 7-2, and Figure 7-3 show the functional block diagrams of the ADS1115,
+ADS1114, and ADS1113, respectively.
+
+The ADS111x ADC core measures a differential signal, VIN, that is the difference of V(AINP) and V(AINN). The
+ converter core consists of a  differential, switched-capacitor ΔΣ modulator followed by a  digital  filter. This
+ architecture results in a very strong attenuation of any common-mode signals. Input signals are compared to
+ the internal voltage reference. The digital filter receives a high-speed bitstream from the modulator and outputs a
+code proportional to the input voltage.
+
+The ADS111x have two available conversion modes: single-shot and continuous-conversion. In single-shot
+mode, the ADC performs one conversion of the input signal upon request, stores the conversion value to an
+ internal conversion register, and then enters a power-down state. This mode is intended to provide significant
+power savings in systems that only require periodic conversions or when there are long idle periods between
+ conversions. In continuous-conversion mode, the ADC automatically begins a conversion of the input signal as
+soon as the previous conversion is completed. The rate of continuous conversion is equal to the programmed
+ data rate. Data can be read at any time and always reflect the most recent completed conversion.
+
+ 7.2 Functional Block Diagrams
+
+                                                            VDD
+
+                                          ADS1115                                                 Comparator
+
+                                                                                               Voltage                       ALERT/RDY
+                                        MUX                         Reference
+
+                                       AIN0
+                                                                                        ADDR
+                                                                                                                       I2C                                       AIN1                    PGA          16-Bit                                                                                                SCL
+                                                                ADC             Interface
+
+                                                                                           SDA
+                                       AIN2
+
+                                                                                                           Oscillator
+                                       AIN3
+
+
+
+                                                         GND
+
+                                 Figure 7-1. ADS1115 Block Diagram
+
+
+
+                             VDD                                                              VDD
+
+             ADS1114                               Comparator                                      ADS1113
+
+                                      Voltage                       ALERT/RDY                                         Voltage
+                                  Reference                                                                          Reference
+
+
+                                                  ADDR                                                        ADDR
+       AIN0                                                                                     AIN0
+                                                            I2C                                                                                                                                                          I2C                                                                                                                                          16-Bit               PGA           16-Bit                                                       SCL                                                                                                                         SCL                          ADC             Interface                                                                                       ADC            Interface
+       AIN1                                                                                     AIN1
+                                                    SDA                                                           SDA
+
+
+                                           Oscillator                                                                                             Oscillator
+
+
+
+
+                           GND                                                           GND
+        Figure 7-2. ADS1114 Block Diagram                Figure 7-3. ADS1113 Block Diagram
+
+
+
+
+
+12    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

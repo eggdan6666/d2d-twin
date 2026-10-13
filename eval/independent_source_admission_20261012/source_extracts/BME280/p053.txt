@@ -1,0 +1,23 @@
+Bosch Sensortec | BME280 Data sheet                                            53 | 60
+
+
+10.  Self test
+The following chapter provides an explanation to the self-test code for the Bosch Sensortec BME280.
+The code itself refers to the API (Application Programming Interface) of the sensor, which can be
+obtained from Bosch Sensortec and is also included in this release package.
+10.1 Self-test flow
+The self-test starts by performing a soft reset of the device. After this, Chip-ID and trimming data are
+read and verified. Then temperature and pressure are measured and compared against customisable
+plausibility limits. A flow chart is given below.
+
+
+
+
+
+Figure 25: Self-test flow chart
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

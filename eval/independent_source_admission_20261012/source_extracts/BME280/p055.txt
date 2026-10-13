@@ -1,0 +1,52 @@
+Bosch Sensortec | BME280 Data sheet                                            55 | 60
+
+
+10.3 Usage
+
+10.3.1 File and function pointer integration
+  Include bme280.c in your programming environment and add the path to the compiler.
+  Include bme280_selftest.c in your programming environment and add the path to the compiler.
+  Modify the lines with read/write function pointer to match your system. Sample functions are given
+     in chapter 10.5:
+
+bme280.bus_read   = BME280_I2C_bus_read;  // must be defined by customer
+bme280.bus_write  = BME280_I2C_bus_write; // must be defined by customer
+bme280.delay_msec = BME280_delay_msec;    // must be defined by customer
+
+   If necessary, adapt the measurement plausibility limits in bme280_selftest.h. The default limits are
+   0…40°C for temperature and 900…1100 hPa for pressure measurement.
+   If you are using I²C communication with the address 0x77 (SDO pin high), then change the
+   BME280.h line
+#define BME280_I2C_ADDRESS      BME280_I2C_ADDRESS1
+         into
+#define BME280_I2C_ADDRESS      BME280_I2C_ADDRESS2
+
+10.3.2 Function call
+Call the self test function using:
+
+unsigned char testresult;
+testresult = bme280_selftest();
+
+A test result of 0 indicates no error. The other return codes are detailed in chapter 10.2.
+
+10.3.3 Test time and interface requirements
+The self test uses a total wait time of 9 milliseconds. Of this, 2 milliseconds are used as wait time for
+soft reset and 7 milliseconds are used as wait time for conversion. The soft reset is performed in order
+to erase any possible old settings and could be omitted if the sensor is known to be in an untouched
+state after power on.
+
+In the self test function, 4 write commands and 6 read commands are issued. In total, 4 bytes are
+written and 34 bytes are read. Assuming burst read is used, the following time duration can be
+expected for communication including overhead:
+  6.0 ms for I²C at 100 kHz
+  1.5 ms for I²C at 400 kHz
+  0.5 ms for SPI at 1 MHz
+
+Assuming a 400 kHz I²C interface with burst reads, the total function run time therefore equals 10.5
+milliseconds.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

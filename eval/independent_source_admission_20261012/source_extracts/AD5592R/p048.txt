@@ -1,0 +1,49 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 25. Bit Descriptions for PD_REF_CTRL (Continued)
+Bits            Bit Name           Description                                                                                                Default Value
+
+4          PD4              Power down the DAC4 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+3          PD3              Power down the DAC3 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+2          PD2              Power down the DAC2 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+1          PD1              Power down the DAC1 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+0          PD0              Power down the DAC0 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+
+
+GPIO Open-Drain Configuration Register
+
+Name: GPIO_OPENDRAIN_CONFIG
+
+Selects open-drain or push/pull for general-purpose outputs. The selected I/Ox pin must be set as digital output pin in the GPIO_CONFIG
+register.
+
+
+
+
+
+Table 26. Bit Descriptions for GPIO_OPENDRAIN_CONFIG
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b1100.                                                       0xC
+[10:8]       RESERVED         Reserved. Set these bits to 0b000.                                                                    0x0
+7           GPIO7              Set the I/O7 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+6           GPIO6              Set the I/O6 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+
+analog.com                                                                                         Rev. H | 48 of 54

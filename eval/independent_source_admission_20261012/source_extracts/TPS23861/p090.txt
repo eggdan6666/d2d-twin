@@ -1,0 +1,65 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+8.3.3.1  Design Requirements
+
+The design for the eight port Semi-Auto Mode application is the same as for the two port design scaled up by
+four. In addition, the eight port application does not require port reset so the RESET pin may be connected
+directly to VDD. Two TPS23861 devices are used in the eight port configuration and are managed by the I2C
+host device. The factory default I2C address for each TPS23861 is 0x20 when the A3 pin is low and 0x28 when
+the A3 pin is left open or tied to VDD.
+
+                                    Table 14. Design Parameters
+
+                DESIGN PARAMETER                                    VALUE
+
+                         Operating mode                                               Semi-Auto Mode
+
+                     Number/type of ports                                                  Eight type 2 ports
+
+                       Other requirements                                                  Micro-controller managed
+
+
+8.3.4  Detailed Design Procedure
+
+8.3.4.1  Power Pin Bypass Capacitors
+•  CVPWR: 0.1 µF, 100 V, X7R ceramic at pin 28 (VPWR)
+•  CVDD: 0.1 µF, 50 V, X7R ceramic at pin 1 (VDD)
+
+8.3.4.2  Per Port Components
+•  RDRNn: RDRNn should be a 47-Ω, 5%, 0.1-W resistor in an 0603 SMT package.
+•  RSENn: RSENn should be a 22.1-Ω, 1%, 0.1-W resistor in an 0603 SMT package.
+•  CPn: 0.1-µF, 100-V, X7R ceramic between VPWR and Pn-
+•  RSnA  / RSnB: The port current sense resistors can be either a combination of two 0.51-Ω, 1% resistors in
+    parallel (0.255 Ω) or four 1.00-Ω, 1% resistors in parallel (0.250 Ω). The most common usage employs dual
+   0.51-Ω, 1%, 0.25-W resistors in an 0805 SMT package. Power dissipation for the resistor pair at maximum
+    ICUT is approximately 117 mW (~58 mW each).
+•  QPn: The port MOSFET can be a small, inexpensive device with average performance characteristics.
+   – BVDSS should be 100 V minimum for high voltage surge environment considerations.
+   –  RDS(on) (VGS = 10 V) should be between 50 mΩ and 150 mΩ for power dissipation considerations.
+     –  The power dissipation for QPn with RDS(on) = 100 mΩ at maximum ICUT is approximately 46 mW.
+   –  Input capacitance (CISS) should be less than 2000 pF.
+   –  Gate Charge (QG) at VGATEn = 12.5 V should be less than 50 nC (see NOTE below).
+
+                                   NOTE
+             For applications requiring faster response times under soft overload conditions (1 to
+              1.5 x ILIM), QG @ VGATEn = 12.5 V may be required to be << 50 nC.
+
+•   FPn: The port fuse should be a slow blow type rated for at least 60 VDC and above ~2 x ICUT(max). The cold
+   resistance should be below 200 mΩ to reduce the DC losses. The power dissipation for FPn with a cold
+   resistance of 180 mΩ at maximum ICUT is approximately 83 mW.
+•  DPnA: The port TVS should be rated for the expected port surge environment. DPnA should have a minimum
+   reverse standoff voltage of 58 V and a maximum clamping voltage of 95 V at the expected peak surge
+    current.
+•  DPnB: The negative clamp diode is optional for extreme surge environments. DPnB should be rated for VR =
+   100 V minimum and be able to survive the expected surge current. Low forward voltage drop at the rated
+   current is beneficial.
+
+
+
+
+
+90     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,50 @@
+LIS3DH                                                                Registers description
+
+8.11   CTRL_REG4 (23h)
+
+
+                                     Table 37. CTRL_REG4 register
+           BDU     BLE(1)     FS1        FS0       HR       ST1      ST0     SIM
+
+                  1.  The BLE function can be activated only in high-resolution mode.
+
+                                   Table 38. CTRL_REG4 description
+
+         BDU                Block data update. Default value: 0
+                                           (0: continuous update;
+                                        1: output registers not updated until MSB and LSB reading)
+
+           BLE                       Big/little endian data selection. Default value 0.
+                                           (0: Data LSB @ lower address; 1: Data MSB @ lower address)
+
+              FS[1:0]                Full-scale selection. default value: 00
+                                       (00: ±2 g; 01: ±4 g; 10: ±8 g; 11: ±16 g)
+
+         HR                   High-resolution output mode: Default value: 0
+                                           (0: high-resolution disabled; 1: high-resolution enabled)
+
+              ST[1:0]                 Self-test enable. Default value: 00
+                                       (00: self-test disabled; other: See Table 39)
+
+           SIM               SPI serial interface mode selection. Default value: 0
+                                           (0: 4-wire interface; 1: 3-wire interface)
+
+                                 Table 39. Self-test mode configuration
+
+                  ST1               ST0                           Self test mode
+
+            0                   0                    Normal mode
+
+            0                   1                          Self-test 0
+
+            1                   0                          Self-test 1
+
+            1                   1                                --
+
+
+
+
+
+                                      DocID17530 Rev 2                                      37/54
+
+                                                                                                                            54

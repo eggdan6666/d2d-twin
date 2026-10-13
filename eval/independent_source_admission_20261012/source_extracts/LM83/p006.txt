@@ -1,0 +1,30 @@
+ Logic Electrical Characteristics                                                                                LM83
+ DIGITAL DC CHARACTERISTICS
+ Unless otherwise noted, these specifications apply for VCC=+3.0 to 3.6 Vdc. Boldface limits apply for TA = TJ = TMIN to
+ TMAX; all other limits TA= TJ=+25˚C, unless otherwise noted.
+  Symbol              Parameter                Conditions          Typical           Limits            Units
+                                                                        (Note 6)          (Note 7)            (Limit)
+SMBData, SMBCLK
+VIN(1)           Logical “1” Input Voltage                                                          2.1         V (min)
+VIN(0)           Logical “0”Input Voltage                                                           0.8         V (max)
+  VIN(HYST)    SMBData and SMBCLK Digital                           300                     mV
+                 Input Hysteresis
+IIN(1)            Logical “1” Input Current            VIN = VCC               0.005               1.5          µA (max)
+IIN(0)            Logical “0” Input Current            VIN = 0 V              −0.005              1.5          µA (max)
+ADD0, ADD1
+VIN(1)           Logical “1” Input Voltage                              VCC                1.5         V (min)
+VIN(0)           Logical “0”Input Voltage                        GND               0.6         V (max)
+IIN(1)            Logical “1” Input Current            VIN = VCC                               2          µA (max)
+IIN(0)            Logical “0” Input Current            VIN = 0 V                                       -2          µA (max)
+ALL DIGITAL INPUTS
+CIN             Input Capacitance                                      20                            pF
+ALL DIGITAL OUTPUTS
+IOH           High Level Output Current        VOH = VCC                             100         µA (max)
+VOL         SMBus Low Level Output            IOL = 3 mA                                   0.4         V (max)
+               Voltage                              IOL = 6 mA                                   0.6
+
+
+
+
+
+                                                            5                                                     www.national.com

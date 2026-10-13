@@ -1,0 +1,84 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+
+
+       ALERT
+
+
+                       1                                        9    1                                        9
+
+         SCL
+
+
+
+
+
+        SDA          0    0    0    1    1    0    0  R/W        1    0    0   A3   A2   A1   A0    0
+
+
+                  Start By                                  ACK By                           From     NACK By  Stop By
+               Master                                         INA219                           INA219       Master    Master
+
+                                                                                                                                                                                                      (1)
+                       Frame 1 SMBus ALERT Response Address Byte                  Frame 2 Slave Address Byte
+
+
+
+
+
+     NOTE (1): The value of the Slave Address Byte is determined by the settings of the A0 and A1 pins. Refer to Table 1.
+
+                             Figure 17. Timing Diagram for SMBus Alert
+
+
+
+                      1                                        9    1                                         9
+       SCL                                  ¼
+
+
+
+
+
+       SDA         1    0    0   A3   A2   A1  A0  R/W       P7   P6   P5   P4   P3   P2   P1   P0           Stop
+
+                 Start By                                  ACK By                                ACK By
+              Master                                         INA219                                       INA219
+                                                                                                            (1)                     Frame 2 Register Pointer Byte                         Frame 1 Two-Wire Slave Address Byte
+
+
+
+
+        NOTE (1): The value of the Slave Address Byte is determined by the settings of the A0 and A1 pins. Refer to Table 1.
+
+                               Figure 18. Typical Register Pointer Set
+
+8.5.6.1  High-Speed I2C Mode
+
+When the bus is idle, both the SDA and SCL lines are pulled high by the pull-up devices. The master generates
+a start condition followed by a valid serial byte containing high-speed (HS) master code 00001XXX. This
+transmission is made in fast (400 kbps) or standard (100 kbps) (F/S) mode at no more than 400 kbps. The
+INA219 does not acknowledge the HS master code, but does recognize  it and switches its internal filters to
+support 2.56 Mbps operation.
+
+The master then generates a repeated start condition (a repeated start condition has the same timing as the start
+condition). After this repeated start condition, the protocol is the same as F/S mode, except that transmission
+speeds up to 2.56 Mbps are allowed. Instead of using a stop condition, repeated start conditions should be used
+to secure the bus in HS-mode. A stop condition ends the HS-mode and switches all the internal filters of the
+INA219 to support the F/S mode. For bus timing, see Bus Timing Diagram Definitions(1) and Figure 1.
+
+8.5.6.2  Power-Up Conditions
+Power-up conditions apply to a software reset through the RST bit (bit 15) in the Configuration register, or the I2C
+bus General Call Reset.
+
+(1)  Values based on a statistical analysis of a one-time sample of devices. Minimum and maximum values are not ensured and not
+     production tested.
+
+
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     17
+
+                                                   Product Folder Links: INA219

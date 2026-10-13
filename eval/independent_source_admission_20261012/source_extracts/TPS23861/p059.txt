@@ -1,0 +1,69 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         CLE4      CLE3      CLE2      CLE1     DETE4     DETE3     DETE2     DETE1
+
+ RESET or POR VALUE      A        A        A        A        A        A        A        A
+
+Detection and classification enable for each port.
+
+When in Manual mode, setting a bit means that only one cycle (detection or classification) is performed for the
+corresponding port. The bit is automatically cleared when the cycle has been completed.
+
+
+                                  NOTE
+         The same result can be obtained by writing to the Detect/Class Restart Register.
+
+
+                                  NOTE
+           Write commands to either 0x12, 0x18, 0x19, or 0x1A require an I2C bus processing delay
+            of 1.2 ms when followed by a Detect/Class Enable (0x14) write command. This delay
+           applies from the end of the 0x12, 0x18, 0x19, or 0x1A command (stop pulse) to the end of
+           the Detect/Class Enable command (stop pulse).
+
+
+It is also cleared if a port turn off (Power Enable Register) is issued.
+
+In Semi-Auto Mode, while the port is not powered up, detection and classification are performed continuously, as
+long as the CLEn and DETEn bits are kept set. First, detection is performed.  If a Resistance valid status is
+returned, classification follows. After, the detect-class sequence repeats. If a valid status is not returned by the
+detection event, classification is skipped, and detection is repeated.
+
+In Auto Mode, if the port is not powered up and the DETEn and CLEn bits are set, classification follows a valid
+detect, and power-on follows classification unless classification returns Unknown, Overcurrent or Class Mismatch
+Status.
+
+During the cool-down cycle following a Start, ICUT or ILIM, any Detect/Class Enable command for that port are
+delayed until the end of the cool-down period.
+
+
+                                  NOTE
+           At the end of the cool-down period, one or more detection/class cycles are automatically
+            restarted as described previously if the detect enable bit is set.
+
+
+Bit Descriptions
+
+CLE4-CLE1: Classification enable bits.
+
+1 = Enabled.
+
+0 = Disabled.
+
+DETE4-DETE1: Detection enable bits.
+
+1 = Enabled.
+
+0 = Disabled.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     59
+
+                                                 Product Folder Links: TPS23861

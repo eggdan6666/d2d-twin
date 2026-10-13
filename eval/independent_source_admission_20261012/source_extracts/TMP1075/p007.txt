@@ -1,0 +1,78 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+ at TA = –55°C to +125°C and V+ = 1.7 V to 5.5 V (unless noted); typical specification are at TA = 25°C and V+=3.3 V
+           PARAMETER                      TEST CONDITIONS                MIN    TYP   MAX  UNIT
+
+                                  R1 = 0, R0 = 0 (default)                                     10      20   µA
+
+                                  R1 = 0, R0 = 1                                                    5.5       9
+                Quiescent current (serial bus
+ IQ                                R1 = 1, R0 = 0                                             4       6   µA                    inactive)
+                                  R1 = 1, R0 = 1                                                    2.7       4
+
+                                            During 5.5 ms active conversion                              52      85   µA
+
+                                                   Serial bus active, SCL frequency = 400 kHz,
+                                                                                               13          µA
+                                  A0=A1=A2=GND
+ ISD           Shutdown current              Serial bus inactive, A0=A1=A2=SCL=SDA=V+,                                                                                                           0.37      0.65   µA
+                                       25°C
+
+                                                   Serial bus inactive, A0=A1=A2=SCL=SDA=V+                    0.37       3.5   µA
+
+                                           Supply rising, Power-on Reset                                  1.22
+              Power supply thresholds                                                              V
+                                           Supply failing, Brown-out Detect                                    1.1
+
+ (1)   Repeatability is the ability to reproduce a reading when the measured temperature is applied consecutively, under the same conditions.
+ (2)   One-shot mode setup, 1 sample per minute for 24 hours.
+ (3)   Long-term drift is determined using accelerated operational life testing at a junction temperature of 150°C.
+
+ 6.6 Electrical Characteristics: TMP1075N
+ At TA = 25 °C and V+ = 1.62 to 3.6 V (unless otherwise noted)
+        PARAMETER                      TEST CONDITIONS                   MIN    TYP    MAX  UNIT
+
+ TEMPERATURE SENSOR
+
+         Temperature Operating
+                                                                                                  -40              125   °C
+        Range
+
+                                     -10 °C to 60 °C                                                       0.25       ±1
+ TERR   Temperature accuracy                                                                                 °C
+                                     -40 °C to 125°C                                                          0.5       ±2
+
+ PSR   DC power supply rejection                                                                             0.2        0.5   °C/V
+
+                                        Including sign bit                                                12                Bits
+ TRES    Temperature resolution
+                            LSB                                                                 62.5          m°C
+ tCONV   Conversion time                                                                         10       15   ms
+ DIGITAL INPUT/OUTPUT
+ CIN      Input capacitance                                                                        3            pF
+ VIH      Input logic high level                                                                   0.7 × V+                  3.6   V
+ VIL      Input logic low level                                                                                         0.3 × V+   V
+  IIN       Input leakage current       0 V< V+ < 3.6 V                                                           1   μA
+ VOL     Output low level          SDA, ALERT (V+ > 2 V, IOL = 3 mA)                          0                  0.4   V
+ VOL     Output low level          SDA, ALERT (V+ < 2 V, IOL = 3 mA)                          0             0.2 x V+   V
+ POWER SUPPLY
+
+ V+      Operating supply range                                                                 1.62                  3.6   V
+
+                                          Serial bus inactive                                                        4.8        7.5
+         Average current
+ IDD_AVG                                Serial bus active, SCL frequency = 400 kHz                           10           μA         consumption
+                                          Serial bus active, SCL frequency = 2.85 MHz                          40
+
+                                          Serial bus inactive                                                    0.15      0.35   μA
+ IDD_SD  Shutdown current            Serial bus active, SCL frequency = 400 kHz                                5.5           μA
+                                          Serial bus active, SCL frequency = 2.85 MHz                          35           μA
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback     7
+
+                                                  Product Folder Links: TMP1075

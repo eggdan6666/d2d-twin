@@ -1,0 +1,76 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+9 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 9.1 Application Information
+
+The following sections give example circuits and suggestions for using the ADS111x in various situations.
+
+ 9.1.1 Basic Connections
+The principle I2C connections for the ADS1115 are shown in Figure 9-1.
+
+
+
+
+                                                                                          10
+                                                            ADS1115
+                                                                 SCL                 VDD
+
+                              VDD                         1 ADDR            SDA  9                    1-k  to 10-k   (typ)
+                      Pullup Resistors
+                                                                           2 ALERT/RDY        VDD  8
+
+                   Microcontroller or                                         3 GND               AIN3  7                 0.1 μF (typ)
+                  Microprocessor
+                                                                           4  AIN0               AIN2  6
+                    with I2C Port
+                                                                            AIN1
+
+                                                                                           5
+                   SCL
+
+
+                  SDA
+
+
+                   GPIO
+
+                                                                                                             Inputs Selected
+                                                                                                 from Configuration
+                                                                                                             Register
+
+
+                           Figure 9-1. Typical Connections of the ADS1115
+
+The fully-differential voltage input of the ADS111x is ideal for connection to differential sources with moderately
+ low source impedance, such as thermocouples and thermistors. Although the ADS111x can read bipolar
+ differential signals, these devices cannot accept negative voltages on either input.
+
+The ADS111x draw transient currents during conversion. A 0.1μF power-supply bypass capacitor supplies the
+momentary bursts of extra current required from the supply.
+The ADS111x interface directly to standard mode, fast mode, and high-speed mode I2C controllers. Any
+ microcontroller I2C peripheral, including controller-only and single-controller I2C peripherals, operates with the
+ADS111x. The ADS111x does not perform clock-stretching (that is, the device never pulls the clock line low), so
+ this function does not need to be provided for unless other clock-stretching devices are on the same I2C bus.
+ Pullup resistors are required on both the SDA and SCL lines because I2C bus drivers are open drain. The size
+ of these resistors depends on the bus operating speed and capacitance of the bus lines. Higher-value resistors
+consume less power, but increase the transition times on the bus, thus limiting the bus speed. Lower-value
+ resistors allow higher speed, but at the expense of higher power consumption. Long bus lines have higher
+ capacitance and require smaller pullup resistors to compensate. Do not use resistors that are too small to avoid
+ bus drivers being unable to pull the bus lines low.
+
+
+
+
+
+28    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

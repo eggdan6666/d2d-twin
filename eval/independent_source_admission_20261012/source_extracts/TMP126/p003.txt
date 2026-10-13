@@ -1,0 +1,74 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+5 Device Comparison
+
+                                    Table 5-1. Device Comparison
+         Feature              TMP126             TMP126N            TMP126-Q1            TMP127-Q1
+
+ Best accuracy
+                                    0.25 °C                    0.8 °C                   0.25 °C                    0.8 °C
+ (maximum)
+
+ Packages                  DCK               DCK                DBV, DCK             DBV
+
+ Continuous and shutdown
+                               ●                    ●                    ●                    ●
+ mode
+
+ 175°C operation                  ●                                        ●                    ●
+
+ Automotive Grade-0                                                        ●                    ●
+
+ NIST Traceable                  ●                    ●                    ●
+
+ Alert pin functionality               ●                    ●                    ●
+
+ Slew rate warning                 ●                    ●                    ●
+
+ CRC option                     ●                    ●                    ●
+
+
+6 Pin Configuration and Functions
+
+
+
+
+
+                                                 CS        1           6       VDD
+
+
+                                            GND        2           5       ALERT
+
+
+                                                          SIO        3           4       SCLK
+
+
+
+                                                                          Not to scale
+                                Figure 6-1. DCK 6-pin SC70 Top View
+
+                                      Table 6-1. Pin Functions
+            PIN
+                                      I/O                                DESCRIPTION
+ NAME        DCK
+
+ CS               1                       I       Chip select signal to activate SPI interface
+
+ GND              2                   -      Ground
+
+ SIO               3             I/O      System data input/output
+
+ SCLK             4                       I      System clock input
+
+ ALERT            5             I/O       Alert open-drain output. Can be left floating or grounded when not used.
+
+ VDD              6                   -       Supply voltage
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback     3
+
+                                                  Product Folder Links: TMP126

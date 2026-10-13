@@ -1,0 +1,61 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.9     CTRL6 (25h)
+              Control register 6 (R/W)
+
+
+                                                 Table 40. Control register 6
+
+                                                               LOW_
+              BW_FILT1    BW_FILT0      FS1         FS0        FDS                       0            0
+                                                                        NOISE
+
+
+
+               BW_FILT[1:0]         Bandwidth selection (see Table 41. Digital filtering cutoff selection)
+
+                FS[1:0]                 Full-scale selection (see Table 42. Full-scale selection)
+
+                                           Filtered data type selection. Default value: 0
+
+           FDS                      (0: low-pass filter path selected;
+
+                                           1: high-pass filter path selected)
+
+                                    Low-noise configuration.
+           LOW_NOISE
+                                              (0: disabled; 1: enabled)
+
+
+                                           Table 41. Digital filtering cutoff selection
+
+                  BW_FILT[1:0]                                    Bandwidth selection
+
+                      00         ODR/2 (up to ODR = 800 Hz, 400 Hz when ODR = 1600 Hz)
+
+                      01         ODR/4 (HP/LP)
+
+                      10         ODR/10 (HP/LP)
+
+                        11         ODR/20 (HP/LP)
+
+
+                                                 Table 42. Full-scale selection
+
+                            FS[1:0]                                                Full-scale selection
+
+                           00               ±2 g
+
+                           01               ±4 g
+
+                           10               ±8 g
+
+                             11               ±16 g
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 41/65

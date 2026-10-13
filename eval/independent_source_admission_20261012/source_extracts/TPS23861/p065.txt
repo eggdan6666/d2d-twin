@@ -1,0 +1,75 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.18  Power Enable Register
+
+Command = 19h with 1 Data Byte, Write Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME        POFF4     POFF3     POFF2     POFF1    PWON4    PWON3    PWON2    PWON1
+
+Push button register. Setting a bit in this register directs the TPS23861 to turn a port on or off.
+
+Used to force a port(s) power on or power off in any mode except Off Mode or during a port shutdown condition
+via the SHTDWN pin.
+
+
+                                  NOTE
+        A power off write command to 0x19 requires an I2C bus processing delay of 1.2 ms when
+           followed by a Detect/Class Enable (0x14) write command. This delay applies from the end
+            of the power off command (stop pulse) to the end of the Detect/Class Enable command
+           (stop pulse).
+
+
+                                  NOTE
+            In Semi-Auto or in Auto Mode, as long as the port is kept off, detection and classification
+          are performed continuously if the corresponding class and detect enable bits are set.
+
+
+The details of a power-on operation depends on the operating mode. See Device Functional Modes section for
+details.
+
+Writing a “1” at POFFn location powers off the associated port.
+
+
+                                  NOTE
+           Writing a “1” at POFFn and PWONn of same port during the same write operation powers
+              off the port.
+
+
+During the cool-down cycle following a Start, ICUT or ILIM, when in Semi-Auto or Auto Mode, any port turn on
+using Power Enable Command is ignored. The port can be turned on at the end of the cool-down cycle. When in
+Manual Mode, the port powers on immediately in response to a power on command even when in cool-down.
+
+Bit Descriptions
+
+POFF4-POFF1: Port power off bits. When POFFn is written, the following takes place:
+•  The corresponding Port n Voltage Registers are cleared.
+•  The corresponding Port n Detect Resistance Register are cleared.
+•  The CLSCn and the DETCn bits in the Detection Event Register are cleared.
+•  The corresponding Port n Status Register are cleared.
+•  The CLEn and the DETEn bits in the Detect/Class Enable Register are cleared.
+•  The DISFn and ICUTn bits in the Fault Event Register are cleared.
+•  The ILIMn and the STRTN bits in the Start/ILIM Event Register are cleared.
+•    If the port was powered on when POFFn is set, the port is powered off, and the following occurs.
+   –  The PGCn and the PECn bits in the Power Event Register are set.
+   –  The PGn and PEn bits in the Power Status Register are cleared.
+
+PWON4-PWON1: Port power on bits.
+
+
+                                  NOTE
+          For any port with power enable set (PEx=1 in 0x10), ensure that port power good status in
+         0x10 is also set (PGx=1) prior to writing a power off command to the Power Enable
+            register (0x19).
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     65
+
+                                                 Product Folder Links: TPS23861

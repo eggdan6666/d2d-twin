@@ -1,0 +1,38 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+THREE-STATE PINS                                      RESET FUNCTION
+The I/Ox pins can be set to three-state by writing to the three-state                                                          The AD5592R/AD5592R-1 can be reset to their default conditions
+configuration register, as shown in the Three-State Configuration                                                               by writing to the software reset register, as shown in the Software
+Register section and Table 27.                                                                Reset Register section and Table 28. This write resets all registers
+85 KΩ PULL-DOWN RESISTOR PINS                         to their default values and reconfigures the I/Ox pins to their default
+                                                                      values (85 kΩ pull-down resistor to GND). The reset function
+The I/Ox pins can be connected to GND via a pull-down resistor           takes 250 µs maximum; do not write new data to the AD5592R/
+(85 kΩ) by setting the appropriate bits in the pull-down configuration      AD5592R-1 during this time. The AD5592R has a RESET pin that
+register, as shown in the Pull-Down Configuration Register section        performs the same function. For normal operation, RESET is tied
+and Table 20.                                                               high. A falling edge on RESET triggers the reset function.
+POWER-DOWN MODE                    READBACK AND LDAC MODE REGISTER
+The AD5592R/AD5592R-1 have a power configuration register to        The values contained in the AD5592R/AD5592R-1 registers can be
+reduce the power consumption when certain functions are not            read back to ensure that the registers are correctly set up. The
+needed. The power-down register allows any channels set as               register readback is initiated by writing to the configuration register
+DACs to be individually placed in a power-down state. When in a         readback and LDAC mode register (see the Configuration Register
+power-down state, the DAC outputs are three-state. When a DAC        Readback and LDAC Mode Register section and Table 21) with Bit
+channel is put back into normal mode, the DAC output returns to         6 set to 1. Bits[5:2] select which register is to be read back. The
+its previous value. The internal reference and its buffer are powered         register data is clocked out of the AD5592R/AD5592R-1 on the next
+down by default and are enabled by setting the EN_REF bit in the        SPI transfer.
+power-down register. The internal reference voltage then appears
+at the VREF pin.                                                                  Bits[1:0] of the configuration register readback and LDAC mode
+                                                                                register select the LDAC mode. The LDAC mode determines if
+There is no dedicated power-down function for the ADC, but the           data written to a DAC input register is also transferred to the DAC
+ADC is automatically powered down if none of the I/Ox pins are              register. See the LDAC Mode Operation section for details of the
+selected as ADCs. The PD_ALL bit powers down all the DACs, the      LDAC mode function.
+reference and its buffer, and the ADC simultaneously. The Power-
+Down/Reference Control Register section shows the power-down
+register.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 33 of 54

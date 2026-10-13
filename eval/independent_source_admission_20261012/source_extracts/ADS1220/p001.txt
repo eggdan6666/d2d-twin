@@ -1,0 +1,76 @@
+                                                                                   ADS1220
+                                                                                SBAS501D – MAY 2013 – REVISED MAY 2026
+   ADS1220 4-Channel, 2kSPS, Low-Power, 24-Bit ADC With Integrated PGA and
+                                 Reference
+
+1 Features                                            low-noise, programmable gain amplifier (PGA), two
+                                                programmable excitation current sources, a voltage•  Low current consumption:
+                                                         reference, an  oscillator, a low-side  switch, and a
+   – As low as 120μA (typ) in duty-cycle mode                                                          precision temperature sensor.
+•  Wide supply range: 2.3V to 5.5V
+•  Programmable gain: 1 to 128                    The device can perform conversions at data rates
+•  Programmable data rates: Up to 2kSPS            up to 2000 samples-per-second (SPS) with single-
+•  Up to 20 Bits effective resolution                      cycle  settling.  At 20SPS,  the  digital   filter  offers
+•  Simultaneous 50Hz and 60Hz rejection at            simultaneous 50Hz and 60Hz  rejection  for  noisy
+  20SPS with single-cycle settling digital filter             industrial  applications.  The  internal PGA  offers
+•  Two differential or four single-ended inputs            gains up  to 128. This PGA makes the ADS1220
+•  Dual-matched programmable current sources:        designed  for  applications measuring  small sensor
+   – 10μA to 1.5mA                                       signals, such as resistance temperature detectors
+•   Internal 2.048V reference: 5ppm/°C (typ) drift         (RTDs),  thermocouples,  thermistors, and  resistive
+•   Internal 2% accurate oscillator                        bridge sensors. The device supports measurements
+•   Internal temperature sensor:                            of pseudo- or fully-differential signals when using the
+                                           PGA. Alternatively, the device can be configured to   –  0.5°C (typ) accuracy
+                                                 bypass the internal PGA while still providing high input•  SPI-compatible interface (mode 1)
+                                                impedance and gains up to 4, allowing for single-
+2 Applications                                ended measurements.
+
+•  Field transmitters:                             Power  consumption  is  as  low  as 120μA when
+   –  Temperature, pressure, strain, flow                operating in duty-cycle mode with the PGA disabled.
+•  PLC and DCS analog input modules               The ADS1220  is  offered  in a  leadless VQFN-16
+•  Patient monitoring systems:                           or a TSSOP-16 package and  is specified over a
+                                                     temperature range of –40°C to +125°C.   –  Body temperature, blood pressure
+•  Factory automation and process control                        Package Information
+3 Description                                    PART NUMBER      PACKAGE(1)    PACKAGE SIZE(2)
+                                                                 RVA (VQFN, 16)    3.5mm × 3.5mm
+The ADS1220 is a precision, 24-bit, analog-to-digital    ADS1220                                                     PW (TSSOP, 16)    5.0mm × 6.4mm
+converter (ADC) that offers many integrated features
+to reduce system  cost and component  count  in      (1)   For all available packages, see the orderable addendum at
+applications measuring  small sensor  signals. The           the end of the data sheet.
+device features two differential or four single-ended      (2)  The package size (length × width) is a nominal value and                                                                            includes pins, where applicable.
+inputs through a flexible input multiplexer (MUX), a
+
+
+                                                                                                                    3.3V                                       3.3V
+
+
+                                                                                                                              0.1µF                                      0.1µF
+
+                                                              3.3V                                                         REFP0   REFN0
+
+                                                                                                                                 10                                                                                                              A to  AVDD                           DVDD                                                                                                                            1.5mA
+                                                                                AIN0                                  2.048V         Reference     ADS1220
+                                                                                                                             Reference       MUX
+
+
+
+                                                                                AIN1
+                                                                                                                                CS
+                                                                                                             AINP                                                                                                                                                                                                          Digital                                                                                                                                                                                                                                Filter
+                                                                                                                                        SCLK
+                              Thermocouple                                                                                                                                                   and
+                                                                        MUX                                                                                                                                                           DIN                                                                                         PGA                   24-BitADC                                                                                                                                                         SPI
+                                                                                AIN2                    AINN                                                 Interface      DRDYDOUT/DRDY
+                                                                                                                                         Block                                                                                                                                       Precision
+                                                                                                                                                                   Low-Drift                                                                                                                                                                                                                                                                      Isothermal                                                                                AIN3                            Temperature
+                                                                                                                      Sensor                 Oscillator
+
+
+
+                                                                                              AVSS                 CLK      DGND
+
+
+                              K-Type Thermocouple Measurement
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+       intellectual property matters and other important disclaimers. PRODUCTION DATA.

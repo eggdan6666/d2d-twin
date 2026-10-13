@@ -1,0 +1,38 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 8.2.1 Design Requirements
+
+ To improve measurement accuracy, TI recommends to isolate the HDC2021 from all heat sources in the form of
+ active circuitry, batteries, displays, and resistive elements. If design space is a constraint, cutouts surrounding
+ the device or the inclusion of small trenches can help minimize heat transfer from PCB heat sources to the
+HDC2021. To avoid self-heating the HDC2021, TI recommends to configure the device for a maximum sample
+ rate of 1 Hz (1 sps).
+
+ 8.2.2 Detailed Design Procedure
+
+When a circuit board layout is created from the schematic shown in Figure 8-1 , a small circuit board is possible.
+The accuracy of a RH and temperature measurement depends on the sensor accuracy and the setup of the
+ sensing system. The HDC2021 samples relative humidity and temperature in its immediate environment, it is
+ therefore important that the local conditions at the sensor match the monitored environment. Use one or more
+ openings in the physical cover of the thermostat to obtain a good airflow even in static conditions. Refer to the
+ layout (Figure 10-1) for a PCB layout that minimizes the thermal mass of the PCB in the region of the HDC2021,
+ which can improve measurement response time and accuracy.
+
+ 8.2.3 Application Curve
+
+These results were acquired at TA = 30°C using a humidity chamber that sweeps RH%. The sweep profile used
+was 20% > 30% > 40% > 50% > 60% > 70% > 60% > 50% > 40% > 30% > 20%. Each RH% set point was held
+ for 20 minutes.
+
+
+
+
+
+                Figure 8-2. RH% Readings of Humidity Chamber and HDC2021 vs. Time
+
+
+
+
+
+34    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

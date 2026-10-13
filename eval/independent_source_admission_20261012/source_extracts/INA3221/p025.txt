@@ -1,0 +1,69 @@
+                                                                                                                                INA3221
+www.ti.com                                                                                                      SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 8.2 Register Descriptions
+ All 16-bit INA3221 registers are two 8-bit bytes via the I2C interface. Table 8-2 shows a register map for the INA3221.
+
+                                                        Table 8-2. Register Map
+                   ADDRESS
+      REGISTER           (Hex)     D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  Configuration               00      RST    CH1en    CH2en    CH3en   AVG2    AVG1    AVG0   VBUSCT2 VBUSCT1 VBUSCT0  VSHCT2  VSHCT1  VSHCT0  MODE3  MODE2  MODE1
+
+ Channel-1 Shunt Voltage      01      SIGN    SD11    SD10    SD9     SD8     SD7     SD6     SD5     SD4     SD3     SD2     SD1     SD0   —    —    —
+
+ Channel-1 Bus Voltage        02      SIGN    BD11    BD10    BD9     BD8     BD7     BD6     BD5     BD4     BD3     BD2     BD1     BD0   —    —    —
+
+ Channel-2 Shunt Voltage      03      SIGN    SD11    SD10    SD9     SD8     SD7     SD6     SD5     SD4     SD3     SD2     SD1     SD0   —    —    —
+
+ Channel-2 Bus Voltage        04      SIGN    BD11    BD10    BD9     BD8     BD7     BD6     BD5     BD4     BD3     BD2     BD1     BD0   —    —    —
+
+ Channel-3 Shunt Voltage      05      SIGN    SD11    SD10    SD9     SD8     SD7     SD6     SD5     SD4     SD3     SD2     SD1     SD0   —    —    —
+
+ Channel-3 Bus Voltage        06      SIGN    BD11    BD10    BD9     BD8     BD7     BD6     BD5     BD4     BD3     BD2     BD1     BD0   —    —    —
+
+ Channel-1 Critical-Alert
+                           07      C1L12   C1L11   C1L10    C1L9    C1L8    C1L7    C1L6    C1L5    C1L4    C1L3    C1L2    C1L1    C1L0   —    —    —
+  Limit
+
+ Channel-1 Warning-Alert
+                           08     W1L12   W1L11   W1L10   W1L9    W1L8    W1L7    W1L6    W1L5    W1L4    W1L3    W1L2    W1L1    W1L0   —    —    —
+  Limit
+
+ Channel-2 Critical-Alert
+                           09      C2L12   C2L11   C2L10    C2L9    C2L8    C2L7    C2L6    C2L5    C2L4    C2L3    C2L2    C2L1    C2L0   —    —    —
+  Limit
+
+ Channel-2 Warning-Alert
+                         0A     W2L12   W2L11   W2L10   W2L9    W2L8    W2L7    W2L6    W2L5    W2L4    W2L3    W2L2    W2L1    W2L0   —    —    —
+  Limit
+
+ Channel-3 Critical-Alert
+                         0B      C3L12   C3L11   C3L10    C3L9    C3L8    C3L7    C3L6    C3L5    C3L4    C3L3    C3L2    C3L1    C3L0   —    —    —
+  Limit
+
+ Channel-3 Warning-Alert
+                        0C     W3L12   W3L11   W3L10   W3L9    W3L8    W3L7    W3L6    W3L5    W3L4    W3L3    W3L2    W3L1    W3L0   —    —    —
+  Limit
+
+ Shunt-Voltage Sum         0D      SIGN    SV13    SV12    SV11    SV10    SV9     SV8     SV7     SV6     SV5     SV4     SV3     SV2     SV1     SV0   —
+
+ Shunt-Voltage Sum Limit      0E      SIGN    SVL13   SVL12   SVL11   SVL10    SVL9    SVL8    SVL7    SVL6    SVL5    SVL4    SVL3    SVL2    SVL1    SVL0   —
+
+ Mask/Enable               0F    —     SCC1   SCC2   SCC3   WEN    CEN     CF1     CF2     CF3     SF     WF1    WF2    WF3    PVF     TCF    CVRF
+
+ Power-Valid Upper Limit       10      SIGN   PVU11   PVU10   PVU9    PVU8    PVU7    PVU6    PVU5    PVU4    PVU3    PVU2    PVU1    PVU0   —    —    —
+
+ Power-Valid Lower Limit       11      SIGN    PVL11   PVL10    PVL9    PVL8    PVL7    PVL6    PVL5    PVL4    PVL3    PVL2    PVL1    PVL0   —    —    —
+
+ Manufacturer ID           FE        0        1        0        1        0        1        0        0        0        1        0        0        1        0        0        1
+
+ Die ID                   FF        0        0        1        1        0        0        1        0        0        0        1        0        0        0        0        0
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                                                                Submit Document Feedback     25
+
+                                                                         Product Folder Links: INA3221

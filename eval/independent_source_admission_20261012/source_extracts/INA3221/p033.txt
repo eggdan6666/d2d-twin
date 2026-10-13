@@ -1,0 +1,66 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 8.2.14 Shunt-Voltage Sum Register (address = 0Dh) [reset = 00h]
+
+ This register contains the sum of the single conversion shunt voltages of the selected channels based on the
+summation control bits 12, 13, and 14 in the Mask/Enable register.
+
+ This register is updated with the most recent sum following each complete cycle of all selected channels. The
+ Shunt-Voltage Sum register LSB value is 40µV.
+
+                               Table 8-29. Shunt-Voltage Sum Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  SIGN  SV13  SV12   SV11  SV10   SV9   SV8   SV7   SV6   SV5   SV4   SV3   SV2   SV1   SV0  —
+
+   R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                      Table 8-30. Shunt-Voltage Sum Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15    SIGN                    R       0h          Sign bit.
+                                                             0 = positive number
+                                                             1 = negative number in twos complement format
+
+    14-1    SV13-0                   R       0h          Shunt-voltage sum data bits
+
+     0     Reserved                  R       0h         Reserved
+
+ 8.2.15 Shunt-Voltage Sum-Limit Register (address = 0Eh) [reset = 7FFEh]
+
+ This register contains the value that is compared to the Shunt-Voltage Sum register value following each
+ completed cycle of all selected channels to detect for system overcurrent events. The Shunt-Voltage Sum-Limit
+ register LSB value is 40µV.
+
+                            Table 8-31. Shunt-Voltage Sum-Limit Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  SIGN  SVL13 SVL12  SVL11  SVL10  SVL9  SVL8  SVL7  SVL6  SVL5  SVL4  SVL3  SVL2  SVL1  SVL0  —
+
+  RW-0  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                    Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15    SIGN                    R       0h          Sign bit.
+                                                             0 = positive number
+                                                             1 = negative number in twos complement format
+
+    14-1    SVL13-0                  R       0h          Shunt-voltage sum-limit data bits
+
+     0     Reserved                  R       0h         Reserved
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    33
+
+                                                  Product Folder Links: INA3221

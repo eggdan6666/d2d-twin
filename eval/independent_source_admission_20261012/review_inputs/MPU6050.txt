@@ -1,0 +1,41 @@
+REGISTER SMPLRT_DIV @ 0x19 reset=0x00 access=RW runtime=None DESC=Sample-rate divider; official register map p.8 and detailed description
+  SMPLRT_DIV[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=Sample Rate = gyroscope output rate / (1 + divider)
+REGISTER CONFIG @ 0x1A reset=0x00 access=RW runtime=None DESC=FSYNC sampling and digital low-pass filter; official map p.8 and description
+  EXT_SYNC_SET[5:3] RW reset=0 read_as=None read_action=None tier=None DESC=External frame synchronization selection
+  DLPF_CFG[2:0] RW reset=0 read_as=None read_action=None tier=None DESC=Digital low-pass filter configuration
+  RESERVED_7_6[7:6] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved bits; set to zero
+REGISTER GYRO_CONFIG @ 0x1B reset=0x00 access=RW runtime=None DESC=Gyroscope self-test and full-scale selection; official map p.8 and detailed description
+  XG_ST[7] RW reset=0 read_as=None read_action=None tier=None DESC=X gyro self-test
+  YG_ST[6] RW reset=0 read_as=None read_action=None tier=None DESC=Y gyro self-test
+  ZG_ST[5] RW reset=0 read_as=None read_action=None tier=None DESC=Z gyro self-test
+  FS_SEL[4:3] RW reset=0 read_as=None read_action=None tier=None DESC=Gyroscope full-scale range
+  RESERVED_2_0[2:0] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved bits; set to zero
+REGISTER ACCEL_CONFIG @ 0x1C reset=0x00 access=RW runtime=None DESC=Accelerometer self-test and full-scale selection; official map p.8
+  XA_ST[7] RW reset=0 read_as=None read_action=None tier=None DESC=X accel self-test
+  YA_ST[6] RW reset=0 read_as=None read_action=None tier=None DESC=Y accel self-test
+  ZA_ST[5] RW reset=0 read_as=None read_action=None tier=None DESC=Z accel self-test
+  AFS_SEL[4:3] RW reset=0 read_as=None read_action=None tier=None DESC=Accelerometer full-scale range
+  RESERVED_2_0[2:0] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved bits; set to zero
+REGISTER ACCEL_XOUT_H @ 0x3B reset=0x00 access=RO runtime=True DESC=High byte of 16-bit X accelerometer measurement; official p.29
+  ACCEL_XOUT_15_8[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=Measurement high byte
+REGISTER ACCEL_XOUT_L @ 0x3C reset=0x00 access=RO runtime=True DESC=Low byte of 16-bit X accelerometer measurement; official p.29
+  ACCEL_XOUT_7_0[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=Measurement low byte
+REGISTER ACCEL_YOUT_H @ 0x3D reset=0x00 access=RO runtime=True DESC=High byte of 16-bit Y accelerometer measurement; official p.29
+  ACCEL_YOUT_15_8[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=Measurement high byte
+REGISTER ACCEL_YOUT_L @ 0x3E reset=0x00 access=RO runtime=True DESC=Low byte of 16-bit Y accelerometer measurement; official p.29
+  ACCEL_YOUT_7_0[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=Measurement low byte
+REGISTER ACCEL_ZOUT_H @ 0x3F reset=0x00 access=RO runtime=True DESC=High byte of 16-bit Z accelerometer measurement; official p.29
+  ACCEL_ZOUT_15_8[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=Measurement high byte
+REGISTER ACCEL_ZOUT_L @ 0x40 reset=0x00 access=RO runtime=True DESC=Low byte of 16-bit Z accelerometer measurement; official p.29
+  ACCEL_ZOUT_7_0[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=Measurement low byte
+REGISTER PWR_MGMT_1 @ 0x6B reset=0x40 access=RW runtime=None DESC=Power, sleep, temperature and clock control; official map p.8. Non-zero reset.
+  DEVICE_RESET[7] RW reset=0 read_as=0 read_action=None tier=UNVERIFIED DESC=Device reset control; auto-clears to 0 after whole-device reset (register detail pp.40-41)
+  SLEEP[6] RW reset=1 read_as=None read_action=None tier=None DESC=Sleep mode
+  CYCLE[5] RW reset=0 read_as=None read_action=None tier=None DESC=Cycle mode
+  TEMP_DIS[3] RW reset=0 read_as=None read_action=None tier=None DESC=Disable temperature sensor
+  CLKSEL[2:0] RW reset=0 read_as=None read_action=None tier=None DESC=Clock source selection
+  RESERVED_4[4] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Reserved bit; set to zero
+REGISTER WHO_AM_I @ 0x75 reset=0x68 access=RO runtime=None DESC=Device identity; official p.45. Bits 7 and 0 are hard-coded zero.
+  WHO_AM_I[6:1] RO reset=52 read_as=None read_action=None tier=None DESC=Upper six bits of 7-bit I2C address
+  ZERO_7[7] RO reset=0 read_as=None read_action=None tier=None DESC=Hard-coded zero
+  ZERO_0[0] RO reset=0 read_as=None read_action=None tier=None DESC=Hard-coded zero

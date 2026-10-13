@@ -1,0 +1,68 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.5.2.2 Communication
+
+ Communication is initiated by taking the CS pin low and clocking the SCLK pin. The  first 16 bits of the
+ communication are the command word for the TMP126. The following data will depend on the command byte.
+ If a write command is issued, the TMP126 will store the data input during the next 16 bits into the appropriate
+ Sub-Address set in the command byte. If the auto-increment bit is set to 1, the address pointer is incremented
+ after every 16-bit word. This allows the system to program all the registers of the TMP126 in a single burst write
+command. If the auto-increment is set to 1 for a read command, after each 16-bit word the address pointer is
+ incremented and the next word of data will be from the next Sub-Address.
+
+The following sections denote example write and read operations with the TMP126.
+
+ 8.5.2.3 Write Operations
+
+ Data is transmitted to the TMP126 by setting the R/W bit of the command word to 0. Data can be continuously
+ written to a single register by setting the auto-increment bit to 0 in the command register. Figure 8-11 shows an
+example of a repeated data write to a single register.
+
+
+                            Controller controls SIO line
+
+
+                          Peripheral controls SIO line
+
+
+
+                CRC Data Block Length               Sub-Address                                       Data Word
+
+ CS pulled low
+
+                 X CRC L4  L3  L1  L0   0   0  A7  A6  A5  A4  A3  A2  A1  A0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                CRC Enable         R/W                                                         Data to Register N
+
+
+                 Don’t Care       Auto Increment
+
+
+
+
+
+                                           Data Word                                                       Data Word
+
+                                                                                                                CS pulled high
+
+                 D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                                        Data to Register N                                                 Data to Register N
+
+                         Figure 8-11. Repeated Data Write to a Single Register
+
+ Figure 8-12 shows how setting the auto increment to logic 1 to can enable a write from multiple registers in a
+ single transaction.
+
+
+
+
+
+20    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

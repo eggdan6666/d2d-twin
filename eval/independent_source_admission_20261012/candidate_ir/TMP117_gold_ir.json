@@ -1,0 +1,270 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "TMP117",
+  "vendor": "TI",
+  "interface": "I2C/SMBus",
+  "reg_width": 16,
+  "i2c": {
+    "addresses_7bit": [
+      "0x48",
+      "0x49",
+      "0x4A",
+      "0x4B"
+    ],
+    "note": "ADDR 引脚四态（§7.5）；8 位指针寄存器复位 00（§7.5.2），MVP 不断言指针本身"
+  },
+  "registers": [
+    {
+      "name": "TEMP",
+      "addr": "0x00",
+      "access": "RO",
+      "reset": "0x8000",
+      "desc": "温度结果（§7.6.2 Table 7-5）。16 位只读、补码、1 LSB=7.8125 m°C；**复位后读 8000h（= −256°C）直至首次转换完成**——本基准少见的非零 RO 复位值",
+      "fields": [
+        {
+          "name": "T",
+          "bits": "15:0",
+          "access": "RO",
+          "reset": 32768,
+          "desc": "T[15:0]（复位值按整寄存器 8000h 断言，字段级不设 read_as）"
+        }
+      ]
+    },
+    {
+      "name": "CONFIG",
+      "addr": "0x01",
+      "access": "RW",
+      "reset": "0x0220",
+      "desc": "Factory CONFIG0220h with EEPROM-backed mask07FC; MOD1 is nonpersistent. HIGH/LOW read clear only in Alert mode T/nA0; Therm mode has threshold/hysteresis HIGH and LOW0, CONFIG read does not clear alert flags. DATA_READY clears on CONFIG or TEMP reads; Busy mirrors unlock Busy and is temporal. Soft_Reset Figure/table access conflict retained.",
+      "fields": [
+        {
+          "name": "HIGH_ALERT",
+          "bits": "15",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R, reset 0. In Alert mode (T/nA=0), read CONFIG clears HIGH_Alert; in Therm mode (T/nA=1), CONFIG read does not clear, temperature conversion > high limit sets and < low limit clears. Dynamic event model required.",
+          "read_action": "conditional_clear"
+        },
+        {
+          "name": "LOW_ALERT",
+          "bits": "14",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R, reset 0. In Alert mode (T/nA=0), read CONFIG clears LOW_Alert; in Therm mode (T/nA=1), always reads 0. No unconditional read-clear annotation.",
+          "read_action": "conditional_clear"
+        },
+        {
+          "name": "DATA_READY",
+          "bits": "13",
+          "access": "RO",
+          "reset": 0,
+          "desc": "转换完成标志，R；**读 TEMP 或 CONFIG 都会清除**",
+          "read_action": "clear"
+        },
+        {
+          "name": "EEPROM_BUSY",
+          "bits": "12",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R status, mirror of EEPROM_UL[14]. Busy=1 while POR EEPROM loading or programming;0 means ready. POR loading approximately1.5ms; programming a cell typically7ms. Reads do not clear Busy; wait Busy=0 before next programming write."
+        },
+        {
+          "name": "MOD",
+          "bits": "11:10",
+          "access": "RW",
+          "reset": 0,
+          "desc": "MOD codes00 continuous,01 shutdown,10 continuous with readback00,11 one-shot; p.27 Table7-6"
+        },
+        {
+          "name": "CONV",
+          "bits": "9:7",
+          "access": "RW",
+          "reset": 4,
+          "desc": "CONV codes 000..111 all defined. Table7-7 continuous cycle time depends on AVG: default CONV=100 gives 1s for all AVG settings; 101/110/111 give4/8/16s. One-shot duration depends on AVG and is independent of CONV."
+        },
+        {
+          "name": "AVG",
+          "bits": "6:5",
+          "access": "RW",
+          "reset": 1,
+          "desc": "AVG codes0/1/2/3 = no averaging/8/32/64 conversions; p.27 Table7-6"
+        },
+        {
+          "name": "TNA",
+          "bits": "4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "0=Alert 模式 1=Thermometer 模式"
+        },
+        {
+          "name": "POL",
+          "bits": "3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ALERT/DRDY 极性"
+        },
+        {
+          "name": "DR_ALERT",
+          "bits": "2",
+          "access": "RW",
+          "reset": 0,
+          "desc": "引脚功能选择 DRDY vs Alert"
+        },
+        {
+          "name": "SOFT_RESET",
+          "bits": "1",
+          "access": "RW",
+          "reset": 0,
+          "read_as": 0,
+          "desc": "Same-file unresolved source conflict: Figure7-14 bit1 is R0, Table7-6 continued is R/W0 and says write1 triggers2ms software reset and always reads0. Any table-text-priority action profile is explicitly conditional; no official erratum established."
+        },
+        {
+          "name": "UNUSED",
+          "bits": "0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "未用，R-0",
+          "tier": "UNVERIFIED",
+          "tier_evidence": "位标注在 Figure 里（文本层无 R-0b 命中）；这颗本身就是图/表矛盾的那颗（Soft_Reset 位）"
+        }
+      ]
+    },
+    {
+      "name": "THIGH",
+      "addr": "0x02",
+      "access": "RW",
+      "reset": "0x6000",
+      "desc": "高温门限（§7.6.4 Figure 7-15，16 位全 R/W，出厂 6000h 来自 EEPROM）",
+      "fields": [
+        {
+          "name": "H",
+          "bits": "15:0",
+          "access": "RW",
+          "reset": 24576,
+          "desc": "H[15:0]，补码，1 LSB=7.8125 m°C"
+        }
+      ]
+    },
+    {
+      "name": "TLOW",
+      "addr": "0x03",
+      "access": "RW",
+      "reset": "0x8000",
+      "desc": "低温门限（§7.6.5，出厂 8000h 来自 EEPROM）",
+      "fields": [
+        {
+          "name": "L",
+          "bits": "15:0",
+          "access": "RW",
+          "reset": 32768,
+          "desc": "L[15:0]"
+        }
+      ]
+    },
+    {
+      "name": "EEPROM_UL",
+      "addr": "0x04",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "EEPROM unlock: EUN[15] R/W0; Busy[14] R0 and mirror CONFIG[12]; Reserved[13:0] R0. Locked writes to EEPROM addresses still update volatile digital registers; EUN1 permits NVM programming when Busy0. Programming typical7ms, no writes until Busy0.",
+      "fields": [
+        {
+          "name": "EUN",
+          "bits": "15",
+          "access": "RW",
+          "reset": 0,
+          "desc": "EUN0: writes to EEPROM mapped addresses update volatile digital registers but do not program EEPROM. EUN1: writes to programmable registers program backing EEPROM only when ready. Wait Busy0 before further writes; general-call reset clears EUN and reloads EEPROM."
+        },
+        {
+          "name": "EEPROM_BUSY",
+          "bits": "14",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R status, mirror of CONFIG[12]. Busy=1 while POR reset load or programming;0 means ready. Not a read-clear field. Reset0 applies after POR load complete."
+        },
+        {
+          "name": "UNUSED",
+          "bits": "13:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R-0 全 14 位保留",
+          "tier": "UNVERIFIED",
+          "tier_evidence": "位标注在 Figure 里（文本层无 R-0b 命中）；这颗本身就是图/表矛盾的那颗（Soft_Reset 位）"
+        }
+      ]
+    },
+    {
+      "name": "EEPROM1",
+      "addr": "0x05",
+      "access": "RW",
+      "reset": "0x0000",
+      "runtime_value": true,
+      "desc": "16-bit R/W volatile scratch register backed by programmable EEPROM. Locked(EUN0) writes update volatile register and are readable but do not burn EEPROM; unlocked(EUN1) writes program backing memory. Reset loads persistent manufacturing/user contents, numerical value unknown. No writes during Busy. EEPROM2 additionally has conflicting reset0000 title vs detailedxxxx/diagramR/W-x, retained unresolved.",
+      "fields": []
+    },
+    {
+      "name": "EEPROM2",
+      "addr": "0x06",
+      "access": "RW",
+      "reset": "0x0000",
+      "runtime_value": true,
+      "desc": "16-bit R/W volatile scratch register backed by programmable EEPROM. Locked(EUN0) writes update volatile register and are readable but do not burn EEPROM; unlocked(EUN1) writes program backing memory. Reset loads persistent manufacturing/user contents, numerical value unknown. No writes during Busy. EEPROM2 additionally has conflicting reset0000 title vs detailedxxxx/diagramR/W-x, retained unresolved.",
+      "fields": []
+    },
+    {
+      "name": "TEMP_OFFSET",
+      "addr": "0x07",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "温度偏移（§7.6.8，16 位 R/W，复位 0000h）",
+      "fields": [
+        {
+          "name": "OFF",
+          "bits": "15:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "16-bit signed temperature offset; saturates result at temperature output range limits. Factory reset0 is EEPROM-backed per Table7-3 note1, so programmed EEPROM can change its reset."
+        }
+      ]
+    },
+    {
+      "name": "EEPROM3",
+      "addr": "0x08",
+      "access": "RW",
+      "reset": "0x0000",
+      "runtime_value": true,
+      "desc": "16-bit R/W volatile scratch register backed by programmable EEPROM. Locked(EUN0) writes update volatile register and are readable but do not burn EEPROM; unlocked(EUN1) writes program backing memory. Reset loads persistent manufacturing/user contents, numerical value unknown. No writes during Busy. EEPROM2 additionally has conflicting reset0000 title vs detailedxxxx/diagramR/W-x, retained unresolved.",
+      "fields": []
+    },
+    {
+      "name": "DEVICE_ID",
+      "addr": "0x0F",
+      "access": "RO",
+      "reset": "0x0117",
+      "desc": "RO device ID register: low12 DID117h known; upper4 revision bits unresolved R-x/0h source conflict. Full0117h is conditional revision0 profile, not an unconditional cross-revision reset value.",
+      "fields": [
+        {
+          "name": "ID",
+          "bits": "15:0",
+          "access": "RO",
+          "reset": 279,
+          "desc": "RO aggregate ID contains revision[15:12] and DID[11:0]. DID117h is consistent; revision reset is Figure7-22 R-x versus Table7-15 0h. Main comparison mask0FFF across reset/snapshots; retain source conflict."
+        }
+      ]
+    }
+  ],
+  "excluded_blocks": [
+    "I2C general-call reset（§7.5.3.x 提到用 general call 命令触发软件复位）属总线行为，不在寄存器堆黑盒接口内",
+    "EEPROM 编程时序（2ms busy、需 EUN 解锁）不建模，见 open_questions Q1/Q3"
+  ],
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

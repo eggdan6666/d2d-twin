@@ -1,0 +1,67 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+The –3dB cutoff frequencies of the differential low-pass filter and the common-mode low-pass filters are set at
+ 3.6kHz and 0.36kHz, respectively.
+
+RSHUNT typically ranges from 0.01mΩ to 100mΩ. Therefore, if R1 = R3 = 1kΩ, a good trade-off exists between
+ the circuit input impedance and input referred resistor noise as explained in the Noise and Input Impedance
+ Considerations section.
+
+A simple resistor divider followed by a buffer amplifier is used to generate VCM of 2.5V from a 5V supply.
+
+ 9.2.2.8 Results Summary
+
+A precision voltage source is used to sweep VSHUNT from –50mV to +50mV. The application circuit produces
+a differential voltage of –250mV to +250mV across the ADC inputs. Figure 9-7 and Figure 9-8 show the
+measurement results. The measurements are taken at TA = 25°C. Although 1% tolerance resistors are used,
+ the exact value of these resistors are measured with a Fluke 4.5 digit multimeter to exclude the errors resulting
+ from inaccuracy of these resistors. In Figure 9-7, the x-axis represents VSHUNT and the black line represents the
+measured digital output voltage in mV. In Figure 9-8, the x-axis represents VSHUNT, the black line represents
+ the total measurement error in %, the blue line represents the total measurement error in % after excluding the
+ errors from precision resistors, and the green line represents the total measurement error in % after excluding
+ the errors from precision resistors and performing a system offset calibration with VSHUNT = 0V. Table 9-3 shows
+a results summary.
+
+                                     Table 9-3. Results Summary
+                                                PARAMETER(1)                                VALUE
+
+                       Total error, including errors from 1% precision resistors                                          1.89%
+
+                       Total error, excluding errors from 1% precision resistors                                          0.17%
+
+                       Total error, after offset calibration, excluding errors from 1% precision resistors                        0.11%
+
+                    (1)   TA = 25°C, not accounting for inaccuracy of shunt resistor.
+ 9.2.3 Application Curves
+
+
+                                                                                          2
+             250
+                                                                                                     1.75
+             200                                                                                        1.5
+                                                                                                     1.25
+             150                                      )
+
+                                               (  0.75                    (mV)  100                                                                           1
+              50                                                                                                                                                                                               Error  0.25                              Output                                                                                              0.5
+               0                                                                           0
+                                                                                                           -0.25
+               -50                                                                                              -0.5
+                                                                                                           -0.75                                        Measured -100                                                                                                                                                                                                                                                                                                                                                                                                                                    Measurement                                                                                                                 -1
+              -150                                                                                        -1.25              Including all errors
+              -200                                                                                              -1.5             Excluding resistor errors
+                                                                                                           -1.75             Excluding resistor errors, after offset calibration
+              -250                                                                                             -2
+                  -60  -50  -40  -30  -20  -10  0   10  20  30  40  50  60                            -50   -40   -30   -20   -10   0   10   20   30   40   50
+                                   Shunt Voltage (mV)                    D004                                           Shunt Voltage (mV)                    D005
+    Figure 9-7. Measured Output vs Shunt Voltage     Figure 9-8. Measurement Error vs Shunt Voltage
+                      (VSHUNT)                                           (VSHUNT)
+
+
+
+
+
+36    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

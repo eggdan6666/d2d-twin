@@ -1,0 +1,50 @@
+Bosch Sensortec | BME280 Data sheet                                            26 | 60
+
+
+   v_x1_u32r = (((((adc_H << 14) – (((BME280_S32_t)dig_H4) << 20) – (((BME280_S32_t)dig_H5) *
+      v_x1_u32r)) + ((BME280_S32_t)16384)) >> 15) * (((((((v_x1_u32r *
+      ((BME280_S32_t)dig_H6)) >> 10) * (((v_x1_u32r * ((BME280_S32_t)dig_H3)) >> 11) +
+      ((BME280_S32_t)32768))) >> 10) + ((BME280_S32_t)2097152)) * ((BME280_S32_t)dig_H2) +
+      8192) >> 14));
+   v_x1_u32r = (v_x1_u32r – (((((v_x1_u32r >> 15) * (v_x1_u32r >> 15)) >> 7) *
+      ((BME280_S32_t)dig_H1)) >> 4));
+   v_x1_u32r = (v_x1_u32r < 0 ? 0 : v_x1_u32r);
+   v_x1_u32r = (v_x1_u32r > 419430400 ? 419430400 : v_x1_u32r);
+   return (BME280_U32_t)(v_x1_u32r>>12);
+}
+
+5. Global memory map and register description
+5.1  General remarks
+The entire communication with the device is performed by reading from and writing to registers.
+Registers have a width of 8 bits. There are several registers which are reserved; they should not be
+written to and no specific value is guaranteed when they are read. For details on the interface, consult
+chapter 6.
+5.2  Register compatibility to BMP280
+The BME280 is downward register compatible to the BMP280, which means that the pressure and
+temperature control and readout is identical to BMP280. However, the following exceptions have to be
+considered:
+
+Table 17: Register incompatibilities between BMP280 and BME280
+
+      Register        Bits  Content       BMP280                 BME280
+
+     0xD0 “id”         7:0    chip_id       Read value is             Read value is 0x60
+                                    0x56 / 0x57 (samples)
+                                   0x58 (mass production)
+    0xF5 “config”       7:5     t_sb           ‘110’: 2000 ms                       ‘110’: 10 ms
+                                                         ‘111’: 4000 ms                        ‘111’: 20 ms
+ 0xF7…0xF9 “press”   19:0    press     Resolution (16…20 bit)    Without filter, resolution depends on
+                                   depends only on osrs_p    osrs_p; when using filter, resolution
+                                                                                                    is always 20 bit
+ 0xFA…0xFC “temp”   19:0   temp     Resolution (16…20 bit)    Without filter, resolution depends on
+                                          only depends on osrs_t    osrs_t; when using filter, resolution is
+                                                                        always 20 bit
+
+5.3  Memory map
+The memory map is given in Table 18 below. Reserved registers are not shown.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

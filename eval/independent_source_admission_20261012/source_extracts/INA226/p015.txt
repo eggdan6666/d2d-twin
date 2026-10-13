@@ -1,0 +1,58 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+ 6.5 Programming
+
+An important aspect of the INA226 is that the device does not necessarily measure current or power. The device
+measures both the differential voltage applied between the IN+ and IN- input pins and the voltage applied to
+ the VBUS pin. For the device to report both current and power values, the user must program the resolution
+ of the Current Register (04h) and the value of the shunt resistor present in the application to develop the
+ differential voltage applied between the input pins. The Power Register (03h) is internally set to be 25 times the
+programmed Current_LSB. Both the Current_LSB and shunt resistor value are used in the calculation of the
+ Calibration Register value the device uses to calculate the corresponding current and power values based on the
+measured shunt and bus voltages.
+
+The Calibration Register is calculated based on Equation 1. This equation includes the term Current_LSB,
+ which  is the programmed value for the LSB for the Current Register (04h). The user uses this value to
+ convert the value in the Current Register (04h) to the actual current in amperes. The highest resolution for
+ the Current Register (04h) can be obtained by using the smallest allowable Current_LSB based on the maximum
+ expected current as shown in Equation 2. While this value yields the highest resolution, selecting a value for the
+ Current_LSB to the nearest round number above this value is common to simplify the conversion of the Current
+ Register (04h) and Power Register (03h) to amperes and watts respectively. The RSHUNT term is the value of the
+ external shunt used to develop the differential voltage across the input pins.
+
+                                                                                                                    (1)       CAL = Current_LSB0.00512× RSHUNTwhere
+
+ •  0.00512 is an internal fixed value used to verify scaling is maintained properly
+
+                                                                                                                    (2)         Current_LSB = Maximum Expected Current                                215 After programming the Calibration Register, the Current Register (04h) and Power Register (03h) update
+ accordingly based on the corresponding shunt voltage and bus voltage measurements. Until the Calibration
+ Register is programmed, the Current Register (04h) and Power Register (03h) remain at zero.
+
+ 6.5.1 Programming the Calibration Register
+
+ Figure 8-1 shows a nominal 10A load that creates a differential voltage of 20mV across a 2mΩ shunt resistor.
+The bus voltage for the INA226 is measured at the external VBUS input pin, which in this example is connected
+ to the IN– pin to measure the voltage level delivered to the load. For this example, the VBUS pin measures less
+ than 12V because the voltage at the IN– pin is 11.98V as a result of the voltage drop across the shunt resistor.
+
+ For  this example, assuming a maximum expected current of 15A, the Current_LSB  is calculated to be
+ 457.7μA/bit using Equation 2. Using a value for the Current_LSB of 500μA/Bit or 1mA/Bit significantly simplifies
+ the conversion from the Current Register (04h) and Power Register (03h) to amperes and watts. For this
+ example, a value of 1mA/bit is selected for the Current_LSB. Using this value for the Current_LSB does trade
+a small amount of resolution for having a simpler conversion process on the user side. Using Equation 1 in this
+example with a Current_LSB value of 1mA/bit and a shunt resistor of 2mΩ results in a Calibration Register value
+ of 2560, or A00h.
+
+The Current Register (04h) is then calculated by multiplying the decimal value of the Shunt Voltage Register
+ (01h) contents by the decimal value of the Calibration Register and then dividing by 2048, as shown in Equation
+ 3. For this example, the Shunt Voltage Register contains a value of 8,000 (representing 20mV), which is
+ multiplied by the Calibration Register value of 2560 and then divided by 2048 to yield a decimal value for the
+ Current Register (04h) of 10000, or 2710h. Multiplying this value by 1mA/bit results in the original 10A level
+ stated in the example.
+
+                                                                                                                    (3)         Current = ShuntVoltage ×2048CalibrationRegister
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    15
+
+                                                   Product Folder Links: INA226

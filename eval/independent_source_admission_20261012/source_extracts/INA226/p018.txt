@@ -1,0 +1,79 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+ 6.5.5.1 Serial Bus Address
+
+ To communicate with the INA226, the controller must first address target devices using a target address byte.
+The target address byte consists of seven address bits and a direction bit that indicates whether the action is to
+be a read or write operation.
+
+The device has two address pins, A0 and A1. Table 6-2 lists the pin logic levels for each of the 16 possible
+ addresses. The device samples the state of pins A0 and A1 on every bus communication. Establish the pin
+ states before any activity on the interface occurs.
+
+                            Table 6-2. Address Pins and Target Addresses
+                     A1                A0                  TARGET ADDRESS
+
+                 GND             GND                          1000000
+
+                 GND               VS                           1000001
+
+                 GND              SDA                          1000010
+
+                 GND               SCL                           1000011
+
+                    VS             GND                          1000100
+
+                    VS                VS                           1000101
+
+                    VS               SDA                           1000110
+
+                    VS               SCL                           1000111
+
+                   SDA             GND                          1001000
+
+                   SDA               VS                           1001001
+
+                   SDA              SDA                          1001010
+
+                   SDA               SCL                           1001011
+
+                    SCL             GND                           1001100
+
+                    SCL               VS                           1001101
+
+                    SCL              SDA                           1001110
+
+                    SCL               SCL                            1001111
+
+ 6.5.5.2 Serial Interface
+The INA226 operates only as a target device on both the I2C bus and the SMBus. Connections to the bus are
+made using the open-drain SDA and SCL lines. The SDA and SCL pins feature integrated spike suppression
+ filters and Schmitt triggers to minimize the effects of input spikes and bus noise. Although the device integrates
+ spike suppression into the digital I/O lines, proper layout techniques help minimize the amount of coupling into
+ the communication lines. This noise introduction can occur from capacitively coupling signal edges between
+ the two communication lines themselves or from other switching noise sources present in the system. Routing
+ traces in parallel with ground in between layers on a printed circuit board (PCB) typically reduces the effects of
+ coupling between the communication lines. Shielded communication lines reduces the possibility of unintended
+ noise coupling into the digital I/O lines that can be incorrectly interpreted as start or stop commands.
+
+The INA226 supports the transmission protocol for fast mode (1kHz to 400kHz) and high-speed mode (1kHz to
+ 2.94MHz). All data bytes are transmitted most significant byte first.
+
+ 6.5.5.3 Writing to and Reading From the INA226
+
+ Accessing a specific register on the INA226 is accomplished by writing the appropriate value to the register
+ pointer. Refer to Table 7-1 for a complete  list of registers and corresponding addresses. The value for the
+ register pointer (as shown in Figure 6-7) is the first byte transferred after the target address byte with the R/ W
+ bit low. Every write operation to the device requires a value for the register pointer.
+
+ Writing to a register begins with the first byte transmitted by the controller. This byte is the target address, with
+ the R/ W bit low. The device then acknowledges receipt of a valid address. The next byte transmitted by the
+ controller is the address of the register which data is written to. This register address value updates the register
+ pointer to the desired register. The next two bytes are written to the register addressed by the register pointer.
+
+
+
+18    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,38 @@
+                                                              LIS2DW12
+                                                                                                                             Digital main blocks
+
+
+5.2      Data stabilization time vs. ODR/device setting
+          Some data samples need to be discarded when changing the ODR in HP mode with ODR/2 bandwidth selection.
+           The table below provides the number of samples to be discarded in order to obtain valid usable data.
+
+
+                                         Table 13. Number of samples to be discarded
+
+                  MODE[1:0] in                            BW_FILT[1:0] in
+                             ODR [Hz]                                    Samples to be discarded
+                CTRL1 (20h)                         CTRL6 (25h)
+
+                       00                             -                                                    0
+
+                                               12.5                                                   0
+
+                                         25                                                   0
+
+                                         50                                                   0
+
+                                         100                  00                               1
+                       01
+                                         200                                                   1
+
+                                         400                                                   1
+
+                                         800                                                   1
+
+                                        1600                                                  2
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 22/65

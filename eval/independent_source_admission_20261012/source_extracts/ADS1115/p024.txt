@@ -1,0 +1,70 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+8 Registers
+
+ 8.1 Register Map
+The ADS111x have four registers that are accessible through the I2C interface using the Address Pointer
+ register. The Conversion register contains the result of the last conversion. The Config register is used to change
+ the ADS111x operating modes and query the status of the device. The other two registers, Lo_thresh and
+ Hi_thresh, set the threshold values used for the comparator function, and are not available in the ADS1113.
+
+ 8.1.1 Address Pointer Register (address = N/A) [reset = N/A]
+
+ All four registers are accessed by writing to the Address Pointer register; see Figure 7-9.
+
+                                Figure 8-1. Address Pointer Register
+       7             6             5             4             3             2             1             0
+
+                               RESERVED                                                              P[1:0]
+
+                                     W-000000b                                              W-00b
+
+
+ LEGEND: R/W = Read/Write; R = Read only; W = Write only; -n = value after reset
+
+                        Table 8-1. Address Pointer Register Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+     7:2    RESERVED   W        000000b   Always write 000000b
+
+     1:0      P[1:0]      W        00b        Register address pointer
+                                               00b : Conversion register
+                                               01b : Config register
+                                               10b : Lo_thresh register
+                                                 11b : Hi_thresh register
+
+ 8.1.2 Conversion Register (P[1:0] = 00b) [reset = 0000h]
+
+The 16-bit Conversion register contains the result of the last conversion in binary two's-complement format.
+ Following power-up, the Conversion register is cleared to 0000h, and remains 0000h until the first conversion
+ completes.
+
+                                   Figure 8-2. Conversion Register
+       15            14            13            12             11            10             9             8
+
+                                                                 D[15:8]
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                                                                    D[7:0]
+
+                                                       R-00h
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                          Table 8-2. Conversion Register Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+     15:0     D[15:0]       R         0000h       16-bit conversion result
+
+
+
+
+
+24    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

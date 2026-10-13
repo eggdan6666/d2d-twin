@@ -1,0 +1,48 @@
+REGISTER TEMP_LOCAL @ 0x00 reset=0x00 access=RO runtime=None DESC=本地温度（RLT，§2.2，只读，1 LSB=1°C 补码）。上电默认 00h，首次转换前读到 0
+  T[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=温度字节
+REGISTER TEMP_D2 @ 0x01 reset=0x00 access=RO runtime=None DESC=二极管 2 远端温度（RD2RT，§2.2）
+  T[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=温度字节
+REGISTER SR1 @ 0x02 reset=0x00 access=RO runtime=None DESC=状态寄存器 1（§2.3.1，只读）。**D7/D5/D3 明写『always set to 0 and reserved for future use』→ A 档硬证据**，与同一颗里的『保留地址该读回什么』（C 档，见 open_questions）形成对照
+  LCRIT[0] RO reset=0 read_as=None read_action=None tier=None DESC=本地临界告警
+  D2CRIT[1] RO reset=0 read_as=None read_action=None tier=None DESC=D2 临界告警
+  D2OPEN[2] RO reset=0 read_as=None read_action=None tier=None DESC=D2 断线
+  RSV3[3] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0（原文明写）
+  D2RHIGH[4] RO reset=0 read_as=None read_action=None tier=None DESC=D2 高温
+  RSV5[5] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0（原文明写）
+  LHIGH[6] RO reset=0 read_as=None read_action=None tier=None DESC=本地高温
+  RSV7[7] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0（原文明写）
+REGISTER CONFIG @ 0x03 reset=0x00 access=RW runtime=None DESC=配置寄存器（§2.5）。**读地址 03h、写地址 09h 不同**（表头：Read Address 03h/Write Address 09h）→ 触发断言⑦读写别名。D6/D0 明写『always set to 0 and reserved… **A write of 1 will return a 0 when read**』→ A 档
+  INT_MASK[7] RW reset=0 read_as=None read_action=None tier=None DESC=INT 输出屏蔽
+  RSV6[6] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0，写 1 读回 0（原话）
+  TCRIT_M_D1[5] RW reset=0 read_as=None read_action=None tier=None DESC=D1 的 T_CRIT_A 屏蔽
+  TCRIT_M_D2[4] RW reset=0 read_as=None read_action=None tier=None DESC=D2 屏蔽
+  TCRIT_M_D3[3] RW reset=0 read_as=None read_action=None tier=None DESC=D3 屏蔽
+  TCRIT_M_LOC[2] RW reset=0 read_as=None read_action=None tier=None DESC=本地屏蔽
+  INT_INV[1] RW reset=0 read_as=None read_action=None tier=None DESC=INT 极性反转
+  RSV0[0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0，写 1 读回 0（原话）
+REGISTER LHS @ 0x05 reset=0x7F access=RW runtime=None DESC=本地高温设定点（§2.6，读 05h/写 0Bh，上电默认 127°C = 7Fh——非零复位值）
+  S[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=设定点，1 LSB=1°C 补码
+REGISTER D2RHS @ 0x07 reset=0x7F access=RW runtime=None DESC=D2 高温设定点（§2.6，读 07h/写 0Dh，默认 7Fh）
+  S[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=设定点
+REGISTER TEMP_D1 @ 0x30 reset=0x00 access=RO runtime=None DESC=D1 远端温度（RD1RT，§2.2）
+  T[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=温度字节
+REGISTER TEMP_D3 @ 0x31 reset=0x00 access=RO runtime=None DESC=D3 远端温度（RD3RT，§2.2）
+  T[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=温度字节
+REGISTER SR2 @ 0x35 reset=0x00 access=RO runtime=None DESC=状态寄存器 2（§2.3.2，只读，D6/D3 明写恒 0）
+  D1CRIT[0] RO reset=0 read_as=None read_action=None tier=None DESC=D1 临界
+  D3CRIT[1] RO reset=0 read_as=None read_action=None tier=None DESC=D3 临界
+  D3OPEN[2] RO reset=0 read_as=None read_action=None tier=None DESC=D3 断线
+  RSV3[3] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0（原文明写）
+  D3RHIGH[4] RO reset=0 read_as=None read_action=None tier=None DESC=D3 高温
+  D1OPEN[5] RO reset=0 read_as=None read_action=None tier=None DESC=D1 断线
+  RSV6[6] RO reset=0 read_as=None read_action=None tier=None DESC=恒 0（原文明写）
+  D1RHIGH[7] RO reset=0 read_as=None read_action=None tier=None DESC=D1 高温
+REGISTER D1RHS @ 0x38 reset=0x7F access=RW runtime=None DESC=D1 高温设定点（§2.6，读 38h/写 50h，默认 7Fh）
+  S[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=设定点
+REGISTER D3RHS @ 0x3A reset=0x7F access=RW runtime=None DESC=D3 高温设定点（§2.6，读 3Ah/写 52h，默认 7Fh）
+  S[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=设定点
+REGISTER TCS @ 0x42 reset=0x7F access=RW runtime=None DESC=T_CRIT 设定点（§2.7，读 42h/写 5Ah，默认 7Fh = 127°C）
+  S[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=设定点
+REGISTER MID @ 0xFE reset=0x01 access=RO runtime=None DESC=厂商 ID（§2.4，读 0xFE，默认 01h）
+  ID[7:0] RO reset=1 read_as=None read_action=None tier=None DESC=0x01 = National
+REGISTER STEP_ID @ 0xFF reset=0x00 access=RO runtime=True DESC=Stepping/Die Revision Code（§2.1 表末行 FFh）——**手册没给默认值**，属步进相关只读值，标 runtime_value 跳过复位值断言

@@ -1,0 +1,81 @@
+REGISTER CONFIG @ 0x00 reset=0x7127 access=RW runtime=None DESC=配置寄存器（§8.2.1 Table 8-3/8-4，p.26-27）。写本寄存器会中止进行中的转换。含 RST 软件复位位
+  RST[15] RW reset=0 read_as=0 read_action=None tier=None DESC=RST：写 1 触发与上电复位等效的系统复位，所有寄存器回默认值，且**该位自清零**（原文『This bit resets all registers to default values and self-clears』）→ 读恒 0
+  CH1en[14] RW reset=1 read_as=None read_action=None tier=None DESC=通道 1 使能，默认 1
+  CH2en[13] RW reset=1 read_as=None read_action=None tier=None DESC=通道 2 使能，默认 1
+  CH3en[12] RW reset=1 read_as=None read_action=None tier=None DESC=通道 3 使能，默认 1
+  AVG[11:9] RW reset=0 read_as=None read_action=None tier=None DESC=平均模式 000=1 … 111=1024 次
+  VBUSCT[8:6] RW reset=4 read_as=None read_action=None tier=None DESC=总线电压转换时间，默认 100b=1.1ms
+  VSHCT[5:3] RW reset=4 read_as=None read_action=None tier=None DESC=分流电压转换时间，默认 100b=1.1ms
+  MODE[2:0] RW reset=7 read_as=None read_action=None tier=None DESC=工作模式，默认 111=分流+总线连续；000/100=power-down
+REGISTER SHUNT1 @ 0x01 reset=0x0000 access=RO runtime=None DESC=通道 1 分流电压（§8.2.2，12 位补码左对齐 bits14:3，低 3 位未用）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  SD[14:3] RO reset=0 read_as=None read_action=None tier=None DESC=SD11..SD0 测量值
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER VBUS1 @ 0x02 reset=0x0000 access=RO runtime=None DESC=通道 1 总线电压（§8.2.3）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  BD[14:3] RO reset=0 read_as=None read_action=None tier=None DESC=BD11..BD0 测量值
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER SHUNT2 @ 0x03 reset=0x0000 access=RO runtime=None DESC=通道 2 分流电压（§8.2.4），格式同 SHUNT1
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  SD[14:3] RO reset=0 read_as=None read_action=None tier=None DESC=测量值
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER VBUS2 @ 0x04 reset=0x0000 access=RO runtime=None DESC=通道 2 总线电压（§8.2.5）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  BD[14:3] RO reset=0 read_as=None read_action=None tier=None DESC=测量值
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER SHUNT3 @ 0x05 reset=0x0000 access=RO runtime=None DESC=通道 3 分流电压（§8.2.6）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  SD[14:3] RO reset=0 read_as=None read_action=None tier=None DESC=测量值
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER VBUS3 @ 0x06 reset=0x0000 access=RO runtime=None DESC=通道 3 总线电压（§8.2.7）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  BD[14:3] RO reset=0 read_as=None read_action=None tier=None DESC=测量值
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER CRIT1 @ 0x07 reset=0x7FF8 access=RW runtime=None DESC=通道 1 临界告警门限（§8.2.8，13 位数据占 bits15:3，复位 0x7FF8）
+  CL[15:3] RW reset=4095 read_as=None read_action=None tier=None DESC=C1L12..C1L0
+  UNUSED[2:0] RW reset=0 read_as=None read_action=None tier=B DESC=[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.31 Table 8-18：『bits 2-0 Reserved  R/W  0h』——手册标 R/W，可写
+REGISTER WARN1 @ 0x08 reset=0x7FF8 access=RW runtime=None DESC=通道 1 警告告警门限（§8.2.9）
+  WL[15:3] RW reset=4095 read_as=None read_action=None tier=None DESC=W1L12..W1L0
+  UNUSED[2:0] RW reset=0 read_as=None read_action=None tier=B DESC=[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.31：Warning-Alert Channel-1 Limit，bits 2-0 Reserved R/W 0h
+REGISTER CRIT2 @ 0x09 reset=0x7FF8 access=RW runtime=None DESC=通道 2 临界告警门限（§8.2.10）
+  CL[15:3] RW reset=4095 read_as=None read_action=None tier=None DESC=C2L12..C2L0
+  UNUSED[2:0] RW reset=0 read_as=None read_action=None tier=B DESC=[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.31-32 同款表：bits 2-0 Reserved R/W 0h
+REGISTER WARN2 @ 0x0A reset=0x7FF8 access=RW runtime=None DESC=通道 2 警告告警门限（§8.2.11）
+  WL[15:3] RW reset=4095 read_as=None read_action=None tier=None DESC=W2L12..W2L0
+  UNUSED[2:0] RW reset=0 read_as=None read_action=None tier=B DESC=[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.32：bits 2-0 Reserved R/W 0h
+REGISTER CRIT3 @ 0x0B reset=0x7FF8 access=RW runtime=None DESC=通道 3 临界告警门限（§8.2.12）
+  CL[15:3] RW reset=4095 read_as=None read_action=None tier=None DESC=C3L12..C3L0
+  UNUSED[2:0] RW reset=0 read_as=None read_action=None tier=B DESC=[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.32 Table 8-25：bits 2-0 Reserved R/W 0h
+REGISTER WARN3 @ 0x0C reset=0x7FF8 access=RW runtime=None DESC=通道 3 警告告警门限（§8.2.13）
+  WL[15:3] RW reset=4095 read_as=None read_action=None tier=None DESC=W3L12..W3L0
+  UNUSED[2:0] RW reset=0 read_as=None read_action=None tier=B DESC=[金标纠正 B] 未用，读 0 | 原编码 RO → RW：PDF p.32：bits 2-0 Reserved R/W 0h
+REGISTER SHUNT_SUM @ 0x0D reset=0x0000 access=RO runtime=None DESC=分流电压累加（§8.2.14，14 位占 bits14:1，bit0 未用）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位
+  SV[14:1] RO reset=0 read_as=None read_action=None tier=None DESC=累加值
+  UNUSED[0] RO reset=0 read_as=None read_action=None tier=None DESC=未用，读 0
+REGISTER SHUNT_SUM_LIMIT @ 0x0E reset=0x7FFE access=RW runtime=None DESC=累加门限（§8.2.15，14 位占 bits15:1，bit0 未用，复位 0x7FFE）
+  SVL[15:1] RW reset=16383 read_as=None read_action=None tier=None DESC=SVL13..SVL0
+  UNUSED[0] RO reset=0 read_as=None read_action=None tier=A DESC=未用，读 0
+REGISTER MASK_ENABLE @ 0x0F reset=0x0002 access=RW runtime=None DESC=屏蔽/使能与标志寄存器（§8.2.16 Table 8-33/8-34，p.34-35）。**16 位全部标 R/W**，包括 bit15 的 Reserved（Table 8-33 给 RW-0）——与 10h/11h 的未用位标 R-0 不同，这颗芯片里两种写法并存，是刻意的区分点。复位 0x0002 = TCF=1
+  RSVD15[15] RW reset=0 read_as=None read_action=None tier=None DESC=Reserved，但手册标 R/W-0（可写！）
+  SCC[14:12] RW reset=0 read_as=None read_action=None tier=None DESC=累加通道选择 SCC1-3
+  WEN[11] RW reset=0 read_as=None read_action=None tier=None DESC=警告告警锁存使能
+  CEN[10] RW reset=0 read_as=None read_action=None tier=None DESC=临界告警锁存使能
+  CF[9:7] RO reset=0 read_as=None read_action=clear tier=None DESC=临界告警标志 CF1-3——读 Mask/Enable 后清除（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）
+  SF[6] RO reset=0 read_as=None read_action=clear tier=None DESC=累加告警标志，read-clear（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）
+  WF[5:3] RO reset=0 read_as=None read_action=clear tier=None DESC=警告告警标志 WF1-3，read-clear（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）
+  PVF[2] RO reset=0 read_as=None read_action=None tier=None DESC=电源有效标志（原文：不随读清除，PVF 要等告警条件消失、TCF 要断电才清 → 忠实编码为 RO 而非可写存储）
+  TCF[1] RO reset=1 read_as=None read_action=None tier=None DESC=时序控制标志——**上电即为 1**（复位值 0x0002 的来源，§7.4.2 p.15）（原文：不随读清除，PVF 要等告警条件消失、TCF 要断电才清 → 忠实编码为 RO 而非可写存储）
+  CVRF[0] RO reset=0 read_as=None read_action=clear tier=None DESC=转换完成标志；写 CONFIG 或读 Mask/Enable 都会清除（read-to-clear：读 Mask/Enable 即清除，§8.2.16 原文）
+REGISTER PV_UPPER @ 0x10 reset=0x2710 access=RW runtime=None DESC=电源有效上限（§8.2.17 Table 8-35/8-36；SIGN 标 R-0、bits14:3 标 R/W、bits2:0 标 R-0；复位 0x2710 = 10.000V，LSB 8mV → 字段值 0x4E2=1250）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位，R-0
+  PVU[14:3] RW reset=1250 read_as=None read_action=None tier=None DESC=PVU11-0，复位 4E2h
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=A DESC=Reserved，标 R-0
+REGISTER PV_LOWER @ 0x11 reset=0x2328 access=RW runtime=None DESC=电源有效下限（§8.2.18；复位 0x2328 = 9.000V → 字段值 0x465=1125）
+  SIGN[15] RO reset=0 read_as=None read_action=None tier=None DESC=符号位，R-0
+  PVL[14:3] RW reset=1125 read_as=None read_action=None tier=None DESC=PVL11-0
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=A DESC=Reserved，标 R-0
+REGISTER MANUF_ID @ 0xFE reset=0x5449 access=RO runtime=None DESC=厂商 ID（§8.2.20）= 0x5449（ASCII 'TI'），只读且复位即为此值
+  ID[15:0] RO reset=21577 read_as=None read_action=None tier=None DESC=0x5449
+REGISTER DIE_ID @ 0xFF reset=0x3220 access=RO runtime=None DESC=芯片 ID（§8.2.21 Table 8-41）= 0x3220，只读，逐位 R-n 齐全
+  DIE[15:0] RO reset=12832 read_as=None read_action=None tier=None DESC=0x3220

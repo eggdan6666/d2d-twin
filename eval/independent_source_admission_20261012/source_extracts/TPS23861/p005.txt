@@ -1,0 +1,92 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+5  Pin Configuration and Functions
+
+
+                                   PW Package
+                                                        28-Pin TSSOP
+                                                Top View
+
+                                               VDD       1                 28     VPWR
+                                               RESET       2                 27       N/C
+                                                   SCL       3                 26      AOUT
+                                                        SDAI       4                 25       AIN
+                                             SDAO       5                 24     SHTDWN
+                                                              INT       6                 23      A3
+                                           DGND       7                 22     AGND
+                                                 SEN3       8                 21      GATE2
+                                                   DRAIN3       9                 20      DRAIN2
+                                                GATE3       10                19      SEN2
+                                              KSENSB       11                18      KSENSA
+                                                 SEN4       12                17      GATE1
+                                                   DRAIN4       13                16      DRAIN1
+                                                GATE4       14                15      SEN1
+
+
+                                          Pin Functions
+
+           PIN
+                                     I/O                                 DESCRIPTION
+ NAME          NO.
+ A3               23                       I        I2C A3 address line. Internally pulled up to VDD.
+
+ AGND            22         P       Analog ground.
+ AIN              25                       I        I2C address programming input line; this pin is internally pulled up to VDD.
+ AOUT            26        O       I2C address programming line; this output is open drain.
+
+ DGND            7         P         Digital ground.
+
+ DRAIN3           9                        I
+
+ DRAIN4          13                       I
+                                              Port 1-4 output voltage monitor; connect to output port through a 47-Ω resistor.
+ DRAIN1          16                       I
+
+ DRAIN2          20                       I
+
+ GATE3           10        O
+
+ GATE4           14        O
+                                              Port 1-4 gate-drive output.
+ GATE1           17        O
+
+ GATE2           21        O
+
+                                                     Interrupt; this pin asserts low when a bit in the interrupt register is asserted. This pin is
+ INT               6        O                                         updated between I2C transactions. This output is open drain.
+
+ KSENSA          18                       I        Kelvin point connection for SEN1 and SEN2.
+
+ KSENSB          11                       I        Kelvin point connection for SEN3 and SEN4.
+
+ N/C              27            x      Used to effect regulatory voltage-spacing compliance. Leave this pin open.
+
+ RESET            2                        I        Reset; when asserted low, the device resets. This pin is internally pulled up to VDD.
+ SCL              3                        I         Serial clock input for I2C bus.
+ SDAI             4                        I         Serial data input for I2C bus; this pin can be connected to SDAO for non-isolated systems.
+                                                  Serial data output for I2C bus; this pin can be connected to SDAI for non-isolated systems.
+ SDAO            5        O
+                                             This output is open drain.
+
+ SEN3             8                        I
+
+ SEN4            12                       I
+                                              Port 1-4 current-sense input; connect to current-sense resistor through a 22-Ω resistor.
+ SEN1            15                       I
+
+ SEN2            19                       I
+
+ SHTDWN         24                       I         Low-priority ports shutdown.
+
+ VDD              1         P         Digital 3.3-V supply. Bypass VDD to DGND using a 0.1-μF capacitor.
+
+ VPWR            28         P       Analog 48-V supply. Bypass VPWR to AGND using a 0.1-μF capacitor.
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback      5
+
+                                                 Product Folder Links: TPS23861

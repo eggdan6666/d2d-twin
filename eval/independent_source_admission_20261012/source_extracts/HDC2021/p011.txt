@@ -1,0 +1,64 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.3 Feature Description
+ 7.3.1 Factory Installed Polyimide Tape
+
+A polyimide tape covers the opening of the humidity sensor element. The tape protects the humidity sensor
+ element from pollutants that can be produced as part of the manufacturing process, such as SMT assembly,
+PCB board wash, and conformal coating. The tape must be removed after the final stages of assembly for
+ accurate measurement of relative humidity in the ambient environment. The tape can withstand at least three
+ standard reflow cycles.
+
+ To remove the polyimide tape from the humidity sensor element, TI recommends to use a ESD-safe tweezer to
+ grip the adhesive free tab in the lower right corner, then slowly peel from the bottom right corner towards the top
+ left corner (pin 1 designator) in an upward direction (as opposed to across the surface). This will help to reduce
+ the risk of scratching the humidity sensor element.
+
+ 7.3.2 Sleep Mode Power Consumption
+
+One key feature of the HDC2021 is the low power consumption designed for battery-powered or energy-
+ harvesting applications. In these applications, the HDC2021 can be put into sleep mode with a typical current
+ consumption of 50 nA, minimizing the average power consumption and self-heating. The sleep mode is the
+ default operating mode upon power-on reset.
+
+ 7.3.3 Measurement Modes: One-Shot vs. Continuous Conversion
+
+ There are two types of measurement modes are available on the HDC2021: one-shot mode and continuous
+ conversion mode.
+ During one-shot mode, each measurement is initiated through an I2C command on an as-needed basis. After
+ the measurement is completed, the device goes back to the sleep mode automatically until another I2C
+command to initiate a measurement is received.
+
+The HDC2021 can also be configured to perform measurements on a periodic basis in continuous conversion
+mode to eliminate the need to initiate multiple measurement requests through I2C commands. The user can
+ adjust the Device Configuration register to select one of 7 different sampling rates spanning from 1 sample every
+2 minutes to 5 samples every second. In continuous conversion mode, the HDC2021 periodically wakes up from
+ the sleep mode based on the selected sampling rate.
+
+ 7.3.4 Heater
+
+The HDC2021 includes an integrated heating element that can be switched on briefly to prevent or remove any
+ condensation that may build up in high humidity environments. Additionally, the heater can be used to verify
+ functionally of the integrated temperature sensor.
+
+ If the dew point of an application is continuously calculated and tracked, and the application firmware is written
+ such that it can detect a potential condensing situation (or a period of it), a software subroutine can be run, as a
+ precautionary measure, to activate the onboard heater as an attempt to remove the condensate. The device
+ shall continue to measure and track the %RH level after the heater is activated. Once the %RH reading goes to
+ zero % (or near it), the heater can be subsequently turned off, allowing the device to cool down. Cooling of the
+ device can takes minutes and temperature measurement shall continue to be performed to ensure the device
+goes back to normal operating condition before restarting the device for normal service.
+
+ Note once the heater activates, the operating temperature of the device shall be limited to below 100°C. The
+ heater has a typical current draw of 90 mA at 3.3-V operation and 55 mA at 1.8-V operation.
+
+ It is important to recognize that the integrated heater evaporates condensate that forms on top of the humidity
+ sensor, but does not remove any dissolved contaminants. Any contaminant residue, if present, may impact the
+ accuracy of the humidity sensor.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    11

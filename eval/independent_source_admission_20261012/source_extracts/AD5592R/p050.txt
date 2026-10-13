@@ -1,0 +1,58 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 27. Bit Descriptions for IO_TS_CONFIG (Continued)
+Bits            Bit Name           Description                                                                                                Default Value
+
+6           TS6                Set the I/O6 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+5           TS5                Set the I/O5 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+4           TS4                Set the I/O4 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+3           TS3                Set the I/O3 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+2           TS2                Set the I/O2 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+1           TS1                Set the I/O1 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+0           TS0                Set the I/O0 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+
+
+Software Reset Register
+
+Name: SW_RESET
+
+Resets the AD5592R/AD5592R-1.
+
+
+
+
+
+Table 28. Bit Descriptions for SW_RESET
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b1111.                                                           0xF
+[10:0]       SW_RESET          Write to RESET register.                                                                            0x0
+                                 10110101100: Reset the AD5592R/AD5592R-1.
+
+
+DAC Write Register
+
+Name: DAC_WR
+
+Writes to addressed DAC register.
+
+
+
+analog.com                                                                                         Rev. H | 50 of 54

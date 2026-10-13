@@ -1,0 +1,90 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 9.2.3 Resistive Bridge Measurement
+
+The device offers several features to ease the implementation of ratiometric bridge measurements (such as a
+PGA with gains up to 128, buffered, differential reference inputs, and a low-side power switch).
+
+                                                                                                5.0V                                             3.3V
+
+
+
+                                                                                                           0.1µF                                            0.1µF
+
+
+                                                                                               REFP0    REFN0
+
+           5.0V                                                                     10 A to  AVDD                                DVDD
+                                                                                1.5mA
+                                                REFP1                                       2.048V           Reference        ADS1220
+                                                                                                         Reference        MUX
+
+
+                                           CCM2
+                                   RF2                       AIN1
+                                                                                                                       CS
+                                                                                        AINP
+                                                                                                                                                                                       Digital Filter       SCLK
+                                                                                                                                                     24-Bit             and
+                                                    CDIF1          CDIF2              MUX          PGA               ADC            SPI           DIN
+                                   RF1                       AIN2                                                                                           Interface        DOUT/DRDY
+                                                                                       AINN
+                                                                                                                    DRDY
+                                           CCM1
+
+                                               REFN1                                       Precision                  Low-Drift
+                                                                                                    Temperature
+                                                                                                                                                         Oscillator
+                                                                                                   Sensor
+
+
+
+
+                                                                              AVSS                    CLK        DGND
+
+
+                             Figure 9-11. Resistive Bridge Measurement
+
+ 9.2.3.1 Design Requirements
+
+                                   Table 9-5. Design Requirements
+                       DESIGN PARAMETER                         VALUE
+
+                             Analog supply voltage                                  5.0V
+
+                                      Digital supply voltage                                  3.3V
+
+                              Load cell type                                     4-wire load cell
+
+                        Load cell maximum capacity                              1kg
+
+                            Load cell sensitivity                             3mV/V
+
+                                     Excitation voltage                               5V
+
+                                      Repeatability                               50mg
+
+ 9.2.3.2 Detailed Design Procedure
+
+ To implement a ratiometric bridge measurement, the bridge excitation voltage is simultaneously used as the
+ reference voltage for the ADC, as shown in Figure 9-11. With this configuration, any drift in excitation voltage
+ also shows up on the reference voltage, consequently canceling out drift error. Either of the two device reference
+ input pairs can be connected to the bridge excitation voltage. However, only the negative reference input
+(REFN1) can be internally routed to a low-side power switch. By connecting the low side of the bridge to REFN1,
+ the device can automatically power-down the bridge by opening the low-side power switch. When the PSW bit
+ in the configuration register is set to 1b, the device opens the switch every time a POWERDOWN command is
+ issued and closes the switch again when a START/SYNC command is sent.
+
+The PGA offers gains up to 128, which helps amplify the small differential bridge output signal to make optimal
+ use of the ADC full-scale range. The output signal of the bridge meets the common-mode voltage requirement of
+ the PGA when a symmetrical bridge is used with the excitation voltage equal to the supply voltage of the device.
+
+The maximum input voltage of ADS1220 is limited to VIN (MAX) = ±[(AVDD – AVSS) – 0.4V] / Gain, which means
+ the entire full-scale range, FSR = ±(AVDD – AVSS) / Gain, cannot be used in this configuration. This limitation
+
+
+
+62    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

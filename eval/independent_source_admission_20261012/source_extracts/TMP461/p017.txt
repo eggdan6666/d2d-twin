@@ -1,0 +1,69 @@
+                                                                                                       TMP461
+
+www.ti.com                                                                                                           SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+8.6  Register Map
+
+                                                        Table 4. Register Map
+
+                                                                                                 BIT DESCRIPTION
+ POINTER READ  POINTER WRITE
+      (HEX)            (HEX)       POR (HEX)         7           6              5             4           3           2           1           0      REGISTER DESCRIPTION
+
+       00              N/A              00           LT11        LT10           LT9           LT8         LT7         LT6         LT5         LT4      Local Temperature Register (high byte)
+
+       01              N/A              00          RT11       RT10         RT9          RT8        RT7        RT6        RT5        RT4     Remote Temperature Register (high byte)
+
+       02              N/A              N/A         BUSY       LHIGH       LLOW        RHIGH     RLOW      OPEN     RTHRM     LTHRM     Status Register
+
+       03               09               00         MASK1       SD      ALERT/THERM2       0           0       RANGE         0           0        Configuration Register
+
+       04             0A              08             0           0              0             0        CR3       CR2       CR1       CR0      Conversion Rate Register
+
+       05             0B              7F          LTHL11      LTHL10        LTHL9        LTHL8       LTHL7       LTHL6      LTHL5       LTHL4     Local Temperature High Limit Register
+
+       06             0C              80          LTLL11      LTLL10         LTLL9         LTLL8       LTLL7       LTLL6       LTLL5       LTLL4     Local Temperature Low Limit Register
+
+       07             0D              7F         RTHL11     RTHL10       RTHL9        RTHL8      RTHL7      RTHL6      RTHL5      RTHL4    Remote Temperature High Limit Register (high byte)
+
+       08             0E              80          RTLL11      RTLL10        RTLL9        RTLL8       RTLL7       RTLL6      RTLL5       RTLL4    Remote Temperature Low Limit Register (high byte)
+
+       N/A             0F              N/A          X         X           X           X         X         X         X         X       One-Shot Start Register(1)
+
+       10              N/A              00          RT3        RT2          RT1          RT0          0           0           0           0      Remote Temperature Register (low byte)
+
+       11               11               00         RTOS11     RTOS10       RTOS9       RTOS8     RTOS7     RTOS6     RTOS5     RTOS4    Remote Temperature Offset Register (high byte)
+
+       12               12               00         RTOS3     RTOS2       RTOS1       RTOS0         0           0           0           0      Remote Temperature Offset Register (low byte)
+
+       13               13              F0         RTHL3      RTHL2        RTHL1        RTHL0         0           0           0           0      Remote Temperature High Limit Register (low byte)
+
+       14               14               00          RTLL3      RTLL2        RTLL1        RTLL0         0           0           0           0      Remote Temperature Low Limit Register (low byte)
+
+       15              N/A              00            LT3         LT2           LT1           LT0          0           0           0           0        Local Temperature Register (low byte)
+
+       16               16               03             0           0              0             0           0           0        REN        LEN      Channel Enable Register
+
+       19               19              7F         RTH11      RTH10        RTH9        RTH8       RTH7       RTH6       RTH5       RTH4     Remote Temperature THERM Limit Register
+
+       20               20              7F          LTH11      LTH10         LTH9         LTH8       LTH7       LTH6       LTH5       LTH4      Local Temperature THERM Limit Register
+
+       21               21             0A         HYS11      HYS10        HYS9        HYS8       HYS7       HYS6       HYS5       HYS4    THERM Hysteresis Register
+
+       22               22               01             0           0              0             0       CONAL2    CONAL1    CONAL0        1       Consecutive ALERT Register
+
+       23               23               00          NC7       NC6         NC5         NC4       NC3       NC2       NC1       NC0      η-Factor Correction Register
+
+       24               24               00             0           0              0             0           0           0         DF1        DF0        Digital Filter Control Register
+
+      FE              N/A              55             0           1              0             1           0           1           0           1       Manufacturer Identification Register
+
+(1)  X = undefined. Writing any value to this register initiates a one-shot start; see the One-Shot Conversion section.
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                                                                      Submit Documentation Feedback     17
+
+                                                                         Product Folder Links: TMP461

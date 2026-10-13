@@ -1,0 +1,58 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 7.3.2.3 Power-Valid Alert
+
+The power-valid alert verifies  if all power rails are above the required levels. This feature manages power
+ sequencing, and validates the reported measurements based on system configuration. Power-valid mode starts
+ at power-up, and detects when each channel exceeds a 10V threshold. This 10V level is the default value
+programmed into the Power-Valid Upper-Limit register. This value can be reprogrammed when the INA3221 is
+powered up to a valid supply-voltage level of at least 2.7V. When all three bus-voltage measurements reach
+ the programmed value loaded to the Power-Valid Upper-Limit register, the power-valid (PV) alert pin pulls high.
+PV powers up in a low state, and does not pull high until the power-valid conditions are met, indicating all
+ bus-voltage rails are above the power-valid upper-limit value. This sequence is shown in Figure 7-1.
+
+                                                               All enabled channel bus voltages are                                     All enabled channel bus voltages are
+                                            above the power-valid upper limit.                           above the power-valid upper limit.
+             High
+    Power
+       Valid
+     Output
+           Low
+                          All enabled channel bus voltages are                        At least one bus voltage channel has
+                     not above the power-valid upper limit.                   dropped below the power-valid lower limit.
+
+                                Figure 7-1. Power-Valid State Diagram
+
+When the power-valid conditions are met, and the PV pin pulls high, the INA3221 monitors  if any bus-voltage
+measurements drop below 9V. This 9V level is the default value programmed into the Power-Valid Lower-Limit
+ register. This value can also be reprogrammed when the INA3221 powers up to a supply voltage of at least
+ 2.7V. If any bus-voltage measurement on the three channels drops below the Power-Valid Lower-Limit register
+ value, the PV pin goes low, indicating that the power-valid condition is no longer met. At this point, the INA3221
+resumes monitoring the power rails for a power-valid condition set in the Power-Valid Upper-Limit register.
+
+The power-valid alert function is based on the power-valid conditions requirement that all three channels reach
+ the intended Power-Valid Upper-Limit register value.  If all three channels are not used, connect the unused-
+ channel IN– pin externally to one of the used channels to use the power-valid alert function.  If the unused
+ channel is not connected to a valid rail, the power-valid alert function cannot detect if all three channels reach
+ the power-valid level. Float the unused channel IN+ pin.
+
+The power-valid function also requires that bus-voltage measurements are monitored. To detect changes in
+ the power-valid state, enable bus-voltage measurements through one of the corresponding MODE-bit settings
+ in the Configuration register. The single-shot bus-voltage mode periodically cycles between the bus-voltage
+measurements to make sure that the power-valid conditions are met.
+
+When all three bus-voltage measurements are completed, the device compares the results to the power-valid
+ threshold values to determine the power-valid state. The bus-voltage measurement values remain in the
+ corresponding channel output registers until the bus-voltage measurements are taken again, thus updating
+ the output registers. When the output registers are updated, the values are again compared to the power-valid
+ thresholds. Without taking periodic bus-voltage measurements, the INA3221 is unable to determine if the power-
+ valid conditions are maintained.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    13
+
+                                                  Product Folder Links: INA3221

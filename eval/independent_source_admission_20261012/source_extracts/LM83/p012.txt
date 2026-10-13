@@ -1,0 +1,25 @@
+1.0 Functional Description (Continued)                                                                           LM83
+1.9 COMMUNICATING with the LM83
+
+
+
+
+
+                                                                                                                                                  DS101058-9
+There are 19 data registers in the LM83, selected by the             isters because that will be the data most frequently read
+Command Register. At power-up the Command Register is           from the LM83), then the read can simply consist of an
+set to “00”, the location for the Read Local Temperature Reg-          address byte, followed by retrieving the data byte.
+ister. The Command Register latches the last location it was        2.    If the Command Register needs to be set, then an ad-
+set to. Reading the Status Register resets T_CRIT_A and           dress byte, command byte, repeat start, and another ad-
+INT, so long as a temperature comparison does not signal a           dress byte will accomplish a read.
+fault (see Sections 1.2 and 1.3). All other registers are pre-                                                    The data byte has the most significant bit first. At the end ofdefined as read only or write only. Read and write registers                                                      a read, the LM83 can accept either Acknowledge or No Ac-with the same function contain mirrored data.                                                        knowledge from the Master (No Acknowledge is typically
+A Write to the LM83 will always include the address byte and      used as a signal for the slave that the Master has read its
+the command byte. A write to any register requires one data         last byte).
+byte.
+Reading the LM83 can take place either of two ways:            1.10 SERIAL INTERFACE ERROR RECOVERY
+1.    If the location latched in the Command Register is cor-      The LM83 SMBus lines will be reset to the SMBus idle state
+    rect (most of the time it is expected that the Command              if the SMBData or SMBCLK lines are held low for 40 ms or
+    Register will point to one of the Read Temperature Reg-      more (tTIMEOUT). The LM83 may or may not reset the state of
+
+
+                                                               11                                                    www.national.com

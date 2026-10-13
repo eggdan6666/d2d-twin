@@ -1,0 +1,62 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.27.4  Port 4 Current Register
+
+Command = 3Ch with 2 Data Byte (LSByte first, MSByte second), Read Only
+
+LSB: 3Ch
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                 Port 4 Current[7:0]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+MSB: 3Dh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                             Port 4 Current[13:8]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Port current is monitored continuously when:
+•  The port is powered on.
+•  The port is in Off Mode. Data conversion result.
+The I2C data transmission is a 2-byte transfer.
+
+
+                                  NOTE
+         The conversion is done using a TI-proprietary multi-slope integrating converter.
+
+
+Bit Descriptions
+
+Port n Current[13:0]: 14-bit data conversion result of current for Port n. The result depends on whether the
+current-sense resistor is 250 mΩ or 255 mΩ.
+
+The equation defining the current measured is:
+        I N u ISTEP
+
+    where
+              •     I = Port n Current, A
+              •  N = 14-bit value in Port n Current Register
+              •   ISTEP = LSB value                                                                                                   (4)
+
+                     RS = 255 mΩ                                             RSENSE = 250 mΩ
+
+       FULL SCALE               LSB VALUE               FULL SCALE               LSB VALUE
+
+             1 A                         61.039 µA                         1.02 A                        62.260 µA
+
+
+
+
+
+74     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

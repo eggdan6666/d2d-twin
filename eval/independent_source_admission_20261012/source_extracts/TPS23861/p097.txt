@@ -1,0 +1,50 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+9 Power Supply Recommendations
+
+9.1 VDD
+
+The recommended VDD supply voltage requirement is 3.3 V, ±0.3 V. Each TPS23861 requires approximately 5
+mA typical and 6 mA maximum from the VDD supply. The VDD supply can be generated from VPWR with a
+linear regulator (TPS7A4001) for single TPS23861/Auto Mode based PSE or a buck-type regulator (LM5007 or
+LM5019 based) for a higher port count PSE using multiple TPS23861 devices operating in Auto or Semi-Auto
+Modes.
+
+The power supply design must ensure the VDD rail rises monotonically through VUVDDR without any droop below
+VUVDDF as the loads are turned on. This is accomplished with proper bulk capacitance across the VDD rail for the
+expected load current steps over worst case design corners. Furthermore, the combination of decoupling
+capacitance and bulk storage capacitance must hold the VDD rail above the UVLO_fall threshold during any
+expected transient outages once power is applied.
+
+9.2 VPWR
+
+The recommended VPWR supply voltage requirement is 44 V to 57 V. A power supply with a nominal 48-V or
+54-V output can support both type 1 and type 2 PD requirements. The output current required from the VPWR
+supply depends on the number and type of ports required in the system. The TPS23861 can be configured for
+type 1 and type 2 ports and the current limit is set proportionally. ICUT for a type 1 port is 374 mA , ±5%, and for
+a type 2 port is 645 mA, ± 5%. Size the VPWR supply accordingly for the number and type of ports to be
+supported. As an example, the VPWR power supply rating should be greater than 3.2 A for eight type 1 ports or
+greater than 5.5 A for eight type 2 ports, assuming maximum port and standby currents.
+
+9.3 VPWR-RESET Sequencing
+
+The voltage on the RESET pin (VRESET ) should be kept below 0.9 V until VVPWR exceeds VUVLOPW_R. If VDD is
+turned ON after VVPWR exceeds VUVLOPW_R then no delay for RESET is required.  If VDD is ON before VVPWR
+exceeds VUVLOPW_R then a delay for RESET is required. This delay can be provided by the system host or with a
+capacitor (CRST) connected to the RESET pin using the internal (50 kΩ typical) or external pullup resistor.
+
+                                  NOTE
+          For the schematic diagrams shown in Figure 36, Figure 46, Figure 48, Figure 49, and
+           Figure 50, the VDD power supply is turned on after the VPWR power supply exceeds
+          VUVLOPW_R. More detail regarding TPS23861 power-on sequencing can be obtained by
+            referring to the application note, TPS23861 Power-On Considerations, SLVA723.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     97
+
+                                                 Product Folder Links: TPS23861

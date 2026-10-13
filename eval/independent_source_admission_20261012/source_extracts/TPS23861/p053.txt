@@ -1,0 +1,54 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.6  Start/ILIM Event Register
+
+Command = 08h with 1 Data Byte, Read Only
+
+Command = 09h with 1 Data Byte, Clear on Read
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME           ILIM4       ILIM3       ILIM2       ILIM1     STRT4     STRT3     STRT2     STRT1
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Active high, each bit corresponds to a particular event that occurred.
+
+Each bit ILIMn, STRTn represents an individual port.
+
+A read at each location (08h or 09h) returns the same register data with the exception that the Clear-on-Read
+command clears all bits of the register. These bits are cleared by I2C power-off command (POFFn) or port-reset
+command (RESPn).
+
+If this register is causing the INT pin to be activated, this Clear-on-Read command releases the INT pin.
+
+Any active bit has an impact on the Interrupt Register as indicated in the Interrupt Register description.
+
+Bit Descriptions
+
+STRT4-STRT1: Indicates that a start fault occurred at port turn on. This may be caused by:
+ 1. Overcurrent (foldback) condition at the end of tSTART.
+ 2. Detect or classification fault following a pushbutton PWON command in Semi-Auto or Manual Mode.
+ 3. Overcurrent or class mismatch on second finger in Semi-Auto or Manual Mode.
+
+1 = Inrush fault or class/detect error occurred.
+
+0 = No inrush fault or class/detect error occurred.
+
+ILIM4-ILIM1: Indicates that an ILIM fault occurred, which means the port has limited its output current to ILIM or
+the folded back ILIM for more than tLIM.
+
+1 = ILIM fault occurred.
+
+0 = No ILIM fault occurred.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     53
+
+                                                 Product Folder Links: TPS23861

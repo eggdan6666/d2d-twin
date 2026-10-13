@@ -1,0 +1,199 @@
+{
+  "status": "PASS_FOR_AUDIT_PACKAGE_COMPLETENESS_ONLY",
+  "field_count": 572,
+  "dimension_count": 4004,
+  "chips": 20,
+  "unique_field_ids": 572,
+  "verdict_counts": {
+    "REPAIR": 96,
+    "CONDITIONAL": 302,
+    "EXCLUDE": 39,
+    "PASS": 135
+  },
+  "per_chip": [
+    {
+      "chip": "AD5592R",
+      "fields": 22,
+      "PASS": 0,
+      "REPAIR": 4,
+      "CONDITIONAL": 18,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "ADS1115",
+      "fields": 12,
+      "PASS": 0,
+      "REPAIR": 1,
+      "CONDITIONAL": 11,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "ADS1220",
+      "fields": 16,
+      "PASS": 0,
+      "REPAIR": 0,
+      "CONDITIONAL": 16,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "BME280",
+      "fields": 25,
+      "PASS": 3,
+      "REPAIR": 0,
+      "CONDITIONAL": 18,
+      "EXCLUDE": 4
+    },
+    {
+      "chip": "BMP280",
+      "fields": 21,
+      "PASS": 3,
+      "REPAIR": 1,
+      "CONDITIONAL": 14,
+      "EXCLUDE": 3
+    },
+    {
+      "chip": "HDC2021",
+      "fields": 39,
+      "PASS": 22,
+      "REPAIR": 8,
+      "CONDITIONAL": 6,
+      "EXCLUDE": 3
+    },
+    {
+      "chip": "INA219",
+      "fields": 16,
+      "PASS": 6,
+      "REPAIR": 6,
+      "CONDITIONAL": 3,
+      "EXCLUDE": 1
+    },
+    {
+      "chip": "INA226",
+      "fields": 29,
+      "PASS": 6,
+      "REPAIR": 6,
+      "CONDITIONAL": 17,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "INA3221",
+      "fields": 61,
+      "PASS": 13,
+      "REPAIR": 3,
+      "CONDITIONAL": 38,
+      "EXCLUDE": 7
+    },
+    {
+      "chip": "LIS2DW12",
+      "fields": 55,
+      "PASS": 2,
+      "REPAIR": 4,
+      "CONDITIONAL": 49,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "LIS3DH",
+      "fields": 34,
+      "PASS": 6,
+      "REPAIR": 8,
+      "CONDITIONAL": 20,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "LM83",
+      "fields": 34,
+      "PASS": 19,
+      "REPAIR": 8,
+      "CONDITIONAL": 7,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "MPU6050",
+      "fields": 29,
+      "PASS": 0,
+      "REPAIR": 0,
+      "CONDITIONAL": 29,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "TMP100",
+      "fields": 14,
+      "PASS": 8,
+      "REPAIR": 2,
+      "CONDITIONAL": 3,
+      "EXCLUDE": 1
+    },
+    {
+      "chip": "TMP102",
+      "fields": 19,
+      "PASS": 7,
+      "REPAIR": 6,
+      "CONDITIONAL": 5,
+      "EXCLUDE": 1
+    },
+    {
+      "chip": "TMP1075",
+      "fields": 14,
+      "PASS": 6,
+      "REPAIR": 4,
+      "CONDITIONAL": 4,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "TMP117",
+      "fields": 20,
+      "PASS": 2,
+      "REPAIR": 15,
+      "CONDITIONAL": 3,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "TMP126",
+      "fields": 36,
+      "PASS": 7,
+      "REPAIR": 8,
+      "CONDITIONAL": 21,
+      "EXCLUDE": 0
+    },
+    {
+      "chip": "TMP461",
+      "fields": 47,
+      "PASS": 22,
+      "REPAIR": 9,
+      "CONDITIONAL": 4,
+      "EXCLUDE": 12
+    },
+    {
+      "chip": "TPS23861",
+      "fields": 29,
+      "PASS": 3,
+      "REPAIR": 3,
+      "CONDITIONAL": 16,
+      "EXCLUDE": 7
+    }
+  ],
+  "findings_entries": 84,
+  "candidate_patch_operation_records": 109,
+  "duplicate_candidate_patch_records": 0,
+  "candidate_ir_attribute_patches": 109,
+  "candidate_ir_field_count": 572,
+  "source_files": 21,
+  "excerpt_checks": 4356,
+  "excerpt_match_count": 4356,
+  "excerpt_mismatch_count": 0,
+  "source_pages_and_hashes_checked": true,
+  "preservation": {
+    "protected_file_count": 12563,
+    "changed_or_missing": [],
+    "v2_manifest_file_count": 44,
+    "v2_manifest_mismatches": [],
+    "rule": "Read-only baseline includes d2d/ir, every existing test_d2d_blackbox.py, entire v2 tree and historical result inventories."
+  },
+  "candidate_bit_field_structure": "nonoverlap and range checked; semantics still conditional",
+  "claim_limits": [
+    "Not all fields PASS; completeness is not manufacturer certification",
+    "No physical timing/events executed",
+    "No models/reference tests executed",
+    "No production input freeze admitted"
+  ]
+}

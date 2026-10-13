@@ -1,0 +1,109 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5  Register Map – I2C-Addressable
+
+                         Table 10. I2C-Addressable Register Set Summary (1)(2)
+
+        REGISTER OR CMD                       I2C   DATA
+       COMMAND                RST STATE                       FIELD DESCRIPTION
+ CODE                R/W   BYTE
+         NAME
+
+  00    Interrupt        RO      1     1000,0000   SUPF  STRTF  IFAULT  CLASC  DETC   DISF   PGC   PEC
+
+                                                 STRTE
+  01    Interrupt Enable    R/W     1     1AA0,0A00  SUPEN           IFEN  CLCEN  DEEN  DISEN  PGSEN PESEN
+                                               N
+
+  02               RO      1                    Power Good status change         Power Enable status change
+       Power Event                       0000,0000
+  03                 CoR     1              PGC4   PGC3   PGC2   PGC1   PEC4   PEC3   PEC2   PEC1
+
+  04               RO      1                                  Classification                           Detection
+         Detection Event                    0000,0000
+  05                 CoR     1              CLSC4  CLSC3  CLSC2  CLSC1  DETC4  DETC3  DETC2  DETC1
+
+  06               RO      1                          Disconnect occurred               ICUT fault occurred
+         Fault Event                        0000,0000
+  07                 CoR     1                DISF4   DISF3   DISF2   DISF1   ICUT4   ICUT3   ICUT2   ICUT1
+
+  08               RO      1                           ILIM fault occurred                      Start fault occurred
+          Start/ILIM Event                    0000,0000
+  09                 CoR     1                   ILIM4    ILIM3    ILIM2    ILIM1   STRT4  STRT3  STRT2  STRT1
+
+  0A               RO      1
+        Supply Event                      0011,0000   TSD          -    VDUV   VPUV         -            -            -            -
+  0B                 CoR     1
+
+  0C    Port 1 Status     RO      1     0000,0000           CLASS P1                   DETECT P1
+
+  0D    Port 2 Status     RO      1     0000,0000           CLASS P2                   DETECT P2
+
+  0E    Port 3 Status     RO      1     0000,0000           CLASS P3                   DETECT P3
+
+  0F    Port 4 Status     RO      1     0000,0000           CLASS P4                   DETECT P4
+
+  10   Power Status     RO      1     0000,0000   PG4    PG3    PG2    PG1    PE4    PE3    PE2    PE1
+         I2C Slave  11                      RO(3)     1     1010,0000  AUTO   SLA6   SLA5   SLA4   SLA3   SLA2   SLA1   SLA0
+        Address
+
+                                   AAAA,AAA
+  12    Operating Mode    R/W     1                      Port 4 Mode       Port 3 Mode       Port 2 Mode       Port 1 Mode
+                                    A
+
+        Disconnect
+  13                 R/W     1    0000,AAAA        -            -            -            -    DCDE4  DCDE3  DCDE2  DCDE1
+        Enable
+
+         Detect/Class                   AAAA,AAA
+  14                 R/W     1               CLE4   CLE3   CLE2   CLE1  DETE4  DETE3  DETE2  DETE1
+      ENABLE                        A
+
+  15    Port PWR Priority  R/W     1    AAAA,0000   FSE4   FSE3   FSE2   FSE1         -            -            -            -
+
+        Timing
+  16                 R/W     1     0000,0000       TLIM         TSTART         TICUT           TDIS
+         Configuration
+
+  17   General Mask     R/W     1     1000,0000   INTEN        -            -    MAINS        -            -     R     M250
+
+         Detect/Class
+  18             WO     1               -      RCL4   RCL3   RCL2   RCL1  RDET4  RDET3  RDET2  RDET1
+         Restart
+
+  19   Power Enable    WO     1               -      POFF4  POFF3  POFF2  POFF1 PWON4 PWON3 PWON2 POWN1
+
+  1A   Reset        WO     1               -      CLRAIN  CLINP        -    RESAL  RESP4  RESP3  RESP2  RESP1
+
+        Legacy Detect
+  20                 R/W     1     0000,0000    LEGMOD4      LEGMOD3      LEGMOD2      LEGMOD1
+       Mode
+
+        Two-Event
+  21                 R/W     1    0A0A,0A0A    TECLEN4       TECLEN3       TECLEN2       TECLEN1
+          Classification
+
+  27    Interrupt Timer    R/W     1     0000,0000    R     R     R     R            TMR 3-0
+
+        Disconnect
+  29                 R/W     1     0000,0000     DCTH4        DCTH3        DCTH2        DCTH1
+        Threshold
+
+  2A   ICUT21 CONFIG   R/W     1     0000,0000         -          ICUT Port 2                  -          ICUT Port 1
+
+  2B   ICUT43 CONFIG   R/W     1     0000,0000         -          ICUT Port 4                  -          ICUT Port 3
+
+  2C   Temperature     RO            0000,0000                         Temperature (bits 7 to 0)
+
+
+
+
+(1)  Bits labeled "R" are reserved. Undesirable behavior may result if the value of these bits are changed from the reset value.
+(2)  Bits labeled “A” assume the state of the bit programmed into register 0x11 after POR.
+(3)  This register is Read/Write during slave address programming when preceded by the unlock code.
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     45
+
+                                                 Product Folder Links: TPS23861

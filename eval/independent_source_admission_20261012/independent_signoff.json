@@ -1,0 +1,55 @@
+{
+  "review_id": "independent-source-admission-20261012.1",
+  "signed_date": "2026-10-12",
+  "timezone": "Asia/Shanghai",
+  "signer": "Codex independent AI source-review orchestrator",
+  "human_signature": false,
+  "task_completion": "COMPLETE_REVIEW_AND_CANDIDATE_DELIVERY",
+  "source_admission_verdict": "REPAIR",
+  "production_generation_ready": false,
+  "scope": {
+    "chips": 20,
+    "inventory_fields": 572,
+    "dimensions": 4004,
+    "source_pdfs": 21
+  },
+  "counts": {
+    "REPAIR": 96,
+    "CONDITIONAL": 302,
+    "EXCLUDE": 39,
+    "PASS": 135
+  },
+  "source_classes": [
+    "MANUFACTURER_FACT",
+    "ABSTRACTION_ASSUMPTION",
+    "UNDEFINED_BEHAVIOR",
+    "SOURCE_CONFLICT"
+  ],
+  "unresolved_named_conflicts": [
+    "TMP117",
+    "INA3221",
+    "TPS23861"
+  ],
+  "all_discovered_conflicts": "conflict_ledger.json",
+  "official_manufacturer_errata_claimed": false,
+  "field_evidence_sha256": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+  "expert_returns_sha256": "f8fc498732f668f16787f83f71af5c7498a70f47e33effc47bf9efb21ab1b17e",
+  "preservation_verification_sha256": "d1d1c6e6e9e43c5df2d1c44afced04fe76edbb1e1a9ab0f8644aa0b3e423b11d",
+  "performed": [
+    "local original PDF text review",
+    "selected critical page visual review",
+    "field-by-field evidence disposition",
+    "candidate-only attribute repairs",
+    "source excerpt and structural/hash verification"
+  ],
+  "not_performed": [
+    "models",
+    "reference admission",
+    "hardware",
+    "SCNet",
+    "external API",
+    "current vendor website byte verification"
+  ],
+  "stage": "M4 PARTIALLY_PASSED; unchanged",
+  "recommendation": "new source-scoped harness admission then exact new generation input freeze"
+}

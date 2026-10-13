@@ -1,0 +1,71 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+Programming (continued)
+
+8.5.2  Programming the Power Measurement Engine
+
+8.5.2.1  Calibration Register and Scaling
+
+The Calibration Register enables the user to scale the Current Register (04h) and Power Register (03h) to the
+most useful value for a given application. For example, set the Calibration Register such that the largest possible
+number is generated in the Current Register (04h) or Power Register (03h) at the expected full-scale point. This
+approach yields the highest resolution using the previously calculated minimum Current_LSB in the equation for
+the Calibration Register. The Calibration Register can also be selected to provide values in the Current Register
+(04h) and Power Register (03h) that either provide direct decimal equivalents of the values being measured, or
+yield a round LSB value for each corresponding register. After these choices have been made, the Calibration
+Register also offers possibilities for end user system-level calibration. After determining the exact current by
+using an external ammeter, the value of the Calibration Register can then be adjusted based on the measured
+current result of the INA219 to cancel the total system error as shown in Equation 6.
+
+
+                                    Cal ´ MeasShuntCurrent
+     Corrected_Full_Scale_Cal = trunc                                      INA219_Current
+                                                                                                                                      (6)
+
+8.5.3  Simple Current Shunt Monitor Usage (No Programming Necessary)
+
+The INA219 can be used without any programming if it is only necessary to read a shunt voltage drop and bus
+voltage with the default 12-bit resolution, 320-mV shunt full-scale range (PGA = /8), 32-V bus full-scale range,
+and continuous conversion of shunt and bus voltage.
+
+Without programming, current is measured by reading the shunt voltage. The Current register and Power register
+are only available if the Calibration register contains a programmed value.
+
+8.5.4  Default Settings
+
+The default power-up states of the registers are shown in the Register Details section of this data sheet. These
+registers are volatile, and  if programmed to other than default values, must be re-programmed at every device
+power-up. Detailed information on programming the Calibration register specifically  is given in the section,
+Programming the Calibration Register.
+
+8.5.5 Bus Overview
+The INA219 offers compatibility with both I2C and SMBus interfaces. The I2C and SMBus protocols are
+essentially compatible with one another.
+The I2C interface is used throughout this data sheet as the primary example, with SMBus protocol specified only
+when a difference between the two systems is being addressed. Two bidirectional lines, SCL and SDA, connect
+the INA219 to the bus. Both SCL and SDA are open-drain connections.
+
+The device that initiates the transfer is called a master, and the devices controlled by the master are slaves. The
+bus must be controlled by a master device that generates the serial clock (SCL), controls the bus access, and
+generates START and STOP conditions.
+
+To address a specific device, the master initiates a START condition by pulling the data signal line (SDA) from a
+HIGH to a LOW logic level while SCL is HIGH. All slaves on the bus shift in the slave address byte on the rising
+edge of SCL, with the last bit indicating whether a read or write operation is intended. During the ninth clock
+pulse, the slave being addressed responds to the master by generating an Acknowledge and pulling SDA LOW.
+
+Data transfer is then initiated and eight bits of data are sent, followed by an Acknowledge bit. During data
+transfer, SDA must remain stable while SCL is HIGH. Any change in SDA while SCL is HIGH is interpreted as a
+START or STOP condition.
+
+Once all data have been transferred, the master generates a STOP condition, indicated by pulling SDA from
+LOW to HIGH while SCL is HIGH. The INA219 includes a 28-ms timeout on its interface to prevent locking up an
+SMBus.
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     13
+
+                                                   Product Folder Links: INA219

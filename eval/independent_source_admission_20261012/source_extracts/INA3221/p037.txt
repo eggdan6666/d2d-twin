@@ -1,0 +1,75 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+9 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 9.1 Application Information
+INA3221 is a three-channel current and bus voltage monitor with I2C/SMBUS-compatible interface. It features
+ programmable conversion times and averaging modes and offers both critical and warning alerts to detect
+ multiple programmable out-of-range conditions for each channel.
+
+ 9.2 Typical Application
+
+The INA3221 measures the voltage developed across a current-sensing resistor when current passes through
+ the resistor. The device also measures the bus supply voltage at the IN- pin. Multiple monitoring functions are
+ supported using four alert pins: Critical, Warning, PV, and TC. Programmable thresholds make sure operation is
+ within desired operating conditions. This design illustrates the ability of the Critical alert pin to respond to a set
+ threshold.
+
+ Figure 9-1 illustrates a typical INA3221 application circuit using all three channels. For best performance, use a
+ 0.1μF ceramic capacitor for power-supply bypassing, placed as close as possible to the supply and ground pins.
+The digital pins (SCL, SDA, Critical, Warning, TC) are connected to supply through pull-up resistors. The power
+ valid (PV) alert pin is connected to the VPU pin through a pull-up resistor to enable power-valid monitoring.
+
+                                      Power Supply
+                                           (0V to 26V)                                                       CBYPASS
+                                                                                                       0.1µF
+
+                                                                   Load 1
+
+
+                                                                                                           VS (Supply
+                                                                 VIN+1           VIN–1                                                     Voltage)        10kΩ
+
+                      Power Supply
+                         (0V to 26V)                                                            SDA
+                                                                                                                                I2C-
+                                               CH 1                                 and     SCL
+                                                                               Bus          SMBus-
+                                               VIN+2       CH 2                              Voltages 1-3      Compatible    A0
+                                                                                                                           Interface            VPU       VS                                                                                      Shunt
+                                                VIN–2                       ADC         Voltages 1-3
+
+                                                                                                                  Critical Limit                                   10kΩ
+                                                                                                        Alerts 1-3               VPU
+                                                                                              Power Valid (PV)
+                         Load 2                       CH 3               Shunt Voltage                      Critical
+                                                                Sum Alerts
+                                                                                                             Warning
+                                                                                                          Timing Control (TC)
+
+                                                       GND
+
+                                                             VIN+3             VIN–3
+
+
+                             Power Supply
+                                (0V to 26V)                        Load 3
+
+
+                            Figure 9-1. INA3221 as an Overcurrent Sensor
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    37
+
+                                                  Product Folder Links: INA3221

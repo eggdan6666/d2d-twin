@@ -1,0 +1,53 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           43 of 46  
+   
+4.30 Register 114 and 115 – FIFO Count Registers 
+FIFO_COUNT_H and FIFO_COUNT_L 
+ 
+Type: Read Only 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+72 
+114 
+ 
+FIFO_COUNT[15:8] 
+73 
+115 
+ 
+FIFO_COUNT[7:0] 
+ 
+Description: 
+These registers keep track of the number of samples currently in the FIFO buffer.  
+These registers shadow the FIFO Count value. Both registers are loaded with the current sample 
+count when FIFO_COUNT_H (Register 72) is read.  
+Note: Reading only FIFO_COUNT_L will not update the registers to the current sample count. 
+FIFO_COUNT_H must be accessed first to update the contents of both these registers.  
+FIFO_COUNT should always be read in high-low order in order to guarantee that the most current 
+FIFO Count value is read.  
+ 
+Parameters: 
+FIFO_COUNT 
+16-bit unsigned value. Indicates the number of bytes stored in the FIFO 
+buffer. This number is in turn the number of bytes that can be read from the 
+FIFO buffer and it is directly proportional to the number of samples available 
+given the set of sensor data bound to be stored in the FIFO (register 35 and 
+36). 
+ 
+ 

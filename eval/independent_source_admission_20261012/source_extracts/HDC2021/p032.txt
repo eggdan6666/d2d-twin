@@ -1,0 +1,66 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.18 Manufacturer ID High (Address: FD)
+
+                       Table 7-41. Manufacturer ID High Register (Address: FD)
+
+       7             6             5             4             3             2             1             0
+
+                                     MANUFACTURER ID[15:8]
+
+                     Table 7-42. Manufacturer ID High Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   MANUFACTURER ID [15:8]      R       54          Manufacturer ID- higher byte value
+
+
+The Manufacturer ID Low and Manufacturer ID High registers contain a factory-programmable identification
+ value that identifies this device as being manufactured by Texas Instruments. The manufacturer ID helps
+ distinguish the device from other devices that are on the same I2C bus. The manufacturer ID reads 0x5449 and
+ spans across the two registers.
+
+ 7.6.19 Device ID Low (Address: FE)
+
+                           Table 7-43. Device ID Low Register (Address: FE)
+
+       7             6             5             4             3             2             1             0
+
+                                             DEVICE ID[7:0]
+
+                         Table 7-44. Device ID Low Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   DEVICE ID [7:0]             R      D0         Device ID - lower byte value
+
+The Device ID Low and Device ID High registers contain a factory-programmable identification value that
+ identifies this device as a HDC2021. The device ID helps distinguish the device from other devices that are on
+ the same I2C bus. The Device ID for the HDC2021 is 0x07D0.
+ 7.6.20 Device ID High (Address: FF)
+
+                           Table 7-45. Device ID High Register (Address: FF)
+
+       7             6             5             4             3             2             1             0
+
+                                             DEVICE ID[15:8]
+
+                        Table 7-46. Device ID High Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   DEVICE ID [15:8]             R       7          Device ID - higher byte value
+
+The Device ID Low and Device ID High registers contain a factory-programmable identification value that
+ identifies this device as a HDC2021. The device ID helps distinguish the device from other devices that are on
+ the same I2C bus. The Device ID for the HDC2021 is 0x07D0.
+
+
+
+
+
+32    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

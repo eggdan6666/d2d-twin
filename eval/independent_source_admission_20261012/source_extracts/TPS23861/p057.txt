@@ -1,0 +1,80 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.9  Power Status Register
+
+Command = 10h with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         PG4      PG3      PG2      PG1       PE4       PE3       PE2       PE1
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Each bit represents the actual power status of a port.
+
+Each bit PGn, PEn represents an individual port.
+
+These bits are cleared when port n is turned off, including if the turn off is caused by a fault condition.
+
+Bit Descriptions
+
+PG4-PG1: Each bit, when at 1, indicates that the port is on and that the voltage at DRAINn has gone below
+VPGT while the port is powered on. These bits are latched high once the turn on is complete and can only be
+cleared when the port is turned off or following a reset or power-on reset.
+
+1 = Power is good.
+
+0 = Power is not good.
+
+PE4-PE1: Each bit indicates the on/off state of the corresponding port.
+
+1 = Port is on.
+
+0 = Port is off.
+
+7.5.10  I2C Slave Address Register
+
+Command = 11h with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME        AUTO      SLA6      SLA5      SLA4      SLA3      SLA2      SLA1      SLA0
+
+  Initial EEPROM VALUE       1          0          1          0          0          0          0          0
+
+Bit Descriptions
+SLA6-SLA0: I2C device address, stored in EEPROM . This address can be changed by following the I2C slave
+address programming protocol. For more details, see the I2C Slave Address and AUTO Bit Programming.
+
+
+                                  NOTE
+         The programmed device address should not be any of 0x00, 0x30, 0x0C.
+
+
+AUTO: Defines whether the controller operates automatically in Auto Mode even in the absence of a host
+controller. Automatic operation is described in Independent Operation when the AUTO Bit is Set section. The
+state of this bit is monitored only immediately following a Power-on Reset or after the RESET input has been
+activated. The impact of that bit state on registers after reset is reflected in Table 10 and is referred to “A”.
+
+
+      DESCRIPTION                                  BINARY DEVICE ADDRESS
+
+                               6            5            4            3            2            1            0
+
+  BROADCAST ACCESS         0            1            1            0            0            0            0
+
+    ALERT RESPONSE          0            0            0            1            1            0            0
+
+    SLAVE NUMBER         SLA6       SLA5       SLA4       A3 pin       SLA2       SLA1       SLA0
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     57
+
+                                                 Product Folder Links: TPS23861

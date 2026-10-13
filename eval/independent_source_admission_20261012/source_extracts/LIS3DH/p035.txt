@@ -1,0 +1,66 @@
+LIS3DH                                                                Registers description
+
+8.8    CTRL_REG1 (20h)
+
+
+                                     Table 29. CTRL_REG1 register
+
+           ODR3    ODR2    ODR1    ODR0     LPen      Zen       Yen       Xen
+
+
+                                   Table 30. CTRL_REG1 description
+
+                           Data rate selection. Default value: 0000               ODR[3:0]
+                              (0000: power-down mode; others: Refer to Table 31: Data rate configuration)
+
+                          Low-power mode enable. Default value: 0
+               LPen       (0: high-resolution mode / normal mode, 1: low-power mode)
+                              (Refer to section Section 3.2.1: High-resolution, normal mode, low-power mode)
+
+                               Z-axis enable. Default value: 1
+                Zen
+                                    (0: Z-axis disabled; 1: Z-axis enabled)
+
+                               Y-axis enable. Default value: 1
+                Yen
+                                    (0: Y-axis disabled; 1: Y-axis enabled)
+
+                              X-axis enable. Default value: 1
+               Xen
+                                    (0: X-axis disabled; 1: X-axis enabled)
+
+          ODR[3:0] is used to set the power mode and ODR selection. The following table indicates
+            the frequency of each combination of ODR[3:0].
+
+                                    Table 31. Data rate configuration
+
+           ODR3    ODR2    ODR1    ODR0             Power mode selection
+
+            0         0         0         0         Power-down mode
+
+            0         0         0         1       HR / Normal / Low-power mode (1 Hz)
+
+            0         0         1         0       HR / Normal / Low-power mode (10 Hz)
+
+            0         0         1         1       HR / Normal / Low-power mode (25 Hz)
+
+            0         1         0         0       HR / Normal / Low-power mode (50 Hz)
+
+            0         1         0         1       HR / Normal / Low-power mode (100 Hz)
+
+            0         1         1         0       HR / Normal / Low-power mode (200 Hz)
+
+            0         1         1         1       HR / Normal / Low-power mode (400 Hz)
+
+            1         0         0         0        Low power mode (1.60 kHz)
+
+            1         0         0         1       HR / normal (1.344 kHz);
+                                                    Low-power mode (5.376 kHz)
+
+
+
+
+
+                                      DocID17530 Rev 2                                      35/54
+
+                                                                                                                            54

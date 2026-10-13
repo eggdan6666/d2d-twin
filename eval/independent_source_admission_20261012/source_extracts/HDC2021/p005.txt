@@ -1,0 +1,69 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 6.5 Electrical Characteristics
+TA = 30°C, VDD = 1.8 V, 20% ≤ RH ≤ 80% (unless otherwise noted)
+
+           PARAMETER                        TEST CONDITION                 MIN   TYP   MAX  UNIT
+
+ RELATIVE HUMIDITY SENSOR
+ RHACC            Accuracy(3) (4) (5)                                                                  ±2     ±3  %RH
+ RHREP             Repeatability(6)          14 bit accuracy option                                           ±0.1       %RH
+ RHHYS            Hysteresis(8)                                                                      ±1       %RH
+ RHRT          Response time(9)           Rising, 30% to 75% RH, t63% step(10)                             6            s
+                                      9 bit accuracy option                                       254           µs
+ RHCT            Conversion time(6)        11 bit accuracy option                                      383           µs
+                                      14 bit accuracy option                                      640           µs
+ RHLTD           Long-term drift(11)                                                                      ±0.25        %RH/yr
+                  Supply Sensitivity -
+ RHPSRR                              VDD = 1.8V to 3.6V                                              ±0.3       %RH/V                  accuracy
+
+ TEMPERATURE SENSOR
+                                      5°C ≤ TA ≤ 60°C                                                 ±0.2     ±0.7   °C
+ TEMPACC         Accuracy(7)
+                                      10°C ≤ TA ≤ 35°C                                               ±0.2     ±0.4   °C
+ TEMPREP          Repeatability(6)          14 bit accuracy option                                           ±0.1           °C
+                                      9 bit accuracy option                                       208           µs
+ TEMPCT         Conversion time(6)        11 bit accuracy option                                      336           µs
+                                      14 bit accuracy option                                      594           µs
+
+                  Supply Sensitivity -
+ TEMPPSRR                           VDD = 1.8V to 3.6V                                              0.05        ℃/V                  accuracy
+
+                                          High Temperature Operating Life (HTOL) tested at
+                                      125°C for 1000 hours
+ TEMPLTD        Long term drift(6)                                                                               ±0.04   °C/yr                                          Normalized using Arrhenius-Peck Acceleration Model
+                                      TA = 30°C, 0.7eV activation energy
+ POWER CONSUMPTION
+
+                                                                Averaged at 1 sample per
+                                                                                                           0.55         µA
+                              RH & TEMP sensor: 14 bit second
+                                           accuracy option(1) (2)      Averaged at 1 sample
+                                                                                                                  0.3         µA
+                                                                     every two seconds
+                                 No Measurement (Sleep   One-shot                             0.05      0.1   µA
+                                      Mode)                   Continuous conversion                 0.05      0.1   µA
+ IDD              Supply current            During RH + TEMP measurement(1)                           650    890   µA
+                                            During TEMP measurement only(1)                            550    730   µA
+
+                                                           Peak                             200         µA
+                                              Startup
+                                                                Average                            80         µA
+                                                  Serial Bus Active. fSCL =   One-shot                           12         µA
+                                      400 kHz                 Continuous conversion                12         µA
+                    Integrated              VDD = 3.3V; THEATER - TA = 80°C IHEATER                                                                                        90        mA                   heater (enabled)          Steady state measurement
+
+ SUPPLY RAIL
+ VDD_POR        Power-on reset voltage    TA = -40°C to 125°C                                                1.4         V
+ SCL, SDA PINS
+
+                                                                                                       0.7 x
+ VIH             High level input voltage                                                             V                                                                                   VDD
+                                                                                                                         0.3 x
+ VIL           Low level input voltage                                                              V                                                                                                 VDD
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback     5

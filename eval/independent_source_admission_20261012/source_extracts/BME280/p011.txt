@@ -1,0 +1,50 @@
+Bosch Sensortec | BME280 Data sheet                                               11 | 60
+
+
+
+ Temperature coefficient    TCOP   25…65 °C, 900 hPa               ±1.5              Pa/K
+  of offset5
+                                                                     ±12.6            cm/K
+ Absolute accuracy             APext       300. . 1100 hPa                 ±1.7             hPa
+ pressure                                -20 . . . 0 °C
+                                                AP,full     300 . . . 1100 hPa                ±1.0             hPa
+                                    0 . . . 65 °C
+                          AP      1100 . . . 1250 hPa               ±1.5             hPa
+                                    25 . . . 40 °C
+  Relative accuracy               Arel       700 … 900hPa                ±0.12            hPa
+  pressure                           25 . . . 40 °C
+ VDD = 3.3V
+ Resolution of             RP     Highest oversampling               0.18             Pa
+ pressure output data
+ Noise in pressure              NP,fullBW        Full bandwidth,                   1.3             Pa
+                                       highest oversampling
+                                                                    11            cm                                 See chapter 3.6
+                                             NP,filtered   Reduced bandwidth,                 0.2             Pa
+                                       highest oversampling
+                                                                            1.7            cm                                 See chapter 3.6
+ Solder drift                     Minimum solder height     -0.5                +2.0     hPa
+                                  50µm
+ Long term stability6          ∆Pstab          per year                     ±1.0             hPa
+ Possible sampling rate       fsample_P   Lowest oversampling,    157      182             Hz
+                                    see chapter 9.2
+
+1.4  Temperature sensor specification
+
+Table 4: Temperature parameter specification
+
+  Parameter            Symbol       Condition        Min      Typ     Max     Unit
+  Operating range          T           Operational          -40      25       85      °C
+                                                 Full accuracy         0                65                                                                               °C
+  Supply current                  IDD,T      1 Hz forced mode,                 1.0             µA
+                                         temperature
+                                  measurement only
+                                     AT,25           25 °C                      ±0.5              °C
+
+
+
+5 When changing temperature by e.g. 10 °C at constant pressure / altitude, the measured pressure / altitude will change by (10 ×
+TCOP).
+6 Long term stability is specified in the full accuracy operating pressure range 0 … 65 °C
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

@@ -1,0 +1,68 @@
+                                                              LIS2DW12
+                                                                                                                                Digital interfaces
+
+6        Digital interfaces
+
+
+           The registers embedded inside the LIS2DW12 may be accessed through both the I²C and SPI serial interfaces.
+           The latter may be software configured to operate either in 3-wire or 4-wire interface mode.
+           The serial interfaces are mapped to the same pins. To select/exploit the I²C interface, the CS line must be tied
+             high (that is, connected to Vdd_IO).
+
+
+                                           Table 14. Serial interface pin description
+
+                    Pin name                                           Pin description
+
+                                    Enable SPI
+
+                                        I²C/SPI mode selection
+                 CS
+                                               (1: SPI idle mode / I²C communication enabled;
+
+                                            0: SPI communication mode / I²C disabled)
+
+                  SCL           I²C serial clock (SCL)
+
+                 SPC         SPI serial port clock (SPC)
+
+                 SDA           I²C serial data (SDA)
+
+                     SDI         SPI serial data input (SDI)
+
+                SDO           3-wire interface serial data output (SDO)
+
+                  SA0           I²C address selection (SA0)
+
+                SDO         SPI serial data output (SDO)
+
+6.1        I²C serial interface
+           The LIS2DW12 I²C is a bus slave. The I²C is employed to write data into registers whose content can also be
+             read back.
+           The relevant I²C terminology is given in the table below.
+
+
+                                                  Table 15. I²C terminology
+
+                Term                                                 Description
+
+                  Transmitter   The device that sends data to the bus
+
+                  Receiver    The device that receives data from the bus
+
+                  Master     The device that initiates a transfer, generates clock signals, and terminates a transfer
+
+                   Slave     The device addressed by the master
+
+
+            There are two signals associated with the I²C bus: the serial clock line (SCL) and the serial data line (SDA). The
+                 latter is a bidirectional line used for sending and receiving the data to/from the interface. Both the lines must be
+            connected to Vdd_IO through an external pull-up resistor. When the bus is free, both the lines are high.
+           The I²C interface supports fast mode (400 kHz) I²C standards as well as normal mode.
+               In order to disable the I²C block, CTRL2 (21h) (I2C_DISABLE) = 1 must be set.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 27/65

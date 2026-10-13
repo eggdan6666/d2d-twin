@@ -1,0 +1,50 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.5  Fault Event Register
+
+Command = 06h with 1 Data Byte, Read Only
+
+Command = 07h with 1 Data Byte, Clear on Read
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME          DISF4      DISF3      DISF2      DISF1      ICUT4      ICUT3      ICUT2      ICUT1
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Active high, each bit corresponds to a particular event that occurred.
+
+Each bit DISFn, ICUTn represents an individual port.
+
+A read at each location (06h or 07h) returns the same register data with the exception that the Clear-on-Read
+command clears all bits of the register. These bits are cleared by I2C power-off command (POFFn) or port-reset
+command (RESPn).
+
+If this register is causing the INT pin to be activated, this Clear-on-Read releases the INT pin.
+
+Any active bit will have an impact on the Interrupt Register as indicated in the Interrupt Register description.
+
+Bit Descriptions
+
+DISF4-DISF1: Indicates that a disconnect event occurred.
+
+1 = Disconnect event occurred.
+
+0 = No disconnect event occurred.
+
+ICUT4-ICUT1: Indicates that an ICUT Fault occurred.
+
+1 = ICUT fault occurred.
+
+0 = No ICUT fault occurred.
+
+
+
+
+
+52     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,51 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 20. Bit Descriptions for PULLDWN_CONFIG (Continued)
+Bits            Bit Name               Description                                                                                            Default Value
+
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+6          PULL_DWN_6          Set the I/O6 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+5          PULL_DWN_5          Set the I/O5 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+4          PULL_DWN_4          Set the I/O4 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+3          PULL_DWN_3          Set the I/O3 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+2          PULL_DWN_2          Set the I/O2 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+1          PULL_DWN_1          Set the I/O1 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+0          PULL_DWN_0          Set the I/O0 pin as weak pull-down output.                                                          0x1
+                                              0: The I/O pin function is determined by the pin configuration registers.
+                                              1: The I/O pin is connected to GND via an 85 kΩ pull-down resistor.
+
+
+Configuration Register Readback and LDAC Mode Register
+
+Name: CONFIG_READ_AND_LDAC
+
+Selects the operation of the Load DAC (LDAC) function and/or which configuration register is read back.
+
+
+
+
+
+Table 21. Bit Descriptions for CONFIG_READ_AND_LDAC
+Bits            Bit Name              Description                                                                                              Default Value
+
+15         MSB                  Set this bit to 0.                                                                                  0x0
+[14:11]      REG_ADDR            Register address. Set these bits to 0b0111.                                                           0x7
+[10:7]       RESERVED           Reserved. Set these bits to 0b0000.                                                                 0x0
+
+
+
+analog.com                                                                                         Rev. H | 42 of 54

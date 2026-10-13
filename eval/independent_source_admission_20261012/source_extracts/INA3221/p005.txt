@@ -1,0 +1,90 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 6.4 Thermal Information
+
+                                                                                INA3221
+                     THERMAL METRIC(1)                           RGV (VQFN)             UNIT
+
+                                                                                 16 PINS
+ RθJA           Junction-to-ambient thermal resistance                                            36.5                 °C/W
+  RθJC(top)        Junction-to-case (top) thermal resistance                                          42.7                 °C/W
+ RθJB           Junction-to-board thermal resistance                                              14.7                 °C/W
+ ψJT             Junction-to-top characterization parameter                                           0.5                 °C/W
+ ψJB            Junction-to-board characterization parameter                                      14.8                 °C/W
+  RθJC(bot)        Junction-to-case (bottom) thermal resistance                                         3.3                 °C/W
+
+ (1)   For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+       note.
+
+ 6.5 Electrical Characteristics
+
+ at TA = 25°C, VS = 3.3V, VIN+ = 12V, VSHUNT = (VIN+) – (VIN–) = 0mV, and VBUS = VIN– = 12V (unless otherwise noted)
+
+                 PARAMETER                          TEST CONDITIONS               MIN      TYP     MAX   UNIT
+
+ INPUT
+
+ VSHUNT     Shunt voltage input                                                                     –163.84                  163.8   mV
+ VBUS      Bus voltage input                                                                       0                  26    V
+ CMR     Common-mode rejection                          VIN+ = 0V to +26V                             110       120             dB
+
+                                                                                                         ±40       ±80    μV
+ VOS
+            Shunt offset voltage, RTI(1)                    TA = –40°C to +125°C                                          0.1         0.5   μV/°C
+ PSRR                                                   vs power supply, VS = 2.7V to 5.5V                         15              μV/V
+
+                                                                                                          ±8       ±16   mV
+ VOS
+           Bus offset voltage, RTI(1)                     TA = –40°C to +125°C                                              80   μV/°C
+
+ PSRR                                                   vs power supply                                                0.5            mV/V
+
+  IIN+         Input bias current at IN+                                                                           10             μA
+  IIN–          Input bias current at IN–                                                                      10 || 670           μA || kΩ
+              Input leakage(2)                                 (IN+ pin) + (IN– pin), power-down mode                         0.1         0.5    μA
+
+ DC ACCURACY
+
+         ADC native resolution                                                                             13                   Bits
+
+                                                        Shunt voltage                                          40             μV
+          1LSB step size
+                                                   Bus voltage                                             8           mV
+
+                                                                                                     0.1%     0.25%
+            Shunt voltage gain error
+                                                     TA = –40°C to +125°C                                    10        50   ppm/°C
+
+                                                                                                     0.1%     0.25%
+           Bus voltage gain error
+                                                     TA = –40°C to +125°C                                    10        50   ppm/°C
+
+ DNL         Differential nonlinearity                                                                                      ±0.1             LSB
+
+                                            CT bit = 000                                          140       154
+
+                                            CT bit = 001                                          204       224
+                                                                                                                               µs
+                                            CT bit = 010                                          332       365
+
+                                            CT bit = 011                                           588       646
+ tCONVERT  ADC conversion time
+                                            CT bit = 100                                                    1.1        1.21
+
+                                            CT bit = 101                                               2.116      2.328
+                                                                                                      ms
+                                            CT bit = 110                                              4.156      4.572
+
+                                            CT bit = 111                                              8.244      9.068
+
+ SMBus
+          SMBus timeout(3)                                                                                28        35    ms
+
+ DIGITAL INPUT/OUTPUT
+
+ CI           Input capacitance                                                                                 3              pF
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback     5
+
+                                                  Product Folder Links: INA3221

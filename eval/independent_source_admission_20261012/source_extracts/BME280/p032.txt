@@ -1,0 +1,41 @@
+Bosch Sensortec | BME280 Data sheet                                            32 | 60
+
+6.  Digital interfaces
+The BME280 supports the I²C and SPI digital interfaces; it acts as a slave for both protocols. The I²C
+interface supports the Standard, Fast and High Speed modes. The SPI interface supports both SPI
+mode ‘00’ (CPOL = CPHA = ‘0’) and mode ‘11’ (CPOL = CPHA = ‘1’) in 4-wire and 3-wire configuration.
+
+The following transactions are supported:
+    •   Single byte write
+    •   multiple byte write (using pairs of register addresses and register data)
+    •   single byte read
+    •   multiple byte read (using a single register address which is auto-incremented)
+6.1  Interface selection
+Interface selection is done automatically based on CSB (chip select) status. If CSB is connected to
+VDDIO, the I²C interface is active. If CSB is pulled down, the SPI interface is activated. After CSB has
+been pulled down once (regardless of whether any clock cycle occurred), the I²C interface is disabled
+until the next power-on-reset. This is done in order to avoid inadvertently decoding SPI traffic to
+another slave as I²C data. Since the device startup is deferred until both VDD and VDDIO are
+established, there is no risk of incorrect protocol detection because of the power-up sequence used.
+However, if I²C is to be used and CSB is not directly connected to VDDIO but is instead connected to a
+programmable pin, it must be ensured that this pin already outputs the VDDIO level during power-on-
+reset of the device. If this is not the case, the device will be locked in SPI mode and not respond to I²C
+commands.
+6.2  I²C Interface
+The I²C slave interface is compatible with Philips I²C Specification version 2.1. For detailed timings,
+please review Table 33. All modes (standard, fast, high speed) are supported. SDA and SCL are not
+pure open-drain. Both pads contain ESD protection diodes to VDDIO and GND. As the devices does
+not perform clock stretching, the SCL structure is a high-Z input without drain capability.
+
+
+
+
+
+Figure 8: SDI/SCK ESD drawing
+
+The 7-bit device address is 111011x. The 6 MSB bits are fixed. The last bit is changeable by SDO
+value and can be changed during operation. Connecting SDO to GND results in slave address
+1110110 (0x76); connection it to VDDIO results in slave address 1110111 (0x77), which is the same as
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

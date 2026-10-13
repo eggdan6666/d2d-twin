@@ -1,0 +1,68 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.19  Reset Register
+
+Command = 1Ah with 1 Data Byte, Write Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         CLRAIN     CLINP              RESAL     RESP4     RESP3     RESP2     RESP1
+
+Push button register.
+
+Writing a “1” at a bit location triggers an event while a “0” has no impact.
+
+
+                                  NOTE
+        A reset port write command to 0x1A requires an I2C bus processing delay of 1.2 ms when
+           followed by a Detect/Class Enable (0x14) write command. This delay applies from the end
+            of the reset port command (stop pulse) to the end of the Detect/Class Enable command
+           (stop pulse).
+
+
+Bit Descriptions
+
+CLRAIN: Clear all interrupts bit. Writing a “1” to CLRAIN clears all event registers and all bits in the Interrupt
+Register. It also releases the INT pin.
+
+CLINP: When a “1” is written to this register, the TPS23861 releases the INT pin without any impact on either the
+event registers nor on the Interrupt Register.
+
+RESAL: Reset register bits when a “1” is written to this location. Writing a “1” to this location results in a state
+equivalent to a power-up reset.
+
+
+                                  NOTE
+          For any port with power enable set (PEx=1 in 0x10), ensure that port power good status in
+         0x10 is also set (PGx=1) prior to writing a reset port command to the Reset register
+           (0x1A).
+
+
+                                  NOTE
+         The VDUV and VPUV bits (Supply Event Register) follow the state of VDD and VPWR
+          supply rails.
+
+
+RESP4-RESP1: Reset port bits. Used to force an immediate port(s) turn off in any mode, by writing a “1” at the
+corresponding RESPn bit location(s). When port n is reset, the following takes place.
+•  The corresponding Port n Voltage Register are cleared.
+•  The CLCSn and the DETCn bits in the Detection Event Register are cleared.
+•  The corresponding Port n Status Register are cleared.
+•  The CLEn and the DETEn bits in the Detect/Class Enable Register are cleared.
+•  The DISFn and ICUTn bits in the Fault Event Register are cleared.
+•  The ILIMn and STRTn bits in the Start/ILIM Event Register are cleared.
+•    If in cool-down, the lockout functionality of the cool-down timer is cancelled.
+•    If the port was powered on when RESPn is set, the port is shut off, and the following occurs.
+   –  The PGCn and the PECn bits in the Power Event Register are set.
+   –  The PGn and PEn bits in the Power Status Register are cleared.
+
+
+
+
+
+66     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

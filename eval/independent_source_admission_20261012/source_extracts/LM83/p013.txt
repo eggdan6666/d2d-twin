@@ -1,0 +1,17 @@
+                                                    (Continued)LM83   1.0 Functional Description
+         the serial interface logic if either of the SMBData or SMBCLK
+          lines are held low between 25 ms and 40 ms. TIMEOUT al-
+        lows a clean recovery in cases where the master may be re-
+         set while the LM83 is transmitting a low bit thus preventing
+         possible bus lock up.
+       Whenever the LM83 sees the start condition its serial inter-
+         face will reset to the beginning of the communication, thus
+         the LM83 will expect to see an address byte next. This sim-
+           plifies recovery when the master is reset while the LM83 is
+         transmitting a high.
+
+
+
+
+
+      www.national.com                                               12

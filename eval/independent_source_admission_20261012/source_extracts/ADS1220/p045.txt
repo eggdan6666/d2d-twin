@@ -1,0 +1,60 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.6.2.3 Configuration Register 2 (Address = 02h) [reset = 00h]
+
+                                Figure 8-34. Configuration Register 2
+       7             6             5             4             3             2             1             0
+
+           VREF[1:0]                         50/60[1:0]           PSW                         IDAC[2:0]
+
+           R/W-00b                     R/W-00b              R/W-0b                     R/W-000b
+
+                        Table 8-13. Configuration Register 2 Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+                                                    Voltage reference selection
+                                               These bits select the voltage reference source that is used for the conversion.
+                                               00b : Internal 2.048V reference selected
+     7:6     VREF[1:0]      R/W       00b
+                                               01b : External reference selected using dedicated REFP0 and REFN0 inputs
+                                               10b : External reference selected using AIN0/REFP1 and AIN3/REFN1 inputs
+                                                 11b : Analog supply (AVDD – AVSS) used as reference
+
+                                                 FIR filter configuration
+                                               These bits configure the filter coefficients for the internal FIR filter.
+                                                   Only use these bits together with the 20SPS setting in normal mode and the
+                                         5SPS setting in duty-cycle mode. Set to 00b for all other data rates.
+     5:4     50/60[1:0]      R/W       00b
+                                               00b : No 50Hz or 60Hz rejection
+                                               01b : Simultaneous 50Hz and 60Hz rejection
+                                               10b : 50Hz rejection only
+                                                 11b : 60Hz rejection only
+
+                                                Low-side power switch configuration
+                                                       This bit configures the behavior of the low-side switch connected between AIN3/
+                                        REFN1 and AVSS.
+     3    PSW          R/W       0h
+                                               0b : Switch is always open
+                                               1b : Switch automatically closes when the START/SYNC command is sent and
+                                                opens when the POWERDOWN command is issued
+
+                                           IDAC current setting
+                                               These bits set the current for both IDAC1 and IDAC2 excitation current sources.
+                                               000b : Off
+                                               001b : 10µA
+                                               010b : 50µA
+     2:0     IDAC[2:0]      R/W       0h
+                                                 011b : 100µA
+                                               100b : 250µA
+                                               101b : 500µA
+                                                 110b : 1000µA
+                                                  111b : 1500µA
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    45
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,54 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+
+
+                      Global Write Cycle: Unlock the Address register                                           Slave #1 I2C address programming
+                                 R/W                                                                      R/W
+                                                         Bit                                                                                                                         Bit
+
+   SDAI                0  1  1  0  0  0  0 W    C7 C6 C5 C4 C3 C2 C1 C0     0  D6 D5 D4 D3 D2 D1 D0                 SA6 SA5 SA4 SA3 SA2 SA1 SA0 W      0  0  0  1  0  0  0  1     D7 D6 D5 D4 D3 D2 D1 D0                                                                                                             ...                                                                                                               Temporary                                                                                                      common                                                                       Temporary                                                                    common                                  Address                                                     Unlock Code                                                                                                                                                     Slave                                                                                                                                                        address                                                                                                                                  New slave address                     Bit   7-bit Global                                                                                                             Bit     Bit                                                                                                                                                                                                                      Bit                                                                                                                                   slave                                                                                                                          Address                                                                                     slave address                          R/W=0                                                                             Bit                                                                                                         Bit                                                                                                                                                                                      Bit                                                                                                                                                                                                                  Bit                                                 Bit                                                                                                                                                           Bit                                                                                                                         command                                                                                                      R/W=0
+                                   Start                          Ack                         Ack                         Ack Stop         Start                                   Ack                         Ack                         Ack Stop
+  SDAO
+
+ AOUT U1
+           .
+           .
+           .                                                                                                                                                                                            tSTP_AOUT
+AOUT Un-1
+
+ AOUT Un
+
+
+
+
+
+                                                                  Slave #n I2C Address Programming
+                                                                   R/W
+                                                                                                                 Bit
+
+        SDAI                                            SA6 SA5 SA4 SA3 SA2 SA1 SA0 W      0  0  0  1  0  0  0  1     D7 D6 D5 D4 D3 D2 D1 D0                    ...
+                                                               Temporary common            Slave address
+                                                            Bit             slave Address        Bit      command       Bit   New slave address   Bit Bit
+                                                                                                    Start             R/W=0           Ack                         Ack                         Ack Stop
+      SDAO
+
+     AOUT U1
+                       .
+                       .
+                       .
+    AOUT Un-1
+
+     AOUT Un
+
+
+                 Figure 42. I2C/SMBus Interface Slave Address Programming Protocol
+
+
+
+
+
+38     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

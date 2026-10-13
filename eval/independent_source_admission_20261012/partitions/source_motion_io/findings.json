@@ -1,0 +1,744 @@
+[
+  {
+    "id": "MOTION-LIS2-TEMP-NIBBLE",
+    "chip": "LIS2DW12",
+    "targets": [
+      "OUT_T_L.TEMP_3_0",
+      "OUT_T_L.ZERO_7_4"
+    ],
+    "problem": "温度低byte数据/零域上下半字节颠倒，来源图与12bit左对齐一致。",
+    "old": {
+      "TEMP_3_0.bits": "3:0",
+      "ZERO_7_4.bits": "7:4"
+    },
+    "candidate_rule": {
+      "TEMP_3_0.bits": "7:4",
+      "ZERO_7_4.rename": "ZERO_3_0",
+      "ZERO_3_0.bits": "3:0",
+      "known_zero_mask": "0x0F"
+    },
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS3-STATUS-DEFAULT",
+    "chip": "LIS3DH",
+    "targets": [
+      "STATUS_REG.ZYXOR",
+      "STATUS_REG.ZOR",
+      "STATUS_REG.YOR",
+      "STATUS_REG.XOR",
+      "STATUS_REG.ZYXDA",
+      "STATUS_REG.ZDA",
+      "STATUS_REG.YDA"
+    ],
+    "problem": "Output总表不能覆盖Table47七个明确default0；14动态字段reset全排除措辞不准确。",
+    "old": {
+      "v2_status_known_reset_mask": "0x00",
+      "report": "14 nonstatic reset fields"
+    },
+    "candidate_rule": {
+      "known_reset_mask": "0xFE",
+      "expected": 0,
+      "scope": "initial default before measurement/event",
+      "XDA_unknown": true
+    },
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47; visually verified",
+        "excerpt": "Default value: 0",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table_or_section": "Table21",
+        "excerpt": "STATUS_REG",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS3-XDA-NO-DESCRIPTION",
+    "chip": "LIS3DH",
+    "targets": [
+      "STATUS_REG.XDA"
+    ],
+    "problem": "Table46有XDA，Table47实际缺XDA行；缺少默认和clear动作不能补全。",
+    "old": {
+      "field_reset": 0
+    },
+    "candidate_rule": {
+      "known_reset": false,
+      "exclude_CoR": true,
+      "do_not_infer_by_symmetry": true
+    },
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Tables46–47; visually verified",
+        "excerpt": "XDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS3-FIFO-READ-EFFECT",
+    "chip": "LIS3DH",
+    "targets": [
+      "OUT_X/Y/Z",
+      "FIFO_SRC_REG.OVRN_FIFO"
+    ],
+    "problem": "输出读取FIFO样本集会推进FIFO并在first sample set读完后清OVRN_FIFO；不等于DATA读清0或STATUS_REG旗标的清除规则。",
+    "old": {
+      "v2": "no FIFO/read transaction model"
+    },
+    "candidate_rule": {
+      "cross_register_clear": "OVRN_FIFO after first sample set read",
+      "sample_pop": true,
+      "exclude_unmodelled_FIFO_function": true
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table_or_section": "§5.1.5",
+        "excerpt": "Each time data is read from the FIFO",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 41,
+        "printed_page": "41",
+        "table_or_section": "Table52",
+        "excerpt": "The OVRN bit is set to 0",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS3-ST-ACCESS",
+    "chip": "LIS3DH",
+    "targets": [
+      "CTRL_REG4.ST"
+    ],
+    "problem": "UNSPEC是旧IR排除标记，不能当厂商访问事实。原始rw表和合法自检编码支持限定RW。",
+    "old": {
+      "ir_access": "UNSPEC"
+    },
+    "candidate_rule": {
+      "access": "RW",
+      "legal_values": [
+        0,
+        1,
+        2
+      ],
+      "exclude_values": [
+        3
+      ],
+      "exclude_analog_response": true
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table_or_section": "Table21",
+        "excerpt": "CTRL_REG4",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Tables38–39",
+        "excerpt": "Self-test enable",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS3-AUX-ADC-BDU",
+    "chip": "LIS3DH",
+    "targets": [
+      "TEMP_CFG_REG.ADC_EN",
+      "TEMP_CFG_REG.TEMP_EN",
+      "CTRL_REG4.BDU"
+    ],
+    "problem": "辅助ADC/温度功能必须BDU1/ADC_EN1，现policy未列功能前置条件。",
+    "old": {
+      "v2": "no auxiliary ADC condition"
+    },
+    "candidate_rule": {
+      "ADC_function_requires": {
+        "BDU": 1,
+        "ADC_EN": 1
+      },
+      "TEMP_function": "ADC channel3 selected with TEMP_EN1; output OUT_ADC3",
+      "function_without_dependencies": "EXCLUDE"
+    },
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table_or_section": "§3.7",
+        "excerpt": "the user must set the BDU bit",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table_or_section": "§3.7",
+        "excerpt": "Channel 3 of the ADC can be connected",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS2-MBZ-ACCESS",
+    "chip": "LIS2DW12",
+    "targets": [
+      "CTRL2.MUST_BE_ZERO"
+    ],
+    "problem": "脚注must0不证明RO hardwire；现policy虽排除非法写但IR未来生成仍误导。",
+    "old": {
+      "ir_access": "RO"
+    },
+    "candidate_rule": {
+      "access": "UNSPEC",
+      "fixed_write": 0,
+      "known_reset": true,
+      "exclude_illegal_write_oracle": true
+    },
+    "locators": [
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table32 footnote",
+        "excerpt": "This bit must be set to 0",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS2-WAKE-CLEAR",
+    "chip": "LIS2DW12",
+    "targets": [
+      "WAKE_UP_SRC.FF_IA",
+      "WAKE_UP_SRC",
+      "ALL_INT_SRC"
+    ],
+    "problem": "FF_IA“自读清”未在§8.28规定；明确可核的clear操作是ALL_INT_SRC对related routed interrupt flags。",
+    "old": {
+      "FF_IA.desc": "自由落体事件标志，读清除"
+    },
+    "candidate_rule": {
+      "desc": "Free-fall event status. ALL_INT_SRC read resets related routed interrupt function flags; no unqualified self-CoR guarantee",
+      "CoR_assertion": "exclude unless relevant mapped clear semantics and fixture"
+    },
+    "locators": [
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "§8.28",
+        "excerpt": "Free-fall event detection status",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 53,
+        "printed_page": "53",
+        "table_or_section": "§8.31",
+        "excerpt": "Reading this register, all related interrupt function flags",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS2-FIFO-MODE-SOURCE",
+    "chip": "LIS2DW12",
+    "targets": [
+      "FIFO_CTRL.FMODE"
+    ],
+    "problem": "§5.3.4/5.3.5的trigger event/continuous终态与Table55的deasserted/FIFO终态不一致。",
+    "old": {
+      "Table55.FMODE_4": "then FIFO mode",
+      "body_FMODE_4": "continuous upon trigger event"
+    },
+    "candidate_rule": {
+      "legal_codes": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ],
+      "source_conflict": "UNRESOLVED",
+      "exclude_FMODE3_4_event_oracles": true
+    },
+    "locators": [
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table_or_section": "Table55",
+        "excerpt": "then FIFO mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table_or_section": "§5.3.4",
+        "excerpt": "FIFO mode starts upon an internal trigger event",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "§5.3.5",
+        "excerpt": "starts in continuous mode upon an internal trigger event",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table_or_section": "§5.3.1",
+        "excerpt": "Bypass mode is also used to reset",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-LIS2-FTH0",
+    "chip": "LIS2DW12",
+    "targets": [
+      "FIFO_CTRL.FTH",
+      "FIFO_SAMPLES.FIFO_FTH",
+      "STATUS.FIFO_THS"
+    ],
+    "problem": "FTH0时明确FIFO_FTH0，不能无条件DIFF≥FTH公式；FIFO切换首样discard。",
+    "old": {
+      "v2": "no functional FIFO rule"
+    },
+    "candidate_rule": {
+      "FIFO_FTH": "FTH!=0 and DIFF>=FTH",
+      "discard_first_sample_on_switch": true,
+      "functional_scope": "requires FIFO events"
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table_or_section": "§5.3",
+        "excerpt": "If FTH[4:0] is equal to 0",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-AD-LOCK-IDLE",
+    "chip": "AD5592R",
+    "targets": [
+      "GEN_CTRL_REG.IO_LOCK",
+      "ADC_CONFIG.ADC_PIN_MASK",
+      "DAC_CONFIG.DAC_PIN_MASK",
+      "PULLDWN_CONFIG.PULL_DWN_MASK"
+    ],
+    "problem": "缺跨寄存器IO_LOCK及idle无转换/无readback前置条件。",
+    "old": {
+      "source_policy_constraints": []
+    },
+    "candidate_rule": {
+      "requires_IO_LOCK": 0,
+      "requires_idle": true,
+      "locked_pin_config_writes": "ignored"
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table_or_section": "CONFIGURING",
+        "excerpt": "pin configuration registers are ignored",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table_or_section": "CONFIGURING",
+        "excerpt": "The I/Ox pins can be reconfigured at any time",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-AD-READBACK-ADAPTER",
+    "chip": "AD5592R",
+    "targets": [
+      "all mapped control registers",
+      "CONFIG_READ_AND_LDAC.REG_RD_EN"
+    ],
+    "problem": "direct memory read抽象缺厂商readback流程：selector/REG_RD_EN/next SPI，REG_RD_EN完成自清；ADC转换时其它read request ignored。",
+    "old": {
+      "register_model": "direct address read"
+    },
+    "candidate_rule": {
+      "scope": "declared selector abstraction, not physical SPI guarantee",
+      "adapter_requires": [
+        "readback selector",
+        "REG_RD_EN",
+        "next SPI",
+        "no active ADC for other reads"
+      ],
+      "REG_RD_EN_clear": "read complete"
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table_or_section": "READ MODE",
+        "excerpt": "all other read requests are ignored",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table_or_section": "Table21",
+        "excerpt": "REG_RD_EN automatically clears",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-AD-RESET-WRONGKEY",
+    "chip": "AD5592R",
+    "targets": [
+      "SW_RESET.SW_RESET_CODE"
+    ],
+    "problem": "0x5AC有明确reset动作，但任意错key必须不复位的硬件oracle不由原文直接支持。",
+    "old": {
+      "v2": "wrong key must not reset"
+    },
+    "candidate_rule": {
+      "recognized_key": "0x5AC",
+      "wrong_key_oracle": "EXCLUDE as manufacturer fact; optionally separately labelled abstraction",
+      "completion": "250us max, no write during reset"
+    },
+    "locators": [
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "Table28",
+        "excerpt": "10110101100: Reset",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table_or_section": "RESET FUNCTION",
+        "excerpt": "takes 250 µs maximum",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-AD-COMMAND-FORMAT-SOURCE",
+    "chip": "AD5592R",
+    "targets": [
+      "ADC_SEQ.REP",
+      "SW_RESET.SW_RESET_CODE",
+      "address_encoding.reserved_command_data_bits"
+    ],
+    "problem": "p.26通用bits10:9保留与逐寄存器REPbit9、SWkeybits10:0不兼容。",
+    "old": {
+      "generic_format": "bits10:9 reserved for control writes"
+    },
+    "candidate_rule": {
+      "interpretation": "per-register-specific command bits; retain generic-format discrepancy",
+      "official_erratum": false
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "Table10",
+        "excerpt": "Bits[10:9] are reserved",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table16",
+        "excerpt": "REP",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "Table28",
+        "excerpt": "10110101100: Reset",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-MPU-SOURCE-IDENTITY",
+    "chip": "MPU6050",
+    "targets": [
+      "source_manifest.MPU6050"
+    ],
+    "problem": "产品规格Rev3.4与寄存器地图Rev4.2必须分别锁源，不能混用页码。",
+    "old": {
+      "initial_source": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf"
+    },
+    "candidate_rule": {
+      "primary_source": {
+        "chip": "MPU6050",
+        "path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+        "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+        "manual_version": "RM-MPU-6000A-00 Revision 4.2; 08/19/2013",
+        "pdf_pages": 46,
+        "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+        "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+        "official_current_download_verified": false
+      },
+      "supplementary_source": {
+        "chip": "MPU6050",
+        "path": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+        "sha256": "a4fdf69590b8cbab1cf0a5bcd359327b0ac022061fb233855aff2e191e7e3584",
+        "manual_version": "PS-MPU-6000A-00 Revision 3.4; 08/19/2013",
+        "pdf_pages": 52,
+        "source_role": "SUPPLEMENTARY_PRODUCT_SPECIFICATION",
+        "source_depth": "full local PDF available; scope and electrical characteristics read",
+        "official_current_download_verified": false,
+        "note": "prepare.py initial device-name match was supplementary PS, not RM. RM p.40 and PS p.40 are different sections; never exchange their locators."
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 1,
+        "printed_page": "1",
+        "table_or_section": "title page",
+        "excerpt": "Revision: 4.2",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-MPU-DLPF7-SOURCE",
+    "chip": "MPU6050",
+    "targets": [
+      "CONFIG.DLPF_CFG"
+    ],
+    "problem": "§4.2 DLPF_CFG0 or7 disabled与§4.3表7 Reserved不同粒度；排除7可保守但不能说其毫无定义。",
+    "old": {
+      "v2_legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    "candidate_rule": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "excluded_value7": "UNRESOLVED_SOURCE_AMBIGUITY"
+    },
+    "locators": [
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table_or_section": "§4.3 DLPF table",
+        "excerpt": "RESERVED",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": "12",
+        "table_or_section": "§4.2",
+        "excerpt": "DLPF_CFG = 0 or 7",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-MPU-GYRO-ST-LAYOUT",
+    "chip": "MPU6050",
+    "targets": [
+      "GYRO_CONFIG.XG_ST",
+      "GYRO_CONFIG.YG_ST",
+      "GYRO_CONFIG.ZG_ST"
+    ],
+    "problem": "总map high3bits“-”与detail named ST位的布局差异，应保留detail-first解读条件。",
+    "old": {
+      "overview": "- - -",
+      "detail": "XG_ST YG_ST ZG_ST"
+    },
+    "candidate_rule": {
+      "access": "RW detail-first provisional",
+      "source_conflict": "UNRESOLVED_LAYOUT_DISCREPANCY",
+      "no_official_erratum": true
+    },
+    "locators": [
+      {
+        "pdf_page": 6,
+        "printed_page": "6",
+        "table_or_section": "§3 overview GYRO_CONFIG",
+        "excerpt": "GYRO_CONFIG",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 14,
+        "printed_page": "14",
+        "table_or_section": "§4.4",
+        "excerpt": "XG_ST",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-MPU-ANY-READ-CLEAR",
+    "chip": "MPU6050",
+    "targets": [
+      "all mapped reads",
+      "INT_PIN_CFG.INT_RD_CLEAR",
+      "INT_STATUS"
+    ],
+    "problem": "INT_RD_CLEAR1时任意read清interrupt；未映射中断block使当前测试无法覆盖。",
+    "old": {
+      "v2": "no interrupt register mapping in IR"
+    },
+    "candidate_rule": {
+      "scope_baseline": {
+        "INT_RD_CLEAR": 0
+      },
+      "dynamic_extension": [
+        "INT_PIN_CFG",
+        "INT_ENABLE",
+        "INT_STATUS"
+      ],
+      "clear_rules": {
+        "0": "INT_STATUS read only",
+        "1": "any read"
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "§4.14",
+        "excerpt": "interrupt status bits are cleared on any read",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table_or_section": "§4.16",
+        "excerpt": "Each bit will clear",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "severity": "P1",
+    "official_erratum": false
+  },
+  {
+    "id": "MOTION-MPU-CLOCK-CYCLE",
+    "chip": "MPU6050",
+    "targets": [
+      "PWR_MGMT_1.CLKSEL",
+      "PWR_MGMT_1.CYCLE",
+      "PWR_MGMT_1.SLEEP"
+    ],
+    "problem": "CLKSEL7合法但clockstop，cycle依SLEEP0及LP_WAKE_CTRL；静态RW不能证明mode更新。",
+    "old": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    "candidate_rule": {
+      "keep_legal7": true,
+      "exclude_clockstop_function_without_clock_model": true,
+      "CYCLE_requires_SLEEP": 0,
+      "dependency": "PWR_MGMT_2.LP_WAKE_CTRL"
+    },
+    "locators": [
+      {
+        "pdf_page": 40,
+        "printed_page": "40",
+        "table_or_section": "§4.28",
+        "excerpt": "Stops the clock",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 40,
+        "printed_page": "40",
+        "table_or_section": "§4.28",
+        "excerpt": "When CYCLE is set to 1 while SLEEP is disabled",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "severity": "P2",
+    "official_erratum": false
+  }
+]

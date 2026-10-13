@@ -1,0 +1,49 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.4  Detection Event Register
+
+Command = 04h with 1 Data Byte, Read Only
+
+Command = 05h with 1 Data Byte, Clear on Read
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME        CLSC4     CLSC3     CLSC2     CLSC1     DETC4     DETC3     DETC2     DETC1
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Active high, each bit corresponds to a particular event that occurred.
+
+Each bit CLSCn, DETCn represents an individual port.
+
+A read at each location (04h or 05h) returns the same register data with the exception that the Clear-on-Read
+command clears all bits of the register. These bits are cleared when port n is turned off.
+
+If this register is causing the INT pin to be activated, this Clear-on-Read command releases the INT pin.
+
+Any active bit will have an impact on the Interrupt Register as indicated in the Interrupt Register description.
+
+Bit Descriptions
+
+CLSC4-CLSC1: Indicates that at least one classification cycle occurred.
+
+1 = At least one classification cycle occurred.
+
+0 = No classification cycle occurred.
+
+DETC4-DETC1: Indicates that at least one detection cycle occurred.
+
+1 = At least one detection cycle occurred.
+
+0 = No detection cycle occurred.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     51
+
+                                                 Product Folder Links: TPS23861

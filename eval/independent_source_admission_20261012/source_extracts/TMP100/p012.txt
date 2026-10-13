@@ -1,0 +1,56 @@
+TMP100, TMP101
+
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015                                                                 www.ti.com
+
+7.3.2.8 POR (Power-On Reset)
+
+The TMP100 and TMP101 devices both have on-chip, power-on reset circuits that reset the device to default
+settings when the device is powered on. This circuit activates when the power supply is less than 0.3 V for more
+than 100 ms.  If the TMP100 and TMP101 devices are powered down by removing supply voltage from the
+device, but the supply voltage is not assured to be less than 0.3 V, TI recommends issuing a General Call reset
+command on the I2C interface bus to ensure that the TMP100 and TMP101 devices are completely reset.
+
+7.3.3  Timing Diagrams
+The TMP100 and TMP101 devices are Two-Wire, SMBUs, and I2C interface-compatible. Figure 6 to Figure 9
+describe the various operations on the TMP100 and TMP101. The following  list provides bus definitions.
+Parameters for Figure 6 are defined in the Timing Requirements section.
+
+Bus Idle: Both SDA and SCL lines remain HIGH.
+
+Start Data Transfer: A change in the state of the SDA line, from HIGH to LOW, while the SCL line is HIGH,
+defines a START condition. Each data transfer is initiated with a START condition.
+
+Stop Data Transfer: A change in the state of the SDA line from LOW to HIGH while the SCL line is HIGH
+defines a STOP condition. Each data transfer is terminated with a repeated START or STOP condition.
+
+Data Transfer: The number of data bytes transferred between a START and a STOP condition is not limited and
+is determined by the master device. The receiver acknowledges the transfer of data.
+
+Acknowledge: Each receiving device, when addressed, is obliged to generate an Acknowledge bit. A device
+that acknowledges must pull down the SDA line during the Acknowledge clock pulse in such a way that the SDA
+line is stable LOW during the HIGH period of the Acknowledge clock pulse. Setup and hold times must be taken
+into account. On a master receive, the termination of the data transfer can be signaled by the master generating
+a Not-Acknowledge on the last byte that is transmitted by the slave.
+
+                                                     t(LOW)
+                                                                                       tFC                                   t(HDSTA)
+                                                            tRC
+
+            SCL
+
+                                                       t(HDSTA)                             t(HIGH)   t(SUSTA)                                                                   t(SUSTO)
+                                                                               t(HDDAT)               t(SUDAT)
+
+           SDA
+                                       t(BUF)                                                             tRD                                                   tFD
+                   P      S                                          S                             P
+
+                                    Figure 6. I2C Timing Diagram
+
+
+
+
+
+12     Submit Documentation Feedback                                                     Copyright © 2002–2015, Texas Instruments Incorporated
+
+                                              Product Folder Links: TMP100 TMP101

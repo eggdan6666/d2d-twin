@@ -1,0 +1,169 @@
+[
+  {
+    "chip": "TMP117",
+    "register": "EEPROM1",
+    "existing_fields": [],
+    "overall_status": "CONDITIONAL",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "fact": "完整16位R/W scratch register，有EEPROM后备；locked写volatile，unlocked编程。reset xxxx由工厂唯一ID或用户EEPROM决定。EEPROM2标题0000h与图表xxxxh冲突。",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "evidence_class": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-11",
+        "section": null,
+        "excerpt": "Table 7-11. EEPROM1 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. To support NIST traceability do not delete or re-program this reg"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ]
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM2",
+    "existing_fields": [],
+    "overall_status": "CONDITIONAL",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "fact": "完整16位R/W scratch register，有EEPROM后备；locked写volatile，unlocked编程。reset xxxx由工厂唯一ID或用户EEPROM决定。EEPROM2标题0000h与图表xxxxh冲突。",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "evidence_class": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-12",
+        "section": null,
+        "excerpt": "Table 7-12. EEPROM2 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§7.6.8 title",
+        "excerpt": "[reset = 0000h] This register function the same as the EEPROM1 register. Return to Register Map. Figure 7-19. EEPROM2 Register 15 14 13 12 11 10 9 8 D15 D14 D13 D12 D11 D10 D9 D8 R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3",
+        "section": null,
+        "excerpt": "EEPROM2 EEPROM2 register Go 07h R/W 0000h(1) Temp_Offset Temperature offset register Go 08h R/W xxxxh(1) EEPROM3 EEPROM3 register Go 0Fh R 0117h Device_ID Device ID register Go (1) This value is stored in Electrically-Er"
+      }
+    ]
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM3",
+    "existing_fields": [],
+    "overall_status": "CONDITIONAL",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "fact": "完整16位R/W scratch register，有EEPROM后备；locked写volatile，unlocked编程。reset xxxx由工厂唯一ID或用户EEPROM决定。EEPROM2标题0000h与图表xxxxh冲突。",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "evidence_class": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-14",
+        "section": null,
+        "excerpt": "Table 7-14. EEPROM3 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register is used as a scratch pad. To support NIST traceability, do not delete or re-program this regist"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ]
+  }
+]

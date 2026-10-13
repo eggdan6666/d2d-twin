@@ -1,0 +1,66 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 7.3 Feature Description
+ 7.3.1 Basic ADC Functions
+
+The INA3221 performs two measurements on up to three power supplies of interest. The voltage developed from
+ the load current passing through a shunt resistor creates a shunt voltage that is measured between the IN+ and
+ IN– pins. The device also internally measures the power-supply bus voltage at the IN– pin for each channel. The
+ differential shunt voltage is measured with respect to the IN– pin, and the bus voltage is measured with respect
+ to ground.
+
+The INA3221 is typically powered by a separate power supply that ranges from 2.7V to 5.5V. The monitored
+ supply buses range from 0V to 26V.
+
+                                   CAUTION
+
+     Based on the fixed 8mV bus-voltage register LSB (for any channel), a full-scale register value results
+        in 32.76V. However, the actual voltage applied to the INA3221 input pins must not exceed 26V.
+
+ There are no special power-supply sequencing considerations between the common-mode input ranges and the
+ device power-supply voltage because each are independent of the other; therefore, the bus voltages can be
+ present with the supply voltage off and reciprocally.
+
+The INA3221 takes two measurements for each channel: one for shunt voltage and one for bus voltage.
+Each measurement can be independently or sequentially measured, based on the mode setting (bits 2-0 in
+ the Configuration register). When the INA3221 is in normal operating mode (that is, the MODE bits of the
+ Configuration register are set to 111), the device continuously converts a shunt-voltage reading followed by a
+ bus-voltage reading. This procedure converts one channel, and then continues to the shunt voltage reading of
+ the next enabled channel, followed by the bus-voltage reading for that channel, and so on, until all enabled
+ channels have been measured. The programmed Configuration register mode setting applies to all channels.
+Any channels that are not enabled are bypassed in the measurement sequence, regardless of mode setting.
+
+The INA3221 has two operating modes, continuous and single-shot, that determine the internal ADC operation
+ after these conversions complete. When the INA3221 is set to continuous mode (using the MODE bit settings),
+ the device continues to cycle through all enabled channels until a new configuration setting is programmed.
+
+The Configuration register MODE control bits also enable modes to be selected that convert only the shunt or
+ bus voltage. This feature further allows the device to fit specific application requirements.
+
+ In single-shot (triggered) mode, setting any single-shot convert mode to the Configuration register (that is, the
+ Configuration register MODE bits set to 001, 010, or 011) triggers a single-shot conversion. This action produces
+a single set of measurements for all enabled channels. To trigger another single-shot conversion, write to the
+ Configuration register a second time, even  if the mode does not change. When a single-shot conversion is
+ initiated, all enabled channels are measured one time and then the device enters a power-down state. The
+INA3221 registers can be read at any time, even while in power-down. The data present in these registers are
+ from the last completed conversion results for the corresponding register. The conversion ready flag bit (Mask/
+ Enable register, CVRF bit) helps coordinate single-shot conversions, and is especially helpful during longer
+ conversion time settings. The CVRF bit is set after all conversions are complete. The CVRF bit clears under the
+ following conditions:
+
+ 1.  Writing to the Configuration register, except when configuring the MODE bits for power-down mode; or
+ 2.  Reading the Mask/Enable register.
+
+ In addition to the two operating modes (continuous and single-shot), the INA3221 also has a separate selectable
+power-down mode that reduces the quiescent current and turns off current into the INA3221 inputs. Power-down
+mode reduces the impact of supply drain when the device is not used. Full recovery from power-down mode
+ requires 40µs. The INA3221 registers can be written to and read from while the device is in power-down mode.
+The device remains in power-down mode until one of the active MODE settings are written to the Configuration
+ register.
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    11
+
+                                                  Product Folder Links: INA3221

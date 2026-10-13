@@ -1,0 +1,54 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.7     CTRL4_INT1_PAD_CTRL (23h)
+              Control register 4 (R/W)
+
+
+                                                 Table 36. Control register 4
+
+                              INT1_                                               INT1_        INT1_        INT1_
+               INT1_6D                INT1_WU     INT1_FF     INT1_TAP
+                        SINGLE_TAP                                           DIFF5       FTH       DRDY
+
+
+                                            Table 37. Control register 4 description
+
+                                  6D recognition is routed to INT1 pad. Default: 0
+             INT1_6D
+                                                        (0: disabled; 1: enabled)
+
+                                                Single-tap recognition is routed to INT1 pad. Default value: 0
+             INT1_SINGLE_TAP
+                                                        (0: disabled; 1: enabled)
+
+                                      Wake-up recognition is routed to INT1 pad. Default value: 0
+            INT1_WU
+                                                        (0: disabled; 1: enabled)
+
+                                                     Free-fall recognition is routed to INT1 pad. Default value: 0
+             INT1_FF
+                                                        (0: disabled; 1: enabled)
+
+                                            Double-tap recognition is routed to INT1 pad. Default value: 0
+             INT1_TAP
+                                                        (0: disabled; 1: enabled)
+
+                                      FIFO full recognition is routed to INT1 pad. Default value: 0
+              INT1_DIFF5
+                                                        (0: disabled; 1: enabled)
+
+                                      FIFO threshold interrupt is routed to INT1 pad. Default value: 0
+             INT1_FTH
+                                                        (0: disabled; 1: enabled)
+
+                                            Data-ready is routed to INT1 pad. Default value: 0
+            INT1_DRDY
+                                                        (0: disabled; 1: enabled)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 39/65

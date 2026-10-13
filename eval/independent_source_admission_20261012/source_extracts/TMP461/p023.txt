@@ -1,0 +1,70 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+9  Application and Implementation
+
+
+                                  NOTE
+           Information  in  the  following  applications  sections  is  not  part  of  the  TI component
+            specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+           responsible for determining suitability of components for their purposes. Customers should
+            validate and test their design implementation to confirm system functionality.
+
+
+9.1  Application Information
+
+The TMP461 device requires only a transistor connected between the D+ and D– pins for remote temperature
+measurement. Tie the D+ pin to GND  if the remote channel is not used and only the local temperature is
+measured. The SDA, ALERT, and THERM pins (and SCL,  if driven by an open-drain output) require pullup
+resistors as part of the communication bus. A 0.1-µF power-supply decoupling capacitor is recommended for
+local bypassing. Figure 18 and Figure 19 illustrate the typical configurations for the TMP461 device.
+
+9.2  Typical Application
+
+                                                                                                                    1.7V to 3.6V
+
+                   RS(2)
+                                                                                        10k     10k     10k     10k                                                         0.1µF                                                                          (3)                                                                    (typ)     (typ)     (typ)     (typ)
+                                              (2)           CDIFF                   RS
+                                                                   10
+
+                                                         A1
+Diode-connected configuration(1)                       1                                 9
+                                             V+                 SCL
+                              Series Resistance
+                         RS(2)                    2                                 8
+                                           D+                SDA
+                                                                                       (3)                                                                       SMBus
+                                                CDIFF                TMP461                                                                          Controller                                                          (2)                         RS                     3                                 7
+                                                     D-               ALERT /
+                                                        THERM2
+
+                                                    4                                 6
+                                        THERM            GND       Transistor-connected configuration(1)
+
+                                                         A0
+                                                                       5
+
+
+
+                                                                                                                              Over-Temperature Shutdown
+
+
+        (1)  The diode-connected configuration provides better settling time. The transistor-connected configuration provides
+            better series resistance cancellation.
+
+        (2)  RS (optional) is < 1 kΩin most applications. RS is the combined series resistance connected externally to the D+, D-
+             pins. RS selection depends on the application; see the Filtering section.
+        (3)  CDIFF (optional) is < 1000 pF in most applications. CDIFF selection depends on the application; see the Filtering
+            section and Figure 6 (Remote Temperature Error vs Differential Capacitance).
+
+              Figure 18. TMP461 Basic Connections Using a Discrete Remote Transistor
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     23
+
+                                                  Product Folder Links: TMP461

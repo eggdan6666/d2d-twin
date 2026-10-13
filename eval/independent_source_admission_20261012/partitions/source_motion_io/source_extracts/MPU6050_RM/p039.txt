@@ -1,0 +1,23 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           39 of 46  
+   
+ 
+SIG_COND_RESET 
+When set to 1, this bit resets the signal paths for all sensors (gyroscopes, 
+accelerometers, and temperature sensor). This operation will also clear the 
+sensor registers. This bit automatically clears to 0 after the reset has been 
+triggered.  
+ 
+When resetting only the signal path (and not the sensor registers), please 
+use Register 104, SIGNAL_PATH_RESET. 
+ 
+ 
+ 
+ 

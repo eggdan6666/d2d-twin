@@ -1,0 +1,38 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           41 of 46  
+   
+Parameters: 
+DEVICE_RESET  
+When set to 1, this bit resets all internal registers to their default values.  
+ 
+The bit automatically clears to 0 once the reset is done. 
+ 
+The default values for each register can be found in Section 3.  
+SLEEP 
+When set to 1, this bit puts the MPU-60X0 into sleep mode.  
+CYCLE 
+When this bit is set to 1 and SLEEP is disabled, the MPU-60X0 will cycle 
+between sleep mode and waking up to take a single sample of data from 
+active sensors at a rate determined by LP_WAKE_CTRL (register 108). 
+TEMP_DIS 
+When set to 1, this bit disables the temperature sensor. 
+CLKSEL 
+3-bit unsigned value. Specifies the clock source of the device. 
+ 
+Note:  
+When using SPI interface, user should use DEVICE_RESET (register 107) as well as 
+SIGNAL_PATH_RESET (register 104) to ensure the reset is performed properly. The sequence 
+used should be: 
+  
+1.       Set DEVICE_RESET = 1 (register PWR_MGMT_1) 
+2.       Wait 100ms 
+3.       Set GYRO_RESET = ACCEL_RESET = TEMP_RESET = 1 (register SIGNAL_PATH_RESET) 
+4.       Wait 100ms 
+ 

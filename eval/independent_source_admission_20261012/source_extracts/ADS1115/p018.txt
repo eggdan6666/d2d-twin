@@ -1,0 +1,59 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 7.4 Device Functional Modes
+ 7.4.1 Reset and Power-Up
+
+The ADS111x reset on power-up and set all the bits in the Config register to the respective default settings.
+The ADS111x enter a power-down state after completion of the reset process. The device interface and digital
+ blocks are active, but no data conversions are performed. The initial power-down state of the ADS111x relieves
+ systems with tight power-supply requirements from encountering a surge during power-up.
+The ADS111x respond to the I2C general-call reset commands. When the ADS111x receive a general call reset
+command (06h), an internal reset is performed as if the device is powered up.
+
+ 7.4.2 Operating Modes
+
+The ADS111x operate in one of two modes: continuous-conversion or single-shot. The MODE bit in the Config
+ register selects the respective operating mode.
+
+ 7.4.2.1 Single-Shot Mode
+
+When the MODE bit in the Config register is set to 1b, the ADS111x enter a power-down state, and operate
+ in single-shot mode. This power-down state is the default state for the ADS111x when power is first applied.
+ Although powered down, the devices still respond to commands. The ADS111x remain in this power-down state
+ until a 1b is written to the operational status (OS) bit in the Config register. When the OS bit is asserted,
+ the device powers up in approximately 25 μs, resets the OS bit to 0b, and starts a single conversion. When
+ conversion data are ready for retrieval, the device powers down again. Writing a 1b to the OS bit while a
+ conversion is ongoing has no effect. To switch to continuous-conversion mode, write a 0b to the MODE bit in the
+ Config register.
+
+ 7.4.2.2 Continuous-Conversion Mode
+
+ In continuous-conversion mode (MODE bit set to 0b), the ADS111x perform conversions continuously. When
+a conversion is complete, the ADS111x place the result in the Conversion register and immediately begin
+ another conversion. When writing new configuration settings, the currently ongoing conversion completes with
+ the previous configuration settings. Thereafter, continuous conversions with the new configuration settings start.
+ To switch to single-shot conversion mode, write a 1b to the MODE bit in the configuration register or reset the
+ device.
+
+ 7.4.3 Duty Cycling For Low Power
+
+The noise performance of a ΔΣ ADC generally improves when lowering the output data rate because more
+ samples of the internal modulator are averaged to yield one conversion result. In applications where power
+ consumption  is  critical, improved noise performance at low data rates  is not always required. For these
+ applications, the ADS111x support duty cycling that yields significant power savings by periodically requesting
+ high data rate readings at an effectively lower data rate. For example, an ADS111x in the power-down state with
+a data rate set to 860SPS can be operated by a microcontroller that instructs a single-shot conversion every
+125ms (8SPS). A conversion at 860SPS only requires approximately 1.2ms, so the ADS111x enter power-down
+ state for the remaining 123.8ms. In this configuration, the ADS111x consume approximately 1/100th the power
+ that is otherwise consumed in continuous-conversion mode. The duty cycling rate is completely arbitrary and is
+ defined by the controller. The ADS111x offer lower data rates that do not implement duty cycling and also offer
+ improved noise performance if required.
+
+
+
+
+
+18    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

@@ -1,0 +1,66 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+The LSB for the Bus Voltage Register (02h) is a fixed 1.25mV/bit, which means that the 11.98V present at the
+VBUS pin results in a register value of 2570h, or a decimal equivalent of 9584. Note that the MSB of the Bus
+ Voltage Register (02h) is always zero because the VBUS pin is only able to measure positive voltages.
+
+The Power Register (03h) is then be calculated by multiplying the decimal value of the Current Register, 10000,
+ by the decimal value of the Bus Voltage Register (02h), 9584, and then dividing by 20,000, as defined in
+ Equation 4. For this example, the result for the Power Register (03h) is 12B8h, or a decimal equivalent of 4792.
+ Multiplying this result by the power LSB (25 times the [1 × 10–3 Current_LSB]) results in a power calculation of
+ (4792 × 25mW/bit), or 119.82W. The power LSB has a fixed ratio to the Current_LSB of 25. For this example,
+a programmed 1mA/bit Current_LSB results in a power LSB of 25mW/bit. This ratio is internally programmed to
+ verify that the scaling of the power calculation is within an acceptable range. A manual calculation for the power
+ being delivered to the load uses a bus voltage of 11.98V (12VCM – 20mV shunt drop) multiplied by the load
+ current of 10A to give a result of 119.8W.
+
+                                                                                                                    (4)        Power = Current20000× BusVoltage Table 6-1 lists the steps for configuring, measuring, and calculating the values for current and power for this
+ device.
+
+                               Table 6-1. Calculating Current and Power
+    STEP        REGISTER NAME     ADDRESS        CONTENTS         DEC       LSB      VALUE (1)
+
+     Step 1         Configuration Register        00h               4127h        —      —      —
+
+     Step 2           Shunt Register           01h              1F40h              8000         2.5µV       20mV
+
+     Step 3       Bus Voltage Register         02h               2570h              9584       1.25mV       11.98V
+
+     Step 4          Calibration Register         05h              A00h               2560     —      —
+
+     Step 5           Current Register           04h               2710              10000       1mA        10A
+
+     Step 6          Power Register           03h              12B8h              4792      25mW      119.82W
+
+ (1)   Conditions: Load = 10A, VCM = 12V, RSHUNT = 2mΩ, and VVBUS = 12V.
+
+ 6.5.2 Programming the Power Measurement Engine
+ 6.5.2.1 Calibration Register and Scaling
+
+The Calibration Register enables the user to scale the Current Register (04h) and Power Register (03h) to the
+most useful value for a given application. For example, set the Calibration Register such that the largest possible
+number is generated in the Current Register (04h) or Power Register (03h) at the expected full-scale point. This
+ approach yields the highest resolution using the previously calculated minimum Current_LSB in the equation for
+ the Calibration Register. The Calibration Register can also be selected to provide values in the Current Register
+ (04h) and Power Register (03h) that either provide direct decimal equivalents of the values being measured, or
+ yield a round LSB value for each corresponding register. After these choices are made, the Calibration Register
+ also offers possibilities for end user system-level calibration. After determining the exact current by using an
+ external ammeter, the value of the Calibration Register can then be adjusted based on the measured current
+ result of the INA226 to cancel the total system error as shown in Equation 5.
+
+                                                                                                                    (5)                                                 Cal ×                                                MeasShuntCurrent          Corrected_Full_Scale_Cal                     = trunc                                                 Device_Current 6.5.3 Simple            Current Shunt Monitor                             Usage                                     (No Programming Necessary)
+
+The device can be used without any programming  if reading a shunt voltage drop and bus voltage with the
+ default power-on reset configuration and continuous conversion of shunt and bus voltages is only necessary.
+
+ Without programming the device Calibration Register, the device is unable to provide either a valid current or
+power value, because these outputs are both derived using the values loaded into the Calibration Register.
+
+
+
+
+
+16    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

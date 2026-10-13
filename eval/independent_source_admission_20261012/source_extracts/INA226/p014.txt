@@ -1,0 +1,79 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+ 6.4.2 Filtering and Input Considerations
+
+ Measuring current is often noisy, and such noise can be difficult to define. The INA226 device offers several
+ options for filtering by allowing the conversion times and number of averages to be selected independently in
+ the Configuration Register (00h). The conversion times can be set independently for the shunt voltage and bus
+ voltage measurements to allow added flexibility in configuring the monitoring of the power-supply bus.
+
+The internal ADC is based on a delta-sigma (ΔΣ) front-end with a 500kHz (±30%) typical sampling rate. This
+ architecture has good inherent noise rejection; however, transients that occur at or very close to the sampling
+ rate harmonics can cause problems. Because these signals are at 1MHz and higher, the signals can be
+managed by incorporating filtering at the input of the device. The high frequency enables the use of low-value
+ series resistors on the filter with negligible effects on measurement accuracy. In general, filtering the device
+ input is only necessary if there are transients at exact harmonics of the 500kHz (±30%) sampling rate (greater
+ than 1MHz). Filter using the lowest possible series resistance (typically 10Ω or less) and a ceramic capacitor.
+Recommended values for this capacitor are between 0.1μF and 1μF. Figure 6-3 shows the device with a filter
+added at the input.
+
+ Overload conditions are another consideration for the device inputs. The device inputs are specified to tolerate
+40V across the inputs. A large differential scenario can be a short to ground on the load side of the shunt.
+ This type of event can result in full power-supply voltage across the shunt (as long the power supply or energy
+ storage capacitors support the voltage). Removing a short to ground can result in inductive kickbacks that
+ can exceed the 40V differential and common-mode rating of the device. Inductive kickback voltages are best
+ controlled by Zener-type transient-absorbing devices (commonly called transzorbs) combined with sufficient
+ energy storage capacitance. See the TI Design, Transient Robustness for Current Shunt Monitors (TIDU473),
+ which describes a high-side current shunt monitor used to measure the voltage developed across a current-
+ sensing resistor when current passes through the resistor.
+
+ In applications that do not have large energy storage electrolytics on one or both sides of the shunt, an input
+ overstress condition can result from an excessive dV/dt of the voltage applied to the input. A hard physical
+ short is the most likely cause of this event, particularly in applications with no large electrolytics present. This
+ problem occurs because an excessive dV/dt can activate the ESD protection in the device in systems where
+ large currents are available. Testing demonstrates that the addition of 10Ω resistors in series with each input of
+ the device sufficiently protects the inputs against this dV/dt failure up to the 40V rating of the device. Selecting
+ these resistors in the range noted has minimal effect on accuracy.
+
+
+                   Power                           Supply
+                         (0 Vto                           36V)                                                                                      CBYPASS
+                                                                                                                    0.1µF
+
+
+
+                                                                                                  VS
+                                                                                                                                       (Supply Voltage)
+                                     VBUS
+
+
+            C FILTER                                                                                        SDA
+              0.1µF to 1µF
+               Ceramic                                                                                            SCL
+                Capacitor
+                                                      X       Power Register
+                                    RFILTER
+                              ≤ 10Ω             V                                                                                      2
+                                              VIN+                                                       Current Register                      I C or SMBus
+                                                   ADC                                                 Compatible
+                                                                                                                                                  Interface
+                                                                                                    I                                           Voltage Register                                      Alert
+                                                   VIN-                                                                                  A0
+                                     RFILTER
+                               ≤ 10Ω                                                                        Alert Register                            A1
+                       Load
+
+
+
+                     GND
+
+                                      Figure 6-3. Input Filtering
+
+
+
+
+
+14    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

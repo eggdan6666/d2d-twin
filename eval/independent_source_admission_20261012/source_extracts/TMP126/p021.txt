@@ -1,0 +1,94 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+
+                            Controller controls SIO line
+
+
+                          Peripheral controls SIO line
+
+
+
+                CRC Data Block Length               Sub-Address                                       Data Word
+
+ CS pulled low
+
+                 X CRC L4  L3  L1  L0   1   0  A7  A6  A5  A4  A3  A2  A1  A0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                CRC Enable         R/W                                                         Data to Register N
+
+
+                 Don’t Care       Auto Increment
+
+
+
+
+
+                                           Data Word                                                       Data Word
+
+
+
+
+                 D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                                       Data to Register N+1                                               Data to Register N+2
+
+                          Figure 8-12. Burst Data Write to Multiple Registers
+
+ 8.5.2.4 Read Operations
+
+ Data is read from the TMP126 by setting the R/W bit of the command word to 1. Data can be continuously
+ read from a single register by setting the auto-increment bit to 0 in the command register. Figure 8-13 shows an
+example of a repeated data read from a single register. Repeated temperature reads are not supported.
+
+
+                            Controller controls SIO line
+
+
+                          Peripheral controls SIO line
+
+
+
+                CRC Data Block Length               Sub-Address                                       Data Word
+
+ CS pulled low
+
+                 X CRC L4  L3  L1  L0   0   1  A7  A6  A5  A4  A3  A2  A1  A0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                CRC Enable         R/W                                                        Data from Register N
+
+
+                 Don’t Care       Auto Increment
+
+
+
+
+
+                                           Data Word                                                       Data Word
+
+                                                                                                                CS pulled high
+
+                 D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                                       Data from Register N                                               Data from Register N
+
+                        Figure 8-13. Repeated Data Read from a Single Register
+
+ Figure 8-14 shows how setting the auto increment to 1 to can enable a read from multiple registers in a single
+ transaction.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    21
+
+                                                  Product Folder Links: TMP126

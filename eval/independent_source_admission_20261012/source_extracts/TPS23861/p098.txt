@@ -1,0 +1,37 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+10  Layout
+
+10.1  Layout Guidelines
+
+10.1.1  Port Current Kelvin Sensing
+
+KSENSA is shared between SEN1 and SEN2, while KSENSB is shared between SEN3 and SEN4. In order to
+optimize the accuracy of the measurement, the PCB layout must be done carefully to minimize impact of PCB
+trace resistance. Refer to Figure 60 as an example.
+
+                          Shape connecting RS1A/B
+                     RS1A/B                                                              RS2A/B                           and R S2A/B to KSENSA
+
+
+
+
+
+                KSENSA route
+        To RSEN1                                  Vias connecting      To RSEN2                          to SN1902071
+                                            shape to GND layer
+
+
+
+
+                              Figure 60. Kelvin Sense Layout Example
+
+
+
+
+
+98     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

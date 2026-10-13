@@ -1,0 +1,61 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+Application Information (continued)
+
+The schematic of Figure 46 depicts automatic mode operation of the TPS23861, providing turnkey functionality
+ready to power PoE loads. No connection to the I2C bus or any type of host control is required. In Figure 46 the
+TPS23861 automatically:
+ 1. Performs load detection.
+ 2. Performs classification including type-2 (two-finger) of up to Class 4 loads.
+ 3. Enables power with protective foldback current limiting, and ICUT value based on load class.
+ 4. Shuts down in the event of fault loads and shorts.
+ 5. Performs Maintain Power Signature function to ensure removal of power if load is disconnected.
+ 6. Undervoltage lock out occurs if VPWR falls below VPUV_F (typical 26.5 V).
+
+Following a power-off command, disconnect or shutdown due to a start, ICUT or ILIM fault, the port powers
+down. Following port power off due to a power off command or disconnect, the TPS23861 continues automatic
+operation starting with a detection cycle.  If the shutdown is due to a start, ICUT or ILIM fault, the TPS23861
+enters into a cool-down period. After the end of the cool-down period the TPS23861 continues automatic
+operation starting with a detection cycle.
+
+The TPS23861 will not automatically apply power to a port under the following circumstances:
+•  The detect status is not Resistance Valid.
+•    If the classification status is overcurrent, class mismatch, or unknown.
+
+8.2.1  Kelvin Current Sensing Resistor
+
+Load current in each PSE port is sensed as the voltage across a low-end current-sense resistor with a value of
+255 mΩ. For more accurate current sensing, kelvin sensing of the low end of the current-sense resistor is
+provided through pins KSENSA for ports 1 and 2, and KSENSB for ports 3 and 4.
+
+8.2.2  Connections on Unused Ports
+
+The TPS23861 can be used on applications needing only 1 to 4 ports. On unused ports ground the SENx pin
+and leave the GATEx pin floating. DRAINx pins can be grounded or left open (leaving open may slightly reduce
+power consumption). One example of an unused PORT4  is shown in Figure 47. For detailed design and
+component selection information, see System Examples.
+
+This schematic shows connections for an unused PORT4.
+
+
+
+                        11 KSENSB KSENSA 18
+                                                          47 :
+                        12 SEN4     GATE1 17
+
+                        13 DRAIN4   DRAIN1 16                 255 m
+                 Port 4                                 22 :         250 m
+             Not Used    14 GATE4     SEN1 15
+
+
+                               Figure 47. Unused PORT4 Connections
+
+
+
+
+
+86     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

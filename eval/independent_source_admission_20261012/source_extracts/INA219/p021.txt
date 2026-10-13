@@ -1,0 +1,56 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+ 4. Complement the binary result : 000 0010 1111 1111
+ 5. Add 1 to the Complement to create the Two’s Complement formatted result →000 0011 0000 0000
+ 6. Extend the sign and create the 16-bit word: 1000 0011 0000 0000 = 8300h (Remember to extend the sign to
+     all sign-bits, as necessary based on the PGA setting.)
+
+At PGA = /8, full-scale range = ±320 mV (decimal = 32000). For VSHUNT = +320 mV, Value = 7D00h; For VSHUNT
+= –320 mV, Value = 8300h; and LSB = 10µV.
+
+                            Figure 20. Shunt Voltage Register at PGA = /8
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+       SD14_ SD13_ SD12_ SD11_ SD10_
+ SIGN                                  SD9_8 SD8_8 SD7_8 SD6_8 SD5_8 SD4_8 SD3_8 SD2_8 SD1_8 SD0_8
+          8      8      8      8      8
+
+At PGA = /4, full-scale range = ±160 mV (decimal = 16000). For VSHUNT = +160 mV, Value = 3E80h; For VSHUNT
+= –160 mV, Value = C180h; and LSB = 10µV.
+
+                            Figure 21. Shunt Voltage Register at PGA = /4
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+              SD13_ SD12_ SD11_ SD10_
+ SIGN  SIGN                            SD9_4 SD8_4 SD7_4 SD6_4 SD5_4 SD4_4 SD3_4 SD2_4 SD1_4 SD0_4
+                 4      4      4      4
+
+At PGA = /2, full-scale range = ±80 mV (decimal = 8000). For VSHUNT = +80 mV, Value = 1F40h; For VSHUNT =
+–80 mV; Value = E0C0h; and LSB = 10µV.
+
+                            Figure 22. Shunt Voltage Register at PGA = /2
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+                    SD12_ SD11_ SD10_
+ SIGN  SIGN  SIGN                     SD9_2 SD8_2 SD7_2 SD6_2 SD5_2 SD4_2 SD3_2 SD2_2 SD1_2 SD0_2
+                        2      2      2
+
+At PGA = /1, full-scale range = ±40 mV (decimal = 4000). For VSHUNT = +40 mV, Value = 0FA0h; For VSHUNT =
+–40 mV, Value = F060h; and LSB = 10µV.
+
+                            Figure 23. Shunt Voltage Register at PGA = /1
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+                          SD11_ SD10_
+ SIGN  SIGN  SIGN  SIGN               SD9_1 SD8_1 SD7_1 SD6_1 SD5_1 SD4_1 SD3_1 SD2_1 SD1_1 SD0_1
+                               1      1
+
+
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     21
+
+                                                   Product Folder Links: INA219

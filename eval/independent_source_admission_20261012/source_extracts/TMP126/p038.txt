@@ -1,0 +1,64 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+10 Power Supply Recommendations
+
+The operates from a single supply VDD. This pin operates with a wide range of 1.62 V to 5.5 V and maintains
+ accuracy across the entire supply range. A de-coupling capacitor of 0.1 µF is recommended for the VDD pin.
+ Place the capacitor as close to the pin as possible.
+11 Layout
+ 11.1 Layout Guidelines
+
+ Place the power-supply de-coupling capacitor as close as possible to the supply and ground pins. The
+recommended value of this de-coupling capacitor is 0.1 µF. Separation between the SCLK trace and the SIO
+ traces is recommended to reduce coupling of the clock onto the data line.
+
+ 11.2 Layout Example
+
+                                                                                           Via to Power Plane
+
+                                                                                           Via to Ground Plane
+
+                                                                                      Top/Bottom Layer Trace
+
+
+
+
+                          CS                VDD
+  Controller /CS
+                                     1                6
+
+                        GND                  ALERT
+                                     2     DCK      5
+
+  Controller Data In
+                               SIO                  SCLK
+
+                                     3                4
+  Controller Data Out 10 k
+
+
+
+
+ SPI Clock
+
+
+
+  Controller Interrupt
+
+
+
+
+          k
+                   10
+
+
+                              Figure 11-1. DCK Package Layout Example
+
+
+
+
+
+38    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

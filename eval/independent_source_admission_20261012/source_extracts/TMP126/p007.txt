@@ -1,0 +1,87 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 7.6 SPI Interface Timing
+ Over free-air temperature range and VDD = 1.62 V to 5.5 V (unless otherwise noted)
+                                                                                                SPI BUS
+                                                                                                                 UNIT
+                                                                                     MIN         MAX
+
+  fCLK           SCLK frequency                                                                                10     MHz
+  tCLK           SCLK Period                                                                  100                         ns
+  tLEAD                Falling edge of CS to rising edge of SCLK setup time                                  100                         ns
+  tLAG               Rising edge of SCLK to rising edge of CS setup time                                   20                         ns
+  tSU             SIO to SCLK rising edge setup time                                                 10                         ns
+ tHOLD           SIO hold time after rising edge of SCLK                                              20                         ns
+  tVALID            Time from falling edge of SLCK to valid SIO data                                                      35        ns
+  tSIO(DIS)          Time from rising edge of CS to SIO high-impedance                                                   200        ns
+  tRISE              SIO, SCLK, CS rise time                                                                        100        ns
+  tFALL              SIO, SCLK, CS fall time                                                                         100        ns
+ tINTERFRAME       Delay between two SPI communication sequences (CS high)                            100                         ns
+  tINITIATION         Delay between valid VDD voltage and initial SPI communication                                0.5                   ms
+
+ 7.7 Timing Diagram
+
+
+                        1.62 V
+           VDD
+
+
+                                           tINITIATION                                                                                                       ttINTERFRAMEt
+
+
+         CS              50 %                                                                                        50 %
+
+
+                                         ttLEADt                                                                  ttCKt                                ttLAGt
+
+                                                                                70 %
+        SCLK               50 %         50 %            50 %                                         50 %    50 %
+                                                                                               30 %
+                                                  tSIO(EN)     tSU                   tHOLD                                  tVALID                                    tSIO(DIS)
+                                 70 %               70 %                                                 70 %
+
+                                 30 %               30 %                                                 30 %
+
+                                Figure 7-1. Two-Wire Timing Diagram
+
+ 7.8 Typical Characteristics
+
+
+
+          0.8
+          0.7       VDD = 1.62 V                              DS Max
+                VDD = 3.3 V
+          0.6       VDD = 5.5 V
+          0.5
+
+          0.4
+      (C)  0.3
+         Error  0.20.1
+          0
+
+          -0.1
+
+          -0.2
+
+          -0.3                   Temperature
+          -0.4
+
+          -0.5
+
+          -0.6
+          -0.7                                              DS Min
+
+          -0.8
+            -55     -30      -5     20     45     70     95     120    145    170
+                              Temperature (C)
+     Figure 7-2. Average Temperature Accuracy        Figure 7-3. Temperature Measurement Noise
+                                                                       Distribution at 25°C
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback     7
+
+                                                  Product Folder Links: TMP126

@@ -1,0 +1,87 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 9.2 Typical Applications
+ 9.2.1 K-Type Thermocouple Measurement (–200°C to +1250°C)
+
+ Figure 9-3 shows the basic connections of a thermocouple measurement system when using the internal high-
+ precision temperature sensor for cold-junction compensation. Apart from the thermocouple, the only external
+ circuitry required are two biasing resistors, a simple low-pass, antialiasing filter, and the power-supply decoupling
+ capacitors.
+
+
+                                                                                                           3.3V                                                 3.3V
+
+
+
+                                                                                                                       0.1µF                                                0.1µF
+
+                                       3.3V                                                                        REFP0     REFN0
+
+                                                                                            10 A to  AVDD                                   DVDD
+                                           RB2             CCM2                                           1.5 mA
+                                                RF2                    AIN0                                           2.048V             Reference         ADS1220
+                                                                                                                      Reference         MUX
+
+                                                                    CDIF
+                                                RF1                    AIN1
+                                                                                                                                   CS
+                                                                                                  AINP
+                                                                                                                                                                                                            Digital Filter        SCLK
+ Thermocouple                                                                                                                                                      24-Bit              and
+                                           RB1             CCM1                    MUX               PGA                 ADC              SPI            DIN
+                                                                                                                                                                                            Interface         DOUT/DRDY
+                                                                 AIN2                         AINN
+                                                                                                                                 DRDY
+
+                                                                       Block
+                                                                                                                              Precision                                                                                                                                  Isothermal                                                                                                                                                                Low-Drift
+                                                                 AIN3                                     Temperature
+                                                                                                                                                                          Oscillator
+                                                                                                              Sensor
+
+
+
+
+                                                                                       AVSS                      CLK         DGND
+
+
+                               Figure 9-3. Thermocouple Measurement
+
+ 9.2.1.1 Design Requirements
+
+                                   Table 9-1. Design Requirements
+                       DESIGN PARAMETER                         VALUE
+
+                                Supply voltage                                     3.3V
+
+                               Reference voltage                                 Internal 2.048V reference
+
+                                Update rate                            ≥10 readings per second
+
+                             Thermocouple type                            K
+
+                        Temperature measurement range                     –200°C to +1250°C
+                    Measurement accuracy at TA = 25°C(1)                          ±0.2°C
+
+                    (1)   Not accounting for error of the thermocouple and cold-junction temperature measurement;
+                           offset calibration at T(TC) = T(CJ) = 25°C; no gain calibration.
+
+ 9.2.1.2 Detailed Design Procedure
+
+The biasing resistors RB1 and RB2 are used to set the common-mode voltage of the thermocouple to within the
+ specified common-mode voltage range of the PGA (in this example, to mid-supply AVDD / 2). If the application
+ requires the thermocouple to be biased to GND, either a bipolar supply (for example, AVDD = 2.5V and AVSS
+= –2.5V) must be used for the device to meet the common-mode voltage requirement of the PGA, or the PGA
+must be bypassed. When choosing the values of the biasing resistors, care must be taken so that the biasing
+ current does not degrade measurement accuracy. The biasing current flows through the thermocouple and can
+ cause self-heating and additional voltage drops across the thermocouple leads. Typical values for the biasing
+ resistors range from 1MΩ to 50MΩ.
+
+
+
+
+
+52    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

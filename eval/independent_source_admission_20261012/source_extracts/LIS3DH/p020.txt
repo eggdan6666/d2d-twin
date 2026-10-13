@@ -1,0 +1,63 @@
+Application hints                                                          LIS3DH
+
+4      Application hints
+
+
+                                Figure 5. LIS3DH electrical connections
+
+
+                                                $'&  $'&
+
+                           9GG
+
+
+
+
+
+                                        )
+                                            9GGB,2                                       $'&
+
+
+
+                                                      723 9,(:
+                                                                                          ,17
+                                        Q)
+
+
+                                                                                          ,17
+                                                                                                                        9GGB,2
+
+                                                                                                               6'2                               5SX    Nȍ           5SX    Nȍ
+                                                                                     63&                       6',  6$
+                                                                                     6&/                       6'$   6'2  &6
+
+
+                             *1'                                                                                             3XOO XS WR EH DGGHG
+                                                                                                            ZKHQ , & LQWHUIDFH LV XVHG
+
+
+                                        'LJLWDO VLJQDO IURP WR VLJQDO FRQWUROOHU  6LJQDO OHYHOV DUH GHILQHG E\ SURSHU VHOHFWLRQ RI 9GGB,2
+
+
+          The device core is supplied through the Vdd line while the I/O pads are supplied through the
+          Vdd_IO line. Power supply decoupling capacitors (100 nF ceramic, 10 μF aluminum) should
+          be placed as near as possible to pin 14 of the device (common design practice).
+
+               All the voltage and ground supplies must be present at the same time to have proper
+            behavior of the IC (refer to Figure 5). It is possible to remove Vdd maintaining Vdd_IO
+             without blocking the communication bus, in this condition the measurement chain is
+          powered off.
+
+          The functionality of the device and the measured acceleration data is selectable and
+            accessible through the I2C or SPI interfaces.When using the I2C, CS must be tied high.
+
+          ADC1, ADC2 & ADC3 if not used can be left floating or connected to Vdd or GND.
+
+          The functions, the threshold and the timing of the two interrupt pins (INT1 and INT2) can be
+            completely programmed by the user through the I2C/SPI interface.
+
+
+
+
+
+20/54                                  DocID17530 Rev 2

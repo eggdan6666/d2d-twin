@@ -1,0 +1,46 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+ADC Conversion Result                                       Table 26). When in an open-drain configuration, the output is driven
+                                                                                to GND when a data bit in the GPIO write data register sets the
+For every selected channel in the ADC sequencer, the ADC conver-                                                                           pin low. When the pin is set high, the output is not driven and must
+sion result is clocked out on SDO in the format given in Table 30.                                                            be pulled high by an external resistor. Open-drain configuration
+The ADC channel address is provided along with the 12-bit ADC                                                                        allows for multiple output pins to be tied together. If all the pins
+data for every valid ADC conversion result. Use the ADC channel                                                                      are normally high, the open-drain configuration allows for one pin
+address while assigning the ADC data for further processing.                                                                                to pull down the others pins. This method is commonly used where
+GPIO OPERATION                                                   multiple pins are used to trigger an alarm or an interrupt pin.
+                                                               To change the state of the I/Ox pins, a write to the GPIO write dataEach of the I/Ox pins of the AD5592R/AD5592R-1 can operate as
+                                                                                register (see the GPIO Write Data Register section) is required.a general-purpose, digital input or output pin. The function of the
+                                                                           Setting a bit to 1 gives a Logic 1 on the selected output. Clearing apins is determined by writing to the appropriate bit in the GPIO read
+                                                                                               bit to 0 gives a Logic 0 on the selected output.configuration register (see the GPIO Read Configuration Register
+section) and the GPIO write configuration register (see the GPIO
+Write Configuration Register section).                          Setting Pins as Inputs
+                                                               To set a pin as a general-purpose input, set the appropriate bit in
+Setting Pins as Outputs                                                                        the GPIO read configuration register to 1 (see the GPIO Read Con-
+                                                                                 figuration Register section and Table 24). For example, setting BitTo set a pin as a general-purpose output, set the appropriate bit
+                                                            0 to 1 enables I/O0 as a general-purpose input. To read the statein the GPIO write configuration register to 1 (see Table 22). For
+                                                                                of the general-purpose inputs, write to the GPIO read configurationexample, setting Bit 0 to 1 enables I/O0 as a general-purpose
+                                                                                register to set Bit 10 to 1 and also any of Bits[7:0] that correspondoutput. The state of the output pin is controlled by setting or
+                                                                                to a general-purpose input pin. The following SPI operation clocksclearing the bits in the GPIO write data register (see the GPIO Write
+                                                                        out the state of any pins set as general-purpose inputs. Figure 50Data Register section and Table 23). A data bit is ignored if it is
+                                                           shows an example where I/O4 to I/O7 are set as general-purposewritten to a location that is not configured as an output.
+                                                                                inputs. I/O3 is assumed to be a DAC. To read the status of I/O7 to
+The outputs can be independently configured as push/pull or open-         I/O4, Bit 10 and Bits[7:4] are set to 1. To read the status of I/O5 and
+drain outputs. When in a push/pull configuration, the output is               I/O4, only Bit 10, Bit 5, and Bit 4 need to be set to 1. The status
+driven to VDD or GND, as determined by the data in the GPIO               of I/O7 and I/O6 are not read, and Bits[7:6] are read as 0. Figure
+write data register. To set a pin as an open-drain output, set the          50 also has a write to a DAC to show that other operations can be
+appropriate bit in the GPIO open-drain configuration register to            included when reading the status of the general-purpose pins.
+1 (see the GPIO Open-Drain Configuration Register section and
+
+
+
+
+
+                                              Figure 50. Configuring and Reading General-Purpose Input Pins
+
+
+
+
+
+analog.com                                                                                         Rev. H | 32 of 54

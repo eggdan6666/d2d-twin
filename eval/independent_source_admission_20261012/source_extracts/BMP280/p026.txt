@@ -1,0 +1,53 @@
+Bosch Sensortec | BMP280 Data sheet                                                          26 | 49
+
+
+
+                                            Table 22: register settings osrs_t
+                                   osrs_t[2:0]     Temperature oversampling
+                                000       Skipped (output set to 0x80000)
+
+                                001              oversampling ×1
+                                010              oversampling ×2
+                                  011              oversampling ×4
+                                100              oversampling ×8
+                                 101, 110, 111         oversampling ×16
+
+
+        4.3.5  Register 0xF5 “config”
+       The “config” register sets the rate, filter and interface options of the device. Writes to the “config”
+         register in normal mode may be ignored. In sleep mode writes are not ignored.
+
+                                            Table 23: Register 0xF5 “config”
+           Register 0xF5        Name                           Description
+              “config”
+                  Bit 7, 6, 5               t_sb[2:0]        Controls inactive duration tstandby in normal mode.
+                                          See chapter 3.6.3 for details.
+                  Bit 4, 3, 2                  filter[2:0]        Controls the time constant of the IIR filter. See
+                                                    chapter 3.3.3 for details.
+                     Bit 0              spi3w_en[0]      Enables 3-wire SPI interface when set to ‘1’. See
+                                                    chapter 5.3 for details.
+
+        4.3.6  Register 0xF7…0xF9 “press” (_msb, _lsb, _xlsb)
+       The “press” register contains the raw pressure measurement output data up[19:0]. For details on how
+         to read out the pressure and temperature information from the device, please consult chapter0.
+
+                                         Table 24: Register 0xF7 … 0xF9 “press”
+           Register 0xF7-        Name                           Description
+          0xF9 “press”
+              0xF7            press_msb[7:0]     Contains the MSB part up[19:12] of the raw pressure
+                                             measurement output data.
+              0xF8              press_lsb[7:0]     Contains the LSB part up[11:4] of the raw pressure
+                                             measurement output data.
+        0xF9 (bit 7, 6, 5, 4)      press_xlsb[3:0]     Contains the XLSB part up[3:0] of the raw pressure
+                                             measurement output data. Contents depend on
+                                                   temperature resolution, see table 5.
+
+        4.3.7  Register 0xFA…0xFC “temp” (_msb, _lsb, _xlsb)
+       The “temp” register contains the raw temperature measurement output data ut[19:0]. For details on
+      how to read out the pressure and temperature information from the device, please consult chapter 0.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

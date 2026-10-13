@@ -1,0 +1,47 @@
+Bosch Sensortec | BME280 Data sheet                                            29 | 60
+
+
+Table 22: Register 0xF4 “ctrl_meas”
+
+    Register 0xF4        Name                           Description
+     “ctrl_meas”
+        Bit 7, 6, 5              osrs_t[2:0]          Controls oversampling of temperature data. See
+                                              Table 24 for settings and chapter 3.4.3 for details.
+        Bit 4, 3, 2             osrs_p[2:0]           Controls oversampling of pressure data. See
+                                              Table 23 for settings and chapter 3.4.2 for details.
+          Bit 1, 0             mode[1:0]         Controls the sensor mode of the device. See Table
+                                           25 for settings and chapter 3.3 for details.
+
+Table 23: register settings osrs_p
+
+   osrs_p[2:0]                   Pressure oversampling
+      000       Skipped (output set to 0x80000)
+      001              oversampling ×1
+      010              oversampling ×2
+      011              oversampling ×4
+      100              oversampling ×8
+   101, others          oversampling ×16
+
+
+Table 24: register settings osrs_t
+
+   osrs_t[2:0]                 Temperature oversampling
+      000       Skipped (output set to 0x80000)
+      001              oversampling ×1
+      010              oversampling ×2
+      011              oversampling ×4
+      100              oversampling ×8
+   101, others          oversampling ×16
+
+
+Table 25: register settings mode
+
+  mode[1:0]     Mode
+      00       Sleep mode
+   01 and 10    Forced mode
+      11       Normal mode
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

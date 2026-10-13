@@ -1,0 +1,91 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.5.4 Reading Data
+
+ Output pins DRDY and DOUT/DRDY (if the DRDYM bit is set high in the configuration register) transition low
+when new data are ready for retrieval. The conversion data are written to an internal data buffer. Data can
+be read directly from this buffer on DOUT/DRDY when DRDY falls low without concern of data corruption. An
+RDATA command does not have to be sent. Data are shifted out on the SCLK rising edges, MSB first, and
+ consist of three bytes of data.
+
+ Figure 8-25 to Figure 8-27 show the timing diagrams for reading conversion data in continuous conversion mode
+and single-shot conversion mode when not using the RDATA command.
+
+       CS
+              §                                    §
+                                              1            9           17
+      SCLK
+              §                                    §
+
+                  Hi-Z    §                                    §
+DOUT/DRDY                              DATA MSB     DATA     DATA LSB
+              §                                    §
+
+
+              §                                    §
+     DRDY                                                                                                     Next Data Ready
+              §
+                                                  2· t(MOD)
+        DIN
+              §                                    §
+
+                       Figure 8-25. Continuous Conversion Mode (DRDYM = 0b)
+
+
+       CS
+              §                                     §
+                                              1            9           17
+      SCLK
+              §                                     §
+
+                  Hi-Z    §                                     §
+DOUT/DRDY                              DATA MSB     DATA     DATA LSB
+              §                                     §
+
+
+              §                                     §
+     DRDY                                                                                                     Next Data Ready
+              §
+                                                 2· t(MOD)
+        DIN
+              §                                     §
+
+                       Figure 8-26. Continuous Conversion Mode (DRDYM = 1b)
+
+
+       CS
+             §           §
+                           1                                          1            9           17
+      SCLK
+             §           §
+
+                  Hi-Z   §           §
+DOUT/DRDY                                                   DATA MSB     DATA     DATA LSB
+             §           §
+
+
+             §           §
+     DRDY                                              Next Data Ready
+             §
+
+        DIN              START/SYNC
+             §           §
+
+                       Figure 8-27. Single-Shot Conversion Mode (DRDYM = 0b)
+
+ Data can also be read at any time without synchronizing to the DRDY signal using the RDATA command.
+When an RDATA command is issued, the conversion result currently stored in the data buffer is shifted out on
+DOUT/DRDY on the following SCLK rising edges. Data can be read continuously with the RDATA command as
+an alternative to monitoring DRDY or DOUT/DRDY. The DRDY pin can be polled after the LSB is clocked out to
+ determine if a new conversion result is loaded. If a new conversion completes during the read operation but data
+ from the previous conversion are read, then DRDY is low. Otherwise, if the most recent result is read, DRDY is
+ high. Figure 8-28 and Figure 8-29 illustrate the behavior for both cases.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    39
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,180 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "TMP1075",
+  "vendor": "TI",
+  "interface": "I2C",
+  "reg_width": 16,
+  "i2c": {
+    "base_address_7bit": "0b1001011",
+    "address_pins": [
+      "A2",
+      "A1",
+      "A0"
+    ],
+    "max_devices": 32,
+    "note": "引脚状态每次总线通信采样；MVP 寄存器级仿真不建模总线地址解码"
+  },
+  "single_byte_semantics": {
+    "applies_to": "all_registers",
+    "test_register": "CFGR",
+    "write": "单字节写只更新该寄存器 bits 15:8",
+    "read": "单字节读只返回 bits 15:8",
+    "source": "§7.5.1.2 Note（xx75/LM75 软件兼容设计）"
+  },
+  "registers": [
+    {
+      "name": "TEMP",
+      "addr": "0x00",
+      "access": "RO",
+      "reset": "0x0000",
+      "desc": "12 位二进制补码温度转换结果，§7.5.1.1",
+      "fields": [
+        {
+          "name": "T",
+          "bits": "15:4",
+          "access": "RO",
+          "reset": 0,
+          "desc": "T[11:0] 最近一次转换结果"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "not used，恒 0"
+        }
+      ]
+    },
+    {
+      "name": "CFGR",
+      "addr": "0x01",
+      "access": "RW",
+      "reset": "0x00FF",
+      "desc": "16 位配置寄存器，§7.5.1.2（TMP1075N 变体 reset=0x60A0 且 R[1:0]/低字节为只读保留，MVP 不测）",
+      "fields": [
+        {
+          "name": "OS",
+          "bits": "15",
+          "access": "RW",
+          "reset": 0,
+          "read_as": 0,
+          "desc": "写 1 启动单次转换；读恒返回 0（Table 7-8）"
+        },
+        {
+          "name": "R",
+          "bits": "14:13",
+          "access": "RW",
+          "reset": 0,
+          "desc": "连续转换速率 00:27.5ms 01:55ms 10:110ms 11:220ms"
+        },
+        {
+          "name": "F",
+          "bits": "12:11",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Fault queue codes00/01/10/11 = 1/2/3/4 for non-N TMP1075; N variant differs; p.22 Table7-8"
+        },
+        {
+          "name": "POL",
+          "bits": "10",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ALERT 极性 0:低有效 1:高有效"
+        },
+        {
+          "name": "TM",
+          "bits": "9",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ALERT 模式 0:比较器 1:中断"
+        },
+        {
+          "name": "SD",
+          "bits": "8",
+          "access": "RW",
+          "reset": 0,
+          "desc": "1=关断模式，0=连续转换"
+        },
+        {
+          "name": "UNUSED_LOW",
+          "bits": "7:0",
+          "access": "RW",
+          "reset": 255,
+          "desc": "not used；access 表标 R/W（见 open_questions[0]）"
+        }
+      ]
+    },
+    {
+      "name": "LLIM",
+      "addr": "0x02",
+      "access": "RW",
+      "reset": "0x4B00",
+      "desc": "12 位二进制补码低温阈值，reset 4B00h = 75°C，§7.5.1.3",
+      "fields": [
+        {
+          "name": "L",
+          "bits": "15:4",
+          "access": "RW",
+          "reset": 1200,
+          "desc": "L[11:0] 低温比较阈值"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "not used（见 open_questions[0]）"
+        }
+      ]
+    },
+    {
+      "name": "HLIM",
+      "addr": "0x03",
+      "access": "RW",
+      "reset": "0x5000",
+      "desc": "12 位二进制补码高温阈值，reset 5000h = 80°C，§7.5.1.4",
+      "fields": [
+        {
+          "name": "H",
+          "bits": "15:4",
+          "access": "RW",
+          "reset": 1280,
+          "desc": "H[11:0] 高温比较阈值"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "not used（见 open_questions[0]）"
+        }
+      ]
+    },
+    {
+      "name": "DIEID",
+      "addr": "0x0F",
+      "access": "RO",
+      "reset": "0x7500",
+      "desc": "Historical source-conflict wording withheld: see the independently reviewed source facts and conditional rules in field_evidence.json; no official manufacturer erratum was verified.",
+      "fields": [
+        {
+          "name": "DID",
+          "bits": "15:0",
+          "access": "RO",
+          "reset": 29952,
+          "desc": "复位 7500h，MSB 静态 75h"
+        }
+      ]
+    }
+  ],
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

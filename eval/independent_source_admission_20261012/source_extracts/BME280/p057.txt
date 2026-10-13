@@ -1,0 +1,49 @@
+Bosch Sensortec | BME280 Data sheet                                            57 | 60
+
+
+10.5 Sample read, write and delay function
+Below some samples read, write and delay functions are given. These are platform dependant and
+should only give an idea of how the functions could look.
+
+signed char BME280_I2C_bus_read(unsigned char device_addr, unsigned char
+    reg_addr, unsigned char *reg_data, unsigned char cnt)
+{
+    int iError=0;
+    unsigned char array[I2C_BUFFER_LEN];
+    unsigned char stringpos;
+    array[0] = reg_addr;
+    iError = I2C_write_read_string(I2C0, device_addr, array, array, 1, cnt);
+    for(stringpos=0;stringpos<cnt;stringpos++)
+    {
+      *(reg_data + stringpos) = array[stringpos];
+    }
+    return (signed char)iError;
+}
+
+signed char BME280_I2C_bus_write(unsigned char device_addr, unsigned char
+    reg_addr, unsigned char *reg_data, unsigned char cnt)
+{
+    int iError=0;
+    unsigned char array[I2C_BUFFER_LEN];
+    unsigned char stringpos;
+    array[0] = reg_addr;
+    for(stringpos=0;stringpos<cnt;stringpos++)
+    {
+      array[stringpos+1] = *(reg_data + stringpos);
+    }
+    iError = I2C_write_string(I2C0, device_addr, array, cnt+1);
+    return (signed char)iError;
+}
+
+void BME280_delay_msec(BME280_U16_t msec) //delay in milliseconds
+{
+    BME280_U32_t counter;
+    for (counter = 0; counter/2000 < msec; counter++); // 2000 counts = 1
+msec
+}
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

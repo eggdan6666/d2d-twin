@@ -1,0 +1,19 @@
+REGISTER TEMP @ 0x00 reset=0x0000 access=RO runtime=None DESC=12 位二进制补码温度转换结果，§7.5.1.1
+  T[15:4] RO reset=0 read_as=None read_action=None tier=None DESC=T[11:0] 最近一次转换结果
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=None DESC=not used，恒 0
+REGISTER CFGR @ 0x01 reset=0x00FF access=RW runtime=None DESC=16 位配置寄存器，§7.5.1.2（TMP1075N 变体 reset=0x60A0 且 R[1:0]/低字节为只读保留，MVP 不测）
+  OS[15] RW reset=0 read_as=0 read_action=None tier=None DESC=写 1 启动单次转换；读恒返回 0（Table 7-8）
+  R[14:13] RW reset=0 read_as=None read_action=None tier=None DESC=连续转换速率 00:27.5ms 01:55ms 10:110ms 11:220ms
+  F[12:11] RW reset=0 read_as=None read_action=None tier=None DESC=Fault queue codes00/01/10/11 = 1/2/3/4 for non-N TMP1075; N variant differs; p.22 Table7-8
+  POL[10] RW reset=0 read_as=None read_action=None tier=None DESC=ALERT 极性 0:低有效 1:高有效
+  TM[9] RW reset=0 read_as=None read_action=None tier=None DESC=ALERT 模式 0:比较器 1:中断
+  SD[8] RW reset=0 read_as=None read_action=None tier=None DESC=1=关断模式，0=连续转换
+  UNUSED_LOW[7:0] RW reset=255 read_as=None read_action=None tier=None DESC=not used；access 表标 R/W（见 open_questions[0]）
+REGISTER LLIM @ 0x02 reset=0x4B00 access=RW runtime=None DESC=12 位二进制补码低温阈值，reset 4B00h = 75°C，§7.5.1.3
+  L[15:4] RW reset=1200 read_as=None read_action=None tier=None DESC=L[11:0] 低温比较阈值
+  UNUSED[3:0] RW reset=0 read_as=None read_action=None tier=None DESC=not used（见 open_questions[0]）
+REGISTER HLIM @ 0x03 reset=0x5000 access=RW runtime=None DESC=12 位二进制补码高温阈值，reset 5000h = 80°C，§7.5.1.4
+  H[15:4] RW reset=1280 read_as=None read_action=None tier=None DESC=H[11:0] 高温比较阈值
+  UNUSED[3:0] RW reset=0 read_as=None read_action=None tier=None DESC=not used（见 open_questions[0]）
+REGISTER DIEID @ 0x0F reset=0x7500 access=RO runtime=None DESC=只读器件 ID（仅 TMP1075 非下单型有），§7.5.1.5。注意：Table 7-11 TYPE 列印作 R/W 为手册笔误——描述明文 '16-bit, read-only register' 且 Figure 7-16 逐位 R（见 proofread_record.erratum_found）
+  DID[15:0] RO reset=29952 read_as=None read_action=None tier=None DESC=复位 7500h，MSB 静态 75h

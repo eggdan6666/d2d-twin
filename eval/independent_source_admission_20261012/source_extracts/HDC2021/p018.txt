@@ -1,0 +1,64 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.4 Device Functional Modes
+
+The HDC2021 has two modes of operation: sleep mode and measurement mode.
+
+ 7.4.1 Sleep Mode vs. Measurement Mode
+ After power up, the HDC2021 defaults to sleep mode and waits for an I2C instruction to set programmable
+ conversion times, trigger a measurement or conversion, or read or write valid data. When a measurement is
+ triggered, the HDC2021 switches to measurement mode that converts temperature or humidity values from
+ integrated sensors through an internal ADC and stores the information in their respective data registers. The
+DRDY/INT pin can be monitored to verify if data is ready after measurement conversion. The DRDY/INT pin
+ polarity and interrupt mode are set according to the configuration of the Interrupt Configuration (address 0x07)
+and Device Configuration (address: 0x0E) registers. After completing the conversion, the HDC2021 returns to
+ sleep mode.
+
+ 7.5 Programming
+ 7.5.1 I2C Serial Bus Address Configuration
+
+ To communicate with the HDC2021, the master must first address slave devices through a slave address byte.
+The slave address byte consists of seven address bits and a direction bit that indicates the intent to execute a
+ read or write operation. The HDC2021 features an address pin (ADDR) to allow up to 2 devices to be addressed
+on a single bus. Table 7-1 describes the pin logic levels used to connect up to two devices, with 'X' representing
+ the read-write (R/W) bit. The ADDR pin shall be configured before any activity on the interface occurs and
+ remain constant while the device is powered up.
+                                Table 7-1. HDC2021 I2C Slave Address
+
+             ADDR                                       ADDRESS
+
+          GND or floating                                             1000000X
+                 VDD                                                 1000001X
+
+ Note that the ADDR is recommended not to be left floating if the device is to be used in noisy environment.
+ 7.5.2 I2C Interface
+The HDC2021 operates only as a slave device on the I2C bus interface. It is not allowed to have multiple devices
+on the same I2C bus with the same address. Connection to the bus is made through the SDA and SCL pins. The
+SDA and SCL pins feature integrated spike-suppression filters and Schmitt triggers to minimize the effects of
+ input spikes and bus noise. After power-up, the sensor needs at least 3.5 ms to be ready to start RH and
+ temperature measurement. After power-up the device defaults in sleep mode until a communication or
+measurement is performed. All data bytes are transmitted MSB first.
+
+ 7.5.3 Read and Write Operations
+
+ Register content of the HDC2021 can be accessed and modified through a pointer mechanism using a pointer
+ register. The user can write a register address to the pointer register to access a particular register on the
+ device. The value for the pointer register is the first byte transferred after the slave address byte with the R/W bit
+ low (refer to Table 7-2). Every write operation to the device requires a value for the pointer register.
+
+When reading from the device, the last value stored in the pointer register by a write operation is used to
+ determine which register is read during a read operation. To change the register pointer for a read operation, a
+new value must be written to the pointer register. The user can issue an address byte with the R/W bit low,
+ followed by the pointer register byte to write a new value for the pointer register (refer to Table 7-4). No additional
+ data is required. The master can then generate a START condition and send the slave address byte with the
+R/W bit high to initiate the read command.
+
+The device also support Multibyte write and Multibyte read operations of which the register pointer is
+ incremented automatically until the master issues a STOP (for Multibyte write) or NACK (for Multibyte read).
+
+
+
+
+
+18    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

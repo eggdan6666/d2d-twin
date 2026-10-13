@@ -1,0 +1,81 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+Typical Application (continued)
+
+For this example, the minimum-current LSB is calculated to be 457.78 µA/bit, assuming a maximum expected
+current of 15 A using Equation 2. This value is rounded up to 1 mA/bit and is chosen for the current LSB. Setting
+the current LSB to this value allows for sufficient precision while serving to simplify the math as well. Using
+Equation 1 results in a calibration value of 20480 (5000h). This value is then programmed into the Calibration
+register.
+
+                                                                                              +3.3V to +5V
+
+
+                    R SHUNT
+                     2mW                                    10A                                10µF           0.1µF                +12V
+             VCM                 Load
+
+                                                                                VS (Supply Voltage)
+
+
+                                          ´      Power Register
+                                                                                                                                                                                                                          I2C-/          SDA
+                                        V                                          SMBUS-
+                                               VIN+                                    Current Register        Compatible
+                                                                                                                                          Interface         SCL
+                                                    VIN-                                    Voltage Register                     A0
+                                                                                                  I
+                                                                                                  A1
+                                  GND
+
+
+
+                              Figure 29. Example Circuit Configuration
+
+
+The bus voltage is internally measured at the IN– pin to calculate the voltage level delivered to the load. The Bus
+Voltage register bits are not right-aligned; therefore, they must be shifted right by three bits. Multiply the shifted
+contents by the 4-mV LSB to compute the bus voltage measured by the device in volts. The shifted value of the
+Bus Voltage register contents is equal to BB3h, the decimal equivalent of 2995. This value of 2995 is multiplied
+by the 4-mV LSB, and results in a value of 11.98 V. As shown, the voltage at the IN– pin is 11.98 V. For a 40-
+mV, full-scale range, this small difference is not a significant deviation from the 12-V common-mode voltage.
+However, at larger full-scale ranges, this deviation can be much larger.
+
+The Current register content  is internally calculated using Equation 4, and the result of 10000 (2710h)  is
+automatically loaded into the register. Current in amperes is equal to 1 mA/bit times 10000, and results in a 10-A
+load current.
+
+The Power  register content  is  internally calculated using Equation 5 and the  result  of 5990 (1766h)  is
+automatically loaded into the register. Multiplying this result by the Power register LSB 20 × 10–3(20 times 1 ×
+10–3 current LSB using Equation 3), results in a power calculation of 5990 × 20 mW/bit, and equals 119.8 W.
+This result matches what is expected for this register. A calculation for the power delivered to the load uses
+11.98 V (12 VCM – 20-mV shunt drop) multiplied by the load current of 10 A to give a 119.8-W result.
+
+9.2.2.1  Register Results for the Example Circuit
+
+Table 8 shows the register readings for the Calibration example.
+
+                                     Table 8. Register Results(1)
+
+    REGISTER NAME      ADDRESS        CONTENTS          ADJ       DEC       LSB      VALUE
+
+         Configuration            00h               019Fh
+
+           Shunt               01h              07D0h                           2000        10 µV        20 mV
+
+           Bus                02h              5D98h             0BB3        2995        4 mV        11.98 V
+
+           Calibration             05h               5000h                          20480
+
+           Current              04h               2710h                          10000        1 mA         10.0 A
+
+          Power               03h               1766h                           5990        20 mW       119.8 W
+
+(1)  Conditions: load = 10 A, VCM = 12 V, RSHUNT = 2 mΩ, VSHUNT FSR = 40 mV, and VBUS = VIN-, BRNG = 0 (VBUS range = 16 V).
+
+
+26     Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

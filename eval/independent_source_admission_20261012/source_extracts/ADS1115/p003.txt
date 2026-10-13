@@ -1,0 +1,84 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+Device Comparison Table
+
+                                   MAXIMUM SAMPLE    INPUT CHANNELS
+                       RESOLUTION                                                                     SPECIAL
+         DEVICE                            RATE                  Differential        PGA      INTERFACE
+                                         (Bits)                                                                  FEATURES
+                                                    (SPS)              (Single-Ended)
+         ADS1115                16                860                  2 (4)               Yes             I2C          Comparator
+         ADS1114                16                860                  1 (1)               Yes             I2C          Comparator
+         ADS1113                16                860                       1(1)             No             I2C            None
+        ADS1015                12               3300                 2 (4)               Yes             I2C          Comparator
+        ADS1014                12               3300                 1 (1)               Yes             I2C          Comparator
+        ADS1013                12               3300                 1 (1)             No             I2C            None
+
+         ADS1118                16                860                  2 (4)               Yes           SPI       Temperature sensor
+
+        ADS1018                12               3300                 2 (4)               Yes           SPI       Temperature sensor
+
+4 Pin Configuration and Functions
+
+                                                          SCL
+
+
+                                       10
+             ADDR  1                      9  SDA
+                                                               ADDR       1                  10      SCL
+
+
+                                                                    ALERT/RDY       2                   9      SDA
+          ALERT/RDY  2                      8  VDD
+
+                                                             GND       3                   8     VDD
+
+             GND  3                      7  AIN3
+                                                                                  AIN0       4                   7       AIN3
+
+
+                                                                                  AIN1       5                   6       AIN2
+                  AIN0  4                      6  AIN2
+
+                   5
+                                                                             AIN1   Not to scale                                             Not to scale
+             Figure 4-1. RUG Package,                    Figure 4-2. DYN and DGS Packages,
+                 10-Pin (Top View)                                 10-Pin (Top View)
+
+                       Table 4-1. Pin Functions: RUG, DYN, and DGS Packages
+                        PIN
+ NAME        ADS1113     ADS1114    ADS1115      TYPE                              DESCRIPTION(1)
+ ADDR             1            1           1          Digital input   I2C target address select
+
+ AIN0              4            4           4        Analog input  Analog input 0
+
+ AIN1              5            5           5        Analog input  Analog input 1
+
+ AIN2       —      —           6        Analog input  Analog input 2 (ADS1115 only)
+
+ AIN3       —      —           7        Analog input  Analog input 3 (ADS1115 only)
+
+                                                                    Comparator output or conversion ready (ADS1114 and ADS1115 only).
+ ALERT/RDY    —           2           2          Digital output
+                                                                       Open-drain output. Connect to VDD using a pullup resistor.
+
+ GND              3            3           3          Analog    Ground
+
+ NC                  2, 6, 7            6, 7      —      —     No connect. Leave the pin floating or connect to GND.
+
+ SCL              10           10          10          Digital input   Serial clock input. Connect to VDD using a pullup resistor.
+
+ SDA              9            9           9           Digital I/O    Serial data input and output. Connect to VDD using a pullup resistor.
+
+ VDD              8            8           8          Analog    Power supply. Connect a 0.1μF, power-supply decoupling capacitor to GND.
+
+ (1)  See the Unused Inputs and Outputs section for unused pin connections.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback     3
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

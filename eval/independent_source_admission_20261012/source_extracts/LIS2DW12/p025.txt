@@ -1,0 +1,40 @@
+                                                              LIS2DW12
+                                                                                                                             Digital main blocks
+
+
+5.3.4       Continuous-to-FIFO mode
+               In continuous-to-FIFO mode FIFO_CTRL (2Eh)(FMode[2:0] = 011), FIFO operates in continuous mode and FIFO
+          mode starts upon an internal trigger event. When the FIFO is full, data collecting is stopped. The trigger could be
+           a single or double tap, wake-up, free-fall, 6D interrupt, or any combination of these events, but every interrupt has
+               to be routed to the corresponding pad to be used as a trigger.
+
+                                             Figure 8. Continuous-to-FIFO mode
+
+
+
+                                               xi,yi,zi                                                                                                                                       xi,yi,zi                                             x0        y0        z0                                                                                                      x0        y0y         z0
+
+                                             x1        y1        z1
+                                                                                                      x1        y1        z1
+                                             x2        y2        z2
+                                                                                                      x2        y2        z2
+                                               x30       y30       z30
+
+                                               x31       y31       z31
+                                                                                                          x31       y31       z31
+
+
+
+
+                                   Continuous Mode              FIFO Mode
+
+                                                         Trigger event
+
+
+                                  Figure 9. Trigger event to FIFO for continuous-to-FIFO mode
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 25/65

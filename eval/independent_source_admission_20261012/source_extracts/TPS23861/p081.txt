@@ -1,0 +1,67 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.34.1.3  Port 4 Detect Resistance Register
+
+Command = 66h with 2 Data Byte (LSByte first, MSByte second), Read Only
+
+LSB: 66h
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                Port 4 Resistance[7:0]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+MSB: 67h
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                RS4[1:0]                                   Port 4 Resistance[13:8]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Bit Descriptions
+
+Most recent 2 point detection resistance measurement. The resistance value shown is usable only if RSn[1:0] are
+at 00 or 01. The I2C data transmission is a 2 byte transfer.
+
+Port n Resistance[13:0]: 14-bit data conversion result of detection resistance for port n. The equation defining
+the resistance measured is:
+   R N u R STEP
+
+    where
+              •  R = Detection resistance, Ω
+              •  N = 14-bit value in Port n Resistance Register
+              •   RSTEP = LSB value                                                                                                  (6)
+
+
+            USEABLE RESISTANCE RANGE                               LSB VALUE
+
+                      500 Ω to 55 kΩ                                                  11.0966 Ω
+
+RSn[1:0]: Most recent detection result status on port n. If the state is 00, the 14-bit resistance value is calculated
+with a bit weight of 11.0966 Ω/bit.  If the state is 01, two additional detection fingers have been performed at
+higher detection currents (270 µA and 540 µA) in order to better measure the lower port impedance. The 14-bit
+resistance value is calculated with a bit weight of 4.625 Ω/bit in this case. The detection result is maintained in
+the register in any operating mode following the detection.
+
+             RSn1                          RSn0                DETECT STATUS             RSTEP BIT WEIGHT
+              0                           0                            Other                      11.0966 Ω/bit
+
+              0                           1                     Low (< 2 kΩ)               Additional detect 4.625 Ω/bit
+
+              1                           0                     Open circuit                      N/A
+
+              1                           1                MOSFET short fault                   N/A
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     81
+
+                                                 Product Folder Links: TPS23861

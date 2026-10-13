@@ -1,0 +1,58 @@
+Registers description                                                      LIS3DH
+
+8.28   INT2_DURATION (37h)
+
+                                   Table 69. INT2_DURATION register
+
+                0       D6       D5       D4       D3       D2       D1       D0
+
+
+                                 Table 70. INT2_DURATION description
+
+                               Duration value. Default value: 000 0000
+               D[6:0]
+                          1 LSb = 1/ODR(1)
+
+                 1.  Duration time is measured in N/ODR, where N is the content of the duration register.
+
+          The D[6:0] bits set the minimum duration of the Interrupt 2 event to be recognized. Duration
+            time steps and maximum values depend on the ODR chosen.
+
+
+8.29   CLICK_CFG (38h)
+
+                                     Table 71. CLICK_CFG register
+
+                    --               --         zd         zs         yd         ys         xd         xs
+
+                                   Table 72. CLICK_CFG description
+
+          ZD             Enable interrupt double click on Z-axis. Default value: 0
+                                      (0: disable interrupt request;
+                                   1: enable interrupt request on measured accel. value higher than preset threshold)
+
+          ZS             Enable interrupt single click on Z-axis. Default value: 0
+                                      (0: disable interrupt request; 1: enable interrupt request on measured accel. value
+                                higher than preset threshold)
+
+          YD             Enable interrupt double click on Y-axis. Default value: 0
+                                      (0: disable interrupt request;
+                                   1: enable interrupt request on measured accel. value higher than preset threshold)
+
+          YS             Enable interrupt single click on Y-axis. Default value: 0
+                                      (0: disable interrupt request;
+                                   1: enable interrupt request on measured accel. value higher than preset threshold)
+
+          XD             Enable interrupt double click on X-axis. Default value: 0
+                                      (0: disable interrupt request;
+                                   1: enable interrupt request on measured accel. value higher than preset threshold)
+
+          XS             Enable interrupt single click on X-axis. Default value: 0
+                                      (0: disable interrupt request;
+                                   1: enable interrupt request on measured accel. value higher than preset threshold)
+
+
+
+
+
+46/54                                  DocID17530 Rev 2

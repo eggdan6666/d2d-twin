@@ -1,0 +1,568 @@
+[
+  {
+    "chip": "TMP117",
+    "register": "EEPROM1",
+    "existing_fields": [],
+    "overall_status": "CONDITIONAL",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "fact": "完整16位R/W scratch register，有EEPROM后备；locked写volatile，unlocked编程。reset xxxx由工厂唯一ID或用户EEPROM决定。EEPROM2标题0000h与图表xxxxh冲突。",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "evidence_class": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-11",
+        "section": null,
+        "excerpt": "Table 7-11. EEPROM1 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. To support NIST traceability do not delete or re-program this reg"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ]
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM2",
+    "existing_fields": [],
+    "overall_status": "CONDITIONAL",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "fact": "完整16位R/W scratch register，有EEPROM后备；locked写volatile，unlocked编程。reset xxxx由工厂唯一ID或用户EEPROM决定。EEPROM2标题0000h与图表xxxxh冲突。",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "evidence_class": "SOURCE_CONFLICT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-12",
+        "section": null,
+        "excerpt": "Table 7-12. EEPROM2 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§7.6.8 title",
+        "excerpt": "[reset = 0000h] This register function the same as the EEPROM1 register. Return to Register Map. Figure 7-19. EEPROM2 Register 15 14 13 12 11 10 9 8 D15 D14 D13 D12 D11 D10 D9 D8 R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3",
+        "section": null,
+        "excerpt": "EEPROM2 EEPROM2 register Go 07h R/W 0000h(1) Temp_Offset Temperature offset register Go 08h R/W xxxxh(1) EEPROM3 EEPROM3 register Go 0Fh R 0117h Device_ID Device ID register Go (1) This value is stored in Electrically-Er"
+      }
+    ]
+  },
+  {
+    "chip": "TMP117",
+    "register": "EEPROM3",
+    "existing_fields": [],
+    "overall_status": "CONDITIONAL",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "fact": "完整16位R/W scratch register，有EEPROM后备；locked写volatile，unlocked编程。reset xxxx由工厂唯一ID或用户EEPROM决定。EEPROM2标题0000h与图表xxxxh冲突。",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "evidence_class": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-14",
+        "section": null,
+        "excerpt": "Table 7-14. EEPROM3 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register is used as a scratch pad. To support NIST traceability, do not delete or re-program this regist"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ]
+  },
+  {
+    "chip": "AD5592R",
+    "registers": [
+      "CONFIG_READ_AND_LDAC",
+      "DAC_WR",
+      "ADC_RESULT",
+      "GPIO/power/reference registers"
+    ],
+    "status": "CONDITIONAL",
+    "why": "IR inventories only22 fields, does not include native SPI readback enable completion, ADC data/clock sequence, GPIO, LDAC or reference mode dependencies.",
+    "candidate_rule": "Freeze current abstraction with explicit omissions; source-expanded adapter is separate generation/evaluation scope.",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table_or_section": "READ MODE",
+        "excerpt": "Reading from a register first requires a write",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table_or_section": "Table21",
+        "excerpt": "REG_RD_EN automatically clears",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 29,
+        "printed_page": "29",
+        "table_or_section": "ADC OPERATION",
+        "excerpt": "The ADC operates with one cycle latency",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS3DH",
+    "registers": [
+      "CTRL_REG2",
+      "CTRL_REG3",
+      "CTRL_REG5",
+      "CTRL_REG6",
+      "REFERENCE",
+      "FIFO_CTRL_REG",
+      "FIFO_SRC_REG",
+      "INT1/2 source/configuration registers"
+    ],
+    "status": "CONDITIONAL",
+    "why": "Output/FIFO/status interactions and interrupt clear are beyond34-field subset; native Rev2 source lacks explicit STATUS_REG flag-clearing map.",
+    "candidate_rule": "Output reset excluded; seven source-defined status defaults admitted only default boundary; no fabricated statusCoR; include FIFO/sample/read adapter before event assertions.",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table_or_section": "§5.1.5",
+        "excerpt": "Each time data is read from the FIFO",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 38,
+        "printed_page": "38",
+        "table_or_section": "CTRL_REG5",
+        "excerpt": "cleared by reading INT1_SRC",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 42,
+        "printed_page": "42",
+        "table_or_section": "INT1_SRC",
+        "excerpt": "Reading at this address clears",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS2DW12",
+    "registers": [
+      "CTRL3",
+      "CTRL6",
+      "CTRL7",
+      "OUT_X/Y/Z",
+      "STATUS_DUP",
+      "ALL_INT_SRC",
+      "TAP/SIXD registers"
+    ],
+    "status": "CONDITIONAL",
+    "why": "Single-shot trigger completion, global enable, latching, FIFO readouts, offset weighting/filter prerequisites unavailable in55-field subset.",
+    "candidate_rule": "Declare controlled fixtures or exclude event functionality; do not claim read-clear coverage from WAKE_UP_SRC.FF_IA alone.",
+    "locators": [
+      {
+        "pdf_page": 38,
+        "printed_page": "38",
+        "table_or_section": "Table34",
+        "excerpt": "this bit is set to 0 automatically",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 53,
+        "printed_page": "53",
+        "table_or_section": "§8.31",
+        "excerpt": "Reading this register",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 55,
+        "printed_page": "55",
+        "table_or_section": "Table92",
+        "excerpt": "FDS bit in CTRL6 (25h) must be set to 0",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "MPU6050",
+    "registers": [
+      "INT_PIN_CFG",
+      "INT_ENABLE",
+      "INT_STATUS",
+      "PWR_MGMT_2",
+      "USER_CTRL",
+      "SIGNAL_PATH_RESET",
+      "FIFO controls/count/data"
+    ],
+    "status": "CONDITIONAL",
+    "why": "Any-read interrupt clear, sleep/cycle/clock effects and measurement snapshot/FIFO excluded from29-field subset.",
+    "candidate_rule": "Default interrupt fixture0 may support static subset; expanded event-aware generation must map dependencies. DEVICE_RESET atomic-complete is abstraction, not actual100ms validation.",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "§4.14",
+        "excerpt": "interrupt status bits are cleared on any read",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 29,
+        "printed_page": "29",
+        "table_or_section": "§4.17",
+        "excerpt": "whenever the serial interface is idle",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 41,
+        "printed_page": "41",
+        "table_or_section": "§4.28",
+        "excerpt": "When using SPI interface",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "RESTART",
+    "address": "0x18",
+    "problem": "IR有寄存器但无fields，因而572-field清单不含8个pushbuttons。",
+    "candidate_rule": {
+      "split_fields": [
+        "RCL4",
+        "RCL3",
+        "RCL2",
+        "RCL1",
+        "RDET4",
+        "RDET3",
+        "RDET2",
+        "RDET1"
+      ],
+      "write1": "trigger",
+      "write0": "no effect",
+      "Manual": "single cycle",
+      "SemiAuto_Auto": "set corresponding Detect/Class Enable",
+      "cooldown": "accepted action delayed",
+      "next_0x14_write_delay_ms": 1.2,
+      "no_numeric_reset": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 64,
+        "printed_page": 64,
+        "table_or_section": "§7.5.17",
+        "excerpt": "Push button register."
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "POWER_ENABLE",
+    "address": "0x19",
+    "problem": "8个POFF/PWON command无字段，漏掉事件清/置、status变更与模式前提。",
+    "candidate_rule": {
+      "split_fields": [
+        "POFF4..1",
+        "PWON4..1"
+      ],
+      "same_port_POFF_PWON": "off wins",
+      "Off_or_SHTDWN": "on prohibited",
+      "SemiAuto_Auto_cooldown": "PWON ignored",
+      "Manual": "immediate",
+      "before_off_if_PE1": "PG must1",
+      "POFF_effects": "clear detect,fault,start,status,enables; if previously on setPGC/PEC and clearPG/PE",
+      "next_0x14_write_delay_ms": 1.2,
+      "no_numeric_reset": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 65,
+        "printed_page": 65,
+        "table_or_section": "§7.5.18",
+        "excerpt": "off the port."
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": 43,
+        "table_or_section": "Table8",
+        "excerpt": "Pushbutton power on ignored. Port follows Auto Mode"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "RESET_CMD",
+    "address": "0x1A",
+    "problem": "旧desc把RESAL当all-alarm、CLINP/CLRAIN当classification clear；实际为不同全局/port动作，无字段。",
+    "candidate_rule": {
+      "fields": {
+        "CLRAIN7": "clear all event/interrupt bits and releaseINT",
+        "CLINP6": "releaseINT only, no event/interrupt mutation",
+        "RESAL4": "power-up equivalent reset with supply conditions",
+        "RESP3..0": "immediate port off; clear flags/status/enables; if on setPGC/PEC and clearPG/PE; cancelcooldown"
+      },
+      "bit5": "reserved unscored keep0",
+      "write0": "no effect",
+      "before_RESP_if_PE1": "PG must1",
+      "next_0x14_write_delay_ms": 1.2,
+      "no_numeric_reset": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 66,
+        "printed_page": 66,
+        "table_or_section": "§7.5.19",
+        "excerpt": "equivalent to a power-up reset."
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "FIRMWARE_REV",
+    "address": "IR0xFE / source0x41",
+    "problem": "无field且地址错误；不能将FEh硬当映射的revision寄存器。",
+    "candidate_rule": {
+      "source_address": "0x41",
+      "runtime_value": true,
+      "no_numeric_reset": true,
+      "do_not_assert_default0": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 77,
+        "printed_page": 77,
+        "table_or_section": "§7.5.30",
+        "excerpt": "Command = 41h with 1 Data Byte, Read Only"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "I2C_SLAVE_ADDRESS",
+    "address": "0x11",
+    "problem": "EEPROM AUTO/SLA未列当前IR/572 inventory，但决定AUTO、reset初值及准入上下文。",
+    "candidate_rule": {
+      "EEPROM_factory_initial": "0xA0",
+      "write_gate": [
+        "global broadcast0x30 unlock0xAA with temporary address",
+        "selected AIN high",
+        "then register0x11 write",
+        "auto-lock and permanent EEPROM store"
+      ],
+      "invalid_addresses": [
+        "0x00",
+        "0x30",
+        "0x0C"
+      ],
+      "SLA3": "A3 input overrides",
+      "AUTO_sampled_at": [
+        "POR",
+        "RESET pin",
+        "RESAL"
+      ],
+      "program_timeout_ms_approx": 100,
+      "post_program_read_delay_ms": 100,
+      "post_reset_min_wait_ms": 22,
+      "endurance_cycles": 25,
+      "no_model_EEPROM_claim_without_gate_state": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": 35,
+        "table_or_section": "§7.3.13",
+        "excerpt": "unlock code (AAh)"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": 37,
+        "table_or_section": "§7.3.13",
+        "excerpt": "automatically locks"
+      },
+      {
+        "pdf_page": 57,
+        "printed_page": 57,
+        "table_or_section": "§7.5.10",
+        "excerpt": "Initial EEPROM VALUE"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "OPERATING_MODE / DETECT_CLASS_ENABLE",
+    "address": "0x12 / 0x14",
+    "problem": "关键模式寄存器未列IR/inventory，无法宣称独立事件/POEP持久性或完成前提完整覆盖。",
+    "candidate_rule": {
+      "mode_values": {
+        "0": "Off",
+        "1": "Manual",
+        "2": "Semi-Auto",
+        "3": "Auto"
+      },
+      "Off": "clears port events/status/enables; writesDETE/CLE do not stick",
+      "Manual_DETE_CLE": "one cycle then auto-clear",
+      "Auto_POEP": "hardware mutable",
+      "reset_values": "depend EEPROM AUTO",
+      "processing_delay_to_0x14_ms": 1.2
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 58,
+        "printed_page": 58,
+        "table_or_section": "§7.5.11",
+        "excerpt": "RESET or POR VALUE AA AA AA AA"
+      },
+      {
+        "pdf_page": 59,
+        "printed_page": 59,
+        "table_or_section": "§7.5.13",
+        "excerpt": "automatically cleared when the cycle has been completed."
+      },
+      {
+        "pdf_page": 42,
+        "printed_page": 42,
+        "table_or_section": "§7.4.4",
+        "excerpt": "will not stick if the port is in Off Mode"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "RESERVED_REGISTERS",
+    "address": "0x1B,1D,1E,1F,22–25,59",
+    "problem": "手册定义reserved manufacturing/future-use地址；不能把所有未列IR地址作为非法访问自由oracle。",
+    "candidate_rule": {
+      "exclude_writes_to_reserved_addresses": true,
+      "undefined_address_policy": "separate abstraction assumption, no manufacturer promise of return0/ignore"
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 84,
+        "printed_page": 84,
+        "table_or_section": "§7.5.36",
+        "excerpt": "Undesirable behavior may result if these registers are written to."
+      }
+    ]
+  },
+  {
+    "chip": "LM83",
+    "register": "STEP_ID",
+    "address": "0xFF",
+    "problem": "IR列runtime寄存器但无fields，572-field清单完全未计此硬件修订值；source未给数字默认。",
+    "candidate_rule": {
+      "add_runtime_readonly_field": "revision",
+      "known_reset_mask": "0x00",
+      "no_fabricated_zero": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": 14,
+        "table_or_section": "§2.1 continued",
+        "excerpt": "Read Stepping or Die Revision Code"
+      }
+    ]
+  }
+]

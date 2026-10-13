@@ -1,0 +1,85 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+6 Detailed Description
+ 6.1 Overview
+
+The TMP102 device is a digital temperature sensor that is designed for thermal-management and thermal-
+ protection applications. The TMP102 device is two-wire, SMBus and I2C interface-compatible. The device is
+ specified over an operating temperature range of –40°C to 125°C. See Functional Block Diagram for a block
+ diagram of the TMP102 device.
+
+The TMP102 device is a temperature sensor. Thermal paths run through the package leads as well as the plastic
+ package. The package leads provide the primary thermal path because of the lower thermal resistance of the
+ metal.
+
+An alternative version of the TMP102 device is available. The TMP112 device has highest accuracy, the same
+ micro-package, and is pin-to-pin compatible.
+
+                           Table 6-1. Advantages of TMP112 versus TMP102
+                                                      SUPPLY      SUPPLY                                                  SPECIFIED
+              COMPATIBLE                    SUPPLY                                       LOCAL SENSOR ACCURACY
+    DEVICE                  PACKAGE                VOLTAGE     VOLTAGE     RESOLUTION                              CALIBRATION
+              INTERFACES                  CURRENT                                                       (MAX)
+                                                                        (MIN)         (MAX)                                                 DRIFT SLOPE
+
+                        I2C           SOT563                                                    12 bit               0.5°C: (0°C to 65°C)
+    TMP112                                                 7.5 µA          1.4 V            3.6 V                                                          Yes
+                SMBus          1.2 × 1.6 × 0.6                                                   0.0625°C           1°C: (-40°C to 125°C)
+
+                        I2C           SOT563                                                    12 bit              2°C: (25°C to 85°C)
+    TMP102                                                 7.5 µA          1.4 V            3.6 V                                                  No
+                SMBus          1.2 × 1.6 × 0.6                                                   0.0625°C           3°C: (-40°C to 125°C)
+
+ 6.2 Functional Block Diagram
+
+                                          Temperature
+
+
+                                                           Diode
+                                                 1                         Control    6
+                                    SCL           Temp.                     SDA
+                                                                                    Logic
+                                                          Sensor
+
+
+
+
+                                                    DS
+                                                 2                            Serial     5
+                               GND           A/D                        V+
+                                                                                           Interface
+                                                             Converter
+
+
+
+
+                                                                                       Config.
+                                                 3                               4
+                                  ALERT        OSC          and Temp.       ADD0
+                                                                                    Register
+
+
+ 6.3 Feature Description
+ 6.3.1 Digital Temperature Output
+
+The digital output from each temperature measurement is stored in the read-only temperature register. The
+ temperature register of the TMP102 device is configured as a 12-bit, read-only register (configuration register
+EM bit = 0, see the Extended Mode (EM) section), or as a 13-bit, read-only register (configuration register
+EM bit = 1) that stores the output of the most recent conversion. Two bytes must be read to obtain data and
+ are listed in Table 6-8 and Table 6-9. Byte 1 is the most significant byte (MSB), followed by byte 2, the least
+ significant byte (LSB). The first 12 bits (13 bits in extended mode) are used to indicate temperature. The least
+ significant byte does not have to be read  if that information is not needed. The data format for temperature
+ is summarized in Table 6-2 and Table 6-3. One LSB equals 0.0625°C. Negative numbers are represented in
+ binary twos-complement format. Following power-up or reset, the temperature register reads 0°C until the first
+ conversion is complete. Bit D0 of byte 2 indicates normal mode (EM bit = 0) or extended mode (EM bit = 1) ,
+and can be used to distinguish between the two temperature register data formats. The unused bits in the
+ temperature register always read 0.
+
+
+
+
+
+8     Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

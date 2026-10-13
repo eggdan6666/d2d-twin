@@ -1,0 +1,69 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 7.5 Programming
+ 7.5.1 Bus Overview
+The INA3221 offers compatibility with both I2C and SMBus interfaces. The I2C and SMBus protocols are
+ essentially compatible with one another.
+The I2C interface is used throughout this datasheet as the primary example, with the SMBus protocol specified
+ only when a difference between the two systems is discussed. Two I/O lines, the serial clock (SCL) and data
+ signal line (SDA), connect the INA3221 to the bus. Both SCL and SDA are open-drain connections.
+
+The device that initiates a data transfer is called a controller, and the devices controlled by the controller are
+ targets. The bus must be controlled by the controller device that generates the SCL, controls the bus access,
+and generates start and stop conditions.
+
+ To address a specific device, the controller initiates a start condition by pulling SDA from a high to a low logic
+ level while SCL is high. All targets on the bus shift in the target address byte on the SCL rising edge, with the
+ last bit indicating whether a read or write operation is intended. During the ninth clock pulse, the target being
+ addressed responds to the controller by generating an acknowledge bit and pulling SDA low.
+
+ Data transfer is then initiated and eight bits of data are sent, followed by an acknowledge bit. During data
+ transfer, SDA must remain stable while SCL is high. Any change in SDA while SCL is high is interpreted as a
+ start or stop condition.
+
+ After all data are transferred, the controller generates a stop condition by pulling SDA from low to high while SCL
+ is high. The INA3221 includes a 28ms timeout on the interface to prevent locking up the bus.
+
+ 7.5.1.1 Serial Bus Address
+
+ To communicate with the INA3221, the controller must first address target devices with a target address byte.
+ This byte consists of seven address bits and a direction bit to indicate whether the intended action is a read or
+ write operation.
+
+The INA3221 has one address pin, A0. Table 7-1 describes the pin logic levels for each of the four possible
+ addresses. The state of the A0 pin is sampled on every bus communication and must be set before any activity
+on the interface occurs.
+
+                            Table 7-1. Address Pins and Target Addresses
+                                    A0               TARGET ADDRESS
+
+                               GND                       1000000
+
+                                   VS                       1000001
+
+                                 SDA                       1000010
+
+                                   SCL                       1000011
+
+ 7.5.1.2 Serial Interface
+The INA3221 only operates as a target device on the I2C bus and SMBus. Bus connections are made using
+ the open-drain I/O lines, SDA and SCL. The SDA and SCL pins feature integrated spike-suppression filters
+and Schmitt triggers to minimize the effects of input spikes and bus noise. While there is spike suppression
+ integrated into the digital I/O lines, use proper layout to minimize the amount of coupling into the communication
+ lines. Noise introduction occurs from capacitively coupling signal edges between the two communication lines
+ themselves, or from other switching noise sources present in the system. Routing traces in parallel with
+ ground between layers on a printed circuit board (PCB) typically reduces the effects of coupling between the
+ communication lines. Shield communication lines to reduce the possibility of unintended noise coupling into the
+ digital I/O lines that can be incorrectly interpreted as start or stop commands.
+
+The INA3221 supports a transmission protocol for Fast (1kHz to 400kHz) and High-speed (1kHz to 2.44MHz)
+modes. All data bytes are transmitted MSB first.
+
+
+
+
+
+20    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

@@ -1,0 +1,149 @@
+7.6.3 Configuration Register (address = 01h) [factory default reset = 0220h]
+Return to Register Map.
+Figure 7-14. Configuration Register
+15
+14
+13
+12
+11
+10
+9
+8
+HIGH_Alert
+LOW_Alert
+Data_Ready
+EEPROM_Busy
+MOD1(2)
+MOD0(1)
+CONV2(1)
+CONV1(1)
+R-0
+R-0
+R-0
+R-0
+R/W-0
+R/W-0
+R/W-1
+R/W-0
+7
+6
+5
+4
+3
+2
+1
+0
+CONV0(1)
+AVG1(1)
+AVG0(1)
+T/nA(1)
+POL(1)
+DR/Alert(1)
+Soft_Reset
+—
+R/W-0
+R/W-0
+R/W-1
+R/W-0
+R/W-0
+R/W-0
+R-0
+R-0
+Table 7-6. Configuration Register Field Descriptions
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+15
+HIGH_Alert
+R
+0
+High Alert flag:
+1: Set when the conversion result is higher than the high limit
+0: Cleared on read of configuration register
+Therm mode:
+1: Set when the conversion result is higher than the therm limit
+0: Cleared when the conversion result is lower than the 
+hysteresis
+14
+LOW_Alert
+R
+0
+Low Alert flag:
+1: Set when the conversion result is lower than the low limit
+0: Cleared when the configuration register is read
+Therm mode: Always set to 0
+13
+Data_Ready
+R
+0
+Data ready flag.
+This flag indicates that the conversion is complete and the 
+temperature register can be read. Every time the temperature 
+register or configuration register is read, this bit is cleared. This 
+bit is set at the end of the conversion when the temperature 
+register is updated. Data ready can be monitored on the ALERT 
+pin by setting bit 2 of the configuration register.
+12
+EEPROM_Busy
+R
+0
+EEPROM busy flag.
+The value of the flag indicates that the EEPROM is busy during 
+programming or power-up.
+11:10
+MOD[1:0]
+R/W
+0
+Set conversion mode.
+00: Continuous conversion (CC)
+01: Shutdown (SD)
+10: Continuous conversion (CC), Same as 00 (reads back = 00)
+11: One-shot conversion (OS)
+9:7
+CONV[2:0]
+R/W
+100
+Conversion cycle bit.
+See Table 7-7 for the standby time between conversions.
+6:5
+AVG[1:0]
+R/W
+01
+Conversion averaging modes. Determines the number of 
+conversion results that are collected and averaged before 
+updating the temperature register. The average is an 
+accumulated average and not a running average.
+00: No averaging
+01: 8 Averaged conversions
+10: 32 averaged conversions
+11: 64 averaged conversions
+4
+T/nA
+R/W
+0
+Therm/alert mode select.
+1: Therm mode
+0: Alert mode
+3
+POL
+R/W
+0
+ALERT pin polarity bit.
+1: Active high
+0: Active low
+2
+DR/Alert
+R/W
+0
+ALERT pin select bit.
+1: ALERT pin reflects the status of the data ready flag
+0: ALERT pin reflects the status of the alert flags
+www.ti.com
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+Copyright © 2022 Texas Instruments Incorporated
+Submit Document Feedback
+27
+Product Folder Links: TMP117

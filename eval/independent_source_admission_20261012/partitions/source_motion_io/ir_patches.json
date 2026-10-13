@@ -1,0 +1,398 @@
+[
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "TEMP_3_0",
+    "property": "bits",
+    "old": "3:0",
+    "new": "7:4",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_7_4",
+    "property": "bits",
+    "old": "7:4",
+    "new": "3:0",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_7_4",
+    "property": "name",
+    "old": "ZERO_7_4",
+    "new": "ZERO_3_0",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22; visually verified",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "CTRL2",
+    "field": "MUST_BE_ZERO",
+    "property": "access",
+    "old": "RO",
+    "new": "UNSPEC",
+    "certainty": "ABSTRACTION_ASSUMPTION_FOR_UNDEFINED_ACCESS",
+    "locators": [
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table32 footnote",
+        "excerpt": "This bit must be set to 0",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "WAKE_UP_SRC",
+    "field": "FF_IA",
+    "property": "desc",
+    "old": "自由落体事件标志，读清除",
+    "new": "Free-fall event status. Reading ALL_INT_SRC resets related interrupt function flags routed to INT pads; unqualified self read-clear is not specified in reviewed source.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "§8.28",
+        "excerpt": "Free-fall event detection status",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 53,
+        "printed_page": "53",
+        "table_or_section": "§8.31",
+        "excerpt": "Reading this register, all related interrupt function flags",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "CTRL_REG4",
+    "field": "ST",
+    "property": "access",
+    "old": "UNSPEC",
+    "new": "RW",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table_or_section": "Table21",
+        "excerpt": "CTRL_REG4",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Tables38–39",
+        "excerpt": "Self-test enable",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "AD5592R",
+    "register": null,
+    "field": null,
+    "property": "address_encoding.reserved_command_data_bits",
+    "old": "10:9 are reserved for control writes; logical fields below cover register data bits.",
+    "new": "Per-register command definitions prevail provisionally; Table10 generic bits10:9 statement conflicts with REP9 and SW_RESET key10:0. No official erratum verified.",
+    "certainty": "SOURCE_CONFLICT_PRESERVED_NO_UNIQUE_ASSIGNMENT",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "Table10",
+        "excerpt": "Bits[10:9] are reserved",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table16",
+        "excerpt": "REP",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "Table28",
+        "excerpt": "10110101100: Reset",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZYXOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZYXOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "YOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "YOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "XOR",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "XOR",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZYXDA",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZYXDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZDA",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "ZDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "YDA",
+    "property": "source_default_admission",
+    "old": {
+      "field_reset": 0,
+      "known_reset": false,
+      "register_reset": null
+    },
+    "new": {
+      "field_reset": 0,
+      "known_reset": true,
+      "scope": "default boundary before events",
+      "register_known_mask": "0xFE"
+    },
+    "certainty": "MANUFACTURER_FACT_WITH_DEFAULT_BOUNDARY",
+    "locators": [
+      {
+        "pdf_page": 39,
+        "printed_page": "39",
+        "table_or_section": "Table47",
+        "excerpt": "YDA",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ],
+    "note": "No field numeric reset change. Do not invent a whole-register numeric reset including XDA. Candidate generator must support masked/reset per-field source metadata."
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "TEMP_3_0",
+    "property": "desc",
+    "old": "Table 22 位图里 [7:4] 标 0（无行名）⇒ 文档明示读 0",
+    "new": "Temperature bitsTEMP3:0 occupy bus bits7:4. OUT_T_H/OUT_T_L form left-justified12bit two's complement output; low4 bits read0.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table_or_section": "Table22",
+        "excerpt": "TEMP3",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table_or_section": "§3.6",
+        "excerpt": "left-justified in 12-bit mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  }
+]

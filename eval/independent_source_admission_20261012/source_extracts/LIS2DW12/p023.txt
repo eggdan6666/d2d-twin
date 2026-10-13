@@ -1,0 +1,40 @@
+                                                              LIS2DW12
+                                                                                                                             Digital main blocks
+
+
+5.3      FIFO
+           The LIS2DW12 embeds 32 slots of 14-bit data FIFO for each of the three output channels, X, Y, and Z of the
+              acceleration data. This allows consistent power saving for the system, since the host processor does not need to
+              continuously poll data from the sensor, but it can wake up only when needed and burst the significant data out
+             from the FIFO.
+           The internal FIFO allows collecting 32 samples (14-bit size data) for each axis.
+          When the FIFO mode is other than bypass, reading the output registers (28h to 2Dh) returns the oldest FIFO
+            sample set. In order to minimize communication between the master and slave, the address read may be
+              automatically incremented by the device by setting the IF_ADD_INC bit of CTRL2 (21h) to 1. The device rolls
+            back to 0x28 when register 0x2D is reached.
+             This buffer can work according to the following five different modes:
+                  •     Bypass mode
+                  •     FIFO mode
+                  •     Continuous-to-FIFO
+                  •     Bypass-to-continuous
+                  •     Continuous
+           Each mode is selected by the FMode[2:0] bits in the FIFO_CTRL (2Eh) register.
+            Programmable FIFO threshold is selected in FIFO_CTRL (2Eh). Status and FIFO overrun events are available in
+              the FIFO_SAMPLES (2Fh) register and can be used to generate dedicated interrupts on the INT1 and INT2 pins
+             using the CTRL4_INT1_PAD_CTRL (23h) and CTRL5_INT2_PAD_CTRL (24h) registers.
+          FIFO_SAMPLES (2Fh) (FIFO_FTH) goes to 1 when the number of unread samples FIFO_SAMPLES (2Fh)
+                 (Diff[5:0]) is greater than or equal to FTH[4:0] in FIFO_CTRL (2Eh).
+                       If FTH[4:0] is equal to 0, FIFO_SAMPLES (2Fh) (FIFO_FTH) goes to 0.
+          FIFO_SAMPLES (2Fh) (FIFO_OVR) is equal to 1 if a FIFO slot is overwritten.
+          FIFO_SAMPLES (2Fh) (Diff[5:0]) contains stored data levels of unread samples. When Diff[5:0] is equal to
+            000000, FIFO is empty. When Diff[5:0] is equal to 100000, FIFO is full and the unread samples are 32.
+            To guarantee the correct acquisition of data during the switching into and out of FIFO, the first sample acquired
+            must be discarded.
+          When the FIFO threshold status flag is 0 logic, FIFO filling is lower than the threshold level and when 1 logic,
+           FIFO filling is equal to or higher than the threshold level.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 23/65

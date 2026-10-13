@@ -1,0 +1,73 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+5 Pin Configuration and Functions
+
+                         CS       SCLK     DIN     DOUT/ DRDY                  SCLK  1                     16  DIN
+                         16   15   14   13                   CS  2                     15  DOUT/DRDY
+
+           CLK  1                         12 DRDY            CLK  3                     14  DRDY
+
+        DGND  2                         11 DVDD         DGND  4                     13  DVDD
+                           Thermal Pad
+          AVSS  3                         10 AVDD           AVSS  5                     12  AVDD
+
+     AIN3/REFN1  4                          9  AIN0/REFP1   AIN3/REFN1  6                     11  AIN0/REFP1
+
+                         5    6    7    8                       AIN2  7                     10  AIN1
+                                                 AIN2        REFN0        REFP0       AIN1                  REFN0  8                      9  REFP0
+       Figure 5-1. RVA Package, 16-Pin VQFN             Figure 5-2. PW Package, 16-Pin TSSOP
+
+                                      Table 5-1. Pin Functions
+                     PIN
+
+                            NO.
+     NAME         RVA       PW          TYPE                                 DESCRIPTION(1)
+
+ AIN0/REFP1            9             11          Analog input    Analog input 0, positive reference input 1
+
+ AIN1                   8            10          Analog input    Analog input 1
+
+ AIN2                   5            7          Analog input    Analog input 2
+
+                                                                  Analog input 3, negative reference input 1.
+ AIN3/REFN1            4            6          Analog input
+                                                                                   Internal low-side power switch connected between AIN3/REFN1 and AVSS.
+
+ AVDD                 10           12         Analog supply    Positive analog power supply. Connect a 100nF (or larger) capacitor to AVSS.
+
+ AVSS                  3            5          Analog supply    Negative analog power supply
+
+ CLK                   1            3              Digital input     External clock source pin. Connect to DGND if not used.
+
+ CS                    16            2              Digital input     Chip select; active low. Connect to DGND if not used.
+
+ DGND                 2            4             Digital supply     Digital ground
+
+ DIN                   14           16             Digital input      Serial data input
+
+ DOUT/ DRDY           13           15             Digital output     Serial data output combined with data ready; active low
+
+                                                                 Data ready, active low.
+ DRDY                 12           14             Digital output
+                                                               Leave unconnected or tie to DVDD using a weak pull-up resistor if not used.
+
+ DVDD                  11            13            Digital supply     Positive digital power supply. Connect a 100nF (or larger) capacitor to DGND.
+
+ REFN0                 6            8          Analog input    Negative reference input 0
+
+ REFP0                 7            9          Analog input     Positive reference input 0
+
+ SCLK                 15            1              Digital input      Serial clock input
+
+ Thermal pad           Pad      —       —         Thermal power pad. Do not connect or only connect to AVSS.
+
+ (1)  See the Unused Inputs and Outputs section for unused pin connections.
+
+
+
+
+
+4     Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,49 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.3  Power Event Register
+
+Command = 02h with 1 Data Byte, Read Only
+
+Command = 03h with 1 Data Byte, Clear on Read
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME        PGC4     PGC3     PGC2     PGC1      PEC4      PEC3      PEC2      PEC1
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Active high, each bit corresponds to a particular event that occurred.
+
+Each bit PGCn, PECn represents an individual port.
+
+A read at each location (02h or 03h) returns the same register data with the exception that the Clear-on-Read
+command clears all bits of the register.
+
+If this register is causing the INT pin to be activated, this Clear-on-Read command releases the INT pin.
+
+Any active bit will have an impact on the Interrupt Register as indicated in the Interrupt Register description.
+
+Bit Descriptions
+
+PGC4-PGC1: Indicates that a power good status change occurred.
+
+1 = Power good status change occurred.
+
+0 = No power good status change occurred.
+
+PEC4-PEC1: Indicates that a power enable status change occurred.
+
+1 = Power enable status change occurred.
+
+0 = No power enable status change occurred.
+
+
+
+
+
+50     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

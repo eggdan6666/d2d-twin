@@ -1,0 +1,72 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+8.3  Typical Application
+
+Typical applications are shown for several port counts. The TPS23861 is an effective choice for port counts less
+than the 4 ports provided, and these applications clearly show the connections for unused ports.
+
+Applications are shown for both Auto Mode as well as Semi-Auto Mode. Operation in any mode except Auto
+Mode require I2C host support. The TPS23861 provides useful telemetry in multi port applications to aid in
+implementing port power management.
+
+8.3.1 Two Port, Auto Mode Application with External Port Reset
+
+      VDD                                   VPWR
+
+
+                                     TPS23861PW
+                   CVDD                                       CVPWR
+    RRST                                                                 VPWR
+                                 1 VDD       VPWR 28                                                                                                                       P2
+
+                                 2  RESET          N/C 27                                                           +                                                                                                                                 RJ45
+                                                                                                        DP2A       CP2     &
+ PORT RESET                       3  SCL         AOUT 26
+                                                                                                    FP2                                  -  XFMR
+                                 4  SDAI           AIN 25
+                                 5 SDAO     SHTDWN 24                                 QP2
+                                                                                                                DP2B
+                                 6  INT            A3 23                                                                                                                                    (Optional)
+                                                                                              RS2A     RS2B
+                                 7 DGND      AGND 22
+
+                                 8  SEN3        GATE2 21
+                                                               RDRN2
+                                 9  DRAIN3     DRAIN2 20                                   RS1A     RS1B                                                                RSEN2
+                                                                                                                                    (Optional)
+                                 10 GATE3        SEN2 19
+                                                                                                                DP1B
+                                 11 KSENSB     KSENSA 18                                 QP1
+                                                                                                                      P1
+                                 12 SEN4        GATE1 17
+                                                               RDRN1                                                                                 -                                                                                                    FP1                          RJ45
+                                 13 DRAIN4     DRAIN1 16
+                                                                                                        DP1A       CP1     &                                                                RSEN1                                                                                                     XFMR
+                                 14 GATE4        SEN1 15                                                           +
+
+                                                                       VPWR
+                                                                                                                                          Copyright © 2016, Texas Instruments Incorporated
+
+                     Figure 48. Two Port Auto Mode Application With Port Reset
+
+8.3.1.1  Design Requirements
+
+                                    Table 12. Design Parameters
+
+                DESIGN PARAMETER                                    VALUE
+
+                         Operating mode                                                  Auto Mode
+
+                     Number/type of ports                                     Two type 2 ports
+
+                       Other requirements                                       Push button port reset
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     87
+
+                                                 Product Folder Links: TPS23861

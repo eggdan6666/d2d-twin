@@ -1,0 +1,121 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           11 of 46  
+   
+Obtaining the Accelerometer Factory Trim (FT) Value 
+ 
+If InvenSense MotionApps software is not used, the procedure detailed below should be followed to 
+obtain the Factory trim value of the self test response (FT) mentioned above. For the specific 
+registers mentioned below, please refer to registers 13-16. 
+ 
+The Factory trim value of the self test response (FT) is calculated as shown below.  FT[Xa], FT[Ya], 
+and FT[Za] refer to the factory trim (FT) values for the accelerometer X, Y, and Z axes, respectively.  
+In the equations below, the factory trim values for the accel should be in decimal format, and they 
+are determined by concatenating the upper accelerometer self test bits (bits 4-2) with the lower 
+accelerometer self test bits (bits 1-0).   
+When performing accelerometer self test, the full-scale range should be set to ±8g. 
+                  
+    
+    
+(         
+    
+)
+  
+ 
+ 
+if XA_TEST ≠ 0. 
+          
+ 
+ 
+ 
+ 
+ 
+ 
+if XA_TEST = 0. 
+ 
+                  
+    
+    
+(         
+    
+)
+  
+ 
+ 
+if YA_TEST ≠ 0. 
+          
+ 
+ 
+ 
+ 
+ 
+ 
+if YA_TEST = 0. 
+ 
+                  
+    
+    
+(         
+    
+)
+  
+ 
+ 
+if ZA_TEST ≠ 0. 
+          
+ 
+ 
+ 
+ 
+ 
+ 
+if ZA_TEST = 0. 
+ 
+Parameters: 
+XA_TEST 
+5-bit unsigned value. FT[Xa] is determined by using this value as explained 
+above. 
+XG_TEST 
+5-bit unsigned value. FT[Xg] is determined by using this value as explained 
+above. 
+YA_TEST 
+5-bit unsigned value. FT[Ya] is determined by using this value as explained 
+above. 
+YG_TEST 
+5-bit unsigned value. FT[Yg] is determined by using this value as explained 
+above. 
+ZA_TEST 
+5-bit unsigned value. FT[Za] is determined by using this value as explained 
+above. 
+ZG_TEST 
+5-bit unsigned value. FT[Zg] is determined by using this value as explained 
+above. 
+ 
+4.2 
+Register 25 – Sample Rate Divider 
+SMPRT_DIV 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+19 
+25 
+SMPLRT_DIV[7:0] 
+ 
+Description: 

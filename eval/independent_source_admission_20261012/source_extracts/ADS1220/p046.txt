@@ -1,0 +1,56 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.6.2.4 Configuration Register 3 (Address = 03h) [reset = 00h]
+
+                                Figure 8-35. Configuration Register 3
+       7             6             5             4             3             2             1             0
+
+                   I1MUX[2:0]                                     I2MUX[2:0]               DRDYM     RESERVED
+
+                 R/W-000b                                  R/W-000b                     R/W-0b        R/W-0b
+
+                        Table 8-14. Configuration Register 3 Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+                                            IDAC1 routing configuration
+                                               These bits select the channel where IDAC1 is routed to.
+                                               000b : IDAC1 disabled
+                                               001b : IDAC1 connected to AIN0/REFP1
+                                               010b : IDAC1 connected to AIN1
+     7:5     I1MUX[2:0]     R/W       000b
+                                                 011b : IDAC1 connected to AIN2
+                                               100b : IDAC1 connected to AIN3/REFN1
+                                               101b : IDAC1 connected to REFP0
+                                                 110b : IDAC1 connected to REFN0
+                                                  111b : Reserved
+
+                                            IDAC2 routing configuration
+                                               These bits select the channel where IDAC2 is routed to.
+                                               000b : IDAC2 disabled
+                                               001b : IDAC2 connected to AIN0/REFP1
+                                               010b : IDAC2 connected to AIN1
+     4:2     I2MUX[2:0]     R/W       000b
+                                                 011b : IDAC2 connected to AIN2
+                                               100b : IDAC2 connected to AIN3/REFN1
+                                               101b : IDAC2 connected to REFP0
+                                                 110b : IDAC2 connected to REFN0
+                                                  111b : Reserved
+
+                                     DRDY mode
+                                                       This bit controls the behavior of the DOUT/DRDY pin when new data are ready.
+     1    DRDYM       R/W       0b
+                                               0b : Only the dedicated DRDY pin is used to indicate when data are ready
+                                               1b : Data ready is indicated simultaneously on DOUT/DRDY and DRDY
+
+                                              Reserved
+     0    RESERVED     R/W       0b
+                                                 Always write 0b
+
+
+
+
+
+46    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

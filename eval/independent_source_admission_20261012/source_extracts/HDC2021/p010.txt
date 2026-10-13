@@ -1,0 +1,52 @@
+  HDC2021
+  SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+  7 Detailed Description
+  7.1 Overview
+
+  The HDC2021 is a highly integrated digital humidity and temperature sensor that incorporates both humidity-
+   sensing and temperature-sensing elements, an analog-to-digital converter, calibration memory, and an I2C
+   interface that are all contained in a 3.00-mm × 3.00-mm, 6-pin WSON package. The HDC2021 provides
+   excellent measurement accuracy with very low power consumption and features configurable accuracy options
+   for both the humidity and temperature sensors:
+    •  Temperature accuracy options: 9, 11, or 14 bits
+    •  Humidity accuracy options: 9, 11, or 14 bits
+  The conversion time during measurements is dependent upon the configured accuracy option for humidity and
+   temperature. The flexable programmability allows the device to be configured for optimal measurement accuracy
+  and power consumption.
+
+  The HDC2021 device incorporates a state-of-the-art polymer dielectric to provide capacitive-sensing
+  measurements. As with most relative humidity sensors that include this type of technology, the user must meet
+   these application requirements to ensure optimal device performance for the sensing element:
+
+    •  Follow the correct storage and handling procedures during board assembly. See Humidity Sensor: Storage
+     and Handling Guidelines. (SNIA025) for these guidelines.
+    •  Protect the sensor from contaminants during operation.
+    •  Reduce prolonged exposure to both high temperature and humidity extremes that may impact sensor
+      accuracy.
+    •  Follow the correct layout guidelines for best performance. See Optimizing Placement and Routing for
+     Humidity Sensors (SNAA297) for these guidelines.
+  7.2 Functional Block Diagram
+
+HDC2021                                                     VDD
+
+
+                                                  SCL
+     RH
+     Sensor                                       SDA
+                                    Registers
+                ADC          +                 I2C   DRDY/INT
+                                     Logic
+                                             ADDR   Temperature
+     Sensor
+
+
+
+                                      Calibration
+                                            GND
+
+
+
+
+
+  10    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

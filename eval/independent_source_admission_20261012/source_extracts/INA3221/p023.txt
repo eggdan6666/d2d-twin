@@ -1,0 +1,63 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+                                               t(LOW)
+                                                                                            tr                            tfCL
+
+
+      SCL
+
+                                                 t(HDSTA)                                 t(HIGH)     t(SUSTA)                                                                          t(SUSTO)
+                                                   t(HDDAT)                                                                     t(HDSTA)
+                                                   t(VDDAT)                                         t(SUDAT)               tfDA
+
+     SDA
+
+                              t(BUF)
+
+             P      S                                           S                             P
+
+                                      Figure 7-13. Bus Timing
+
+                                 Table 7-2. Bus Timing Definitions(1)
+                                                     FAST MODE          HIGH-SPEED MODE
+
+                 PARAMETER                           MIN       MAX       MIN      MAX    UNIT
+  f(SCL)      SCL operating frequency                                0.001             0.4       0.001         2.44   MHz
+  t(BUF)      Bus free time between stop and start conditions            1300                      160                 ns
+            Hold time after repeated START condition.
+ t(HDSTA)                                                       600                      160                 ns               After this period, the first clock is generated.
+  t(SUSTA)     Repeated start condition setup time                      600                      160                 ns
+ t(SUSTO)    STOP condition setup time                             600                      160                 ns
+ t(HDDAT)     Data hold time                                         0                        0                 ns
+ t(VDDAT)     Data valid time                                                   1200                    260     ns
+ t(SUDAT)     Data setup time                                      100                       10                 ns
+ t(LOW)     SCL clock low period                                 1300                      270                 ns
+  t(HIGH)     SCL clock high period                                 600                       60                 ns
+  tfDA        Data fall time                                                      500                    150     ns
+  tfCL         Clock fall time                                                     300                     40     ns
+             Clock rise time                                                    300                     40     ns
+  tr
+             Clock rise time for SCLK ≤ 100kHz                                    1000                             ns
+
+ (1)   Values based on a statistical analysis of a one-time sample of devices. Minimum and maximum values are not production tested.
+     A0 = A1 = 0.
+
+ 7.5.3 SMBus Alert Response
+
+The INA3221 responds to the SMBus alert response address. The SMBus alert response provides a quick fault
+ identification for simple target devices. When an alert occurs, the controller broadcasts the alert response target
+ address (0001 100) with the R/ W bit set high. Following this alert response, any target devices that generated
+an alert self-identifies by acknowledging the alert response, and sending the respective address on the bus.
+The alert response can activate several different target devices simultaneously, similar to the I2C general call. If
+more than one target attempts to respond, bus arbitration rules apply. The losing device does not generate an
+ acknowledge, and continues to hold the alert line low until the interrupt is cleared. Alerts must be in Latch mode
+ to function.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    23
+
+                                                  Product Folder Links: INA3221

@@ -1,0 +1,72 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.4 Configuration Register (Address = 03h) [reset = 0006h]
+
+ This register is used to configuration the operation of the TMP126.
+
+ Return to Register Map.
+
+                                 Figure 8-22. Configuration Register
+       15            14            13            12             11            10             9             8
+
+                                             Reserved                                                     Reset
+
+                                                R-00h                                                  R/W-0b
+
+       7             6             5             4             3             2             1             0
+
+     AVG        Reserved      Int_Comp      One_Shot       Mode                      Conv_Period[2:0]
+
+     R/W-0b         R-0b         R/W-0b        R/W-0b        R/W-0b                     R/W-110b
+
+                         Table 8-8. Configuration Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:9    Reserved                  R       00h        Reserved
+
+     8     Resets                     R/W     0b          Software reset bit.
+                                                    When set to 1b it triggers software reset with a duration of 0.5
+                                                               ms.
+                                                                        This bit will always read back 0b
+
+     7    AVG                       R/W     0b          Averaging enable bit. Averaging will force every measurement
+                                                                             including one-shot measurements to be averaged with eight
+                                                                        conversions.
+                                                                         0b: Averaging is disabled
+                                                                         1b: Averaging is enabled
+
+     6     Reserved                  R       0b         Reserved
+
+     5     Int_Comp                   R/W     0b            Interrupt or comparator mode select
+                                                             0b = Interrupt mode
+                                                             1b = Comparator mode
+
+     4     One_Shot                   R/W     0b         One-shot conversion trigger. Triggering a one-shot conversion
+                                                                                                 will place the TMP126 into shutdown mode after the conversion
+                                                                      completes. This bit will always read 0h.
+                                                             0b = Default
+                                                             1b = Trigger a one-shot conversion
+
+     3    Mode                      R/W     0b         Conversion mode selection bit.
+                                                             0b = Continuous conversion mode
+                                                             1b = Shutdown mode
+
+     2:0     Conv_Period[2:0]              R/W     110b       Conversion period setting. This bit field changes the conversion
+                                                                         period of the TMP126.
+                                                             000b = 6 ms
+                                                             001b = 31.25 ms / 32 Hz
+                                                             010b = 62.5 ms / 16 Hz
+                                                               011b = 125 ms / 8 Hz
+                                                             100b = 250 ms / 4 Hz
+                                                             101b = 500 ms / 2 Hz
+                                                               110b = 1 s / 1 Hz
+                                                                 111b = 2 s / 0.5 Hz
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    29
+
+                                                  Product Folder Links: TMP126

@@ -1,0 +1,46 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.28    WAKE_UP_SRC (38h)
+           Wake-up source register (R)
+
+
+                                              Table 77. WAKE_UP_SRC register
+
+                                                SLEEP_
+                   0            0          FF_IA                  WU_IA      X_WU      Y_WU      Z_WU
+                                                STATE IA
+
+
+                                         Table 78. WAKE_UP_SRC register description
+
+                                               Free-fall event detection status
+              FF_IA
+                                                 (0: FF event not detected; 1: FF event detected)
+
+                                      Sleep event status
+            SLEEP_ STATE IA
+                                                 (0: sleep event not detected; 1: sleep event detected)
+
+                                  Wake-up event detection status
+            WU_IA
+                                                 (0: wake-up event not detected; 1: wake-up event is detected)
+
+                                  Wake-up event detection status on X-axis
+          X_WU
+                                                 (0: wake-up event on X not detected; 1: wake-up event on X-axis is detected)
+
+                                  Wake-up event detection status on Y-axis
+          Y_WU
+                                                 (0: wake-up event on Y not detected; 1: wake-up event on Y-axis is detected)
+
+                                  Wake-up event detection status on Z-axis
+           Z_WU
+                                                 (0: wake-up event on Z not detected; 1: wake-up event on Z-axis is detected)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 50/65

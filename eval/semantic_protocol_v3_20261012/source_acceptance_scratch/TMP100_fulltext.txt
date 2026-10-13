@@ -1,0 +1,2501 @@
+PDF PAGE 1
+Diode
+Sensor
+∆Σ
+ADC
+Converter
+OSC
+Control
+Logic
+Serial
+Interface
+Config
+and Temp
+Register
+TMP100
+Temperature
+GND
+SCL
+1
+2
+3
+6
+5
+4
+1
+2
+3
+6
+5
+4
+ADD1
+SDA
+ADD0
+V+
+Diode
+Sensor
+∆Σ
+ADC
+Converter
+OSC
+Control
+Logic
+Serial
+Interface
+Config
+and Temp
+Register
+TMP101
+Temperature
+GND
+SCL
+ALERT
+SDA
+ADD0
+V+
+Temp.
+Temp.
+Product
+Folder
+Sample &
+Buy
+Technical
+Documents
+Tools &
+Software
+Support &
+Community
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+TMP10x Temperature Sensor With I2C and SMBus Interface with
+Alert Function in SOT-23 Package
+1
+Features
+3
+Description
+The
+TMP100
+and
+TMP101
+devices
+are
+digital
+1•
+Digital Output: SMBus™, Two-Wire, and I2C
+temperature sensors ideal for negative temperature
+Interface Compatibility
+coefficient (NTC) and positive temperature coefficient
+•
+Resolution: 9 to 12 Bits, User-Selectable
+(PTC) thermistor replacement. The devices offer a
+•
+Accuracy:
+typical accuracy of ±1°C without requiring calibration
+or external component signal conditioning. Device
+–
+±1°C (Typical) from –55°C to 125°C
+temperature sensors are highly linear and do not
+–
+±2°C (Maximum) from –55°C to 125°C
+require complex calculations or look-up tables to
+•
+Low Quiescent Current: 45-μA, 0.1-μA Standby
+derive the temperature. The on-chip, 12-bit ADC
+offers resolutions down to 0.0625°C. The devices are
+•
+Wide Supply Range: 2.7 V to 5.5 V
+available in 6-Pin SOT-23 packages.
+•
+TMP100 Features Two Address Pins
+The TMP100 and TMP101 devices feature SMBus,
+•
+TMP101 Features One Address Pin and an
+Two-Wire,
+and
+I2C
+interface
+compatibility.
+The
+ALERT Pin
+TMP100 device allows up to eight devices on one
+•
+6-Pin SOT-23 Package
+bus. The TMP101 device offers an SMBus Alert
+function with up to three devices per bus.
+2
+Applications
+The TMP100 and TMP101 devices are ideal for
+•
+Power-Supply Temperature Monitoring
+extended temperature measurement in a variety of
+•
+Computer Peripheral Thermal Protection
+communication, computer, consumer, environmental,
+industrial, and instrumentation applications.
+•
+Notebook Computers
+The TMP100 and TMP101 devices are specified for
+•
+Cell Phones
+operation over a temperature range of −55°C to
+•
+Battery Management
+125°C.
+•
+Office Machines
+•
+Thermostat Controls
+Device Information(1)
+•
+Environmental Monitoring and HVAC
+PART NUMBER
+PACKAGE
+BODY SIZE (NOM)
+TMP100
+SOT-23 (6)
+2.90 mm × 1.60 mm
+•
+Electromechanical Device Temperature
+TMP101
+SOT-23 (6)
+2.90 mm × 1.60 mm
+(1) For all available packages, see the orderable addendum at
+the end of the data sheet.
+Simplified Schematics
+1
+An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+intellectual property matters and other important disclaimers. PRODUCTION DATA.
+
+PDF PAGE 2
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+Table of Contents
+7.3
+Feature Description................................................... 9
+1
+Features.................................................................. 1
+7.4
+Device Functional Modes........................................ 14
+2
+Applications ........................................................... 1
+7.5
+Programming........................................................... 15
+3
+Description ............................................................. 1
+8
+Application and Implementation ........................ 19
+4
+Revision History..................................................... 2
+8.1
+Application Information............................................ 19
+5
+Pin Configuration and Functions......................... 3
+8.2
+Typical Application .................................................. 19
+6
+Specifications......................................................... 4
+9
+Power Supply Recommendations...................... 21
+6.1
+Absolute Maximum Ratings ...................................... 4
+10
+Layout................................................................... 21
+6.2
+ESD Ratings ............................................................ 4
+10.1
+Layout Guidelines ................................................. 21
+6.3
+Recommended Operating Conditions....................... 4
+10.2
+Layout Examples................................................... 21
+6.4
+Thermal Information ................................................. 4
+11
+Device and Documentation Support ................. 23
+6.5
+Electrical Characteristics........................................... 5
+11.1
+Related Links ........................................................ 23
+6.6
+Timing Requirements................................................ 6
+11.2
+Trademarks........................................................... 23
+6.7
+Typical Characteristics.............................................. 7
+11.3
+Electrostatic Discharge Caution............................ 23
+7
+Detailed Description .............................................. 8
+11.4
+Glossary................................................................ 23
+7.1
+Overview ................................................................... 8
+12
+Mechanical, Packaging, and Orderable
+7.2
+Functional Block Diagram ......................................... 8
+Information ........................................................... 23
+4
+Revision History
+Changes from Revision H (March 2015) to Revision I
+Page
+•
+Changed body size values in Device Information table ........................................................................................................ 1
+Changes from Revision G (November 2007) to Revision H
+Page
+•
+Added ESD Ratings table, Feature Description section, Device Functional Modes, Application and Implementation
+section, Power Supply Recommendations section, Layout section, Device and Documentation Support section, and
+Mechanical, Packaging, and Orderable Information section. ................................................................................................ 1
+•
+Changed specification values in Timing Requirements table ................................................................................................ 6
+2
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 3
+SCL
+GND
+ALERT
+SDA
+ADD0
+V+
+1
+2
+3
+6
+5
+4
+T101
+TMP101
+SCL
+GND
+ADD1
+SDA
+ADD0
+V+
+1
+2
+3
+6
+5
+4
+T100
+TMP100
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+5
+Pin Configuration and Functions
+DBV Package
+6-Pin SOT-23
+Top View
+DBV Package
+6-Pin SOT-23
+Top View
+Pin Functions
+PIN
+NO.
+I/O
+DESCRIPTION
+NAME
+TMP100
+TMP101
+ADD0
+5
+5
+I
+Address select. Connect to GND, V+, or leave floating.
+ADD1
+3
+—
+I
+Address select. Connect to GND, V+, or leave floating.
+ALERT
+—
+3
+O
+Overtemperature alert. Open-drain output; requires a pullup resistor.
+GND
+2
+2
+—
+Ground
+SCL
+1
+1
+I
+Serial clock. Open-drain output; requires a pullup resistor.
+SDA
+6
+6
+I/O
+Serial data. Open-drain output; requires a pullup resistor.
+V+
+4
+4
+I
+Supply voltage, 2.7 V to 5.5 V
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+3
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 4
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+6
+Specifications
+6.1
+Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted)(1)
+MIN
+MAX
+UNIT
+Power supply, V+
+7.5
+V
+Input voltage(2)
+–0.5
+7.5
+V
+Operating temperature
+–55
+125
+°C
+Junction temperature, TJ
+150
+°C
+Storage temperature, Tstg
+–60
+150
+°C
+(1)
+Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress ratings
+only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under Recommended
+Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device reliability.
+(2)
+Input voltage rating applies to all TMP100 and TMP101 input voltages.
+6.2
+ESD Ratings
+VALUE
+UNIT
+Human body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)
+±2000
+V(ESD)
+Electrostatic discharge
+V
+Charged device model (CDM), per JEDEC specification JESD22-C101(2)
+±200
+(1)
+JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)
+JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+6.3
+Recommended Operating Conditions
+over operating free-air temperature range (unless otherwise noted)
+MIN
+NOM
+MAX
+UNIT
+Supply voltage
+2.7
+5.5
+V
+Operating free-air temperature, TA
+–55
+125
+°C
+6.4
+Thermal Information
+TMP100, TMP101
+THERMAL METRIC(1)
+DBV (SOT-23)
+UNIT
+6 PINS
+RθJA
+Junction-to-ambient thermal resistance
+182.9
+°C/W
+RθJC(top)
+Junction-to-case (top) thermal resistance
+115
+°C/W
+RθJB
+Junction-to-board thermal resistance
+30.2
+°C/W
+ψJT
+Junction-to-top characterization parameter
+17.1
+°C/W
+ψJB
+Junction-to-board characterization parameter
+29.7
+°C/W
+(1)
+For more information about traditional and new thermal metrics, see the IC Package Thermal Metrics application report, SPRA953.
+4
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 5
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+6.5
+Electrical Characteristics
+At TA = −55°C to 125°C and V+ = 2.7 V to 5.5 V, unless otherwise noted.
+PARAMETER
+TEST CONDITIONS
+MIN
+TYP
+MAX
+UNIT
+TEMPERATURE INPUT
+Range
+–55
+125
+°C
+−25°C to 85°C
+±0.5
+±2
+Accuracy (temperature error)
+°C
+−55°C to 125°C
+±1
+±2
+Accuracy (temperature error) vs supply
+0.2
+±0.5
+°C/V
+Resolution
+Selectable
+0.0625
+°C
+DIGITAL INPUT/OUTPUT
+Input capacitance
+3
+pF
+VIH
+High-level input logic
+0.7 (V+)
+6
+V
+VIL
+Low-level input logic
+−0.5
+0.3 (V+)
+V
+IIN
+Input current
+0 V ≤VIN ≤6 V
+1
+µA
+VOL
+Low-level output logic SDA
+IOL = 3 mA
+0
+0.15
+0.4
+V
+VOL
+Low-level output logic ALERT
+IOL = 4 mA
+0
+0.15
+0.4
+V
+Resolution
+Selectable
+9
+12
+Bits
+9 bits
+40
+75
+10 bits
+80
+150
+Conversion time
+ms
+11 bits
+160
+300
+12 bits
+320
+600
+9 bits
+25
+10 bits
+12
+Conversion rate
+s/s
+11 bits
+6
+12 bits
+3
+POWER SUPPLY
+Operating range
+2.7
+5.5
+V
+Serial bus inactive
+45
+75
+IQ
+Quiescent current
+Serial bus active, SCL frequency = 400 kHz
+70
+µA
+Serial bus active, SCL frequency = 3.4 MHz
+150
+Serial bus inactive
+0.1
+13
+ISD
+Shutdown current
+Serial bus active, SCL frequency = 400 kHz
+20
+µA
+Serial bus active, SCL frequency = 3.4 MHz
+100
+TEMPERATURE RANGE
+Specified range
+–55
+125
+°C
+Storage range
+–60
+150
+°C
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+5
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 6
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+6.6
+Timing Requirements
+FAST MODE
+HIGH-SPEED MODE
+PARAMETER
+UNIT
+MIN
+MAX
+MIN
+MAX
+f(SCL)
+SCL operating frequency
+0.4
+2
+MHz
+t(BUF)
+Bus free time between STOP and START condition
+1300
+160
+ns
+Hold time after repeated START condition.
+t(HDSTA)
+600
+160
+ns
+After this period, the first clock is generated.
+t(SUSTA)
+Repeated START condition setup time
+600
+160
+ns
+t(SUSTO)
+STOP condition setup time
+600
+160
+ns
+t(HDDAT)
+Data hold time
+20
+900
+20
+170
+ns
+t(SUDAT)
+Data setup time
+100
+20
+ns
+t(LOW)
+SCL clock LOW period
+1300
+360
+ns
+t(HIGH)
+SCL clock HIGH period
+600
+60
+ns
+tRC, tFC
+Clock rise and fall time
+300
+40
+ns
+tRD, tFD
+Data rise and fall time
+300
+170
+ns
+6
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 7
+180
+160
+140
+120
+100
+80
+60
+40
+20
+0
+SCL Frequency (Hz)
+10k
+100k
+1M
+10M
+IQ (µA)
+125°C
+FAST MODE
+Hs MODE
+−55°C
+−55°C
+125°C
+25°C
+25°C
+400
+350
+300
+250
+Temperature (°C)
+−60
+−40
+−20
+0
+20
+40
+60
+80
+100
+120
+140
+Conversion Time (ms)
+V+ = 5 V
+V+ = 2.7 V
+NOTE: 12−bit resolution.
+2.0
+1.5
+1.0
+0.5
+0.0
+−0.5
+−1.0
+−1.5
+−2.0
+Temperature (°C)
+−60
+−40
+−20
+0
+20
+40
+60
+80
+100
+120
+140
+Temperature Error (°C)
+3 Typical Units
+NOTE: 12−bit resolution.
+70
+60
+50
+40
+30
+Temperature (°C)
+−60
+−40
+−20
+0
+20
+40
+60
+80
+100
+120
+140
+IQ (µA)
+Serial Bus Inactive
+V+ = 5 V
+V+ = 27 V
+1
+0.9
+0.8
+0.7
+0.6
+0.5
+0.4
+0.3
+0.2
+0.1
+0
+−0.1
+Temperature ( C)
+°
+−60
+−40
+−20
+0
+20
+40
+60
+80
+100
+120
+140
+ISD (µA)
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+6.7
+Typical Characteristics
+At TA = 25°C and V+ = 5 V, unless otherwise noted.
+Figure 1. Quiescent Current vs Temperature
+Figure 2. Shutdown Current vs Temperature
+Figure 3. Conversion Time vs Temperature
+Figure 4. Temperature Accuracy vs Temperature
+Figure 5. Quiescent Current With Bus Activity vs Temperature
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+7
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 8
+Diode
+Sensor
+∆Σ
+ADC
+Converter
+OSC
+Control
+Logic
+Serial
+Interface
+Config
+and Temp
+Register
+TMP100
+Temperature
+GND
+SCL
+1
+2
+3
+6
+5
+4
+1
+2
+3
+6
+5
+4
+ADD1
+SDA
+ADD0
+V+
+Diode
+Sensor
+∆Σ
+ADC
+Converter
+OSC
+Control
+Logic
+Serial
+Interface
+Config
+and Temp
+Register
+TMP101
+Temperature
+GND
+SCL
+ALERT
+SDA
+ADD0
+V+
+Temp.
+Temp.
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7
+Detailed Description
+7.1
+Overview
+The TMP100 and TMP101 devices are digital temperature sensors optimal for thermal management and thermal
+protection applications. The TMP100 and TMP101 devices are Two-Wire, SMBus, and I2C interface-compatible.
+These devices are specified over a operating temperature range of −55°C to 125°C. The Functional Block
+Diagram section shows the internal block diagrams of the TMP100 and TMP101 devices.
+The temperature sensor in the TMP100 and TMP101 devices is the chip itself. Thermal paths run through the
+package leads as well as the plastic package. The package leads provide the primary thermal path because of
+the lower thermal resistance of the metal. The GND pin of the TMP100 or TMP101 is directly connected to the
+metal lead frame, and is the best choice for thermal input.
+7.2
+Functional Block Diagram
+8
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 9
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+7.3
+Feature Description
+7.3.1
+Digital Temperature Output
+The digital output from each temperature measurement conversion is stored in the read-only Temperature
+Register. The Temperature Register of the TMP100 or TMP101 device is a 12-bit, read-only register that stores
+the output of the most recent conversion. Two bytes must be read to obtain data and are listed in Table 6 and
+Table 7. The first 12 bits are used to indicate temperature with all the remaining bits equal to zero. The data
+format for temperature is listed in Table 1. Negative numbers are represented in binary twos complement format.
+Following power-up or reset, the temperature register reads 0°C until the first conversion is complete.
+The user can obtain 9, 10, 11, or 12 bits of resolution by addressing the Configuration Register and setting the
+resolution bits accordingly. For 9-, 10-, or 11-bit resolution, the most significant bits (MSBs) in the Temperature
+Register are used with the unused least significant bits (LSBs) set to zero.
+Table 1. Temperature Data Format
+DIGITAL OUTPUT
+TEMPERATURE
+(°C)
+BINARY
+HEX
+128
+0111 1111 1111
+7FF
+127.9375
+0111 1111 1111
+7FF
+100
+0110 0100 0000
+640
+80
+0101 0000 0000
+500
+75
+0100 1011 0000
+4B0
+50
+0011 0010 0000
+320
+25
+0001 1001 0000
+190
+0.25
+0000 0000 0100
+004
+0
+0000 0000 0000
+000
+–0.25
+1111 1111 1100
+FFC
+–25
+1110 0111 0000
+E70
+–55
+1100 1001 0000
+C90
+–128
+1000 0000 0000
+800
+7.3.2
+Serial Interface
+The TMP100 and TMP101 devices operate only as slave devices on the SMBus, Two-Wire, and I2C interface-
+compatible bus. Connections to the bus are made through the open-drain I/O lines SDA and SCL. The TMP100
+and TMP101 devices support the transmission protocol for fast (up to 400 kHz) and high-speed (up to 2 MHz)
+modes. All data bytes are transmitted MSB first.
+7.3.2.1
+Bus Overview
+The device that initiates the transfer is called a master, and the devices controlled by the master are slaves. The
+bus must be controlled by a master device that generates the serial clock (SCL), controls the bus access, and
+generates the START and STOP conditions.
+To address a specific device, a START condition is initiated, indicated by pulling the data line (SDA) from a HIGH
+to LOW logic level while SCL is HIGH. All slaves on the bus shift in the slave address byte, with the last bit
+indicating whether a read or write operation is intended. During the ninth clock pulse, the slave being addressed
+responds to the master by generating an Acknowledge and pulling SDA LOW.
+Data transfer is then initiated and sent over eight clock pulses followed by an Acknowledge Bit. During data
+transfer, SDA must remain stable while SCL is HIGH because any change in SDA while SCL is HIGH is
+interpreted as a control signal.
+When all data are transferred, the master generates a STOP condition indicated by pulling SDA from LOW to
+HIGH, while SCL is HIGH.
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+9
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 10
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7.3.2.2
+Serial Bus Address
+To program the TMP100 and TMP101 devices, the master must first address slave devices through a slave
+address byte. The slave address byte consists of seven address bits and a direction bit indicating the intent of
+executing a read or write operation.
+The TMP100 device features two address pins to allow up to eight devices to be addressed on a single I2C
+interface. Table 2 describes the pin logic levels used to properly connect up to eight devices. Float indicates the
+pin is left unconnected. The state of pins ADD0 and ADD1 is sampled on the first I2C bus communication and
+must be set before any activity on the interface.
+Table 2. Address Pins and Slave Addresses for the TMP100
+ADD1
+ADD0
+SLAVE ADDRESS
+0
+0
+1001000
+0
+Float
+1001001
+0
+1
+1001010
+1
+0
+1001100
+1
+Float
+1001101
+1
+1
+1001110
+Float
+0
+1001011
+Float
+1
+1001111
+The TMP101 device features one address pin and an ALERT pin, allowing up to three devices to be connected
+per bus. Pin logic levels are described in Table 3. The address pins of the TMP100 and TMP101 devices are
+read after reset or in response to an I2C address acquire request. Following reading, the state of the address
+pins is latched to minimize power dissipation associated with detection.
+Table 3. Address Pins and Slave Addresses for the TMP101
+ADD0
+SLAVE ADDRESS
+0
+1001000
+Float
+1001001
+1
+1001010
+7.3.2.3
+Writing and Reading to the TMP100 and TMP101
+Accessing a particular register on the TMP100 and TMP101 devices is accomplished by writing the appropriate
+value to the Pointer Register. The value for the Pointer Register is the first byte transferred after the I2C slave
+address byte with the R/W bit LOW. Every write operation to the TMP100 and TMP101 devices requires a value
+for the Pointer Register (see Figure 7).
+When reading from the TMP100 and TMP101 devices, the last value stored in the Pointer Register by a write
+operation is used to determine which register is read by a read operation. To change the register pointer for a
+read operation, a new value must be written to the Pointer Register. This action is accomplished by issuing an
+I2C slave address byte with the R/W bit LOW, followed by the Pointer Register Byte. No additional data are
+required. The master can then generate a START condition and send the I2C slave address byte with the R/W bit
+HIGH to initiate the read command; see Figure 8 for details of this sequence. If repeated reads from the same
+register are desired, the Pointer Register bytes do not have to be continually sent because the TMP100 and
+TMP101 devices remember the Pointer Register value until that value is changed by the next write operation.
+10
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 11
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+7.3.2.4
+Slave Mode Operations
+The TMP100 and TMP101 devices can operate as a slave receiver or slave transmitter.
+7.3.2.4.1
+Slave Receiver Mode
+The first byte transmitted by the master is the slave address, with the R/W bit LOW. The TMP100 or TMP101
+devices then acknowledges reception of a valid address. The next byte transmitted by the master is the Pointer
+Register. The TMP100 or TMP101 devices then acknowledges reception of the Pointer Register byte. The next
+byte or bytes are written to the register addressed by the Pointer Register. The TMP100 and TMP101 devices
+acknowledge reception of each data byte. The master can terminate data transfer by generating a START or
+STOP condition.
+7.3.2.4.2
+Slave Transmitter Mode
+The first byte is transmitted by the master and is the slave address, with the R/W bit HIGH. The slave
+acknowledges reception of a valid slave address. The next byte is transmitted by the slave and is the most
+significant byte of the register indicated by the Pointer Register. The master acknowledges reception of the data
+byte. The next byte transmitted by the slave is the least significant byte. The master acknowledges reception of
+the data byte. The master can terminate data transfer by generating a Not-Acknowledge on reception of any data
+byte, or generating a START or STOP condition.
+7.3.2.5
+SMBus Alert Function
+The TMP101 device supports the SMBus Alert function. When the TMP101 device is operating in Interrupt Mode
+(TM = 1), the ALERT pin of the TMP101 device can be connected as an SMBus Alert signal. When a master
+senses that an ALERT condition is present on the ALERT line, the master sends an SMBus Alert command
+(00011001) on the bus. If the ALERT pin of the TMP101 device is active, the TMP101 device acknowledges the
+SMBus Alert command and responds by returning its slave address on the SDA line. The eighth bit (LSB) of the
+slave address byte indicates if the temperature exceeding THIGH or falling below TLOW caused the ALERT
+condition. For POL = 0, this bit is LOW if the temperature is greater than or equal to THIGH. This bit is HIGH if
+the temperature is less than TLOW. The polarity of this bit is inverted if POL = 1; see Figure 9 for details of this
+sequence.
+If multiple devices on the bus respond to the SMBus Alert command, arbitration during the slave address portion
+of the SMBus alert command determine which device clears its ALERT status. If the TMP101 device wins the
+arbitration, its ALERT pin becomes inactive at the completion of the SMBus Alert command. If the TMP101 loses
+the arbitration, its ALERT pin remains active.
+The TMP100 device also responds to the SMBus ALERT command if its TM bit is set to 1. Because the device
+does not have an ALERT pin, the device must periodically poll the device by issuing an SMBus Alert command.
+If the TMP100 device generates an ALERT, the device acknowledges the SMBus Alert command and returns its
+slave address in the next byte.
+7.3.2.6
+General Call
+The TMP100 and TMP101 devices respond to the I2C General Call address (0000000) if the eighth bit is 0. The
+device acknowledges the General Call address and responds to commands in the second byte. If the second
+byte is 00000100, the TMP100 and TMP101 devices latch the status of their address pins, but do not reset. If the
+second byte is 00000110, the TMP100 and TMP101 devices latch the status of their address pins and reset their
+internal registers.
+7.3.2.7
+High-Speed Mode
+In order for the I2C bus to operate at frequencies above 400 kHz, the master device must issue an Hs-mode
+master code (00001XXX) as the first byte after a START condition to switch the bus to high-speed operation.
+The TMP100 and TMP101 devices do not acknowledge this byte as required by the I2C specification, but do
+switch their input filters on SDA and SCL and their output filters on SDA to operate in Hs-mode, allowing
+transfers at up to 2 MHz. After the Hs-mode master code is issued, the master transmits an I2C slave address to
+initiate a data transfer operation. The bus continues to operate in Hs-mode until a STOP condition occurs on the
+bus. Upon receiving the STOP condition, the TMP100 and TMP101 devices switch the input and output filter
+back to fast-mode operation.
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+11
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 12
+SCL
+SDA
+t(LOW)
+tRC
+tFC
+t(HDSTA)
+t(HDSTA)
+t(HDDAT)
+t(SUDAT)
+t(HIGH)
+t(SUSTA)
+t(SUSTO)
+t(BUF)
+S
+S
+P
+P
+tRD
+tFD
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7.3.2.8
+POR (Power-On Reset)
+The TMP100 and TMP101 devices both have on-chip, power-on reset circuits that reset the device to default
+settings when the device is powered on. This circuit activates when the power supply is less than 0.3 V for more
+than 100 ms. If the TMP100 and TMP101 devices are powered down by removing supply voltage from the
+device, but the supply voltage is not assured to be less than 0.3 V, TI recommends issuing a General Call reset
+command on the I2C interface bus to ensure that the TMP100 and TMP101 devices are completely reset.
+7.3.3
+Timing Diagrams
+The TMP100 and TMP101 devices are Two-Wire, SMBUs, and I2C interface-compatible. Figure 6 to Figure 9
+describe the various operations on the TMP100 and TMP101. The following list provides bus definitions.
+Parameters for Figure 6 are defined in the Timing Requirements section.
+Bus Idle: Both SDA and SCL lines remain HIGH.
+Start Data Transfer: A change in the state of the SDA line, from HIGH to LOW, while the SCL line is HIGH,
+defines a START condition. Each data transfer is initiated with a START condition.
+Stop Data Transfer: A change in the state of the SDA line from LOW to HIGH while the SCL line is HIGH
+defines a STOP condition. Each data transfer is terminated with a repeated START or STOP condition.
+Data Transfer: The number of data bytes transferred between a START and a STOP condition is not limited and
+is determined by the master device. The receiver acknowledges the transfer of data.
+Acknowledge: Each receiving device, when addressed, is obliged to generate an Acknowledge bit. A device
+that acknowledges must pull down the SDA line during the Acknowledge clock pulse in such a way that the SDA
+line is stable LOW during the HIGH period of the Acknowledge clock pulse. Setup and hold times must be taken
+into account. On a master receive, the termination of the data transfer can be signaled by the master generating
+a Not-Acknowledge on the last byte that is transmitted by the slave.
+Figure 6. I2C Timing Diagram
+12
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 13
+Frame 1 I2C Slave Address Byte
+Frame 2 Pointer Register Byte
+1
+Start By
+Master
+ACK By
+TMP100 or TMP101
+ACK By
+TMP100 or TMP101
+Frame 3 I2C Slave Address Byte
+Frame 4 Data Byte 1 Read Register
+Start By
+Master
+ACK By
+TMP100 or TMP101
+ACK By
+Master
+From
+TMP100 or TMP101
+1
+9
+1
+9
+1
+9
+1
+9
+SDA
+SCL
+0
+0
+1
+A2
+A1
+A0
+R/W
+0
+0
+0
+0
+0
+0
+P1
+P0
+…
+…
+…
+…
+SDA
+(Continued)
+SCL
+(Continued)
+SDA
+(Continued)
+SCL
+(Continued)
+1
+0
+0
+1
+A2
+A1
+A0
+R/W
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+Frame 5 Data Byte 2 Read Register
+Stop By
+Master
+ACK By
+Master
+From
+TMP100 or TMP101
+1
+9
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+Frame 1 I2C Slave Address Byte
+Frame 2 Pointer Register Byte
+Frame 4 Data Byte 2
+1
+Start By
+Master
+ACK By
+TMP100 or TMP101
+ACK By
+TMP100 or TMP101
+ACK By
+TMP100 or TMP101
+Stop By
+Master
+1
+9
+1
+1
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+9
+Frame 3 Data Byte 1
+ACK By
+TMP100 orTMP101
+1
+D7
+SDA
+(Continued)
+SCL
+(Continued)
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+9
+9
+SDA
+SCL
+0
+0
+1
+A2
+A1
+A0
+R/W
+0
+0
+0
+0
+0
+0
+P1
+P0
+…
+…
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+Figure 7. I2C Timing Diagram for Write Word Format
+Figure 8. I2C Timing Diagram for Read Word Format
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+13
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 14
+Frame 1 SMBus ALERT Response Address Byte
+Frame 2 Slave Address From TMP100
+Start By
+Master
+ACK By
+TMP100 or TMP101
+From
+TMP100 orTMP101
+NACK By
+Master
+Stop By
+Master
+1
+9
+1
+9
+SDA
+SCL
+ALERT
+0
+0
+0
+1
+1
+0
+0
+R/W
+1
+0
+0
+1
+A2
+A1
+A0
+Sta tus
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+Figure 9. Timing Diagram for SMBus ALERT
+7.4
+Device Functional Modes
+7.4.1
+Shutdown Mode (SD)
+The Shutdown Mode of the TMP100 and TMP101 devices lets the user save maximum power by shutting down
+all device circuitry other than the serial interface, which reduces current consumption to less than 1 µA. For the
+TMP100 and TMP101 devices, Shutdown Mode is enabled when the SD bit is 1. The device shuts down when
+the current conversion is completed. For SD equal to 0, the device maintains continuous conversion.
+7.4.2
+OS/ALERT (OS)
+The TMP100 and TMP101 devices feature a One-Shot Temperature Measurement Mode. When the device is in
+Shutdown Mode, writing 1 to the OS/ALERT bit starts a single temperature conversion. The device returns to the
+shutdown state at the completion of the single conversion. This feature is useful to reduce power consumption in
+the TMP100 and TMP101 devices when continuous monitoring of temperature is not required.
+Reading the OS/ALERT bit provides information about the Comparator Mode status. The state of the POL bit
+inverts the polarity of data returned from the OS/ALERT bit. For POL = 0, the OS/ALERT reads as 1 until the
+temperature equals or exceeds THIGH for the programmed number of consecutive faults, causing the OS/ALERT
+bit to read as 0. The OS/ALERT bit continues to read as 0 until the temperature falls below TLOW for the
+programmed number of consecutive faults when the OS/ALERT bit again reads as 1. The status of the TM bit
+does not affect the status of the OS/ALERT bit.
+7.4.3
+Thermostat Mode (TM)
+The Thermostat Mode bit of the TMP101 device indicates to the device whether to operate in Comparator Mode
+(TM = 0) or Interrupt Mode (TM = 1). For more information on comparator and interrupt modes, see the High-
+and Low-Limit Registers section.
+7.4.3.1
+Comparator Mode (TM = 0)
+In Comparator Mode (TM = 0), the ALERT pin is activated when the temperature equals or exceeds the value in
+the THIGH register and remains active until the temperature falls below the value in the TLOW register. For more
+information on the Comparator Mode, see the High- and Low-Limit Registers section.
+7.4.3.2
+Interrupt Mode (TM = 1)
+In Interrupt Mode (TM = 1), the ALERT pin is activated when the temperature exceeds THIGH or goes below the
+TLOW registers. The ALERT pin is cleared when the host controller reads the temperature register. For more
+information on the interrupt mode, see the High- and Low-Limit Registers section.
+14
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 15
+I/O
+Control
+Interface
+SCL
+SDA
+Temperature
+Register
+Configuration
+Register
+TLOW
+Register
+THIGH
+Register
+Pointer
+Register
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+7.5
+Programming
+7.5.1
+Pointer Register
+Figure 10 shows the internal register structure of the TMP100 and TMP101 devices. The 8-bit Pointer Register of
+the TMP100 and TMP101 devices is used to address a given data register. The Pointer Register uses the two
+LSBs to identify which of the data registers respond to a read or write command. Table 4 identifies the bits of the
+Pointer Register byte. Table 5 describes the pointer address of the registers available in the TMP100 and
+TMP101 devices. The power-up reset value of P1 and P0 is 00.
+Figure 10. Internal Register Structure of the TMP100 and TMP101
+7.5.1.1
+Pointer Register Byte (pointer = N/A) [reset = 00h]
+Table 4. Pointer Register Byte
+P7
+P6
+P5
+P4
+P3
+P2
+P1
+P0
+0
+0
+0
+0
+0
+0
+Register Bits
+7.5.1.2
+Pointer Addresses of the TMP100 and TMP101 Registers
+Table 5. Pointer Addresses of the TMP100 and TMP101 Registers
+P1
+P0
+TYPE
+REGISTER
+0
+0
+R only, default
+Temperature Register
+0
+1
+R/W
+Configuration Register
+1
+0
+R/W
+TLOW Register
+1
+1
+R/W
+THIGH Register
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+15
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 16
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7.5.2
+Temperature Register
+The Temperature Register of the TMP100 or TMP101 devices is a 12-bit, read-only register that stores the
+output of the most recent conversion. Two bytes must be read to obtain data, and are described in Table 6 and
+Table 7. The first 12 bits are used to indicate temperature, with all remaining bits equal to zero. Data format for
+temperature is summarized in Table 1. Following power-up or reset, the Temperature Register reads 0°C until
+the first conversion is complete.
+Table 6. Byte 1 of the Temperature Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+T11
+T10
+T9
+T8
+T7
+T6
+T5
+T4
+Table 7. Byte 2 of the Temperature Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+T3
+T2
+T1
+T0
+0
+0
+0
+0
+7.5.3
+Configuration Register
+The Configuration Register is an 8-bit read and write register used to store bits that control the operational
+modes of the temperature sensor. Read and write operations are performed MSB-first. The format of the
+Configuration Register for the TMP100 and TMP101 devices is shown in Table 8, followed by a breakdown of the
+register bits. The power-up or reset value of the Configuration Register is all bits equal to 0. The OS/ALERT bit
+reads as 1 after power-up or reset value.
+Table 8. Configuration Register Format
+BYTE
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+1
+OS/ALERT
+R1
+R0
+F1
+F0
+POL
+TM
+SD
+7.5.3.1
+Shutdown Mode (SD)
+The Shutdown Mode of the TMP100 and TMP101 devices allows the user to save maximum power by shutting
+down all device circuitry other than the serial interface, which reduces current consumption to less than 1 µA. For
+the TMP100 and TMP101 devices, Shutdown Mode is enabled when the SD bit is 1. The device shuts down
+when the current conversion is completed. For SD equal to 0, the device maintains continuous conversion.
+7.5.3.2
+Thermostat Mode (TM)
+The Thermostat Mode bit of the TMP101 device indicates to the device whether to operate in Comparator Mode
+(TM = 0) or Interrupt Mode (TM = 1). For more information on comparator and interrupt modes, see High- and
+Low-Limit Registers.
+7.5.3.3
+Polarity (POL)
+The Polarity bit of the TMP101 device lets the user adjust the polarity of the ALERT pin output. If the POL bit is
+set to 0 (default), the ALERT pin becomes active low. When the POL bit is set to 1, the ALERT pin becomes
+active high and the state of the ALERT pin is inverted. The operation of the ALERT pin in various modes is
+illustrated in Figure 11.
+16
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 17
+Measured
+Temperature
+THIGH
+TLOW
+TMP101 ALERT PIN
+(Comparator Mode)
+POL = 0
+TMP101 ALERT PIN
+(Interrupt Mode)
+POL = 0
+TMP101 ALERT PIN
+(Comparator Mode)
+POL = 1
+TMP101 ALERT PIN
+(Interrupt Mode)
+POL = 1
+Read
+Read
+Time
+Read
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+Figure 11. Output Transfer Function Diagrams
+7.5.3.4
+Fault Queue (F1, F0)
+A fault condition occurs when the measured temperature exceeds the user-defined limits set in the THIGH and
+TLOW Registers. Additionally, the number of fault conditions required to generate an alert can be programmed
+using the Fault Queue. The Fault Queue is provided to prevent a false alert resulting from environmental noise.
+The Fault Queue requires consecutive fault measurements in order to trigger the alert function. If the temperature
+falls below TLOW before reaching the number of programmed consecutive faults limit, the count is reset to 0.
+Table 9 defines the number of measured faults that can be programmed to trigger an alert condition in the
+device.
+Table 9. Fault Settings of the TMP100 and TMP101
+F1
+F0
+CONSECUTIVE FAULTS
+0
+0
+1
+0
+1
+2
+1
+0
+4
+1
+1
+6
+7.5.3.5
+Converter Resolution (R1, R0)
+The Converter Resolution bits control the resolution of the internal analog-to-digital converter (ADC), thus
+allowing the user to maximize efficiency by programming for higher resolution or faster conversion time. Table 10
+identifies the Resolution bits and the relationship between resolution and conversion time.
+Table 10. Resolution of the TMP100 and TMP101
+CONVERSION TIME
+R1
+R0
+RESOLUTION
+(Typical)
+0
+0
+9 bits (0.5°C)
+40 ms
+0
+1
+10 bits (0.25°C)
+80 ms
+1
+0
+11 bits (0.125°C)
+160 ms
+1
+1
+12 bits (0.0625°C)
+320 ms
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+17
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 18
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7.5.3.6
+OS/ALERT (OS)
+The TMP100 and TMP101 devices feature a One-Shot Temperature Measurement Mode. When the device is in
+Shutdown Mode, writing 1 to the OS/ALERT bit starts a single temperature conversion. The device returns to the
+shutdown state at the completion of the single conversion. This feature is useful to reduce power consumption in
+the TMP100 and TMP101 when continuous temperature monitoring is not required.
+Reading the OS/ALERT bit provides information about the Comparator Mode status. The state of the POL bit
+inverts the polarity of data returned from the OS/ALERT bit. For POL = 0, the OS/ALERT reads as 1 until the
+temperature equals or exceeds THIGH for the programmed number of consecutive faults, causing the OS/ALERT
+bit to read as 0. The OS/ALERT bit continues to read as 0 until the temperature falls below TLOW for the
+programmed number of consecutive faults when the OS/ALERT bit again reads as 1. The status of the TM bit
+does not affect the status of the OS/ALERT bit.
+7.5.4
+High- and Low-Limit Registers
+In Comparator Mode (TM = 0), the ALERT pin of the TMP101 becomes active when the temperature equals or
+exceeds the value in THIGH and generates a consecutive number of faults according to fault bits F1 and F0. The
+ALERT pin remains active until the temperature falls below the indicated TLOW value for the same number of
+faults.
+In Interrupt Mode (TM = 1) the ALERT pin becomes active when the temperature equals or exceeds THIGH for a
+consecutive number of fault conditions. The ALERT pin remains active until a read operation of any register
+occurs or the device successfully responds to the SMBus Alert Response Address. The ALERT pin is also
+cleared if the device is placed in Shutdown Mode. When the ALERT pin is cleared, it only becomes active again
+by the temperature falling below TLOW. When the temperature falls below TLOW, the ALERT pin becomes active
+and remains active until cleared by a read operation of any register or a successful response to the SMBus Alert
+Response Address. When the ALERT pin is cleared, the above cycle repeats with the ALERT pin becoming
+active when the temperature equals or exceeds THIGH. The ALERT pin can also be cleared by resetting the
+device with the General Call Reset command. This action also clears the state of the internal registers in the
+device, returning the device to Comparator Mode (TM = 0).
+Both operational modes are represented in Figure 11. Table 11, Table 12, Table 13, and Table 14 describe the
+format for the THIGH and TLOW registers. Power-up reset values for THIGH and TLOW are: THIGH = 80°C and TLOW =
+75°C. The format of the data for THIGH and TLOW is the same as for the Temperature Register.
+Table 11. Byte 1 of the THIGH Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+H11
+H10
+H9
+H8
+H7
+H6
+H5
+H4
+Table 12. Byte 2 of the THIGH Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+H3
+H2
+H1
+H0
+0
+0
+0
+0
+Table 13. Byte 1 of the TLOW Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+L11
+L10
+L9
+L8
+L7
+L6
+L5
+L4
+Table 14. Byte 2 of the TLOW Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+L3
+L2
+L1
+L0
+0
+0
+0
+0
+All 12 bits for the Temperature, THIGH, and TLOW registers are used in the comparisons for the ALERT function for
+all converter resolutions. The three LSBs in THIGH and TLOW can affect the ALERT output even if the converter is
+configured for 9-bit resolution.
+18
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 19
+SCL
+GND
+ALERT
+2
+4
+1
+V+
+ADD0
+6
+3
+5
+0.01 PF
+Two-Wire
+Host Controller
+TMP101
+2.7 V to 5.5 V
+SDA
+Pull-Up Resistors
+Supply Bypass
+Capacitor
+Supply Voltage
+5-k
+SCL
+GND
+ADD1
+2
+4
+1
+V+
+ADD0
+6
+3
+5
+0.01 PF
+Two-Wire
+Host Controller
+TMP100
+SDA
+Pull-Up Resistors
+Supply Bypass
+Capacitor
+Supply Voltage
+5-k
+2.7 V to 5.5 V
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+8
+Application and Implementation
+NOTE
+Information in the following applications sections is not part of the TI component
+specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+responsible for determining suitability of components for their purposes. Customers should
+validate and test their design implementation to confirm system functionality.
+8.1
+Application Information
+The TMP100 and TMP101 devices are used to measure the printed circuit board (PCB) temperature of the board
+location where the devices are mounted. The TMP100 features two address pins to allow up to eight devices to
+be addressed on a single I2C interface. The TMP101 device features one address pin and an ALERT pin,
+allowing up to three devices to be connected per bus. The TMP100 and TMP101 devices require no external
+components for operation except for pullup resistors on SCL, SDA, and ALERT (TMP101 device), although a
+0.1-μF bypass capacitor is recommended.
+The sensing device of the TMP100 and TMP101 devices is the chip itself. Thermal paths run through the
+package leads as well as the plastic package. The die flag of the lead frame is connected to GND. The lower
+thermal resistance of metal causes the leads to provide the primary thermal path. The GND pin of the TMP100 or
+TMP101 device is directly connected to the metal lead frame, and is the best choice for thermal input.
+8.2
+Typical Application
+Figure 12. Typical Connections of the TMP100
+Figure 13. Typical Connections of the TMP101
+8.2.1
+Design Requirements
+The TMP100 and TMP101 devices require pullup resistors on the SCL, SDA, and ALERT (TMP101 device) pins.
+The recommended value for the pullup resistor is 5-kΩ. In some applications, the pullup resistor can be lower or
+higher than 5-kΩ but must not exceed 3 mA of current on the SCL and SDA pins, and must not exceed 4 mA on
+the ALERT (TMP101) pin. A 0.1-μF bypass capacitor is recommended, as shown in Figure 12 and Figure 13.
+The SCL, SDA, and ALERT lines can be pulled up to a supply that is equal to or higher than VS through the
+pullup resistors. For the TMP100, to configure one of eight different addresses on the bus, connect ADD0 and
+ADD1 to either the GND pin, V+ pin, or float. Float indicates the pin is left unconnected. For the TMP101 device,
+to configure one of three different addresses on the bus, connect ADD0 to either the GND pin, V+ pin, or float.
+8.2.2
+Detailed Design Procedure
+Place the TMP100 and TMP101 devices in close proximity to the heat source that must be monitored, with a
+proper layout for good thermal coupling. This placement ensures that temperature changes are captured within
+the shortest possible time interval. To maintain accuracy in applications that require air or surface temperature
+measurement, care must be taken to isolate the package and leads from ambient air temperature. A thermally-
+conductive adhesive is helpful in achieving accurate surface temperature measurement.
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+19
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 20
+Time (s)
+Temperature (qC)
+-1
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+80
+85
+90
+95
+100
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+Typical Application (continued)
+8.2.3
+Application Curve
+Figure 14 shows the step response of the TMP100 and TMP101 devices to a submersion in an oil bath of 100ºC
+from room temperature (27ºC). The time constant, or the time for the output to reach 63% of the input step, is
+0.9 s. The time-constant result depends on the PCB that the TMP100 and TMP101 devices are mounted. For
+this test, the TMP100 and TMP101 devices are soldered to a two-layer PCB that measures 0.375 inch × 0.437
+inch.
+Figure 14. Temperature Step Response
+20
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 21
+Serial Bus Traces
+Pull-Up Resistors
+Supply Bypass 
+Capacitor
+Via to Power or Ground Plane
+Via to Internal Layer
+Supply Voltage
+SCL
+GND
+ADD1
+V+
+SDA
+Ground Plane for
+Thermal Coupling 
+to Heat Source
+Heat Source
+ADD0
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+9
+Power Supply Recommendations
+The TMP100 and TMP101 devices operate with power supply in the range of 2.7 V to 5.5 V. A power-supply
+bypass capacitor is required for stability; place this capacitor as close as possible to the supply and ground pins
+of the device. A typical value for this supply bypass capacitor is 0.01 μF. Applications with noisy or high-
+impedance power supplies can require additional decoupling capacitors to reject power-supply noise.
+10
+Layout
+10.1
+Layout Guidelines
+Place the power-supply bypass capacitor as close as possible to the supply and ground pins. The recommended
+value of this bypass capacitor is 0.01 μF. Additional decoupling capacitance can be added to compensate for
+noisy or high-impedance power supplies. Pull up the open-drain output pins SDA , SCL, and ALERT (TMP101)
+through 5-kΩ pullup resistors.
+10.2
+Layout Examples
+Figure 15. TMP100 Layout Example
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+21
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 22
+Serial Bus Traces
+Pull-Up Resistors
+Supply Bypass 
+Capacitor
+Via to Power or Ground Plane
+Via to Internal Layer
+Supply Voltage
+SCL
+GND
+ALERT
+V+
+ADD0
+SDA
+Ground Plane for
+Thermal Coupling 
+to Heat Source
+Heat Source
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+Layout Examples (continued)
+Figure 16. TMP101 Layout Example
+22
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 23
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+11
+Device and Documentation Support
+11.1
+Related Links
+The table below lists quick access links. Categories include technical documents, support and community
+resources, tools and software, and quick access to sample or buy.
+Table 15. Related Links
+TECHNICAL
+TOOLS &
+SUPPORT &
+PARTS
+PRODUCT FOLDER
+SAMPLE & BUY
+DOCUMENTS
+SOFTWARE
+COMMUNITY
+TMP100
+Click here
+Click here
+Click here
+Click here
+Click here
+TMP101
+Click here
+Click here
+Click here
+Click here
+Click here
+11.2
+Trademarks
+SMBus is a trademark of NXP Semiconductors.
+All other trademarks are the property of their respective owners.
+11.3
+Electrostatic Discharge Caution
+These devices have limited built-in ESD protection. The leads should be shorted together or the device placed in conductive foam
+during storage or handling to prevent electrostatic damage to the MOS gates.
+11.4
+Glossary
+SLYZ022 — TI Glossary.
+This glossary lists and explains terms, acronyms, and definitions.
+12
+Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+23
+Product Folder Links: TMP100 TMP101
+
+PDF PAGE 24
+PACKAGE OPTION ADDENDUM
+www.ti.com
+21-Apr-2026
+PACKAGING INFORMATION
+Orderable part number
+Status
+(1)
+Material type
+(2)
+Package | Pins
+Package qty | Carrier
+RoHS
+(3)
+Lead finish/
+Ball material
+(4)
+MSL rating/
+Peak reflow
+(5)
+Op temp (°C)
+Part marking
+(6)
+TMP100NA/250
+Obsolete
+Production
+SOT-23 (DBV) | 6
+-
+-
+Call TI
+Call TI
+-55 to 125
+T100
+TMP100NA/3K
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T100
+TMP100NA/3K.B
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T100
+TMP100NA/3K1G4
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T100
+TMP100NA/3K1G4.B
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T100
+TMP101NA/3K
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T101
+TMP101NA/3K.B
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T101
+TMP101NA/3K1G4
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T101
+TMP101NA/3K1G4.B
+Active
+Production
+SOT-23 (DBV) | 6
+3000 | LARGE T&R
+Yes
+NIPDAU
+Level-2-260C-1 YEAR
+-55 to 125
+T101
+ 
+(1) Status:  For more details on status, see our product life cycle.
+ 
+(2) Material type:  When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+ 
+(3) RoHS values:  Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+ 
+(4) Lead finish/Ball material:  Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+ 
+(5) MSL rating/Peak reflow:  The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+ 
+(6) Part marking:  There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+ 
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+ 
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+Addendum-Page 1
+
+PDF PAGE 25
+PACKAGE OPTION ADDENDUM
+www.ti.com
+21-Apr-2026
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+ 
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+ 
+ OTHER QUALIFIED VERSIONS OF TMP100, TMP101 :
+• Automotive : TMP100-Q1, TMP101-Q1
+• Enhanced Product : TMP100-EP
+ NOTE: Qualified Version Definitions:
+• Automotive - Q100 devices qualified for high-reliability automotive applications targeting zero defects
+• Enhanced Product - Supports Defense, Aerospace and Medical Applications
+Addendum-Page 2
+
+PDF PAGE 26
+PACKAGE MATERIALS INFORMATION
+ 
+ 
+www.ti.com
+18-Jun-2025
+TAPE AND REEL INFORMATION
+Reel Width (W1)
+REEL DIMENSIONS
+A0
+B0
+K0
+W
+Dimension designed to accommodate the component length
+Dimension designed to accommodate the component thickness
+Overall width of the carrier tape
+Pitch between successive cavity centers
+Dimension designed to accommodate the component width
+TAPE DIMENSIONS
+K0
+ P1
+B0 W
+A0
+Cavity
+QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+Pocket Quadrants
+Sprocket Holes
+Q1
+Q1
+Q2
+Q2
+Q3
+Q3
+Q4
+Q4
+User Direction of Feed
+P1
+Reel
+Diameter
+ 
+*All dimensions are nominal
+Device
+Package
+Type
+Package
+Drawing
+Pins
+SPQ
+Reel
+Diameter
+(mm)
+Reel
+Width
+W1 (mm)
+A0
+(mm)
+B0
+(mm)
+K0
+(mm)
+P1
+(mm)
+W
+(mm)
+Pin1
+Quadrant
+TMP100NA/3K
+SOT-23
+DBV
+6
+3000
+178.0
+9.0
+3.23
+3.17
+1.37
+4.0
+8.0
+Q3
+TMP100NA/3K1G4
+SOT-23
+DBV
+6
+3000
+178.0
+9.0
+3.23
+3.17
+1.37
+4.0
+8.0
+Q3
+TMP101NA/3K
+SOT-23
+DBV
+6
+3000
+178.0
+9.0
+3.23
+3.17
+1.37
+4.0
+8.0
+Q3
+TMP101NA/3K1G4
+SOT-23
+DBV
+6
+3000
+178.0
+9.0
+3.23
+3.17
+1.37
+4.0
+8.0
+Q3
+Pack Materials-Page 1
+
+PDF PAGE 27
+PACKAGE MATERIALS INFORMATION
+ 
+ 
+www.ti.com
+18-Jun-2025
+TAPE AND REEL BOX DIMENSIONS
+Width (mm)
+W
+L
+H
+ 
+*All dimensions are nominal
+Device
+Package Type
+Package Drawing
+Pins
+SPQ
+Length (mm)
+Width (mm)
+Height (mm)
+TMP100NA/3K
+SOT-23
+DBV
+6
+3000
+180.0
+180.0
+18.0
+TMP100NA/3K1G4
+SOT-23
+DBV
+6
+3000
+180.0
+180.0
+18.0
+TMP101NA/3K
+SOT-23
+DBV
+6
+3000
+445.0
+220.0
+345.0
+TMP101NA/3K1G4
+SOT-23
+DBV
+6
+3000
+445.0
+220.0
+345.0
+Pack Materials-Page 2
+
+PDF PAGE 28
+www.ti.com
+PACKAGE OUTLINE
+C
+0.22
+0.08 TYP
+0.25
+3.0
+2.6
+2X 0.95
+1.45
+0.90
+0.15
+0.00 TYP
+6X 0.50
+0.25
+0.6
+0.3 TYP
+8
+0 TYP
+1.9
+4X 0 -15
+4X 4 -15
+A
+3.05
+2.75
+B
+1.75
+1.45
+(1.1)
+SOT-23 - 1.45 mm max height
+DBV0006A
+SMALL OUTLINE TRANSISTOR
+4214840/G   08/2024
+NOTES: 
+ 
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+    per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. Body dimensions do not include mold flash or protrusion. Mold flash and protrusion shall not exceed 0.25 per side.
+4. Leads 1,2,3 may be wider than leads 4,5,6 for package orientation.
+5. Refernce JEDEC MO-178.
+0.2
+C A B
+1
+3
+4
+5
+2
+INDEX AREA
+PIN 1
+6
+GAGE PLANE
+SEATING PLANE
+0.1 C
+SCALE  4.000
+
+PDF PAGE 29
+www.ti.com
+EXAMPLE BOARD LAYOUT
+0.07 MAX
+ARROUND
+0.07 MIN
+ARROUND
+6X (1.1)
+6X (0.6)
+(2.6)
+2X (0.95)
+(R0.05) TYP
+4214840/G   08/2024
+SOT-23 - 1.45 mm max height
+DBV0006A
+SMALL OUTLINE TRANSISTOR
+NOTES: (continued)
+ 
+6. Publication IPC-7351 may have alternate designs. 
+7. Solder mask tolerances between and around signal pads can vary based on board fabrication site.
+ 
+SYMM
+LAND PATTERN EXAMPLE
+EXPOSED METAL SHOWN
+SCALE:15X
+PKG
+1
+3
+4
+5
+2
+6
+SOLDER MASK
+OPENING
+METAL UNDER
+SOLDER MASK
+SOLDER MASK
+DEFINED
+EXPOSED METAL
+METAL
+SOLDER MASK
+OPENING
+NON SOLDER MASK
+DEFINED
+(PREFERRED)
+SOLDER MASK DETAILS
+EXPOSED METAL
+
+PDF PAGE 30
+www.ti.com
+EXAMPLE STENCIL DESIGN
+(2.6)
+2X(0.95)
+6X (1.1)
+6X (0.6)
+(R0.05) TYP
+SOT-23 - 1.45 mm max height
+DBV0006A
+SMALL OUTLINE TRANSISTOR
+4214840/G   08/2024
+NOTES: (continued)
+ 
+8. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+     design recommendations. 
+9. Board assembly site may have different recommendations for stencil design.
+ 
+SOLDER PASTE EXAMPLE
+BASED ON 0.125 mm THICK STENCIL
+SCALE:15X
+SYMM
+PKG
+1
+3
+4
+5
+2
+6
+
+PDF PAGE 31
+IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE 
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS” 
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY 
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD 
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate 
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable 
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an 
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license 
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully 
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on 
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable 
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products 
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+Copyright © 2026, Texas Instruments Incorporated
+Last updated 10/2025

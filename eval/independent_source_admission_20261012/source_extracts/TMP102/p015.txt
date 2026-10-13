@@ -1,0 +1,77 @@
+                                                                                   TMP102
+www.ti.com                                                                        SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+
+                                 Table 6-5. Conversion Rate Settings
+           CR1                    CR0                          CONVERSION RATE
+
+              0                           0                                            0.25 Hz
+
+              0                           1                                        1 Hz
+
+              1                           0                                    4 Hz (default)
+
+              1                           1                                        8 Hz
+
+
+ After power-up or general-call reset, the TMP102 immediately starts a conversion, as shown in Figure 6-5. The
+ first result is available after 10 ms (typical). The active quiescent current during conversion is 55 μA (typical at
+ +27°C). The quiescent current during delay is 2.6 μA (typical at +27°C).
+
+
+
+                                                                               Delay(1)
+
+
+                                                    10ms
+                                                                     10ms
+
+
+                                                            Startup                 Start of
+                                                                         Conversion
+ A.  Delay is set by CR1 and CR0.
+
+                                    Figure 6-5. Conversion Start
+
+ 6.4.2 Extended Mode (EM)
+
+The Extended-Mode bit configures the device for Normal mode operation (EM = 0) or Extended mode operation
+(EM = 1). In Normal mode, the Temperature Register and high- and low-limit registers use a 12-bit data format.
+ Normal mode is used to make the TMP102 device compatible with the TMP75 device.
+
+ Extended mode (EM = 1) allows measurement of temperatures above 128°C by configuring the Temperature
+ Register, and high- and low-limit registers for 13-bit data format.
+
+ 6.4.3 Shutdown Mode (SD)
+
+The Shutdown-mode bit saves maximum power by shutting down  all device circuitry other than the serial
+ interface, reducing current consumption to typically less than 0.15 μA. Shutdown mode enables when the SD bit
+ is 1; the device shuts down when current conversion is completed. When SD is equal to 0, the device maintains
+a continuous conversion state.
+
+ 6.4.4 One-Shot/Conversion Ready (OS)
+
+The TMP102 device features a one-shot temperature measurement mode. When the device is in Shutdown
+Mode, writing a 1 to the OS bit starts a single temperature conversion. During the conversion, the OS bit reads
+ '0'. The device returns to the shutdown state at the completion of the single conversion. After the conversion, the
+OS bit reads 1. This feature reduces power consumption in the TMP102 device when continuous temperature
+ monitoring is not required.
+
+As a result of the short conversion time, the TMP102 device achieves a higher conversion rate. A single
+ conversion typically takes 10 ms and a read can take place in less than 20 μs. When using One-Shot Mode, 80
+ or more conversions per second are possible.
+
+ 6.4.5 Thermostat Mode (TM)
+
+The thermostat-mode bit indicates to the device whether to operate in comparator mode (TM = 0) or Interrupt
+mode (TM = 1).
+
+ 6.4.5.1 Comparator Mode (TM = 0)
+
+ In Comparator mode (TM = 0), the Alert pin is activated when the temperature equals or exceeds the value in
+ the T(HIGH) register and remains active until the temperature falls below the value in the T(LOW) register. For more
+ information on the comparator mode, see the High- and Low-Limit Registers.
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    15
+
+                                                  Product Folder Links: TMP102

@@ -1,0 +1,62 @@
+Registers description                                                      LIS3DH
+
+8.9    CTRL_REG2 (21h)
+
+                                     Table 32. CTRL_REG2 register
+
+           HPM1    HPM0    HPCF2    HPCF1    FDS    HPCLICK   HP_IA2    HP_IA1
+
+                                   Table 33. CTRL_REG2 description
+             HPM[1:0]       High-pass filter mode selection. Default value: 00
+                             Refer to Table 34: High-pass filter mode configuration
+             HPCF[2:1]      High-pass filter cutoff frequency selection
+                                  Filtered data selection. Default value: 0
+          FDS              (0: internal filter bypassed;
+                                  1: data from internal filter sent to output register and FIFO)
+                            High-pass filter enabled for CLICK function.
+           HPCLICK
+                                    (0: filter bypassed; 1: filter enabled)
+            HP_IA2        High-pass filter enabled for AOI function on interrupt 2,
+                                    (0: filter bypassed; 1: filter enabled)
+            HP_IA1        High-pass filter enabled for AOI function on interrupt 1,
+                                    (0: filter bypassed; 1: filter enabled)
+
+                              Table 34. High-pass filter mode configuration
+
+           HPM1   HPM0                         High-pass filter mode
+
+            0        0        Normal mode (reset by reading REFERENCE (26h))
+
+            0        1        Reference signal for filtering
+
+            1        0        Normal mode
+
+            1        1         Autoreset on interrupt event
+
+
+8.10   CTRL_REG3 (22h)
+
+                                     Table 35. CTRL_REG3 register
+
+             I1_CLICK    I1_IA1     I1_IA2   I1_ZYXDA   I1_321DA   I1_WTM   I1_OVERRUN      --
+
+                                   Table 36. CTRL_REG3 description
+            I1_CLICK             Click interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+              I1_IA1               IA1 interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+              I1_IA2               IA2 interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+           I1_ZYXDA        ZYXDA interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+            I1_321DA         321DA interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+           I1_WTM           FIFO watermark interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+          I1_OVERRUN       FIFO overrun interrupt on INT1. Default value: 0
+                                           (0: disable; 1: enable)
+
+
+
+
+36/54                                  DocID17530 Rev 2

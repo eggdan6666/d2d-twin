@@ -1,0 +1,54 @@
+Registers description                                                      LIS3DH
+
+8.5    WHO_AM_I (0Fh)
+
+
+                                     Table 24. WHO_AM_I register
+
+                0         0         1         1         0         0         1         1
+
+           Device identification register.
+
+
+8.6    CTRL_REG0 (1Eh)
+
+                                     Table 25. CTRL_REG0 register
+           SDO_PU_DISC      0(1)          0(1)          1(2)          0(1)          0(1)          0(1)          0(1)
+
+                 1.  This bit must be set to 0 for correct operation of the device.
+
+                 2.  This bit must be set to 1 for correct operation of the device.
+
+
+                                   Table 26. CTRL_REG0 description
+
+                              Disconnect SDO/SA0 pull-up. Default value: 00010000
+           SDO_PU_DISC   (0: pull-up connected to SDO/SA0 pin;
+                                    1: pull-up disconnected to SDO/SA0 pin)
+
+
+Note:      Leave bits 0 through 6 at the default value in order to ensure correct operation of the device.
+
+
+8.7    TEMP_CFG_REG (1Fh)
+
+                                   Table 27. TEMP_CFG_REG register
+
+           ADC_EN   TEMP_EN      0         0         0         0         0         0
+
+
+                                 Table 28. TEMP_CFG_REG description
+
+                             Temperature sensor (T) enable. Default value: 0
+          TEMP_EN
+                                      (0: T disabled; 1: T enabled)
+
+                     ADC enable. Default value: 0
+          ADC_EN
+                                      (0: ADC disabled; 1: ADC enabled)
+
+
+
+
+
+34/54                                  DocID17530 Rev 2

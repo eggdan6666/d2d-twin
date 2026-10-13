@@ -1,0 +1,63 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+6  Pin Configuration and Functions
+
+
+                                       RUN Package
+                                                         10-Pin WQFN
+                                                Top View
+                                                                A1
+
+                                                                      10
+                                                 V+   1                     9   SCL
+
+                                               D+   2                     8  SDA
+
+                                                          D-   3                     7   ALERT/THERM2
+
+                                        THERM   4                     6  GND                                                                       5
+                                                                A0
+
+                                          Pin Functions
+
+            PIN
+                            TYPE                                       DESCRIPTION
+     NAME        NO.
+
+       A0           5          Digital input     Address select. Connect to GND, V+, or leave floating.
+
+       A1           10         Digital input     Address select. Connect to GND, V+, or leave floating.
+
+                                                           Interrupt or SMBus alert output. Can be configured as a second THERM output.
+  ALERT/THERM2      7         Digital output
+                                                   Open-drain; requires a pullup resistor to a voltage between 1.7 V and 3.6 V.
+
+       D–           3       Analog input     Negative connection to remote temperature sensor
+
+       D+           2       Analog input     Positive connection to remote temperature sensor
+
+     GND           6         Ground       Supply ground connection
+
+                                                         Serial clock line for SMBus.
+      SCL           9          Digital input
+                                                           Input; requires a pullup resistor to a voltage between 1.7 V and 3.6 V if driven by an open-drain output.
+
+                                    Bidirectional digital
+      SDA           8                            Serial data line for SMBus. Open-drain; requires a pullup resistor to a voltage between 1.7 V and 3.6 V.
+                                      input-output
+
+                                               Thermal shutdown or fan-control pin.
+     THERM         4         Digital output
+                                                   Open-drain; requires a pullup resistor to a voltage between 1.7 V and 3.6 V.
+
+       V+           1      Power supply     Positive supply voltage, 1.7 V to 3.6 V
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback      3
+
+                                                  Product Folder Links: TMP461

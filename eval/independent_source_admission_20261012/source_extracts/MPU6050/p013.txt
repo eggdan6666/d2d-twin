@@ -1,0 +1,48 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+6.2  Accelerometer Specifications
+VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C
+
+  PARAMETER                    CONDITIONS                        MIN    TYP   MAX   UNITS    NOTES
+  ACCELEROMETER SENSITIVITY
+   Full-Scale Range                  AFS_SEL=0                                    ±2            g
+                                AFS_SEL=1                                    ±4            g
+                                AFS_SEL=2                                    ±8            g
+                                AFS_SEL=3                                    ±16           g
+  ADC Word Length                     Output in two’s complement format                  16                 bits
+   Sensitivity Scale Factor             AFS_SEL=0                                      16,384          LSB/g
+                                AFS_SEL=1                                       8,192           LSB/g
+                                AFS_SEL=2                                       4,096           LSB/g
+                                AFS_SEL=3                                       2,048           LSB/g
+    Initial Calibration Tolerance                                                          ±3       %
+   Sensitivity Change vs. Temperature     AFS_SEL=0, -40°C to +85°C                        ±0.02          %/°C
+   Nonlinearity                           Best Fit Straight Line                                   0.5       %
+   Cross-Axis Sensitivity                                                              ±2       %
+  ZERO-G OUTPUT
+    Initial Calibration Tolerance          X and Y axes                                   ±50         mg          1
+                                Z axis                                         ±80         mg
+  Zero-G Level Change vs. Temperature  X and Y axes, 0°C to +70°C                       ±35
+                                Z axis, 0°C to +70°C                             ±60         mg
+  SELF TEST RESPONSE
+   Relative                          Change from factory trim                    -14              14   %           2
+  NOISE PERFORMANCE
+  Power Spectral Density              @10Hz, AFS_SEL=0 & ODR=1kHz                 400           g/√Hz
+  LOW PASS FILTER RESPONSE
+                                    Programmable Range                     5              260   Hz
+  OUTPUT DATA RATE
+                                    Programmable Range                     4              1,000   Hz
+  INTELLIGENCE FUNCTION
+  INCREMENT                                                                     32           mg/LSB
+
+     1.   Typical zero-g initial calibration tolerance value after MSL3 preconditioning
+     2.  Please refer to the following document for further information on Self-Test: MPU-6000/MPU-6050 Register Map
+       and Descriptions
+
+
+
+
+
+                                           13 of 52

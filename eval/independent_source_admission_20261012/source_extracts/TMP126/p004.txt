@@ -1,0 +1,65 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+7 Specifications
+ 7.1 Absolute Maximum Ratings
+ Over free-air temperature range unless otherwise noted(1)
+                                                                              MIN     MAX    UNIT
+
+ Supply voltage       VDD                                                                     –0.3          6     V
+ I/O voltage           SIO                                                                      –0.3 VDD + 0.2 V     V
+ I/O voltage           CS,ALERT, SCLK                                                         –0.3          6     V
+ TMP126 Operating junction temperature, TJ                                                  –65        180     °C
+ TMP126N Operating junction temperature, TJ                                                 –45        155     °C
+ Storage temperature, Tstg                                                                 –65        180     °C
+
+ (1)   Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress
+       ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under
+     Recommended Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+         reliability.
+
+ 7.2 ESD Ratings
+
+                                                                                          VALUE       UNIT
+              Electrostatic discharge         Human-body model (HBM) per JESD22-A114(1)                                ±2000        V
+  V(ESD)
+              Electrostatic discharge          Charged-device model (CDM), per JEDEC specification JESD22-C101 (2)            ±750        V
+
+ (1)  JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+ (2)  JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+ 7.3 Recommended Operating Conditions
+
+                                                                               MIN      NOM       MAX     UNIT
+
+ VDD      Supply voltage                                                                          1.62            3.3            5.5     V
+  VI/O      SIO                                                                            0                     VDD     V
+  VI/O      CS,ALERT, SCLK                                                                0                            5.5     V
+ TA      TMP126 Operating ambient temperature(1)                                                  -55                       175      °C
+ TA      TMP126N Operating ambient temperature                                                  -40                       150      °C
+
+ (1)  HTOL was performed at 175 °C for 1410 hours
+
+ 7.4 Thermal Information
+
+                                                                                TMP126
+                        THERMAL METRIC(1)                               DCK (SC70)                 UNIT
+
+                                                                                           6 PINS
+
+ RθJA             Junction-to-ambient thermal resistance                                                  183.4                    °C/W
+  RθJC(top)         Junction-to-case (top) thermal resistance                                                 136.4                    °C/W
+  RθJC(bot)         Junction-to-case (bottom) thermal resistance                                          –                      °C/W
+ RθJB             Junction-to-board thermal resistance                                                      74.2                    °C/W
+ ψJT              Junction-to-top characterization parameter                                                 57.9                    °C/W
+ ψJB              Junction-to-board characterization parameter                                               74.0                    °C/W
+
+ (1)   For more information about traditional and new thermal metrics, see the IC Package Thermal Metrics application report, SPRA953.
+
+
+
+
+
+4     Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

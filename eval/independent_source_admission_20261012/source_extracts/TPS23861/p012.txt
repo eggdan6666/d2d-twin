@@ -1,0 +1,68 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+6.7  Switching Characteristics
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+           PARAMETER                    TEST CONDITIONS              MIN      TYP     MAX   UNIT
+
+            Duty cycle of IPORT with current δIfault                                                                       5.5%                6.7%
+                fault
+
+                                     TICUT = 00, default as supplied                50                  70    ms
+
+                                     TICUT = 01                                25                  35    ms
+ tOVLD       ICUT time limit
+                                     TICUT = 10                               100                 140    ms
+
+                                     TICUT = 11                               200                 280    ms
+
+                                POEPn = 0, default as supplied                50                  70    ms
+
+                                POEPn = 1, TLIM = 00                       50                  70    ms
+
+ tLIM        ILIM time limit              POEPn = 1, TLIM = 01                         28.4        30        34    ms
+
+                                POEPn = 1, TLIM = 10                         14.7        15.5        17    ms
+
+                                POEPn = 1, TLIM = 11                       9.025                   11.5    ms
+
+                                 TSTART = 00, default as supplied              50                  70    ms
+          Maximum current limit duration in
+ tSTART                             TSTART = 01                              25                  35    ms              port start-up
+                                 TSTART = 10                             100                 140    ms
+
+ tDET        Four-point detection duration     Time to complete a detection                 275                 500    ms
+           Pause between detection       VVPWR – VDRAINn > 2.5 V                     300       400       500    ms
+ tDET_BOFF
+             attempts                    VVPWR – VDRAINn < 2.5 V                       0                 150    ms
+
+                                                 1st and 2nd class event, Auto Mode,
+ tCLE         Classification duration           Semi-Auto Mode, from detection                  6.5                  13    ms
+                                           complete
+
+                                             1-event physical layer class timing, Auto
+                                   Mode and Semi-Auto Mode, from                 6.5                  13    ms
+ tpdc          Classification duration             detection complete
+                                       Manual mode, from beginning of
+                                                                                                6.5                  14    ms
+                                                     classification
+
+                                                 1st and 2nd mark event, from class 4
+ tME        Mark duration                                                            6                  12    ms                                           complete
+
+                                       Manual mode, from port turn-on
+ tp(on)        Port power-on delay                                                                           4    ms                                  command to port turn on completed
+
+
+
+
+
+12     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

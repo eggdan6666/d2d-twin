@@ -1,0 +1,79 @@
+                                                                                   TMP102
+www.ti.com                                                                        SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+
+                             Table 6-2. 12-Bit Temperature Data Format(1)
+         TEMPERATURE (°C)                 DIGITAL OUTPUT (BINARY)                   HEX
+
+                  128                                0111 1111 1111                            7FF
+
+                 127.9375                              0111 1111 1111                            7FF
+
+                  100                              0110 0100 0000                             640
+
+                  80                              0101 0000 0000                             500
+
+                  75                              0100 1011 0000                            4B0
+
+                  50                               0011 0010 0000                             320
+
+                  25                              0001 1001 0000                             190
+
+                    0.25                             0000 0000 0100                             004
+
+                   0                              0000 0000 0000                             000
+
+                   –0.25                                1111 1111 1100                         FFC
+
+                  –25                                1110 0111 0000                            E70
+
+                  –55                              1100 1001 0000                           C90
+
+ (1)  The resolution for the Temp ADC in Internal Temperature mode is 0.0625°C/count.
+
+ Table 6-2 does not list all temperatures. Use the following rules to obtain the digital data format for a given
+ temperature or the temperature for a given digital data format.
+
+ To convert positive temperatures to a digital data format:
+ 1.  Divide the temperature by the resolution
+ 2.  Convert the result to binary code with a 12-bit, left-justified format, and MSB = 0 to denote a positive sign.
+
+    Example: (50°C) / (0.0625°C / LSB) = 800 = 320h = 0011 0010 0000
+
+ To convert a positive digital data format to temperature:
+ 1.  Convert the 12-bit, left-justified binary temperature result, with the MSB = 0 to denote a positive sign, to a
+    decimal number.
+ 2.  Multiply the decimal number by the resolution to obtain the positive temperature.
+
+    Example: 0011 0010 0000 = 320h = 800 × (0.0625°C / LSB) = 50°C
+
+ To convert negative temperatures to a digital data format:
+ 1.  Divide the absolute value of the temperature by the resolution, and convert the result to binary code with a
+     12-bit, left-justified format.
+ 2.  Generate the twos complement of the result by complementing the binary number and adding one. Denote a
+    negative number with MSB = 1.
+
+    Example: (|–25°C|) / (0.0625°C / LSB) = 400 = 190h = 0001 1001 0000
+
+    Two's complement format: 1110 0110 1111 + 1 = 1110 0111 0000
+
+ To convert a negative digital data format to temperature:
+ 1.  Generate the twos compliment of the 12-bit, left-justified binary number of the temperature result (with
+   MSB = 1, denoting negative temperature result) by complementing the binary number and adding one. This
+    represents the binary number of the absolute value of the temperature.
+ 2.  Convert to decimal number and multiply by the resolution to get the absolute temperature, then multiply by
+    –1 for the negative sign.
+
+    Example: 1110 0111 0000 has twos compliment of 0001 1001 0000 = 0001 1000 1111 + 1
+
+    Convert to temperature: 0001 1001 0000 = 190h = 400; 400 × (0.0625°C / LSB) = 25°C = (|–25°C|); (|–
+    25°C|) × (–1) = –25°C
+
+                              Table 6-3. 13-Bit Temperature Data Format
+         TEMPERATURE (°C)                 DIGITAL OUTPUT (BINARY)                   HEX
+
+                  150                             0 1001 0110 0000                            0960
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback     9
+
+                                                  Product Folder Links: TMP102

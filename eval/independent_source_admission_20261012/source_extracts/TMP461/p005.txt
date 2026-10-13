@@ -1,0 +1,107 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+7.5  Electrical Characteristics
+
+At TA = –40°C to 125°C and V+ = 1.7 V to 3.6 V, unless otherwise noted.
+
+             PARAMETER                               CONDITIONS                     MIN     TYP    MAX   UNIT
+
+ TEMPERATURE MEASUREMENT
+
+                                                TA = –10°C to 100°C, V+ = 1.7 V to 3.6 V                          -1    ±0.125       +1
+ TALOCAL    Local temperature sensor accuracy                                                                                    °C
+                                                TA = –40°C to 125°C, V+ = 1.7 V to 3.6 V                      -1.25      ±0.5     +1.25
+
+                                                TA = 0°C to 100°C, TD = –55°C to 150°C,                                                                                                                       -0.75    ±0.125    + 0.75
+                                         V+ = 1.7 V to 3.6 V
+ TAREMOTE  Remote temperature sensor accuracy                                                                                  °C
+                                                TA = –40°C to 125°C, TD = –55°C to 150°C,                                                                                                                               -1.5      ±0.5      +1.5
+                                         V+ = 1.7 V to 3.6 V
+
+            Temperature sensor error versus supply
+                                         V+ = 1.7 V to 3.6 V                                            -0.25      ±0.1     +0.25    °C/V
+                (local or remote)
+
+            Temperature resolution
+                                                                                                                   0.0625             °C
+                (local and remote)
+
+         ADC conversion time                   One-shot mode, per channel (local or remote)                          15       17   ms
+
+         ADC resolution                                                                                     12                 Bits
+
+                             High                                                                     88      120      152
+           Remote sensor
+                         Medium               Series resistance 1 kΩ(max)                              33       45       57    µA
+            source current
+                        Low                                                                                   5.5        7.5        9.5
+
+ η         Remote transistor ideality factor        TMP461 optimized ideality factor                                      1.008
+
+ SERIAL INTERFACE
+
+ VIH          High-level input voltage                                                                                   1.4                   V
+
+ VIL          Low-level input voltage                                                                                                   0.45    V
+
+             Hysteresis                                                                                        200          mV
+
+         SDA output-low sink current                                                                   6                mA
+
+ VOL         Low-level output voltage                     IO = –6 mA                                                            0.15        0.4    V
+
+               Serial bus input leakage current          0 V ≤VIN ≤3.6 V                                        –1                 1    μA
+
+                                        SCL                                                            3        6    pF
+               Serial bus input capacitance
+                                     SDA                                                                      4.6        9    pF
+
+               Serial bus clock frequency                                                                        0.001                 2.17   MHz
+
+               Serial bus timeout                                                                          20       25       30   ms
+
+ DIGITAL INPUTS (A0, A1)
+
+ VIH          High-level input voltage                                                                             0.9(V+)            (V+) + 0.3    V
+
+ VIL          Low-level input voltage                                                                               –0.3              0.1(V+)    V
+
+              Input leakage current                  0 V ≤VIN ≤3.6 V                                        –1                 1    μA
+
+              Input capacitance                                                                                                   2.5        5    pF
+
+ DIGITAL OUTPUTS (THERM, ALERT/THERM2)
+
+             Output-low sink current                                                                       6                mA
+
+ VOL         Low-level output voltage                     IO = –6 mA                                                            0.15        0.4    V
+
+ IOH          High-level output leakage current        VO = V+                                                                  1    μA
+
+ POWER SUPPLY
+
+ V+          Specified supply voltage range                                                                            1.7                   3.6    V
+
+                                                         Active conversion, local sensor                                     240      375
+
+                                                         Active conversion, remote sensor                                   400      600
+
+                                                 Standby mode (between conversions)                                15       35
+ IQ          Quiescent current                                                                                        µA
+                                              Shutdown mode, serial bus inactive                                   3        8
+
+                                              Shutdown mode, serial bus active, fS = 400 kHz                        90
+
+                                              Shutdown mode, serial bus active, fS = 2.17 MHz                      350
+
+ POR       Power-on reset threshold                  Rising edge                                                               1.2      1.55    V
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback      5
+
+                                                  Product Folder Links: TMP461

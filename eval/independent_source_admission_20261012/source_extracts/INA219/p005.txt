@@ -1,0 +1,102 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+7.5  Electrical Characteristics:
+At TA = 25°C, VS = 3.3 V, VIN+ = 12V, VSHUNT = (VIN+ – VIN–) = 32 mV, PGA = /1, and BRNG(1) = 1, unless otherwise noted.
+
+                                                                       INA219A                     INA219B
+             PARAMETER               TEST CONDITIONS                                                           UNIT
+                                                               MIN        TYP    MAX    MIN      TYP   MAX
+
+ INPUT
+
+                                    PGA = /1                   0                   ±40       0               ±40  mV
+
+             Full-scale current sense (input) voltage   PGA = /2                   0                   ±80       0               ±80  mV
+ VSHUNT
+           range                        PGA = /4                   0                  ±160       0              ±160  mV
+
+                                    PGA = /8                   0                  ±320       0              ±320  mV
+
+                                   BRNG = 1                  0                    32       0                32   V
+          Bus voltage (input voltage) range(2)
+                                   BRNG = 0                  0                    16       0                16   V
+
+ CMRR   Common-mode rejection                   VIN+ = 0 to 26 V            100          120              100       120          dB
+                                    PGA = /1                              ±10     ±100               ±10    ±50(4)   μV
+                                    PGA = /2                              ±20     ±125               ±20    ±75(4)   μV
+            Offset voltage, RTI(3)
+ VOS                                 PGA = /4                              ±30     ±150               ±30    ±75(4)   μV
+                                    PGA = /8                              ±40     ±200               ±40   ±100(4)   μV
+
+                    vs Temperature               TA = –25°C to 85°C                           0.1                              0.1           μV/°C
+
+ PSRR     vs Power Supply                     VS = 3 to 5.5 V                          10                         10           μV/V
+
+            Current sense gain error                                                     ±40                         ±40       m%
+
+                    vs Temperature               TA = –25°C to 85°C                        1                          1         m%/°C
+
+          IN+ pin input bias current                   Active mode                            20                         20          μA
+
+           IN– pin input bias current || VIN– pin input                                                                         μA ||                                                       Active mode                       20 || 320                    20 || 320
+          impedance                                                                                             kΩ
+          IN+ pin input leakage(5)                 Power-down mode                           0.1       ±0.5                   0.1     ±0.5   μA
+           IN– pin input leakage(5)                 Power-down mode                           0.1       ±0.5                   0.1     ±0.5   μA
+
+ DC ACCURACY
+
+        ADC basic resolution                                                         12                         12                bits
+
+           Shunt voltage, 1 LSB step size                                                 10                         10          μV
+
+          Bus voltage, 1 LSB step size                                                    4                          4        mV
+                                                                                                                          ±0.3%(
+            Current measurement error                                                ±0.2%    ±0.5%             ±0.2%            4)
+
+                                                                                                                          ±0.5%(
+                    over Temperature              TA = –25°C to 85°C                         ±1%                                            4)
+
+          Bus voltage measurement error                                             ±0.2%    ±0.5%             ±0.2%   ±0.5%
+
+                    over Temperature              TA = –25°C to 85°C                         ±1%                   ±1%
+
+              Differential nonlinearity                                                              ±0.1                            ±0.1          LSB
+
+ ADC TIMING
+
+                                             12 bit                                 532      586               532     586    μs
+
+                                             11 bit                                 276      304               276     304    μs
+        ADC conversion time
+                                             10 bit                                 148      163               148     163    μs
+
+                                             9 bit                                   84       93                84      93    μs
+
+          Minimum convert input low time                                    4                             4                       μs
+
+ SMBus
+ SMBus timeout(6)                                                                     28       35                28      35   ms
+
+ DIGITAL INPUTS (SDA as Input, SCL, A0, A1)
+
+            Input capacitance                                                            3                          3           pF
+
+          Leakage input current                  0 ≤VIN ≤VS                                  0.1        1                   0.1       1   μA
+
+            VIH input logic level                                                 0.7 (VS)                     6  0.7 (VS)                 6   V
+
+             VIL input logic level                                                   –0.3                   0.3 (VS)     –0.3              0.3 (VS)   V
+
+(1) BRNG is bit 13 of the Configuration register 00h in Figure 19.
+(2)  This parameter only expresses the full-scale range of the ADC scaling. In no event should more than 26 V be applied to this device.
+(3)  Referred-to-input (RTI)
+(4)  Indicates improved specifications of the INA219B.
+(5)  Input leakage is positive (current flowing into the pin) for the conditions shown at the top of the table. Negative leakage currents can
+     occur under different input conditions.
+(6)  SMBus timeout in the INA219 resets the interface any time SCL or SDA is low for over 28 ms.
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback      5
+
+                                                   Product Folder Links: INA219

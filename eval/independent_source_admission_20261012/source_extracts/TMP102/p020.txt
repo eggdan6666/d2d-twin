@@ -1,0 +1,75 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+                             Table 6-16. Byte 2 Temperature RegisterLOW
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+       L3            L2            L1            L0             0             0             0             0
+
+        (L4)              (L3)              (L2)              (L1)              (L0)               (0)                (0)                (0)
+
+7 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 7.1 Application Information
+
+The TMP102 device is used to measure the PCB temperature of the board location where the device is
+ mounted. The programmable address options allow up to four locations on the board to be monitored on a single
+ serial bus.
+
+ 7.2 Typical Application
+
+                                                                                                       Supply Voltage
+                                                                                                       1.4V to 3.6V
+
+
+                                                                                                            Supply Bypass
+                                                                                                                      Capacitor
+                                                                  Pullup Resistors                                 0.01µF
+                                                       5kΩ
+
+
+
+
+
+                                                     TMP102
+
+                        Two-Wire                            1                           6
+                      Host Controller                        SCL            SDA
+
+                                                          2                           5
+                                              GND              V+
+
+
+                                                          3                           4
+                                                     ALERT          ADD0
+
+
+
+
+                                   Figure 7-1. Typical Connections
+
+ 7.2.1 Design Requirements
+
+The TMP102 device requires pullup resistors on the SCL, SDA, and ALERT pins. The recommended value for
+ the pullup resistors is 5-kΩ. In some applications the pullup resistor can be lower or higher than 5 kΩ but must
+ not exceed 3 mA of current on any of those pins. A 0.01-μF bypass capacitor on the supply is recommended
+ as shown in Figure 7-1. The SCL and SDA lines can be pulled up to a supply that is equal to or higher than V+
+ through the pullup resistors. To configure one of four different addresses on the bus, connect the ADD0 pin to
+ either the GND, V+, SDA, or SCL pin.
+
+ 7.2.2 Detailed Design Procedure
+
+ Place the TMP102 device in close proximity to the heat source that must be monitored, with a proper layout
+ for good thermal coupling. This placement verifies that temperature changes are captured within the shortest
+
+
+20    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

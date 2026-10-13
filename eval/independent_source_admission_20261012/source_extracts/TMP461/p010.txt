@@ -1,0 +1,70 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+8.3  Feature Description
+
+8.3.1  Temperature Measurement Data
+
+The local and remote temperature sensors have a resolution of 12 bits (0.0625°C). Temperature data that result
+from conversions within the default measurement range are represented in binary form, as shown in the
+Standard Binary column of Table 1. Any temperatures above 127°C result in a value that rails to 127.9375
+(7FFh). The device can be set to measure over an extended temperature range by changing bit 2 (RANGE) of
+the configuration register from low to high. The change in measurement range and data format from standard
+binary to extended binary occurs at the next temperature conversion. For data captured in the extended
+temperature range configuration, an offset of 64 (40h) is added to the standard binary value, as shown in the
+Extended Binary column of Table 1. This configuration allows measurement of temperatures as low as –64°C,
+and as high as 191°C; however, most temperature-sensing diodes only operate within the range of –55°C to
+150°C. Additionally, the TMP461 is specified only for ambient temperatures ranging from –40°C to 125°C;
+parameters in the Absolute Maximum Ratings table must be observed.
+
+             Table 1. Temperature Data Format (Local and Remote Temperature High Bytes)
+
+                                   LOCAL AND REMOTE TEMPERATURE REGISTER HIGH BYTE VALUE
+                                                                         (1°C Resolution)
+                            STANDARD BINARY(1)                               EXTENDED BINARY(2)
+ TEMPERATURE
+        (°C)                 BINARY                   HEX                    BINARY                   HEX
+
+       –64                   1100 0000                    C0                       0000 0000                       00
+
+       –50                   1100 1110                  CE                       0000 1110                     0E
+
+       –25                   1110 0111                     E7                       0010 0111                       27
+
+        0                    0000 0000                       00                       0100 0000                       40
+
+        1                    0000 0001                       01                       0100 0001                       41
+
+        5                    0000 0101                       05                       0100 0101                       45
+
+       10                   0000 1010                     0A                       0100 1010                     4A
+
+       25                   0001 1001                       19                       0101 1001                       59
+
+       50                   0011 0010                       32                       0111 0010                       72
+
+       75                   0100 1011                     4B                       1000 1011                     8B
+
+       100                   0110 0100                       64                       1010 0100                     A4
+
+       125                   0111 1101                    7D                       1011 1101                  BD
+
+       127                   0111 1111                      7F                       1011 1111                    BF
+
+       150                   0111 1111                      7F                       1101 0110                    D6
+
+       175                   0111 1111                      7F                       1110 1111                    EF
+
+       191                   0111 1111                      7F                       1111 1111                     FF
+
+(1)  Resolution is 1°C per count. Negative numbers are represented in twos complement format.
+(2)  Resolution is 1°C per count. All values are unsigned with a –64°C offset.
+
+
+
+
+
+10     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

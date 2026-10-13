@@ -1,0 +1,56 @@
+Bosch Sensortec | BMP280 Data sheet                                                          10 | 49
+
+
+      3. Functional description
+       The BMP280 consists of a Piezo-resistive pressure sensing element and a mixed-signal ASIC. The
+      ASIC performs A/D conversions and provides the conversion results and sensor specific
+       compensation data through a digital interface.
+
+      BMP280 provides highest flexibility to the designer and can be adapted to the requirements regarding
+        accuracy, measurement time and power consumption by selecting from a high number of possible
+        combinations of the sensor settings.
+
+      BMP280 can be operated in three power modes (see chapter 3.6):
+
+            •   sleep mode
+            •   normal mode
+            •   forced mode
+
+         In sleep mode, no measurements are performed. Normal mode comprises an automated perpetual
+         cycling between an active measurement period and an inactive standby period. In forced mode, a
+         single measurement is performed. When the measurement is finished, the sensor returns to sleep
+       mode.
+
+      A set of oversampling settings is available ranging from ultra low power to ultra high resolution setting
+          in order to adapt the sensor to the target application. The settings are predefined combinations of
+        pressure measurement oversampling and temperature measurement oversampling. Pressure and
+        temperature measurement oversampling can be selected independently from 0 to 16 times
+        oversampling (see chapter 3.3.1 and 3.3.2):
+
+            •   Temperature measurement
+            •   Ultra low power
+            •  Low power
+            •   Standard resolution
+            •   High resolution
+            •   Ultra high resolution
+
+      BMP280 is equipped with a built-in IIR filter in order to minimize short-term disturbances in the output
+        data caused by the slamming of a door or window. The filter coefficient ranges from 0 (off) to 16.
+
+         In order to simplify the device usage and reduce the high number of possible combinations of power
+       modes, oversampling rates and filter settings, Bosch Sensortec provides a proven set of
+       recommendations for common use-cases in smart-phones, mobile weather stations or flying toys (see
+        chapter 3.3):
+
+            •   Handheld device low-power (e.g. smart phones running Android)
+            •   Handheld device dynamic (e.g. smart phones running Android)
+            •  Weather monitoring (setting with lowest power consumption)
+            •   Elevator / floor change detection
+            •  Drop detection
+            •   Indoor navigation
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

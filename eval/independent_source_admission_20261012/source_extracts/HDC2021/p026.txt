@@ -1,0 +1,56 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.9 Temperature Offset Adjustment (Address: 0x08)
+
+                  Table 7-23. Temperature Offset Adjustment Register (Address: 0x08)
+
+       7             6             5             4             3             2             1             0
+
+                                          TEMP_OFFSET_ADJUST[7:0]
+
+                 Table 7-24. Temperature Offset Adjustment Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   TEMP_OFFSET_ADJUST [7:0]     R/W     0          Temperature offset adjustment value. The value is added to the
+                                                                     converted temperature data.
+
+
+The reported temperature conversion data can be adjusted by programming the Temperature Offset Adjustment
+ Register. The following table summarizes the equivalent offset value added or subtracted for each bit of the
+ register:
+
+       7             6             5             4             3             2             1             0
+
+    –20.63°C       +10.31°C       +5.16°C        +2.58°C        +1.29°C        +0.64°C        +0.32°C        +0.16°C
+
+
+The value is added to the converted temperature value for offset adjustment as shown in Figure 7-7.
+
+
+
+                                 Converted Value                                   Temperature Output                              +
+
+
+
+
+                                                         User Temperature Offset
+
+                             Figure 7-7. Temperature Output Calculation
+
+The resulting temperature offset is a summation of the register bits that have been enabled (that is, programmed
+ to 1). Some examples:
+ 1. Programming TEMP_OFFSET_ADJUST to 00000001 adjusts the reported temperature by +0.16°C.
+ 2. Programming TEMP_OFFSET_ADJUST to 00000111 adjusts the reported temperature by +1.12°C.
+ 3. Programming TEMP_OFFSET_ADJUST to 00001101 adjusts the reported temperature by +2.08°C.
+ 4. Programming TEMP_OFFSET_ADJUST to 11111111 adjusts the reported temperature by –0.16°C.
+ 5. Programming TEMP_OFFSET_ADJUST to 11111001 adjusts the reported temperature by –1.12°C.
+ 6. Programming TEMP_OFFSET_ADJUST to 11110011 adjusts the reported temperature by –2.08°C.
+
+
+
+
+
+26    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

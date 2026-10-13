@@ -1,0 +1,54 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+
+
+
+
+Table 29. Bit Descriptions for DAC_WR
+Bits            Bit Name                 Description                                                                                          Default Value
+
+15         MSB                     Set this bit to 1.                                                                              0x1
+[14:12]      DAC_ADDR          DAC Address.                                                                               0x0
+                                         000: DAC0.
+                                         001: DAC1.
+                                         010: DAC2.
+                                           011: DAC3.
+                                         100: DAC4.
+                                         101: DAC5.
+                                           110: DAC6.
+                                             111: DAC7.
+[11:0]       DAC_DATA_WR             12-bit DAC data.                                                                             0x0
+
+DATA FORMAT DETAILS: AD5592R/AD5592R-1 ADC AND DAC READBACK
+
+
+ADC Conversion Result Format
+
+Name: ADC_RESULT
+
+ADC Conversion Result.
+
+
+
+
+
+Table 30. Bit Descriptions for ADC_RESULT
+Bits              Bit Name              Description
+
+15          MSB               MSB. This bit is read as 0 during ADC channel readback.
+[14:12]       ADC_ADDR        ADC address.
+                                       000: ADC0.
+                                       001: ADC1.
+                                       010: ADC2.
+                                         011: ADC3.
+                                       100: ADC4.
+                                       101: ADC5.
+                                         110: ADC6.
+                                          111: ADC7.
+[11:0]         ADC_DATA              12-bit ADC result.
+
+
+
+analog.com                                                                                         Rev. H | 51 of 54

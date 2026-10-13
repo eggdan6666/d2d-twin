@@ -1,0 +1,43 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.3 Feature Descriptions
+ 8.3.1 Temperature Limits
+
+The TMP126 includes a temperature limit warning that can be enabled or disabled in the configuration register.
+ If enabled, at the end of every completed conversion the TMP126 will compare the result against the limits
+ stored in the low limit register and the high limit register. When exceeding these limits the ALERT pin will be set.
+The ALERT pin behavior will change depending on which mode the device is configured to as described in the
+ Interrupt and Comparator Mode section.
+
+The Alert functionality can allow the system to set the desired operating thermal limits of the system with
+ the TMP126 and allow autonomous monitoring of temperature without the need for the system to read the
+ temperature. When a thermal limit is exceeded the system will receive a warning through the ALERT pin and can
+ react accordingly to adjust the operating temperature back to within normal system operation.
+
+                                          System adjusts to fix
+                                             overtemperature condition
+
+
+                                                          High temperature limit
+
+
+
+
+
+                                                Low temperature limit                                                                                                                                                    Temperature
+
+                           Time
+
+
+                 ALERT
+
+                                 Figure 8-1. Temperature Limit Alert
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    11
+
+                                                  Product Folder Links: TMP126

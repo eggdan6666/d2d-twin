@@ -1,0 +1,82 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+                       Table 8-3. Config Register Field Descriptions (continued)
+      Bit     Field           Type      Reset      Description
+
+                                             Programmable gain amplifier configuration
+                                               These bits set the FSR of the programmable gain amplifier.
+                                               These bits serve no function on the ADS1113. ADS1113 always uses FSR =
+                                                     ±2.048V.
+                                               000b : FSR = ±6.144V(1)
+                                               001b : FSR = ±4.096V(1)
+     11:9    PGA[2:0]       R/W       010b
+                                               010b : FSR = ±2.048V (default)
+                                                 011b : FSR = ±1.024V
+                                               100b : FSR = ±0.512V
+                                               101b : FSR = ±0.256V
+                                                 110b : FSR = ±0.256V
+                                                  111b : FSR = ±0.256V
+
+                                                 Device operating mode
+                                                       This bit controls the operating mode.
+     8    MODE        R/W       1b
+                                               0b : Continuous-conversion mode
+                                               1b : Single-shot mode or power-down state (default)
+
+                                                Data rate
+                                               These bits control the data rate setting.
+                                               000b : 8SPS
+                                               001b : 16SPS
+                                               010b : 32SPS
+     7:5     DR[2:0]        R/W       100b
+                                                 011b : 64SPS
+                                               100b : 128SPS (default)
+                                               101b : 250SPS
+                                                 110b : 475SPS
+                                                  111b : 860SPS
+
+                                              Comparator mode (ADS1114 and ADS1115 only)
+                                                       This bit configures the comparator operating mode.
+     4    COMP_MODE   R/W       0b          This bit serves no function on the ADS1113.
+                                               0b : Traditional comparator (default)
+                                               1b : Window comparator
+
+                                              Comparator polarity (ADS1114 and ADS1115 only)
+                                                       This bit controls the polarity of the ALERT/RDY pin.
+     3    COMP_POL     R/W       0b          This bit serves no function on the ADS1113.
+                                               0b : Active low (default)
+                                               1b : Active high
+
+                                                  Latching comparator (ADS1114 and ADS1115 only)
+                                                       This bit controls whether the ALERT/RDY pin latches after being asserted or
+                                                           clears after conversions are within the margin of the upper and lower threshold
+                                                          values.
+                                                       This bit serves no function on the ADS1113.
+     2    COMP_LAT     R/W       0b        0b : Nonlatching comparator. The ALERT/RDY pin does not latch when asserted
+                                                                  (default).
+                                               1b : Latching comparator. The asserted ALERT/RDY pin remains latched until
+                                                      conversion data are read by the controller or an appropriate SMBus alert
+                                                   response is sent by the controller. The device responds with an address, and
+                                                                        is the lowest address currently asserting the ALERT/RDY bus line.
+
+                                              Comparator queue and disable (ADS1114 and ADS1115 only)
+                                               These bits perform two functions. When set to 11, the comparator is disabled
+                                               and the ALERT/RDY pin is set to a high-impedance state. When set to any other
+                                                           value, the ALERT/RDY pin and the comparator function are enabled, and the set
+                                                       value determines the number of successive conversions exceeding the upper or
+     1:0    COMP_QUE[1:0] R/W       11b         lower threshold required before asserting the ALERT/RDY pin.
+                                               These bits serve no function on the ADS1113.
+                                               00b : Assert after one conversion
+                                               01b : Assert after two conversions
+                                               10b : Assert after four conversions
+                                                 11b : Disable comparator and set ALERT/RDY pin to high-impedance (default)
+
+ (1)   This parameter expresses the full-scale range of the ADC scaling. Do not apply more than VDD + 0.3V to the analog inputs of the
+       device.
+
+
+
+26    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

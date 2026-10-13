@@ -1,0 +1,81 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+9  Application and Implementation
+
+
+                                  NOTE
+           Information  in  the  following  applications  sections  is  not  part  of  the  TI component
+            specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+           responsible for determining suitability of components for their purposes. Customers should
+            validate and test their design implementation to confirm system functionality.
+
+
+9.1  Application Information
+The INA219 is a current shunt and power monitor with an I2C- and SMBus-compatible interface. The device
+monitors both a shunt voltage drop and bus supply voltage. Programmable calibration value, combined with an
+internal multiplier, enable readouts of current and power.
+
+9.2  Typical Application
+
+Figure 28 shows a typical application circuit for the INA219. Use a 0.1-μF ceramic capacitor for power-supply
+bypassing, placed as closely as possible to the supply and ground pins.
+
+The input filter circuit consisting of RF1, RF2, and CF is not necessary in most applications. If the need for filtering
+is unknown, reserve board space for the components and install 0-Ωresistors for RF1 and RF2 and leave CF
+unpopulated, unless a filter is needed (see Filtering and Input Considerations).
+
+The pull-up resistors shown on the SDA and SCL lines are not needed  if there are pullup resistors on these
+same lines elsewhere in the system. Resistor values shown are typical: consult either the I2C or SMBus
+specification to determine the acceptable minimum or maximum values and also refer to the Specifications for
+Output Current Limitations.
+
+              RSHUNT                                               Supply(INA219VoltagePower Supply Range isPower Bus
+(0V to 26V)                  Load                               3V to 5.5V)
+
+         RF1               RF2
+                CF                                                                CBYPASS
+                                                                                            0.1 m F
+                                                                                                              (typical)
+
+                                                                                                                                 RPULLUP         RPULLUP              VIN+          VIN-
+                                                                                                                                          3.3k W           3.3k W
+                                                                                                         INA219       (typical)           (typical)
+
+                                     ´       Power Register                        SDA                                       Data (SDA)
+
+                                                                                                  SCL
+                                                                                                                                             2                                                           Clock (SCL)
+                                                                                                                                                                                                         I C                                                                                    Current Register                                                                                                        A0                                                                                                                              Interface
+                         PGA           ADC                                                        A1
+                                                                                    Voltage Register
+
+
+
+
+                GND
+
+
+                                Figure 28. Typical Application Circuit
+
+
+9.2.1  Design Requirements
+
+The INA219 measures the voltage across a current-sensing resistor (RSHUNT) when current passes through the
+resistor. The device also measures the bus supply voltage, and calculates power when calibrated. This section
+goes through the steps to program the device for power measurements, and shows the register results Table 8.
+
+The Conditions for the example circuit is: Maximum expected load current = 15 A, Nominal load current = 10 A,
+VCM = 12 V, RSHUNT = 2 mΩ, VSHUNT FSR = 40 mV (PGA = /1), and BRNG = 0 (VBUS range = 16 V).
+
+9.2.2  Detailed Design Procedure
+
+Figure 29 shows a nominal 10-A load that creates a differential voltage of 20 mV across a 2-mΩ shunt resistor.
+The common mode is at 12 volts and the voltage present at the IN– pin is equal to the common-mode voltage
+minus the differential drop across the resistor.
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     25
+
+                                                   Product Folder Links: INA219

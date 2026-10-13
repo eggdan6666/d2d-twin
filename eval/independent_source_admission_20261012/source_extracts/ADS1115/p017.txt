@@ -1,0 +1,55 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 7.3.8 Conversion Ready Pin (ADS1114 and ADS1115 Only)
+
+The ALERT/RDY pin can also be configured as a conversion-ready pin. Set the most-significant bit of the
+ Hi_thresh register to 1b and the most-significant  bit of Lo_thresh register to 0b to enable the pin as a
+ conversion-ready pin. The COMP_POL bit continues to function as expected. Set the COMP_QUE[1:0] bits
+ to any 2-bit value other than 11b to keep the ALERT/RDY pin enabled, and allow the conversion-ready signal to
+ appear at the ALERT/RDY pin output. The COMP_MODE and COMP_LAT bits no longer control any function.
+When configured as a conversion-ready pin, ALERT/RDY continues to require a pullup resistor. The ADS111x
+ provide an approximately 8µs conversion-ready pulse on the ALERT/RDY pin at the end of each conversion in
+ continuous-conversion mode, as shown in Figure 7-8. In single-shot mode, the ALERT/RDY pin asserts low at
+ the end of a conversion if the COMP_POL bit is set to 0b.
+
+     ADS1114/5
+                      Converting                 Converting                             Converting                 Converting
+           Status
+
+                           Conversion Ready                    Conversion Ready                    Conversion Ready
+
+
+
+                                                                    8 µs
+    ALERT/RDY
+      (active high)
+
+                 Figure 7-8. Conversion Ready Pulse in Continuous-Conversion Mode
+
+ 7.3.9 SMbus Alert Response
+
+ In latching comparator mode (COMP_LAT = 1b), the ALERT/RDY pin asserts when the comparator detects a
+ conversion that exceeds the upper or lower threshold value. This assertion is latched and can be cleared only by
+ reading conversion data, or by issuing a successful SMBus alert response and reading the asserting device I2C
+ address. If conversion data exceed the upper or lower threshold values after being cleared, the pin reasserts.
+ This assertion does not affect conversions that are already in progress. The ALERT/RDY pin is an open-drain
+ output. This architecture allows several devices to share the same interface bus. When disabled, the pin holds a
+ high state so that the pin does not interfere with other devices on the same bus line.
+
+When the controller senses that the ALERT/RDY pin has latched, the controller issues an SMBus alert command
+ (00011001b) to the I2C bus. Any ADS1114 and ADS1115 data converters on the I2C bus with the ALERT/RDY
+ pins asserted respond to the command with the target address. If more than one ADS111x on the I2C bus assert
+ the latched ALERT/RDY pin, arbitration during the address response portion of the SMBus alert determines
+ which device clears assertion. The device with the lowest I2C address always wins arbitration. If a device loses
+ arbitration, the device does not clear the comparator output pin assertion. The controller then repeats the SMBus
+ alert response until all devices have the respective assertions cleared. In window comparator mode, the SMBus
+ alert status bit indicates a 1b if signals exceed the high threshold, and a 0b if signals exceed the low threshold.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    17
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

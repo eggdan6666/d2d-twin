@@ -1,0 +1,57 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+              Table 8-38. Power-Valid Lower-Limit Register Field Descriptions (continued)
+     Bit     Field                          Type     Reset      Description
+
+     2-0    Reserved                  R       0h         Reserved
+
+ 8.2.19 Manufacturer ID Register (address = FEh) [reset = 5449h]
+
+ This  register  contains a  factory-programmable  identification  value  that  identifies  this  device as  being
+ manufactured by Texas Instruments. This register distinguishes this device from other devices that are on the
+same I2C bus. The contents of this register are 5449h, or TI in ASCII.
+
+                                 Table 8-39. Manufacturer ID Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  D15   D14   D13   D12    D11   D10    D9    D8    D7    D6    D5    D4    D3    D2    D1    D0
+
+   R-0    R-1    R-0    R-1    R-0    R-1    R-0    R-0    R-0    R-1    R-0    R-0    R-1    R-0    R-0    R-1
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                        Table 8-40. Manufacturer ID Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15-0    D15-0                    R       5449h      Manufacturer ID bits
+
+ 8.2.20 Die ID Register (address = FFh) [reset = 3220]
+
+ This register contains a factory-programmable identification value that identifies this device as an INA3221. This
+ register distinguishes this device from other devices that are on the same I2C bus. The Die ID for the INA3221 is
+ 3220h.
+
+                                     Table 8-41. Die ID Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  D15   D14   D13   D12    D11   D10    D9    D8    D7    D6    D5    D4    D3    D2    D1    D0
+
+   R-0    R-0    R-1    R-1    R-0    R-0    R-1    R-0    R-0    R-0    R-1    R-0    R-0    R-0    R-0    R-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                             Table 8-42. Die ID Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15-0    D15-0                    R       3220h      Die ID bits
+
+
+
+
+
+36    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

@@ -1,0 +1,23 @@
+REGISTER TEMP @ 0x00 reset=0x0000 access=RO runtime=None DESC=12 位二进制补码温度（EM=1 时 13 位），1 LSB=0.0625°C；上电读到 0°C 直至首次转换完成，§6.5.2
+  T[15:4] RO reset=0 read_as=None read_action=None tier=None DESC=T[11:0] 最近一次转换结果
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0（EM=1 时 bit0 为 EM 标志）
+REGISTER CONFIG @ 0x01 reset=0x60A0 access=RW runtime=None DESC=16 位配置寄存器，§6.5.3；byte1=OS,R1,R0,F1,F0,POL,TM,SD；byte2=CR1,CR0,AL,EM,0,0,0,0；上电 0x60A0
+  OS[15] RW reset=0 read_as=None read_action=None tier=None DESC=shutdown 态写 1 触发单次转换；转换期间读 0（§6.5.3.6；转换完成后行为见 open_questions[1]）
+  R1[14] RO reset=1 read_as=None read_action=None tier=None DESC=只读！分辨率位，出厂设 11（§6.5.3.5）
+  R0[13] RO reset=1 read_as=None read_action=None tier=None DESC=只读！同上
+  F1[12] RW reset=0 read_as=None read_action=None tier=None DESC=故障队列 00:1 01:2 10:4 11:6 连续故障（§6.5.3.4 Table 6-12）
+  F0[11] RW reset=0 read_as=None read_action=None tier=None DESC=同上
+  POL[10] RW reset=0 read_as=None read_action=None tier=None DESC=ALERT 极性 0:低有效 1:高有效
+  TM[9] RW reset=0 read_as=None read_action=None tier=None DESC=0:比较器模式 1:中断模式
+  SD[8] RW reset=0 read_as=None read_action=None tier=None DESC=1=关断模式
+  CR1[7] RW reset=1 read_as=None read_action=None tier=None DESC=CR[1:0] codes00/01/10/11 = 0.25/1/4/8Hz; default10=4Hz; p.15 Table6-5
+  CR0[6] RW reset=0 read_as=None read_action=None tier=None DESC=Low bit of conversion rate; see CR1 corrected code table
+  AL[5] RO reset=1 read_as=None read_action=None tier=None DESC=只读！比较器状态位：POL=0 时常态读 1，超 THIGH 连续故障后读 0（§6.5.3.8）
+  EM[4] RW reset=0 read_as=None read_action=None tier=None DESC=扩展模式 0:12 位 1:13 位
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0
+REGISTER TLOW @ 0x02 reset=0x4B00 access=RW runtime=None DESC=低温阈值 12 位，复位 75°C，格式同 TEMP，§6.5.4
+  L[15:4] RW reset=1200 read_as=None read_action=None tier=None DESC=L[11:0]
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0（EM=1 时 bit0 有意义）
+REGISTER THIGH @ 0x03 reset=0x5000 access=RW runtime=None DESC=高温阈值 12 位，复位 80°C，§6.5.4
+  H[15:4] RW reset=1280 read_as=None read_action=None tier=None DESC=H[11:0]
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0（EM=1 时 bit0 有意义）

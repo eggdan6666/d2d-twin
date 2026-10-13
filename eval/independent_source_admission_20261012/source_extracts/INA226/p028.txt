@@ -1,0 +1,71 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+ 7.1.8 Alert Limit Register (07h) (Read/Write)
+
+The Alert Limit Register contains the value used to compare to the register selected in the Mask/Enable Register
+ to determine if a limit has been exceeded.
+
+                     Table 7-13. Alert Limit Register (07h) (Read/Write) Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+          AUL15   AUL14   AUL13   AUL12   AUL11   AUL10   AUL9    AUL8    AUL7    AUL6    AUL5    AUL4    AUL3    AUL2    AUL1    AUL0
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+ 7.1.9 Manufacturer ID Register (FEh) (Read-Only)
+
+The Manufacturer ID Register stores a unique identification number for the manufacturer.
+
+                  Table 7-14. Manufacturer ID Register (FEh) (Read-Only) Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+             ID15     ID14     ID13     ID12      ID11     ID10      ID9      ID8      ID7      ID6      ID5      ID4      ID3      ID2      ID1      ID0
+ NAME
+
+ POR
+             0        1        0        1        0        1        0        0        0        1        0        0        1        0        0        1
+ VALUE
+
+
+ ID:                 Manufacturer ID Bits
+
+ Bits 0-15             Stores the manufacturer identification bits
+
+ 7.1.10 Die ID Register (FFh) (Read-Only)
+
+The Die ID Register stores a unique identification number and the revision ID for the die.
+
+                       Table 7-15. Die ID Register (FFh) (Read-Only) Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+            DID11    DID10    DID9     DID8     DID7     DID6     DID5     DID4     DID3     DID2     DID1     DID0     RID3     RID2     RID1     RID0
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+
+ DID:                Device ID Bits
+
+ Bits 4-15             Stores the device identification bits
+
+
+ RID:                Die Revision ID Bits
+
+  Bit 0-3                Stores the device revision identification bits
+
+
+
+
+
+28    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

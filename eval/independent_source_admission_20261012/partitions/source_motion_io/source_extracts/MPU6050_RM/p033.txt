@@ -1,0 +1,43 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           33 of 46  
+   
+Each enabled slave will have EXT_SENS_DATA registers associated with it by number of bytes read 
+(I2C_SLVx_LEN) in order of slave number, starting from EXT_SENS_DATA_00. Note that this 
+means enabling or disabling a slave may change the higher numbered slaves’ associated registers. 
+Furthermore, if fewer total bytes are being read from the external sensors as a result of such a 
+change, then the data remaining in the registers which no longer have an associated slave device 
+(i.e. high numbered registers) will remain in these previously allocated registers unless reset. 
+If the sum of the read lengths of all SLVx transactions exceed the number of available 
+EXT_SENS_DATA  registers , the excess bytes will be dropped. There are 24 EXT_SENS_DATA 
+registers and hence the total read lengths between all the slaves cannot be greater than 24 or some 
+bytes will be lost. 
+Note: Slave 4’s behavior is distinct from that of Slaves 0-3. For further information regarding the 
+characteristics of Slave 4, please refer to Registers 49 to 53.  
+ 
+Example: 
+Suppose that Slave 0 is enabled with 4 bytes to be read (I2C_SLV0_EN = 1 and I2C_SLV0_LEN = 
+4) while Slave 1 is enabled with 2 bytes to be read, (I2C_SLV1_EN=1 and I2C_SLV1_LEN = 2). In 
+such a situation, EXT_SENS_DATA _00 through _03 will be associated with Slave 0, while 
+EXT_SENS_DATA _04 and 05 will be associated with Slave 1.  
+If Slave 2 is enabled as well, registers starting from EXT_SENS_DATA_06 will be allocated to Slave 
+2. 
+If Slave 2 is disabled while Slave 3 is enabled in this same situation, then registers starting from 
+EXT_SENS_DATA_06 will be allocated to Slave 3 instead.  
+ 
+ 
+Register Allocation for Dynamic Disable vs. Normal Disable 
+If a slave is disabled at any time, the space initially allocated to the slave in the EXT_SENS_DATA 
+register, will remain associated with that slave. This is to avoid dynamic adjustment of the register 
+allocation.  
+The allocation of the EXT_SENS_DATA registers is recomputed only when (1) all slaves are 
+disabled, or (2) the I2C_MST_RST bit is set (Register 106). 
+This above is also true if one of the slaves gets NACKed and stops functioning. 
+ 
+ 

@@ -1,0 +1,52 @@
+                                                              LIS2DW12
+                                                                                                                                Digital interfaces
+
+
+6.2.1      SPI read
+
+                                                 Figure 13. SPI read protocol
+
+
+                CS
+
+               SPC
+
+                   SDI
+
+                          RW
+                                    AD6 AD5 AD4 AD3 AD2 AD1 AD0
+
+              SDO
+
+                                                         DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0
+
+
+           The SPI read command is performed with 16 clock pulses. A multiple byte read command is performed by adding
+             blocks of 8 clock pulses to the previous one.
+               bit 0: READ bit. The value is 1.
+               bit 1-7: address AD(6:0). This is the address field of the indexed register.
+               bit 8-15: data DO(7:0) (read mode). This is the data that is read from the device (MSb first).
+               bit 16-... : data DO(...-8). Additional data in multiple byte reads.
+
+                                   Figure 14. Multiple byte SPI read protocol (2-byte example)
+
+
+
+                 CS
+
+                SPC
+
+                     SDI
+
+                                 RW
+                                           AD6 AD5 AD4AD3 AD2 AD1 AD0
+
+               SDO
+
+                                                                       DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0 DO15 DO14DO13DO12 DO11DO10 DO9 DO8
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 30/65

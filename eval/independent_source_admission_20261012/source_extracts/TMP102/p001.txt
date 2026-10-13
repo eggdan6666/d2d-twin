@@ -1,0 +1,77 @@
+                                                                                  TMP102
+                                                                                  SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+  TMP102 Low-Power Digital Temperature Sensor With SMBus and Two-Wire Serial
+                                  Interface in SOT563
+
+1 Features                              3 Description
+
+•  SOT563 package (1.6mm × 1.6mm) is a 68%        The TMP102 device is a digital temperature sensor
+   smaller footprint than SOT-23                      designed for NTC/PTC thermistor replacement where
+•  Accuracy without calibration:                         high  accuracy  is  required. The  device  offers an
+   –  2.0°C (maximum) from –25°C to 85°C            accuracy  of  ±0.5°C  without  requiring  calibration
+   –  3.0°C (maximum) from –40°C to 125°C             or  external component  signal  conditioning. Device
+•  Low quiescent current:                             temperature sensors are highly  linear and do not
+   –  7.5μA active (maximum)                           require complex  calculations  or  lookup  tables  to
+   –  0.35μA shutdown (maximum)                      derive the temperature. The on-chip 12-bit ADC offers
+•  Supply range: 1.4V to 3.6V                            resolutions down to 0.0625°C.
+•  Resolution: 12 bits                            The 1.6mm × 1.6mm SOT563 package  is 68%
+•   Digital output: SMBus, two-wire, and I2C interface     smaller  footprint  than an SOT-23  package. The
+   compatibility                              TMP102 device features SMBus™, two-wire and I2C
+•  NIST traceable                                          interface compatibility, and allows up to four devices
+2 Applications                                on one bus. The device also features an SMBus
+                                                                  alert function. The device is specified to operate over
+•  Portable electronics                                supply voltages from 1.4V to 3.6V with the maximum
+•  Power-supply temperature monitoring                quiescent current  of 7.5µA over the  full operating
+•  Connected peripherals and printers                   range.
+•  PC and notebooks
+                                             The TMP102  device   is  designed  for  extended•  Battery management
+                                                     temperature   measurement    in   a    variety    of•  Enterprise machine
+                                                    communication, computer, consumer, environmental,•  Thermostat
+                                                                  industrial,  and  instrumentation  applications.  The•  Electromechanical device temperatures
+                                                      device is specified for operation over a temperature•  General temperature measurements:
+                                                   range of –40°C to 125°C.
+   –  Factory automation & control
+   –  Test & measurement                        The TMP102  production  units  are 100%  tested
+   –  Medical and healthcare                           against sensors  that  are  NIST-traceable and  are
+                                                                                    Supply Voltage        verified  with  equipment  that  are  NIST-traceable
+                                                                                    1.4V to 3.6V       through ISO/IEC 17025 accredited calibrations.
+
+                                                                                         Supply Bypass
+                                                                                                  Capacitor                 Package Information
+                                              Pullup Resistors                                 0.01µF
+                                       5kΩ                             PART NUMBER      PACKAGE(1)    PACKAGE SIZE(2)
+
+                                                    TMP102          SOT563 (6)        1.60mm × 1.60mm
+
+                                       TMP102                                  (1)   For more information, see Section 10.
+      Two-Wire                            1                           6                         (2)  The package size (length × width) is a nominal value and
+    Host Controller                        SCL            SDA                              includes pins, where applicable.
+
+                                         2                           5
+                                 GND              V+                                                  Temperature
+
+                                         3                                                                    4
+                                                                                                                                Diode                                      ALERT          ADD0                                                                                                                  1                                                                                                                                                                    Control    6
+                                                                                           SCL           Temp.                     SDA
+                                                                                                                                                               Logic
+                                                                                                                              Sensor
+
+
+
+
+
+                                                                                                                  2                                                                                                                                                                                  Serial     5               Simplified Schematic                                    GND           DS                                                                                                                         A/D                                                                                                                                      V+
+                                                                                                                                                                              Interface
+                                                                                                                                       Converter
+
+
+
+                                                                                                                  3                          Config.    4
+                                                                                          ALERT        OSC          and Temp.       ADD0
+                                                                                                                                                                  Register
+
+
+                                                               Block Diagram
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+       intellectual property matters and other important disclaimers. PRODUCTION DATA.

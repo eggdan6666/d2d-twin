@@ -1,0 +1,46 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.31     ALL_INT_SRC (3Bh)
+            Reading this register, all related interrupt function flags routed to the INT pads are reset simultaneously.
+
+
+                                               Table 83. ALL_INT_SRC register
+
+                                    SLEEP_               DOUBLE_    SINGLE_
+                   0            0                       6D_IA                             WU_IA        FF_IA
+                                  CHANGE_IA                 TAP        TAP
+
+
+                                         Table 84. ALL_INT_SRC register description
+
+                                           Sleep change status
+            SLEEP_CHANGE_IA
+                                                        (0: sleep change not detected; 1: sleep change detected)
+
+                                          Source of change in position portrait/landscape/face-up/face-down
+             6D_IA
+                                                        (0: no event detected; 1: a change in position detected)
+
+                                             Double-tap event status
+           DOUBLE_TAP
+                                                        (0: double-tap event not detected; 1: double-tap event detected)
+
+                                                 Single-tap event status
+            SINGLE_TAP
+                                                        (0: single-tap event not detected; 1: single-tap event detected)
+
+                                       Wake-up event detection status
+            WU_IA
+                                                        (0: wake-up event not detected; 1: wake-up event detected)
+
+                                                      Free-fall event detection status.
+              FF_IA
+                                                        (0: free-fall event not detected; 1: free-fall event detected)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 53/65

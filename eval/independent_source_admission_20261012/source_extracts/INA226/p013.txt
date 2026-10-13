@@ -1,0 +1,54 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+measured shunt voltage to determine  if the measurements has exceeded the programmed limit. The AFF, bit
+4 of the Mask/Enable Register, asserts high any time the measured voltage exceeds the value programmed
+ into the Alert Limit Register. In addition to the AFF being asserted, the Alert pin is asserted based on the Alert
+ Polarity Bit (APOL, bit 1 of the Mask/Enable Register). If the Alert Latch is enabled, the AFF and Alert pin remain
+ asserted until either the Configuration Register (00h) is written to or the Mask/Enable Register is read.
+
+The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every
+ bus voltage conversion and assert the AFF bit and Alert pin if the limit threshold is exceeded.
+
+The Power Over-Limit alert function is also compared to the calculated power value following every bus voltage
+measurement conversion and asserts the AFF bit and Alert pin if the limit threshold is exceeded.
+
+ 6.4 Device Functional Modes
+ 6.4.1 Averaging and Conversion Time Considerations
+
+The INA226 device offers programmable conversion times (tCT) for both the shunt voltage and bus voltage
+ measurements. The conversion times for these measurements can be selected from as fast as 140μs to as long
+ as 8.244ms. The conversion time settings, along with the programmable averaging mode, allow the device to be
+ configured to optimize the available timing requirements in a given application. For example, if a system requires
+ that data be read every 5ms, the device can be configured with the conversion times set to 588 μs for both shunt
+and bus voltage measurements and the averaging mode set to 4. This configuration results in the data updating
+ approximately every 4.7ms. The device can also be configured with a different conversion time setting for the
+ shunt and bus voltage measurements. This type of approach is common in applications where the bus voltage
+ tends to be relatively stable. This situation can allow for the time focused on the bus voltage measurement to be
+ reduced relative to the shunt voltage measurement. The shunt voltage conversion time can be set to 4.156ms
+ with the bus voltage conversion time set to 588μs, with the averaging mode set to 1. This configuration also
+ results in data updating approximately every 4.7ms.
+
+ There are trade-offs associated with the settings for conversion time and the averaging mode used. The
+ averaging feature can significantly improve the measurement accuracy by effectively filtering the signal. This
+ approach allows the device to reduce any noise in the measurement that can be caused by noise coupling
+ into the signal. A greater number of averages enables the device to be more effective in reducing the noise
+component of the measurement.
+
+The conversion times selected can also have an impact on the measurement accuracy. Figure 6-2 shows
+ multiple conversion times to show the impact of noise on the measurement. to achieve the highest accuracy
+measurement possible, use a combination of the longest allowable conversion times and highest number of
+ averages, based on the timing requirements of the system.
+
+
+
+
+
+                                Figure 6-2. Noise vs Conversion Time
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    13
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,44 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.25  Temperature Register
+
+Command = 2Ch with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                  Temp[7:0]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Die temperature register.
+
+Bit Descriptions
+
+Temp[7:0]: 8-bit data conversion result of temperature. The equation defining the temperature measured is:
+    T   20 N u TSTEP
+
+    where
+              •  T = temperature, °C
+              •  TSTEP = LSB value
+              •  N = 8-bit value in Temp[7:0]                                                                                        (2)
+
+
+            MODE                       FULL SCALE VALUE                    LSB VALUE
+
+                 Any                              150°C (typical)                                 0.7°C
+
+
+
+                                  NOTE
+          Temperature sensor performance is only typical, not production tested and not ensured.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     71
+
+                                                 Product Folder Links: TPS23861

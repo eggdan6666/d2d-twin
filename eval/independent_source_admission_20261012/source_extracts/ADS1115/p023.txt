@@ -1,0 +1,71 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 7.5.4 Data Format
+
+The ADS111x provide 16 bits of data in binary 2's-complement format. A positive full-scale (+FS) input produces
+an output code of 7FFFh and a negative full-scale (–FS) input produces an output code of 8000h. The output
+ clips at these codes for signals that exceed full-scale. Table 7-3 summarizes the ideal output codes for different
+ input signals. Figure 7-12 shows code transitions versus input voltage.
+
+                           Table 7-3. Input Signal Versus Ideal Output Code
+                                  INPUT SIGNAL
+                                        VIN = (VAINP – VAINN)        IDEAL OUTPUT CODE(1) (1)
+                                   ≥ +FS (215 – 1)/215                 7FFFh
+                                            +FS/215                      0001h
+
+                                          0                         0000h
+                                            –FS/215                     FFFFh
+
+                                         ≤ –FS                       8000h
+
+                                       (1)   Excludes the effects of noise, INL, offset, and gain errors.
+
+
+                                     7FFFh
+
+                                    7FFEh
+
+                      .
+
+                      .
+
+                      .
+
+                                        0001h
+                                                                              Code   0000h
+                                    FFFFh
+
+
+
+
+                      .
+
+                      .                                                                                                                     Output  .
+
+
+                                        8001h
+
+                                        8000h
+
+                                                   -FS                           . . .  0     . . .            +FS
+
+                                                                               Input Voltage VIN
+                                                      2 15 - 1                       2 15 - 1
+                                                   -FS                       +FS
+                                                                     215                                215
+
+                                Figure 7-12. Code Transition Diagram
+
+                                           Note
+     Single-ended signal measurements, where VAINN = 0V and VAINP = 0V to +FS, only use the positive
+     code range from 0000h to 7FFFh. However, because of device offset, the ADS111x can still output
+     negative codes in case VAINP is close to 0V.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    23
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

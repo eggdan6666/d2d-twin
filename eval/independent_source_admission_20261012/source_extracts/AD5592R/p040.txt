@@ -1,0 +1,49 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 18. Bit Descriptions for ADC_CONFIG (Continued)
+Bits            Bit Name           Description                                                                                                Default Value
+
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+3          ADC3                Select the I/O3 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+2          ADC2                Select the I/O2 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+1          ADC1                Select the I/O1 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+0          ADC0                Select the I/O0 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+
+
+DAC Pin Configuration Register
+
+Name: DAC_CONFIG
+
+Selects which pins are DAC outputs.
+
+
+
+
+
+Table 19. Bit Descriptions for DAC_CONFIG
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b0101.                                                             0x5
+[10:8]       RESERVED         Reserved. Set these bits to 0b000.                                                                    0x0
+7          DAC7                Select the I/O7 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+6          DAC6                Select the I/O6 pin as DAC output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a DAC output.
+5          DAC5                Select the I/O5 pin as DAC output.                                                                    0x0
+
+
+analog.com                                                                                         Rev. H | 40 of 54

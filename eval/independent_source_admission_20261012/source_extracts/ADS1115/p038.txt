@@ -1,0 +1,61 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+11 Layout
+ 11.1 Layout Guidelines
+
+Employ best design practices when laying out a  printed-circuit board (PCB)  for both analog and  digital
+ components. For optimal performance, separate the analog components [such as ADCs, amplifiers, references,
+ digital-to-analog converters (DACs), and analog MUXs] from digital components [such as microcontrollers,
+ complex programmable logic devices (CPLDs), field-programmable gate arrays (FPGAs), radio frequency (RF)
+ transceivers, universal serial bus (USB) transceivers, and switching regulators]. An example of good component
+ placement is shown in Figure 11-1. Although Figure 11-1 provides a good example of component placement, the
+ best placement for each application is unique to the geometries, components, and PCB fabrication capabilities
+ employed. That is, there is no single layout that is perfect for every design and careful consideration must always
+be used when designing with any analog component.
+
+
+                                Ground                                                                   Fill or                                    Split Cut               GroundGround PlaneFill or                                Ground                                          Plane
+                                                                                                     Supply
+                                                                                                      Generation                                      Signal                                                                                                                                Optional: Ground
+                                   Conditioning
+                                                                                                   Interface
+                            (RC Filters        Device              Microcontroller
+                                                                                          Transceiver                                and
+                                      Amplifiers)                                                                  Split Cut                                      Connector
+                                                                                                                  or Antenna
+                                Ground Fill or                            Ground Fill or                                Ground Plane                                                                 Optional: Ground               Ground Plane
+
+                             Figure 11-1. System Component Placement
+
+The following outlines some basic recommendations for the layout of the ADS111x to get the best possible
+ performance of the ADC. A good design can be ruined with a bad circuit layout.
+
+ •  Separate analog and digital signals. To start, partition the board into analog and digital sections where
+    the layout permits. Route digital lines away from analog lines. This placement prevents digital noise from
+    coupling back into analog signals.
+ •   Fill void areas on signal layers with ground fill.
+ •  Provide good ground return paths. Signal return currents flow on the path of least impedance. If the ground
+   plane is cut or has other traces that block the current from flowing right next to the signal trace, the current
+   must find another path to return to the source and complete the circuit. A longer return current path increases
+    the chance that the signal radiates. Sensitive signals are more susceptible to EMI interference.
+ •  Use bypass capacitors on supplies to reduce high-frequency noise. Do not place vias between bypass
+    capacitors and the active device. Placing the bypass capacitors on the same layer as close to the active
+    device yields the best results.
+ •  Consider the resistance and inductance of the routing. Often, traces for the inputs have resistances that react
+    with the input bias current and cause an added error voltage. Reduce the loop area enclosed by the source
+    signal and the return current in order to reduce the inductance in the path. Reduce the inductance to reduce
+    the EMI pickup, and reduce the high frequency impedance observed by the device.
+ •   Differential inputs must be matched for both the inputs going to the measurement source.
+ •  Analog inputs with differential connections must have a capacitor placed differentially across the inputs. Best
+    input combinations for differential measurements use adjacent analog input lines such as AIN0, AIN1 and
+   AIN2, AIN3. The differential capacitors must be of high quality. The best ceramic chip capacitors are C0G
+   (NPO), which have stable properties and low-noise characteristics.
+
+
+
+
+
+38    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

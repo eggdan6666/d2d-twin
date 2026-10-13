@@ -1,0 +1,74 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+The ADC noise contribution, vn_ADC, is attenuated by the noninverting gain stage.
+ If the gain of the noninverting gain stage is high (≥ 5), a good approximation for vn_res 2 is given by Equation 14.
+The noise contribution from resistors R2, R4, R5, and R6 when referred to the input is smaller in comparison to R1
+and R3 and can be neglected for approximation purposes.
+
+      vn_res 2 = 4 · k · T · (R1 + R3) · Δf                                                                       (14)
+
+ where:
+
+ •  where k = Boltzmann constant
+ •  T = temperature (in kelvins)
+ •  Δf = noise bandwidth
+
+An approximation for the input impedance, RIN, of the application circuit is given by Equation 15. RIN can be
+modeled as a resistor in parallel with the shunt resistor, and can contribute to additional gain error.
+
+     RIN = R3 + R4                                                                                        (15)
+
+From Equation 14 and Equation 15, a trade-off exists between vN and RIN. If R3 increases, vn_res increases, and
+ therefore, the total input-referred rms system noise, vN, increases. If R3 decreases, the input impedance, RIN,
+ drops, and causes additional gain error.
+
+ 9.2.2.6 First-Order RC Filter Considerations
+
+ Although the device's digital filter attenuates high-frequency noise, use a first-order, low-pass RC filter at the
+ADC inputs to further reject out-of-bandwidth noise and avoid aliasing. A differential low-pass RC filter formed by
+ R5, R6, and the differential capacitor CDIFF sets the –3dB cutoff frequency, fC, given by Equation 16. These filter
+ resistors produce a voltage drop because of the input currents flowing into and out of the ADC. This voltage drop
+ can contribute to an additional gain error. Limit the filter resistor values to below 1kΩ.
+
+      fC = 1 / [2π · (R5 + R6) · CDIFF]                                                                         (16)
+
+Two common-mode filter capacitors (CCM1 and CCM2) are also added to offer attenuation of high-frequency,
+common-mode noise components. Select a differential capacitor, CDIFF, that is at least an order of magnitude
+ (10x) larger than these common-mode capacitors because mismatches in these common-mode capacitors can
+ convert common-mode noise into differential noise.
+
+ 9.2.2.7 Circuit Implementation
+
+ Table 9-2 shows the chosen values for this design.
+
+                                        Table 9-2. Parameters
+                           PARAMETER                                        VALUE
+
+                                   VCM                                                         2.5V
+
+                             FSR of ADC                                                  ±0.256V
+
+                                     Output data rate                                          250SPS
+
+                                            R1, R3                                                               1kΩ(1)
+                                            R2, R4                                                               5kΩ(1)
+                                            R5, R6                                                           100Ω(1)
+
+                                            CDIFF                                                      0.22µF
+
+                                      CCM1, CCM2                                                   0.022µF
+
+                    (1)  1% precision resistors used.
+
+ Using Equation 7, if VSHUNT ranges from –50mV to +50mV, the application circuit produces a differential voltage
+ ranging from –0.250V to +0.250V across the ADC inputs. The ADC is therefore configured at an FSR of ±0.256V
+ to maximize the dynamic range of the ADC.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    35
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

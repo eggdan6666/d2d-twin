@@ -1,0 +1,86 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.1  Interrupt Register
+
+Command = 00h with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         SUPF     STRTF     IFAULT    CLASC     DETC       DISF      PGC      PEC
+
+ RESET OR POR VALUE      1          0          0          0          0          0          0          0
+
+Active high, each bit corresponds to a particular event that occurred.
+
+Each bit can be individually reset by doing a read at the corresponding event register address, or by setting bit 7
+of Reset Register.
+
+Any active bit of the Interrupt register activates the INT output  if its corresponding enable bit in the Interrupt
+Enable Register is set, as well as the INTEN bit in the General Mask Register.
+
+Bit Descriptions
+
+SUPF: Indicates that a supply event fault occurred.
+
+SUPF = TSD || VDUV || VPUV
+
+1 = At least one supply event fault occurred.
+
+0 = No such event occurred.
+
+STRTF: Indicates that a start fault occurred on at least one port.
+
+STRTF = STRT1 || STRT2 || STRT3 || STRT4
+
+1 = Start fault occurred for at least one port.
+
+0 = No start fault occurred.
+
+IFAULT: Indicates that an ICUT or ILIM fault occurred on at least one port.
+
+IFAULT = ICUT1 || ICUT2 || ICUT3 || ICUT4 || ILIM1 || ILIM2 || ILIM3 || ILIM4
+
+1 = ICUT or ILIM Fault occurred for at least one port.
+
+0 = No ICUT or ILIM Fault occurred.
+
+CLASC: Indicates that at least one classification cycle occurred on at least one port.
+
+CLASC = CLSC1 || CLSC2 || CLSC3 || CLSC4
+
+1 = At least one classification cycle occurred for at least one port.
+
+0 = No classification cycle occurred.
+
+DETC: Indicates that at least one detection cycle occurred on at least one port.
+
+DETC = DETC1 || DETC2 || DETC3 || DETC4
+
+1 = At least one detection cycle occurred for at least one port.
+
+0 = No detection cycle occurred.
+
+DISF: Indicates that a disconnect event occurred on at least one port.
+
+DISF = DISF1 || DISF2 || DISF3 || DISF4
+
+1 = Disconnect event occurred for at least one port.
+
+0 = No disconnect event occurred.
+
+PGC: Indicates that a power good status change occurred on at least one port.
+
+PGC = PGC1 || PGC2 || PGC3 || PGC4
+
+1 = Power good status change occurred on at least one port.
+
+0 = No power good status change occurred.
+
+PEC: Indicates that a power enable status change occurred on at least one port.
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     47
+
+                                                 Product Folder Links: TPS23861

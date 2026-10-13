@@ -1,0 +1,51 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+
+Table 22. Bit Descriptions for GPIO_CONFIG
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b1000.                                                             0x8
+[10:9]       RESERVED         Reserved. Set these bits to 0b00.                                                                     0x0
+8          EN_BUSY          Enable the I/O7 pin as BUSY.                                                                        0x0
+                                         0: I/O7 is not configured as BUSY.
+                                         1: I/O7 pin is configured as BUSY. GPIO7 must be set to 1 to enable the I/O7 pin as an output.
+7           GPIO7               Select the I/O7 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+6           GPIO6               Select the I/O6 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+5           GPIO5               Select the I/O5 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+4           GPIO4               Select the I/O4 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+3           GPIO3               Select the I/O3 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+2           GPIO2               Select the I/O2 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+1           GPIO1               Select the I/O1 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+0           GPIO0               Select the I/O0 pin as GPIO output.                                                                    0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a general-purpose output pin.
+
+
+GPIO Write Data Register
+
+Name: GPIO_OUTPUT
+
+Writes data to the general-purpose outputs.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 44 of 54

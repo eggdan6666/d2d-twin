@@ -1,0 +1,31 @@
+7.4.4.1 Alert Mode
+When the T/nA bit in the configuration register is set to 0, the device is in alert mode. In this mode, the device 
+compares the conversion result at the end of every conversion with the values in the low limit register and high 
+limit register. If the temperature result exceeds the value in the high limit register, the HIGH_Alert status flag in 
+the configuration register is set. On the other hand, if the temperature result is lower than the value in the low 
+limit register, the LOW_Alert status flag in the configuration register is set. As shown in Figure 7-5, the user can 
+run an I2C read from the configuration register to clear the status flags in alert mode.
+When a user configures the device in alert mode, it affects the behavior of the ALERT pin. The device asserts 
+the ALERT pin in this mode when either the HIGH_Alert or the LOW_Alert status flag is set, as shown in Figure 
+7-5. The user can either run an I2C read of the configuration register (which also clears the status flags) or run 
+an SMBus alert response command (see the SMBus Alert Function section) to deassert the ALERT pin. The 
+polarity of the ALERT pin can be changed by using the POL bit setting in the configuration register.
+This mode effectively makes the device behave like a window limit detector. Thus this mode can be used in 
+applications where detecting if the temperature goes outside of the specified range is necessary.
+High temperature limit
+Low temperature limit
+Temperature
+Temperature conversions
+HIGH_Alert Status Flag
+LOW_Alert Status Flag
+I2C Read
+ALERT pin (POL = 0)
+SMBus Alert Command
+Figure 7-5. Alert Mode Timing Diagram
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+www.ti.com
+16
+Submit Document Feedback
+Copyright © 2022 Texas Instruments Incorporated
+Product Folder Links: TMP117

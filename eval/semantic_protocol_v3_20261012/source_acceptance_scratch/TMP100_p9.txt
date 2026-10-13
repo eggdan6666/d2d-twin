@@ -1,0 +1,85 @@
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+7.3
+Feature Description
+7.3.1
+Digital Temperature Output
+The digital output from each temperature measurement conversion is stored in the read-only Temperature
+Register. The Temperature Register of the TMP100 or TMP101 device is a 12-bit, read-only register that stores
+the output of the most recent conversion. Two bytes must be read to obtain data and are listed in Table 6 and
+Table 7. The first 12 bits are used to indicate temperature with all the remaining bits equal to zero. The data
+format for temperature is listed in Table 1. Negative numbers are represented in binary twos complement format.
+Following power-up or reset, the temperature register reads 0°C until the first conversion is complete.
+The user can obtain 9, 10, 11, or 12 bits of resolution by addressing the Configuration Register and setting the
+resolution bits accordingly. For 9-, 10-, or 11-bit resolution, the most significant bits (MSBs) in the Temperature
+Register are used with the unused least significant bits (LSBs) set to zero.
+Table 1. Temperature Data Format
+DIGITAL OUTPUT
+TEMPERATURE
+(°C)
+BINARY
+HEX
+128
+0111 1111 1111
+7FF
+127.9375
+0111 1111 1111
+7FF
+100
+0110 0100 0000
+640
+80
+0101 0000 0000
+500
+75
+0100 1011 0000
+4B0
+50
+0011 0010 0000
+320
+25
+0001 1001 0000
+190
+0.25
+0000 0000 0100
+004
+0
+0000 0000 0000
+000
+–0.25
+1111 1111 1100
+FFC
+–25
+1110 0111 0000
+E70
+–55
+1100 1001 0000
+C90
+–128
+1000 0000 0000
+800
+7.3.2
+Serial Interface
+The TMP100 and TMP101 devices operate only as slave devices on the SMBus, Two-Wire, and I2C interface-
+compatible bus. Connections to the bus are made through the open-drain I/O lines SDA and SCL. The TMP100
+and TMP101 devices support the transmission protocol for fast (up to 400 kHz) and high-speed (up to 2 MHz)
+modes. All data bytes are transmitted MSB first.
+7.3.2.1
+Bus Overview
+The device that initiates the transfer is called a master, and the devices controlled by the master are slaves. The
+bus must be controlled by a master device that generates the serial clock (SCL), controls the bus access, and
+generates the START and STOP conditions.
+To address a specific device, a START condition is initiated, indicated by pulling the data line (SDA) from a HIGH
+to LOW logic level while SCL is HIGH. All slaves on the bus shift in the slave address byte, with the last bit
+indicating whether a read or write operation is intended. During the ninth clock pulse, the slave being addressed
+responds to the master by generating an Acknowledge and pulling SDA LOW.
+Data transfer is then initiated and sent over eight clock pulses followed by an Acknowledge Bit. During data
+transfer, SDA must remain stable while SCL is HIGH because any change in SDA while SCL is HIGH is
+interpreted as a control signal.
+When all data are transferred, the master generates a STOP condition indicated by pulling SDA from LOW to
+HIGH, while SCL is HIGH.
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+9
+Product Folder Links: TMP100 TMP101

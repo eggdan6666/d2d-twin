@@ -1,0 +1,60 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+8 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 8.1 Application Information
+
+The TMP117 is used to measure the temperature of the board location where the device is mounted. The
+ programmable address options allow up to four locations on the board to be monitored on a single serial bus.
+ For more information, refer to the related Considerations for Measuring Ambient Air Temperature (SNOA966),
+ Replacing resistance temperature detectors with the TMP116 temp sensor (SNOA969), and Temperature
+ sensors: PCB guidelines for surface mount devices (SNOA967) application reports on ti.com.
+
+ 8.2 Typical Application
+
+                                                                               1.7 V to 5.5 V
+
+
+
+                                              5 k      5 k      5 k         VDD
+
+                                                   SCL
+                 2-wire interface I2C or                      SDA
+             SMBus compatible                            TMP117
+                                                   ALERT                          controller
+                                                 ADD0
+
+                                               GND
+
+
+
+                                   Figure 8-1. Typical Connections
+
+ 8.2.1 Design Requirements
+The TMP117 operates only as a slave device and communicates with the host through the I2C-compatible serial
+ interface. SCL is the input pin, SDA is a bidirectional pin, and ALERT is the output. The TMP117 requires a
+ pullup resistor on the SDA, and ALERT pins. The recommended value for the pullup resistors is 5 kΩ. In some
+ applications, the pullup resistor can be lower or higher than 5 kΩ. A 0.1-µF bypass capacitor is recommended
+ to be connected between V+ and GND. An SCL pullup resistor is required if the system microprocessor SCL pin
+ is open-drain. Use a ceramic capacitor type with a temperature rating that matches the operating range of the
+ application, and place the capacitor as close as possible to the V+ pin of the TMP117. The ADD0 pin can be
+ connected directly to GND, V+, SDA and SCL for address selection of four possible unique slave ID addresses.
+ Table 7-1 explains the addressing scheme. The ALERT output pin can be connected to a microcontroller
+ interrupt that triggers an event that occurred when the temperature limit exceeds the programmable value in
+ registers 02h and 03h. The ALERT pin can be left floating or connected to ground when not in use.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    33
+
+                                                  Product Folder Links: TMP117

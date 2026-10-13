@@ -1,0 +1,59 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.12    OUT_X_L (28h)
+              X-axis LSB output register (R)
+
+
+                                                 Table 47. OUT_X_L register
+
+                X_L7       X_L6       X_L5       X_L4        X_L3(1)       X_L2(1)           0                0
+
+                 1.   If low-power mode 1 is enabled, this bit is set to 0.
+
+           The 8 least significant bits of linear acceleration sensor X-axis output. Together with the OUT_X_H (29h) register,
+                         it forms the output value expressed as a 16-bit word in two's complement.
+
+8.13    OUT_X_H (29h)
+              X-axis MSB output register (R)
+
+
+                                                 Table 48. OUT_X_H register
+
+               X_H7       X_H6       X_H5       X_H4       X_H3       X_H2       X_H1       X_H0
+
+
+           The 8 most significant bits of linear acceleration sensor X-axis output. Together with the OUT_X_L (28h) register,
+                         it forms the output value expressed as a 16-bit word in two's complement.
+
+8.14    OUT_Y_L (2Ah)
+              Y-axis LSB output register (R)
+
+
+                                                 Table 49. OUT_Y_L register
+
+                Y_L7        Y_L6        Y_L5        Y_L4         Y_L3(1)         Y_L2(1)         0            0
+
+                 1.   If low-power mode 1 is enabled, this bit is set to 0.
+
+           The 8 least significant bits of linear acceleration sensor Y-axis output. Together with the OUT_Y_H (2Bh) register,
+                         it forms the output value expressed as a 16-bit word in two's complement.
+
+8.15    OUT_Y_H (2Bh)
+              Y-axis MSB output register (R)
+
+
+                                                 Table 50. OUT_Y_H register
+
+               Y_H7       Y_H6       Y_H5       Y_H4       Y_H3       Y_H2       Y_H1       Y_H0
+
+
+           The 8 most significant bits of linear acceleration sensor Y-axis output. Together with the OUT_Y_L (2Ah) register,
+                         it forms the output value expressed as a 16-bit word in two's complement.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 43/65

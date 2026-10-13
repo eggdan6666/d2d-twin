@@ -1,0 +1,47 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+GPIO Read Configuration Register
+
+Name: GPIO_INPUT
+
+Selects which pins are general-purpose inputs.
+
+
+
+
+
+Table 24. Bit Descriptions for GPIO_INPUT
+Bits            Bit Name              Description                                                                                             Default value
+
+15         MSB                  Set this bit to 0.                                                                                 0x0
+[14:11]      REG_ADDR            Register address. Set these bits to 0b1010.                                                       0xA
+10          GPIO_RD_EN         Enable GPIO readback.                                                                           0x0
+                                            0: GPIO7 to GPIO0 bits determine which pins are set as general-purpose inputs.
+                                            1: The next SPI operation clocks out the state of the GPIO pins.
+[9:8]        RESERVED           Reserved. Set these bits to 0b00.                                                                   0x0
+7           GPIO7                Set the I/O7 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+6           GPIO6                Set the I/O6 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+5           GPIO5                Set the I/O5 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+4           GPIO4                Set the I/O4 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+3           GPIO3                Set the I/O3 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+2           GPIO2                Set the I/O2 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+1           GPIO1                Set the I/O1 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+
+
+analog.com                                                                                         Rev. H | 46 of 54

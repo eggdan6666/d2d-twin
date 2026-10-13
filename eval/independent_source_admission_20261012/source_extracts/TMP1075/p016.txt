@@ -1,0 +1,69 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 7.3.2.5.2 Transmitter Mode
+
+The first byte is transmitted by the host and is the device address, with the R/W bit high. The target device
+ acknowledges reception of a valid device address. The next byte is transmitted by the device and is the most
+ significant byte of the register indicated by the Pointer register. The host acknowledges reception of the data
+ byte. The next byte transmitted by the device is the least significant byte. The host acknowledges reception of
+ the data byte. The host can terminate data transfer by generating a Not-Acknowledge on reception of any data
+ byte, or generating a START or STOP condition.
+
+ 7.3.2.6 SMBus Alert Function
+
+The TMP1075 supports the SMBus Alert function. When the TMP1075 is operating in interrupt mode (TM = 1),
+ the ALERT pin of the TMP1075 can be connected as an SMBus Alert signal. When a host senses that an alert
+ condition is present on the ALERT line, the host sends an SMBus Alert command (00011001) on the bus.  If
+ the ALERT pin of the TMP1075 is active, the devices acknowledge the SMBus Alert command and respond by
+ returning the device address on the SDA line. The eighth bit (LSB) of the device address byte indicates  if the
+ temperature exceeding THIGH or falling below TLOW caused the alert condition. This bit is equal to POL  if the
+ temperature is greater than or equal to THIGH. This bit is equal to POL if the temperature is less than TLOW. See
+ Figure 7-8 for details of this sequence.
+
+ If multiple devices on the bus respond to the SMBus Alert command, arbitration during the device address
+ portion of the SMBus Alert command determines which device clears the alert status. If the TMP1075 wins the
+ arbitration, the ALERT pin becomes inactive at the completion of the SMBus Alert command. If the TMP1075
+ loses the arbitration, the ALERT pin remains active.
+
+ 7.3.2.7 General Call- Reset Function
+
+The TMP1075 responds to the two-wire general call address (0000 000)  if the eighth bit is 0. The device
+ acknowledges the general call address and responds to commands in the second byte. If the second byte is
+00000 110, the TMP1075 resets the internal registers to the power-up reset values.
+
+ 7.3.2.8 High-Speed Mode (HS)
+
+ For the two-wire bus to operate at frequencies above 400 kHz, the host device must issue an HS mode host
+code (00001XXX) as the first byte after a START condition to switch the bus to high-speed operation. The
+TMP1075 device does not acknowledge this byte, but the device does switch the input filters on the SDA and
+SCL and the output filters on the SDA to operate in HS mode. After the HS mode host code is issued, the host
+ transmits a two-wire device address to initiate a data transfer operation. The bus continues to operate in HS
+mode until a STOP condition occurs on the bus. Upon receiving the STOP condition, the TMP1075 switches the
+ input and output filters back to fast-mode operation.
+
+ 7.3.2.9 Coexists in I3C Mixed Fast Mode
+A bus with both I3C and I2C interfaces is referred to as a mixed fast mode with clock speeds up to 12.5 MHz. For
+ the TMP1075, which is an I2C device, to coexist in the same bus, the device incorporated a spike suppression
+ filter of 50 ns on the SDA and SCL pins to avoid any interference to the bus when communicating with I3C
+ devices.
+
+ 7.3.2.10 Time-Out Function
+
+The TMP1075 resets the serial interface if SCL is held low by the host or SDA is held low by the TMP1075 for 25
+ms (TMP1075N: 30 ms) (typical) between a START and STOP condition. The TMP1075 releases the SDA bus
+and waits for a START condition. To avoid activating the time-out function, a communication speed of at least 1
+kHz must be maintained.
+
+ 7.3.3 Timing Diagrams
+The TMP1075 is two-wire SMBus and I2C interface-compatible. Figure 7-3 to Figure 7-8 describe the various
+ operations on the TMP1075. The following list provides bus definitions.
+
+Bus Idle: Both SDA and SCL lines remain high.
+
+
+
+
+16    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

@@ -1,0 +1,43 @@
+Data Sheet                               AD5592R
+
+THEORY OF OPERATION
+
+GPIO SECTION                                                             their default values (85 kΩ pull-down to GND). The reset function
+                                                                      takes 250 µs maximum; do not write new data to the AD5592R
+Each of the eight I/Ox pins can be configured as a general-purpose                                                                        during this time. The AD5592R has a software reset that performs
+digital input pin by programming the GPIO read configuration regis-                                                                        the same function as the RESET pin. The reset function is activated
+ter (see the GPIO Read Configuration Register section) or as a                                                               by writing 0x5AC to the software reset register (see the Software
+digital output pin by programming the GPIO write configuration reg-                                                                Reset Register section).
+ister (see the GPIO Write Configuration Register section). When an
+I/Ox pin is configured as an output, the pin can be set high or low     TEMPERATURE INDICATOR
+by programming the GPIO write data register (see the GPIO Write
+                                                          The AD5592R/AD5592R-1 contain an integrated temperature indi-Data Register section). Logic levels for general-purpose outputs are
+                                                                                  cator, which can be read to provide an estimation of the die tem-
+relative to VDD and GND. When an I/Ox pin is configured as an                                                                           perature. The temperature reading can be used in fault detectioninput, its status can be determined by setting Bit 10 in the GPIO
+                                                             where a sudden rise in die temperature may indicate a fault condi-read configuration register. The next SPI operation clocks out the
+                                                                                   tion such as a shorted output. Temperature readback is enabled bystate of the GPIO pins. When an I/Ox pin is set as an output, it is
+                                                                                setting Bit 8 in the ADC sequence register (see the ADC Sequencepossible to read its status by also setting it as an input pin. When
+                                                                        Register section) to 1. The temperature result is then added to thereading the status of the I/Ox pins set as inputs, the status of an
+                                                ADC sequence. The temperature result has an address of 0b1000I/Ox pin set as both an input and output pin is also returned.
+                                                                     (see the Temperature Reading Format section, Table 31); take care
+INTERNAL REFERENCE                                            that this result is not confused with the readback from the DAC0
+                                                                       channel. The temperature conversion takes 5 µs with the ADC
+The AD5592R/AD5592R-1 contain an on-chip 2.5 V reference.                                                                               buffer enabled and 20 µs when the buffer is disabled. Calculate the
+The reference is powered down by default and is enabled by                                                                    temperature by using the following formulae:
+setting Bit 9 in the power-down/reference control register (see
+the Power-Down/Reference Control Register section). When the          For ADC gain = 1,
+on-chip reference is powered up, the reference voltage appears on
+the VREF pin and may be used as a reference source for other com-       Temperature (°C) =                                                                           ADC Code −  0.5 / VREF × 4095ponents. When the internal reference is used, it is recommended to                                                                                                          2.654 ×  2.5 / VREFdecouple the internal reference to GND using a 100 nF capacitor.         For ADC gain = 2, 25 +
+It is recommended that the internal reference be buffered before                                                                 Temperature (°C) =using it elsewhere in the system. When the reference is powered
+down, an external reference must be connected to the VREF pin.Suitable external reference sources for the AD5592R/AD5592R-1              ADC Code −  0.5 / 2 × VREF  × 4095include the AD780, AD1582, ADR431, REF193, and ADR391.        25The range+    of codes returned1.327 × by2.5the/ VREFADC when reading from the
+                                                                    temperature indicator is approximately 645 to 1084 (for ADC gain
+RESET FUNCTION                                                         = 1), corresponding to a temperature between −40°C (TA) and
+The AD5592R has an asynchronous RESET pin. For normal oper-       +125°C (TJ). The accuracy of the temperature indicator, averaged
+ation, RESET is tied high. A falling edge on RESET resets all             over five samples, is typically 3°C.
+registers to their default values and reconfigures the I/Ox pins to
+
+
+
+
+
+analog.com                                                                                         Rev. H | 25 of 54

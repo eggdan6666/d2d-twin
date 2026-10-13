@@ -1,0 +1,55 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+10.2  Layout Example
+          TOP SIDE                        BOTTOM SIDE (not mirrored)
+                    TPS23861PW
+                                                                                                                                  CVDD        KSENSB                                                                                                                                             CVPWR
+       RDRN3                 KSENSA                                       RSEN3                    RSEN2
+                                            QP2                                          RS4A       RS1A
+                                                                                RS3A                                RS2A
+                                                                                RS3B                                RS2B      QP3                                                                                         RS4B             RS1B
+                        RDRN4                                         RDRN1  RDRN2                                                                                                                                                                       RSEN4 RSEN1                                                   GND
+                     QP4       QP1
+         FP3                                FP2                                               FP4
+                                                                                                                     FP1
+
+
+                                                                                                                     DP1A
+  DP3A                                         DP2A                     DP4A
+                                 DP3BDP2B        CP2                                      CP4                  DP4B DP1B        CP1       CP3
+               P3   GND    P2                                      P4                  P1
+                                                                                                                                              JIO
+                VPWR
+
+
+                                Figure 61. Four Port Layout Example
+
+
+10.2.1 Component Placement and Routing Guidelines
+
+10.2.1.1  Power Pin Bypass Capacitors
+
+CVPWR: Place close to pin 28 (VPWR) and connect with low inductance traces and vias according to Figure 61.
+CVDD: Place close to pin 1 (VDD) and connect with low inductance traces and vias according to Figure 61.
+
+10.2.1.2  Per-Port Components
+
+RSnA  / RSnB: Place according  to Figure 60  in a manner  that  facilitates a clean Kelvin connection with
+KSENSEA/B.
+
+QPn: Place QPn around the TPS23861 as illustrated in Figure 61. Provide sufficient copper from QPn-D to FPn.
+RDRNn: Place RDRNn near to QPn-D. Connect to DRAINn pins as illustrated in Figure 61.
+RSENn: Place RSENn near to QPn-S. Connect to SENn pins as illustrated in Figure 61.
+FPn, CPn, DPnA, DPnB: Place this circuit group near the RJ45 port connector (or port power interface if a daughter
+board type of interface is used as illustrated in Figure 61). Connect this circuit group to QPn-D / GND (TPS23861-
+AGND) using low inductance traces.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     99
+
+                                                 Product Folder Links: TPS23861

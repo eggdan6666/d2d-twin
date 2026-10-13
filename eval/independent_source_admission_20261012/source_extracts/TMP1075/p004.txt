@@ -1,0 +1,81 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+5 Pin Configuration and Functions
+
+
+
+
+         SDA     1                                   8     V+
+                                                           SDA       1                            8      V+
+
+
+                                                               SCL       2                            7      A0
+          SCL    2                                   7     A0
+
+                                                             ALERT        3                            6      A1
+
+
+        ALERT     3                                   6     A1                                                       GND       4                            5      A2
+
+
+        GND     4                                   5     A2           .
+
+     Figure 5-1. D Package 8-Pin SOIC Top View      Figure 5-2. DGK Package 8-Pin VSSOP Top View
+
+
+            SDA   1                        8   V+
+                                                                     SCL      1               6    SDA
+
+
+             SCL   2                        7   A0
+                                                            GND     2               5     V+
+
+
+           ALERT   3                        6   A1
+
+                                                                   ALERT      3               4     A0
+
+
+           GND   4                        5   A2
+
+
+                                                                                                       1.    Pin 1 is determined by orienting the package marking as indicated in the diagram.
+  .                                                                                                   2.    Referred to as the TMP1075N orderable throughout the document.
+
+  .                                                   Figure 5-4. DRL Package 6-Pin SOT563 Top View
+   Figure 5-3. DSG Package 8-Pin WSON Top View
+
+                                      Table 5-1. Pin Functions
+                     PIN
+                  SOIC /                       TYPE(1)                      DESCRIPTION
+ NAME          VSSOP /       SOT563
+              WSON
+
+ A0                   7             4                        I      Address select A0: Connect to GND, V+, SDA, or SCL
+
+ A1                   6       —                       I      Address select A1: Connect to GND, V+, SDA, or SCL
+
+ A2                   5       —                       I      Address select A2: Connect to GND or V+
+
+ ALERT               3             3        O     Overtemperature alert; Open-drain output that requires a pullup resistor
+
+ GND                 4             2      —     Ground
+
+ SCL                  2             1                        I       Serial clock
+
+ SDA                  1             6              I/O      Serial data. Open-drain output that requires a pullup resistor
+
+                                                            Supply voltage, 1.7 V to 5.5 V (TMP1075); 1.62 V to 3.6 V
+ V+                   8             5                        I
+                                                      (TMP1075N)
+
+ (1)     I = Input, O = Output, I/O = Input or Output
+
+
+
+
+
+4     Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

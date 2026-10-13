@@ -1,0 +1,71 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+                                           Note
+    The configuration register supports single-byte read and write over I2C bus to  verify software
+      compatibility with other xx75 standard temperature sensors like TMP75 and LM75. When a single
+     byte write is performed, the data byte on the I2C bus updates the register bits 15-8. Similarly when a
+      single byte read is performed, the data bits 15-8 is transferred over the I2C bus.
+
+
+ 7.5.1.3 Low Limit Register (address = 02h) [default reset = 4B00h]
+
+The register is configured as a 12-bit, read/write register and data is represented in two's complement format.
+ Figure 7-14 shows the layout for TLOW is the same as the temperature register. The default reset value is 4B00h
+and corresponds to 75°C.
+
+                                   Figure 7-14. Low Limit Register
+       15            14            13            12             11            10             9             8
+
+      L11           L10            L9            L8            L7            L6            L5            L4
+
+     R/W-0         R/W-1         R/W-0         R/W-0         R/W-1         R/W-0         R/W-1         R/W-1
+
+       7             6             5             4             3             2             1             0
+
+       L3            L2            L1            L0             0             0             0             0
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+                            Table 7-9. Low Limit Register Field Description
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:4     L[11:0]                      R/W     4B0h         12-bit, read-write register that stores the low limit for comparison
+                                                                            with temperature results.
+
+     3:0  —                         R/W     0h         Not used
+
+ 7.5.1.4 High Limit Register (address = 03h) [default reset = 5000h]
+
+The register is configured as a 12-bit, read/write register and data is represented in two's complement format.
+ Figure 7-15 show the layout for THIGH is the same as the temperature register. The default reset value is 5000h
+and corresponds to 80°C.
+
+                                   Figure 7-15. High Limit Register
+       15            14            13            12             11            10             9             8
+
+      H11          H10          H9          H8          H7          H6          H5          H4
+
+     R/W-0         R/W-1         R/W-0         R/W-1         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+      H3          H2          H1          H0            0             0             0             0
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+                           Table 7-10. High Limit Register Field Description
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:4     H[11:0]                     R/W     500h         12-bit, read-write register that stores the high limit for
+                                                                 comparison with temperature results.
+
+     3:0  —                         R/W     0h         Not used
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    23
+
+                                                  Product Folder Links: TMP1075

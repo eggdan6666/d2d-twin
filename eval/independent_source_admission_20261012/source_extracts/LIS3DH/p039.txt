@@ -1,0 +1,54 @@
+LIS3DH                                                                Registers description
+
+8.14   REFERENCE (26h)
+
+                                     Table 44. REFERENCE register
+
+             Ref7       Ref6      Ref5      Ref4       Ref3       Ref2      Ref1        Ref0
+
+                               Table 45. REFERENCE register description
+
+               Ref[7:0]             Reference value for Interrupt generation. Default value: 0000 0000
+
+
+8.15   STATUS_REG (27h)
+
+                                       Table 46. STATUS register
+
+          ZYXOR   ZOR     YOR    XOR     ZYXDA    ZDA    YDA     XDA
+
+                                 Table 47. STATUS register description
+
+          ZYXOR   X, Y and Z-axis data overrun. Default value: 0
+                              (0: no overrun has occurred; 1: a new set of data has overwritten the previous set)
+
+         ZOR      Z-axis data overrun. Default value: 0
+                              (0: no overrun has occurred;
+                            1: a new data for the Z-axis has overwritten the previous data)
+
+         YOR      Y-axis data overrun. Default value: 0
+                              (0: no overrun has occurred;
+                            1: new data for the Y-axis has overwritten the previous data)
+
+         XOR      X-axis data overrun. Default value: 0
+                              (0: no overrun has occurred;
+                            1: new data for the X-axis has overwritten the previous data)
+
+          ZYXDA    X, Y and Z-axis new data available. Default value: 0
+                              (0: a new set of data is not yet available; 1: a new set of data is available)
+
+          ZDA       Z-axis new data available. Default value: 0
+                              (0: new data for the Z-axis is not yet available;
+                            1: new data for the Z-axis is available)
+
+          YDA       Y-axis new data available. Default value: 0
+                              (0: new data for the Y-axis is not yet available;
+                            1: new data for the Y-axis is available)
+
+
+
+
+
+                                      DocID17530 Rev 2                                      39/54
+
+                                                                                                                            54

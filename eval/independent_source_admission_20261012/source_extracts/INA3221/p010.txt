@@ -1,0 +1,64 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+7 Detailed Description
+ 7.1 Overview
+The INA3221 is a current-shunt and bus voltage monitor that communicates over an I2C- and SMBus-compatible
+ interface. The INA3221 provides digital shunt and bus voltage readings necessary for accurate decision making
+ in precisely-controlled systems, and also monitors multiple rails to maintain compliance voltages. Programmable
+ registers offer flexible configuration for measurement precision, and continuous versus single-shot operation.
+The Register Maps section provides details of the INA3221 registers, beginning with Table 8-1.
+
+ 7.2 Functional Block Diagram
+
+                                                                                 Bus Voltage(1)       X
+
+
+
+
+               Shunt Voltage                                   Channel 2                  Power Valid(2)
+                 Channel                                                              Upper Limit
+                                                             Channel 3
+                              ADC
+
+
+              Bus Voltage
+                 Channel                                                             Power Valid
+                                                                                      Lower Limit(2)
+
+
+
+                                                                                        Shunt Voltage(1)      X
+
+
+
+
+
+                                                                                                                          Critical Limit(2)
+
+
+
+
+                                                                                       Warning Limit(2)
+
+
+
+
+                                                             Channel 2                    Summation(1)
+
+                                                             Channel 3
+
+
+
+                                                                                 Summation Limit(2)
+
+ A.   Read-only.
+ B.   Read/write.
+
+
+
+
+
+10    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

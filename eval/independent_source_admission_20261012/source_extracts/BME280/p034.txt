@@ -1,0 +1,62 @@
+Bosch Sensortec | BME280 Data sheet                                            34 | 60
+
+
+6.3  SPI interface
+The SPI interface is compatible with SPI mode ‘00’ (CPOL = CPHA = ‘0’) and mode ‘11’ (CPOL =
+CPHA = ‘1’). The automatic selection between mode ‘00’ and ‘11’ is determined by the value of SCK
+after the CSB falling edge.
+The SPI interface has two modes: 4-wire and 3-wire. The protocol is the same for both. The 3-wire
+mode is selected by setting ‘1’ to the register spi3w_en. The pad SDI is used as a data pad in 3-wire
+mode.
+
+The SPI interface uses the following pins:
+    •  CSB:   chip select, active low
+    •  SCK:   serial clock
+    •   SDI:    serial data input; data input/output in 3-wire mode
+    •  SDO:   serial data output; hi-Z in 3-wire mode
+Refer to chapter 7 for connection instructions.
+
+CSB is active low and has an integrated pull-up resistor. Data on SDI is latched by the device at SCK
+rising edge and SDO is changed at SCK falling edge. Communication starts when CSB goes to low
+and stops when CSB goes to high; during these transitions on CSB, SCK must be stable. The SPI
+protocol is shown in Figure 11. For timing details, please review Table 34.
+
+       CSB
+
+
+       SCK
+
+
+        SDI
+
+                 RW  AD6  AD5  AD4  AD3  AD2  AD1  AD0  DI7   DI6   DI5   DI4   DI3   DI2   DI1   DI0
+
+      SDO
+
+                                                       DO7 DO6 DO5 DO4 DO3 DO2 DO1 DO0 tri-state
+Figure 11: SPI protocol (shown for mode ‘11’ in 4-wire configuration)
+
+In SPI mode, only 7 bits of the register addresses are used; the MSB of register address is not used
+and replaced by a read/write bit (RW = ‘0’ for write and RW = ‘1’ for read).
+Example: address 0xF7 is accessed by using SPI register address 0x77. For write access, the byte
+0x77 is transferred, for read access, the byte 0xF7 is transferred.
+6.3.1  SPI write
+Writing is done by lowering CSB and sending pairs control bytes and register data. The control bytes
+consist of the SPI register address (= full register address without bit 7) and the write command (bit7 =
+RW = ‘0’). Several pairs can be written without raising CSB. The transaction is ended by a raising
+CSB. The SPI write protocol is depicted in Figure 12.
+
+
+                     Control byte                                Data byte                                  Control byte                                Data byte
+  Start RW         Register address (F4h)                   Data register - address F4h        RW         Register address (F5h)                    Data register - adress F5h               Stop
+ CSB                                                                                                                                       CSB
+   =    0   1   1   1   0   1   0   0    bit7    bit6    bit5    bit4    bit3    bit2    bit1   bit0   0   1   1   1   0   1   0   1    bit7    bit6    bit5    bit4    bit3    bit2    bit1   bit0    =
+   0                                                                                                                                                                         1
+
+Figure 12: SPI multiple byte write (not auto-incremented)
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

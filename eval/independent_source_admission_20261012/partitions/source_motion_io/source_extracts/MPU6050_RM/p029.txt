@@ -1,0 +1,98 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           29 of 46  
+   
+4.17 Registers 59 to 64 – Accelerometer Measurements 
+ACCEL_XOUT_H, ACCEL_XOUT_L, ACCEL_YOUT_H, ACCEL_YOUT_L, ACCEL_ZOUT_H, and 
+ACCEL_ZOUT_L 
+ 
+Type: Read Only 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+3B 
+59 
+ 
+ACCEL_XOUT[15:8] 
+3C 
+60 
+ 
+ACCEL_XOUT[7:0] 
+3D 
+61 
+ 
+ACCEL_YOUT[15:8] 
+3E 
+62 
+ 
+ACCEL_YOUT[7:0] 
+3F 
+63 
+ 
+ACCEL_ZOUT[15:8] 
+40 
+64 
+ 
+ACCEL_ZOUT[7:0] 
+ 
+Description: 
+These registers store the most recent accelerometer measurements.  
+Accelerometer measurements are written to these registers at the Sample Rate as defined in 
+Register 25.  
+The accelerometer measurement registers, along with the temperature measurement registers, 
+gyroscope measurement registers, and external sensor data registers, are composed of two sets of 
+registers: an internal register set and a user-facing read register set.  
+The data within the accelerometer sensors’ internal register set is always updated at the Sample 
+Rate. Meanwhile, the user-facing read register set duplicates the internal register set’s data values 
+whenever the serial interface is idle. This guarantees that a burst read of sensor registers will read 
+measurements from the same sampling instant. Note that if burst reads are not used, the user is 
+responsible for ensuring a set of single byte reads correspond to a single sampling instant by 
+checking the Data Ready interrupt.  
+Each 16-bit accelerometer measurement has a full scale defined in ACCEL_FS (Register 28). For 
+each full scale setting, the accelerometers’ sensitivity per LSB in ACCEL_xOUT is shown in the table 
+below. 
+AFS_SEL 
+Full Scale Range 
+LSB Sensitivity 
+0 
+±2g 
+16384 LSB/g 
+1 
+±4g 
+8192 LSB/g 
+2 
+±8g 
+4096 LSB/g 
+3 
+±16g 
+2048 LSB/g 
+ 
+ 
+Parameters: 
+ACCEL_XOUT 
+16-bit 2’s complement value.  
+ 
+Stores the most recent X axis accelerometer measurement. 
+ACCEL_YOUT 
+16-bit 2’s complement value.  
+ 
+Stores the most recent Y axis accelerometer measurement. 
+ACCEL_ZOUT 
+16-bit 2’s complement value.  
+ 
+Stores the most recent Z axis accelerometer measurement. 

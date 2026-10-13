@@ -1,0 +1,42 @@
+Bosch Sensortec | BME280 Data sheet                                            21 | 60
+
+
+Table 10: Settings and performance for gaming
+
+                           Suggested settings for gaming
+ Sensor mode                   normal mode, tstandby = 0.5 ms
+ Oversampling settings            pressure ×4, temperature ×1, humidity ×0
+  IIR filter settings                            filter coefficient 16
+                         Performance for suggested settings
+ Current consumption            581 µA
+ RMS Noise                       0.3 Pa / 2.5 cm
+ Data output rate                83 Hz
+  Filter bandwidth                  1.75 Hz
+ Response time (75%)             0.3 s
+
+3.6  Noise
+The noise depends on the oversampling and, for pressure and temperature, on the filter setting used.
+The stated values were determined in a controlled environment and are based on the average
+standard deviation of 32 consecutive measurement points taken at highest sampling speed. This is
+needed in order to exclude long term drifts from the noise measurement. The noise depends both on
+humidity/pressure oversampling and temperature oversampling, since the temperature value is used
+for humidity/pressure temperature compensation. The oversampling combinations use below results in
+an optimal power to noise ratio.
+
+Table 11: Noise and current for humidity
+
+   Humidity / temperature       Typical RMS noise in       Typ. current [µA] at 1 Hz forced
+    oversampling setting     humidity [%RH] at 25 °C       mode, 25 °C, humidity and
+                                                       temperature measurement, incl.
+                                                                                 IDDSM
+          ×1 / ×1                       0.07                               1.8
+          ×2 / ×1                       0.05                               2.5
+          ×4 / ×1                       0.04                               3.8
+          ×8 / ×1                       0.03                               6.5
+                                        0.02                              11.7         ×16 / ×1
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

@@ -1,0 +1,83 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+The PV pin allows for a 0V output that indicates a power-invalid condition. An output equal to the pull-up supply
+ voltage connected to the VPU pin indicates a power-valid condition, as shown in Figure 7-2. Dividing down the
+ high power-valid pull-up voltage by adding a resistor to ground at the PV output is also possible, thus allowing
+ this function to interface with lower-voltage circuitry, if needed.
+
+                                                                                              VS
+
+                                      INA3221
+                                                                     VPU
+
+
+                                                                                                                                   RPU_ext
+
+                                                                        PV
+                                                                       RPU
+
+
+                                                        Power-Valid                                                 RDIV (1)
+                                                           Detection
+
+
+
+ A.   RDIV can be used to level-shift the PV output high.
+
+                               Figure 7-2. Power-Valid Output Structure
+
+ 7.3.2.4 Timing-Control Alert
+
+The INA3221 timing-control alert function helps verify proper power-supply sequencing. At power-up, the default
+INA3221 setting is continuous shunt- and bus-voltage conversion mode, and the INA3221 internally begins
+ comparing the channel-1 bus voltage to determine when a 1.2V level is reached. This comparison is made each
+ time the sequence returns to the channel-1 bus-voltage measurement. When a 1.2V level is detected on the
+ channel-1 bus-voltage measurement, the INA3221 begins checking for a 1.2V level present on the channel-2
+ bus-voltage measurement. After a 1.2V level is detected on channel 1,  if the INA3221 does not detect a 1.2V
+ value or greater on the bus voltage measurement following four complete cycles of all three channels, the timing
+ control (TC) alert pin pulls low to indicate that the INA3221 has not detected a valid power rail on channel 2. As
+shown in Figure 7-3, this sequence allows for approximately 28.6ms from the time 1.2V is detected on channel 1
+ for a valid voltage to be detected on channel 2. Figure 7-4 illustrates the state diagram for the TC alert pin.
+
+                                    1.2V Detected on Channel-1                                      Measure For 1.2V on
+                                      Bus-Voltage Measurement                                         Channel-2 Bus Voltage
+
+
+
+                                         Signal   S B  S B  S B  S B  S B  S B  S B  S B  S B  S B  S B  S B S B  S B  S B
+
+                                  Channel   Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch  Ch
+                                           1    2    3   1    2    3   1    2    3   1    2    3   1    2    3
+
+                                                     2.2ms
+
+                                                                         28.6ms
+
+
+    NOTE: The signal refers to the corresponding shunt (S) and bus (B) voltage measurement for each channel.
+
+                              Figure 7-3. Timing Control Timing Diagram
+
+
+                                 1.2V Detected on Channel-1          Measure for 1.2V
+                                   Bus-Voltage Measurement       on Channel-2 Bus Voltage
+
+
+                                                                                       1.2V on Channel 2 Detected
+                                      High
+
+                                 Timing
+                                   Control
+                                Output                  28.6ms
+                                                                                     1.2V on Channel 2 Not Detected
+                                 Low
+
+                              Figure 7-4. Timing Control State Diagram
+
+
+
+
+14    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

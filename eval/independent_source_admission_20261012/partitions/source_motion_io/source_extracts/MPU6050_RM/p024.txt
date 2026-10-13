@@ -1,0 +1,44 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           24 of 46  
+   
+Parameters: 
+I2C_SLV4_RW 
+When set to 1, this bit configures the data transfer as a read operation. 
+When cleared to 0, this bit configures the data transfer as a write operation. 
+I2C_SLV4_ADDR 
+7-bit I2C address for Slave 4. 
+I2C_SLV4_REG 
+8-bit address of the Slave 4 register to/from which data transfer starts. 
+I2C_SLV4_DO 
+This register stores the data to be written into the Slave 4.  
+If I2C_SLV4_RW is set 1 (set to read), this register has no effect. 
+I2C_SLV4_EN 
+When set to 1, this bit enables Slave 4 for data transfer operations.  
+When cleared to 0, this bit disables Slave 4 from data transfer operations.  
+I2C_SLV4_INT_EN 
+When set to 1, this bit enables the generation of an interrupt signal upon 
+completion of a Slave 4 transaction. 
+ 
+When cleared to 0, this bit disables the generation of an interrupt signal 
+upon completion of a Slave 4 transaction. 
+ 
+The interrupt status can be observed in Register 54.  
+I2C_SLV4_REG_DIS 
+When set to 1, the transaction will read or write data. 
+When cleared to 0, the transaction will read or write a register address. 
+I2C_MST_DLY 
+Configures the decreased access rate of slave devices relative to the 
+Sample Rate.  
+I2C_SLV4_DI 
+This register stores the data read from Slave 4.  
+ 
+This field is populated after a read transaction. 
+ 
+ 

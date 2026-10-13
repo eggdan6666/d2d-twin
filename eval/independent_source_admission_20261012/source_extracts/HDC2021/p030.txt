@@ -1,0 +1,50 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.15 Device Configuration (Address: 0x0E)
+
+                      Table 7-35. Device Configuration Register (Address: 0x0E)
+
+       7             6             5             4             3             2             1             0
+
+  SOFT_RES                       CC[2:0]                  HEAT_EN    DRDY/INT_EN    INT_POL     INT_MODE
+
+                     Table 7-36. Device Configuration Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7    SOFT_RES                  R/W     0          0 = Normal Operation
+                                                             1 = Trigger a Soft Reset. This bit self-clears after RESET.
+     [6:4]    CC[2:0]                     R/W     0           Configure the measurement mode to one-shot or continuous
+                                                                         conversion. The bits also allow sampling frequency to be
+                                                            programmed in continuous conversion mode.
+                                                             000 = Continuous conversion disabled (one-shot mode)
+                                                             001 = 1/120Hz (1 samples every 2 minutes)
+                                                             010 = 1/60Hz (1 samples every minute)
+                                                                011 = 0.1Hz (1 samples every 10 seconds)
+                                                             100 = 0.2 Hz (1 samples every 5 second)
+                                                             101 = 1Hz (1 samples every second)
+                                                                110 = 2Hz (2 samples every second)
+                                                                   111 = 5Hz (5 samples every second)
+
+     3    HEAT_EN                   R/W     0          0 = Heater off
+                                                             1 = Heater on
+
+     2     DRDY/INT_EN                R/W     0         DRDY/INT_EN pin configuration
+                                                             0 = High Z
+                                                             1 = Enable
+
+     1     INT_POL                    R/W     0             Interrupt polarity
+                                                             0 = Active Low
+                                                             1 = Active High
+
+     0    INT_MODE                  R/W     0             Interrupt mode
+                                                             0 = Clear-on-read mode
+                                                             1 = Comparator mode
+
+
+
+
+
+30    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

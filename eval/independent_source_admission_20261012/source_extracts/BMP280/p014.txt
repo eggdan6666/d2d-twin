@@ -1,0 +1,51 @@
+Bosch Sensortec | BMP280 Data sheet                                                          14 | 49
+
+
+
+                                                 Table 6: filter settings
+                                    Filter coefficient     Samples to reach ≥75 %
+                                                         of step response
+                                              Filter off                   1
+                                 2                      2
+                                 4                      5
+                                 8                       11
+                                 16                     22
+
+         In order to find a suitable setting for filter, please consult chapter 3.4.
+
+      When writing to the register filter, the filter is reset. The next value will pass through the filter and be
+        the initial memory value for the filter. If temperature or pressure measurement is skipped, the
+        corresponding filter memory will be kept unchanged even though the output registers are set to
+       0x80000. When the previously skipped measurement is re-enabled, the output will be filtered using the
+            filter memory from the last time when the measurement was not skipped.
+
+       3.4   Filter selection
+         In order to select optimal settings, the following use cases are suggested:
+
+                                 Table 7: Recommended filter settings based on use cases
+           Use case     Mode     Over-    osrs_p    osrs_t      IIR       IDD   ODR   RMS
+                                  sampling                                filter    [µA]     [Hz]    Noise
+                                         setting                           coeff.     (see       (see     [cm]
+                                                                                        (see        3.7)       3.8.2)      (see
+                                                                                                     3.3.3)                                3.5)
+         handheld device   Normal    Ultra high    ×16      ×2       4      247     10.0      4.0
+            low-power                  resolution
+              (e.g. Android)
+         handheld device   Normal   Standard     ×4       ×1      16     577     83.3      2.4
+            dynamic                   resolution
+              (e.g. Android)
+            Weather       Forced    Ultra low     ×1       ×1        Off     0.14     1/60     26.4
+             monitoring                power
+            (lowest power)
+           Elevator / floor    Normal   Standard     ×4       ×1       4      50.9      7.3      6.4
+         change detection               resolution
+          Drop detection    Normal     Low       ×2       ×1        Off     509     125     20.8
+                                    power
+          Indoor navigation   Normal    Ultra high    ×16      ×2      16     650     26.3      1.6
+                                           resolution
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

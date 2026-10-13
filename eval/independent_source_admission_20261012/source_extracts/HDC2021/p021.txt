@@ -1,0 +1,55 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.1 Temperature Low (Address: 0x00)
+
+                         Table 7-7. Temperature Low Register (Address 0x00)
+
+       7             6             5             4             3             2             1             0
+
+                                                        TEMP[7:0]
+
+                        Table 7-8. Temperature Low Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+     [7:0]   TEMPERATURE [7:0]          R       0          Temperature data- lower byte
+
+The temperature data is a 16-bits value that spans accross the Temperature Low (address 0x00) and
+ Temperature High (address 0x01) registers. The Temperature Low register containts the lower-byte of the 16-bits
+ temperature data.
+
+The temperature can be calculated from the output data using Equation 1:
+
+                            § TEMPERATURE [15 : 0] ·
+    Temperature ( qC)   ¨             16             ¸ u 165  40                            ©        2               ¹                                                                  (1)
+
+ 7.6.2 Temperature High (Address: 0x01)
+
+                         Table 7-9. Temperature High Register (Address 0x01)
+
+       7             6             5             4             3             2             1             0
+
+                                                       TEMP[15:8]
+
+                       Table 7-10. Temperature High Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+    [15:8]   TEMPERATURE [15:8]         R       0          Temperature data- higher byte
+
+
+The temperature data is a 16-bits value that spans accross the Temperature Low (address 0x00) and
+ Temperature High (address 0x01) registers. The Temperature High register containts the higher-byte of the 16-
+ bits temperature data.
+
+The temperature can be calculated from the output data using Equation 2:
+
+                            § TEMPERATURE [15 : 0] ·
+    Temperature ( qC)   ¨             16             ¸ u 165  40                            ©        2               ¹                                                                  (2)
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    21

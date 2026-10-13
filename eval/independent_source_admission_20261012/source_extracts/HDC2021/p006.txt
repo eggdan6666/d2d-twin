@@ -1,0 +1,66 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+           PARAMETER                        TEST CONDITION                 MIN   TYP   MAX  UNIT
+ VOL           Low level output voltage    IOL = 3 mA                                                                  0.4   V
+                                                    SCL                                     1.7          pF
+ CI                 Input pin capacitance(12)    VI = VDD or GND
+                                                 SDA                                    1.6          pF
+
+                                                    SCL                             -0.1               0.1   µA
+   II                  Input leakage current       VI = VDD, or 3.6V, or GND
+                                                 SDA                             -0.1               0.1   µA
+
+ DRDY/INT PIN
+                                                                                 VDD –                                     VDD = 1.62V to 3.60V      IOH = -100 µA.                              V                                                                                                         0.2                 High Level Output Voltage
+ VOH                    (Figure 6-11)            VDD = 3.3V                                                2.4               V
+                                                                        IOH = -2 mA.
+                                     VDD = 1.8V                                                1.1               V
+                                     VDD = 1.62V to 3.60V       IOL = 100 µA.                                     0.2   V
+               Low Level Output Voltage
+ VOL                                 VDD = 3.3V                                                                  0.4   V
+                    (Figure 6-10)                                             IOL = 2 mA.
+                                     VDD = 1.8V                                                              0.45   V
+                  Output leakage current in
+ IOZ_DRDY                             DRDY/INT Pin = Hi-Z.                                        -0.1               0.1   µA                   Hi-Z
+
+ (1)  Does not include I2C read/write communication or pullup resistor current through SCL and SDA
+ (2)   Average current consumption while conversion is in progress
+ (3)   Excludes hysteresis and long-term drift
+ (4)   Excludes the impact of dust, gas phase solvents and other contaminents such as vapors from packaging materials, adhesives, or
+       tapes, etc.
+ (5)   Limits apply over the humidity operating 20% to 80% RH (non-condensing) from 0°C to 60°C
+ (6)   This parameter is specified by design and/or characterization and is not tested in production
+ (7)   Over-temperature performance is specified by design and/or characterization
+ (8)  The hysteresis value is the difference between the RH measurement in a rising and falling RH environment, at a specific RH point
+ (9)   Actual response times will vary dependent on system thermal mass and air-flow
+ (10)  Time for the RH output to change by 63% of the total RH change after a step change in environmental humidity
+ (11)   Drift due to aging effects at typical conditions (30°C and 20% to 50% RH). This value may be impacted by dust, vaporized solvents,
+      outgassing tapes, adhesives, packaging materials, etc.
+ (12)  Guaranteed by design/characterization; not production tested
+ 6.6 Switching Characteristics
+TA = -40°C to 125°C and VDD = 1.62V to 3.60V (unless otherwise noted)
+
+                      PARAMETER                                MIN        TYP       MAX   UNIT
+
+ SCL, SDA PINS
+ fSCL     SCL clock frequency(1)                                               10                       400   kHz
+ tLOW    LOW period of the SCL clock(1)                                                1.3                               µs
+ tHIGH      High period of the SCL clock(1)                                                0.6                               µs
+ tSU;DAT    Setup Time: Data(1)                                                100                               ns
+ tHD;DAT    Hold Time: Data(1)                                                   0                               µs
+ tSU;STA    Set-up time: Repeated START condition(1)                                     0.6                               µs
+ tHD;STA    Hold time: Repeated START condition(1) (2)                                     0.6                               µs
+ tSU;STO    Set-up time: STOP condition(1)                                                0.6                               µs
+ tR;SCL     Rise Time: SCL(1)                                                                            300    ns
+ tR;SDA     Rise Time: SDA(1)                                                                           300    ns
+  tF;SCL       Fall Time: SCL(1)                                                 20*(VDD/5.5V)                       300    ns
+ tF;SDA       Fall Time: SDA(1)                                                 20*(VDD/5.5V)                       300    ns
+ tBUF      Bus free time between a STOP and START condition(1)                         1.3                               µs
+ tVD;DAT    Data valid time(1) (3)                                                                                         0.9    µs
+ tVD;ACK    Data valid acknowledge time(1) (4)                                                                            0.9    µs
+
+
+
+
+6     Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

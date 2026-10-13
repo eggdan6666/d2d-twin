@@ -1,0 +1,65 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6 Register Map
+
+                                    Table 8-3. TMP126 Registers
+  ADDRESS    TYPE     RESET   ACRONYM            REGISTER NAME                      SECTION
+
+     00h       R         0000h    Temp_Result              Temperature result register                  Go
+
+     01h       R         0000h    Slew_Result              Slew rate result register                    Go
+
+     02h       R/RC       0000h     Alert_Status                   Alert status register                       Go
+
+     03h       R/W        0006h     Configuration                Configuration register                     Go
+
+     04h       R/W        0016h    Alert_Enable                  Alert enable register                      Go
+
+     05h       R/W       F380h    TLow_Limit                Temperature low limit register                Go
+
+     06h       R/W       2A80h    THigh_Limit               Temperature high limit register               Go
+
+     07h       R/W       0A0Ah    Hysteresis                  Hysteresis register                       Go
+
+     08h       R/W        0500h    Slew_Limit                Temperature slew rate limit register            Go
+
+     09h       R          xxxxh    Unique_ID1               Unique ID1 register                       Go
+
+     0Ah       R          xxxxh    Unique_ID2               Unique ID2 register                       Go
+
+     0Bh       R          xxxxh    Unique_ID3               Unique ID3 register                       Go
+
+    0Ch       R         2126h    Device_ID                 Device ID register                        Go
+
+   10h-2Ah      R          xxxxh    Reserved                 Reserved
+
+                                Table 8-4. TMP126 Access Type Codes
+                            Access Type   Code           Description
+
+                           Read Type
+
+                      R          R            Read
+
+                      RC         R            Read
+                                 C                 to Clear
+
+                              R-0         R            Read
+                                                      -0              Returns 0s
+
+                                   Write Type
+
+                 W       W               Write
+
+                               Reset or Default Value
+
+                                    -n                              Value after reset or the default
+                                                                  value
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    25
+
+                                                  Product Folder Links: TMP126

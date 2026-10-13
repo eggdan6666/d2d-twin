@@ -1,0 +1,70 @@
+Bosch Sensortec | BME280 Data sheet                                            25 | 60
+
+
+        0xE7                  dig_H6             signed char
+4.2.3  Compensation formulas
+Please note that it is strongly advised to use the API available from Bosch Sensortec to perform
+readout and compensation. If this is not wanted, the code below can be applied at the user’s risk. Both
+pressure and temperature values are expected to be received in 20 bit format, positive, stored in a 32
+bit signed integer. Humidity is expected to be received in 16 bit format, positive, stored in a 32 bit
+signed integer.
+The variable t_fine (signed 32 bit) carries a fine resolution temperature value over to the pressure and
+humidity compensation formula and could be implemented as a global variable.
+The data type “BME280_S32_t” should define a 32 bit signed integer variable type and can usually be
+defined as “long signed int”.
+The data type “BME280_U32_t” should define a 32 bit unsigned integer variable type and can usually
+be defined as “long unsigned int”.
+For best possible calculation accuracy in pressure, 64 bit integer support is needed. If this is not
+possible on your platform, please see appendix 8.2 for a 32 bit alternative.
+The data type “BME280_S64_t” should define a 64 bit signed integer variable type, which on most
+supporting platforms can be defined as “long long signed int”. The revision of the code is rev.1.1.
+
+// Returns temperature in DegC, resolution is 0.01 DegC. Output value of “5123” equals 51.23
+DegC.
+// t_fine carries fine temperature as global value
+BME280_S32_t t_fine;
+BME280_S32_t BME280_compensate_T_int32(BME280_S32_t adc_T)
+{
+   BME280_S32_t var1, var2, T;
+   var1  = ((((adc_T>>3) – ((BME280_S32_t)dig_T1<<1))) * ((BME280_S32_t)dig_T2)) >> 11;
+   var2  = (((((adc_T>>4) – ((BME280_S32_t)dig_T1)) * ((adc_T>>4) – ((BME280_S32_t)dig_T1)))
+>> 12) *
+      ((BME280_S32_t)dig_T3)) >> 14;
+   t_fine = var1 + var2;
+   T  = (t_fine * 5 + 128) >> 8;
+   return T;
+}
+// Returns pressure in Pa as unsigned 32 bit integer in Q24.8 format (24 integer bits and 8
+fractional bits).
+// Output value of “24674867” represents 24674867/256 = 96386.2 Pa = 963.862 hPa
+BME280_U32_t BME280_compensate_P_int64(BME280_S32_t adc_P)
+{
+   BME280_S64_t var1, var2, p;
+   var1 = ((BME280_S64_t)t_fine) – 128000;
+   var2 = var1 * var1 * (BME280_S64_t)dig_P6;
+   var2 = var2 + ((var1*(BME280_S64_t)dig_P5)<<17);
+   var2 = var2 + (((BME280_S64_t)dig_P4)<<35);
+   var1 = ((var1 * var1 * (BME280_S64_t)dig_P3)>>8) + ((var1 * (BME280_S64_t)dig_P2)<<12);
+   var1 = (((((BME280_S64_t)1)<<47)+var1))*((BME280_S64_t)dig_P1)>>33;
+   if (var1 == 0)
+   {
+      return 0; // avoid exception caused by division by zero
+   }
+   p = 1048576-adc_P;
+   p = (((p<<31)-var2)*3125)/var1;
+   var1 = (((BME280_S64_t)dig_P9) * (p>>13) * (p>>13)) >> 25;
+   var2 = (((BME280_S64_t)dig_P8) * p) >> 19;
+   p = ((p + var1 + var2) >> 8) + (((BME280_S64_t)dig_P7)<<4);
+   return (BME280_U32_t)p;
+}
+// Returns humidity in %RH as unsigned 32 bit integer in Q22.10 format (22 integer and 10
+fractional bits).
+// Output value of “47445” represents 47445/1024 = 46.333 %RH
+BME280_U32_t bme280_compensate_H_int32(BME280_S32_t adc_H)
+{
+   BME280_S32_t v_x1_u32r;
+   v_x1_u32r = (t_fine – ((BME280_S32_t)76800));
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

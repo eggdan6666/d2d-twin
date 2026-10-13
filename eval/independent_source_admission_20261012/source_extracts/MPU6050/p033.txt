@@ -1,0 +1,62 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+9   Digital Interface
+9.1   I2C and SPI (MPU-6000 only) Serial Interfaces
+The internal registers and memory of the MPU-6000/MPU-6050 can be accessed using either I2C at 400 kHz
+or SPI at 1MHz (MPU-6000 only). SPI operates in four-wire mode.
+
+
+Serial Interface
+
+  Pin Number   MPU-6000   MPU-6050    Pin Name    Pin Description
+
+      8          Y                      /CS      SPI chip select (0=SPI enable)
+
+      8                    Y        VLOGIC      Digital I/O supply voltage. VLOGIC must be ≤ VDD at all times.
+      9          Y                 AD0 / SDO    I2C Slave Address LSB (AD0); SPI serial data output (SDO)
+      9                    Y         AD0       I2C Slave Address LSB
+      23         Y                SCL / SCLK    I2C serial clock (SCL); SPI serial clock (SCLK)
+      23                   Y         SCL       I2C serial clock
+      24         Y                SDA / SDI     I2C serial data (SDA); SPI serial data input (SDI)
+      24                   Y        SDA       I2C serial data
+
+
+Note:
+To prevent switching into I2C mode when using SPI (MPU-6000), the I2C interface should be disabled by
+setting the I2C_IF_DIS configuration bit. Setting this bit should be performed immediately after waiting for the
+time specified by the “Start-Up Time for Register Read/Write” in Section 6.3.
+
+For further information regarding the I2C_IF_DIS bit, please refer to the MPU-6000/MPU-6050 Register Map
+and Register Descriptions document.
+
+
+9.2   I2C Interface
+I2C is a two-wire interface comprised of the signals serial data (SDA) and serial clock (SCL). In general, the
+lines are open-drain and bi-directional. In a generalized I2C interface implementation, attached devices can
+be a master or a slave. The master device puts the slave address on the bus, and the slave device with the
+matching address acknowledges the master.
+
+The MPU-60X0 always operates as a slave device when communicating to the system processor, which thus
+acts as the master. SDA and SCL lines typically need pull-up resistors to VDD. The maximum bus speed is
+400 kHz.
+
+The slave address of the MPU-60X0 is b110100X which is 7 bits long. The LSB bit of the 7 bit address is
+determined by the logic level on pin AD0. This allows two MPU-60X0s to be connected to the same I2C bus.
+When used in this configuration, the address of the one of the devices should be b1101000 (pin AD0 is logic
+low) and the address of the other should be b1101001 (pin AD0 is logic high).
+
+
+9.3   I2C Communications Protocol
+START (S) and STOP (P) Conditions
+Communication on the I2C bus starts when the master puts the START condition (S) on the bus, which is
+defined as a HIGH-to-LOW transition of the SDA line while SCL line is HIGH (see figure below). The bus is
+considered to be busy until the master puts a STOP condition (P) on the bus, which is defined as a LOW to
+HIGH transition on the SDA line while SCL is HIGH (see figure below).
+
+
+
+
+                                           33 of 52

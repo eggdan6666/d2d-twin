@@ -1,0 +1,75 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.6.1 Temp_Result Register (Address = 00h) [reset = 0000h]
+
+ This register stores the latest temperature conversion result in a 14-bit two's complement format with a LSB
+ (Least Significant Bit) equal to 0.03125°C.
+
+ Return to Register Map.
+
+                                 Figure 8-19. Temp_Result Register
+       15            14            13            12             11            10             9             8
+
+                                                        Temp_Result[13:6]
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                                         Temp_Result[5:0]                                            Reserved
+
+                                         R-00h                                                    R-00b
+
+                          Table 8-5. Temp_Result Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    Temp_Result[13:0]            R       0000h       14-bit temperature conversion result.
+                                                                  Temperature data is represented by a 14-bit, two's complement
+                                                              word with an LSB (Least Significant Bit) equal to 0.03125°C.
+
+     1:0    Reserved                  R       00b        These two bits will always read 00b
+
+
+ 8.6.2 Slew_Result Register (Address = 01h) [reset = 0000h]
+
+ This register shows the latest slew rate calculation. Two consecutive measurements in continuous conversion
+mode are required before a result is shown. When not in continuous conversion mode the register will return to
+ the default value.
+
+The slew rate result is depicted in 14-bit twos-complement format with the LSB equal to 0.03125°C/s. The
+TMP126 does not accurately report negative slew rate values and bit 13 of the output result can be used to
+ indicate a negative slew rate but the output value cannot be guaranteed.
+
+ Return to Register Map.
+
+                                  Figure 8-20. Slew_Result Register
+       15            14            13            12             11            10             9             8
+
+                                                      Slew_Rate_Result[13:6]
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                                      Slew_Rate_Result[5:0]                                          Reserved
+
+                                         R-00h                                                    R-00b
+
+                          Table 8-6. Slew_Result Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    Slew_Rate_Result[13:0]         R       0000h      Temperature slew rate result.
+                                                                  Temperature slew rate is represented by a 14-bit, twos-
+                                                              complement word with an LSB (Least Significant Bit) equal to
+                                                                      0.03125°C/s. Format is°C/s.
+
+     1:0    Reserved                  R       00b        Reserved
+
+
+
+
+
+26    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

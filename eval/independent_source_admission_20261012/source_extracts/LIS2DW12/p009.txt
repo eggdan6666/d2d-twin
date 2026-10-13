@@ -1,0 +1,66 @@
+                                                              LIS2DW12
+                                                                                   Mechanical and electrical specifications
+
+
+2.4      Communication interface characteristics
+
+2.4.1      SPI - serial peripheral interface
+             Subject to general operating conditions for Vdd and Top.
+
+
+                                               Table 6. SPI slave timing values
+
+                                                                                              Value (1)
+                 Symbol                           Parameter                                                     Unit
+                                                                                  Min       Max
+
+                           tc(SPC)        SPI clock cycle                                        100                     ns
+
+                           fc(SPC)        SPI clock frequency                                                10       MHz
+
+                            tsu(CS)      CS setup time                                          6
+
+                            th(CS)      CS hold time                                           8
+
+                                tsu(SI)        SDI input setup time                                     12
+
+                                  th(SI)        SDI input hold time                                      15                      ns
+
+                            tv(SO)      SDO valid output time                                              50
+
+                           th(SO)      SDO output hold time                                    9
+
+                             tdis(SO)      SDO output disable time                                            50
+
+                 1.  10 MHz clock frequency for SPI with both 4 and 3 wires, based on characterization results, not tested in production.
+
+                                              Figure 3. SPI slave timing diagram
+
+
+
+
+                        CS
+
+                                                                                              tsu(CS)                                                      tc(SPC)                                                                        th(CS)
+
+                        SPC
+
+                                                                                                                                   tsu(SI)             th(SI)
+
+
+                              SDI                      MSB IN                                                  LSB IN
+
+                                                                                                                                              tv(SO)                          th(SO)                                                                  tdis(SO)
+
+
+                       SDO                      MSB OUT                                             LSB OUT
+
+
+
+Note:       Measurement points are done at 0.3·Vdd_IO and 0.7·Vdd_IO for both input and output ports.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                        page 9/65

@@ -1,0 +1,47 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.6 Register Map
+
+ 8.6.1 Configuration Registers
+
+The device has four 8-bit configuration registers that are accessible through the serial interface using the RREG
+and WREG commands. After power-up or reset, all registers are set to the default values (which are all 00h).
+ All registers retain the values during power-down mode. Table 8-8 shows the register map of the configuration
+ registers.
+
+                                Table 8-8. Configuration Register Map
+   REGISTER
+                     BIT 7          BIT 6          BIT 5          BIT 4          BIT 3          BIT 2          BIT 1          BIT 0
+      (Hex)
+
+      00h                                MUX[3:0]                                                GAIN[2:0]                PGA_BYPASS
+
+      01h                           DR[2:0]                            MODE[1:0]           CM          TS         BCS
+
+      02h                 VREF[1:0]                         50/60[1:0]           PSW                          IDAC[2:0]
+
+      03h                         I1MUX[2:0]                                     I2MUX[2:0]                DRDYM     RESERVED
+
+ 8.6.2 Register Descriptions
+
+ Table 8-9 lists the access codes for the ADS1220 registers.
+
+                               Table 8-9. Register Access Type Codes
+              Access Type         Code                  Description
+
+            R               R                  Read
+
+             R/W               R/W                   Read-Write
+
+         W           W                       Write
+
+                   -n                                             Value after reset or the default value
+
+
+
+
+
+42    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

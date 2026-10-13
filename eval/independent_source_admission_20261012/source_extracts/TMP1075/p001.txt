@@ -1,0 +1,63 @@
+                                                                                   TMP1075
+                                                                             SBOS854F – MARCH 2018 – REVISED JUNE 2024
+  TMP1075 Temperature Sensor With I2C and SMBus Interface in Industry Standard
+                     LM75 Form Factor and Pinout
+
+1 Features                                       Compatible with two-wire SMBus and I2C interfaces,
+                                                        the TMP1075 support up to 32 device addresses and•  Temperature accuracy:
+                                                       provides SMBus Reset and Alert function.
+   –  ±0.25°C (typical) from −55°C to 125°C
+   –  ±1°C (maximum) from −40 °C to 110°C          The TMP1075 D, DGK, and DSG packages are
+   –  ±2°C (maximum) from −55°C to 125°C              specified for operation over a temperature range of
+•  Low power consumption:                        −55°C to 125°C and the TMP1075N DRL package is
+   –  2.7μA Average current                              specified over the −40°C to 125°C temperature range.
+   –  0.37μA Shutdown current                                             The TMP1075 units are 100% tested on a production
+•  Supply range options from: 1.62V to 5.5V                                                     setup  that  is  NIST  traceable  and  verified  with
+•  Temperature independent of supply                                                  equipment  that  is  calibrated  to  ISO/IEC  17025
+•   Digital interface: SMBus, I2C                                                        accredited standards.
+•  Software compatibility with industry standard LM75
+   and TMP75                                             Package Information
+•  Can coexist in I3C mixed fast mode bus                     PART NUMBER          PACKAGE(1)          PACKAGE SIZE(2)
+•  Resolution: 12 Bits                                                         VSSOP (DGK, 8)         3.00mm × 4.90mm
+•  Supports up to 32 I2C addresses                           TMP1075             SOIC (D, 8)             4.90mm × 6.00mm
+•  ALERT pin function                                                  WSON (DSG, 8)          2.00mm × 2.00mm
+•  NIST traceability                                                                  SOT563 (DRL, 6)(3)       1.60mm × 1.60mm
+2 Applications                                                      (1)(2)   ForThe morepackageinformation,size (lengthsee ×Sectionwidth) is11.a nominal value and
+                                                                            includes pins, where applicable.
+•  Power-supply temperature monitoring                                                                               (3)   Available as the TMP1075N orderable.
+•  Connected peripherals & printers
+•  PC and notebooks                                                                                                                                                       1.7VSupplyto 5.5VVoltage(TMP1075)
+•  Mobile phones                                                                                                                                                          1.62V to 3.6V (TMP1075N)
+
+                                                                                                                                                                                               Resistors
+                                                                                                                                                                                                         Supply Bypass•  Battery management                                                                                                                         Pullup5k
+•  Enterprise machine                                                                                                                                                                     Capacitor0.01µF
+•  Thermostat
+•  Wireless environmental sensor and HVAC                                                             SDA                V+
+•  Electro mechanical device temperature                                           Two-Wire                        SCL                 A0
+                                                                                                                              Host Controller
+3 Description                                                                                                                      ALERT              A1*
+                                                                                                                                                                 A2*
+The TMP1075  is  the most  accurate and  lowest                                       GND
+power replacement to the industry standard LM75                                                            *Pin isTMP1075Nnot available on
+and TMP75  digital temperature sensors. Available
+in  SOIC-8,  VSSOP-8, WSON-8,  and  SOT563-6                  Simplified Schematic
+packages,  the  TMP1075   offers   pin-to-pin  and
+software compatibility to quickly upgrade any existing                          2.53          Average      Average r3V     Min/Max Limit
+xx75 design. The TMP1075 additional new packages                       2
+are a 2.0mm × 2.0mm DFN and a 1.6mm × 1.6mm                                 (qC)  1.51
+SOT563-6 reducing the printed circuit board (PCB)                                                   Error  0.5
+footprint by 82% and 89% compared to the SOIC                            -0.50
+package, respectively.                                                                                          -1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Temperature  -1.5
+The  TMP1075  has  a  ±1°C  accuracy  over  a                             -2
+wide temperature range and offers an on-chip 12-                            -2.5-3
+bit  analog-to-digital  converter  (ADC)  providing  a                            -55   -35   -15    5 Temperature25   45 (qC) 65   85   105  125D00X
+temperature resolution of 0.0625°C.
+                                                DGK and D packages
+
+                                                            Temperature Accuracy
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+       intellectual property matters and other important disclaimers. PRODUCTION DATA.

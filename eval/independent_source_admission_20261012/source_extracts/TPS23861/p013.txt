@@ -1,0 +1,78 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+Switching Characteristics (continued)
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+           PARAMETER                    TEST CONDITIONS              MIN      TYP     MAX   UNIT
+
+                                     ICUT , ILIM or start fault, Auto Mode,
+                                          Semi-Auto Mode,                                 0.8         1         1.2      s
+                                CLDN = 0X, default as supplied
+             Fault delay timing. Delay before
+                                     ICUT , ILIM or start fault, Auto Mode,
+             next attempt to power a port
+ ted                                       Semi-Auto Mode,                                 1.6         2         2.4      s              following power removal due to
+                                CLDN = 10
+                fault condition
+                                     ICUT , ILIM or start fault, Auto Mode,
+                                          Semi-Auto Mode,                                 3.2         4         4.8      s
+                                CLDN = 11
+
+                                      TDIS = 00, default as supplied                300                 400    ms
+
+         PD maintain power signature     TDIS = 01                                 75                 100    ms
+ tMPDO
+            dropout time limit              TDIS = 10                                150                 200    ms
+
+                                      TDIS = 11                                600                 800    ms
+
+ tD_off_SHDW  Gate turn-off time from SHTDWN From SHTDWN to VGATEn < 1 V, VSENn =                                                                                 1                   5     µs
+ N            input                        0 V
+           Gate turn-off time from port off   From port off command to VGATEn < 1 V, tP_off_CMD                                                                                           900     µs          command                     VSENn = 0 V
+           Gate turn-off time with RESET    From RESET low to, VGATEn < 1 V, VSENn tP_off_RST                                                                          1                   5     µs             pin                        = 0 V
+
+                                POEPn = 0,
+                                            VDRAINn = 1 V , from VSENn pulsed to                                      0.9     µs
+           Gate turn-off time from SENn     0.425 V
+ tD_off_SEN
+              input                    POEPn = 1,
+                                            VDRAINn = 1 V , from VSENn pulsed to 0.62                                 0.9     µs
+                                V
+
+ tPOR       Device power-on-reset delay                                                                   23    ms
+
+           Reset time duration from RESET
+ tRESET                                                                            1                   5     µs             pin
+
+                                 VLIM
+
+
+                             VCUT
+
+
+          SEN
+
+
+                                                                   0V
+
+         GATE
+
+                                                                   0V
+                                                                tOVLD
+
+
+                                 Figure 2. Overcurrent Fault Timing
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     13
+
+                                                 Product Folder Links: TPS23861

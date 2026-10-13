@@ -1,0 +1,77 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+8  Application and Implementation
+
+
+                                  NOTE
+           Information  in  the  following  applications  sections  is  not  part  of  the  TI component
+            specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+           responsible for determining suitability of components for their purposes. Customers should
+            validate and test their design implementation to confirm system functionality.
+
+
+8.1  Introduction to PoE
+
+Power-over-Ethernet (PoE) is a means of distributing power to Ethernet devices over the Ethernet cable using
+either data or spare pairs. PoE eliminates the need for power supplies at the Ethernet device. Common
+applications of PoE are security cameras, IP Phones and PDA chargers. The host or mid-span equipment that
+supplies power is the Power Source Equipment (PSE). The load at the Ethernet connector is the Powered device
+(PD). PoE protocol between PSE and PD controlling power to the load is specified by IEEE Std 802.3at-2009.
+Transformers are used at Ethernet host ports, mid-spans and hubs, to interface data to the cable. A DC voltage
+can be applied to the center tap of the transformer with no effect on the data signals. As in any power
+transmission line, a relatively high 48 V is used to keep current low, minimize the effect of IR drops in the line
+and preserve power to the load. Standard POE delivers approximately 13 W to a type 1 PD, and 25.5 W to a
+type 2 PD. Figure 46 shows the overview schematic of a POE port.
+
+8.2  Application Information
+
+The TPS23861 is a four port, IEEE 802.3at PoE PSE controller and can be used in very simple, low port count,
+automatic or high port count micro-controller managed applications.
+
+Subsequent sections describe detailed design procedures for applications with different requirements including
+host control.
+
+                                                     VDD                      VPWR
+
+                                                            0.1PF                                         0.1PF
+                                                    50V                TPS23861PW             100V
+                  VPWR                                              1 VDD       VPWR 28                             VPWR                   P2   P3
+
+  RJ45   +                                                                  2  RESET          N/C 27                                                           +   RJ45
+  &    0.1PF              SMBJ58A-13-F                                                                       SMBJ58A-13-F                0.1PF   &
+       100V                                                                                                                                         XFMR XFMR                     C1S 1.5                                                                           3  SCL         AOUT 26                          C1S 1.5            100V-              -
+                                                                           4  SDAI           AIN 25
+                   FDMC3612                                         5 SDAO     SHTDWN 24                          FDMC3612
+10MQ100NTRPBF                                                                                                        10MQ100NTRPBF
+                                                                           6  INT            A3 23                                                              (Optional)           (Optional)
+                      :                                                                   :
+                                                                           7 DGND      AGND 22
+                                                             22.1:
+                                                                           8  SEN3        GATE2 21
+                                             :                        :
+                                                                           9  DRAIN3     DRAIN2 20
+                      :                                                                22.1:                   :
+           (Optional)                                                                                                                                                                   (Optional)
+                                                                           10 GATE3        SEN2 19
+10MQ100NTRPBF                                                                                                        10MQ100NTRPBF
+                   FDMC3612                            22.1:    11 KSENSB     KSENSA 18                          FDMC3612
+   P4                 C1S 1.5                                         12 SEN4        GATE1 17                          C1S 1.5                      P1
+              -                                       :                        :                                                                                  -   RJ45  RJ45
+  &    0.1PF                                                             13 DRAIN4     DRAIN1 16                                                     0.1PF   &                                                                                                22.1:              SMBJ58A-13-F              100V       100V
+                                                                                                                                                                +  XFMR XFMR  +                                                                           14 GATE4        SEN1 15
+                         SMBJ58A-13-F
+
+                  VPWR                                                                                 VPWR
+                                                                                                                                                                                                            Copyright © 2016, Texas Instruments Incorporated
+
+                          Figure 46. Automatic 4-Port Operation Schematic
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     85
+
+                                                 Product Folder Links: TPS23861

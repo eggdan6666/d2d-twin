@@ -1,0 +1,56 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.10 Humidity Offset Adjustment (Address 0x09)
+
+                   Table 7-25. Humidity Offset Adjustment Register (Address: 0x09)
+
+       7             6             5             4             3             2             1             0
+
+                                      HUM_OFFSET_ADJUST [7:0]
+
+                  Table 7-26. Humidity Offset Adjustment Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   HUM_OFFSET_ADJUST [7:0]     R/W     0           Humidity offset adjustment value. The value is added to the
+                                                                     converted humidity data.
+
+
+The reported humidity conversion data can be adjusted by programming the Humidity Offset Adjustment
+ Register. The following table summarizes the equivalent offset value added or subtracted for each bit of the
+ register:
+
+       7             6             5             4             3             2             1             0
+
+   –25%RH      +12.5%RH     +6.3%RH      +3.1%RH      +1.6%RH      +0.8%RH      +0.4%RH      +0.2%RH
+
+
+The value is added to the converted humidity value for offset adjustment as shown in Figure 7-8
+
+
+
+                                 Converted Value                                        Humidity Output                              +
+
+
+
+
+                                                           User Humidity Offset
+
+                               Figure 7-8. Humidity Output Calculation
+
+The resulting humidity offset is a summation of the register bits that have been enabled (that is, programmed to
+ 1). Some examples:
+ 1. Programming HUM_OFFSET_ADJUST to 00000001 adjusts the reported humidity by +0.20%RH.
+ 2. Programming HUM_OFFSET_ADJUST to 00000101 adjusts the reported humidity by +1.00%RH.
+ 3. Programming HUM_OFFSET_ADJUST to 00001010 adjusts the reported humidity by +2.00%RH.
+ 4. Programming HUM_OFFSET_ADJUST to 11111111 adjusts the reported humidity by –0.10%RH.
+ 5. Programming HUM_OFFSET_ADJUST to 11111011 adjusts the reported humidity by –0.90%RH.
+ 6. Programming HUM_OFFSET_ADJUST to 11110101 adjusts the reported humidity by –2.10%RH.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    27

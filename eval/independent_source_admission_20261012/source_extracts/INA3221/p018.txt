@@ -1,0 +1,60 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 7.4.2.2 Averaging and Conversion-Time Considerations
+
+The INA3221 has programmable conversion times for both the shunt- and bus-voltage measurements. The
+ selectable conversion times for these measurements range from 140μs to 8.244ms. The conversion-time
+ settings, along with the programmable-averaging mode, enable the INA3221 to optimize available timing
+ requirements in a given application. For example,  if a system requires data to be read every 2ms with all
+ three channels monitored, configure the INA3221 with the conversion times for the shunt- and bus-voltage
+measurements set to 332μs.
+
+The INA3221 can also be configured with a different conversion-time setting for the shunt- and bus-voltage
+ measurements. This approach is common in applications where the bus voltage tends to be relatively stable,
+and allows for the time focused on the bus voltage measurement to be reduced relative to the shunt-voltage
+ measurement. For example, the shunt-voltage conversion time can be set to 4.156ms with the bus-voltage
+ conversion time set to 588μs for a 5ms update time.
+
+ There are trade-offs associated with the conversion-time and averaging-mode settings. The averaging feature
+ significantly improves the measurement accuracy by effectively filtering the signal. This approach allows the
+INA3221 to reduce the amount of noise in the measurement caused by noise coupling into the signal. A greater
+number of averages allows the INA3221 to be more effective in reducing the measurement noise component.
+The trade-off to this noise reduction is that the averaged value has a longer response time to input-signal
+ changes. This aspect of the averaging feature is mitigated to some extent with the critical-alert feature that
+compares each single conversion to determine if a measured signal (with noise component) has exceeded the
+maximum acceptable level.
+
+The selected conversion times also have an impact on measurement accuracy. This effect can seen  in
+ Figure 7-7. The multiple conversion times shown in Figure 7-7 illustrate the impact of noise on measurement.
+These curves shown do not use averaging. to achieve the highest-accuracy measurement possible, use a
+ combination of the longest allowable conversion times and highest number of averages, based on system timing
+ requirements.
+
+                                       120
+                                                                        Conversion Time: 140µs
+
+                                        80
+
+
+                                        40
+                                                                                (µV)                               Conversion Time: 332µs
+                                                                                                                                            Voltage   0
+                                       −40
+
+                                                                        Conversion Time: 1.1ms
+                                       −80
+
+                                      −120
+                                           0        200       400       600       800      1000
+                                                      Number of Conversions
+
+                              Figure 7-7. Noise Versus Conversion Time
+
+
+
+
+
+18    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

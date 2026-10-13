@@ -1,0 +1,59 @@
+Bosch Sensortec | BME280 Data sheet                                            19 | 60
+
+
+The step response (e.g. response to in sudden change in height) of the different filter settings is
+displayed in Figure 7.
+                                                                    g
+                    100
+
+                     90
+
+                     80
+
+                     70
+                    [%]
+                     60                                                                                               filter off
+                          step                                                                            2
+             to  50                                                     4
+                                                                            8
+                     40                                                                             16                                                    Response
+                     30
+
+                     20
+
+                     10
+
+                     0
+                      0   2   4   6   8  10  12  14  16  18  20  22  24  26  28  30  32
+                                           Number of samples
+Figure 7: Step response at different IIR filter settings
+
+3.5  Recommended modes of operation
+The different oversampling options, filter settings and sensor modes result in a large number of
+possible settings. In this chapter, a number of settings recommended for various scenarios are
+presented.
+3.5.1  Weather monitoring
+Description: Only a very low data rate is needed. Power consumption is minimal. Noise of pressure
+values is of no concern. Humidity, pressure and temperature are monitored.
+
+Table 7: Settings and performance for weather monitoring
+
+                    Suggested settings for weather monitoring
+ Sensor mode                     forced mode, 1 sample / minute
+ Oversampling settings            pressure ×1, temperature ×1, humidity ×1
+  IIR filter settings                           filter off
+                        Performance for suggested settings
+ Current consumption             0.16 µA
+ RMS Noise                       3.3 Pa / 30 cm, 0.07 %RH
+ Data output rate                 1/60 Hz
+
+3.5.2  Humidity sensing
+Description: A low data rate is needed. Power consumption is minimal. Forced mode is used to
+minimize power consumption and to synchronize readout, but using normal mode would also be
+possible.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

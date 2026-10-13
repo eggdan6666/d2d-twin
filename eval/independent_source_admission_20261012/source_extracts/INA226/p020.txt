@@ -1,0 +1,82 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+
+       ALERT
+
+
+                      1                                         9     1                                          9
+
+         SCL
+
+
+
+
+
+       SDA          0    0    0    1    1    0    0  R/W         1    0    0   A3   A2   A1   A0    0
+
+                Start By                                      ACK By                            From      NACK By   Stop By
+              Controller                                             Target                                Target        Controller  Controller
+                                                                                                                                                                                                           (1)
+                       Frame 1 SMBus ALERT Response Address Byte                    Frame 2 Target Address Byte
+
+ 1.  The value of the Target Address Byte is determined by the settings of the A0 and A1 pins. Refer to Table 6-2.
+
+                            Figure 6-6. Timing Diagram for SMBus ALERT
+
+
+                      1                                          9     1                                          9
+
+         SCL
+
+
+
+
+
+       SDA          1     0    0   A3   A2   A1   A0  R/W        P7   P6   P5   P4   P3   P2   P1   P0            Stop
+
+                Start By                                      ACK By                                     ACK By
+              Controller                                             Target                                              Target
+                                                                                                               (1)
+                         Frame 1 Two-Wire Target Address Byte                         Frame 2 Register Pointer Byte
+
+ 1.  The value of the Target Address Byte is determined by the settings of the A0 and A1 pins. Refer to Table 6-2.
+
+                               Figure 6-7. Typical Register Pointer Set
+
+ 6.5.5.3.1 High-Speed I2C Mode
+
+When the bus is idle, both the SDA and SCL lines are pulled high by the pullup resistors. The controller
+ generates a start condition followed by a valid serial byte containing high-speed (HS) controller code 00001XXX.
+ This transmission is made in fast (400kHz) or standard (100kHz) (F/S) mode at no more than 400kHz. The
+ device does not acknowledge the HS controller code, but does recognize the code and switches the internal
+ filters to support 2.94MHz operation.
+
+The controller then generates a repeated start condition (a repeated start condition has the same timing as
+ the start condition). After this repeated start condition, the protocol is the same as F/S mode, except that
+ transmission speeds up to 2.94MHz are allowed. Instead of using a stop condition, use repeated start conditions
+ to secure the bus in HS-mode. A stop condition ends the HS-mode and switches all the internal filters of the
+ device to support the F/S mode.
+
+                                            t(LOW)
+                                                         tR                       tF                                     t(HDSTA)
+
+
+      SCL
+
+                                              t(HDSTA)                             t(HIGH)   t(SUSTA)                                                                   t(SUSTO)
+                                                                      t(HDDAT)               t(SUDAT)
+
+     SDA
+                            t(BUF)
+
+             P      S                                          S                             P
+
+                                   Figure 6-8. Bus Timing Diagram
+
+
+
+
+20    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,65 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.3.8 Excitation Current Sources
+
+The device provides two matched programmable excitation current sources (IDACs) for RTD applications. The
+ output current of the current sources can be programmed to 10μA, 50μA, 100μA, 250μA, 500μA, 1000μA, or
+1500μA using the respective bits (IDAC[2:0]) in the configuration register. Each current source can be connected
+ to any of the analog inputs (AINx) as well as to any of the dedicated reference inputs (REFP0 and REFN0).
+ Both current sources can also be connected to the same pin. Use the I1MUX[2:0] and I2MUX[2:0] bits in the
+ configuration register to configure the routing of the IDACs. Care must be taken not to exceed the compliance
+ voltage of the IDACs. In other words, limit the voltage on the pin where the IDAC is routed to ≤ (AVDD –
+ 0.9V), otherwise the specified accuracy of the IDAC current is not met. For three-wire RTD applications, the
+matched current sources can be used to cancel errors caused by sensor lead resistance (see the 3-Wire RTD
+Measurement section for more details).
+
+The IDACs require up to 200µs to start up after the IDAC current is programmed to the respective value using
+ the IDAC[2:0] bits. Set the IDAC current to the respective value using the IDAC[2:0] bits and then select the
+ routing for each IDAC (I1MUX[2:0], I2MUX[2:0]) thereafter.
+
+ In single-shot conversion mode, the IDACs remain active between any two conversions if the IDAC[2:0] bits are
+ set to a value other than 000b. However, the IDACs are powered down whenever the POWERDOWN command
+ is issued.
+
+The analog supply current increases when enabling the IDACs (that is, when the IDAC[2:0] bits are set to a
+ value other than 000b). The IDAC circuit needs this bias current to operate even when the IDACs are not routed
+ to any pin (I1MUX[2:0] = I2MUX[2:0] = 000b). In addition, the selected output current is drawn from the analog
+ supply when I1MUX[2:0] or I2MUX[2:0] are set to a value other than 000b.
+
+ 8.3.9 Low-Side Power Switch
+
+A low-side power switch with low on-resistance connected between the analog input AIN3/REFN1 and AVSS
+ is integrated in the device as well. This power switch can be used to reduce system power consumption in
+ bridge sensor applications by powering down the bridge circuit between conversions. When the respective bit
+(PSW) in the configuration register is set, the switch automatically closes when the START/SYNC command is
+ sent and opens when the POWERDOWN command is issued. The switch stays closed between conversions in
+ single-shot conversion mode in case the PSW bit is set to 1b. The switch can be opened at any time by setting
+ the PSW bit to 0b. By default, the switch is always open.
+
+ 8.3.10 Sensor Detection
+
+ To help detect a possible sensor malfunction, the device provides internal 10µA, burn-out current sources. When
+ enabled by setting the respective bit (BCS) in the configuration register, one current source sources current to
+ the positive analog input (AINP) currently selected while the other current source sinks current form the selected
+ negative analog input (AINN).
+ In case of an open circuit in the sensor, these burn-out current sources pull the positive input towards AVDD and
+ the negative input towards AVSS, resulting in a full-scale reading. A full-scale reading can also indicate that the
+ sensor is overloaded or that the reference voltage is absent. A near-zero reading can indicate a shorted sensor.
+The absolute value of the burn-out current sources typically varies by ±10% and the internal multiplexer adds
+a small series resistance. Therefore, distinguishing a shorted sensor condition from a normal reading can be
+ difficult, especially if an RC filter is used at the inputs. In other words, even if the sensor is shorted, the voltage
+ drop across the external filter resistance and the residual resistance of the multiplexer causes the output to read
+a value higher than zero.
+
+ADC readings of a functional sensor can be corrupted when the burn-out current sources are enabled. Disable
+ the burn-out current sources when preforming the precision measurement, and only enable these sources to test
+ for sensor fault conditions.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    31
+
+                                                  Product Folder Links: ADS1220

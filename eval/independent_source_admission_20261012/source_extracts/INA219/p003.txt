@@ -1,0 +1,73 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+5  Related Products
+
+
+                   DEVICE                                                  DESCRIPTION
+
+                      INA209                          Current/power monitor with watchdog, peak-hold, and fast comparator functions
+
+        INA210, INA211, INA212, INA213, INA214            Zerø-drift, low-cost, analog current shunt monitor series in small package
+
+
+6  Pin Configuration and Functions
+
+
+                DCN Package
+                        8-Pin SOT-23                                      D Package
+                     Top View                                                          8-Pin SOIC
+                                                                           Top View
+
+                 IN+  1                 8  A1
+                                                                             A1  1                 8  IN+
+                 IN–  2                 7  A0
+                                                                             A0  2                 7  IN–
+           GND  3                 6  SDA
+                                                                   SDA  3                 6  GND
+                VS  4                 5  SCL
+                                                                       SCL  4                 5  VS
+
+
+                                          Pin Functions
+
+            PIN
+                                     I/O                                DESCRIPTION
+ NAME   SOT-23   SOIC
+
+                              Analog
+ IN+        1        8                  Positive differential shunt voltage. Connect to positive side of shunt resistor.
+                                    Input
+
+                              Analog   Negative differential shunt voltage. Connect to negative side of shunt resistor. Bus voltage is
+ IN–        2        7
+                                    Input   measured from this pin to ground.
+
+ GND       3        6       Analog  Ground
+
+ VS         4        5       Analog  Power supply, 3 to 5.5 V
+
+                                       Digital
+ SCL       5        4                   Serial bus clock line
+                                    Input
+
+                                       Digital
+ SDA       6        3                   Serial bus data line
+                                     I/O
+
+                                       Digital
+ A0         7        2               Address pin. Table 1 shows pin settings and corresponding addresses.
+                                    Input
+
+                                       Digital
+ A1         8        1               Address pin. Table 1 shows pin settings and corresponding addresses.
+                                    Input
+
+
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback      3
+
+                                                   Product Folder Links: INA219

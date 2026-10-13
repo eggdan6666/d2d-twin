@@ -1,0 +1,86 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+
+                            Controller controls SIO line
+
+
+                          Peripheral controls SIO line
+
+
+
+                CRC Data Block Length               Sub-Address                                       Data Word
+
+ CS pulled low
+
+                 X CRC L4  L3  L1  L0   1   1  A7  A6  A5  A4  A3  A2  A1  A0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                CRC Enable         R/W                                                        Data from Register N
+
+
+                 Don’t Care       Auto Increment
+
+
+
+
+
+                                           Data Word                                                       Data Word
+
+
+
+
+                 D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0     D15 D14 D13 D12 D11 D10 D9  D8  D7  D6  D5  D4  D3  D2  D1  D0
+
+
+
+                                      Data from Register N+1                                            Data from Register N+2
+
+                         Figure 8-14. Burst Data Read from Multiple Registers
+
+ 8.5.2.5 Cyclic Redundancy Check (CRC)
+
+The TMP126 has an optional CRC feature to determine the integrity of the data that has been transmitted across
+ the SPI communication interface. The CRC for the TMP126 is enabled by setting the CRC bit in the command
+word to 1. When enabled, the TMP126 will append a 16-bit CRC checksum to the end the data block for
+ read transactions. The controller can then compare this checksum to their own calculation and determine if the
+ transaction was valid. During a write transaction, the host will append the 16-bit CRC checksum. The TMP126
+ will compare this to its own checksum. If there is a mismatch, the TMP126 will discard the write transaction and
+ set a CRC fault ALERT to indicate to the host that the transaction failed. The host will need to send the register
+ settings again to correctly program the TMP126. Reading the Alert_Status register will clear the CRC_Fault bit
+and de-assert the ALERT pin.
+
+An overview of a CRC enabled write transaction is shown below with a data block length of 2.
+
+
+              Controller controls SIO line
+
+
+             Peripheral controls SIO line
+
+
+
+  CS
+
+
+
+SIO       Command      Write Data      Write Data      Write Data      CRC
+
+
+
+
+
+                     CRC determined by Command word and Data Block
+
+                                   Figure 8-15. CRC Enabled Write
+
+An overview of a CRC enabled read transaction is shown below with a data block length of 2.
+
+
+
+
+
+22    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

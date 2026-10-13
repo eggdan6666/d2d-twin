@@ -1,0 +1,62 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+POWER-UP TIME                                          have the additional option of being configured as push/pull or open-
+                                                                                drain. The input/output channels are configured by writing to the
+When power is applied to the AD5592R/AD5592R-1, the power-on                                                                         appropriate configuration registers, as shown in Table 11 and Table
+reset block begins to configure the device and to load the registers                                                            12 (see the Register Map section). To assign a particular function to
+with their default values. The configuration process takes 250 µs;                                                            an input/output channel, the user writes to the appropriate register
+do not write to any of the registers during this time.                                                            and sets the corresponding bit to 1. For example, setting Bit 0 in
+WRITE MODE                                                      the DAC configuration register to 1 configures I/O0 as a DAC (see
+                                                                      Table 19). See the Register Map section for details.
+Figure 4 shows the read and write timing for the AD5592R/
+                                                                                In the event that the bit for an input/output channel is set in multipleAD5592R-1. A write sequence begins by bringing the SYNC line
+                                                                            configuration registers, the input/output channel takes the functionlow. Data on SDI is clocked into the 16-bit shift register on the
+                                                                            dictated by the last write operation. The exceptions to this rulefalling edge of SCLK. After the 16th falling clock edge, the last
+                                                                      are that an I/Ox pin can be set as both a DAC and an ADC ordata bit is clocked in. SYNC is brought high, and the programmed
+                                                               as a digital input and output. When an I/Ox pin is configured asfunction is executed (that is, a change in a DAC input register or
+                                                            a DAC and ADC, its primary function is as a DAC, and the ADCa change in a control register). SYNC must be brought high for
+                                                              can measure the voltage being provided by the DAC. This featurea minimum of 20 ns before the next write. All interface pins must
+                                                              can monitor the output voltage to detect short circuits or overloadbe operated close to the VDD or VLOGIC rails to minimize power
+                                                                             conditions.consumption in the digital input buffers.
+                                                   When a pin is configured as both a general-purpose input andREAD MODE
+                                                                             output, the primary function is as an output pin. This configuration
+The AD5592R/AD5592R-1 allow data readback from the ADCs            allows the status of the output pin to be determined by reading
+and control registers via the serial interface. ADC conversions             the GPIO register. Figure 43 shows a typical configuration example
+are automatically clocked out on the serial interface as part of a          where I/O0 and I/O1 are configured as ADCs, I/O2 and I/O3 are
+sequence or as a single ADC conversion. Reading from a register         configured as DACs, I/O4 is a general-purpose output pin, I/O5 is a
+first requires a write to the readback and LDAC mode register             general-purpose input pin, and I/O6 and I/O7 are three-state.
+to select the register to read back. The contents of the selected
+                                                          The general-purpose control register (see the General-Purposeregister are clocked out on the next 16 SCLKs following a falling
+                                                                         Control Register section) also contains other functions associatededge of SYNC. Note that due to timing requirements of t10 (25 ns),                                                                           with the DAC and ADC, such as the lock configuration bit. Whenthe maximum speed of the SPI interface during a read operation
+                                                                        the lock configuration (IO_LOCK) bit is set to 1, any writes to themust not exceed 20 MHz.
+                                                                           pin configuration registers are ignored, thus preventing the function
+During the ADC conversion cycle, only the ADC conversion result           of the I/Ox pins from being changed.
+and the temperature reading results can be read back and all other
+                                                          The I/Ox pins can be reconfigured at any time when the AD5592R/read requests are ignored.
+                                                          AD5592R-1 is in an idle state, that is, no ADC conversions are
+CONFIGURING THE AD5592R/AD5592R-1                taking place and no registers are being read back. The lock config-
+                                                                             uration bit must also be 0.
+The AD5592R/AD5592R-1 I/Ox pins are configured by writing to a
+series of configuration registers. The control registers are accessed
+when the MSB of a serial write is 0, as shown in Table 10. The
+control register map for the AD5592R/AD5592R-1 is shown in Table
+13. At power-up, the I/Ox pins are configured as 85 kΩ pull-down
+resistors connected to GND.
+
+The input/output channels of the AD5592R/AD5592R-1 can be
+configured to operate as DAC outputs, ADC inputs, digital outputs,
+digital inputs, three-state, or connected to GND with 85 kΩ pull-
+down resistors. When configured as digital outputs, the I/Ox pins                             Figure 43. Typical Configuration Example
+
+Table 11. I/Ox Pin Configuration Registers
+MSB                                                                                                           LSB
+15         14        13        12        11        10        9       8       7       6       5       4       3       2       1       0
+0                          Register address                       Reserved          IO7     IO6     IO5     IO4     IO3     IO2     IO1     IO0
+
+
+
+
+
+analog.com                                                                                         Rev. H | 27 of 54

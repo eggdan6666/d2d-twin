@@ -1,0 +1,63 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+8.6.1.3  Status Register
+
+The status register reports the state of the temperature ADC, the temperature  limit comparators, and the
+connection to the remote sensor. Table 5 lists the status register bits. The status register is read-only and is read
+by accessing pointer address 02h.
+
+                                   Table 5. Status Register Format
+
+                               STATUS REGISTER (Read = 02h, Write = N/A)
+
+       BIT NUMBER               BIT NAME                              FUNCTION
+
+            7                  BUSY          = 1 when the ADC is converting
+            6                       LHIGH(1)         = 1 when the local high temperature limit is tripped
+            5                     LLOW(1)         = 1 when the local low temperature limit is tripped
+            4                      RHIGH(1)         = 1 when the remote high temperature limit is tripped
+            3                    RLOW(1)         = 1 when the remote low temperature limit is tripped
+            2                     OPEN(1)         = 1 when the remote sensor is an open circuit
+
+            1                RTHRM         = 1 when the remote THERM limit is tripped
+
+            0                 LTHRM          = 1 when the local THERM limit is tripped
+
+(1)  These flags stay high until the status register is read or are reset by a POR when pin 7 is configured as ALERT. Only bit 2 (OPEN) stays
+     high until the status register is read or is reset by a POR when pin 7 is configured as THERM2.
+
+The BUSY bit = 1 if the ADC is making a conversion. This bit is set to 0 if the ADC is not converting.
+
+The LHIGH and LLOW bits indicate a local sensor overtemperature or undertemperature event, respectively. The
+RHIGH and RLOW bits indicate a remote sensor overtemperature or undertemperature event, respectively. The
+HIGH bit is set when the temperature exceeds the high limit in alert mode and therm mode and the low bit is set
+when the temperature goes below the low limit in alert mode. The OPEN bit indicates an open-circuit condition
+on the remote sensor. When pin 7 is configured as the ALERT output, the five flags are NORed together. If any
+of the five flags are high, the ALERT interrupt latch is set and the ALERT output goes low. Reading the status
+register clears the five flags, provided that the condition that caused the setting of the flags is not present
+anymore (that  is, the value of the corresponding result register is within the limits, or the remote sensor is
+connected properly and functional). The ALERT interrupt latch (and the ALERT pin correspondingly) is not reset
+by reading the status register. The reset is done by the master reading the temperature sensor device address to
+service the interrupt, and only  if the flags are reset and the condition that caused them to be set is no longer
+present.
+
+The RTHRM and LTHRM flags are set when the corresponding temperature exceeds the programmed THERM
+limit. These flags are reset automatically when the temperature returns to within the limits. The THERM output
+goes low in the case of overtemperature on either the local or remote channel, and goes high as soon as the
+measurements are within the limits again. The THERM hysteresis register (21h) allows hysteresis to be added so
+that the flag resets and the output goes high when the temperature returns to or goes below the limit value minus
+the hysteresis value.
+
+When pin 7 is configured as THERM2, only the high limits matter. The LHIGH and RHIGH flags are set  if the
+respective temperatures exceed the limit values, and the pin goes low to indicate the event. The LLOW and
+RLOW flags have no effect on THERM2 and the output behaves the same way when configured as THERM.
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     19
+
+                                                  Product Folder Links: TMP461

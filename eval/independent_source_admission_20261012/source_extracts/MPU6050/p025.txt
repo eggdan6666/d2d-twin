@@ -1,0 +1,58 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.7   Three-Axis MEMS Gyroscope with 16-bit ADCs and Signal Conditioning
+The MPU-60X0 consists of three independent vibratory MEMS rate gyroscopes, which detect rotation about
+the X-, Y-, and Z- Axes. When the gyros are rotated about any of the sense axes, the Coriolis Effect causes
+a vibration that is detected by a capacitive pickoff. The resulting signal is amplified, demodulated, and filtered
+to produce a voltage that is proportional to the angular rate. This voltage is digitized using individual on-chip
+16-bit Analog-to-Digital Converters (ADCs) to sample each axis. The full-scale range of the gyro sensors
+may be digitally programmed to ±250, ±500, ±1000, or ±2000 degrees per second (dps). The ADC sample
+rate is programmable from 8,000 samples per second, down to 3.9 samples per second, and user-selectable
+low-pass filters enable a wide range of cut-off frequencies.
+
+
+7.8   Three-Axis MEMS Accelerometer with 16-bit ADCs and Signal Conditioning
+The MPU-60X0’s 3-Axis accelerometer uses separate proof masses for each axis. Acceleration along a
+particular axis induces displacement on the corresponding proof mass, and capacitive sensors detect the
+displacement  differentially. The MPU-60X0’s architecture reduces the accelerometers’  susceptibility to
+fabrication variations as well as to thermal drift. When the device is placed on a flat surface, it will measure
+0g on the X- and Y-axes and +1g on the Z-axis. The accelerometers’ scale factor is calibrated at the factory
+and is nominally independent of supply voltage. Each sensor has a dedicated sigma-delta ADC for providing
+digital outputs. The full scale range of the digital output can be adjusted to ±2g, ±4g, ±8g, or ±16g.
+
+
+7.9   Digital Motion Processor
+The embedded Digital Motion Processor (DMP) is located within the MPU-60X0 and offloads computation of
+motion processing algorithms from the host processor. The DMP acquires data from accelerometers,
+gyroscopes, and additional 3rd party sensors such as magnetometers, and processes the data. The resulting
+data can be read from the DMP’s registers, or can be buffered in a FIFO. The DMP has access to one of the
+MPU’s external pins, which can be used for generating interrupts.
+
+The purpose of the DMP  is to offload both timing requirements and processing power from the host
+processor. Typically, motion processing algorithms should be run at a high rate, often around 200Hz, in order
+to provide accurate results with low latency. This is required even if the application updates at a much lower
+rate; for example, a low power user interface may update as slowly as 5Hz, but the motion processing should
+still run at 200Hz. The DMP can be used as a tool in order to minimize power, simplify timing, simplify the
+software architecture, and save valuable MIPS on the host processor for use in the application.
+
+
+7.10 Primary I2C and SPI Serial Communications Interfaces
+The MPU-60X0 communicates to a system processor using either a SPI (MPU-6000 only) or an I2C serial
+interface. The MPU-60X0 always acts as a slave when communicating to the system processor. The LSB of
+the of the I2C slave address is set by pin 9 (AD0).
+
+The logic levels for communications between the MPU-60X0 and its master are as follows:
+
+      MPU-6000: The logic level for communications with the master is set by the voltage on VDD
+      MPU-6050: The logic level for communications with the master is set by the voltage on VLOGIC
+
+For further information regarding the logic levels of the MPU-6050, please refer to Section 10.
+
+
+
+
+
+                                           25 of 52

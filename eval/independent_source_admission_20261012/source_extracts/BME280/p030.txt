@@ -1,0 +1,50 @@
+Bosch Sensortec | BME280 Data sheet                                            30 | 60
+
+
+5.4.6  Register 0xF5 “config”
+The “config” register sets the rate, filter and interface options of the device. Writes to the “config”
+register in normal mode may be ignored. In sleep mode writes are not ignored.
+
+Table 26: Register 0xF5 “config”
+
+    Register 0xF5        Name                           Description
+      “config”
+        Bit 7, 6, 5               t_sb[2:0]          Controls inactive duration tstandby in normal mode.
+                                       See Table 27 for settings and chapter 3.3.4 for
+                                                                               details.
+        Bit 4, 3, 2                  filter[2:0]         Controls the time constant of the IIR filter. See Table
+                                          27 for settings and chapter 3.4.4 for details.
+           Bit 0              spi3w_en[0]        Enables 3-wire SPI interface when set to ‘1’. See
+                                                           chapter 6.3 for details.
+
+Table 27: t_sb settings
+
+   t_sb[2:0]          tstandby [ms]
+     000               0.5
+     001              62.5
+     010            125
+     011            250
+     100            500
+     101            1000
+     110             10
+     111             20
+
+Table 28: filter settings
+
+     filter[2:0]      Filter coefficient
+
+      000                Filter off
+      001             2
+      010             4
+      011             8
+   100, others          16
+
+5.4.7  Register 0xF7…0xF9 “press” (_msb, _lsb, _xlsb)
+The “press” register contains the raw pressure measurement output data up[19:0]. For details on how
+to read out the pressure and temperature information from the device, please consult chapter 4.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

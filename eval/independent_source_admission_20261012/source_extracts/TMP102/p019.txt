@@ -1,0 +1,72 @@
+                                                                                   TMP102
+www.ti.com                                                                        SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+
+ 6.5.3.8 Alert (AL Bit)
+
+The AL bit is a read-only function. Reading the AL bit provides information about the comparator mode status.
+The state of the POL bit inverts the polarity of data returned from the AL bit. When the POL bit equals 0, the AL
+ bit reads as 1 until the temperature equals or exceeds T(HIGH) for the programmed number of consecutive faults,
+ causing the AL bit to read as 0. The AL bit continues to read as 0 until the temperature falls below T(LOW) for the
+programmed number of consecutive faults, when the AL bit again reads as 1. The status of the TM bit does not
+ affect the status of the AL bit.
+
+ 6.5.3.9 Conversion Rate (CR)
+
+The conversion rate bits, CR1 and CR0, configure the TMP102 device for conversion rates of 0.25 Hz, 1 Hz, 4
+ Hz, or 8 Hz. The default rate is 4 Hz. For more information on the conversion rate bits, see Table 6-5.
+
+ 6.5.4 High- and Low-Limit Registers
+
+The temperature limits are stored in the T(LOW) and T(HIGH) registers in the same format as the temperature
+ result, and the values are compared to the temperature result on every conversion. The outcome of the
+ comparison drives the behavior of the ALERT pin, which operates as a comparator output or an interrupt, and is
+ set by the TM bit in the configuration register.
+
+ In Comparator mode (TM = 0), the ALERT pin becomes active when the temperature equals or exceeds the
+ value in THIGH and generates a consecutive number of faults according to fault bits F1 and F0. The ALERT pin
+ remains active until the temperature falls below the indicated TLOW value for the same number of faults.
+ In Interrupt mode (TM = 1), the ALERT pin becomes active when the temperature equals or exceeds the value
+ in T(HIGH) for a consecutive number of fault conditions (as shown in Table 6-5). The ALERT pin remains active
+ until a read operation of any register occurs, or the device successfully responds to the SMBus Alert Response
+ address. The ALERT pin will also be cleared  if the device is placed in Shutdown mode. When the ALERT pin
+ is cleared, it becomes active again only when temperature falls below T(LOW), and remains active until cleared
+ by a read operation of any register or a successful response to the SMBus Alert Response address. When
+ the ALERT pin is cleared, the above cycle repeats, with the ALERT pin becoming active when the temperature
+ equals or exceeds T(HIGH). The ALERT pin can also be cleared by resetting the device with the General Call
+ Reset command. This action also clears the state of the internal registers in the device, returning the device to
+ Comparator mode (TM = 0).
+
+ Both operational modes are represented in Figure 6-7. Table 6-13 through Table 6-16 describe the format for the
+ THIGH and TLOW registers. Note that the most significant byte is sent first, followed by the least significant byte.
+ Power-up reset values for THIGH and TLOW are: THIGH = 80°C and TLOW = 75°C. The format of the data for THIGH
+and TLOW is the same as for the Temperature Register.
+                            Table 6-13. Byte 1 Temperature RegisterHIGH (1)
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+      H11          H10          H9          H8          H7          H6          H5          H4
+
+      (H12)           (H11)           (H10)           (H9)            (H8)            (H7)            (H6)            (H5)
+
+ (1)   Extended mode 13-bit configuration shown in parenthesis.
+
+                             Table 6-14. Byte 2 Temperature RegisterHIGH
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+      H3          H2          H1          H0            0             0             0             0
+
+       (H4)            (H3)            (H2)            (H1)            (H0)               (0)                (0)                (0)
+
+                            Table 6-15. Byte 1 Temperature RegisterLOW (1)
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+      L11           L10            L9            L8            L7            L6            L5            L4
+
+       (L12)            (L11)            (L10)             (L9)              (L8)              (L7)              (L6)              (L5)
+
+ (1)   Extended mode 13-bit configuration shown in parenthesis.
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+
+                                                  Product Folder Links: TMP102

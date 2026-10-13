@@ -1,0 +1,48 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.6.8 Hysteresis Register (Address = 07h) [reset = 0A0Ah]
+
+ This register sets the hysteresis for the THigh_Limit threshold and the TLow_Limit threshold. The default
+ hysteresis value for both the high and low limits is equal to 5 °C.
+
+The Hysteresis is in a 8-bit unsigned format with the LSB equal to 0.5°C. This gives a maximum value of
+ 127.5°C of hysteresis.
+
+ Return to Register Map.
+
+                                   Figure 8-26. Hysteresis Register
+       15            14            13            12             11            10             9             8
+
+                                                          THigh_Hyst[7:0]
+
+                                                   R/W-0Ah
+
+       7             6             5             4             3             2             1             0
+
+                                                        TLow_Hyst[7:0]
+
+                                                   R/W-0Ah
+
+                          Table 8-12. Hysteresis Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:8    THigh_Hyst[7:0]               R/W     0Ah        THigh_Limit Hysteresis setting.
+                                                                        Hysteresis value is represented by a unsigned Byte with the
+                                                      LSB equal to 0.5°C. The High temperature limit hysteresis
+                                                                          threshold is equal to (THigh_Limit - THigh_Hyst).
+                                                           The default hysteresis value is 5 °C.
+
+     7:0     TLow_Hyst[7:0]               R/W     0Ah        TLow_Limit Hysteresis setting.
+                                                                        Hysteresis value is represented by a unsigned Byte with the
+                                                      LSB equal to 0.5°C. The Low temperature limit hysteresis
+                                                                          threshold is equal to (TLow_Limit + TLow_Hyst).
+                                                           The default hysteresis value is 5 °C.
+
+
+
+
+
+32    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

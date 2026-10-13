@@ -1,0 +1,57 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+The AD5592R/AD5592R-1 has programmable user configuration        The Data Format Details: AD5592R/AD5592R-1 ADC and DAC
+registers that are used to configure the device. Table 13 shows a         Readback section provides data formats for the ADC and the DAC
+complete list of the user configuration registers. See the Register          readback.
+Details: AD5592R/AD5592R-1 Control Register Map section for
+details about the functions of each of the bits.
+REGISTER SUMMARY: AD5592R/AD5592R-1 CONTROL REGISTER MAP
+
+Table 13. AD5592R/AD5592R-1 Control Register Summary
+MSB         Address                                                                                                                          Default Value
+Bit 15          Bits[14:11]     Register Name                         Register Description                                                         Bits[10:0]
+
+0            0000        NOP                              NOP.                                                              0x000
+                                                      No operation.
+0            0001        DAC_RD                      DAC Readback Register.                                             0x000
+                                                                          Selects and enables DAC readback.
+0            0010        ADC_SEQ                     ADC Sequence Register.                                             0x000
+                                                                          Selects ADCs for conversion.
+0             0011        GEN_CTRL_REG                      General-Purpose Control Register.                                      0x000
+                                                 DAC and ADC control register.
+0            0100         ADC_CONFIG                  ADC Pin Configuration Register.                                        0x000
+                                                                          Selects which pins are ADC inputs.
+0            0101         DAC_CONFIG                  DAC Pin Configuration Register.                                        0x000
+                                                                          Selects which pins are DAC outputs.
+0             0110        PULLDWN_CONFIG                    Pull-Down Configuration Register.                                     0x0FF
+                                                                          Selects which pins have an 85 kΩ pull-down resistor to GND.
+0             0111         CONFIG_READ_AND_LDAC              Configuration Register readback and LDAC Mode Register.                  0x000
+                                                                          Selects the operation of the Load DAC (LDAC) function and/or which configu-
+                                                                                   ration register is read back.
+0            1000         GPIO_CONFIG1                   GPIO Write Configuration Register.                                     0x000
+                                                                          Selects which pins are general-purpose outputs.
+0            1001         GPIO_OUTPUT                    GPIO Write Data Register.                                            0x000
+                                                                          Writes data to the general-purpose outputs.
+0            1010         GPIO_INPUT                     GPIO Read Configuration Register.                                     0x000
+                                                                          Selects which pins are general-purpose inputs
+0             1011         PD_REF_CTRL                       Power-Down/Reference Control Register.                                0x000
+                                                              Powers down DACs and enables/disables the reference.
+0             1100         GPIO_OPENDRAIN_CONFIG          GPIO Open-Drain Configuration Register.                                0x000
+                                                                          Selects open-drain or push/pull for general-purpose outputs.
+0             1101         IO_TS_CONFIG                         Three-State Configuration Register.                                     0x000
+                                                                          Selects which pins are three-state.
+0             1111        SW_RESET                            Software Reset.                                                     0x000
+                                                                   Resets the AD5592R/AD5592R-1.
+1           XXX2       DAC_WR                     DAC Write.                                                         0x000
+                                                                          Writes to addressed DAC register.
+
+1  This register is also used to set I/O7 as a BUSY output.
+2  Bits[14:12] represent the DAC register address.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 35 of 54

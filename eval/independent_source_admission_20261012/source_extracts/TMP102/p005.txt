@@ -1,0 +1,88 @@
+                                                                                   TMP102
+www.ti.com                                                                        SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+
+ 5.5 Electrical Characteristics
+ At TA = 25°C and V+ = 1.4 to 3.6 V, unless otherwise noted.
+               PARAMETER                   TEST CONDITIONS         MIN      TYP     MAX   UNIT
+
+ TEMPERATURE SENSOR
+
+         Range                                                                –40                  125    °C
+
+                                                     -25°C to 85°C                             ± 0.5        ± 2
+          Accuracy (temperature error)                                                                          °C
+                                                     -40°C to 125°C                             ± 1        ± 3
+
+           vs supply                                                                                       0.2          0.5   °C/V
+
+           Resolution                                                                           0.0625              °C
+
+ DIGITAL INPUT/OUTPUT
+
+            Input capacitance                                                                    3              pF
+ VIH        Input logic high                                                               0.7 × (V+)                      3.6    V
+ VIL        Input logic low                                                                  –0.5                0.3 × (V+)    V
+  IIN        Input current                             0 < VIN < 3.6V                                          1    µA
+                                           V+ > 2 V, IOL = 3 mA                0                      0.4
+                               SDA
+                                           V+ < 2 V, IOL = 3 mA                0                0.2 × (V+)
+ VOL      Output logic                                                                          V
+                                           V+ > 2 V, IOL = 3 mA                0                      0.4
+                                 ALERT
+                                           V+ < 2 V, IOL = 3 mA                0                0.2 × (V+)
+           Resolution                                                                        12                     Bit
+
+           Conversion time                                                                    10         15   ms
+
+                                         CR1 = 0, CR0 = 0                              0.25
+
+                                         CR1 = 0, CR0 = 1                            1
+           Conversion modes                                                                                      Conv/s
+                                         CR1 = 1, CR0 = 0 (default)                     4
+
+                                         CR1 = 1, CR0 = 1                            8
+
+           Timeout time                                                                       30         40   ms
+
+ POWER SUPPLY
+
+           Operating supply range                                                             1.4                      3.6    V
+
+                                                                Serial bus inactive, CR1 =
+                                                                                                            3.2          5
+                                                                 0, CR0 = 1
+
+                                                                Serial bus inactive, CR1 =
+                                                                                                            4.8          7.5
+                                                                 1, CR0 = 0 (default)
+ IQ       Average quiescent current                                                                    µA
+                                                                Serial bus active, SCL
+                                                                                           10
+                                                        frequency = 400 kHz
+
+                                                                Serial bus active, SCL
+                                                                                           40
+                                                        frequency = 2.85 MHz
+
+                                                                Serial bus inactive                             0.15        0.35
+
+                                                                Serial bus active, SCL
+                                                                                                            5.5
+ ISD      Shutdown current                             frequency = 400 kHz                                     µA
+                                                                Serial bus active, SCL
+                                                                                           35
+                                                        frequency = 2.85 MHz
+
+ TEMPERATURE
+
+            Specified range                                                         –40                  125    °C
+
+           Operating range                                                        –55                  150    °C
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback     5
+
+                                                  Product Folder Links: TMP102

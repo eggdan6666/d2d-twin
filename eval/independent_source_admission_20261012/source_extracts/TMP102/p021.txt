@@ -1,0 +1,72 @@
+                                                                                   TMP102
+www.ti.com                                                                        SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+
+ possible time interval. To maintain accuracy in applications that require air or surface temperature measurement,
+ care must be taken to isolate the package and leads from ambient air temperature. A thermally-conductive
+ adhesive is helpful in achieving accurate surface temperature measurement.
+
+The TMP102 device is a very low-power device and generates very low noise on the supply bus. Applying an RC
+ filter to the V+ pin of the TMP102 device can further reduce any noise that the TMP102 device can propagate to
+ other components. R(F) in Figure 7-2 must be less than 5 kΩ and C(F) must be greater than 10 nF.
+
+                                                               Supply Voltage
+
+
+
+                                                 Device                    R(F) ≤ 5 kΩ
+
+                                   SCL     SDA
+
+
+
+                               GND      V+
+
+                                                                                          C(F) ≥ 10 nF
+                                    ALERT  ADD0
+
+
+
+                               Figure 7-2. Noise Reduction Techniques
+
+ 7.2.3 Application Curve
+
+ Figure 7-3 shows the step response of the TMP102 device to a submersion in an oil bath of 100°C from room
+ temperature (27°C). The time-constant, or the time for the output to reach 63% of the input step, is 0.8 s. The
+ time-constant result depends on the printed circuit board (PCB) that the TMP102 device is mounted. For this
+ test, the TMP102 device was soldered to a two-layer PCB that measured 0.375 inch × 0.437 inch.
+
+ space
+
+
+                                        100
+                                         95
+                                         90
+                                         85
+                                         80
+                                                                  (qC)  75
+                                         70
+                                         65
+                                         60
+                                         55                                                                                                                                                                                                                                 Temperature  50
+                                         45
+                                         40
+                                         35
+                                         30
+                                         25
+                                                     -1   1    3    5    7    9   11   13   15   17   19
+                                                                 Time (s)
+                               Figure 7-3. Temperature Step Response
+
+ 7.3 Power Supply Recommendations
+
+The TMP102 device operates with power supply in the range of 1.4 to 3.6 V. The device is optimized for
+ operation at 3.3-V supply but can measure temperature accurately in the full supply range.
+
+A power-supply bypass capacitor is required for proper operation. Place this capacitor as close as possible to
+ the supply and ground pins of the device. A typical value for this supply bypass capacitor is 0.01 μF. Applications
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    21
+
+                                                  Product Folder Links: TMP102

@@ -1,0 +1,73 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.5.3.1.2 Serial Bus Address
+
+ To communicate with the TMP117, the master must first address slave devices through an address byte. The
+ address byte has seven address bits and a read-write (R/W) bit that indicates the intent of executing a read or
+ write operation.
+
+The TMP117 features an address pin to allow up to four devices to be addressed on a single bus. Table 7-2
+ describes the pin logic levels used to properly connect up to four devices. x represents the read-write (R/ W) bit.
+
+                             Table 7-2. Address Pin and Slave Addresses
+              DEVICE TWO-WIRE ADDRESS                           ADD0 PIN CONNECTION
+
+                         1001000x                                                 Ground
+
+                         1001001x                                             V+
+
+                         1001010x                                         SDA
+
+                         1001011x                                           SCL
+
+ 7.5.3.1.3 Writing and Reading Operation
+
+The user can write a register address to the pointer register to access a particular register on the TMP117. The
+ value for the pointer register is the first byte transferred after the slave address byte with the R/ W bit low. Every
+ write operation to the TMP117 requires a value for the pointer register.
+
+When reading from the TMP117, the last value stored in the pointer register by a write operation is used to
+ determine which register is read during a read operation. To change the register pointer for a read operation,
+a new value must be written to the pointer register. The user can issue an address byte with the R/ W bit low,
+ followed by the pointer register byte to write a new value for the pointer register. No additional data is required.
+The master can then generate a START condition and send the slave address byte with the R/ W bit high to
+ initiate the read command. See Figure 7-10 for details of this sequence. If repeated reads from the same register
+ are desired, it is not necessary to send the pointer register bytes continuously because the TMP117 retains the
+ pointer register value until the value is changed by the next write operation.
+
+ Register bytes are sent with the most significant byte first, followed by the least significant byte.
+
+ 7.5.3.1.4 Slave Mode Operations
+
+The TMP117 can operate as a slave receiver or slave transmitter. As a slave device, the TMP117 never drives
+ the SCL line.
+
+ 7.5.3.1.4.1 Slave Receiver Mode
+
+The  first byte transmitted by the master  is the slave address with the R/W  bit low. The TMP117 then
+ acknowledges reception of a valid address. The next byte transmitted by the master is the pointer register. The
+TMP117 then acknowledges reception of the pointer register byte. The next byte(s) are written to the register
+ addressed by the pointer register. The TMP117 acknowledges reception of each data byte. The master can
+ terminate data transfer by generating a START or STOP condition.
+
+ 7.5.3.1.4.2 Slave Transmitter Mode
+
+The first byte transmitted by the master is the slave address with the R/W bit high. The slave acknowledges
+ reception of a valid slave address. The next byte is transmitted by the slave and is the most significant byte
+ of the register indicated by the pointer register. The master acknowledges reception of the data byte. The next
+ byte transmitted by the slave is the least significant byte. The master acknowledges reception of the data byte.
+The master can terminate data transfer by generating a not-acknowledge on reception of any data byte or by
+ generating a START or STOP condition.
+
+ 7.5.3.1.5 SMBus Alert Function
+
+The TMP117 supports the SMBus alert function. When the ALERT pin is connected to an SMBus alert signal
+and a master senses that an alert condition is present, the master can send out an SMBus ALERT command
+ (0001 1001) to the bus.  If the ALERT pin is active, the device acknowledges the SMBus ALERT command
+and responds by returning the slave address on the SDA line. The eighth bit (LSB) of the slave address byte
+ indicates if the alert condition is caused by the temperature exceeding T(HIGH) or falling below T(LOW). The LSB is
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    21
+
+                                                  Product Folder Links: TMP117

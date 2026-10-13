@@ -1,0 +1,70 @@
+                                                                          ADS1113, ADS1114, ADS1115
+                                                                           SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+     ADS111x Ultra-Small, Low-Power, I2C-Compatible, 860SPS, 16-Bit ADCs
+         with Internal Reference, Oscillator, and Programmable Comparator
+
+1 Features                              3 Description
+
+•  Ultra-small packages:                          The ADS1113, ADS1114, and ADS1115 (ADS111x)
+   – X2QFN: 2mm × 1.5mm × 0.4mm                  are  precision,  low-power,  16-bit,  I2C-compatible,
+   –  SOT: 2.9mm × 2.8mm × 0.6mm                      analog-to-digital  converters  (ADCs)  offered  in  a
+•  Wide supply range: 2.0V to 5.5V                      leadless  X2QFN-10,  a  SOT-10  package,  and
+•  Low current consumption: 150μA                  a  VSSOP-10  package.  The  ADS111x  devices
+   (continuous-conversion mode)                        incorporate  a   low-drift   voltage  reference  and
+•  Programmable data rate:                        an  oscillator.  The ADS1114  and ADS1115  also
+  8SPS to 860SPS                                     incorporate a programmable  gain  amplifier (PGA)
+•  Single-cycle settling                            and a  digital  comparator. These  features,  along
+•   Internal low-drift voltage reference                     with a wide operating supply range, are useful for
+•   Internal oscillator                                 power- and space-constrained, sensor measurement
+•  I2C interface: four pin-selectable addresses            applications.
+•  Operating temperature range:                                             The ADS111x devices perform conversions at data
+   –40°C to +125°C                                                          rates  of up  to 860 samples  per second  (SPS).
+•  Family of devices:                                             The PGA  offers  input  ranges  from ±256mV  to
+   –  ADS1113: one single-ended (SE) or differential     ±6.144V,  allowing  precise  large- and  small-signal
+      (DE) input                                   measurements.  The ADS1115  features  an  input
+   –  ADS1114: one single-ended or differential input     multiplexer (MUX)  that  allows  two  differential  or
+      with comparator and PGA                           four  single-ended  input  measurements. Use  the
+   –  ADS1115: four single-ended or two differential       digital comparator in the ADS1114 and ADS1115 for
+      inputs with comparator and PGA                  undervoltage and overvoltage detection.
+2 Applications                                           Package Information
+                                                   PART NUMBER      PACKAGE(1)    PACKAGE SIZE(2)•  Portable instrumentation
+•  Battery voltage and current monitoring                          RUG (X2QFN, 10)   1.50mm × 2.00mm
+•  Temperature measurement systems                       ADS111x     DYN (SOT, 10)      2.90mm × 2.80mm
+•  Consumer electronics                                        DGS (VSSOP, 10)   3.00mm × 4.90mm
+•  Factory automation and process control
+                                                                               (1)   For more information, see Section 14.
+                                                                               (2)  The package size (length × width) is a nominal value and
+                                                                            includes pins, where applicable.
+                                                              Device Information
+                                                   PART NUMBER   INPUT CHANNELS    FEATURES(1)
+
+                                                            ADS1113         1 DE (1 SE)       —
+
+                                                            ADS1114         1 DE (1 SE)      PGA, comparator
+
+                                                            ADS1115         2 DE (4 SE)      PGA, comparator
+
+                                                                               (1)  See the Device Comparison Table for details.
+             VDD                                VDD                                         VDD
+
+                                                                          Comparator                                                     Comparator
+            Voltage                                                   Voltage                 ALERT/                                    Voltage                 ALERT/
+          Reference                                             Reference             RDY                                   Reference             RDY
+
+                          ADDR                                   ADDR  AIN0                                      ADDR
+AIN0        16-Bit                         AIN0                     16-Bit                                                                       16-Bit
+                           I2C                                                                                        I2C                                                                                                                                                                  I2C                                                                                          AIN1                                       PGA                                                                MUX   PGA                            SCL                                                                       SCL                                                                                                                           SCL
+                                                                                          AIN2                                                ADC       Interface                                                                                               ADC       InterfaceAIN1     ADC       Interface                                        AIN1
+                           SDA                                     SDA                                              SDA
+                                                                                          AIN3
+
+            Oscillator                                                         Oscillator                                                                      Oscillator
+                 ADS1113                                ADS1114                                        ADS1115
+
+
+            GND                               GND                                       GND
+
+                                       Simplified Block Diagrams
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+       intellectual property matters and other important disclaimers. PRODUCTION DATA.

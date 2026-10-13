@@ -1,0 +1,44 @@
+Bosch Sensortec | BMP280 Data sheet                                                          8 | 49
+
+
+
+          Absolute accuracy            APext       300 . . 1100 hPa                 ±1.7             hPa
+          pressure                                  -20 . . . 0 °C
+                                                       APfull      300 . . . 1100 hPa                ±1.0             hPa
+                                            0 . . . 65 °C
+          Resolution of             RP           Pressure                  0.0016            hPa
+          output data in ultra high
+                                RT         Temperature                  0.01              °C           resolution mode
+         Noise in pressure                 Vp,full       Full bandwidth, ultra                1.3             Pa
+                                                  high resolution
+                                       See chapter 3.5                 11            cm
+                                                           Vp,filtered     Lowest bandwidth,                 0.2             Pa
+                                                          ultra high resolution
+                                                                                    1.7            cm                                       See chapter 3.5
+          Absolute accuracy          AT      @ 25 °C                    ±0.5              °C
+          temperature3
+                                           0 . . . +65 °C                  ±1.0              °C
+       PSRR (DC)          PSRR            full VDD range                          ±0.005    Pa/
+                                                                mV
+         Long term stability4         ∆Pstab        12 months                   ±1.0             hPa
+          Solder drifts                       Minimum solder        -0.5               +2     hPa
+                                                     height 50 µm
+           Start-up time                        tstartup        Time to first                          2     ms
+                                           communication after
+                                             both VDD > 1.58V and
+                                                    VDDIO > 0.65V
+          Possible sampling rate       fsample      osrs_t = osrs_p = 1;     157      182       tbd5     Hz
+                                       See chapter 3.8
+         Standby time accuracy      ∆tstandby                                  ±5      ±25    %
+
+
+
+
+
+             3 Temperature measured by the internal temperature sensor. This temperature value depends on the PCB temperature, sensor
+         element self-heating and ambient temperature and is typically above ambient temperature.
+             4 Long term stability is specified in the full accuracy operating pressure range 0 … 65°C
+             5 Depends on application case, please contact Application Engineer for further questions
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

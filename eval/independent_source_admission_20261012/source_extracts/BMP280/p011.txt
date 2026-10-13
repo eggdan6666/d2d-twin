@@ -1,0 +1,49 @@
+Bosch Sensortec | BMP280 Data sheet                                                              11 | 49
+
+
+       3.1  Block Diagram
+         Figure 1 shows a simplified block diagram of the BMP280:
+
+                                                VDD                          VDDIO
+
+                                                   Voltage                                       Voltage
+                                                    reference                                          regulator
+                                      (analog &
+                                                   digital)                                  SDI                                                                                                                              I
+                                                               n
+                 Pressure/                                                                                                                              t
+                temperature       Analog                              SDO                                ADC                   e                  sensing         front-end                                                            Logic            r
+                 element                                                                                                                              f                                                                  SCK
+                                                               a
+                                                                      c
+                                                               e                                     OSC POR NVM       CSB
+                                            GND
+         Figure 1: Block diagram of BMP280
+
+       3.2  Power management
+       The BMP280 has two separate power supply pins
+            •   VDD is the main power supply for all internal analog and digital functional blocks
+            •   VDDIO is a separate power supply pin, used for the supply of the digital interface
+
+      A power-on reset generator is built in which resets the logic circuitry and the register values after the
+       power-on sequence. There are no limitations on slope and sequence of raising the VDD and VDDIO
+         levels. After powering up, the sensor settles in sleep mode (see 3.6.1).
+
+        Warning. Holding any interface pin (SDI, SDO, SCK or CSB) at a logical high level when VDDIO is
+        switched off can permanently damage the device due caused by excessive current flow through the
+      ESD protection diodes.
+
+              If VDDIO is supplied, but VDD is not, the interface pins are kept at a high-Z level. The bus can therefore
+        already be used freely before the BMP280 VDD supply is established.
+
+       3.3  Measurement flow
+       The BMP280 measurement period consists of a temperature and pressure measurement with
+        selectable oversampling. After the measurement period, the data are passed through an optional IIR
+             filter, which removes short-term fluctuations in pressure (e.g. caused by slamming a door). The flow is
+        depicted in the diagram below.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

@@ -1,0 +1,2155 @@
+
+### TMP117 PDF 17
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.4.4.2 Therm Mode
+
+When the T/nA bit in the configuration register is set to 1 the device is in therm mode. In this mode, the device
+compares the conversion result at the end of every conversion with the values in the low limit register and high
+ limit register and sets the HIGH_Alert status flag in the configuration register  if the temperature exceeds the
+ value in the high limit register. When set, the device clears the HIGH_Alert status flag  if the conversion result
+goes below the value in the low limit register. Thus, the difference between the high and low limits effectively
+ acts like a hysteresis. In this mode, the LOW_Alert status flag is disabled and always reads 0. Unlike the alert
+mode, I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set
+ or cleared at the end of conversions based on the value of the temperature result compared to the high and low
+ limits.
+
+As in alert mode, configuring the device in therm mode also affects the behavior of the ALERT pin. In this mode,
+ the device asserts the ALERT pin  if the HIGH_Alert status flag is set and deasserts the ALERT pin when the
+ HIGH_Alert status flag is cleared. In therm mode, the ALERT pin cannot be cleared by performing an I2C read
+ of the configuration register or by performing an SMBus alert response command. As in alert mode, the polarity
+ of the active state of the ALERT pin can be changed if the user adjusts the POL bit setting in the configuration
+ register.
+
+ Thus, this mode effectively makes the device behave like a high-limit threshold detector. This mode can be used
+ in applications where detecting if the temperature has gone above a desired threshold is necessary. Figure 7-6
+shows a timing diagram of this mode.
+
+
+
+                                                                                                     High temperature limit
+
+
+
+           Temperature
+
+
+
+                                                                                     Low temperature limit
+
+
+
+
+ Temperature conversions
+
+
+  HIGH_Alert Status Flag
+
+
+
+   ALERT pin (POL = 0)
+
+
+                 I2C Read
+
+
+                               Figure 7-6. Therm Mode Timing Diagram
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    17
+
+                                                  Product Folder Links: TMP117
+### TMP117 PDF 18
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.5 Programming
+ 7.5.1 EEPROM Programming
+ 7.5.1.1 EEPROM Overview
+
+The device has a user-programmable EEPROM that can be used for two purposes:
+ •  Storing power-on reset (POR) values of the high limit register, low limit register, conversion cycle time,
+   averaging mode, conversion mode (continuous or shutdown mode), alert function mode (alert or therm
+   mode), and alert polarity
+ •  Storing four 16-bit locations for general-purpose use. See the EEPROM[4:1] registers for more information.
+
+On reset, the device goes through a POR sequence that loads the values programmed in the EEPROM into
+ the respective register map locations. This process takes approximately 1.5 ms. When the power-up sequence
+ is complete, the device starts operating in accordance to the configuration parameters that are loaded from
+ the EEPROM. Any I2C writes performed during this initial POR period to the limit registers or the configuration
+ register are ignored. I2C read transactions can still be performed with the device during the power-up period.
+ While the POR sequence is being executed, the EEPROM_Busy status flag in the EEPROM unlock register is
+ set.
+
+ During production, the EEPROM in the TMP117 is programmed with reset values as shown in Table 7-3. The
+Programming the EEPROM section describes how to change these values. A unique ID is also programmed in
+ the general-purpose EEPROM locations during production. This unique ID is used to support NIST traceability.
+The TMP117 units are 100% tested on a production setup that is NIST traceable and verified with equipment
+ that is calibrated to ISO/IEC 17025 accredited standards. Only reprogram the general-purpose EEPROM[4:1]
+ locations if NIST traceability is not desired.
+
+ 7.5.1.2 Programming the EEPROM
+ To prevent accidental programming, the EEPROM is locked by default. When locked, any I2C writes to the
+ register map locations are performed only on the volatile registers and not on the EEPROM.
+
+ Figure 7-7 shows a flow chart describing the EEPROM programming sequence. To program the EEPROM, first
+ unlock the EEPROM by setting the EUN bit in the EEPROM unlock register. After the EEPROM is unlocked,
+ any subsequent I2C writes to the register map locations program a corresponding non-volatile memory location
+ in the EEPROM. Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do
+ not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is
+ set. Read this flag to monitor  if the programming is complete. After programming the desired data, issue a
+ general-call reset command to trigger a software reset. The programmed data from the EEPROM are then
+ loaded to the corresponding register map locations as part of the reset sequence. This command also clears the
+EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the
+ device to perform temperature conversions when the EEPROM is unlocked.
+
+
+
+
+
+18    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117
+### TMP117 PDF 27
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.6.3 Configuration Register (address = 01h) [factory default reset = 0220h]
+
+ Return to Register Map.
+
+                                 Figure 7-14. Configuration Register
+       15            14            13            12             11            10             9             8
+   HIGH_Alert     LOW_Alert     Data_Ready  EEPROM_Busy    MOD1(2)       MOD0(1)       CONV2(1)      CONV1(1)
+
+      R-0           R-0            R-0            R-0          R/W-0         R/W-0         R/W-1         R/W-0
+
+       7             6             5             4             3             2             1             0
+    CONV0(1)        AVG1(1)         AVG0(1)          T/nA(1)          POL(1)         DR/Alert(1)      Soft_Reset     —
+
+     R/W-0         R/W-0         R/W-1         R/W-0         R/W-0         R/W-0          R-0           R-0
+
+                         Table 7-6. Configuration Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET   DESCRIPTION
+
+     15     HIGH_Alert                 R        0         High Alert flag:
+                                                                                1: Set when the conversion result is higher than the high limit
+                                                                                0: Cleared on read of configuration register
+                                                          Therm mode:
+                                                                                1: Set when the conversion result is higher than the therm limit
+                                                                                0: Cleared when the conversion result is lower than the
+                                                                          hysteresis
+
+     14     LOW_Alert                 R        0       Low Alert flag:
+                                                                                1: Set when the conversion result is lower than the low limit
+                                                                                0: Cleared when the configuration register is read
+                                                          Therm mode: Always set to 0
+
+     13     Data_Ready                R        0        Data ready flag.
+                                                                       This flag indicates that the conversion is complete and the
+                                                                    temperature register can be read. Every time the temperature
+                                                                                register or configuration register is read, this bit is cleared. This
+                                                                                               bit is set at the end of the conversion when the temperature
+                                                                                register is updated. Data ready can be monitored on the ALERT
+                                                                           pin by setting bit 2 of the configuration register.
+
+     12    EEPROM_Busy              R        0      EEPROM busy flag.
+                                                          The value of the flag indicates that the EEPROM is busy during
+                                                              programming or power-up.
+
+    11:10   MOD[1:0]                    R/W     0         Set conversion mode.
+                                                                        00: Continuous conversion (CC)
+                                                                        01: Shutdown (SD)
+                                                                        10: Continuous conversion (CC), Same as 00 (reads back = 00)
+                                                                            11: One-shot conversion (OS)
+
+     9:7    CONV[2:0]                   R/W     100      Conversion cycle bit.
+                                                        See Table 7-7 for the standby time between conversions.
+
+     6:5     AVG[1:0]                    R/W     01        Conversion averaging modes. Determines the number of
+                                                                     conversion results that are collected and averaged before
+                                                                      updating the temperature register. The average is an
+                                                                 accumulated average and not a running average.
+                                                                        00: No averaging
+                                                                        01: 8 Averaged conversions
+                                                                        10: 32 averaged conversions
+                                                                            11: 64 averaged conversions
+
+     4     T/nA                       R/W     0         Therm/alert mode select.
+                                                                                1: Therm mode
+                                                                                0: Alert mode
+
+     3    POL                       R/W     0       ALERT pin polarity bit.
+                                                                                1: Active high
+                                                                                0: Active low
+
+     2      DR/Alert                     R/W     0       ALERT pin select bit.
+                                                                                1: ALERT pin reflects the status of the data ready flag
+                                                                                0: ALERT pin reflects the status of the alert flags
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    27
+
+                                                  Product Folder Links: TMP117
+### TMP117 PDF 28
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+                    Table 7-6. Configuration Register Field Descriptions (continued)
+    BIT    FIELD                      TYPE   RESET   DESCRIPTION
+
+     1      Soft_Reset                   R/W     0         Software reset bit.
+                                                   When set to 1 it triggers software reset with a duration of 2 ms
+                                                                       This bit will always read back 0
+
+     0   —                      R        0        Not used
+
+ (1)   These bits can be stored in EEPROM. The factory setting for this register is 0220.
+ (2)  The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous
+      conversion mode.
+
+                            Table 7-7. Conversion Cycle Time in CC Mode
+       CONV[2:0]             AVG[1:0] = 00           AVG[1:0] = 01           AVG[1:0] = 10           AVG[1:0] = 11
+
+          000                    15.5 ms                125 ms                 500 ms                  1 s
+
+          001                  125 ms                 125 ms                 500 ms                  1 s
+
+          010                  250 ms                 250 ms                 500 ms                  1 s
+
+           011                  500 ms                 500 ms                 500 ms                  1 s
+
+          100                    1 s                    1 s                    1 s                    1 s
+
+          101                    4 s                    4 s                    4 s                    4 s
+
+           110                    8 s                    8 s                    8 s                    8 s
+
+           111                   16 s                   16 s                   16 s                   16 s
+
+
+ If the time to complete the conversions needed for a given averaging setting is higher than the conversion setting
+ cycle time, there will be no stand by time in the conversion cycle.
+
+
+
+
+
+28    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117
+### TMP117 PDF 29
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.6.4 High Limit Register (address = 02h) [Factory default reset = 6000h]
+
+ This register is a 16-bit, read/write register that stores the high limit for comparison with the temperature result.
+One LSB equals 7.8125 m°C. The range of the register is ±256 °C. Negative numbers are represented in binary
+ two's complement format. Following power-up or a general-call reset, the high-limit register is loaded with the
+ stored value from the EEPROM. The factory default reset value is 6000h.
+
+ Return to Register Map.
+
+                                   Figure 7-15. High Limit Register
+       15            14            13            12             11            10             9             8
+
+     H15          H14          H13          H12          H11          H10          H9          H8
+
+     R/W-0         R/W-1         R/W-1         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+      H7          H6          H5          H4          H3          H2          H1          H0
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+                           Table 7-8. High Limit Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET   DESCRIPTION
+
+    15:0     H[15:0]                      R/W     6000h     16-bit, read/write register that stores the high limit for comparison
+                                                                           with the temperature result.
+
+
+ 7.6.5 Low Limit Register (address = 03h) [Factory default reset = 8000h]
+
+ This register is configured as a 16-bit, read/write register that stores the low limit for comparison with the
+ temperature result. One LSB equals 7.8125 m°C. The range of the register is ±256 °C. Negative numbers
+ are represented in binary two's complement format. The data format is the same as the temperature register.
+ Following power-up or reset, the low-limit register is loaded with the stored value from the EEPROM. The factory
+ default reset value is 8000h.
+
+ Return to Register Map.
+
+                                   Figure 7-16. Low Limit Register
+       15            14            13            12             11            10             9             8
+
+      L15           L14           L13           L12            L11           L10            L9            L8
+
+     R/W-1         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+       L7            L6            L5            L4            L3            L2            L1            L0
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+                           Table 7-9. Low Limit Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0     L[15:0]                     R/W     8000h        16-bit, read/write register that stores the low limit for comparison
+                                                                            with the temperature result.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    29
+
+                                                  Product Folder Links: TMP117
+### TMP117 PDF 30
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.6.6 EEPROM Unlock Register (address = 04h) [reset = 0000h]
+
+ Return to Register Map.
+
+                                Figure 7-17. EEPROM Unlock Register
+       15            14            13            12             11            10             9             8
+
+     EUN     EEPROM_Busy    —       —       —       —       —       —
+
+     R/W-0          R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+       7             6             5             4             3             2             1             0
+
+    —       —       —       —       —       —       —       —
+
+      R-0           R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+                       Table 7-10. EEPROM Unlock Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+     15    EUN                       R/W     0       EEPROM unlock.
+                                                                                 0: EEPROM is locked for programming: writes to all EEPROM
+                                                                  addresses (such as configuration, limits, and EEPROM locations
+                                                                            1-4) are written to registers in digital logic and are not
+                                                            programmed in the EEPROM
+                                                                                 1: EEPROM unlocked for programming: any writes to
+                                                               programmable registers program the respective location in the
+                                               EEPROM
+
+     14    EEPROM_Busy              R       0       EEPROM busy. This flag is the mirror of the EEPROM busy flag
+                                                                                                 (bit 12) in the configuration register.
+                                                                                 0: Indicates that the EEPROM is ready, which means that the
+                                               EEPROM has finished the last transaction and is ready to
+                                                                     accept new commands
+                                                                                 1: Indicates that the EEPROM is busy, which means that the
+                                               EEPROM is currently completing a programming operation or
+                                                                       performing power-up on reset load
+
+    13:0  —                      R       0          Not used
+
+
+ 7.6.7 EEPROM1 Register (address = 05h) [reset = XXXXh]
+
+The EEPROM1 register is a 16-bit register that be used as a scratch pad by the customer to store general-
+ purpose data. This register has a corresponding EEPROM location. Writes to this address when the EEPROM is
+ locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked
+ causes the corresponding EEPROM location to be programmed. See the Programming the EEPROM section
+ for more information. EEPROM[4:1] are preprogrammed during manufacturing with the unique ID that can be
+ overwritten. To support NIST traceability do not delete or reprogram the EEPROM[1] register.
+
+ Return to Register Map.
+
+                                   Figure 7-18. EEPROM1 Register
+       15            14            13            12             11            10             9             8
+
+     D15          D14          D13          D12          D11          D10          D9          D8
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+       7             6             5             4             3             2             1             0
+
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+                           Table 7-11. EEPROM1 Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    D[15:0]                     R/W      xxxxh       This 16-bit register can be used as a scratch pad. To support
+                                                           NIST traceability do not delete or re-program this register.
+
+
+
+
+30    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117
+### TMP117 PDF 31
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.6.8 EEPROM2 Register (address = 06h) [reset = 0000h]
+
+ This register function the same as the EEPROM1 register.
+
+ Return to Register Map.
+
+                                   Figure 7-19. EEPROM2 Register
+       15            14            13            12             11            10             9             8
+
+     D15          D14          D13          D12          D11          D10          D9          D8
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+       7             6             5             4             3             2             1             0
+
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+                           Table 7-12. EEPROM2 Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    D[15:0]                     R/W      xxxxh       This 16-bit register can be used as a scratch pad.
+
+
+ 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]
+
+ This 16-bit register is to be used as a user-defined temperature offset register during system calibration. The
+ offset will be added to the temperature result after linearization. It has a same resolution of 7.8125 m°C and
+same range of ±256 °C as the temperature result register. The data format is the same as the temperature
+ register.  If the added result is out of boundary, then the temperature result will show as the maximum or
+minimum value.
+
+ Return to Register Map.
+
+                               Figure 7-20. Temperature Offset Register
+       15            14            13            12             11            10             9             8
+
+     D15          D14          D13          D12          D11          D10          D9          D8
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+                      Table 7-13. Temperature Offset Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    D[15:0]                     R/W     0          Temperature offset data from system calibration.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    31
+
+                                                  Product Folder Links: TMP117
+### TMP126 PDF 16
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.4.4.1 Interrupt Mode
+
+When the INT_COMP bit in the Configuration register is set to 0, the device is in interrupt mode. Changing
+ the device to Interrupt mode from Comparator mode  will immediately clear the Alert_Status register and
+ reset the ALERT pin. The TMP126  will then behave as described in this section at the next temperature
+ conversion. In this mode, the device compares the temperature result at the end of every conversion with the
+ values in the TLow_Limit register and THigh_Limit register. If the temperature result is higher the value in the
+ THigh_Limit register, the THigh_Status and THigh_Flag bits in the Alert_Status register will be set and the
+ALERT pin will assert. After a read of the Alert_Status register the flag bit will clear and the ALERT pin will
+ de-assert. Subsequent temperature results above the hysteresis value (THigh_Limit - THigh_Hysteresis), where
+ THigh_Hysteresis is the Most Significant Byte (MSB) in the Hysteresis register, will not set the THigh_Flag bit.
+The status bit will not clear until a temperature result is below (THigh_Limit - THigh_Hysteresis).
+
+ After a temperature  result below (THigh_Limit  - THigh_Hysteresis), the THigh_Status  bit  will  clear, the
+ THigh_Flag bit will be set, and the ALERT pin will be asserted to indicate the change.
+
+ If the THigh_Flag bit is not enabled in the Alert_Enable register, the flag bit will be set when the measured
+ temperature crosses the THigh_Limit or hysteresis but the ALERT pin will not assert. The behavior for the
+ TLow_Limit and Slew rate will be the same as the previously described high limit. Figure 8-7 shows a diagram
+ depicting the behavior.
+
+                                                                                                   Slew_Rate_Limit
+
+                                                                                                           THigh_Limit
+                                                                                                           THigh_Limit ± THigh_Hyst
+
+
+
+           Temperature
+
+
+
+                                                                                                      TLow_Limit + TLow_Hyst
+
+                                                                                                      TLow_Limit
+
+
+
+
+ Temperature conversions
+
+
+           THigh_Status
+
+
+
+             THigh_Flag
+
+
+
+           TLow_Status
+
+
+
+            TLow_Flag
+
+
+
+            Slew_Status
+
+
+
+             Slew_Flag
+
+
+
+             ALERT
+
+
+
+              SPI Read
+
+
+                                 Figure 8-7. Interrupt Mode Diagram
+
+
+
+
+
+16    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 18
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.5 Programming
+ 8.5.1 Temperature Data Format
+
+ Temperature data is represented by a 14-bit, two's complement word with an LSB (Least Significant Bit) equal to
+ 0.03125 °C. The last two bits of the register are always 00.
+
+                              Table 8-1. 14-Bit Temperature Data Format
+                                                                                     Digital Output
+           Temperature
+                                                           Binary                                 Hex
+
+              175°C                              0101 0111 1000 0000                              5780
+
+              150°C                              0100 1011 0000 0000                            4B00
+
+              125°C                               0011 1110 1000 0000                            3E80
+
+              25°C                               0000 1100 1000 0000                           0C80
+
+             0.03125°C                            0000 0000 0000 0100                             0004
+
+               0°C                               0000 0000 0000 0000                             0000
+
+            −0.03125°C                                1111 1111 1111 1100                          FFFC
+
+              −25°C                                  1111 0011 1000 0000                             F380
+
+              −40°C                                 1110 1100 0000 0000                          EC00
+
+              −55°C                                1110 0100 1000 0000                            E480
+
+
+The first data byte is the most significant byte with most significant bit first, permitting only as much data as
+ necessary to be read to determine temperature condition. For example,  if the first four bits of the temperature
+ data indicate an over temperature condition, the host controller could immediately abort communication and take
+ action to remedy the excessive temperature condition.
+
+ 8.5.2 Serial Bus Interface
+
+ Figure 8-9 shows an overview of the TMP126 protocol. The CS pin must be taken low between communication
+ transactions. Data is clocked out on the falling edge of the serial clock (SCLK), while data is clocked in on the
+ rising edge of SCLK. The 16-bit write words are latched to the respective registers after the 16th rising clock
+edge including during burst write mode. If a software reset is enabled, the device will immediately reset after the
+ 16th rising clock edge and will not respond to SPI communication until a new falling edge of the CS is observed.
+ If a software reset is triggered during burst write, any data after the configuration register write will be ignored.
+The SIO buffer is high impedance during reset.
+
+Each transaction with the TMP126 will consist of a command word, followed by the data block, and the optional
+CRC that is enabled in the command word.
+
+       CS
+
+
+                         16-bit             16-bit             16-bit             16-bit
+      SI/O        Command       Host R/W        Host R/W         CRC
+
+
+     SCLK
+
+                            Figure 8-9. TMP126 Communication Overview
+
+
+
+
+
+18    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 26
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.6.1 Temp_Result Register (Address = 00h) [reset = 0000h]
+
+ This register stores the latest temperature conversion result in a 14-bit two's complement format with a LSB
+ (Least Significant Bit) equal to 0.03125°C.
+
+ Return to Register Map.
+
+                                 Figure 8-19. Temp_Result Register
+       15            14            13            12             11            10             9             8
+
+                                                        Temp_Result[13:6]
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                                         Temp_Result[5:0]                                            Reserved
+
+                                         R-00h                                                    R-00b
+
+                          Table 8-5. Temp_Result Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    Temp_Result[13:0]            R       0000h       14-bit temperature conversion result.
+                                                                  Temperature data is represented by a 14-bit, two's complement
+                                                              word with an LSB (Least Significant Bit) equal to 0.03125°C.
+
+     1:0    Reserved                  R       00b        These two bits will always read 00b
+
+
+ 8.6.2 Slew_Result Register (Address = 01h) [reset = 0000h]
+
+ This register shows the latest slew rate calculation. Two consecutive measurements in continuous conversion
+mode are required before a result is shown. When not in continuous conversion mode the register will return to
+ the default value.
+
+The slew rate result is depicted in 14-bit twos-complement format with the LSB equal to 0.03125°C/s. The
+TMP126 does not accurately report negative slew rate values and bit 13 of the output result can be used to
+ indicate a negative slew rate but the output value cannot be guaranteed.
+
+ Return to Register Map.
+
+                                  Figure 8-20. Slew_Result Register
+       15            14            13            12             11            10             9             8
+
+                                                      Slew_Rate_Result[13:6]
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                                      Slew_Rate_Result[5:0]                                          Reserved
+
+                                         R-00h                                                    R-00b
+
+                          Table 8-6. Slew_Result Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    Slew_Rate_Result[13:0]         R       0000h      Temperature slew rate result.
+                                                                  Temperature slew rate is represented by a 14-bit, twos-
+                                                              complement word with an LSB (Least Significant Bit) equal to
+                                                                      0.03125°C/s. Format is°C/s.
+
+     1:0    Reserved                  R       00b        Reserved
+
+
+
+
+
+26    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 27
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.3 Alert_Status Register(Address = 02h) [reset = 0000h]
+
+ This register show the current alert status of the TMP126. This register will currently only clear with a single
+ register read without auto increment.
+
+ Return to Register Map.
+
+                                  Figure 8-21. Alert_Status Register
+       15            14            13            12             11            10             9             8
+
+                                                    Reserved
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+   CRC_Flag     Slew_Status     Slew_Flag     THigh_Status   TLow_Status    THigh_Flag     TLow_Flag   Data_Ready_Fl
+                                                                                                         ag
+
+     RC-0b          R-0b         RC-0b          R-0b          R-0b         RC-0b        RC-0b        RC-0b
+
+                          Table 8-7. Alert_Status Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:8    Reserved                  R       00h        Reserved
+
+     7     CRC_Flag                 RC      0b       CRC checksum error flag indicator. This indicates that the write
+                                                                            transaction CRC checksum failed and the register settings were
+                                                                         discarded.
+                                                             0b = The most recent CRC enabled write transaction was
+                                                                           successful.
+                                                             1b = The most recent CRC enabled write transaction failed.
+
+     6     Slew_Pos_Status             R       0b           Positive slew rate status indicator. This bit is set if there is a
+                                                                                positive slew rate exceeding the Slew_Rate_Limit.
+                                                                         0b: The most recent temperature conversion result is below the
+                                                                      Slew_Rate_Limit.
+                                                                         1b: The most recent temperature conversion result is above the
+                                                                      Slew_Rate_Limit.
+
+     5     Slew_Flag                 RC      0b         Slew rate flag indicator. This indicates that the current there was
+                                                             a temperature slew rate beyond the slew rate limit threshold.
+                                                                Reading Alert_Status register will clear this bit.
+                                                             0b = The most recent temperature conversion has not crossed
+                                                                         the Slew_Rate_Limit threshold.
+                                                             1b = A temperature conversion has crossed the
+                                                                    Slew_Rate_Limit threshold.
+
+     4     THigh_Status               R       0b         High temperature status indicator.
+                                                                         0b: The most recent temperature conversion result is below the
+                                                                        Thigh_Limit
+                                                                         1b: The most recent temperature conversion is above the
+                                                                        THigh_Limit. Once set, this bit will not clear until a temperature
+                                                                      conversion is below THigh_Limit - THigh_Hyst
+
+     3     TLow_Status               R       0b        Low temperature status indicator.
+                                                                         0b: The most recent temperature conversion result is above the
+                                                                  TLow_Limit
+                                                                         1b: The most recent temperature conversion is below the
+                                                                        THigh_Limit. Once set, this bit will not clear until a temperature
+                                                                      conversion is above TLow_Limit + TLow_Hyst
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    27
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 28
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+                    Table 8-7. Alert_Status Register Field Descriptions (continued)
+     Bit     Field                          Type     Reset      Description
+
+     2     THigh_Flag                RC      0b         High temperature flag indicator. This indicates that the latest
+                                                                     temperature conversion has cross above the THigh_Limit
+                                                                                 register threshold or crossed below the THigh_Limit -
+                                                                 THigh_Hyst threshold. Reading Alert_Status register will clear
+                                                                                       this bit.
+                                                             0b = The most recent temperature conversion has not crossed
+                                                                         the THigh_Limit or the hysteresis threshold.
+                                                                         1b: A temperature conversion crossed the THigh_Limit or
+                                                                    crossed below the THigh_Limit - THigh_Hyst threshold. Once
+                                                                         the THigh_Flag is set, THigh_Flag will not be set again until a
+                                                                     temperature conversion is below THigh_Limit - THigh_Hyst
+
+     1     TLow_Flag                 RC      0b        Low temperature flag indicator. This indicates that the latest
+                                                                     temperature conversion has cross below the TLow_Limit
+                                                                                 register threshold or crossed above the Tlow_Limit + TLow_Hyst
+                                                                             threshold. Reading Alert_Status register will clear this bit.
+                                                             0b = The most recent temperature conversion has not crossed
+                                                                         the TLow_Limit or the hysteresis threshold.
+                                                                         1b: A temperature conversion crossed below the TLow_Limit.
+                                                         Once the TLow_Flag is set, TLow_Flag will not be set again until
+                                                                     temperature conversion is above TLow_Limit + TLow_Hyst
+
+     0     Data_Ready_Flag            RC      0b         Data Ready flag indicator. This indicates that there is an unread
+                                                                     temperature conversion. Reading Alert_Status register or the
+                                                                  Temperature Results register will clear this bit.
+                                                             0b = Data in Temp_Result has been read already
+                                                             1b = Data in Temp_Result is unread
+
+
+
+
+
+28    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 29
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.4 Configuration Register (Address = 03h) [reset = 0006h]
+
+ This register is used to configuration the operation of the TMP126.
+
+ Return to Register Map.
+
+                                 Figure 8-22. Configuration Register
+       15            14            13            12             11            10             9             8
+
+                                             Reserved                                                     Reset
+
+                                                R-00h                                                  R/W-0b
+
+       7             6             5             4             3             2             1             0
+
+     AVG        Reserved      Int_Comp      One_Shot       Mode                      Conv_Period[2:0]
+
+     R/W-0b         R-0b         R/W-0b        R/W-0b        R/W-0b                     R/W-110b
+
+                         Table 8-8. Configuration Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:9    Reserved                  R       00h        Reserved
+
+     8     Resets                     R/W     0b          Software reset bit.
+                                                    When set to 1b it triggers software reset with a duration of 0.5
+                                                               ms.
+                                                                        This bit will always read back 0b
+
+     7    AVG                       R/W     0b          Averaging enable bit. Averaging will force every measurement
+                                                                             including one-shot measurements to be averaged with eight
+                                                                        conversions.
+                                                                         0b: Averaging is disabled
+                                                                         1b: Averaging is enabled
+
+     6     Reserved                  R       0b         Reserved
+
+     5     Int_Comp                   R/W     0b            Interrupt or comparator mode select
+                                                             0b = Interrupt mode
+                                                             1b = Comparator mode
+
+     4     One_Shot                   R/W     0b         One-shot conversion trigger. Triggering a one-shot conversion
+                                                                                                 will place the TMP126 into shutdown mode after the conversion
+                                                                      completes. This bit will always read 0h.
+                                                             0b = Default
+                                                             1b = Trigger a one-shot conversion
+
+     3    Mode                      R/W     0b         Conversion mode selection bit.
+                                                             0b = Continuous conversion mode
+                                                             1b = Shutdown mode
+
+     2:0     Conv_Period[2:0]              R/W     110b       Conversion period setting. This bit field changes the conversion
+                                                                         period of the TMP126.
+                                                             000b = 6 ms
+                                                             001b = 31.25 ms / 32 Hz
+                                                             010b = 62.5 ms / 16 Hz
+                                                               011b = 125 ms / 8 Hz
+                                                             100b = 250 ms / 4 Hz
+                                                             101b = 500 ms / 2 Hz
+                                                               110b = 1 s / 1 Hz
+                                                                 111b = 2 s / 0.5 Hz
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    29
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 30
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.6.5 Alert_Enable Register(Address = 04h) [reset = 0016h]
+
+ This register configures which flags of the Alert_Status register are enabled or disabled. Disabling an Alert flag
+ will cause the ALERT pin to not assert when that flag bit is set. If the flag is enabled the ALERT pin will assert
+when that flag is set. The flag bit will still be set in the register when the Alert functionality is disabled for that bit.
+
+ Currently if there is an active alert on the ALERT pin and the enable for that alert is set to 0b, the TMP126 will
+ not the de-assert the pin until the status register is read or a new conversion occurs.
+
+ Return to Register Map.
+
+                                 Figure 8-23. Alert_Enable Register
+       15            14            13            12             11            10             9             8
+
+                                                    Reserved
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                 Reserved                  CRC_Alert_En  Slew_Alert_En  THigh_Alert_En  TLow_Alert_En  Data_Ready_Al
+                                                                                                                     ert_En
+
+                   R-000b                      R/W-1b        R/W-0b        R/W-1b        R/W-1b        R/W-0b
+
+                          Table 8-9. Alert_Enable Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:5    Reserved                  R       000h       Reserved
+
+     4     CRC_Alert_En                R/W     1b         Enables the CRC_Flag alert to assert the ALERT pin.
+                                                             0b = CRC_Flag ALERT disabled
+                                                             1b = CRC_Flag ALERT enabled
+
+     3     Slew_Alert_En                R/W     0b         Enables the Slew_Flag assert the ALERT pin while in interrupt
+                                                             mode. When in comparator mode, enables the Slew_Status to
+                                                                           assert the ALERT.
+                                                             0b = Slew_Flag ALERT disabled
+                                                             1b = Slew_Flag ALERT enabled
+
+     2     THigh_Alert_En               R/W     1b         Enables the THigh_Flag assert the ALERT pin while in interrupt
+                                                             mode. When in comparator mode, enables the THigh_Status to
+                                                                           assert the ALERT.
+                                                             0b = THigh_Flag Alert disabled
+                                                             1b = THigh_Flag Alert enabled
+
+     1     TLow_Alert_En                R/W     1b         Enables the TLow_Flag assert the ALERT pin while in interrupt
+                                                             mode. When in comparator mode, enables the TLow_Status to
+                                                                           assert the ALERT.
+                                                             0b = TLow_Flag Alert disabled
+                                                             1b = TLow_Flag Alert enabled
+
+     0     Data_Ready_Alert_En           R/W     0b         Enables the Data_Ready_Flag to assert the ALERT pin.
+                                                             0b = Data_Ready Alert disabled
+                                                             1b = Data_Ready Alert enabled
+
+
+
+
+
+30    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 31
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.6 TLow_Limit Register(Address = 05h) [reset = F380h]
+
+ This register is used to configuration the low temperature limit of the TMP126. The limit is formatted in a 14-bit
+ two's complement format with a LSB (Least Significant Bit) equal to 0.03125°C. This is the same format as the
+TEMP_RESULT register. The range of the register is ±256°C. The default value on start-up is F380h or -25°C.
+ If the THigh_Limit register is equal to or less than the TLow_Limit register the temperature limits will be ignored
+ until configured such that THigh_Limit is greater than TLow_Limit.
+
+ Return to Register Map.
+
+                                  Figure 8-24. TLow_Limit Register
+       15            14            13            12             11            10             9             8
+
+                                                          TLow_Limit[13:6]
+
+                                                    R/W-F3h
+
+       7             6             5             4             3             2             1             0
+
+                                           TLow_Limit[5:0]                                             Reserved
+
+                                       R/W-20h                                                   R-00b
+
+                          Table 8-10. TLow_Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    TLow_Limit[13:0]              R/W     3CE0h       14-bit temperature low limit setting.
+                                                                  Temperature low limit is represented by a 14-bit, two's
+                                                              complement word with an LSB (Least Significant Bit) equal to
+                                                                   0.03125°C. The default setting for this is -25°C.
+
+     1:0    Reserved                  R       00b        These two bits will always read 00b
+
+
+ 8.6.7 THigh_Limit Register(Address = 06h) [reset = 2A80h]
+
+ This register is used to configuration the high temperature limit of the TMP126. The limit is formatted in a 14-bit
+ two's complement format with a LSB (Least Significant Bit) equal to 0.03125°C. This is the same format as the
+ Temp_Result register. The range of the register is ±256°C. The default value on start-up is 2A80h or 85°C. If the
+ THigh_Limit register is equal to or less than the TLow_Limit register the temperature limits will be ignored until
+ configured such that THigh_Limit is greater than TLow_Limit.
+
+ Return to Register Map.
+
+                                  Figure 8-25. THigh_Limit Register
+       15            14            13            12             11            10             9             8
+
+                                                            THigh_Limit[13:6]
+
+                                                   R/W-2Ah
+
+       7             6             5             4             3             2             1             0
+
+                                            THigh_Limit[5:0]                                             Reserved
+
+                                       R/W-20h                                                   R-00b
+
+                          Table 8-11. THigh_Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    THigh_Limit[13:0]              R/W     0AA0h       14-bit temperature high limit setting.
+                                                                  Temperature high limit is represented by a 14-bit, two's
+                                                              complement word with an LSB (Least Significant Bit) equal to
+                                                                   0.03125°C.
+
+     1:0    Reserved                  R       00b        These two bits will always read 00b
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    31
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 32
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.6.8 Hysteresis Register (Address = 07h) [reset = 0A0Ah]
+
+ This register sets the hysteresis for the THigh_Limit threshold and the TLow_Limit threshold. The default
+ hysteresis value for both the high and low limits is equal to 5 °C.
+
+The Hysteresis is in a 8-bit unsigned format with the LSB equal to 0.5°C. This gives a maximum value of
+ 127.5°C of hysteresis.
+
+ Return to Register Map.
+
+                                   Figure 8-26. Hysteresis Register
+       15            14            13            12             11            10             9             8
+
+                                                          THigh_Hyst[7:0]
+
+                                                   R/W-0Ah
+
+       7             6             5             4             3             2             1             0
+
+                                                        TLow_Hyst[7:0]
+
+                                                   R/W-0Ah
+
+                          Table 8-12. Hysteresis Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:8    THigh_Hyst[7:0]               R/W     0Ah        THigh_Limit Hysteresis setting.
+                                                                        Hysteresis value is represented by a unsigned Byte with the
+                                                      LSB equal to 0.5°C. The High temperature limit hysteresis
+                                                                          threshold is equal to (THigh_Limit - THigh_Hyst).
+                                                           The default hysteresis value is 5 °C.
+
+     7:0     TLow_Hyst[7:0]               R/W     0Ah        TLow_Limit Hysteresis setting.
+                                                                        Hysteresis value is represented by a unsigned Byte with the
+                                                      LSB equal to 0.5°C. The Low temperature limit hysteresis
+                                                                          threshold is equal to (TLow_Limit + TLow_Hyst).
+                                                           The default hysteresis value is 5 °C.
+
+
+
+
+
+32    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126
+### TMP126 PDF 33
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.9 Slew_Limit Register (Address = 08h) [reset = 0500h]
+
+ This register is used to configure the temperature slew rate limit of the TMP126. The limit is formatted in a 13-bit
+ unsigned format with the LSB (Least Significant Bit) equal to 0.03125°C/s. The range of the register is 0°C to
+ +256°C. The default value on start-up is 0140h or 10°C/s. The slew rate limit will trigger a slew rate alert on
+ positive slew rates that are greater than the unsigned limit as enabled by the Alert_Enable register.
+
+ Return to Register Map.
+
+                                  Figure 8-27. Slew_Limit Register
+       15            14            13            12             11            10             9             8
+
+    Reserved                                                  Slew_Rate_Limit[12:6]
+
+      R-0b                                                  R/W-05h
+
+       7             6             5             4             3             2             1             0
+
+                                        Slew_Rate_Limit[5:0]                                           Reserved
+
+                                       R/W-00h                                                   R-00b
+
+                          Table 8-13. Slew_Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15     Reserved                  R       00b        Reserved
+
+    14:2    Slew_Rate_Limit[12:0]           R/W     0140h       13-bit temperature slew rate limit setting.
+                                                                  Temperature low limit is represented by a 13-bit unsigned word
+                                                                            with a LSB (Least Significant Bit) equal to 0.03125°C/s. The
+                                                                               default setting for this is 10°C/s.
+
+     1:0    Reserved                  R       00b        Reserved
+
+
+ 8.6.10 Unique_ID1 register (Address = 09h) [reset = xxxxh]
+
+ This register contains bits 47:32 of the Unique ID for the device. The Unique ID of the device is used for NIST
+ traceability purposes.
+
+ Return to Register Map.
+
+                                  Figure 8-28. Unique_ID1 Register
+       15            14            13            12             11            10             9             8
+
+                                                         Unique_ID[47:40]
+
+                                                          R-xxh
+
+       7             6             5             4             3             2             1             0
+
+                                                         Unique_ID[39:32]
+
+                                                          R-xxh
+
+                          Table 8-14. Unique_ID4 Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:0    Unique_ID[47:32]             R        xxxxh        Bits 47:32 of the device Unique ID
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    33
+
+                                                  Product Folder Links: TMP126
+### HDC2021 PDF 15
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.3.5.2.2 Temperature Low (TL)
+
+When TL_ENABLE is enabled in the Interrupt Configuration register (address 0x07) and the temperature is
+ under the programmed threshold level stored in the Temperature Threshold LOW register (address 0x0C), the
+TL_STATUS bit of the Status register (address 0x04) asserts to 1. The interrupt is cleared upon reading the
+ Status register.
+
+The polarity and interrupt mode of the TL_STATUS bit and the DRDY/INT pin can be configured through the
+INT_POL and INT_MODE bits of the Device Configuration Register (address 0x0E). The INT_MODE bit sets the
+ threshold to either comparator mode or clear-on-read mode. When the INT_MODE bit is set to 0, the
+TL_STATUS bit remains set to 1 until it is read. When the INT_MODE bit is set to 1, the TL_STATUS bit status
+ reflects the current temperature conversion result. The polarity of the DRDY/INT pin is set by INT_POL bit.
+
+                      T [°C]
+
+
+
+
+
+                       Temperature Threshold Low
+
+                                                                                                                                                                       Time
+
+               1
+ TL_STATUS                                                                                                           Status Register
+ [INT_MODE = 0]                                                                                    Read
+               0
+ DRDY/INT pin      VDD
+ [INT_MODE = 0]
+ [INT_POL = 1]    0
+ DRDY/INT pin      VDD
+ [INT_MODE = 0]
+ [INT_POL = 0]    0
+
+
+               1
+ TL_STATUS
+ [INT_MODE = 1]
+               0
+ DRDY/INT pin      VDD
+ [INT_MODE = 1]
+ [INT_POL = 1]    0
+ DRDY/INT pin      VDD
+ [INT_MODE = 1]
+ [INT_POL = 0]    0
+
+                       Figure 7-4. INTERRUPT on Threshold - Temperature Low
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    15
+### HDC2021 PDF 23
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.5 Status (Address 0x04)
+
+                              Table 7-15. Status Register (Address 0x04)
+
+       7              6              5              4              3             2            1            0
+
+ DRDY_STATUS   TH_STATUS    TL_STATUS    HH_STATUS    HL_STATUS      RES        RES        RES
+
+                            Table 7-16. Status Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7    DRDY_STATUS              R       0          DataReady bit status
+                                                             0 = Data Not Ready
+                                                             1 = Data Ready
+
+     6    TH_STATUS                R       0          Temperature threshold HIGH Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     5     TL_STATUS                R       0          Temperature threshold LOW Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     4    HH_STATUS               R       0           Humidity threshold HIGH Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     3    HL_STATUS                R       0           Humidity threshold LOW Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     2    RES                                    0          Reserved
+
+     1    RES                                    0          Reserved
+
+     0    RES                                    0          Reserved
+
+
+The DRDY_STATUS bit indicates that temperature and/or humidity conversion is completed, and its behavior is
+ defined by the Device Configuration Register (0x0E). This bit is cleared when the any of the following registers is
+ read: Temperature Low (0x00), Temperature High (0x01), Humidity Low (0x02), Humidity High (0x03), and
+ Status (0x04). The bit is also cleared upon RESET.
+
+The TL_STATUS bit indicates that the Temperature Threshold LOW value is exceeded, and its behavior is
+ defined by the Device Configuration Register (0x0E). The bit is cleared when the Status Register (0x04) is read.
+The bit is also cleared upon RESET.
+
+The TH_STATUS bit indicates that the Temperature Threshold HIGH value is exceeded, and its behavior is
+ defined by the 0x0E Configuration register value. The bit is cleared when the Status Register (0x04) is read. The
+ bit is also cleared upon RESET.
+
+The HH_STATUS bit indicates that the Humidity Threshold HIGH value is exceeded, and its behavior is defined
+ by the Device Configuration Register (0x0E). The bit is cleared when the Status Register (0x04) is read. The bit
+ is also cleared upon RESET.
+
+The HL_STATUS bit indicates that the Humidity Threshold LOW value is exceeded, and its behavior is defined
+ by the Device Configuration Register (0x0E). The bit is cleared when the Status Register (0x04) is read. The bit
+ is also cleared upon RESET.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    23
+### HDC2021 PDF 24
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.6 Temperature MAX (Address: 0x05)
+
+                        Table 7-17. Temperature MAX Register (Address: 0x05)
+
+       7             6             5             4             3             2             1             0
+
+                                          TEMPERATUREMAX[7:0]
+
+                           Table 7-18. Temperature Max Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     [HEX]                    DESCRIPTION
+     [7:0]   TEMPERATUREMAX[7:0]       R       0         Maximum temperature measurement data (one-shot mode only)
+
+
+ This register implements temperature peak detector function. The register stores the highest temperature value
+ converted after the last reset (power-on reset or software reset).
+
+The temperature can be calculated from the output data using Equation 5:
+
+                            § TEMPERATURE [7 : 0] ·
+    Temperature ( qC)   ¨             8             ¸ u 165  40                            ©        2              ¹                                                                    (5)
+
+ 7.6.7 Humidity MAX (Address: 0x06)
+
+                          Table 7-19. Humidity MAX Register (Address: 0x06)
+
+       7             6             5             4             3             2             1             0
+
+                                                HUMIDITYMAX[7:0]
+
+                             Table 7-20. Humidity MAX Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]    HUMIDITYMAX[7:0]           R       0         Maximum humidity measurement data (one-shot mode only)
+
+
+ This register implements humidity peak detector function. The register stores the highest humidity value
+ converted after the last reset (power-on reset or software reset).
+
+The humidity can be calculated from the output data using Equation 6:
+
+                                                     § 100 ·
+    Humidity (%RH)  HUMIDITYMAX > 7 : 0 @ u¨  8 ¸                                                     © 2  ¹                                                                 (6)
+
+
+
+
+
+24    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated
+### HDC2021 PDF 25
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.8 Interrupt Enable (Address: 0x07)
+
+                         Table 7-21. Interrupt Enable Register (Address: 0x07)
+
+       7             6             5             4             3             2             1             0
+
+ DRDY_ENABLE  TH_ENABLE   TL_ENABLE   HH_ENABLE   HL_ENABLE      RES        RES        RES
+
+                        Table 7-22. Interrupt Enable Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7    DRDY_ENABLE               R/W     0          DataReady Interrupt enable
+                                                             0 = DataReady Interrupt disabled
+                                                             1 = DataReady Interrupt enabled
+
+     6    TH_ENABLE                 R/W     0          Temperature threshold HIGH Interrupt enable
+                                                             0 = Temperature high Interrupt disabled
+                                                             1 = Temperature high Interrupt enabled
+
+     5    TL_ENABLE                 R/W     0          Temperature threshold LOW Interrupt enable
+                                                             0 = Temperature low Interrupt disabled
+                                                             1 = Temperature low Interrupt enabled
+
+     4    HH_ENABLE                 R/W     0           Humidity threshold HIGH Interrupt enable
+                                                             0 = Humidity high Interrupt disabled
+                                                             1 = Humidity high Interrupt enabled
+
+     3    HL_ENABLE                 R/W     0           Humidity threshold LOW Interrupt enable
+                                                             0 = Humidity low Interrupt disabled
+                                                             1 = Humidity low Interrupt enabled
+
+     2    RES                                    0          Reserved
+
+     1    RES                                    0          Reserved
+
+     0    RES                                    0          Reserved
+
+
+The Interrupt Enable register enables or disables interrupt asserstion on the DRDY/INT pin from DataReady,
+ Temperature threshold High, Temperature threshold Low, Humidity threshold High, or Humidity threshold Low.
+The Status register (address 0x04) content is unaffected by this register.
+
+ Note the settings of this regsiter only takes effect if the DRDY/INT_EN bit of the Device Configuration register
+ (address 0x0E) is set to 1.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    25
+### HDC2021 PDF 26
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.9 Temperature Offset Adjustment (Address: 0x08)
+
+                  Table 7-23. Temperature Offset Adjustment Register (Address: 0x08)
+
+       7             6             5             4             3             2             1             0
+
+                                          TEMP_OFFSET_ADJUST[7:0]
+
+                 Table 7-24. Temperature Offset Adjustment Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   TEMP_OFFSET_ADJUST [7:0]     R/W     0          Temperature offset adjustment value. The value is added to the
+                                                                     converted temperature data.
+
+
+The reported temperature conversion data can be adjusted by programming the Temperature Offset Adjustment
+ Register. The following table summarizes the equivalent offset value added or subtracted for each bit of the
+ register:
+
+       7             6             5             4             3             2             1             0
+
+    –20.63°C       +10.31°C       +5.16°C        +2.58°C        +1.29°C        +0.64°C        +0.32°C        +0.16°C
+
+
+The value is added to the converted temperature value for offset adjustment as shown in Figure 7-7.
+
+
+
+                                 Converted Value                                   Temperature Output                              +
+
+
+
+
+                                                         User Temperature Offset
+
+                             Figure 7-7. Temperature Output Calculation
+
+The resulting temperature offset is a summation of the register bits that have been enabled (that is, programmed
+ to 1). Some examples:
+ 1. Programming TEMP_OFFSET_ADJUST to 00000001 adjusts the reported temperature by +0.16°C.
+ 2. Programming TEMP_OFFSET_ADJUST to 00000111 adjusts the reported temperature by +1.12°C.
+ 3. Programming TEMP_OFFSET_ADJUST to 00001101 adjusts the reported temperature by +2.08°C.
+ 4. Programming TEMP_OFFSET_ADJUST to 11111111 adjusts the reported temperature by –0.16°C.
+ 5. Programming TEMP_OFFSET_ADJUST to 11111001 adjusts the reported temperature by –1.12°C.
+ 6. Programming TEMP_OFFSET_ADJUST to 11110011 adjusts the reported temperature by –2.08°C.
+
+
+
+
+
+26    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated
+### HDC2021 PDF 27
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.10 Humidity Offset Adjustment (Address 0x09)
+
+                   Table 7-25. Humidity Offset Adjustment Register (Address: 0x09)
+
+       7             6             5             4             3             2             1             0
+
+                                      HUM_OFFSET_ADJUST [7:0]
+
+                  Table 7-26. Humidity Offset Adjustment Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   HUM_OFFSET_ADJUST [7:0]     R/W     0           Humidity offset adjustment value. The value is added to the
+                                                                     converted humidity data.
+
+
+The reported humidity conversion data can be adjusted by programming the Humidity Offset Adjustment
+ Register. The following table summarizes the equivalent offset value added or subtracted for each bit of the
+ register:
+
+       7             6             5             4             3             2             1             0
+
+   –25%RH      +12.5%RH     +6.3%RH      +3.1%RH      +1.6%RH      +0.8%RH      +0.4%RH      +0.2%RH
+
+
+The value is added to the converted humidity value for offset adjustment as shown in Figure 7-8
+
+
+
+                                 Converted Value                                        Humidity Output                              +
+
+
+
+
+                                                           User Humidity Offset
+
+                               Figure 7-8. Humidity Output Calculation
+
+The resulting humidity offset is a summation of the register bits that have been enabled (that is, programmed to
+ 1). Some examples:
+ 1. Programming HUM_OFFSET_ADJUST to 00000001 adjusts the reported humidity by +0.20%RH.
+ 2. Programming HUM_OFFSET_ADJUST to 00000101 adjusts the reported humidity by +1.00%RH.
+ 3. Programming HUM_OFFSET_ADJUST to 00001010 adjusts the reported humidity by +2.00%RH.
+ 4. Programming HUM_OFFSET_ADJUST to 11111111 adjusts the reported humidity by –0.10%RH.
+ 5. Programming HUM_OFFSET_ADJUST to 11111011 adjusts the reported humidity by –0.90%RH.
+ 6. Programming HUM_OFFSET_ADJUST to 11110101 adjusts the reported humidity by –2.10%RH.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    27
+### HDC2021 PDF 28
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.11 Temperature Threshold LOW (Address 0x0A)
+
+                   Table 7-27. Temperature Threshold LOW Register (Address: 0x0A)
+
+       7             6             5             4             3             2             1             0
+
+                                           TEMP_THRES_LOW[7:0]
+
+                      Table 7-28. Temperature Threshold LOW Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+     [7:0]   TEMP_THRES_LOW[7:0]        R/W     1          Temperature threshold LOW value
+
+
+The Temperature Threshold LOW register configures the temperature threshold setting for interrupt generation if
+ the TL_ENABLE interrupt is enabled. The threshold value can be calculated using Equation 7:
+
+                                            § TEMP_THRES_LOW [7 : 0] ·
+    Temperature threshold low ( qC)   ¨               8               ¸ u 165  40                                            ©          2                ¹                                             (7)
+
+ 7.6.12 Temperature Threshold HIGH (Address 0x0B)
+
+                   Table 7-29. Temperature Threshold HIGH Register (Address 0x0B)
+
+       7             6             5             4             3             2             1             0
+
+                                            TEMP_THRES_HIGH[7:0]
+
+                  Table 7-30. Temperature Threshold HIGH Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]    TEMP_THRES_HIGH[7:0]        R/W     FF         Temperature threshold HIGH value
+
+
+The Temperature Threshold HIGH register configures the temperature threshold setting for interrupt generation if
+ the TH_ENABLE interrupt is enabled. The threshold value can be calculated using Equation 8:
+
+                                             § TEMP_THRES_HIGH [7 : 0] ·
+    Temperature threshold high ( qC)   ¨               8               ¸ u 165  40                                             ©          2                 ¹                                            (8)
+
+
+
+
+
+28    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated
+### BME280 PDF 27
+Bosch Sensortec | BME280 Data sheet                                            27 | 60
+
+
+Table 18: Memory map
+
+                                                                                                                        Reset   Register Name    Address       bit7         bit6         bit5         bit4         bit3         bit2         bit1         bit0                                                                                                                                            state
+     hum_lsb        0xFE                                           hum_lsb<7:0>                                          0x00
+    hum_msb       0xFD                                      hum_msb<7:0>                                          0x80
+    temp_xlsb       0xFC                    temp_xlsb<7:4>                    0          0          0          0         0x00
+     temp_lsb       0xFB                                            temp_lsb<7:0>                                          0x00
+    temp_msb       0xFA                                        temp_msb<7:0>                                         0x80
+    press_xlsb       0xF9                     press_xlsb<7:4>                    0          0          0          0         0x00
+     press_lsb        0xF8                                              press_lsb<7:0>                                          0x00
+    press_msb       0xF7                                         press_msb<7:0>                                         0x80
+       config         0xF5                     t_sb[2:0]                                         filter[2:0]                            spi3w_en[0]    0x00
+     ctrl_meas        0xF4                    osrs_t[2:0]                             osrs_p[2:0]                     mode[1:0]           0x00
+       status         0xF3                                                      measuring[0]                         im_update[0]    0x00
+     ctrl_hum        0xF2                                                                                     osrs_h[2:0]                0x00
+   calib26..calib41  0xE1…0xF0                                                  calibration data                                                    individual
+        reset         0xE0                                                         reset[7:0]                                            0x00
+          id          0xD0                                                       chip_id[7:0]                                           0x60
+   calib00..calib25  0x88…0xA1                                                  calibration data                                                    individual
+
+                             Reserved   Calibration    Control      Data       Status                     Registers:                                                         Chip ID     Reset                                   registers      data      registers    registers    registers
+                            do not                       Type:               read only  read / write  read only   read only   read only   write only                            change
+
+5.4  Register description
+5.4.1  Register 0xD0 “id”
+The “id” register contains the chip identification number chip_id[7:0], which is 0x60. This number can
+be read as soon as the device finished the power-on-reset.
+5.4.2  Register 0xE0 “reset”
+The “reset” register contains the soft reset word reset[7:0]. If the value 0xB6 is written to the register,
+the device is reset using the complete power-on-reset procedure. Writing other values than 0xB6 has
+no effect. The readout value is always 0x00.
+5.4.3  Register 0xF2 “ctrl_hum”
+The “ctrl_hum” register sets the humidity data acquisition options of the device. Changes to this
+register only become effective after a write operation to “ctrl_meas”.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022
+### BME280 PDF 28
+Bosch Sensortec | BME280 Data sheet                                            28 | 60
+
+
+Table 19: Register 0xF2 “ctrl_hum”
+
+    Register 0xF2        Name                           Description
+     “ctrl_hum”
+        Bit 2, 1, 0             osrs_h[2:0]        Controls oversampling of humidity data. See Table
+                                          20 for settings and chapter 3.4.1 for details.
+
+Table 20: register settings osrs_h
+
+   osrs_h[2:0]      Humidity oversampling
+      000        Skipped (output set to 0x8000)
+      001              oversampling ×1
+      010              oversampling ×2
+      011              oversampling ×4
+      100              oversampling ×8
+   101, others          oversampling ×16
+
+5.4.4  Register 0xF3 “status”
+The “status” register contains two bits which indicate the status of the device.
+
+Table 21: Register 0xF3 “status”
+
+    Register 0xF3        Name                           Description
+       “status”
+           Bit 3             measuring[0]         Automatically set to ‘1’ whenever a conversion is
+                                              running and back to ‘0’ when the results have been
+                                                           transferred to the data registers.
+           Bit 0             im_update[0]      Automatically set to ‘1’ when the NVM data are being
+                                             copied to image registers and back to ‘0’ when the
+                                            copying is done. The data are copied at power-on-
+                                                         reset and before every conversion.
+
+5.4.5  Register 0xF4 “ctrl_meas”
+The “ctrl_meas” register sets the pressure and temperature data acquisition options of the device. The
+register needs to be written after changing “ctrl_hum” for the changes to become effective.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022
+### BME280 PDF 30
+Bosch Sensortec | BME280 Data sheet                                            30 | 60
+
+
+5.4.6  Register 0xF5 “config”
+The “config” register sets the rate, filter and interface options of the device. Writes to the “config”
+register in normal mode may be ignored. In sleep mode writes are not ignored.
+
+Table 26: Register 0xF5 “config”
+
+    Register 0xF5        Name                           Description
+      “config”
+        Bit 7, 6, 5               t_sb[2:0]          Controls inactive duration tstandby in normal mode.
+                                       See Table 27 for settings and chapter 3.3.4 for
+                                                                               details.
+        Bit 4, 3, 2                  filter[2:0]         Controls the time constant of the IIR filter. See Table
+                                          27 for settings and chapter 3.4.4 for details.
+           Bit 0              spi3w_en[0]        Enables 3-wire SPI interface when set to ‘1’. See
+                                                           chapter 6.3 for details.
+
+Table 27: t_sb settings
+
+   t_sb[2:0]          tstandby [ms]
+     000               0.5
+     001              62.5
+     010            125
+     011            250
+     100            500
+     101            1000
+     110             10
+     111             20
+
+Table 28: filter settings
+
+     filter[2:0]      Filter coefficient
+
+      000                Filter off
+      001             2
+      010             4
+      011             8
+   100, others          16
+
+5.4.7  Register 0xF7…0xF9 “press” (_msb, _lsb, _xlsb)
+The “press” register contains the raw pressure measurement output data up[19:0]. For details on how
+to read out the pressure and temperature information from the device, please consult chapter 4.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022
+### BMP280 PDF 24
+Bosch Sensortec | BMP280 Data sheet                                                          24 | 49
+
+
+      4. Global memory map and register description
+
+       4.1   General remarks
+          All communication with the device is performed by reading from and writing to registers. Registers
+       have a width of 8 bits. There are several registers which are reserved; they should not be written to
+       and no specific value is guaranteed when they are read. For details on the interface, consult chapter
+         5.
+
+       4.2   Memory map
+       The memory map is given in Table 18 below. Reserved registers are not shown.
+
+                                                Table 18: Memory map
+
+                                                                                                                                  Reset              Register Name    Address       bit7         bit6         bit5         bit4         bit3         bit2         bit1         bit0                                                                                                                                                        state
+               temp_xlsb       0xFC                    temp_xlsb<7:4>                    0          0          0          0         0x00
+               temp_lsb       0xFB                                            temp_lsb<7:0>                                          0x00
+             temp_msb       0xFA                                        temp_msb<7:0>                                         0x80
+               press_xlsb       0xF9                     press_xlsb<7:4>                    0          0          0          0         0x00
+                press_lsb        0xF8                                              press_lsb<7:0>                                          0x00
+             press_msb       0xF7                                         press_msb<7:0>                                         0x80
+                  config         0xF5                     t_sb[2:0]                                         filter[2:0]                            spi3w_en[0]    0x00
+                ctrl_meas        0xF4                    osrs_t[2:0]                             osrs_p[2:0]                     mode[1:0]           0x00
+                  status         0xF3                                                      measuring[0]                         im_update[0]    0x00
+                    reset         0xE0                                                         reset[7:0]                                            0x00
+                       id          0xD0                                                       chip_id[7:0]                                           0x58
+               calib25...calib00  0xA1…0x88                                                  calibration data                                                    individual
+
+                                       Reserved   Calibration    Control      Data       Status                                Registers:                                                            Revision     Reset                                               registers      data      registers    registers    registers
+                                     do not                                 Type:               read only  read / write  read only   read only   read only   write only                                                 write
+
+       4.3  Register description
+        4.3.1  Register 0xD0 “id”
+       The “id” register contains the chip identification number chip_id[7:0], which is 0x58. This number can
+       be read as soon as the device finished the power-on-reset.
+        4.3.2  Register 0xE0 “reset”
+       The “reset” register contains the soft reset word reset[7:0]. If the value 0xB6 is written to the register,
+        the device is reset using the complete power-on-reset procedure. Writing other values than 0xB6 has
+       no effect. The readout value is always 0x00.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021
+### BMP280 PDF 25
+Bosch Sensortec | BMP280 Data sheet                                                          25 | 49
+
+
+        4.3.3  Register 0xF3 “status”
+       The “status” register contains two bits which indicate the status of the device.
+
+                                            Table 19: Register 0xF3 “status”
+           Register 0xF3        Name                           Description
+              “status”
+                     Bit 3             measuring[0]      Automatically set to ‘1’ whenever a conversion is
+                                                    running and back to ‘0’ when the results have been
+                                                         transferred to the data registers.
+                     Bit 0             im_update[0]      Automatically set to ‘1’ when the NVM data are being
+                                                   copied to image registers and back to ‘0’ when the
+                                                   copying is done. The data are copied at power-on-
+                                                        reset and before every conversion.
+
+        4.3.4  Register 0xF4 “ctrl_meas”
+       The “ctrl_meas” register sets the data acquisition options of the device.
+
+                                           Table 20: Register 0xF4 “ctrl_meas”
+           Register 0xF4        Name                           Description
+            “ctrl_meas”
+                  Bit 7, 6, 5              osrs_t[2:0]       Controls oversampling of temperature data. See
+                                                     chapter 3.3.2 for details.
+                  Bit 4, 3, 2             osrs_p[2:0]       Controls oversampling of pressure data. See chapter
+                                                        3.3.1 for details.
+                   Bit 1, 0             mode[1:0]       Controls the power mode of the device. See chapter
+                                                      3.6 for details.
+
+
+                                            Table 21: register settings osrs_p
+                                     osrs_p[2:0]        Pressure
+                                                  oversampling
+                                     000       Skipped (output set to
+                                                      0x80000)
+                                     001          oversampling ×1
+                                     010          oversampling ×2
+                                      011          oversampling ×4
+                                     100          oversampling ×8
+                                      101, Others     oversampling ×16
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021
+### BMP280 PDF 26
+Bosch Sensortec | BMP280 Data sheet                                                          26 | 49
+
+
+
+                                            Table 22: register settings osrs_t
+                                   osrs_t[2:0]     Temperature oversampling
+                                000       Skipped (output set to 0x80000)
+
+                                001              oversampling ×1
+                                010              oversampling ×2
+                                  011              oversampling ×4
+                                100              oversampling ×8
+                                 101, 110, 111         oversampling ×16
+
+
+        4.3.5  Register 0xF5 “config”
+       The “config” register sets the rate, filter and interface options of the device. Writes to the “config”
+         register in normal mode may be ignored. In sleep mode writes are not ignored.
+
+                                            Table 23: Register 0xF5 “config”
+           Register 0xF5        Name                           Description
+              “config”
+                  Bit 7, 6, 5               t_sb[2:0]        Controls inactive duration tstandby in normal mode.
+                                          See chapter 3.6.3 for details.
+                  Bit 4, 3, 2                  filter[2:0]        Controls the time constant of the IIR filter. See
+                                                    chapter 3.3.3 for details.
+                     Bit 0              spi3w_en[0]      Enables 3-wire SPI interface when set to ‘1’. See
+                                                    chapter 5.3 for details.
+
+        4.3.6  Register 0xF7…0xF9 “press” (_msb, _lsb, _xlsb)
+       The “press” register contains the raw pressure measurement output data up[19:0]. For details on how
+         to read out the pressure and temperature information from the device, please consult chapter0.
+
+                                         Table 24: Register 0xF7 … 0xF9 “press”
+           Register 0xF7-        Name                           Description
+          0xF9 “press”
+              0xF7            press_msb[7:0]     Contains the MSB part up[19:12] of the raw pressure
+                                             measurement output data.
+              0xF8              press_lsb[7:0]     Contains the LSB part up[11:4] of the raw pressure
+                                             measurement output data.
+        0xF9 (bit 7, 6, 5, 4)      press_xlsb[3:0]     Contains the XLSB part up[3:0] of the raw pressure
+                                             measurement output data. Contents depend on
+                                                   temperature resolution, see table 5.
+
+        4.3.7  Register 0xFA…0xFC “temp” (_msb, _lsb, _xlsb)
+       The “temp” register contains the raw temperature measurement output data ut[19:0]. For details on
+      how to read out the pressure and temperature information from the device, please consult chapter 0.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021
+### HDC2021 PDF32
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.18 Manufacturer ID High (Address: FD)
+
+                       Table 7-41. Manufacturer ID High Register (Address: FD)
+
+       7             6             5             4             3             2             1             0
+
+                                     MANUFACTURER ID[15:8]
+
+                     Table 7-42. Manufacturer ID High Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   MANUFACTURER ID [15:8]      R       54          Manufacturer ID- higher byte value
+
+
+The Manufacturer ID Low and Manufacturer ID High registers contain a factory-programmable identification
+ value that identifies this device as being manufactured by Texas Instruments. The manufacturer ID helps
+ distinguish the device from other devices that are on the same I2C bus. The manufacturer ID reads 0x5449 and
+ spans across the two registers.
+
+ 7.6.19 Device ID Low (Address: FE)
+
+                           Table 7-43. Device ID Low Register (Address: FE)
+
+       7             6             5             4             3             2             1             0
+
+                                             DEVICE ID[7:0]
+
+                         Table 7-44. Device ID Low Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   DEVICE ID [7:0]             R      D0         Device ID - lower byte value
+
+The Device ID Low and Device ID High registers contain a factory-programmable identification value that
+ identifies this device as a HDC2021. The device ID helps distinguish the device from other devices that are on
+ the same I2C bus. The Device ID for the HDC2021 is 0x07D0.
+ 7.6.20 Device ID High (Address: FF)
+
+                           Table 7-45. Device ID High Register (Address: FF)
+
+       7             6             5             4             3             2             1             0
+
+                                             DEVICE ID[15:8]
+
+                        Table 7-46. Device ID High Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   DEVICE ID [15:8]             R       7          Device ID - higher byte value
+
+The Device ID Low and Device ID High registers contain a factory-programmable identification value that
+ identifies this device as a HDC2021. The device ID helps distinguish the device from other devices that are on
+ the same I2C bus. The Device ID for the HDC2021 is 0x07D0.
+
+
+
+
+
+32    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated
+### TMP126 PDF29
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.4 Configuration Register (Address = 03h) [reset = 0006h]
+
+ This register is used to configuration the operation of the TMP126.
+
+ Return to Register Map.
+
+                                 Figure 8-22. Configuration Register
+       15            14            13            12             11            10             9             8
+
+                                             Reserved                                                     Reset
+
+                                                R-00h                                                  R/W-0b
+
+       7             6             5             4             3             2             1             0
+
+     AVG        Reserved      Int_Comp      One_Shot       Mode                      Conv_Period[2:0]
+
+     R/W-0b         R-0b         R/W-0b        R/W-0b        R/W-0b                     R/W-110b
+
+                         Table 8-8. Configuration Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:9    Reserved                  R       00h        Reserved
+
+     8     Resets                     R/W     0b          Software reset bit.
+                                                    When set to 1b it triggers software reset with a duration of 0.5
+                                                               ms.
+                                                                        This bit will always read back 0b
+
+     7    AVG                       R/W     0b          Averaging enable bit. Averaging will force every measurement
+                                                                             including one-shot measurements to be averaged with eight
+                                                                        conversions.
+                                                                         0b: Averaging is disabled
+                                                                         1b: Averaging is enabled
+
+     6     Reserved                  R       0b         Reserved
+
+     5     Int_Comp                   R/W     0b            Interrupt or comparator mode select
+                                                             0b = Interrupt mode
+                                                             1b = Comparator mode
+
+     4     One_Shot                   R/W     0b         One-shot conversion trigger. Triggering a one-shot conversion
+                                                                                                 will place the TMP126 into shutdown mode after the conversion
+                                                                      completes. This bit will always read 0h.
+                                                             0b = Default
+                                                             1b = Trigger a one-shot conversion
+
+     3    Mode                      R/W     0b         Conversion mode selection bit.
+                                                             0b = Continuous conversion mode
+                                                             1b = Shutdown mode
+
+     2:0     Conv_Period[2:0]              R/W     110b       Conversion period setting. This bit field changes the conversion
+                                                                         period of the TMP126.
+                                                             000b = 6 ms
+                                                             001b = 31.25 ms / 32 Hz
+                                                             010b = 62.5 ms / 16 Hz
+                                                               011b = 125 ms / 8 Hz
+                                                             100b = 250 ms / 4 Hz
+                                                             101b = 500 ms / 2 Hz
+                                                               110b = 1 s / 1 Hz
+                                                                 111b = 2 s / 0.5 Hz
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    29
+
+                                                  Product Folder Links: TMP126
+### HDC2021 PDF29
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.13 Humidity Threshold LOW (Address 0x0C)
+
+                     Table 7-31. Humidity Threshold LOW Register (Address 0x0C)
+
+       7             6             5             4             3             2             1             0
+
+                                            HUMI_THRES_LOW[7:0]
+
+                    Table 7-32. Humidity Threshold LOW Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   HUMI_THRES_LOW[7:0]         R/W     0           Humidity threshold LOW value
+
+
+The Humidity Threshold LOW register configures the humidity threshold setting for interrupt generation if the
+HL_ENABLE interrupt is enabled. The threshold value can be calculated with using Equation 9:
+
+                                            § HUMI_THRES_LOW [7 : 0] ·
+    Humidity threashold low (%RH)   ¨               8               ¸ u 100                                            ©          2                ¹                                               (9)
+
+ 7.6.14 Humidity Threshold HIGH (Address 0x0D)
+
+                    Table 7-33. Humidity Threshold HIGH Register (Address: 0x0D)
+
+       7             6             5             4             3             2             1             0
+
+                                             HUMI_THRES_HIGH[7:0]
+
+                   Table 7-34. Humidity Threshold HIGH Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]    HUMI_THRES_HIGH[7:0]        R/W     FF          Humidity threshold HIGH value
+
+
+The Humidity Threshold HIGH register configures the temperature threshold setting for interrupt generation if the
+HH_ENABLE interrupt is enabled. The threshold value can be calculated using Equation 10:
+
+                                          § HUMI_THRES_HIGH [7 : 0] ·
+    Humidity threshold high (%RH)   ¨               8               ¸ u 100                                          ©          2                ¹                                         (10)
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    29
+### HDC2021 PDF30
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.15 Device Configuration (Address: 0x0E)
+
+                      Table 7-35. Device Configuration Register (Address: 0x0E)
+
+       7             6             5             4             3             2             1             0
+
+  SOFT_RES                       CC[2:0]                  HEAT_EN    DRDY/INT_EN    INT_POL     INT_MODE
+
+                     Table 7-36. Device Configuration Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7    SOFT_RES                  R/W     0          0 = Normal Operation
+                                                             1 = Trigger a Soft Reset. This bit self-clears after RESET.
+     [6:4]    CC[2:0]                     R/W     0           Configure the measurement mode to one-shot or continuous
+                                                                         conversion. The bits also allow sampling frequency to be
+                                                            programmed in continuous conversion mode.
+                                                             000 = Continuous conversion disabled (one-shot mode)
+                                                             001 = 1/120Hz (1 samples every 2 minutes)
+                                                             010 = 1/60Hz (1 samples every minute)
+                                                                011 = 0.1Hz (1 samples every 10 seconds)
+                                                             100 = 0.2 Hz (1 samples every 5 second)
+                                                             101 = 1Hz (1 samples every second)
+                                                                110 = 2Hz (2 samples every second)
+                                                                   111 = 5Hz (5 samples every second)
+
+     3    HEAT_EN                   R/W     0          0 = Heater off
+                                                             1 = Heater on
+
+     2     DRDY/INT_EN                R/W     0         DRDY/INT_EN pin configuration
+                                                             0 = High Z
+                                                             1 = Enable
+
+     1     INT_POL                    R/W     0             Interrupt polarity
+                                                             0 = Active Low
+                                                             1 = Active High
+
+     0    INT_MODE                  R/W     0             Interrupt mode
+                                                             0 = Clear-on-read mode
+                                                             1 = Comparator mode
+
+
+
+
+
+30    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated
+### HDC2021 PDF31
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.16 Measurement Configuration (Address: 0x0F)
+
+                   Table 7-37. Measurement Configuration Register (Address: 0x0F)
+
+       7             6             5             4            3             2              1              0
+
+           TACC[1:0]                    HACC[1:0]           RES            MEAS_CONF[1:0]        MEAS_TRIG
+
+                  Table 7-38. Measurement Configuration Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7:6     TACC[1:0]                   R/W     0          Temperature accuracy option:
+                                                                         00: 14 bit
+                                                                         01: 11 bit
+                                                                         10: 9 bit
+                                                                             11: NA
+     5:4    HACC[1:0]                   R/W     0           Humidity accuracy option:
+                                                                         00: 14 bit
+                                                                         01: 11 bit
+                                                                         10: 9 bit
+                                                                             11: NA
+
+     3    RES                       R/W     0          Reserved
+
+     2:1    MEAS_CONF[1:0]              R/W     0          Measurement configuration:
+                                                                         00: Humidity + Temperature
+                                                                         01: Temperature only
+                                                                         10: NA
+                                                                             11: NA
+
+     0    MEAS_TRIG                 R/W     0          Measurement trigger:
+                                                                                 0: No action
+                                                                                 1: Start measurement
+                                                                            Setting this bit to 1 to start a single measurement in one-shot
+                                                      mode or continuous measurements in continuous conversion
+                                                             mode. This bit self-clears to 0 once the measurement starts.
+
+ 7.6.17 Manufacturer ID Low (Address: FC)
+
+                        Table 7-39. Manufacturer ID Low Register (Address: FC)
+
+       7             6             5             4             3             2             1             0
+
+                                     MANUFACTURER ID[7:0]
+
+                          Table 7-40. Manufacturer ID Low Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   MANUFACTURER ID [7:0]       R       49          Manufacturer ID- lower byte value
+
+
+The Manufacturer ID Low and Manufacturer ID High registers contain a factory-programmable identification
+ value that identifies this device as being manufactured by Texas Instruments. The manufacturer ID helps
+ distinguish the device from other devices that are on the same I2C bus. The manufacturer ID reads 0x5449 and
+ spans across the two registers.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    31

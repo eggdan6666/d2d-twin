@@ -1,0 +1,77 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.6 TLow_Limit Register(Address = 05h) [reset = F380h]
+
+ This register is used to configuration the low temperature limit of the TMP126. The limit is formatted in a 14-bit
+ two's complement format with a LSB (Least Significant Bit) equal to 0.03125°C. This is the same format as the
+TEMP_RESULT register. The range of the register is ±256°C. The default value on start-up is F380h or -25°C.
+ If the THigh_Limit register is equal to or less than the TLow_Limit register the temperature limits will be ignored
+ until configured such that THigh_Limit is greater than TLow_Limit.
+
+ Return to Register Map.
+
+                                  Figure 8-24. TLow_Limit Register
+       15            14            13            12             11            10             9             8
+
+                                                          TLow_Limit[13:6]
+
+                                                    R/W-F3h
+
+       7             6             5             4             3             2             1             0
+
+                                           TLow_Limit[5:0]                                             Reserved
+
+                                       R/W-20h                                                   R-00b
+
+                          Table 8-10. TLow_Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    TLow_Limit[13:0]              R/W     3CE0h       14-bit temperature low limit setting.
+                                                                  Temperature low limit is represented by a 14-bit, two's
+                                                              complement word with an LSB (Least Significant Bit) equal to
+                                                                   0.03125°C. The default setting for this is -25°C.
+
+     1:0    Reserved                  R       00b        These two bits will always read 00b
+
+
+ 8.6.7 THigh_Limit Register(Address = 06h) [reset = 2A80h]
+
+ This register is used to configuration the high temperature limit of the TMP126. The limit is formatted in a 14-bit
+ two's complement format with a LSB (Least Significant Bit) equal to 0.03125°C. This is the same format as the
+ Temp_Result register. The range of the register is ±256°C. The default value on start-up is 2A80h or 85°C. If the
+ THigh_Limit register is equal to or less than the TLow_Limit register the temperature limits will be ignored until
+ configured such that THigh_Limit is greater than TLow_Limit.
+
+ Return to Register Map.
+
+                                  Figure 8-25. THigh_Limit Register
+       15            14            13            12             11            10             9             8
+
+                                                            THigh_Limit[13:6]
+
+                                                   R/W-2Ah
+
+       7             6             5             4             3             2             1             0
+
+                                            THigh_Limit[5:0]                                             Reserved
+
+                                       R/W-20h                                                   R-00b
+
+                          Table 8-11. THigh_Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:2    THigh_Limit[13:0]              R/W     0AA0h       14-bit temperature high limit setting.
+                                                                  Temperature high limit is represented by a 14-bit, two's
+                                                              complement word with an LSB (Least Significant Bit) equal to
+                                                                   0.03125°C.
+
+     1:0    Reserved                  R       00b        These two bits will always read 00b
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    31
+
+                                                  Product Folder Links: TMP126

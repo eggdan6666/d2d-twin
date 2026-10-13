@@ -1,0 +1,51 @@
+Bosch Sensortec | BMP280 Data sheet                                                          15 | 49
+
+
+       3.5   Noise
+       Noise depends on the oversampling and filter settings selected. The stated values were determined in
+       a controlled pressure environment and are based on the average standard deviation of 32 consecutive
+       measurement points taken at highest sampling speed. This is needed in order to exclude long term
+          drifts from the noise measurement.
+
+                                               Table 8: Noise in pressure
+                                      Typical RMS noise in pressure [Pa]
+                         Oversampling setting         IIR filter coefficient
+                                                             off    2     4     8    16
+                                     Ultra low power       3.3    1.9    1.2    0.9   0.4
+                           Low power          2.6    1.5    1.0    0.6   0.4
+                             Standard resolution     2.1    1.2    0.8    0.5   0.3
+                              High resolution        1.6    1.0    0.6    0.4   0.2
+                                  Ultra high resolution     1.3    0.8    0.5    0.4   0.2
+
+
+                                             Table 9: Noise in temperature
+                                     Typical RMS noise in temperature [°C]
+                              Temperature oversampling      IIR filter off
+                                      oversampling ×1             0.005
+                                      oversampling ×2             0.004
+                                      oversampling ×4             0.003
+                                      oversampling ×8             0.003
+                                     oversampling ×16            0.002
+
+       3.6   Power modes
+       The BMP280 offers three power modes: sleep mode, forced mode and normal mode. These can be
+        selected using the mode[1:0] bits in control register 0xF4.
+
+                                                Table 10: mode settings
+                                      mode[1:0]     Mode
+                                        00       Sleep mode
+                                     01 and 10    Forced mode
+                                           11       Normal mode
+
+        3.6.1  Sleep mode
+       Sleep mode is set by default after power on reset. In sleep mode, no measurements are performed
+       and power consumption (IDDSM) is at a minimum. All registers are accessible; Chip-ID and
+       compensation coefficients can be read.
+        3.6.2  Forced mode
+         In forced mode, a single measurement is performed according to selected measurement and filter
+         options. When the measurement is finished, the sensor returns to sleep mode and the measurement
+         results can be obtained from the data registers. For a next measurement, forced mode needs to be
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

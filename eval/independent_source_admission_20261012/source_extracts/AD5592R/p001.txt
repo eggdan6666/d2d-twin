@@ -1,0 +1,47 @@
+                                              Data Sheet
+                                       AD5592R
+
+   8-Channel, 12-Bit, Configurable ADC/DAC with On-Chip Reference, SPI Interface
+
+
+FEATURES                                                (DAC) outputs, analog-to-digital converter (ADC) inputs, digital out-
+                                                                             puts, or digital inputs. When an I/Ox pin is configured as an analog
+►8-channel, configurable ADC/DAC/GPIO                                 output, it is driven by a 12-bit DAC. The output range of the DAC
+►Configurable as any combination of                                              is 0 V to VREF or 0 V to 2 × VREF. When an I/Ox pin is configured
+ ►8 × 12-bit DAC channels                                      as an analog input, it is connected to a 12-bit ADC via an analog
+ ►8 × 12-bit ADC channels                                                multiplexer. The input range of the ADC is 0 V to VREF or 0 V to
+                                                            2 × VREF. The ADC has a total throughput rate of 400 kSPS. The ►8 × general-purpose digital input/output pins
+                                                                         I/Ox pins can also be configured as digital, general-purpose input or
+►Integrated temperature sensor                                                                        output (GPIO) pins. The state of the GPIO pins can be set or read
+►SPI interface                                                  back by accessing the GPIO write data register or the GPIO read
+►2.7 V to 5.5 V power supply                                              configuration register, respectively, via a serial peripheral interface
+►1.8 V logic compatibility (AD5592R-1)                                  (SPI) write or read operation.
+►Available in                                               The AD5592R/AD5592R-1 have an integrated 2.5 V, 20 ppm/°C
+  ►16-ball, 2 mm × 2 mm WLCSP                                       reference, which is turned off by default, and an integrated temper-
+  ►16-lead, 3 mm × 3 mm LFCSP                                      ature indicator, which gives an indication of the die temperature.
+  ►16-lead TSSOP                                          The temperature value is read back as part of an ADC read
+                                                                 sequence.►AEC-Q100 qualified for automotive applications
+                                                          The AD5592R/AD5592R-1 are available in 16-ball, 2 mm × 2 mm
+APPLICATIONS                                                    WLCSP, 16-lead, 3 mm × 3 mm LFCSP, and 16-lead TSSOP. The
+                                                          AD5592R/AD5592R-1 operate over a temperature range of −40 °C►Control and monitoring
+                                                                           (TA) to +125 °C (TJ).►General-purpose analog and digital inputs/outputs
+                                                                               Table 1. Related Products
+GENERAL DESCRIPTION                                                                                    Part No.        Description
+The AD5592R/AD5592R-1 have eight I/Ox pins (I/O0 to I/O7)             AD5593R      AD5592R equivalent with VLOGIC and RESET pins and an I2C
+that can be independently configured as digital-to-analog converter                             interface
+FUNCTIONAL BLOCK DIAGRAM
+
+
+
+
+
+                                                       Figure 1. AD5592R Functional Block Diagram
+
+
+
+
+
+Rev. H
+ DOCUMENT FEEDBACK     Information furnished by Analog Devices is believed to be accurate and reliable "as is". However, no responsibility is assumed by Analog                                  Devices for its use, nor for any infringements of patents or other rights of third parties that may result from its use. Specifications subject to
+                                change without notice. No license is granted by implication or otherwise under any patent or patent rights of Analog Devices. Trademarks and
+  TECHNICAL SUPPORT      registered trademarks are the property of their respective owners.

@@ -1,0 +1,64 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.3.12  Independent Operation when the AUTO Bit is Set
+
+The TPS23861 operates as a fully automatic PSE in compliance with IEEE 802.3at when the AUTO bit is set as
+described in I2C Slave Address and AUTO Bit Programming section. Fully automatic operation means that the
+TPS23861 operates as a power-over-ethernet four-port PSE without any connection to a host system via the I2C
+bus. Generally speaking, when the bit is set, most specialized features of the TPS23861 are disabled.
+
+
+                                  NOTE
+         The state of the AUTO bit is read only following power on, hardware reset (RESET pin) or
+            writing a 1 to the RESAL bit in the Reset Register.
+
+If the AUTO bit is set and the TPS23861 is connected to a host over the I2C bus, the host may change the
+register settings any time after power up, including changing operating mode. When the AUTO bit is set, the
+state of TPS23861 following power up is summarized below.
+•  The CLEn and DETn bits in the Detect/Class Enable Register is set. Consequently, detect and classification
+    is performed before any power on.
+•  The DCDEn bit in the Disconnect Enable Register is set, enabling automatic disconnection.
+•  The TECLENn bits in the Two-Event Classification Register is set to 0b01. Consequently, if a Class 4 PD is
+   recognized during the classification cycle,
+   –  The TPS23861 initiates a second physical-layer classification event.
+   –  The PoEPn bit in the PoE Plus register is set, employing the 2x curve for ILIM.
+   –  The ICUT Port n fields in the ICUTnm CONFIG registers will be set to 0b110 corresponding to 645 mA.
+•    If a Class 0, 1, 2 or 3 PD is recognized during the classification cycle,
+   –  There is no second physical-layer classification event.
+   –  The POEPn bit is cleared so the TPS23861 employs the 1x foldback curve for ILIM.
+   – A value of 374 mA is used for ICUT.
+•  The Port n Mode field in the Operating Mode Register is set to Auto (0×11) for all four ports. Consequently,
+   –  Detection, classification and power up occurs in sequence, automatically and independently for each port.
+   –  Following a valid one- or two-event physical layer classification, the TPS23861 applies power to a port
+       subject to the inrush-current foldback protection curve in Figure 57.
+     .
+•  The FSEn bits in the Port Power Priority Register is set. Consequently, all ports are shut down in response to
+   a low level on the SHTDWN pin.
+•  The LEGMODn fields in the Legacy Detect Mode Register is set to 00. Consequently, legacy PD devices not
+   compliant with IEEE 802.3at will not be detected.
+•  The General Mask 1 Register is set to its standard power-on-reset value 0x80. Consequently,
+   –  Interrupts are enabled.
+   –  During detection A/D conversions of the detect voltage occurs at a rate of 800 per second.
+   –  Classification levels are determined as if a 255-mΩ resistor is used for the current-sense resistor.
+
+
+                                  NOTE
+                  If a 250-mΩ resistor  is used, the classification thresholds shifts  slightly, but remains
+           compliant with IEEE 802.3at.
+
+•  The Interrupt Enable Register is set to 0xE4, enabling the following interrupts
+   – SUPEN – Supply event fault enable bit.
+   – STRTEN – Start fault enable bit.
+   –  IFEN – ICUT or ILIM fault enable bit.
+   –  DISEN – Disconnect event interrupt enable bit.
+•  Any register not explicitly referenced above is set to its default power-on-reset value according to Table 10.
+
+
+
+
+
+34     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

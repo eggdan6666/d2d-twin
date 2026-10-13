@@ -1,0 +1,36 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           5 of 46  
+   
+2 
+Purpose and Scope 
+This document provides preliminary information regarding the register map and descriptions for the Motion 
+Processing Units™ MPU-6000™ and MPU-6050™, collectively called the MPU-60X0™ or MPU™.  
+The MPU devices provide the world’s first integrated 6-axis motion processor solution that eliminates the 
+package-level gyroscope and accelerometer cross-axis misalignment associated with discrete solutions. The 
+devices combine a 3-axis gyroscope and a 3-axis accelerometer on the same silicon die together with an 
+onboard Digital Motion Processor™ (DMP™) capable of processing complex 9-axis sensor fusion algorithms 
+using the field-proven and proprietary MotionFusion™ engine. 
+The MPU-6000 and MPU-6050’s integrated 9-axis MotionFusion algorithms access external magnetometers 
+or other sensors through an auxiliary master I2C bus, allowing the devices to gather a full set of sensor data 
+without intervention from the system processor.  The devices are offered in the same 4x4x0.9 mm QFN 
+footprint and pinout as the current MPU-3000™ family of integrated 3-axis gyroscopes, providing a simple 
+upgrade path and facilitating placement on already space constrained circuit boards.  
+For precision tracking of both fast and slow motions, the MPU-60X0 features a user-programmable 
+gyroscope full-scale range of ±250, ±500, ±1000, and ±2000°/sec (dps). The parts also have a user-
+programmable accelerometer full-scale range of ±2g, ±4g, ±8g, and ±16g.  
+The MPU-6000 family is comprised of two parts, the MPU-6000 and MPU-6050. These parts are identical to 
+each other with two exceptions.  The MPU-6050 supports I2C communications at up to 400kHz and has a 
+VLOGIC pin that defines its interface voltage levels; the MPU-6000 supports SPI at up to 20MHz in addition 
+to I2C, and has a single supply pin, VDD, which is both the device’s logic reference supply and the analog 
+supply for the part.   
+For more detailed information for the MPU-60X0 devices, please refer to the “MPU-6000 and MPU-6050 
+Product Specification”. 
+ 
+ 

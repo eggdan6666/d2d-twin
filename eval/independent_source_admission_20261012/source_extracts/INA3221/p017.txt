@@ -1,0 +1,41 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 7.4.2 Multiple Channel Monitoring
+
+The INA3221 monitors shunt and voltage measurements  for up to three unique power-supply  rails, and
+measures up to six different signals. Adjust the number of channels and signals being measured by setting
+ the channel enable (CH1en to CH3en) and mode (MODE3-1) bits in the Configuration register. This adjustment
+ allows the device to be optimized based on application requirements for the system in use.
+
+ 7.4.2.1 Channel Configuration
+
+ If all three channels must be monitored at power-up, but only one channel must be monitored after the system
+ has stabilized, disable the other two channels after power-up. This configuration allows the INA3221 to only
+ monitor the power-supply rail of interest. Disable unused channels to help improve system response time by
+more quickly returning to sampling the channel of interest. The INA3221 linearly monitors the enabled channels.
+ That is,  if all three channels are enabled for both shunt- and bus-voltage measurements, an additional five
+ conversions complete after a signal is measured before the device returns to that particular signal to begin
+ another conversion. To reduce this requirement down to two conversions before the device begins a new
+ conversion on a particular channel again, change the operating mode to monitor only the shunt voltage.
+
+A timing aspect is also involved in reducing the measured signals. The amount of time to complete an all-
+ channel, shunt- and bus-voltage sequence is equal to the sum of the shunt-voltage conversion time and the
+ bus-voltage conversion time (programmed by the CT bits in the Configuration register) multiplied by the three
+ channels. The conversion times for the shunt- and bus-voltage measurements are programmed independently;
+ however, the selected shunt- and bus-voltage conversion times apply to all channels.
+
+ Enable a single channel with only one signal measured to allow for that particular signal to be monitored solely.
+ This setting enables the fastest response over time to changes in that specific input signal because there is no
+ delay from the end of one conversion before the next conversion begins on that channel. Conversion time is not
+ affected by enabling or disabling other channels. Selecting both the shunt- and bus-voltage settings, as well as
+ enabling additional channels, extends the time from the end of one conversion on a signal before the beginning
+ of the next conversion of that signal.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    17
+
+                                                  Product Folder Links: INA3221

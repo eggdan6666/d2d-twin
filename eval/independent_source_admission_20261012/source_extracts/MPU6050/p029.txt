@@ -1,0 +1,73 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.14 MPU-6000 Using SPI Interface
+In the figure below, the system processor is an SPI master to the MPU-6000. Pins 8, 9, 23, and 24 are used
+to support the /CS, SDO, SCLK, and SDI signals for SPI communications. Because these SPI pins are
+shared with the I2C slave pins (9, 23 and 24), the system processor cannot access the auxiliary I2C bus
+through the interface bypass multiplexer, which connects the processor I2C interface pins to the sensor I2C
+interface pins.
+Since the MPU-6000 has limited capabilities as an I2C Master, and depends on the system processor to
+manage the initial configuration of any auxiliary sensors, another method must be used for programming the
+sensors on the auxiliary sensor I2C bus pins 6 and 7 (AUX_DA and AUX_CL).
+
+When using SPI communications between the MPU-6000 and the system processor, configuration of
+devices on the auxiliary I2C sensor bus can be achieved by using I2C Slaves 0-4 to perform read and write
+transactions on any device and register on the auxiliary I2C bus. The I2C Slave 4 interface can be used to
+perform only single byte read and write transactions.
+
+Once the external sensors have been configured, the MPU-6000 can perform single or multi-byte reads
+using the sensor I2C bus. The read results from the Slave 0-3 controllers can be written to the FIFO buffer as
+well as to the external sensor registers.
+For further information regarding the control of the MPU-60X0’s auxiliary I2C interface, please refer to the
+MPU-6000/MPU-6050 Register Map and Register Descriptions document.
+
+                                                                             Processor SPI Bus: for reading all
+                                                                                  data from MPU and for configuring
+                                                         MPU and external sensors
+                                                  Interrupt                12
+                                              Status                       INT
+                                              Register
+
+                                                                  8   /CS                                 /CS
+     MPU-6000                                         9   AD0/SDO                            SDI
+                                            Slave I2C                                                              System
+                                               or SPI                 23   SCL/SCLK                    SCLK     Processor
+                                                    Serial
+                                                  Interface                24   SDA/SDI                     SDO
+                      FIFO
+                                                                            Sensor I2C Bus: for
+                                                                                      configuring and
+                       Config                                                     reading data from
+                        Register                                                        external sensors
+                                                                                                         Optional
+                                         Sensor                  7   AUX_CL           SCL
+                      Sensor             Master I2C       Interface
+                        Register                 Serial       Bypass                             Compass
+                                                  Interface       Mux      6   AUX_DA          SDA
+
+                       Factory
+                        Calibration
+                                                      Digital
+                                           Motion
+                                          Processor
+                                         (DMP)                                 I2C Master performs
+                                                                              read and write
+                                                                                    transactions on
+                                                                         Sensor I2C bus.
+
+
+
+
+                                        Bias & LDO
+
+                                    13      18       10
+
+                          VDD    GND   REGOUT
+
+
+
+
+                                           29 of 52

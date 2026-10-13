@@ -1,0 +1,73 @@
+TMP100, TMP101
+
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015                                                                 www.ti.com
+
+7.3.2.2  Serial Bus Address
+
+To program the TMP100 and TMP101 devices, the master must first address slave devices through a slave
+address byte. The slave address byte consists of seven address bits and a direction bit indicating the intent of
+executing a read or write operation.
+The TMP100 device features two address pins to allow up to eight devices to be addressed on a single I2C
+interface. Table 2 describes the pin logic levels used to properly connect up to eight devices. Float indicates the
+pin is left unconnected. The state of pins ADD0 and ADD1 is sampled on the first I2C bus communication and
+must be set before any activity on the interface.
+
+                      Table 2. Address Pins and Slave Addresses for the TMP100
+
+             ADD1                           ADD0                       SLAVE ADDRESS
+
+                  0                                     0                                  1001000
+
+                  0                                            Float                                1001001
+
+                  0                                     1                                  1001010
+
+                  1                                     0                                  1001100
+
+                  1                                            Float                                1001101
+
+                  1                                     1                                  1001110
+
+                     Float                                   0                                  1001011
+
+                     Float                                   1                                  1001111
+
+The TMP101 device features one address pin and an ALERT pin, allowing up to three devices to be connected
+per bus. Pin logic levels are described in Table 3. The address pins of the TMP100 and TMP101 devices are
+read after reset or in response to an I2C address acquire request. Following reading, the state of the address
+pins is latched to minimize power dissipation associated with detection.
+
+                      Table 3. Address Pins and Slave Addresses for the TMP101
+
+                     ADD0                                       SLAVE ADDRESS
+
+                            0                                                     1001000
+
+                                 Float                                                   1001001
+
+                            1                                                     1001010
+
+
+7.3.2.3  Writing and Reading to the TMP100 and TMP101
+
+Accessing a particular register on the TMP100 and TMP101 devices is accomplished by writing the appropriate
+value to the Pointer Register. The value for the Pointer Register is the first byte transferred after the I2C slave
+address byte with the R/W bit LOW. Every write operation to the TMP100 and TMP101 devices requires a value
+for the Pointer Register (see Figure 7).
+
+When reading from the TMP100 and TMP101 devices, the last value stored in the Pointer Register by a write
+operation is used to determine which register is read by a read operation. To change the register pointer for a
+read operation, a new value must be written to the Pointer Register. This action is accomplished by issuing an
+I2C slave address byte with the R/W bit LOW, followed by the Pointer Register Byte. No additional data are
+required. The master can then generate a START condition and send the I2C slave address byte with the R/W bit
+HIGH to initiate the read command; see Figure 8 for details of this sequence. If repeated reads from the same
+register are desired, the Pointer Register bytes do not have to be continually sent because the TMP100 and
+TMP101 devices remember the Pointer Register value until that value is changed by the next write operation.
+
+
+
+
+
+10     Submit Documentation Feedback                                                     Copyright © 2002–2015, Texas Instruments Incorporated
+
+                                              Product Folder Links: TMP100 TMP101

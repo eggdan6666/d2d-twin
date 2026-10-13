@@ -1,0 +1,37 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+ TA = 25°C, VVS = 3.3 V, VIN+ = 12 V, VSENSE = (VIN+ – VIN–) = 0 mV and VVBUS = 12 V, unless otherwise noted
+
+               PARAMETER                       TEST CONDITIONS                MIN       TYP      MAX    UNIT
+
+  VIL           Low-level input voltage                                                                   –0.5                  0.3×VVS     V
+ VOL          Low-level output voltage, SDA, Alert        IOL = 3 mA                                    0                         0.4     V
+
+               Hysteresis                                                                                 500            mV
+
+ POWER SUPPLY
+
+               Operating supply range                                                                       2.7                         5.5     V
+
+  IQ           Quiescent current                                                                           330         420     μA
+
+              Quiescent current, power-down
+                                                                                                                           0.5           2     μA
+               (shutdown) mode
+
+ VPOR        Power-on reset threshold                                                                       2              V
+
+ (1)   While the input range is 36 V, the full-scale range of the ADC scaling is 40.96 V. See the Section 6.3.1. Do not apply more than 36 V.
+ (2)   RTI = Referred-to-input.
+ (3)   Input leakage is positive (current flowing into the pin) for the conditions shown at the top of this table. Negative leakage currents can
+      occur under different input conditions.
+ (4)  SMBus timeout in the device resets the interface any time SCL is low for more than 28 ms.
+
+
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

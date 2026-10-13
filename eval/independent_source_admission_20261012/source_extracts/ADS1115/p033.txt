@@ -1,0 +1,76 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 9.2 Typical Application
+
+ Shunt-based, current-measurement solutions are widely used to monitor load currents. Low-side, current-shunt
+measurements are independent of the bus voltage because the shunt common-mode voltage is near ground.
+ Figure 9-6 shows an example circuit for a bidirectional, low-side, current-shunt measurement system. The load
+ current is determined by measuring the voltage across the shunt resistor that is amplified and level-shifted by a
+ low-drift operational amplifier, OPA333 . The OPA333 output voltage is digitized with ADS1115 and sent to the
+ microcontroller using the I2C interface. This circuit is capable of measuring bidirectional currents flowing through
+ the shunt resistor with great accuracy and precision.
+
+
+                                                                                 High-Voltage Bus
+                                                                                            VCM   VDD                         VDD
+                                                             LOAD                                 R6      CCM2
+                                                                                                                         AINN
+                                                                                                  ILOAD                                                                                                                                                                                 I2C                                                                                             R4
+                                                                                           R3                                                                                              +  OPA333  R5         CDIFF       ADS1115
+
+                                                                                                   ±     VOUT                                                                                                                                                                                                                                Kelvin                                 VINX                               AINP
+                                                                                                                              CCM1                                                                                          VSHUNT                                                                                                                                                                                                                                          RSHUNT                                                                                                                                                                                                                                4-Wire  Connection
+
+                                                                                           R1           R2
+
+                            Figure 9-6. Low-Side Current Shunt Monitoring
+
+ 9.2.1 Design Requirements
+
+ Table 9-1 shows the design parameters for this application.
+
+                                    Table 9-1. Design Parameters
+                                 DESIGN PARAMETER                                     VALUE
+
+                                          Supply voltage (VDD)                                          5V
+
+                                      Voltage across shunt resistor (VSHUNT)                                 ±50mV
+
+                                           Output data rate (DR)                                     ≥200 readings per second
+
+                                    Typical measurement accuracy at TA = 25°C(1)                                  ±0.2%
+
+                    (1)  Does not account for inaccuracy of shunt resistor and the precision resistors used in the
+                          application.
+ 9.2.2 Detailed Design Procedure
+
+The first stage of the application circuit consists of an OPA333 in a noninverting summing amplifier configuration
+and serves two purposes:
+
+ 1.  To level-shift the ground-referenced signal to allow bidirectional current measurements while running off a
+     unipolar supply. The voltage across the shunt resistor, VSHUNT, is level-shifted by a common-mode voltage,
+    VCM, as shown in Figure 9-6. The level-shifted voltage, VINX, at the noninverting input, is given by Equation
+     5.
+
+     VINX = (VCM · R3 + VSHUNT · R4) / (R3 + R4)                                                                     (5)
+ 2.  To amplify the level-shifted voltage (VINX). The OPA333 is configured in a noninverting gain configuration
+     with the output voltage, VOUT, given by Equation 6.
+    VOUT = VINX · (1 + R2 / R1)                                                                                     (6)
+
+ Using Equation 5 and Equation 6, VOUT is given as a function of VSHUNT and VCM by Equation 7.
+
+    VOUT = (VCM · R3 + VSHUNT · R4) / (R3 + R4) · (1 + R2 / R1)                                                      (7)
+
+ Using Equation 7 the ADC differential input voltage, before the first-order RC filter, is given by Equation 8.
+
+    VOUT – VCM = VSHUNT · (1 + R2 / R1) / (1 + R4 / R3) + VCM · (R2 / R1 – R3 / R4) / (1 + R3 / R4)                     (8)
+
+ If R1 = R4 and R2 = R3, Equation 8 is simplified to Equation 9.
+
+    VOUT – VCM = VSHUNT · (1 + R2 / R1) / (1 + R4 / R3)                                                             (9)
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    33
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

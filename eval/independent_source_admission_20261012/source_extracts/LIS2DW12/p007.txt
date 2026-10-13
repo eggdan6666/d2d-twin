@@ -1,0 +1,52 @@
+                                                              LIS2DW12
+                                                                                   Mechanical and electrical specifications
+
+
+2.2       Electrical characteristics
+         @Vdd = 1.8 V, T = 25°C unless otherwise noted. The product is factory calibrated at 1.8 V. The operational power
+             supply range is from 1.62 V to 3.6 V.
+
+
+                                        Table 4. Electrical characteristics
+
+ Symbol                  Parameter                         Test conditions            Min.       Typ. (1)     Max.      Unit
+
+   Vdd    Supply voltage                                                                   1.62         1.8         3.6      V
+
+ Vdd_IO   I/O pins supply voltage(2)                                                          1.62                Vdd+0.1    V
+
+                            @ ODR range
+  IddHR   Supply current in high-performance mode(3)                                               90               µA
+                                                           12.5 Hz - 1600 Hz, 14-bit
+
+                                       ODR 100 Hz                               5
+
+                                       ODR 50 Hz                                3
+  IddLP   Supply current in low-power mode(4)                                                                 µA
+                                       ODR 12.5 Hz                              1
+
+                                       ODR 1.6 Hz                                  0.38
+
+  Idd_PD  Supply current in power-down                                                          50                nA
+
+    VIH      Digital high-level input voltage                                               0.7*Vdd_IO                     V
+
+    VIL      Digital low-level input voltage                                                                      0.3*Vdd_IO   V
+
+   VOH     Digital high-level output voltage                   IOH = 4 mA(5)               Vdd_IO - 0.2                    V
+
+   VOL     Digital low-level output voltage                     IOL = 4 mA(5)                                                0.2      V
+
+1.  Typical specifications are not guaranteed.
+2.   It is possible to remove Vdd maintaining Vdd_IO without blocking the communication busses. In this condition the measurement chain is
+   powered off.
+3.  Low-noise setting disabled.
+4.  Low-power mode 1. Low-noise setting disabled.
+5.  4 mA is the maximum driving capability, that is, the maximum DC current that can be sourced/sunk by the digital pad in order to guarantee
+    the correct digital output voltage levels VOH and VOL.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                        page 7/65

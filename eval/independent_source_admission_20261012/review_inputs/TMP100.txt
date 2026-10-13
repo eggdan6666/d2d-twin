@@ -1,0 +1,18 @@
+REGISTER TEMP @ 0x00 reset=0x0000 access=RO runtime=None DESC=温度结果，二进制补码，左对齐；默认分辨率 R1R0=00 → 9 位、1 LSB=0.5°C，占 bits[15:7]，未用低位恒 0（§7.3.1 与 §7.5.1.2 前文：『For 9-, 10-, or 11-bit resolution, the MSBs in the Temperature Register are used with the unused least significant bits equal to zero』）；上电读到 0°C 直至首次转换完成
+  T[15:7] RO reset=0 read_as=None read_action=None tier=None DESC=T[8:0] 9 位温度（默认分辨率）
+  UNUSED[6:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=恒 0（R1R0=11 时才扩展为 [15:4] 12 位）
+REGISTER CONFIG @ 0x01 reset=0x0080 access=RW runtime=None DESC=8 位配置寄存器（§7.5.3 Table 8）。手册两句合读：内部位上电全 0，但『The OS/ALERT bit reads as 1 after power-up or reset value』→ 总线读回 0x80。与 TMP102 的关键差异：本芯片 R1/R0 可写（9~12 位用户可选），TMP102 的 R1/R0 是只读 11
+  OS[7] RW reset=1 read_as=1 read_action=None tier=None DESC=OS/ALERT：关断态写 1 触发单次转换；读为比较器状态——POL=0 时常态读 1，连续故障达 THIGH 后读 0（§7.4.2）。默认态（温度 0°C < THIGH）读 1，故复位读回 0x80
+  R1[6] RW reset=0 read_as=None read_action=None tier=None DESC=分辨率高位 00:9 01:10 10:11 11:12 位（§7.5.3）
+  R0[5] RW reset=0 read_as=None read_action=None tier=None DESC=分辨率低位
+  F1[4] RW reset=0 read_as=None read_action=None tier=None DESC=故障队列 00:1 01:2 10:4 11:6 次连续故障（Table 9）
+  F0[3] RW reset=0 read_as=None read_action=None tier=None DESC=同上
+  POL[2] RW reset=0 read_as=None read_action=None tier=None DESC=ALERT 极性 0:低有效 1:高有效
+  TM[1] RW reset=0 read_as=None read_action=None tier=None DESC=0:比较器模式 1:中断模式（TMP101 才有中断态行为，TMP100 无 ALERT 引脚）
+  SD[0] RW reset=0 read_as=None read_action=None tier=None DESC=1=关断模式
+REGISTER TLOW @ 0x02 reset=0x4B00 access=RW runtime=None DESC=12-bit threshold storage at all converter resolutions; TMP100.pdf p.18 Tables 11-14 and final paragraph.
+  L[15:4] RW reset=1200 read_as=None read_action=None tier=None DESC=12-bit threshold; independent of ADC conversion resolution
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=SOURCE_EXPLICIT_ZERO DESC=Unused low four bits, fixed zero in threshold format
+REGISTER THIGH @ 0x03 reset=0x5000 access=RW runtime=None DESC=12-bit threshold storage at all converter resolutions; TMP100.pdf p.18 Tables 11-14 and final paragraph.
+  H[15:4] RW reset=1280 read_as=None read_action=None tier=None DESC=12-bit threshold; independent of ADC conversion resolution
+  UNUSED[3:0] RO reset=0 read_as=None read_action=None tier=SOURCE_EXPLICIT_ZERO DESC=Unused low four bits, fixed zero in threshold format

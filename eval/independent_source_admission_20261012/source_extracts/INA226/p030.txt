@@ -1,0 +1,82 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+ 8.2.1.2 Detailed Design Procedure
+
+The Alert pin can be configured to respond to one of the five alert functions described in the Alert Pin section.
+The alert pin must to be pulled up to the VVS pin voltage via the pull-up resistors. The configuration register is set
+based on the required conversion time and averaging. The Mask/Enable Register is set to identify the required
+ alert function and the Alert Limit Register is set to the limit value used for comparison.
+
+ 8.2.1.3 Application Curves
+
+ Figure 8-2 shows the Alert pin response to a shunt voltage over-limit of 80mV for a conversion time (tCT) of
+1.1ms and averaging set to 1. Figure 8-3 shows the response for the same limit but with the conversion time
+ reduced to 140µs.
+
+
+                                              ALERT                                                  ALERT
+                                                 INPUT                                                      INPUT
+                                                          LIMIT                                                                                                                               LIMIT
+              Alert V/div)                                                                                                                                                                             Alert V/div)        (2                                                                       (2
+
+                              Input/Limit mV/div)(50                                                                                                                                                                                                                                                                                                                                        Input/Limit mV/div)(50
+
+
+                            Time (200 s/div)                                                   Time (20 s/div)
+                  See Table 8-1                     tCT = 1.1ms
+                                                                      See Table 8-2                     tCT = 140µs                  See Table 8-3             See Table 8-4
+                                                                      See Table 8-3             See Table 8-4
+             Figure 8-2. Alert Response
+                                                              Figure 8-3. Alert Response
+
+              Table 8-1. Configuration Register (00h) Settings for Figure 8-2 (Value = 4025h)
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT                                                        VBUSCT VBUSCT VBUSCT
+          RST   —    —    —     AVG2    AVG1    AVG0
+ NAME                                                                           2        1        0     VSHCT2  VSHCT1  VSHCT0  MODE3  MODE2  MODE1
+
+ POR
+             0        1        0        0        0        0        0        0        0        0        1        0        0        1        0        1
+ VALUE
+
+              Table 8-2. Configuration Register (00h) Settings for Figure 8-3 (Value = 4005h)
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT                                                        VBUSCT VBUSCT VBUSCT
+          RST   —    —    —     AVG2    AVG1    AVG0
+ NAME                                                                           2        1        0     VSHCT2  VSHCT1  VSHCT0  MODE3  MODE2  MODE1
+
+ POR
+             0        1        0        0        0        0        0        0        0        0        0        0        0        1        0        1
+ VALUE
+
+       Table 8-3. Mask/Enable Register (06h) Settings for Figure 8-2 and Figure 8-3 (Value = 8000h)
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+          SOL    SUL    BOL    BUL    POL   CNVR   —    —    —    —    —     AFF    CVRF    OVF    APOL    LEN
+ NAME
+
+ POR
+             1        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+         Table 8-4. Alert Limit Register (07h) Settings for Figure 8-2 and Figure 8-3 (Value = 7D00)
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+          AUL15   AUL14   AUL13   AUL12   AUL11   AUL10   AUL9    AUL8    AUL7    AUL6    AUL5    AUL4    AUL3    AUL2    AUL1    AUL0
+ NAME
+
+ POR
+             0        1        1        1        1        1        0        1        0        0        0        0        0        0        0        0
+ VALUE
+
+
+
+
+30    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

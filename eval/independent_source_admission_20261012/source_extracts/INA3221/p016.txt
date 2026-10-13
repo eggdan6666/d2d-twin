@@ -1,0 +1,65 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 7.4 Device Functional Modes
+ 7.4.1 Averaging Function
+
+The INA3221 includes three channels to monitor up to three independent supply buses; however, multichannel
+ monitoring sometimes results in poor shunt-resistor placement. Ideally, shunt resistors are placed as close as
+ possible to the corresponding channel input pins. However, because of system layout and multiple power-supply
+ rails, one or more shunt resistors can require being located further away, thus presenting potentially larger
+measurement errors. These errors result from additional trace inductance and other parasitic impedances
+between the shunt resistor and input pins. Longer traces also create an additional potential for coupling noise
+ into the signal if the traces are routed near noise-generating sections of the board.
+
+The INA3221 averaging function mitigates  this  potential problem by  limiting the impact  that any single
+measurement has on the averaged value of each measured signal. This limitation reduces the influence that
+ noise has on the averaged value, thereby effectively creating an input-signal filter.
+
+The averaging function is illustrated in Figure 7-5. Operation begins by first measuring the shunt input signal
+on channel 1. This value is then subtracted from the previous value that is present in the corresponding data
+ output register. This difference is then divided by the value programmed by the averaging mode setting (AVG2-0,
+ Configuration register bits 11-9) and stored in an internal accumulation register. The computed result is then
+added to the previously-loaded data output register value, and the resulting value is loaded to the corresponding
+ data output register. After the update, the next signal to be measured follows the same process. The larger
+ the value selected for the averaging mode setting, the less impact or influence any new conversion has on the
+ average value, as shown in Figure 7-6. This averaging feature functions as a filter to reduce input noise from the
+ averaged measurement value.
+
+                            +                +
+                              New               ÷                              Output
+                                 Sample                AVG #                             Register
+                                     ±                                                   +
+
+
+                            Figure 7-5. Averaging Function Block Diagram
+
+
+                                          26
+                                                                                1 Average
+                                                                                16 Averages
+                                          25
+                                                                                1024 Averages
+
+                                                                                  (mV)   24
+
+                                          23
+                                                                                                                                                                                          Amplitude   22
+
+
+                                          21
+
+
+                                          20
+                                           1000    2000    3000    4000    5000    6000    7000
+                                                                 Samples                                G020
+
+                                Figure 7-6. Average Setting Example
+
+
+
+
+
+16    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

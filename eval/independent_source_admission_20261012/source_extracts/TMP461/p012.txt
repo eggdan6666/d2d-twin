@@ -1,0 +1,74 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+8.3.2  Series Resistance Cancellation
+
+Series resistance cancellation automatically eliminates the temperature error caused by the resistance of the
+routing to the remote transistor or by the resistors of the optional external low-pass filter. A total of up to 1 kΩ of
+series  resistance can be  cancelled by  the TMP461  device,  thus  eliminating  the need  for  additional
+characterization and temperature  offset  correction. See Figure 5 (Remote Temperature  Error vs Series
+Resistance) for details on the effects of series resistance on sensed remote temperature error.
+
+8.3.3  Differential Input Capacitance
+
+The TMP461 device tolerates differential input capacitance of up to 1000 pF with minimal change in temperature
+error. The effect of capacitance on the sensed remote temperature error is illustrated in Figure 6 (Remote
+Temperature Error vs Differential Capacitance).
+
+8.3.4  Filtering
+
+Remote junction temperature sensors are usually implemented in a noisy environment. Noise is most often
+created by fast digital signals that can corrupt measurements. The TMP461 device has a built-in, 65-kHz filter on
+the D+ and D– inputs to minimize the effects of noise. However, a bypass capacitor placed differentially across
+the inputs of the remote temperature sensor is recommended to make the application more robust against
+unwanted coupled signals. For this capacitor, select a value between 100 pF differential and 1 nF. Some
+applications attain better overall accuracy with additional series resistance. However, this increased accuracy is
+application-specific. When series resistance is added, the total value must not be greater than 1 kΩ. If filtering is
+required, suggested component values are 100 pF differential and 50 Ωon each input; exact values are
+application-specific.
+
+Additionally, a digital filter is available for the remote temperature measurements to further reduce the effect of
+noise. This filter is programmable and has two levels when enabled. Level 1 performs a moving average of four
+consecutive samples. Level 1 filtering can be achieved by setting the digital filter control register (read address
+24h, write address 24h) to 01h. Level 2 performs a moving average of eight consecutive samples. Level 2
+filtering can be achieved by setting the digital filter control register (read address 24h, write address 24h) to 02h.
+The value stored in the remote temperature result register is the output of the digital filter, and is the value that
+the ALERT and THERM limits are compared to. The digital filter provides additional immunity to noise and spikes
+on the ALERT and THERM outputs. The filter responses to impulse and step inputs are shown in Figure 11 and
+Figure 12, respectively. The filter can be enabled or disabled by programming the desired levels in the digital
+filter register; see Table 4. The digital filter is disabled by default and on POR.
+
+
+      100                                                                      100
+
+      90                                                                       90
+
+      80                                                                       80
+ (°C)   70                                                                                                 (°C)   70
+                 Disabled                                                                   Disabled
+      60                                                                       60                  Level 1
+      50                                                                       50                           Level 2   Temperature   40                                                                                                                                                                                                                                                                           Temperature   40
+                             Level1
+      30                                 Level 2                                  30
+
+      20                                                                       20
+
+      10                                                                       10
+
+       0                                                                        0
+
+          0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15           0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15
+                                  Samples                                                            Samples
+
+
+
+             Figure 11. Filter Response to Impulse Inputs                      Figure 12. Filter Response to Step Inputs
+
+
+
+
+
+12     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

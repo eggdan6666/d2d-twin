@@ -1,0 +1,125 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+
+
+                                      CoR 0x03h
+
+                      CLRAIN                                                                                                         CLRAIN
+                       (Clear All Interrupts)                                                                                                                                      (Clear All Interrupts)
+                          (0x1Ah)                                                                                                                              (0x1Ah)
+
+
+                                                                                                                                         CLINP
+                                                                                                                                                                                 (Clear Interrupt Pin)
+                                                                                                                                                               (0x1Ah)
+
+
+
+                                      R
+
+
+                                                  Q3                 PEC
+                                                                                                          Interrupt Bit 0
+                                                                                             (0x00h)
+
+                                                  Q2
+  Port Power            Enable Status                PWR                                                    Enable
+        Change                                                   Event                                                                                                   CK    R
+                                                  Q1
+                                                                                                   D         Q
+
+                                                                  PESEN
+                                                  Q0                     Interrupt Enable
+                                                                                             (0x01h)
+
+
+
+                                                  Q7                PGC
+                                                                                                          Interrupt Bit 1
+                                                                                             (0x00h)
+
+                                                  Q6
+   Port Power           Good Status                PWR                                            Good
+        Change                                                   Event                                                                                  CK    R
+                                                  Q5
+                                                                                                                        Logic Hi     Q
+
+                                                  Q4               PGSEN                                                                                        INTEN
+                                                                                                    Interrupt Enable (0x01h)                                                                                                                 (Interrupt Pin Enable
+                                                                                                                                                                                                               (0x17h)
+                                                                                                                                                                                                                                      INT
+                                                                                                                 Port Disconnect Event
+
+
+                                                                                                                      Detection Cycle
+
+                                                                                                                                Classification Cycle
+
+                                                                                              ICUT or ILIM Fault
+
+                                    CoR 0x09h
+
+                   CLRAIN                                                                                      CLRAIN
+                    (Clear All Interrupts)                                                                                                            (Clear All Interrupts)
+                       (0x1Ah)                                                                                                       (0x1Ah)
+
+
+                                                                                                                   CLINP
+                                                                                                                                                    (Clear Interrupt Pin)
+                                                                                                                                     (0x1Ah)
+
+                                     R
+
+
+                                                Q3                 STRTF
+                                                                                                       Interrupt Bit 6
+                                                                                          (0x00h)
+
+                                                Q2
+
+    Port Start Fault                                   Start Event                                        CK    R
+                                                Q1
+                                                                                 D         Q
+
+                                                                STRTEN
+                                                Q0                     Interrupt Enable
+                                                                                          (0x01h)
+
+
+
+
+
+                                    CoR 0x0Bh
+                       CLRAIN                                                                                  CLRAIN
+                         (Clear All Interrupts)                                                                                                       (Clear All Interrupts)
+                            (0x1Ah)                                                                                                   (0x1Ah)
+
+
+                                                                                                                   CLINP
+                                                                                                                                                    (Clear Interrupt Pin)
+                                                                                                                                     (0x1Ah)
+
+                                     R
+
+
+                                                Q7                 SUPF
+                                                                                                       Interrupt Bit 7
+                                                                                          (0x00h)
+
+                                                Q6
+
+    Supply Event                             Supply Event                                       CK    R
+                                                Q5
+                                                                                 D         Q
+                                                                SUPEN
+                                                                                                     Interrupt Enable
+                                                Q4                      (0x01h)
+
+
+                            Figure 43. Interrupt Logic Functional Diagram
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     39
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,59 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+10 Power Supply Recommendations
+
+The input circuitry of the device can accurately measure signals on common-mode voltages beyond its power
+supply voltage, VS. For example, the voltage applied to the VS power supply terminal can be 5 V, whereas the
+load power-supply voltage being monitored (the common-mode voltage) can be as high as 26 V. Note also that
+the device can withstand the full 0-V to 26-V range at the input terminals, regardless of whether the device has
+power applied or not.
+
+Place the required power-supply bypass capacitors as close as possible to the supply and ground terminals of
+the device to ensure stability. A typical value for this supply bypass capacitor is 0.1 μF. Applications with noisy or
+high-impedance power supplies may require additional decoupling capacitors to reject power-supply noise.
+
+
+11  Layout
+
+11.1  Layout Guidelines
+
+Connect the input pins (IN+ and IN–) to the sensing resistor using a Kelvin connection or a 4-wire connection.
+These connection techniques ensure that only the current-sensing resistor impedance is detected between the
+input pins. Poor routing of the current-sensing resistor commonly results in additional resistance present between
+the input pins. Given the very low ohmic value of the current-sensing resistor, any additional high-current carrying
+impedance causes  significant measurement errors. Place the power-supply bypass capacitor as close as
+possible to the supply and ground pins.
+
+11.2  Layout Example
+
+
+
+
+
+                                       A1             IN+
+                                                                                               Sense/Shunt
+                                                                                                              Resistor                                       A0              IN±
+
+                                   SDA       GND
+                   I2C - /
+            SMBUS -                  SCL          VS
+                compatible
+                    interface                                                                                Supply bypass
+                                                                                              capacitor
+
+
+                                                                                   Via to Ground Plane
+
+                                                                                   Via to Power Plane
+
+                                  Figure 30. Recommended Layout
+
+
+
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     27
+
+                                                   Product Folder Links: INA219

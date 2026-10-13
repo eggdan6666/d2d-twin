@@ -1,0 +1,56 @@
+Bosch Sensortec | BMP280 Data sheet                                                          7 | 49
+
+
+      1. Specification
+
+              If not stated otherwise,
+
+            •    All values are valid over the full voltage range
+            •    All minimum/maximum values are given for the full accuracy temperature range
+            •  Minimum/maximum values of drifts, offsets and temperature coefficients are ±3σ values over
+                   lifetime
+            •   Typical values of currents and state machine timings are determined at 25 °C
+            •  Minimum/maximum values  of currents are determined using corner  lots over complete
+               temperature range
+            •  Minimum/maximum values of state machine timings are determined using corner lots over
+           0…+65 °C temperature range
+
+       The specification tables are split into pressure and temperature part of BMP280.
+
+                                            Table 2: Parameter specification
+         Parameter            Symbol       Condition        Min      Typ     Max    Units
+          Operating temperature      TA            operational          -40      25      +85     °C
+         range
+                                                                           full accuracy         0               +65
+          Operating pressure       P                full accuracy        300               1100    hPa
+         range
+
+         Sensor supply voltage      VDD       ripple max. 50mVpp     1.71       1.8        3.6     V
+           Interface supply voltage     VDDIO                              1.2        1.8        3.6     V
+         Supply current                 IDD,LP     1 Hz forced mode,                 2.8        4.2     µA
+                                                 pressure and
+                                               temperature, lowest
+                                               power
+        Peak current                      Ipeak        during pressure               720      1120    µA
+                                           measurement
+          Current at temperature       IDDT                                   325             µA
+         measurement
+         Sleep current1                IDDSL           25 °C                       0.1        0.3     µA
+
+
+         Standby current              IDDSB           25 °C                       0.2        0.5     µA
+            (inactive period of
+         normal mode) 2
+           Relative accuracy               Arel       700 … 900hPa                ±0.12            hPa
+          pressure                            25 . . . 40 °C
+         VDD = 3.3V                                                            ±1.0          m
+          Offset temperature       TCO         900hPa                     ±1.5             Pa/K
+           coefficient                           25 . . . 40 °C                                                                               12.6             cm/K
+
+
+
+          1 Typical value at VDD = VDDIO = 1.8 V, maximal value at VDD = VDDIO = 3.6 V.
+          2 Typical value at VDD = VDDIO = 1.8 V, maximal value at VDD = VDDIO = 3.6 V.
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

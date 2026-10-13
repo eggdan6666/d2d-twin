@@ -1,0 +1,83 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           10 of 46  
+   
+ 
+Obtaining the Gyroscope Factory Trim (FT) Value 
+ 
+If InvenSense MotionApps software is not used, the procedure detailed below should be followed to 
+obtain the Factory trim value of the self test response (FT) mentioned above. For the specific 
+registers mentioned below, please refer to registers 13-15. 
+ 
+The Factory trim value of the self test response (FT) is calculated as shown below.  FT[Xg], FT[Yg], 
+and FT[Zg] refer to the factory trim (FT) values for the gyroscope X, Y, and Z axes, respectively.  
+XG_TEST is the decimal version of XG_TEST[4-0], YG_TEST is the decimal version of YG_TEST[4-
+0], and ZG_TEST is the decimal version of ZG_TEST[4-0]. 
+ 
+When performing self test for the gyroscope, the full-scale range should be set to ±250dps. 
+ 
+                      (         )    
+ 
+ 
+if XG_TEST ≠ 0 
+           
+ 
+ 
+ 
+ 
+ 
+if XG_TEST = 0 
+ 
+                      (         )              
+if YG_TEST ≠ 0 
+            
+ 
+ 
+ 
+ 
+ 
+if YG_TEST = 0 
+ 
+                      (         )    
+ 
+ 
+if ZG_TEST ≠ 0 
+           
+ 
+ 
+ 
+ 
+ 
+if ZG_TEST = 0 
+ 
+2. Accelerometer Hardware Self-Test: Relative Method 
+Accelerometer self-test permits users to test the mechanical and electrical portions of the 
+accelerometer. Code for operating self-test is included within the MotionApps software provided by 
+InvenSense. Please refer to the next section (titled Obtaining the Accelerometer Factory Trim (FT) 
+Value) if not using MotionApps software. 
+When self-test is activated, the on-board electronics will actuate the appropriate sensor. This 
+actuation simulates an external force. The actuated sensor, in turn, will produce a corresponding 
+output signal. The output signal is used to observe the self-test response.  
+The self-test response (STR) is defined as follows: 
+                 
+                                            
+                                              
+ 
+This self test-response is used to determine whether the part has passed or failed self-test by finding 
+the change from factory trim of the self-test response as follows: 
+                                                  ( ) 
+(      )
+  
+ 
+        
+                                                                             
+This change from factory trim of the self-test response must be within the limits provided in the MPU-
+6000/MPU-6050 Product Specification document for the part to pass self-test. Otherwise, the part is 
+deemed to have failed self-test. 
+ 

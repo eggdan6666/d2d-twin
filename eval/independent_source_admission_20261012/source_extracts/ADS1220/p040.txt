@@ -1,0 +1,93 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+
+       CS
+             §                                       §
+                                       1            1            9           17
+      SCLK
+             §                                       §
+
+                  Hi-Z   §                                       §
+DOUT/DRDY                                   DATA MSB     DATA     DATA LSB
+             §                                       §
+
+
+             §
+     DRDY                                                                      Next Data Ready
+             §
+
+        DIN                         RDATA
+             §                                       §
+
+        Figure 8-28. State of DRDY When a New Conversion Finishes During an RDATA Command
+
+
+       CS
+             §                                       §
+                                       1            1            9           17
+      SCLK
+             §                                       §
+
+                  Hi-Z   §                                       §
+DOUT/DRDY                                   DATA MSB     DATA     DATA LSB
+             §                                       §
+
+
+             §                                       §
+     DRDY                                                                                                     Next Data Ready
+             §
+
+        DIN                         RDATA
+             §                                       §
+
+     Figure 8-29. State of DRDY When the Most Recent Conversion Result is Read During an RDATA
+                                 Command
+
+ 8.5.5 Sending Commands
+
+The device serial interface is capable of full-duplex operation while reading conversion data when not using the
+RDATA command. Full-duplex operation means commands are decoded at the same time that conversion data
+ are read. Commands can be sent on any 8-bit data boundary during a data read operation. When a RREG
+ or RDATA command is recognized, the current data read operation is aborted and the conversion data are
+ corrupted, unless the command is sent while the last byte of the conversion result is retrieved. The device starts
+ to output the requested data on DOUT/DRDY at the first SCLK rising edge after the command byte. To read data
+ without interruption, keep DIN low while clocking out data.
+
+A WREG command can be sent without corrupting an ongoing read operation. Figure 8-30 shows an example
+ for sending a WREG command to write two configuration registers while reading conversion data in continuous
+ conversion mode. After the command is clocked in (after the 32nd SCLK falling edge), the device resets the
+ digital filter and starts converting with the new register settings. The WREG command can be sent on any of the
+ 8-bit boundaries.
+
+       CS
+              §                                       §
+                                          1            9           17           25
+      SCLK
+              §                                       §
+
+                  Hi-Z    §                                       §
+DOUT/DRDY                           DATA MSB     DATA     DATA LSB
+              §
+
+
+              §                                       §
+     DRDY                                                                                                     Next Data Ready
+              §
+                                                  2· t(MOD)
+        DIN                                  WREG    REG_DATA   REG_DATA
+              §                                       §
+
+        Figure 8-30. Example of Reading Data while Simultaneously Sending a WREG Command
+
+The serial interface does not decode commands while an RDATA or RREG command is executed. That is, all 24
+ bits of the conversion result must be read after the RDATA command is issued and all requested registers must
+be read after a RREG command is sent before a new command can be issued.
+
+
+
+
+
+40    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

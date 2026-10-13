@@ -1,0 +1,48 @@
+                                                           (Continued)LM83   Logic Electrical Characteristics
+      SMBus DIGITAL SWITCHING CHARACTERISTICS
+        Unless otherwise noted, these specifications apply for VCC=+3.0 Vdc to +3.6 Vdc, CL (load capacitance) on output lines = 80
+        pF. Boldface limits apply for TA = TJ = TMIN to TMAX; all other limits TA = TJ = +25˚C, unless otherwise noted.
+       The switching characteristics of the LM83 fully meet or exceed the published specifications of the SMBus or I2C bus. The fol-
+        lowing parameters are the timing relationships between SMBCLK and SMBData signals related to the LM83. They are not the
+        I2C or SMBus bus specifications.
+      Symbol                Parameter                       Conditions           Typical       Limits        Units
+                                                                                         (Note 6)      (Note 7)        (Limit)
+       fSMB      SMBus Clock Frequency                                                       100      kHz (max)
+                                                                                            10       kHz (min)
+       tLOW      SMBus Clock Low Time                  10 % to 10 %                                 1.3        µs (min)
+                                                                                            25      ms (max)
+      tLOWMEXT  Cumulative Clock Low Extend Time                                               10      ms (max)
+        tHIGH     SMBus Clock High Time                 90 % to 90%                                  0.6        µs (min)
+       tR,SMB    SMBus Rise Time                   10% to 90%                  1                     µs (max)
+        tF,SMB     SMBus Fall Time                   90% to 10%                    0.3                    ns (max)
+        tOF         Output Fall Time                       CL = 400 pF,                            250       ns (max)
+                                                                   IO = 3 mA
+       tTIMEOUT   SMBData and SMBCLK Time Low for                                             25      ms (min)
+                 Reset of Serial Interface (Note 12)                                                40      ms (max)
+          t1       SMBCLK (Clock) Period                                                        10        µs (min)
+          t2,         Data In Setup Time to SMBCLK High                                             100        ns (min)
+        tSU;DAT
+          t3,         Data Out Stable after SMBCLK Low                                              300        ns (min)
+       tHD;DAT                                                                 TBD       ns (max)
+          t4,        SMBData Low Setup Time to SMBCLK                                            100        ns (min)
+        tHD;STA    Low
+          t5,        SMBData High Delay Time after                                                 100        ns (min)
+       tSU;STO    SMBCLK High (Stop Condition Setup)
+          t6,       SMBus Start-Condition Setup Time                                                         0.6        µs (min)
+        tSU;STA
+       tBUF      SMBus Free Time                                                                         1.3        µs (min)
+
+
+                                       SMBus Communication
+
+
+
+
+
+                                                                                                                                                                             DS101058-4
+
+
+
+
+
+      www.national.com                                                6

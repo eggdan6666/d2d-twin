@@ -1,0 +1,56 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+8  Detailed Description
+
+8.1  Overview
+
+The TMP461 device is a digital temperature sensor that combines a local temperature measurement channel
+and a remote-junction temperature measurement channel in a single WQFN-10 package. The device is two-wire-
+and SMBus-interface-compatible with nine pin-programmable bus address options, and  is specified over a
+temperature range of –40°C to 125°C. The TMP461 device also contains multiple registers for programming and
+holding configuration settings, temperature limits, and temperature measurement results.
+
+8.2  Functional Block Diagram
+
+
+                                             V+
+
+
+           TMP461
+
+
+     A0                                              Register Bank                  Oscillator
+
+     A1
+
+
+   SCL
+                              Serial Interface                                         Control Logic
+   SDA
+
+                                              16 x I  6 x I      I                                                                                    ALERT/THERM2
+
+
+
+    D+
+                                                ADC
+
+      D-
+                             Internal                                                     THERM
+                       BJT
+
+
+
+
+
+                                     GND
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback      9
+
+                                                  Product Folder Links: TMP461

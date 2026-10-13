@@ -1,0 +1,58 @@
+LIS3DH                                            Mechanical and electrical specifications
+
+2.4     Communication interface characteristics
+
+2.4.1     SPI - serial peripheral interface
+
+            Subject to general operating conditions for Vdd and Top.
+
+                               Table 7. SPI slave timing values
+                                                                       Value (1)
+     Symbol                      Parameter                                                Unit
+                                                             Min       Max
+
+         tc(SPC)       SPI clock cycle                                 100                    ns
+         fc(SPC)       SPI clock frequency                                         10       MHz
+         tsu(CS)      CS setup time                                   5
+
+         th(CS)      CS hold time                                   20
+           tsu(SI)       SDI input setup time                              5
+            th(SI)        SDI input hold time                              15                     ns
+         tv(SO)      SDO valid output time                                       50
+         th(SO)      SDO output hold time                             5
+         tdis(SO)     SDO output disable time                                     50
+
+1.  Values are guaranteed at 10 MHz clock frequency for SPI with both 4 and 3 wires, based on characterization results, not
+    tested in production.
+
+                             Figure 3. SPI slave timing diagram
+
+ CS      (1)                                                                                                                                   (1)
+
+                              tsu(CS)                                                      tc(SPC)                                                                        th(CS)
+
+ SPC    (1)                                                                                                                                   (1)
+
+                                                           tsu(SI)             th(SI)
+
+
+ SDI     (1)                   MSB IN                                                        LSB IN              (1)
+
+                                                                                tv(SO)                          th(SO)                                                                  tdis(SO)
+
+
+ SDO    (1)                     MSB OUT                                                    LSB OUT            (1)
+
+
+
+1. When no communication is ongoing, data on SDO is driven by internal pull-up resistors.
+Note:      Measurement points are done at 0.2·Vdd_IO and 0.8·Vdd_IO, for both input and output
+              ports.
+
+
+
+
+
+                                      DocID17530 Rev 2                                      13/54
+
+                                                                                                                            54

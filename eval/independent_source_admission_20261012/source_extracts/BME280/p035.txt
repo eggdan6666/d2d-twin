@@ -1,0 +1,56 @@
+Bosch Sensortec | BME280 Data sheet                                            35 | 60
+
+
+6.3.2  SPI read
+Reading is done by lowering CSB and first sending one control byte. The control bytes consist of the
+SPI register address (= full register address without bit 7) and the read command (bit 7 = RW = ‘1’).
+After writing the control byte, data is sent out of the SDO pin (SDI in 3-wire mode); the register address
+is automatically incremented. The SPI read protocol is depicted in Figure 13.
+
+
+                                       Control byte                                Data byte                                    Data byte
+                        Start RW         Register address (F6h)                   Data register - address F6h                      Data register - address F7h           Stop
+               CSB                                                                                                     CSB
+                  =    1   1   1   1   0   1   1   0   bit15  bit14  bit13  bit12  bit11  bit10   bit9   bit8   bit7   bit6   bit5   bit4   bit3   bit2   bit1   bit0   =
+                   0                                                                                                                               1
+
+Figure 13: SPI multiple byte read
+6.4  Interface parameter specification
+6.4.1  General interface parameters
+The general interface parameters are given in Table 32 below.
+
+Table 32: interface parameters
+
+  Parameter             Symbol           Condition        Min   Typ   Max     Unit
+  Input low level                         Vil_si         VDDIO=1.2 V to 3. 6V                  20     %VDDI
+                                                                                        O
+  Input high level                     Vih_si         VDDIO=1.2 V to 3.6 V     80                  %VDDI
+                                                                                        O
+ Output low level I2C            Vol_SDI       VDDIO=1.62 V, Iol=3 mA                 20     %VDDI
+                                                                                        O
+ Output low level I2C           Vol_SDI_1.2      VDDIO=1.20 V, Iol=3 mA                 23     %VDDI
+                                                                                        O
+ Output low level SPI          Vol_SDO       VDDIO=1.62 V, Iol=1 mA                 20     %VDDI
+                                                                                        O
+ Output low level SPI         Vol_SDO_1.2      VDDIO=1.20 V, Iol=1 mA                 23     %VDDI
+                                                                                        O
+ Output high level              Voh        VDDIO=1.62 V, Ioh=1 mA    80                  %VDDI
+                                         (SDO, SDI)                                 O
+ Output high level               Voh_1.2       VDDIO=1.20 V, Ioh=1 mA    60                  %VDDI
+                                         (SDO, SDI)                                 O
+  Pull-up resistor                     Rpull           Internal CSB pull-up     70    120    190    kΩ
+                                              resistance to VDDIO
+ I2C bus load capacitor        Cb        On SDI and SCK                   400     pF
+
+6.4.2  I²C timings
+For I²C timings, the following abbreviations are used:
+    •  “S&F mode” = standard and fast mode
+    •  “HS mode” = high speed mode
+    •  Cb = bus capacitance on SDA line
+
+All other naming refers to I²C specification 2.1 (January 2000).
+
+The I²C timing diagram is in Figure 14. The corresponding values are given in Table 33.
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

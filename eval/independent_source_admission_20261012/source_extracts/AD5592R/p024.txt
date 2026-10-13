@@ -1,0 +1,60 @@
+Data Sheet                               AD5592R
+
+THEORY OF OPERATION
+
+                                                                                of the ADC is straight binary. It is possible to set each I/Ox pin as
+                                                                     both a DAC and an ADC. When an I/Ox pin is set as both a DAC
+                                                            and an ADC, the primary function is that of the DAC. If the pin is
+                                                                        selected for inclusion in an ADC conversion sequence, the voltage
+                                                            on the pin is converted and made available via the serial interface,
+                                                                          allowing the DAC voltage to be monitored.
+
+                                                   Calculating ADC Input Current
+
+                                                          The current flowing into the I/Ox pins configured as ADC inputs
+                                                                       vary with the sampling rate (fS), the voltage difference between
+                                                                    successive channels (VDIFF), and whether buffered or unbuffered
+                                                      mode is used. Figure 42 shows a simplified version of the ADC
+                                                                             input structure. When a new channel is selected for conversion, the
+                                                                        5.8 pF capacitor must be charged or discharged of the voltage that
+    Figure 41. Output Voltage Range of the DAC with Gain = 2 (Unloaded         was on the previously selected channel. The time required by the
+                                Condition)                                charge or discharge depends on the voltage difference between the
+                                                                 two channels. This affects the input impedance of the multiplexer
+When VREF = VDD for gain = 1 or VREF = 0.5 × VDD for gain = 2,                                                            and therefore the input current flowing into the I/Ox pins. In buffered
+there is an upper dead band of 10 mV at the DAC channel output                                                            mode, Switch S1 is open and Switch S2 is closed, in which case
+in unloaded conditions. Additionally, there is a lower dead band of                                                                        the U1 buffer is directly driving the 23.1 pF capacitor, and its
+~4.88 mV at the DAC channel output in unloaded conditions. When                                                                      charging time is negligible. In unbuffered mode, Switch S1 is closed
+drawing a load current at either rail, the output voltage headroom                                                            and Switch S2 is closed. In unbuffered mode, the 23.1 pF capacitor
+with respect to that rail is limited by the 25 Ω typical channel                                                              must be charged from the I/Ox pins, which contributes to the input
+resistance of the DAC channel. For example, when sinking 1 mA,                                                                               current. For applications where the ADC input current is too high,
+the minimum output voltage = 25 Ω × 1 mA = 25 mV.                                                            an external input buffer may be required. The choice of buffer is a
+ADC SECTION                                                        function of the particular application.
+The 12-bit, single-supply ADC is capable of throughput rates of 400        Calculate the input current for buffered mode as follows:
+kSPS. The ADC is preceded by a multiplexer that switches selected                                                                                      fS × C × VDIFF + 1 nA
+I/Ox pins to the ADC. A sequencer is included to automatically
+switch the multiplexer to the next selected channel. Channels are         where:
+selected for conversion by writing to the ADC sequence register.             fS is the ADC sample rate in Hertz.
+When the write to the ADC sequence register has completed, the      C is the sampling capacitance in Farads.
+first channel in the conversion sequence is put into track mode.            VDIFF is the voltage change between successive channels.
+Allow each channel to track the input signal for a minimum of 500        1 nA is the dc leakage current associated with buffered mode.
+ns. The first SYNC falling edge following the write to the ADC                                                                        Calculate the input current for unbuffered mode as follows:
+sequence register begins the conversion of the first channel in
+the sequence. The next SYNC falling edge starts a conversion               fS × C × VDIFF
+on the second channel in the sequence and also begins to clock                                                       An example solution is as follows: for the ADC input current inthe first ADC result onto the serial interface. ADC data is clocked
+                                                                         buffered mode, where I/O0 = 0.5 V, I/O1 = 2 V, and fS = 10 kHz,out of the AD5592R/AD5592R-1 in a 16-bit frame. Bit 15 is 0 to
+indicate that the data contains ADC data, Bits[14:12] are the binary        (10,000 × 5.8 × 10−12 × 1.5) + 1 nA = 88 nA
+representation of the ADC address, and Bits[11:0] represent the
+                                                             Under the same conditions, the ADC input current in unbufferedADC result (see Table 30).
+                                                      mode is as follows:
+Each conversion takes 2 µs, and the conversion must be completed
+                                                                     (10,000 × 28.9 × 10−12 × 1.5) = 433.5 nAbefore another conversion is initiated. Only write to the AD5592R/
+AD5592R-1 when no conversion is taking place. I/O7 can be con-
+figured as a BUSY signal to indicate when a conversion is taking
+place. BUSY goes low while a conversion is in progress, and high
+when an ADC result is available. The ADC has an input range
+selection bit (Bit 5 in the General-Purpose Control Register section,
+Table 17), which sets the input range as 0 V to VREF or 0 V to 2 ×
+VREF. All input channels share the same range. The output coding                                Figure 42. ADC Input Structure
+
+
+analog.com                                                                                         Rev. H | 24 of 54

@@ -1,0 +1,76 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 8.2.11 Channel-2 Warning-Alert Limit Register (address = 0Ah) [reset = 7FF8h]
+
+ This register contains the value used to compare to the averaged shunt voltage value of channel 2 to detect a
+ longer duration overcurrent event.
+
+                          Table 8-23. Channel-2 Warning-Alert Limit Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+ W2L12 W2L11 W2L10  W2L9  W2L8  W2L7  W2L6  W2L5  W2L4  W2L3  W2L2  W2L1  W2L0  —   —   —
+
+  RW-0  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-0  RW-0  RW-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                 Table 8-24. Channel-2 Warning-Alert Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15-3    W2L12-0                    R/W     FFFh       Channel-2 warning-alert-limit data bits
+
+     2-0    Reserved                    R/W     0h         Reserved
+
+ 8.2.12 Channel-3 Critical-Alert Limit Register (address = 0Bh) [reset = 7FF8h]
+
+ This register contains the value used to compare to each shunt voltage conversion on channel 3 to detect fast
+ overcurrent events.
+
+                           Table 8-25. Channel-3 Critical-Alert Limit Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+ C3L12  C3L11  C3L10  C3L9   C3L8   C3L7   C3L6   C3L5   C3L4   C3L3   C3L2   C3L1   C3L0  —   —   —
+
+  RW-0  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-0  RW-0  RW-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                  Table 8-26. Channel-3 Critical-Alert Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15-3    C3L12-0                    R/W     FFFh       Channel-3 critical-alert-limit data bits
+
+     2-0    Reserved                    R/W     0h         Reserved
+
+ 8.2.13 Channel-3 Warning-Alert Limit Register (address = 0Ch) [reset = 7FF8h]
+
+ This register contains the value used to compare to the averaged shunt voltage value of channel 3 to detect a
+ longer duration overcurrent event.
+
+                          Table 8-27. Channel-3 Warning-Alert Limit Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+ W3L12 W3L11 W3L10  W3L9  W3L8  W3L7  W3L6  W3L5  W3L4  W3L3  W3L2  W3L1  W3L0  —   —   —
+
+  RW-0  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-1  RW-0  RW-0  RW-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                 Table 8-28. Channel-3 Warning-Alert Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15-3    W3L12-0                    R/W     FFFh       Channel-3 warning-alert limit data bits
+
+     2-0    Reserved                    R/W     0h         Reserved
+
+
+
+
+
+32    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

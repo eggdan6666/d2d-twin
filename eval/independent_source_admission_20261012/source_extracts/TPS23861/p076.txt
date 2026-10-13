@@ -1,0 +1,59 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.28.4  Port 4 Voltage Register
+
+Command = 3Eh with 2 Data Byte (LSByte first, MSByte second), Read Only
+
+LSB: 3Eh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                 Port 4 Voltage[7:0]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+MSB: 3Fh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                                             Port 4 Voltage[13:8]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Port voltage is monitored continuously when
+•  The port is powered on.
+•  The port is in Off Mode.
+Data conversion result. The I2C data transmission is a 2-byte transfer.
+
+Bit Descriptions
+
+Port n Voltage[13:0]: 14-bit Data conversion result of voltage for port n. The equation defining the voltage
+measured is:
+   V N u VSTEP
+
+    where
+              •  V = Port n Voltage, V
+              •  N = 14-bit value in Port n Voltage Register
+              •   VSTEP = LSB Value                                                                                                  (5)
+
+
+                 FULL SCALE VALUE                                    LSB VALUE
+
+                          60 V                                                         3.662 mV
+
+
+
+                                  NOTE
+         The port voltage measurement is made between VPWR and DRAINn.
+
+
+
+
+
+76     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

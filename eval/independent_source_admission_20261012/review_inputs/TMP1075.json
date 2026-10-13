@@ -1,0 +1,393 @@
+{
+  "chip": "TMP1075",
+  "source": {
+    "device": "TMP1075",
+    "path": "corpus/data/raw_pdf/TI/TMP1075.pdf",
+    "sha256": "266c9a50a80b100884e9cf378b320ea51412023057fed8ba4fbdf85502340cf2",
+    "pdf_pages": 49,
+    "version_first_page_text": "                                                                                   TMP1075\n                                                                             SBOS854F – MARCH 2018 – REVISED JUNE 2024\n  TMP1075 Temperature Sensor With I2C and SMBus Interface in Industry Standard\n                     LM75 Form Factor and Pinout\n\n1 Features                                       Compatible with two-wire SMBus and I2C interfaces,\n                                                        the TMP1075 support up to 32 device addresses and•  Temperature accuracy:\n                                                       provides SMBus Reset and Alert function.\n   –  ±0.25°C (typical) from −55°C to 125°C\n   –  ±1°C (maximum) from −40 °C to 110°C          The TMP1075 D, DGK, and DSG packages are\n   –  ±2°C (maximum) from −55°C to 125°C              specified for operation over a temperature range of\n•  Low power consumption:                        −55°C to 125°C and the TMP1075N DRL package is\n   –  2.7μA Average current                              specified over the −40°C to 125°C temperature range.\n   –  0.37μA Shutdown current                                             The TMP1075 units are 100% tested on a production\n•  Supply range options from: 1.62V to 5.5V                                                     setup  that  is  NIST  traceable  and  verified  with\n•  Temperature independent of supply                                                  equipment  that  is  calibrated  to  ISO/IEC  17025\n•   Digital interface: SMBus, I2C                                                        accredited standards.\n•  Software compatibility with industry standard LM75\n   and TMP75                                             Package Information\n•  Can coexist in I3C mixed fast mode bus                     PART NUMBER          PACKAGE(1)          PACKAGE SIZE(2)\n•  Resolution: 12 Bits                                                         VSSOP (DGK, 8)         3.00mm × 4.90mm\n•  Supports up to 32 I2C addresses                           TMP1075             SOIC (D, 8)             4.90mm × 6.00mm\n•  ALERT pin function                                                  WSON (DSG, 8)          2.00mm × 2.00mm\n•  NIST traceability                                                                  SOT563 (DRL, 6)(3)       1.60mm × 1.60mm\n2 Applications                                                      (1)(2)   ForThe morepackageinformation,size (lengthsee ×Sectionwidth) is11.a nominal value and\n                                                                            includes pins, where applicable.\n•  Power-supply temperature monitoring                                                                               (3)   Available as the TMP1075N orderable.\n•  Connected peripherals & printers\n•  PC and notebooks                                                                                                                                                       1.7VSupplyto 5.5VVoltage(TMP1075)\n•  Mobile phones                                                                                                                                                          1.62V to 3.6V (TMP1075N)\n\n                                                                                                                                                                                               Resistors\n                                                                                                                                                                                                         Supply Bypass•  Battery management                                                                                                                         Pullup5k\n•  Enterprise machine                                                                                                                                                                     Capacitor0.01µF\n•  Thermostat\n•  Wireless environmental sensor and HVAC                                                             SDA                V+\n•  Electro mechanical device temperature                                           Two-Wire                        SCL                 A0\n                                                                                                                              Host Controller\n3 Description                                                                                                                      ALERT              A1*\n                                                                                                                                                                 A2*\nThe TMP1075  is  the most  accurate and  lowest                                       GND\npower replacement to the industry standard LM75                                                            *Pin isTMP1075Nnot available on\nand TMP75  digital temperature sensors. Available\nin  SOIC-8,  VSSOP-8, WSON-8,  and  SOT563-6                  Simplified Schematic\npackages,  the  TMP1075   offers   pin-to-pin  and\nsoftware compatibility to quickly upgrade any existing                          2.53          Average      Average r3V     Min/Max Limit\nxx75 design. The TMP1075 additional new packages                       2\nare a 2.0mm × 2.0mm DFN and a 1.6mm × 1.6mm                                 (qC)  1.51\nSOT563-6 reducing the printed circuit board (PCB)                                                   Error  0.5\nfootprint by 82% and 89% compared to the SOIC                            -0.50\npackage, respectively.                                                                                          -1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Temperature  -1.5\nThe  TMP1075  has  a  ±1°C  accuracy  over  a                             -2\nwide temperature range and offers an on-chip 12-                            -2.5-3\nbit  analog-to-digital  converter  (ADC)  providing  a                            -55   -35   -15    5 Temperature25   45 (qC) 65   85   105  125D00X\ntemperature resolution of 0.0625°C.\n                                                DGK and D packages\n\n                                                            Temperature Accuracy\n\n\n\n     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,\n       intellectual property matters and other important disclaimers. PRODUCTION DATA."
+  },
+  "ir": {
+    "schema": "d2d-ir-v1",
+    "schema_note": "字段命名对齐 CMSIS-SVD（register/field/access/reset/bitRange），可无损导出 SVD；来源 = d2d/parsed/TMP1075/auto/TMP1075.md（MinerU 解析）+ 人工校对",
+    "device": "TMP1075",
+    "vendor": "TI",
+    "interface": "I2C",
+    "reg_width": 16,
+    "i2c": {
+      "base_address_7bit": "0b1001011",
+      "address_pins": [
+        "A2",
+        "A1",
+        "A0"
+      ],
+      "max_devices": 32,
+      "note": "引脚状态每次总线通信采样；MVP 寄存器级仿真不建模总线地址解码"
+    },
+    "single_byte_semantics": {
+      "applies_to": "all_registers",
+      "test_register": "CFGR",
+      "write": "单字节写只更新该寄存器 bits 15:8",
+      "read": "单字节读只返回 bits 15:8",
+      "source": "§7.5.1.2 Note（xx75/LM75 软件兼容设计）"
+    },
+    "registers": [
+      {
+        "name": "TEMP",
+        "addr": "0x00",
+        "access": "RO",
+        "reset": "0x0000",
+        "desc": "12 位二进制补码温度转换结果，§7.5.1.1",
+        "fields": [
+          {
+            "name": "T",
+            "bits": "15:4",
+            "access": "RO",
+            "reset": 0,
+            "desc": "T[11:0] 最近一次转换结果"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "not used，恒 0"
+          }
+        ]
+      },
+      {
+        "name": "CFGR",
+        "addr": "0x01",
+        "access": "RW",
+        "reset": "0x00FF",
+        "desc": "16 位配置寄存器，§7.5.1.2（TMP1075N 变体 reset=0x60A0 且 R[1:0]/低字节为只读保留，MVP 不测）",
+        "fields": [
+          {
+            "name": "OS",
+            "bits": "15",
+            "access": "RW",
+            "reset": 0,
+            "read_as": 0,
+            "desc": "写 1 启动单次转换；读恒返回 0（Table 7-8）"
+          },
+          {
+            "name": "R",
+            "bits": "14:13",
+            "access": "RW",
+            "reset": 0,
+            "desc": "连续转换速率 00:27.5ms 01:55ms 10:110ms 11:220ms"
+          },
+          {
+            "name": "F",
+            "bits": "12:11",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Fault queue codes00/01/10/11 = 1/2/3/4 for non-N TMP1075; N variant differs; p.22 Table7-8"
+          },
+          {
+            "name": "POL",
+            "bits": "10",
+            "access": "RW",
+            "reset": 0,
+            "desc": "ALERT 极性 0:低有效 1:高有效"
+          },
+          {
+            "name": "TM",
+            "bits": "9",
+            "access": "RW",
+            "reset": 0,
+            "desc": "ALERT 模式 0:比较器 1:中断"
+          },
+          {
+            "name": "SD",
+            "bits": "8",
+            "access": "RW",
+            "reset": 0,
+            "desc": "1=关断模式，0=连续转换"
+          },
+          {
+            "name": "UNUSED_LOW",
+            "bits": "7:0",
+            "access": "RW",
+            "reset": 255,
+            "desc": "not used；access 表标 R/W（见 open_questions[0]）"
+          }
+        ]
+      },
+      {
+        "name": "LLIM",
+        "addr": "0x02",
+        "access": "RW",
+        "reset": "0x4B00",
+        "desc": "12 位二进制补码低温阈值，reset 4B00h = 75°C，§7.5.1.3",
+        "fields": [
+          {
+            "name": "L",
+            "bits": "15:4",
+            "access": "RW",
+            "reset": 1200,
+            "desc": "L[11:0] 低温比较阈值"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "not used（见 open_questions[0]）"
+          }
+        ]
+      },
+      {
+        "name": "HLIM",
+        "addr": "0x03",
+        "access": "RW",
+        "reset": "0x5000",
+        "desc": "12 位二进制补码高温阈值，reset 5000h = 80°C，§7.5.1.4",
+        "fields": [
+          {
+            "name": "H",
+            "bits": "15:4",
+            "access": "RW",
+            "reset": 1280,
+            "desc": "H[11:0] 高温比较阈值"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "not used（见 open_questions[0]）"
+          }
+        ]
+      },
+      {
+        "name": "DIEID",
+        "addr": "0x0F",
+        "access": "RO",
+        "reset": "0x7500",
+        "desc": "只读器件 ID（仅 TMP1075 非下单型有），§7.5.1.5。注意：Table 7-11 TYPE 列印作 R/W 为手册笔误——描述明文 '16-bit, read-only register' 且 Figure 7-16 逐位 R（见 proofread_record.erratum_found）",
+        "fields": [
+          {
+            "name": "DID",
+            "bits": "15:0",
+            "access": "RO",
+            "reset": 29952,
+            "desc": "复位 7500h，MSB 静态 75h"
+          }
+        ]
+      }
+    ],
+    "proofread_record": {
+      "date": "2026-10-07",
+      "method": "人工对照原 PDF（corpus/data/raw_pdf/TI/TMP1075.pdf）截图逐表核验",
+      "decisions": [
+        {
+          "q": "Q1 CFGR bits 7:0 与 LLIM/HLIM bits 3:0 可写性",
+          "decision": "保持 RW（可写存储）",
+          "evidence": "Figure 7-12 低字节逐位 R/W-1；Table 7-9 bits 3:0 行 TYPE=R/W"
+        },
+        {
+          "q": "Q2 OS 位 read_as=0",
+          "decision": "确认",
+          "evidence": "解析文本 Table 7-8 明文 'Read returns 0'，与 Figure 7-12 OS=R/W-0 复位值一致"
+        },
+        {
+          "q": "Q3 单字节语义范围",
+          "decision": "保持 all_registers",
+          "evidence": "§7.5.1.2 Note 明文（CFGR）；其余寄存器按 I2C 高字节惯例推广"
+        },
+        {
+          "q": "Q4 TMP1075N 变体",
+          "decision": "排除出 MVP",
+          "evidence": "Figure 7-13：R1/R0 只读 R-1、bits 7:0 Reserved，与标准版行为差异实质存在"
+        }
+      ],
+      "erratum_found": "Table 7-11（DIEID）TYPE 列印作 R/W，与同表描述 '16-bit, read-only register' 及 Figure 7-16 逐位 R 码矛盾——判定为手册笔误，IR 取 RO。人工校对环节价值之实证。"
+    }
+  },
+  "prior_policy": {},
+  "inventory": [
+    {
+      "chip": "TMP1075",
+      "register": "TEMP",
+      "field": "T",
+      "bits": "15:4",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xfff0",
+      "known_protection_bit_mask": "0xfff0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "TEMP",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xf",
+      "known_protection_bit_mask": "0xf",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "OS",
+      "bits": "15",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8000",
+      "known_protection_bit_mask": "0x8000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "R",
+      "bits": "14:13",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x6000",
+      "known_protection_bit_mask": "0x6000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "F",
+      "bits": "12:11",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x1800",
+      "known_protection_bit_mask": "0x1800",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "POL",
+      "bits": "10",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x400",
+      "known_protection_bit_mask": "0x400",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "TM",
+      "bits": "9",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x200",
+      "known_protection_bit_mask": "0x200",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "SD",
+      "bits": "8",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x100",
+      "known_protection_bit_mask": "0x100",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "CFGR",
+      "field": "UNUSED_LOW",
+      "bits": "7:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "LLIM",
+      "field": "L",
+      "bits": "15:4",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xfff0",
+      "known_protection_bit_mask": "0xfff0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "LLIM",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xf",
+      "known_protection_bit_mask": "0xf",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "HLIM",
+      "field": "H",
+      "bits": "15:4",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xfff0",
+      "known_protection_bit_mask": "0xfff0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "HLIM",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xf",
+      "known_protection_bit_mask": "0xf",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP1075",
+      "register": "DIEID",
+      "field": "DID",
+      "bits": "15:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xffff",
+      "known_protection_bit_mask": "0xffff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    }
+  ]
+}

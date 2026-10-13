@@ -1,0 +1,286 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "source_motion_io",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    {
+      "path": "eval/protocol_v2_20261012/REPORT.md",
+      "sha256": "83e4534f34309e0a4a8158f28c20d96cdc0bf48fbd8e91f533362f198d1def16",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/SOURCE_POLICY_REVIEW.md",
+      "sha256": "66abbf099d2dd223c43775424cd7cab16246bbc800f3a0d30df3a2ada23ba63d",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/LEGAL_DOMAIN_SUPPLEMENT.md",
+      "sha256": "6e4c8169d753b2b81f4153b1bc24bd4fde65bdfdaee276a46901520a40b8a7c0",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/INDEPENDENT_REPAIR_REVIEW.md",
+      "sha256": "eb6b037032a0c1371736940c3fac751f0618f40dcebfe8cf4dcf08f08c400869",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/source_policy.json",
+      "sha256": "dd2460abbe0feb4c39bce7a5effc9feaf99b8b7733bffde722497a9993f466b3",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/field_policy_inventory.json",
+      "sha256": "3e196ee069a6043ceaeb4f04fe61314e0bf2ed071582175b8bb70f5382e54fa2",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "path": "eval/protocol_v2_20261012/protocol_manifest.json",
+      "sha256": "c090ed8562428c17c2b888f22fe2cefca4e9a4b212a0f76bb8e61831f124e1b8",
+      "role": "OBJECT_UNDER_REVIEW_NOT_MANUFACTURER_EVIDENCE",
+      "review_scope": "four assigned chip slices and global claims of certification"
+    },
+    {
+      "chip": "AD5592R",
+      "path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+      "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+      "manual_version": "AD5592R/AD5592R-1 Data Sheet Rev. H"
+    },
+    {
+      "chip": "LIS3DH",
+      "path": "corpus/data/raw_pdf/ST/LIS3DH.pdf",
+      "sha256": "852bfcf1a993f04cc147f26a26612a22fdc307c234f3e53d2c24c850ad421533",
+      "manual_version": "DocID17530 Rev 2"
+    },
+    {
+      "chip": "LIS2DW12",
+      "path": "corpus/data/raw_pdf/ST/lis2dw12.pdf",
+      "sha256": "5208623aa91c63a33be0e930518c20f5210c4eb76932350f35369687ae1d0dd5",
+      "manual_version": "DS11811 Rev 9"
+    },
+    {
+      "chip": "MPU6050",
+      "path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+      "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+      "manual_version": "RM-MPU-6000A-00 Revision 4.2; 08/19/2013"
+    },
+    {
+      "chip": "MPU6050",
+      "path": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+      "sha256": "a4fdf69590b8cbab1cf0a5bcd359327b0ac022061fb233855aff2e191e7e3584",
+      "manual_version": "PS-MPU-6000A-00 Revision 3.4; 08/19/2013"
+    }
+  ],
+  "outputs": [
+    "fields.json",
+    "findings.json",
+    "register_gaps.json",
+    "sources.json",
+    "candidate_ir_annotation_patch.json",
+    "ir_patches.json",
+    "candidate_policy.json",
+    "quality_checks.json",
+    "REVIEW.md"
+  ],
+  "evidence_status": [
+    "VERIFIED_USER_MATERIAL: assigned inventory and seven named review inputs",
+    "VERIFIED_SOURCE: local manufacturer originalPDF pages with locator+SHA, limitations retained",
+    "EXECUTED_LOCAL: PDF extraction/hashes and schema/quote validation",
+    "AI_INFERENCE: bounded abstraction and conservative exclusions",
+    "NOT_EXECUTED: reference/model/hardware/new officialdownload or erratum verification"
+  ],
+  "assumptions": [
+    "Direct-register storage subset is an explicitly labelled abstraction.",
+    "Source admission is bounded to assigned140 inventory fields, no unrestricted full-device signoff.",
+    "Source PDF mirror carries manufacturer document content; official-current download identity not checked."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {
+      "inventory_fields": 140,
+      "exact_inventory_keys_preserved": true,
+      "dimensions_per_field": 7,
+      "dimension_records": 980,
+      "overall_counts": {
+        "CONDITIONAL": 116,
+        "REPAIR": 16,
+        "PASS": 8
+      },
+      "per_chip_counts": {
+        "AD5592R": {
+          "CONDITIONAL": 18,
+          "REPAIR": 4
+        },
+        "LIS3DH": {
+          "PASS": 6,
+          "CONDITIONAL": 20,
+          "REPAIR": 8
+        },
+        "LIS2DW12": {
+          "REPAIR": 4,
+          "CONDITIONAL": 49,
+          "PASS": 2
+        },
+        "MPU6050": {
+          "CONDITIONAL": 29
+        }
+      },
+      "locator_excerpt_occurrences_verified_in_original_PDF_text": 1515,
+      "visually_reviewed_pages": [
+        "LIS2DW12 p.35 Table22",
+        "LIS3DH p.39 Tables46–47",
+        "MPU6050 RM p.6 overview"
+      ],
+      "baseline_mutations": "none; build writes partition directory only",
+      "no_model_or_reference_execution": true,
+      "no_hardware_or_external_API": true
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "MOTION-LIS2-FIFO-MODE-SOURCE",
+      "conflict_type": "SOURCE_INTERNAL_AMBIGUITY_OR_LAYOUT_DISCREPANCY",
+      "claim": "§5.3.4/5.3.5的trigger event/continuous终态与Table55的deasserted/FIFO终态不一致。",
+      "source_or_locator": [
+        {
+          "pdf_page": 44,
+          "printed_page": "44",
+          "table_or_section": "Table55",
+          "excerpt": "then FIFO mode",
+          "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+        },
+        {
+          "pdf_page": 25,
+          "printed_page": "25",
+          "table_or_section": "§5.3.4",
+          "excerpt": "FIFO mode starts upon an internal trigger event",
+          "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+        },
+        {
+          "pdf_page": 26,
+          "printed_page": "26",
+          "table_or_section": "§5.3.5",
+          "excerpt": "starts in continuous mode upon an internal trigger event",
+          "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+        },
+        {
+          "pdf_page": 24,
+          "printed_page": "24",
+          "table_or_section": "§5.3.1",
+          "excerpt": "Bypass mode is also used to reset",
+          "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+        }
+      ],
+      "competing_values_or_interpretations": {
+        "Table55.FMODE_4": "then FIFO mode",
+        "body_FMODE_4": "continuous upon trigger event"
+      },
+      "recommended_resolution": "preserve both source statements; exclude ambiguous functional assertion or declare provisional interpretation; not an official erratum"
+    },
+    {
+      "conflict_id": "MOTION-AD-COMMAND-FORMAT-SOURCE",
+      "conflict_type": "SOURCE_INTERNAL_AMBIGUITY_OR_LAYOUT_DISCREPANCY",
+      "claim": "p.26通用bits10:9保留与逐寄存器REPbit9、SWkeybits10:0不兼容。",
+      "source_or_locator": [
+        {
+          "pdf_page": 26,
+          "printed_page": "26",
+          "table_or_section": "Table10",
+          "excerpt": "Bits[10:9] are reserved",
+          "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+        },
+        {
+          "pdf_page": 37,
+          "printed_page": "37",
+          "table_or_section": "Table16",
+          "excerpt": "REP",
+          "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+        },
+        {
+          "pdf_page": 50,
+          "printed_page": "50",
+          "table_or_section": "Table28",
+          "excerpt": "10110101100: Reset",
+          "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+        }
+      ],
+      "competing_values_or_interpretations": {
+        "generic_format": "bits10:9 reserved for control writes"
+      },
+      "recommended_resolution": "preserve both source statements; exclude ambiguous functional assertion or declare provisional interpretation; not an official erratum"
+    },
+    {
+      "conflict_id": "MOTION-MPU-DLPF7-SOURCE",
+      "conflict_type": "SOURCE_INTERNAL_AMBIGUITY_OR_LAYOUT_DISCREPANCY",
+      "claim": "§4.2 DLPF_CFG0 or7 disabled与§4.3表7 Reserved不同粒度；排除7可保守但不能说其毫无定义。",
+      "source_or_locator": [
+        {
+          "pdf_page": 13,
+          "printed_page": "13",
+          "table_or_section": "§4.3 DLPF table",
+          "excerpt": "RESERVED",
+          "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+        },
+        {
+          "pdf_page": 12,
+          "printed_page": "12",
+          "table_or_section": "§4.2",
+          "excerpt": "DLPF_CFG = 0 or 7",
+          "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+        }
+      ],
+      "competing_values_or_interpretations": {
+        "v2_legal_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "recommended_resolution": "preserve both source statements; exclude ambiguous functional assertion or declare provisional interpretation; not an official erratum"
+    },
+    {
+      "conflict_id": "MOTION-MPU-GYRO-ST-LAYOUT",
+      "conflict_type": "SOURCE_INTERNAL_AMBIGUITY_OR_LAYOUT_DISCREPANCY",
+      "claim": "总map high3bits“-”与detail named ST位的布局差异，应保留detail-first解读条件。",
+      "source_or_locator": [
+        {
+          "pdf_page": 6,
+          "printed_page": "6",
+          "table_or_section": "§3 overview GYRO_CONFIG",
+          "excerpt": "GYRO_CONFIG",
+          "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+        },
+        {
+          "pdf_page": 14,
+          "printed_page": "14",
+          "table_or_section": "§4.4",
+          "excerpt": "XG_ST",
+          "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+        }
+      ],
+      "competing_values_or_interpretations": {
+        "overview": "- - -",
+        "detail": "XG_ST YG_ST ZG_ST"
+      },
+      "recommended_resolution": "preserve both source statements; exclude ambiguous functional assertion or declare provisional interpretation; not an official erratum"
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "主编排逐项接受候选修订和条件/排除规则，冻结新的来源与输入版本后才用于新一轮生成。",
+  "stage_acceptance_recommendation": "REPAIR"
+}

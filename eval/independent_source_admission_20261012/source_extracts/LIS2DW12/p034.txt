@@ -1,0 +1,27 @@
+                                                              LIS2DW12
+                                                                                                               Register mapping
+
+
+
+                                                          Register address
+                    Name                Type(1)                            Default             Comment
+                                               Hex      Binary
+
+           Y_OFS_USR                R/W     3D      00111110    00000000
+
+           Z_OFS_USR                 R/W     3E     00000100    00000000
+
+            CTRL7                     R/W     3F     00000100    00000000
+
+                 1. R = read-only register, R/W = readable/writable register
+
+             Registers marked as Reserved must not be changed. Writing to those registers may cause permanent damage to
+              the device.
+           The content of the registers that are loaded at boot should not be changed. They contain the factory calibration
+              values. Their content is automatically restored when the device is powered up.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 34/65

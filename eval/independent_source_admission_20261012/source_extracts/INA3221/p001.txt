@@ -1,0 +1,79 @@
+                                                                                            INA3221
+                                                                        SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+  INA322126V, Triple Channel, 13-Bit, I2C Output Current and Voltage Monitor With
+                                        Alerts
+
+1 Features                              3 Description
+
+•  Senses bus voltages from 0V to 26V              The INA3221  is a three-channel, high-side current
+•  Reports shunt and bus voltage                    and bus voltage monitor with an I2C- and SMBUS-
+•  High accuracy:                                     compatible  interface. The INA3221  monitors  both
+   –  Offset voltage: ±80µV (maximum)                 shunt  voltage drops and bus supply  voltages,  in
+   –  Gain error: 0.25% (maximum)                      addition to having programmable conversion times
+•  Configurable averaging options                   and averaging modes for these signals. The INA3221
+•  Four programmable addresses                          offers  both  critical and  warning  alerts  to  detect
+•  Programmable alert and warning outputs               multiple programmable  out-of-range  conditions  for
+•  Power-supply operation: 2.7V to 5.5V              each channel.
+2 Applications                               The INA3221 senses current on buses that can vary
+                                                    from 0V  to 26V. The device  is powered from a
+•  Computers                                             single 2.7V to 5.5V supply, and draws 350μA (typ)
+•  Power management                                     of supply current. The INA3221 is specified over the
+•  Telecom equipment                                  operating temperature range of –40°C to +125°C. The
+•  Battery chargers                                       I2C- and SMBUS-compatible interface features four
+•  Power supplies                                 programmable addresses.
+•  Test equipment
+                                                         Package Information•  Data Centers
+                                                   PART NUMBER      PACKAGE(1)    PACKAGE SIZE(2)
+
+                                                           INA3221        RGV (VQFN, 16)    4.00mm × 4.00mm
+
+                                                                               (1)   For all available packages, see the package option
+                                                           addendum at the end of the datasheet.
+                                                                               (2)  The package size (length × width) is a nominal value and
+                                                                            includes pins, where applicable.
+
+
+                                 Power Supply
+                                     (0V to 26V)                                                       CBYPASS
+                                                                                                  0.1µF
+
+                                                              Load 1
+
+
+                                                                                                      VS (Supply
+                                                          VIN+1           VIN–1                                                     Voltage)        10kΩ
+
+                 Power Supply
+                    (0V to 26V)                                                            SDA
+                                                                                                                         I2C-
+                                           CH 1                                 and     SCL
+                                                                           Bus          SMBus-
+                                        VIN+2       CH 2                              Voltages 1-3      Compatible    A0
+                                                                                                                    Interface            VPU       VS                                                                                 Shunt
+                                                 ADC
+                                         VIN–2                                              Voltages 1-3
+
+                                                                                                           Critical Limit                                   10kΩ
+                                                                                                 Alerts 1-3               VPU
+                                                                                          Power Valid (PV)
+                    Load 2                       CH 3               Shunt Voltage                      Critical
+                                                            Sum Alerts
+                                                                                                       Warning
+                                                                                                    Timing Control (TC)
+
+                                                    GND
+
+                                                      VIN+3             VIN–3
+
+
+                        Power Supply
+                           (0V to 26V)                        Load 3
+
+
+                                          Typical Application
+
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+       intellectual property matters and other important disclaimers. PRODUCTION DATA.

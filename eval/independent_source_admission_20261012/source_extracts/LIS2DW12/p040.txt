@@ -1,0 +1,53 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.8     CTRL5_INT2_PAD_CTRL (24h)
+              Control register 5 (R/W)
+
+
+                                                 Table 38. Control register 5
+
+                   INT2_         INT2_         INT2_         INT2_         INT2_         INT2_         INT2_         INT2_
+             SLEEP_STATE  SLEEP_CHG     BOOT       DRDY_T       OVR          DIFF5         FTH        DRDY
+
+
+                                            Table 39. Control register 5 description
+
+                                            Enables routing SLEEP_STATE to INT2 pad. Default value: 0
+            INT2_SLEEP_STATE
+                                                          (0: disabled; 1: enabled)
+
+                                            Sleep change status routed to INT2 pad. Default value: 0
+            INT2_SLEEP_CHG
+                                                          (0: disabled; 1: enabled)
+
+                                            Boot state routed to INT2 pad. Default value: 0
+              INT2 _BOOT
+                                                          (0: disabled; 1: enabled)
+
+                                            Temperature data-ready is routed to INT2. Default value: 0
+            INT2_DRDY_T
+                                                          (0: disabled; 1: enabled)
+
+                                        FIFO overrun interrupt is routed to INT2 pad. Default value: 0
+              INT2 _OVR
+                                                          (0: disabled; 1: enabled)
+
+                                        FIFO full recognition is routed to INT2 pad. Default value: 0
+              INT2_DIFF5
+                                                          (0: disabled; 1: enabled)
+
+                                        FIFO threshold interrupt is routed to INT2 pad. Default value: 0
+              INT2 _FTH
+                                                          (0: disabled; 1: enabled)
+
+                                              Data-ready is routed to INT2 pad. Default value: 0
+              INT2 _DRDY
+                                                          (0: disabled; 1: enabled)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 40/65

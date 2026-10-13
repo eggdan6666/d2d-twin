@@ -1,0 +1,70 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.3.2 Low-Noise PGA
+
+The device features programmable gains of 1, 2, 4, 8, 16, 32, 64, and 128. Use the GAIN[2:0] bits in the
+ configuration register to configure the gain. Gains are achieved in two stages. The first stage is a low-noise,
+ low-drift, high input impedance, programmable gain amplifier (PGA). The second gain stage is implemented by a
+ switched-capacitor circuit at the input to the ΔΣ modulator. Table 8-1 shows how each gain is implemented.
+
+                                   Table 8-1. Gain Implementation
+                    GAIN SETTING             PGA GAIN         SWITCHED-CAPACITOR GAIN
+
+                            1                           1                           1
+
+                            2                           1                           2
+
+                            4                           1                           4
+
+                            8                           2                           4
+
+                            16                           4                           4
+
+                            32                           8                           4
+
+                            64                          16                           4
+
+                           128                          32                           4
+
+
+The PGA consists of two chopper-stabilized amplifiers (A1 and A2) and a resistor feedback network that sets
+ the PGA gain. The PGA input is equipped with an electromagnetic interference (EMI) filter. Figure 8-2 shows a
+ simplified diagram of the PGA.
+
+                     200
+              AINP                       +
+                              25pF     A1
+
+                                                                 -
+                                         RF
+                                                 OUTP
+                        VIN          RG                                 VOUT = Gain × VIN
+                                         RF
+                                                 OUTN
+
+
+                                                                 -
+                                     A2                     200
+             AINN                       +
+                              25pF
+
+
+                                 Figure 8-2. Simplified PGA Diagram
+
+ VIN denotes the differential input voltage VIN = (VAINP – VAINN). The gain of the PGA can be calculated with
+ Equation 4:
+
+    Gain = 1 + 2 × RF / RG                                                                                         (4)
+
+ Gain is changed inside the device using a variable resistor, RG. The differential full-scale input voltage range
+ (FSR) of the PGA is defined by the gain setting and the reference voltage used, as shown in Equation 5:
+
+   FSR = ±VREF / Gain                                                                                           (5)
+
+ Table 8-2 shows the corresponding full-scale ranges when using the internal 2.048V reference.
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    21
+
+                                                  Product Folder Links: ADS1220

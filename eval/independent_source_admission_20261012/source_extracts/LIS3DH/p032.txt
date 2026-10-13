@@ -1,0 +1,55 @@
+Register mapping                                                         LIS3DH
+
+
+                                    Table 21. Register address map
+
+                                                      Register address
+                   Name             Type                         Default     Comment
+                                              Hex     Binary
+
+                   INT1_CFG             rw       30     011 0000 00000000
+
+                   INT1_SRC                      r       31     011 0001   Output
+
+                    INT1_THS             rw       32     011 0010 00000000
+
+                 INT1_DURATION          rw       33     011 0011 00000000
+
+                   INT2_CFG             rw       34     011 0100 00000000
+
+                   INT2_SRC                      r       35     011 0101   Output
+
+                    INT2_THS             rw       36     011 0110 00000000
+
+                 INT2_DURATION          rw       37     011 0111 00000000
+
+                  CLICK_CFG             rw       38     011 1000 00000000
+
+                  CLICK_SRC                     r       39     011 1001   Output
+
+                   CLICK_THS             rw      3A    011 1010 00000000
+
+                     TIME_LIMIT             rw      3B     011 1011 00000000
+
+                 TIME_LATENCY           rw      3C    011 1100 00000000
+
+                TIME_WINDOW           rw      3D    011 1101 00000000
+
+                  ACT_THS              rw      3E     011 1110 00000000
+
+                 ACT_DUR             rw      3F     011 1111  00000000
+
+            Registers marked as Reserved or not listed in the table above must not be changed. Writing
+              to those registers may cause permanent damage to the device.
+
+          The content of the registers that are loaded at boot should not be changed. They contain the
+             factory calibration values. Their content is automatically restored when the device is
+          powered up.
+
+          The boot procedure is complete about 5 milliseconds after device power-up.
+
+
+
+
+
+32/54                                  DocID17530 Rev 2

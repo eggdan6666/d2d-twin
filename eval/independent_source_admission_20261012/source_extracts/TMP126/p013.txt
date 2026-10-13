@@ -1,0 +1,67 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+
+
+                                                                                   Slew_Limit
+
+
+
+
+
+                    Temperature
+
+
+
+
+
+         Temperature conversions
+
+
+                     Slew_Status
+
+
+
+                      Slew_Flag
+
+
+
+                      SPI Read
+
+
+                            Figure 8-3. Slew Rate Warning Timing Diagram
+
+ 8.3.3 Cyclic Redundancy Check (CRC)
+
+The TMP126 has integrated optional CRC that can be used to determine the integrity of the SPI communication
+ to the TMP126. The CRC is enabled by setting the CRC_Enable  bit in the command word to 1 with an
+ appropriate data block length. During a read, the TMP126 will append a 16 bit CRC checksum to the data block
+ for the host to compare with its own checksum. In this manner the host can validate the data sent by TMP126
+and read from the device again if necessary. During write operations, the host will send the CRC word that the
+TMP126 will compare against its own checksum. If the TMP126 determines that the data sent during the write
+ transaction was corrupted, the TMP126 will discard the write and set the CRC_Flag in the Alert_Status register
+ to alert the host that the register settings must be sent again.
+
+ This allows the system to ensure the data integrity of the SPI communication in both write and read operations.
+
+ Writing to the configuration register with a CRC enabled transaction is currently not supported.
+
+ 8.3.4 NIST Traceability
+
+The accuracy of temperature testing is verified with equipment that is calibrated by an accredited lab that
+ complies with ISO/IEC 17025 policies and procedures. Each device is tested and trimmed to conform to its
+ respective data sheet specification limits.
+
+ 8.3.5 Fast Measurement Intervals With No Self-Heating Concerns
+
+The TMP126 is optimized to minimize the effects of self-heating and maintain the temperature accuracy  if
+ the conversion period is greater than 31.25 ms in continuous conversion or one-shot mode. This eliminates
+measurement waiting time normally needed for self-heating avoidance.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    13
+
+                                                  Product Folder Links: TMP126

@@ -1,0 +1,68 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.16 Measurement Configuration (Address: 0x0F)
+
+                   Table 7-37. Measurement Configuration Register (Address: 0x0F)
+
+       7             6             5             4            3             2              1              0
+
+           TACC[1:0]                    HACC[1:0]           RES            MEAS_CONF[1:0]        MEAS_TRIG
+
+                  Table 7-38. Measurement Configuration Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7:6     TACC[1:0]                   R/W     0          Temperature accuracy option:
+                                                                         00: 14 bit
+                                                                         01: 11 bit
+                                                                         10: 9 bit
+                                                                             11: NA
+     5:4    HACC[1:0]                   R/W     0           Humidity accuracy option:
+                                                                         00: 14 bit
+                                                                         01: 11 bit
+                                                                         10: 9 bit
+                                                                             11: NA
+
+     3    RES                       R/W     0          Reserved
+
+     2:1    MEAS_CONF[1:0]              R/W     0          Measurement configuration:
+                                                                         00: Humidity + Temperature
+                                                                         01: Temperature only
+                                                                         10: NA
+                                                                             11: NA
+
+     0    MEAS_TRIG                 R/W     0          Measurement trigger:
+                                                                                 0: No action
+                                                                                 1: Start measurement
+                                                                            Setting this bit to 1 to start a single measurement in one-shot
+                                                      mode or continuous measurements in continuous conversion
+                                                             mode. This bit self-clears to 0 once the measurement starts.
+
+ 7.6.17 Manufacturer ID Low (Address: FC)
+
+                        Table 7-39. Manufacturer ID Low Register (Address: FC)
+
+       7             6             5             4             3             2             1             0
+
+                                     MANUFACTURER ID[7:0]
+
+                          Table 7-40. Manufacturer ID Low Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     [7:0]   MANUFACTURER ID [7:0]       R       49          Manufacturer ID- lower byte value
+
+
+The Manufacturer ID Low and Manufacturer ID High registers contain a factory-programmable identification
+ value that identifies this device as being manufactured by Texas Instruments. The manufacturer ID helps
+ distinguish the device from other devices that are on the same I2C bus. The manufacturer ID reads 0x5449 and
+ spans across the two registers.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    31

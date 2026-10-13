@@ -1,0 +1,68 @@
+LIS3DH                                                                Registers description
+
+8.20   FIFO_SRC_REG (2Fh)
+
+
+                                   Table 51. FIFO_SRC_REG register
+
+        WTM   OVRN_FIFO   EMPTY    FSS4    FSS3    FSS2    FSS1    FSS0
+
+                                 Table 52. FIFO_SRC_REG description
+        WTM       WTM bit is set high when FIFO content exceeds watermark level
+
+          OVRN_FIFO   OVRN bit is set high when FIFO buffer is full; this means that the FIFO buffer
+                               contains 32 unread samples. At the following ODR a new sample set replaces the
+                                oldest FIFO value. The OVRN bit is set to 0 when the first sample set has been
+                             read
+
+          EMPTY      EMPTY flag is set high when all FIFO samples have been read and FIFO is empty
+
+          FSS [4:0]      FSS [4:0] field always contains the current number of unread samples stored in the
+                         FIFO buffer. When FIFO is enabled, this value increases at ODR frequency until
+                               the buffer is full, whereas, it decreases every time one sample set is retrieved from
+                            FIFO.
+
+
+8.21   INT1_CFG (30h)
+
+
+                                      Table 53. INT1_CFG register
+
+            AOI    6D    ZHIE      ZLIE        YHIE      YLIE        XHIE      XLIE
+
+
+
+                                    Table 54. INT1_CFG description
+
+            AOI     And/Or combination of Interrupt events. Default value: 0 Refer to Table 55: Interrupt mode
+
+           6D      6 direction detection function enabled. Default value: 0Refer to Table 55: Interrupt mode
+
+            ZHIE    Enable interrupt generation on Z high event or on Direction recognition. Default value: 0
+                             (0: disable interrupt request;1: enable interrupt request)
+
+             ZLIE     Enable interrupt generation on Z low event or on Direction recognition. Default value: 0 (0:
+                         disable interrupt request;1: enable interrupt request)
+
+            YHIE    Enable interrupt generation on Y high event or on Direction recognition. Default value: 0
+                             (0: disable interrupt request; 1: enable interrupt request.)
+
+            YLIE    Enable interrupt generation on Y low event or on Direction recognition. Default value: 0 (0:
+                         disable interrupt request; 1: enable interrupt request.)
+
+            XHIE    Enable interrupt generation on X high event or on Direction recognition. Default value: 0
+                             (0: disable interrupt request; 1: enable interrupt request.)
+
+            XLIE    Enable interrupt generation on X low event or on Direction recognition. Default value: 0 (0:
+                         disable interrupt request; 1: enable interrupt request.)
+
+
+           Content of this register is loaded at boot.
+
+
+
+
+
+                                      DocID17530 Rev 2                                      41/54
+
+                                                                                                                            54

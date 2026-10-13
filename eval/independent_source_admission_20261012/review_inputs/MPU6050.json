@@ -1,0 +1,852 @@
+{
+  "chip": "MPU6050",
+  "source": {
+    "device": "MPU6050",
+    "path": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+    "sha256": "a4fdf69590b8cbab1cf0a5bcd359327b0ac022061fb233855aff2e191e7e3584",
+    "pdf_pages": 52,
+    "version_first_page_text": "                       InvenSense Inc.\n                                                      Document Number: PS-MPU-6000A-00          1197 Borregas Ave, Sunnyvale, CA 94089 U.S.A.\n                                                                    Revision: 3.4              Tel: +1 (408) 988-7339 Fax: +1 (408) 988-8104\n                                                           Release Date: 08/19/2013                    Website: www.invensense.com\n\n\n\n\n\nMPU-6000 and MPU-6050\n Product Specification\n      Revision 3.4\n\n\n\n\n\n                       1 of 52"
+  },
+  "ir": {
+    "schema": "d2d-ir-v1",
+    "schema_note": "正式 Gold IR；已通过独立来源审校和候选 simulator admission。来源为 RM-MPU-6000A-00 Revision 4.2 的本地 PDF 镜像，已与 InvenSense/TDK 官方网页索引的文档号、版本、日期和关键页内容对齐；镜像来源仍需第二位审校者确认后才可准入。",
+    "device": "MPU6050",
+    "vendor": "InvenSense",
+    "interface": "I2C",
+    "reg_width": 8,
+    "i2c": {
+      "addresses_7bit": [
+        "0x68",
+        "0x69"
+      ],
+      "note": "7-bit address b110100X; AD0 selects LSB; Product Specification p.33"
+    },
+    "source_url": "https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Register-Map.pdf",
+    "source_local": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+    "source_sha256": "519650CBC502A3E89DDBA6D6F115734B6C7060D451938C0DC36B6232DAAE7014",
+    "source_evidence": "RM-MPU-6000A-00 Revision 4.2, 46-page local mirror; register map p.6-8, CONFIG p.13, GYRO_CONFIG p.14, accelerometer outputs p.29, WHO_AM_I p.45. Official web index confirms the same document number, revision and release date.",
+    "registers": [
+      {
+        "name": "SMPLRT_DIV",
+        "addr": "0x19",
+        "access": "RW",
+        "reset": "0x00",
+        "desc": "Sample-rate divider; official register map p.8 and detailed description",
+        "fields": [
+          {
+            "name": "SMPLRT_DIV",
+            "bits": "7:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Sample Rate = gyroscope output rate / (1 + divider)"
+          }
+        ]
+      },
+      {
+        "name": "CONFIG",
+        "addr": "0x1A",
+        "access": "RW",
+        "reset": "0x00",
+        "desc": "FSYNC sampling and digital low-pass filter; official map p.8 and description",
+        "fields": [
+          {
+            "name": "EXT_SYNC_SET",
+            "bits": "5:3",
+            "access": "RW",
+            "reset": 0,
+            "desc": "External frame synchronization selection"
+          },
+          {
+            "name": "DLPF_CFG",
+            "bits": "2:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Digital low-pass filter configuration"
+          },
+          {
+            "name": "RESERVED_7_6",
+            "bits": "7:6",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "GYRO_CONFIG",
+        "addr": "0x1B",
+        "access": "RW",
+        "reset": "0x00",
+        "desc": "Gyroscope self-test and full-scale selection; official map p.8 and detailed description",
+        "fields": [
+          {
+            "name": "XG_ST",
+            "bits": "7",
+            "access": "RW",
+            "reset": 0,
+            "desc": "X gyro self-test"
+          },
+          {
+            "name": "YG_ST",
+            "bits": "6",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Y gyro self-test"
+          },
+          {
+            "name": "ZG_ST",
+            "bits": "5",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Z gyro self-test"
+          },
+          {
+            "name": "FS_SEL",
+            "bits": "4:3",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Gyroscope full-scale range"
+          },
+          {
+            "name": "RESERVED_2_0",
+            "bits": "2:0",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_CONFIG",
+        "addr": "0x1C",
+        "access": "RW",
+        "reset": "0x00",
+        "desc": "Accelerometer self-test and full-scale selection; official map p.8",
+        "fields": [
+          {
+            "name": "XA_ST",
+            "bits": "7",
+            "access": "RW",
+            "reset": 0,
+            "desc": "X accel self-test"
+          },
+          {
+            "name": "YA_ST",
+            "bits": "6",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Y accel self-test"
+          },
+          {
+            "name": "ZA_ST",
+            "bits": "5",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Z accel self-test"
+          },
+          {
+            "name": "AFS_SEL",
+            "bits": "4:3",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Accelerometer full-scale range"
+          },
+          {
+            "name": "RESERVED_2_0",
+            "bits": "2:0",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_XOUT_H",
+        "addr": "0x3B",
+        "access": "RO",
+        "reset": "0x00",
+        "runtime_value": true,
+        "desc": "High byte of 16-bit X accelerometer measurement; official p.29",
+        "fields": [
+          {
+            "name": "ACCEL_XOUT_15_8",
+            "bits": "7:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Measurement high byte"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_XOUT_L",
+        "addr": "0x3C",
+        "access": "RO",
+        "reset": "0x00",
+        "runtime_value": true,
+        "desc": "Low byte of 16-bit X accelerometer measurement; official p.29",
+        "fields": [
+          {
+            "name": "ACCEL_XOUT_7_0",
+            "bits": "7:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Measurement low byte"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_YOUT_H",
+        "addr": "0x3D",
+        "access": "RO",
+        "reset": "0x00",
+        "runtime_value": true,
+        "desc": "High byte of 16-bit Y accelerometer measurement; official p.29",
+        "fields": [
+          {
+            "name": "ACCEL_YOUT_15_8",
+            "bits": "7:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Measurement high byte"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_YOUT_L",
+        "addr": "0x3E",
+        "access": "RO",
+        "reset": "0x00",
+        "runtime_value": true,
+        "desc": "Low byte of 16-bit Y accelerometer measurement; official p.29",
+        "fields": [
+          {
+            "name": "ACCEL_YOUT_7_0",
+            "bits": "7:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Measurement low byte"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_ZOUT_H",
+        "addr": "0x3F",
+        "access": "RO",
+        "reset": "0x00",
+        "runtime_value": true,
+        "desc": "High byte of 16-bit Z accelerometer measurement; official p.29",
+        "fields": [
+          {
+            "name": "ACCEL_ZOUT_15_8",
+            "bits": "7:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Measurement high byte"
+          }
+        ]
+      },
+      {
+        "name": "ACCEL_ZOUT_L",
+        "addr": "0x40",
+        "access": "RO",
+        "reset": "0x00",
+        "runtime_value": true,
+        "desc": "Low byte of 16-bit Z accelerometer measurement; official p.29",
+        "fields": [
+          {
+            "name": "ACCEL_ZOUT_7_0",
+            "bits": "7:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Measurement low byte"
+          }
+        ]
+      },
+      {
+        "name": "PWR_MGMT_1",
+        "addr": "0x6B",
+        "access": "RW",
+        "reset": "0x40",
+        "desc": "Power, sleep, temperature and clock control; official map p.8. Non-zero reset.",
+        "fields": [
+          {
+            "name": "DEVICE_RESET",
+            "bits": "7",
+            "access": "RW",
+            "reset": 0,
+            "read_as": 0,
+            "desc": "Device reset control; auto-clears to 0 after whole-device reset (register detail pp.40-41)",
+            "tier": "UNVERIFIED"
+          },
+          {
+            "name": "SLEEP",
+            "bits": "6",
+            "access": "RW",
+            "reset": 1,
+            "desc": "Sleep mode"
+          },
+          {
+            "name": "CYCLE",
+            "bits": "5",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Cycle mode"
+          },
+          {
+            "name": "TEMP_DIS",
+            "bits": "3",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Disable temperature sensor"
+          },
+          {
+            "name": "CLKSEL",
+            "bits": "2:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Clock source selection"
+          },
+          {
+            "name": "RESERVED_4",
+            "bits": "4",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved bit; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "WHO_AM_I",
+        "addr": "0x75",
+        "access": "RO",
+        "reset": "0x68",
+        "desc": "Device identity; official p.45. Bits 7 and 0 are hard-coded zero.",
+        "fields": [
+          {
+            "name": "WHO_AM_I",
+            "bits": "6:1",
+            "access": "RO",
+            "reset": 52,
+            "desc": "Upper six bits of 7-bit I2C address"
+          },
+          {
+            "name": "ZERO_7",
+            "bits": "7",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Hard-coded zero"
+          },
+          {
+            "name": "ZERO_0",
+            "bits": "0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "Hard-coded zero"
+          }
+        ]
+      }
+    ],
+    "excluded_blocks": [
+      "FIFO, interrupt, auxiliary-I2C and dynamic gyro/temperature registers remain excluded until their stateful read/write semantics are reviewed.",
+      "I2C electrical waveform timing is recorded as metadata; the direct-register harness does not score bus-level ACK/START/STOP behavior.",
+      "DEVICE_RESET whole-device side effects are documented but not independently asserted by the direct-register harness."
+    ],
+    "proofread_record": {
+      "date": "2026-10-10",
+      "method": "Product Specification pp.30-36 plus 46-page RM-MPU-6000A-00 Revision 4.2 local mirror and official web index",
+      "erratum_found": "not checked by an independent reviewer",
+      "open_questions": [
+        "Independent review passed after adding reserved fields, correcting PWR_MGMT_1 page references, and recording primary-I2C framing metadata."
+      ]
+    },
+    "address_encoding": {
+      "i2c_register_address": "8-bit register address byte",
+      "write_sequence": "START -> AD+W -> ACK -> RA -> ACK -> DATA bytes -> ACK -> STOP",
+      "read_sequence": "START -> AD+W -> ACK -> RA -> ACK -> repeated START -> AD+R -> ACK/DATA -> NACK -> STOP",
+      "burst_auto_increment": true,
+      "spi_supported": false,
+      "source_local": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+      "source_pages": "33-37"
+    },
+    "admission_status": "FORMAL_GOLD_ADMITTED_2026-10-10",
+    "admission_evidence": {
+      "source_review": "INDEPENDENT_IR_REVIEW_SIGNOFF.md",
+      "post_repair_recheck": "POST_REPAIR_RECHECK.md",
+      "candidate_harness": "_setup/CANDIDATE_ADMISSION_REPORT.md",
+      "promotion_note": "Promoted after source PASS and isolated candidate simulator PASS; protocol extensions remain supplemental."
+    }
+  },
+  "prior_policy": {
+    "fields": {
+      "CONFIG.DLPF_CFG": {
+        "legal_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "PWR_MGMT_1.CLKSEL": {
+        "legal_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ]
+      },
+      "PWR_MGMT_1.DEVICE_RESET": {
+        "verified_access": true,
+        "known_reset": true,
+        "source": "RM-MPU-6000A-00 Rev4.2 pp.8,40-41; prior independent review signoff",
+        "abstraction": "Atomic completed reset in register MVP; elapsed time not verified"
+      }
+    },
+    "source": "MPU-6000 register map Rev4.2 pp.13,40"
+  },
+  "inventory": [
+    {
+      "chip": "MPU6050",
+      "register": "SMPLRT_DIV",
+      "field": "SMPLRT_DIV",
+      "bits": "7:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "CONFIG",
+      "field": "EXT_SYNC_SET",
+      "bits": "5:3",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x38",
+      "known_protection_bit_mask": "0x38",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "CONFIG",
+      "field": "DLPF_CFG",
+      "bits": "2:0",
+      "ir_access": "RW",
+      "field_policy": {
+        "legal_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      },
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x7",
+      "known_protection_bit_mask": "0x7",
+      "source_review_status": "BOUNDED_POLICY_REVIEW",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40",
+      "legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "tested_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "chip": "MPU6050",
+      "register": "CONFIG",
+      "field": "RESERVED_7_6",
+      "bits": "7:6",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "GYRO_CONFIG",
+      "field": "XG_ST",
+      "bits": "7",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "GYRO_CONFIG",
+      "field": "YG_ST",
+      "bits": "6",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x40",
+      "known_protection_bit_mask": "0x40",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "GYRO_CONFIG",
+      "field": "ZG_ST",
+      "bits": "5",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x20",
+      "known_protection_bit_mask": "0x20",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "GYRO_CONFIG",
+      "field": "FS_SEL",
+      "bits": "4:3",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x18",
+      "known_protection_bit_mask": "0x18",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "GYRO_CONFIG",
+      "field": "RESERVED_2_0",
+      "bits": "2:0",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_CONFIG",
+      "field": "XA_ST",
+      "bits": "7",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_CONFIG",
+      "field": "YA_ST",
+      "bits": "6",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x40",
+      "known_protection_bit_mask": "0x40",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_CONFIG",
+      "field": "ZA_ST",
+      "bits": "5",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x20",
+      "known_protection_bit_mask": "0x20",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_CONFIG",
+      "field": "AFS_SEL",
+      "bits": "4:3",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x18",
+      "known_protection_bit_mask": "0x18",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_CONFIG",
+      "field": "RESERVED_2_0",
+      "bits": "2:0",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_XOUT_H",
+      "field": "ACCEL_XOUT_15_8",
+      "bits": "7:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_XOUT_L",
+      "field": "ACCEL_XOUT_7_0",
+      "bits": "7:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_YOUT_H",
+      "field": "ACCEL_YOUT_15_8",
+      "bits": "7:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_YOUT_L",
+      "field": "ACCEL_YOUT_7_0",
+      "bits": "7:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_ZOUT_H",
+      "field": "ACCEL_ZOUT_15_8",
+      "bits": "7:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "ACCEL_ZOUT_L",
+      "field": "ACCEL_ZOUT_7_0",
+      "bits": "7:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "PWR_MGMT_1",
+      "field": "DEVICE_RESET",
+      "bits": "7",
+      "ir_access": "RW",
+      "field_policy": {
+        "verified_access": true,
+        "known_reset": true,
+        "source": "RM-MPU-6000A-00 Rev4.2 pp.8,40-41; prior independent review signoff",
+        "abstraction": "Atomic completed reset in register MVP; elapsed time not verified"
+      },
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "BOUNDED_POLICY_REVIEW",
+      "source_locator": "RM-MPU-6000A-00 Rev4.2 pp.8,40-41; prior independent review signoff"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "PWR_MGMT_1",
+      "field": "SLEEP",
+      "bits": "6",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x40",
+      "known_protection_bit_mask": "0x40",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "PWR_MGMT_1",
+      "field": "CYCLE",
+      "bits": "5",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x20",
+      "known_protection_bit_mask": "0x20",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "PWR_MGMT_1",
+      "field": "TEMP_DIS",
+      "bits": "3",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8",
+      "known_protection_bit_mask": "0x8",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "PWR_MGMT_1",
+      "field": "CLKSEL",
+      "bits": "2:0",
+      "ir_access": "RW",
+      "field_policy": {
+        "legal_values": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          7
+        ]
+      },
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x7",
+      "known_protection_bit_mask": "0x7",
+      "source_review_status": "BOUNDED_POLICY_REVIEW",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40",
+      "legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ],
+      "tested_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "chip": "MPU6050",
+      "register": "PWR_MGMT_1",
+      "field": "RESERVED_4",
+      "bits": "4",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "WHO_AM_I",
+      "field": "WHO_AM_I",
+      "bits": "6:1",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x7e",
+      "known_protection_bit_mask": "0x7e",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "WHO_AM_I",
+      "field": "ZERO_7",
+      "bits": "7",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    },
+    {
+      "chip": "MPU6050",
+      "register": "WHO_AM_I",
+      "field": "ZERO_0",
+      "bits": "0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x1",
+      "known_protection_bit_mask": "0x1",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "MPU-6000 register map Rev4.2 pp.13,40"
+    }
+  ]
+}

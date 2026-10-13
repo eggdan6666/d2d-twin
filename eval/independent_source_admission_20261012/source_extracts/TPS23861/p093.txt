@@ -1,0 +1,69 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+8.4  System Examples
+
+8.4.1  Overcurrent and Overload Protection
+
+The TPS23861 provides three levels of overcurrent protection. During the tSTART period immediately following
+power up, inrush current protection is provided as described in Inrush Protection. This protection allows the input
+capacitance of the PD to charge to the full input voltage on the power interface while ensuring the pass FET
+remains within its safe operating area.
+
+Following the end of the tSTART period a two-tiered current-limit protection scheme is applied to the ports. The first
+level (i.e., lower current) is the ICUT current limit. The ICUT current-limit threshold is set using the ICUTnm
+CONFIG registers and includes a timeout, tOVLD, set using TICUT field in the TIMING CONFIGURATION register.
+When the TICUT timer times out because the ICUT current threshold is exceeded, the port is powered off, and
+the ICUTn bit in the FAULT EVENT register is set with the option of asserting an interrupt. This delay in powering
+down the port provides protection against spurious power downs during moderate load transients. See ICUT
+Current Limit.
+
+The second level of powered-on current-limiting protection is the ILIM current limit. The ILIM current limit is a
+hard limit. That is, hardware protection including voltage foldback is imposed when the ILIM current threshold is
+reached. This second level of protection is invoked in the event of extreme overload or short circuit. The ILIM
+current-limit value is set using the POEPn bits in the PoE Plus register. Also, when the ILIM value is reached, the
+ILIM timer is started. When the ILIM timer times out, the port is powered off and the ILIMn bit in the Start/ILIM
+Event Register is set with the option of asserting an interrupt. See Foldback Protection (ILIM).
+
+8.4.2  Inrush Protection
+
+Inrush-current limiting is provided by the TPS23861 according to the curve in Figure 57. When the port is first
+powered on, the TSTART timer is started. While the TSTART timer is counting, the port current is limited to
+IINRUSH, as shown in Figure 57.  If at the end of tSTART period the current is  still limiting at IINRUSH, the port is
+powered off and the STRTn bit in the Start/ILIM Event Register is set with the option of asserting an interrupt.
+
+                  500
+
+                  450
+
+                  400
+
+                  350
+
+            mA      - 300
+                              Limit 250
+
+                  200                                          Current
+                  150
+
+                  100
+
+                   50
+
+                    0
+                      0              10             20             30             40             50             60             70
+                                                                                        Port Voltage -V
+
+                                                                                                                                                                                                                       C002
+
+                         Figure 57. Foldback During Inrush (at port turn on)
+                                                               IInrush vs VPORT
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     93
+
+                                                 Product Folder Links: TPS23861

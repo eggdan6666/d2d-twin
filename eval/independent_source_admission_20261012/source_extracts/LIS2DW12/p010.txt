@@ -1,0 +1,64 @@
+                                                              LIS2DW12
+                                                                                   Mechanical and electrical specifications
+
+
+2.4.2        I²C - inter-IC control interface
+             Subject to general operating conditions for Vdd and Top.
+
+
+                                                Table 7. I²C slave timing values
+
+                                                                                           I²C standard mode(1)     I²C fast mode(1)
+             Symbol                      Parameter                                                                    Unit
+                                                                        Min      Max      Min    Max
+
+                      f(SCL)   SCL clock frequency                                    0         100        0      400    kHz
+
+                   tw(SCLL)  SCL clock low time                                            4.7                     1.3             µs
+
+                  tw(SCLH)  SCL clock high time                                           4.0                     0.6
+
+                    tsu(SDA)  SDA setup time                                       250                 100             ns
+
+                    th(SDA)  SDA data hold time                                         0.01        3.45       0.01      0.9     µs
+
+                       th(ST)   START condition hold time                                4                      0.6
+
+                     tsu(SR)   Repeated START condition setup time                          4.7                     0.6
+                                                                                                                   µs
+                      tsu(SP)  STOP condition setup time                               4                      0.6
+
+                   tw(SP:SR)  Bus free time between STOP and START condition              4.7                     1.3
+
+                 1.  Data based on standard I²C protocol requirement, not tested in production.
+
+                                              Figure 4. I²C slave timing diagram
+
+
+                                                                                                      REPEATED
+                                                                                                                          START
+                                         START
+
+                                                                                                                                                                                                                         tsu(SR)
+                       SDA                                                                                                                                                              tw(SP:SR)     START
+
+
+
+                                                                                                                              tsu(SDA)                 th(SDA)
+
+                                                                                                                                                                                                                                tsu(SP)       STOP
+
+                        SCL
+
+
+
+                                                                                    th(ST)      tw(SCLL)       tw(SCLH)
+
+
+Note:       Measurement points are done at 0.3·Vdd_IO and 0.7·Vdd_IO for both ports.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 10/65

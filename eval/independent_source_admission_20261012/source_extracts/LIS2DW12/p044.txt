@@ -1,0 +1,70 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.16    OUT_Z_L (2Ch)
+              Z-axis LSB output register (R)
+
+
+                                                 Table 51. OUT_Z_L register
+
+                 Z_L7        Z_L6        Z_L5        Z_L4          Z_L3(1)         Z_L2(1)         0            0
+
+                 1.   If low-power mode 1 is enabled, this bit is set to 0.
+
+           The 8 least significant bits of linear acceleration sensor Z-axis output. Together with the OUT_Z_H (2Dh) register,
+                         it forms the output value expressed as a 16-bit word in two's complement.
+
+8.17    OUT_Z_H (2Dh)
+              Z-axis MSB output register (R)
+
+
+                                                 Table 52. OUT_Z_H register
+
+               Z_H7        Z_H6        Z_H5        Z_H4        Z_H3        Z_H2        Z_H1        Z_H0
+
+
+           The 8 most significant bits of linear acceleration sensor Z-axis output. Together with the OUT_Z_L (2Ch) register,
+                         it forms the output value expressed as a 16-bit word in two's complement.
+
+8.18     FIFO_CTRL (2Eh)
+           FIFO control register (R/W)
+
+
+                                                Table 53. FIFO_CTRL register
+
+              FMode2      FMode1      FMode0      FTH4       FTH3       FTH2       FTH1       FTH0
+
+
+                                           Table 54. FIFO_CTRL register description
+
+               FMode[2:0]   FIFO mode selection bits. Default: 000. For further details, refer to Table 55. FIFO mode selection.
+
+               FTH[4:0]     FIFO threshold level setting
+
+
+                                                Table 55. FIFO mode selection
+
+                FMode[2:0]                                 Mode description
+
+                   000       Bypass mode: FIFO turned off
+
+                   001      FIFO mode: stops collecting data when FIFO is full
+
+                   010       Reserved
+
+                   011        Continuous-to-FIFO: stream mode until trigger is deasserted, then FIFO mode
+
+                   100        Bypass-to-continuous: bypass mode until trigger is deasserted, then FIFO mode
+
+                   101       Reserved
+
+                   110       Continuous mode: If the FIFO is full, the new sample overwrites the older sample.
+
+                    111       Reserved
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 44/65

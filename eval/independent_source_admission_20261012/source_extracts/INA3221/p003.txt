@@ -1,0 +1,88 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+4 Device Comparison Table
+         DEVICE                                          DESCRIPTION
+          INA226           36V, Bidirectional, Ultrahigh Accuracy, Low- or High-Side, I2C Out, Current and Power Monitor With Alert
+          INA219           26V, Bidirectional, Zero-Drift, High-Side, I2C Out, Current and Power Monitor
+          INA209           26V, Bidirectional, Low- or High-Side, I2C Out, Current and Power Monitor and High-Speed Comparator
+
+   INA210, INA211, INA212,
+                             26V, Bidirectional, Zero-Drift, High-Accuracy, Low- or High-Side, Voltage Out, Current Shunt Monitor
+       INA213, INA214
+
+5 Pin Configuration and Functions
+
+                                                                                               VPU     IN+2 2IN   TC
+
+                                                               16   15   14   13
+
+
+                                                  IN 3    1                      12  IN+1
+
+                                               IN+3   2                      11  IN 1
+
+                                  GND   3                      10  PV
+
+                                       VS   4                      9    Critical
+
+
+
+
+                                5 6 7 8
+
+                                                                A0    SCL    SDA         Warning
+
+                           Figure 5-1. RGV Package 16-Pin VQFN Top View
+
+                                      Table 5-1. Pin Functions
+           PIN
+                              Type                                DESCRIPTION
+ NAME          NO.
+                                           Address pin. Connect to GND, SCL, SDA, or VS. Table 7-1 shows pin settings and A0               5             Digital input
+                                              corresponding addresses.
+
+  Critical           9            Digital output   Conversion-triggered critical alert; open-drain output.
+
+ GND             3            Analog     Ground
+
+                                           Connect to load side of the channel 1 shunt resistor. Bus voltage is the measurement
+ IN–1              11         Analog input
+                                             from this pin to ground.
+
+ IN+1             12         Analog input   Connect to supply side of the channel 1 shunt resistor.
+
+                                           Connect to load side of the channel 2 shunt resistor. Bus voltage is the measurement
+ IN–2             14         Analog input
+                                             from this pin to ground.
+
+ IN+2             15         Analog input   Connect to supply side of the channel 2 shunt resistor.
+
+                                           Connect to load side of the channel 3 shunt resistor. Bus voltage is the measurement
+ IN–3             1         Analog input
+                                             from this pin to ground.
+
+ IN+3             2         Analog input   Connect to supply side of the channel 3 shunt resistor.
+
+ PV              10           Digital output   Power valid alert; open-drain output.
+
+ SCL             6             Digital input    Serial bus clock line; open-drain input.
+
+ SDA             7              Digital I/O     Serial bus data line; open-drain input/output.
+
+ TC              13           Digital output   Timing control alert; open-drain output.
+
+ VPU             16         Analog input    Pull-up supply voltage used to bias power valid output circuitry.
+
+ VS              4            Analog     Power supply, 2.7V to 5.5V.
+
+ Warning          8            Digital output   Averaged measurement warning alert; open-drain output.
+
+ Thermal                 -                       -         This pad must be connected to ground or left floating.
+ Pad
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback     3
+
+                                                  Product Folder Links: INA3221

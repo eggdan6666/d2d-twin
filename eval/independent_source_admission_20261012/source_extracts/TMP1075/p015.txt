@@ -1,0 +1,77 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+
+                                                                Pointer
+                                                                 Register
+
+
+
+                                                Temperature
+                                                          Register
+
+
+                                                                                      SCL
+                                           Con gura on
+                                                          Register
+                                                   I/O
+                                                        TLOW         Control                                                          Register
+                                                    Interface      SDA
+
+                                                                 THIGH
+                                                          Register
+
+
+
+                                                   Device ID*
+
+
+                                              * Not available on TMP1075N package
+
+                                Figure 7-2. Internal Register Structure
+
+ 7.3.2.3.1 Pointer Register Byte [reset = 00h]
+
+                                   Table 7-4. Pointer Register Byte
+      P7           P6           P5           P4           P3           P2           P1           P0
+
+       0             0             0             0                                   Register Bits
+
+ 7.3.2.4 Writing and Reading to the TMP1075
+
+ Accessing a particular register on the TMP1075 device is accomplished by writing the appropriate value to the
+ pointer register. After Reset, the register value is set to zero. The value for the pointer register is the first byte
+ transferred after the device address byte with the R/W bit low. Every write operation to the TMP1075 requires a
+ value for the pointer register (see Figure 7-3).
+
+When reading from the TMP1075 device, the last value stored in the pointer register by a write operation is used
+ to determine which register is read by a read operation. To change the register pointer for a read operation,
+a new value must be written to the pointer register. This action is accomplished by issuing a device address
+ byte with the R/ W bit low, followed by the pointer register byte. No additional data are required. The host can
+ then generate a START condition and send the device address byte with the R/ W bit high to initiate the read
+command. See Figure 7-5 for details of this sequence. If repeated reads from the same register are desired, the
+ pointer register bytes do not have to be continually sent because the TMP1075 remembers the pointer register
+ value until the value is changed by the next write operation.
+
+ Register bytes are sent MSB first.
+
+ 7.3.2.5 Operation Mode
+
+The TMP1075 can operate as a receiver or transmitter. As a target device, the TMP1075 never drives the SCL
+ line.
+
+ 7.3.2.5.1 Receiver Mode
+
+The  first byte transmitted by the host  is the device address with the R/W  bit low. The TMP1075 then
+ acknowledges reception of a valid address. The next byte transmitted by the host is the pointer register. The
+TMP1075 then acknowledges reception of the pointer register byte. The next byte or bytes are written to the
+ register addressed by the pointer register. The TMP1075 acknowledges reception of each data byte. The host
+ can terminate data transfer by generating a START or STOP condition.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    15
+
+                                                  Product Folder Links: TMP1075

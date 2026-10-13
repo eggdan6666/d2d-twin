@@ -1,0 +1,88 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.3.7 Output Data Rate
+
+ Table 8-4 shows the actual conversion times for each data rate setting. The values provided are in terms of t(CLK)
+ cycles using an external clock with a clock frequency of fCLK = 4.096MHz. The data rates scale proportionally in
+ case an external clock with a frequency other than 4.096MHz is used.
+
+ Continuous-conversion mode data rates are timed from one DRDY falling edge to the next DRDY falling edge.
+The first conversion starts 210 × tCLK (normal mode, duty-cycle mode) or 114 × tCLK (turbo mode) after the last
+SCLK falling edge of the START/SYNC command.
+
+ Single-shot conversion mode data rates are timed from the last SCLK  falling edge of the START/SYNC
+command to the DRDY falling edge and rounded to the next tCLK. In case the internal oscillator is used, an
+ additional oscillator wake-up time of up to 50µs (normal mode, duty-cycle mode) or 25µs (turbo mode) must be
+added in single-shot conversion mode. The internal oscillator starts to power up at the first SCLK rising edge
+ of the START/SYNC command.  If an SCLK frequency higher than 160kHz (normal mode, duty-cycle mode)
+ or 320kHz (turbo mode) is used, the oscillator is not always fully powered up at the end of the START/SYNC
+command. The ADC then waits until the internal oscillator is fully powered up before starting a conversion.
+
+ Single-shot conversion times in duty-cycle mode are the same as in normal mode. See the Duty-Cycle Mode
+ section for more details on duty-cycle mode operation.
+
+                                    Table 8-4. Conversion Times
+    NOMINAL DATA RATE        –3dB BANDWIDTH                       ACTUAL CONVERSION TIME (tCLK)
+            (SPS)                          (Hz)            CONTINUOUS CONVERSION MODE      SINGLE-SHOT CONVERSION MODE
+
+ NORMAL MODE
+
+             20                           13.1                           204768                                204850
+
+             45                           20.0                             91120                                 91218
+
+             90                           39.6                            46128                                 46226
+
+            175                          77.8                            23664                                 23762
+
+            330                         150.1                           12464                                 12562
+
+            600                         279.0                            6896                                  6994
+
+            1000                         483.8                            4144                                  4242
+
+ DUTY-CYCLE MODE
+
+             5                            13.1                           823120                                        n/a
+
+             11.25                          20.0                           364560                                        n/a
+
+              22.5                          39.6                           184592                                        n/a
+
+             44                           77.8                            94736                                         n/a
+
+              82.5                         150.1                           49936                                         n/a
+
+            150                         279.0                           27664                                         n/a
+
+            250                         483.8                           16656                                         n/a
+
+ TURBO MODE
+
+             40                           17.1                           102384                                102434
+
+             90                           39.9                            45560                                 45618
+
+            180                          79.2                            23064                                 23122
+
+            350                         155.6                            11832                                  11890
+
+            660                         300.3                            6232                                  6290
+
+            1200                         558.1                            3448                                  3506
+
+            2000                         967.6                            2072                                  2130
+
+
+Even though the conversion time at the 20SPS setting is not exactly 1 / 20Hz = 50ms, this discrepancy does
+ not affect the 50Hz or 60Hz rejection. To achieve the 50Hz and 60Hz rejection specified in the Electrical
+ Characteristics table, the external clock frequency must be 4.096MHz. When using the internal oscillator,
+ the conversion time and filter notches vary by the amount specified in the Electrical Characteristics table for
+ oscillator accuracy.
+
+
+
+30    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

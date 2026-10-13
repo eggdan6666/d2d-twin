@@ -1,0 +1,48 @@
+Bosch Sensortec | BME280 Data sheet                                            24 | 60
+
+
+Table 15: Computational requirements for compensation formulas
+
+  Compensation of       Number of clocks (ARM Cortex-M3)
+                   32 bit integer   64 bit integer   Double precision
+      Humidity          ~83           –           ~2900 11
+    Temperature         ~46           –           ~2400 11
+      Pressure         ~112 12        ~1400         ~5400 11
+
+4.2.2  Trimming parameter readout
+The trimming parameters are programmed into the devices’ non-volatile memory (NVM) during
+production and cannot be altered by the customer. Each compensation word is a 16-bit signed or
+unsigned integer value stored in two’s complement. As the memory is organized into 8-bit words, two
+words must always be combined in order to represent the compensation word. The 8-bit registers are
+named calib00…calib41 and are stored at memory addresses 0x88…0xA1 and 0xE1…0xE7. The
+corresponding compensation words are named dig_T# for temperature compensation related values,
+dig_P# for pressure related values and dig_H# for humidity related values. The mapping is seen in
+Table 16.
+
+Table 16: Compensation parameter storage, naming and data type
+
+   Register Address        Register content        Data type
+     0x88 / 0x89          dig_T1 [7:0] / [15:8]      unsigned short
+     0x8A / 0x8B          dig_T2 [7:0] / [15:8]       signed short
+     0x8C / 0x8D          dig_T3 [7:0] / [15:8]       signed short
+     0x8E / 0x8F          dig_P1 [7:0] / [15:8]      unsigned short
+     0x90 / 0x91          dig_P2 [7:0] / [15:8]       signed short
+     0x92 / 0x93          dig_P3 [7:0] / [15:8]       signed short
+     0x94 / 0x95          dig_P4 [7:0] / [15:8]       signed short
+     0x96 / 0x97          dig_P5 [7:0] / [15:8]       signed short
+     0x98 / 0x99          dig_P6 [7:0] / [15:8]       signed short
+     0x9A / 0x9B          dig_P7 [7:0] / [15:8]       signed short
+     0x9C / 0x9D          dig_P8 [7:0] / [15:8]       signed short
+     0x9E / 0x9F          dig_P9 [7:0] / [15:8]       signed short
+        0xA1                dig_H1 [7:0]         unsigned char
+     0xE1 / 0xE2         dig_H2 [7:0] / [15:8]       signed short
+        0xE3                dig_H3 [7:0]         unsigned char
+   0xE4 / 0xE5[3:0]        dig_H4 [11:4] / [3:0]       signed short
+    0xE5[7:4] / 0xE6        dig_H5 [3:0] / [11:4]       signed short
+
+
+11 Use only recommended for high-level programming languages like Matlab™ or LabVIEW™
+12 Use only recommended for 8-bit micro controllers
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

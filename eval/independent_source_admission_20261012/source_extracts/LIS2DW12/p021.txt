@@ -1,0 +1,29 @@
+                                                              LIS2DW12
+                                                                                                                             Digital main blocks
+
+5        Digital main blocks
+
+
+5.1      Block diagram of filters
+
+                                                Figure 7. Accelerometer chain
+
+
+
+
+
+              Referring to Figure 7. Accelerometer chain, the first block is the low-pass filter 1 (LPF1) whose behavior is a
+              function of the actual ODR and mode selected in CTRL1 (20h). The signal is then downsampled and can be
+               either directly sent to the output registers or to the low-pass filter 2 (LPF2) or high-pass filter (HP) using the
+            BW_FILT[1:0] bits and FDS bit in CTRL6 (25h).
+               In the low-pass path, it is possible to apply a user offset determined by the X_OFS_USR (3Ch), Y_OFS_USR
+              (3Dh), Z_OFS_USR (3Eh) register values and the USR_OFF_W bit in CTRL7 (3Fh) and send the result to the
+              output using the USR_OFF_ON_OUT bit in CTRL7 (3Fh).
+               In the high-pass path, it is possible to use the high-pass filter reference mode (HP) using the HP_REF_MODE bit
+                in CTRL7 (3Fh).
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 21/65

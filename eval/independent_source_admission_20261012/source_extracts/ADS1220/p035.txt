@@ -1,0 +1,60 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.4.3 Operating Modes
+
+ In addition to the different conversion modes, the device can also be operated in different operating modes that
+ can be selected to trade-off power consumption, noise performance, and output data rate. These modes are:
+ normal mode, duty-cycle mode, turbo mode, and power-down mode.
+
+ 8.4.3.1 Normal Mode
+
+ Normal mode is the default mode of operation after power-up. In this mode, the internal modulator of the ΔΣ
+ADC runs at a modulator clock frequency of fMOD = fCLK / 16, where the system clock (fCLK) is either provided by
+ the internal oscillator or the external clock source. The modulator frequency is 256kHz when using the internal
+ oscillator. Normal mode offers output data rate options ranging from 20SPS to 1kSPS with the internal oscillator.
+The data rate is selected by the DR[2:0] bits in the configuration register. In case an external clock source with a
+ clock frequency other than 4.096MHz is used, the data rates scale accordingly. For example, using an external
+ clock with fCLK = 2.048MHz yields data rates ranging from 10SPS to 500SPS.
+
+ 8.4.3.2 Duty-Cycle Mode
+
+The noise performance of a ΔΣ ADC generally improves when lowering the output data rate because more
+ samples of the internal modulator can be averaged to yield one conversion result. In applications where power
+ consumption is critical, the improved noise performance at low data rates are not always required. For these
+ applications, the device supports an automatic duty-cycle mode that can yield significant power savings by
+ periodically entering a low-power state between conversions. In principle, the device runs in normal mode with
+a duty cycle of 25%. This functionality means the device performs one conversion in the same manner as when
+ running in normal mode but then automatically enters a low power-state for three consecutive conversion cycles.
+The noise performance in duty-cycle mode is therefore comparable to the noise performance in normal mode at
+ four times the data rate. Data rates in duty-cycle mode range from 5SPS to 250SPS with the internal oscillator.
+
+ 8.4.3.3 Turbo Mode
+
+ Applications that require higher data rates up to 2kSPS can operate the device in turbo mode. In this mode, the
+ internal modulator runs at a higher frequency of fMOD = fCLK / 8. fMOD equals 512kHz when the internal oscillator
+ or an external 4.096MHz clock is used. The device power consumption increases because the modulator runs at
+a higher frequency. Running the ADS1220 in turbo mode at a comparable output data rate as in normal mode
+ yields better noise performance. For example, the input-referred noise at 90SPS in turbo mode is lower than the
+ input-referred noise at 90SPS in normal mode.
+
+ 8.4.3.4 Power-Down Mode
+
+When the POWERDOWN command is issued, the device enters power-down mode after completing the current
+ conversion. In this mode, all analog circuitry (including the voltage reference and both IDACs) are powered
+ down, the low-side power switch is opened, and the device typically only uses 400nA of current. While in
+power-down mode, the device holds the configuration register settings and responds to commands, but does not
+ perform any data conversions.
+
+ Issuing a START/SYNC command wakes up the device and either starts a single conversion or starts continuous
+ conversion mode, depending on the conversion mode selected by the CM bit. Writing to any configuration
+ register wakes up the device as well, but only starts a single conversion regardless of the selected conversion
+mode (CM).
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    35
+
+                                                  Product Folder Links: ADS1220

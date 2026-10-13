@@ -1,0 +1,71 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+8.5  Programming
+
+An important aspect of the INA219 device is that it measure current or power if it is programmed based on the
+system. The device measures both the differential voltage applied between the IN+ and IN- input pins and the
+voltage at IN- pin. In order for the device to report both current and power values, the user must program the
+resolution of the Current Register (04h) and the value of the shunt resistor (RSHUNT) present in the application to
+develop the differential voltage applied between the input pins. Both the Current_LSB and shunt resistor value
+are used in the calculation of the Calibration Register value that the device uses to calculate the corresponding
+current and power values based on the measured shunt and bus voltages.
+
+After programming the Calibration Register, the Current Register (04h) and Power Register (03h) update
+accordingly based on the corresponding shunt voltage and bus voltage measurements. Until the Calibration
+Register is programmed, the Current Register (04h) and Power Register (03h) remain at zero.
+
+8.5.1  Programming the Calibration Register
+
+The Calibration Register is calculated based on Equation 1. This equation includes the term Current_LSB, which
+is the programmed value for the LSB for the Current Register (04h). The user uses this value to convert the
+value in the Current Register (04h) to the actual current in amperes. The highest resolution for the Current
+Register (04h) can be obtained by using the smallest allowable Current_LSB based on the maximum expected
+current as shown in Equation 2. While this value yields the highest resolution, it is common to select a value for
+the Current_LSB to the nearest round number above this value to simplify the conversion of the Current Register
+(04h) and Power Register (03h) to amperes and watts respectively. The RSHUNT term is the value of the external
+shunt used to develop the differential voltage across the input pins. The Power Register (03h) is internally set to
+be 20 times the programmed Current_LSB see Equation 3.
+
+                      0.04096
+     Cal = trunc                Current_LSB ´ R SHUNT
+
+
+    where
+              •   0.04096 is an internal fixed value used to ensure scaling is maintained properly                                (1)
+               Maximum Expected Current
+     Current_LSB =                   15
+                           2                                                                                            (2)
+    Power_LSB = 20 Current_LSB                                                                                           (3)
+
+Shunt voltage is calculated by multiplying the Shunt Voltage Register contents with the Shunt Voltage LSB of 10
+µV.
+
+The Bus Voltage register bits are not right-aligned. In order to compute the value of the Bus Voltage, Bus Voltage
+Register contents must be shifted right by three bits. This shift puts the BD0 bit in the LSB position so that the
+contents can be multiplied by the Bus Voltage LSB of 4-mV to compute the bus voltage measured by the device.
+
+After programming the Calibration Register, the value expected in the Current Register (04h) can be calculated
+by multiplying the Shunt Voltage register contents by the Calibration Register and then dividing by 4096 as
+shown in Equation 4. To obtain a value in amperes the Current register value is multiplied by the programmed
+Current_LSB.
+
+                     Shunt Voltage Register ´ Calibration Register
+     Current Register =
+                                    4096                                                                          (4)
+
+The value expected in the Power register (03h) can be calculated by multiplying the Current register value by the
+Bus Voltage register value and then dividing by 5000 as shown in Equation 5. Power Register content is
+multiplied by Power LSB which is 20 times the Current_LSB for a power value in watts.
+                      Current Register ´ Bus Voltage Register
+    Power Register =
+                                5000                                                                              (5)
+
+
+
+
+
+12     Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

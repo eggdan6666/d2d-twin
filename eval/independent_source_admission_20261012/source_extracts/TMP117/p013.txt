@@ -1,0 +1,49 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.3.3 Temperature Result and Limits
+
+ At the end of every conversion, the device updates the temperature register with the conversion result. The data
+ in the result register is in two's complement format, has a data width of 16 bits and a resolution of 7.8125 m°C.
+ Table 7-1 shows multiple examples of possible binary data that can be read from the temperature result register
+and the corresponding hexadecimal and temperature equivalents.
+
+The TMP117 also has alert status flags and alert pin functionality that use the temperature limits stored in the
+ low limit register and high limit register. The same data format used for the temperature result register is used for
+ data written to the high and low limit registers.
+
+                              Table 7-1. 16-Bit Temperature Data Format
+                                            TEMPERATURE REGISTER VALUE
+     TEMPERATURE                                         (0.0078125 °C RESOLUTION)
+              (°C)
+                                         BINARY                               HEX
+
+           –256                           1000 0000 0000 0000                                 8000
+
+            –25                              1111 0011 1000 0000                                F380
+
+           –0.1250                             1111 1111 1111 0000                               FFF0
+
+         –0.0078125                           1111 1111 1111 1111                              FFFF
+
+             0                            0000 0000 0000 0000                                 0000
+
+         0.0078125                        0000 0000 0000 0001                                 0001
+
+           0.1250                          0000 0000 0001 0000                                 0010
+
+             1                            0000 0000 1000 0000                                 0080
+
+            25                            0000 1100 1000 0000                              0C80
+
+            100                            0011 0010 0000 0000                                 3200
+
+          255.9921                           0111 1111 1111 1111                               7FFF
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    13
+
+                                                  Product Folder Links: TMP117

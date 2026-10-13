@@ -1,0 +1,585 @@
+{
+  "chip": "AD5592R",
+  "source": {
+    "device": "AD5592R",
+    "path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+    "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+    "pdf_pages": 54,
+    "version_first_page_text": "                                              Data Sheet\n                                       AD5592R\n\n   8-Channel, 12-Bit, Configurable ADC/DAC with On-Chip Reference, SPI Interface\n\n\nFEATURES                                                (DAC) outputs, analog-to-digital converter (ADC) inputs, digital out-\n                                                                             puts, or digital inputs. When an I/Ox pin is configured as an analog\n►8-channel, configurable ADC/DAC/GPIO                                 output, it is driven by a 12-bit DAC. The output range of the DAC\n►Configurable as any combination of                                              is 0 V to VREF or 0 V to 2 × VREF. When an I/Ox pin is configured\n ►8 × 12-bit DAC channels                                      as an analog input, it is connected to a 12-bit ADC via an analog\n ►8 × 12-bit ADC channels                                                multiplexer. The input range of the ADC is 0 V to VREF or 0 V to\n                                                            2 × VREF. The ADC has a total throughput rate of 400 kSPS. The ►8 × general-purpose digital input/output pins\n                                                                         I/Ox pins can also be configured as digital, general-purpose input or\n►Integrated temperature sensor                                                                        output (GPIO) pins. The state of the GPIO pins can be set or read\n►SPI interface                                                  back by accessing the GPIO write data register or the GPIO read\n►2.7 V to 5.5 V power supply                                              configuration register, respectively, via a serial peripheral interface\n►1.8 V logic compatibility (AD5592R-1)                                  (SPI) write or read operation.\n►Available in                                               The AD5592R/AD5592R-1 have an integrated 2.5 V, 20 ppm/°C\n  ►16-ball, 2 mm × 2 mm WLCSP                                       reference, which is turned off by default, and an integrated temper-\n  ►16-lead, 3 mm × 3 mm LFCSP                                      ature indicator, which gives an indication of the die temperature.\n  ►16-lead TSSOP                                          The temperature value is read back as part of an ADC read\n                                                                 sequence.►AEC-Q100 qualified for automotive applications\n                                                          The AD5592R/AD5592R-1 are available in 16-ball, 2 mm × 2 mm\nAPPLICATIONS                                                    WLCSP, 16-lead, 3 mm × 3 mm LFCSP, and 16-lead TSSOP. The\n                                                          AD5592R/AD5592R-1 operate over a temperature range of −40 °C►Control and monitoring\n                                                                           (TA) to +125 °C (TJ).►General-purpose analog and digital inputs/outputs\n                                                                               Table 1. Related Products\nGENERAL DESCRIPTION                                                                                    Part No.        Description\nThe AD5592R/AD5592R-1 have eight I/Ox pins (I/O0 to I/O7)             AD5593R      AD5592R equivalent with VLOGIC and RESET pins and an I2C\nthat can be independently configured as digital-to-analog converter                             interface\nFUNCTIONAL BLOCK DIAGRAM\n\n\n\n\n\n                                                       Figure 1. AD5592R Functional Block Diagram\n\n\n\n\n\nRev. H\n DOCUMENT FEEDBACK     Information furnished by Analog Devices is believed to be accurate and reliable \"as is\". However, no responsibility is assumed by Analog                                  Devices for its use, nor for any infringements of patents or other rights of third parties that may result from its use. Specifications subject to\n                                change without notice. No license is granted by implication or otherwise under any patent or patent rights of Analog Devices. Trademarks and\n  TECHNICAL SUPPORT      registered trademarks are the property of their respective owners."
+  },
+  "ir": {
+    "schema": "d2d-ir-v1",
+    "schema_note": "正式 Gold IR；已通过独立来源审校和候选 simulator admission。ADI AD5592R Rev. H，Register Map p.35-52。该器件使用 SPI 16-bit command word；addr 表示 control-register selector，不是独立总线地址。",
+    "device": "AD5592R",
+    "vendor": "ADI",
+    "interface": "SPI",
+    "reg_width": 16,
+    "address_encoding": {
+      "word": "16-bit serial input word",
+      "control_selector_bits": "14:11",
+      "control_word_bit15": 0,
+      "dac_write_bit15": 1,
+      "source_pages": "26,35-36,51",
+      "reserved_command_data_bits": "10:9 are reserved for control writes; logical fields below cover register data bits."
+    },
+    "registers": [
+      {
+        "name": "DAC_RD",
+        "addr": "0x1",
+        "access": "RW",
+        "reset": "0x0000",
+        "desc": "DAC readback selection; p.36",
+        "fields": [
+          {
+            "name": "DAC_RD_EN",
+            "bits": "4:3",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Enable DAC input-register readback"
+          },
+          {
+            "name": "DAC_CH_SEL",
+            "bits": "2:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Select DAC channel 0-7"
+          },
+          {
+            "name": "RESERVED_10_5",
+            "bits": "10:5",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "ADC_SEQ",
+        "addr": "0x2",
+        "access": "RW",
+        "reset": "0x0000",
+        "desc": "ADC conversion sequence; p.37-38",
+        "fields": [
+          {
+            "name": "REP",
+            "bits": "9",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Repeat sequence"
+          },
+          {
+            "name": "TEMP",
+            "bits": "8",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Include temperature indicator"
+          },
+          {
+            "name": "ADC_CH_MASK",
+            "bits": "7:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Enable ADC0-ADC7"
+          },
+          {
+            "name": "RESERVED_10",
+            "bits": "10",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bit; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "GEN_CTRL_REG",
+        "addr": "0x3",
+        "access": "RW",
+        "reset": "0x0000",
+        "desc": "General-purpose DAC/ADC control; p.38-39",
+        "fields": [
+          {
+            "name": "ADC_BUF_PRECH",
+            "bits": "9",
+            "access": "RW",
+            "reset": 0,
+            "desc": "ADC buffer precharge"
+          },
+          {
+            "name": "ADC_BUF_EN",
+            "bits": "8",
+            "access": "RW",
+            "reset": 0,
+            "desc": "ADC buffer enable"
+          },
+          {
+            "name": "IO_LOCK",
+            "bits": "7",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Lock I/O configuration"
+          },
+          {
+            "name": "ALL_DAC",
+            "bits": "6",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Apply future DAC write to all DAC channels"
+          },
+          {
+            "name": "ADC_RANGE",
+            "bits": "5",
+            "access": "RW",
+            "reset": 0,
+            "desc": "ADC input range"
+          },
+          {
+            "name": "DAC_RANGE",
+            "bits": "4",
+            "access": "RW",
+            "reset": 0,
+            "desc": "DAC output range"
+          },
+          {
+            "name": "RESERVED_10",
+            "bits": "10",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bit; set to zero"
+          },
+          {
+            "name": "RESERVED_3_0",
+            "bits": "3:0",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "ADC_CONFIG",
+        "addr": "0x4",
+        "access": "RW",
+        "reset": "0x0000",
+        "desc": "ADC pin configuration; p.39-40",
+        "fields": [
+          {
+            "name": "ADC_PIN_MASK",
+            "bits": "7:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Select I/O0-I/O7 as ADC inputs"
+          },
+          {
+            "name": "RESERVED_10_8",
+            "bits": "10:8",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "DAC_CONFIG",
+        "addr": "0x5",
+        "access": "RW",
+        "reset": "0x0000",
+        "desc": "DAC pin configuration; p.40-41",
+        "fields": [
+          {
+            "name": "DAC_PIN_MASK",
+            "bits": "7:0",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Select I/O0-I/O7 as DAC outputs"
+          },
+          {
+            "name": "RESERVED_10_8",
+            "bits": "10:8",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "PULLDWN_CONFIG",
+        "addr": "0x6",
+        "access": "RW",
+        "reset": "0x00FF",
+        "desc": "85 kOhm pull-down configuration; p.41-42",
+        "fields": [
+          {
+            "name": "PULL_DWN_MASK",
+            "bits": "7:0",
+            "access": "RW",
+            "reset": 255,
+            "desc": "Enable pull-down on I/O0-I/O7"
+          },
+          {
+            "name": "RESERVED_10_8",
+            "bits": "10:8",
+            "access": "UNSPEC",
+            "reset": 0,
+            "desc": "Reserved command-data bits; set to zero"
+          }
+        ]
+      },
+      {
+        "name": "SW_RESET",
+        "addr": "0xF",
+        "access": "W",
+        "reset": "0x0000",
+        "desc": "Software reset command; write 10110101100 to bits 10:0; p.50",
+        "fields": [
+          {
+            "name": "SW_RESET_CODE",
+            "bits": "10:0",
+            "access": "W",
+            "reset": 0,
+            "desc": "Reset code"
+          }
+        ],
+        "write_key": "0x5AC"
+      }
+    ],
+    "excluded_blocks": [
+      "DAC_WR and ADC_RESULT/DAC_DATA_RD readback framing are excluded until SPI transaction timing is specified.",
+      "GPIO, power/reference and LDAC behaviors are deferred.",
+      "Direct-register harness does not score power-up delay, software-reset timing, or IO_LOCK cross-register side effects."
+    ],
+    "proofread_record": {
+      "date": "2026-10-10",
+      "method": "PDF text extraction plus page-level inspection of Register Map pages 35-52",
+      "erratum_found": "not checked by an independent reviewer",
+      "open_questions": [
+        "Confirm that the frozen harness can represent selector-based SPI command words.",
+        "Confirm reset timing and readback transaction sequencing.",
+        "Independent reviewer must verify reserved-bit policy and defaults."
+      ]
+    },
+    "stateful_semantics": {
+      "power_up_delay_us": 250,
+      "software_reset": "SW_RESET key 0x5AC restores register and I/O defaults; reset timing/visibility requires protocol adapter.",
+      "io_lock": "GEN_CTRL_REG.IO_LOCK blocks later I/O configuration writes; not scored by direct-register harness."
+    },
+    "admission_status": "FORMAL_GOLD_ADMITTED_2026-10-10",
+    "admission_evidence": {
+      "source_review": "INDEPENDENT_IR_REVIEW_SIGNOFF.md",
+      "post_repair_recheck": "POST_REPAIR_RECHECK.md",
+      "candidate_harness": "_setup/CANDIDATE_ADMISSION_REPORT.md",
+      "promotion_note": "Promoted after source PASS and isolated candidate simulator PASS; protocol extensions remain supplemental."
+    }
+  },
+  "prior_policy": {
+    "fields": {
+      "DAC_RD.DAC_RD_EN": {
+        "legal_values": [
+          0,
+          3
+        ]
+      }
+    },
+    "source": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+  },
+  "inventory": [
+    {
+      "chip": "AD5592R",
+      "register": "DAC_RD",
+      "field": "DAC_RD_EN",
+      "bits": "4:3",
+      "ir_access": "RW",
+      "field_policy": {
+        "legal_values": [
+          0,
+          3
+        ]
+      },
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x18",
+      "known_protection_bit_mask": "0x18",
+      "source_review_status": "BOUNDED_POLICY_REVIEW",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous",
+      "legal_values": [
+        0,
+        3
+      ],
+      "tested_values": [
+        0,
+        3
+      ]
+    },
+    {
+      "chip": "AD5592R",
+      "register": "DAC_RD",
+      "field": "DAC_CH_SEL",
+      "bits": "2:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x7",
+      "known_protection_bit_mask": "0x7",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "DAC_RD",
+      "field": "RESERVED_10_5",
+      "bits": "10:5",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "ADC_SEQ",
+      "field": "REP",
+      "bits": "9",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x200",
+      "known_protection_bit_mask": "0x200",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "ADC_SEQ",
+      "field": "TEMP",
+      "bits": "8",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x100",
+      "known_protection_bit_mask": "0x100",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "ADC_SEQ",
+      "field": "ADC_CH_MASK",
+      "bits": "7:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "ADC_SEQ",
+      "field": "RESERVED_10",
+      "bits": "10",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "ADC_BUF_PRECH",
+      "bits": "9",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x200",
+      "known_protection_bit_mask": "0x200",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "ADC_BUF_EN",
+      "bits": "8",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x100",
+      "known_protection_bit_mask": "0x100",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "IO_LOCK",
+      "bits": "7",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "ALL_DAC",
+      "bits": "6",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x40",
+      "known_protection_bit_mask": "0x40",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "ADC_RANGE",
+      "bits": "5",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x20",
+      "known_protection_bit_mask": "0x20",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "DAC_RANGE",
+      "bits": "4",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x10",
+      "known_protection_bit_mask": "0x10",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "RESERVED_10",
+      "bits": "10",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "GEN_CTRL_REG",
+      "field": "RESERVED_3_0",
+      "bits": "3:0",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "ADC_CONFIG",
+      "field": "ADC_PIN_MASK",
+      "bits": "7:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "ADC_CONFIG",
+      "field": "RESERVED_10_8",
+      "bits": "10:8",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "DAC_CONFIG",
+      "field": "DAC_PIN_MASK",
+      "bits": "7:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "DAC_CONFIG",
+      "field": "RESERVED_10_8",
+      "bits": "10:8",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "PULLDWN_CONFIG",
+      "field": "PULL_DWN_MASK",
+      "bits": "7:0",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xff",
+      "known_protection_bit_mask": "0xff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "PULLDWN_CONFIG",
+      "field": "RESERVED_10_8",
+      "bits": "10:8",
+      "ir_access": "UNSPEC",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    },
+    {
+      "chip": "AD5592R",
+      "register": "SW_RESET",
+      "field": "SW_RESET_CODE",
+      "bits": "10:0",
+      "ir_access": "W",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x7ff",
+      "known_protection_bit_mask": "0x7ff",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "ADI/ad5592r.pdf p.29 DAC READBACK requires bits4:3=11; Table15 grouping ambiguous"
+    }
+  ]
+}

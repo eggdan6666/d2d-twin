@@ -1,0 +1,169 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "TMP100",
+  "vendor": "TI",
+  "interface": "I2C",
+  "reg_width": 16,
+  "i2c": {
+    "addresses_7bit": [
+      "0x48",
+      "0x49",
+      "0x4A",
+      "0x4B"
+    ],
+    "note": "A0 引脚三态 + 默认（§7.3.2 Table 2/Table 3）；MVP 不建模总线地址",
+    "pointer_register": "8 位指针寄存器，P1P0 选寄存器、上电 00（§7.5.1 Table 4）；MVP 断言不覆盖指针本身，与 TMP102 IR 同口径"
+  },
+  "registers": [
+    {
+      "name": "TEMP",
+      "addr": "0x00",
+      "access": "RO",
+      "reset": "0x0000",
+      "desc": "Twelve-bit read-only register at bits15:4, bits3:0 zero. Effective conversion resolution selected by R1:R0=9/10/11/12bits; at POR default9bits, unneeded result LSBs zero until higher resolution selected. Result0 before first conversion completes.",
+      "fields": [
+        {
+          "name": "T",
+          "bits": "15:4",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Full twelve-bit register format; R1:R0 selects effective ADC resolution and zeros unused LSBs."
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Low four bits always zero in the twelve-bit temperature register format; bits6:4 belong to conversion data.",
+          "tier": "SOURCE_EXPLICIT_ZERO",
+          "tier_evidence": "Table7 p.16 explicitly shows bits3:0 zero; effective resolution unused LSBs from §7.3.1 p.9."
+        }
+      ]
+    },
+    {
+      "name": "CONFIG",
+      "addr": "0x01",
+      "access": "RW",
+      "reset": "0x0080",
+      "desc": "8 位配置寄存器（§7.5.3 Table 8）。手册两句合读：内部位上电全 0，但『The OS/ALERT bit reads as 1 after power-up or reset value』→ 总线读回 0x80。与 TMP102 的关键差异：本芯片 R1/R0 可写（9~12 位用户可选），TMP102 的 R1/R0 是只读 11",
+      "fields": [
+        {
+          "name": "OS",
+          "bits": "7",
+          "access": "RW",
+          "reset": 1,
+          "desc": "Write1 triggers one-shot only when SD1. Read reports comparator state with POL inversion; not an invariant1 and not a conversion-busy bit."
+        },
+        {
+          "name": "R1",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "分辨率高位 00:9 01:10 10:11 11:12 位（§7.5.3）"
+        },
+        {
+          "name": "R0",
+          "bits": "5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "分辨率低位"
+        },
+        {
+          "name": "F1",
+          "bits": "4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "故障队列 00:1 01:2 10:4 11:6 次连续故障（Table 9）"
+        },
+        {
+          "name": "F0",
+          "bits": "3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "同上"
+        },
+        {
+          "name": "POL",
+          "bits": "2",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ALERT 极性 0:低有效 1:高有效"
+        },
+        {
+          "name": "TM",
+          "bits": "1",
+          "access": "RW",
+          "reset": 0,
+          "desc": "0:比较器模式 1:中断模式（TMP101 才有中断态行为，TMP100 无 ALERT 引脚）"
+        },
+        {
+          "name": "SD",
+          "bits": "0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "1=关断模式"
+        }
+      ]
+    },
+    {
+      "name": "TLOW",
+      "addr": "0x02",
+      "access": "RW",
+      "reset": "0x4B00",
+      "desc": "12-bit threshold storage at all converter resolutions; TMP100.pdf p.18 Tables 11-14 and final paragraph.",
+      "fields": [
+        {
+          "name": "L",
+          "bits": "15:4",
+          "access": "RW",
+          "reset": 1200,
+          "desc": "12-bit threshold; independent of ADC conversion resolution"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Unused low four bits, fixed zero in threshold format",
+          "tier": "SOURCE_EXPLICIT_ZERO",
+          "tier_evidence": "TMP100.pdf p.18 Tables 12 and 14 show lower nibble zero"
+        }
+      ]
+    },
+    {
+      "name": "THIGH",
+      "addr": "0x03",
+      "access": "RW",
+      "reset": "0x5000",
+      "desc": "12-bit threshold storage at all converter resolutions; TMP100.pdf p.18 Tables 11-14 and final paragraph.",
+      "fields": [
+        {
+          "name": "H",
+          "bits": "15:4",
+          "access": "RW",
+          "reset": 1280,
+          "desc": "12-bit threshold; independent of ADC conversion resolution"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Unused low four bits, fixed zero in threshold format",
+          "tier": "SOURCE_EXPLICIT_ZERO",
+          "tier_evidence": "TMP100.pdf p.18 Tables 12 and 14 show lower nibble zero"
+        }
+      ]
+    }
+  ],
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

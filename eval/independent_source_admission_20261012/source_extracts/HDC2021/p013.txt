@@ -1,0 +1,64 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.3.5.1 DataReady (DRDY) Interrupt
+
+When DRDY_ENABLE is enabled in the Interrupt Configuration register (address 0x07), and a humidity and/or
+ temperature conversion is complete, the DRDY_STATUS bit of the Status register (address 0x04) is asserts to 1.
+ To enable hardware interrupt generation on the DRDY/INT pin of HDC2021, the DRDY/INT_EN bit must be set
+ to 1 and the INT_MODE bit must be set to 0 in the Device Configuration register (address 0x0E). If these bits are
+ not configured, the DRDY/INT pin is kept in high impedance regardless of the interrupt status. The INT_POL bit
+ of this register defines the interrupt polarity of the DRDY/INT pin. Figure 7-1 and Figure 7-2 display the output
+ behavior of the DRDY/INT pin for both interrupt polarity cases: INT_POL= 0 and INT_POL= 1. The interrupt is
+ cleared upon reading the Status register (address 0x04).
+
+
+
+                                                              Previous Data                                New Data Available
+
+
+
+
+                                    1
+
+              DRDY_STATUS
+
+                                    0
+
+                                    VDD
+
+                DRDY/INT
+                 [INT_POL = 1]
+
+                                    0
+
+                      Figure 7-1. Data Ready Interrupt - Active High (INT_POL = 1)
+
+
+
+
+                                                              Previous Data                                New Data Available
+
+
+
+
+                                    1
+
+              DRDY_STATUS
+
+                                    0
+
+                                    VDD
+
+                DRDY/INT
+                 [INT_POL = 0]
+
+                                    0
+
+                      Figure 7-2. Data Ready Interrupt - Active Low (INT_POL = 0)
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    13

@@ -1,0 +1,77 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           36 of 46  
+   
+ 
+4.25 Register 103 – I2C Master Delay Control 
+I2C_MST_DELAY_CTRL 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+67 
+103 
+DELAY 
+_ES 
+_SHADOW 
+- 
+- 
+I2C_SLV4 
+_DLY_EN 
+I2C_SLV3 
+_DLY_EN 
+I2C_SLV2 
+_DLY_EN 
+I2C_SLV1 
+_DLY_EN 
+I2C_SLV0 
+_DLY_EN 
+ 
+Description: 
+This register is used to specify the timing of external sensor data shadowing. The register is also 
+used to decrease the access rate of slave devices relative to the Sample Rate. 
+When DELAY_ES_SHADOW is set to 1, shadowing of external sensor data is delayed until all data 
+has been received. 
+When I2C_SLV4_DLY_EN, I2C_SLV3_DLY_EN, I2C_SLV2_DLY_EN, I2C_SLV1_DLY_EN, and 
+I2C_SLV0_DLY_EN are enabled, the rate of access for the corresponding slave devices is reduced.  
+When a slave’s access rate is decreased relative to the Sample Rate, the slave is accessed every  
+ 1 / (1 + I2C_MST_DLY) samples. 
+This base Sample Rate in turn is determined by SMPLRT_DIV (register 25) and DLPF_CFG 
+(register 26).  
+ 
+For further information regarding I2C_MST_DLY, please refer to register 52.  
+For further information regarding the Sample Rate, please refer to register 25.  
+Bits 6 and 5 are reserved. 
+ 
+Parameters: 
+DELAY_ES_SHADOW 
+When set, delays shadowing of external sensor data until all data 
+has been received.  
+I2C_SLV4_DLY_EN 
+When enabled, slave 4 will only be accessed at a decreased rate.  
+I2C_SLV3_DLY_EN 
+When enabled, slave 3 will only be accessed at a decreased rate.  
+I2C_SLV2_DLY_EN 
+When enabled, slave 2 will only be accessed at a decreased rate.  
+I2C_SLV1_DLY_EN 
+When enabled, slave 1 will only be accessed at a decreased rate. 
+I2C_SLV0_DLY_EN 
+When enabled, slave 0 will only be accessed at a decreased rate. 
+ 
+ 

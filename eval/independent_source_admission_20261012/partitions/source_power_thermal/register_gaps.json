@@ -1,0 +1,251 @@
+[
+  {
+    "chip": "TPS23861",
+    "register": "RESTART",
+    "address": "0x18",
+    "problem": "IR有寄存器但无fields，因而572-field清单不含8个pushbuttons。",
+    "candidate_rule": {
+      "split_fields": [
+        "RCL4",
+        "RCL3",
+        "RCL2",
+        "RCL1",
+        "RDET4",
+        "RDET3",
+        "RDET2",
+        "RDET1"
+      ],
+      "write1": "trigger",
+      "write0": "no effect",
+      "Manual": "single cycle",
+      "SemiAuto_Auto": "set corresponding Detect/Class Enable",
+      "cooldown": "accepted action delayed",
+      "next_0x14_write_delay_ms": 1.2,
+      "no_numeric_reset": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 64,
+        "printed_page": 64,
+        "table_or_section": "§7.5.17",
+        "excerpt": "Push button register."
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "POWER_ENABLE",
+    "address": "0x19",
+    "problem": "8个POFF/PWON command无字段，漏掉事件清/置、status变更与模式前提。",
+    "candidate_rule": {
+      "split_fields": [
+        "POFF4..1",
+        "PWON4..1"
+      ],
+      "same_port_POFF_PWON": "off wins",
+      "Off_or_SHTDWN": "on prohibited",
+      "SemiAuto_Auto_cooldown": "PWON ignored",
+      "Manual": "immediate",
+      "before_off_if_PE1": "PG must1",
+      "POFF_effects": "clear detect,fault,start,status,enables; if previously on setPGC/PEC and clearPG/PE",
+      "next_0x14_write_delay_ms": 1.2,
+      "no_numeric_reset": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 65,
+        "printed_page": 65,
+        "table_or_section": "§7.5.18",
+        "excerpt": "off the port."
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": 43,
+        "table_or_section": "Table8",
+        "excerpt": "Pushbutton power on ignored. Port follows Auto Mode"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "RESET_CMD",
+    "address": "0x1A",
+    "problem": "旧desc把RESAL当all-alarm、CLINP/CLRAIN当classification clear；实际为不同全局/port动作，无字段。",
+    "candidate_rule": {
+      "fields": {
+        "CLRAIN7": "clear all event/interrupt bits and releaseINT",
+        "CLINP6": "releaseINT only, no event/interrupt mutation",
+        "RESAL4": "power-up equivalent reset with supply conditions",
+        "RESP3..0": "immediate port off; clear flags/status/enables; if on setPGC/PEC and clearPG/PE; cancelcooldown"
+      },
+      "bit5": "reserved unscored keep0",
+      "write0": "no effect",
+      "before_RESP_if_PE1": "PG must1",
+      "next_0x14_write_delay_ms": 1.2,
+      "no_numeric_reset": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 66,
+        "printed_page": 66,
+        "table_or_section": "§7.5.19",
+        "excerpt": "equivalent to a power-up reset."
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "FIRMWARE_REV",
+    "address": "IR0xFE / source0x41",
+    "problem": "无field且地址错误；不能将FEh硬当映射的revision寄存器。",
+    "candidate_rule": {
+      "source_address": "0x41",
+      "runtime_value": true,
+      "no_numeric_reset": true,
+      "do_not_assert_default0": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 77,
+        "printed_page": 77,
+        "table_or_section": "§7.5.30",
+        "excerpt": "Command = 41h with 1 Data Byte, Read Only"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "I2C_SLAVE_ADDRESS",
+    "address": "0x11",
+    "problem": "EEPROM AUTO/SLA未列当前IR/572 inventory，但决定AUTO、reset初值及准入上下文。",
+    "candidate_rule": {
+      "EEPROM_factory_initial": "0xA0",
+      "write_gate": [
+        "global broadcast0x30 unlock0xAA with temporary address",
+        "selected AIN high",
+        "then register0x11 write",
+        "auto-lock and permanent EEPROM store"
+      ],
+      "invalid_addresses": [
+        "0x00",
+        "0x30",
+        "0x0C"
+      ],
+      "SLA3": "A3 input overrides",
+      "AUTO_sampled_at": [
+        "POR",
+        "RESET pin",
+        "RESAL"
+      ],
+      "program_timeout_ms_approx": 100,
+      "post_program_read_delay_ms": 100,
+      "post_reset_min_wait_ms": 22,
+      "endurance_cycles": 25,
+      "no_model_EEPROM_claim_without_gate_state": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": 35,
+        "table_or_section": "§7.3.13",
+        "excerpt": "unlock code (AAh)"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": 37,
+        "table_or_section": "§7.3.13",
+        "excerpt": "automatically locks"
+      },
+      {
+        "pdf_page": 57,
+        "printed_page": 57,
+        "table_or_section": "§7.5.10",
+        "excerpt": "Initial EEPROM VALUE"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "OPERATING_MODE / DETECT_CLASS_ENABLE",
+    "address": "0x12 / 0x14",
+    "problem": "关键模式寄存器未列IR/inventory，无法宣称独立事件/POEP持久性或完成前提完整覆盖。",
+    "candidate_rule": {
+      "mode_values": {
+        "0": "Off",
+        "1": "Manual",
+        "2": "Semi-Auto",
+        "3": "Auto"
+      },
+      "Off": "clears port events/status/enables; writesDETE/CLE do not stick",
+      "Manual_DETE_CLE": "one cycle then auto-clear",
+      "Auto_POEP": "hardware mutable",
+      "reset_values": "depend EEPROM AUTO",
+      "processing_delay_to_0x14_ms": 1.2
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 58,
+        "printed_page": 58,
+        "table_or_section": "§7.5.11",
+        "excerpt": "RESET or POR VALUE AA AA AA AA"
+      },
+      {
+        "pdf_page": 59,
+        "printed_page": 59,
+        "table_or_section": "§7.5.13",
+        "excerpt": "automatically cleared when the cycle has been completed."
+      },
+      {
+        "pdf_page": 42,
+        "printed_page": 42,
+        "table_or_section": "§7.4.4",
+        "excerpt": "will not stick if the port is in Off Mode"
+      }
+    ]
+  },
+  {
+    "chip": "TPS23861",
+    "register": "RESERVED_REGISTERS",
+    "address": "0x1B,1D,1E,1F,22–25,59",
+    "problem": "手册定义reserved manufacturing/future-use地址；不能把所有未列IR地址作为非法访问自由oracle。",
+    "candidate_rule": {
+      "exclude_writes_to_reserved_addresses": true,
+      "undefined_address_policy": "separate abstraction assumption, no manufacturer promise of return0/ignore"
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 84,
+        "printed_page": 84,
+        "table_or_section": "§7.5.36",
+        "excerpt": "Undesirable behavior may result if these registers are written to."
+      }
+    ]
+  },
+  {
+    "chip": "LM83",
+    "register": "STEP_ID",
+    "address": "0xFF",
+    "problem": "IR列runtime寄存器但无fields，572-field清单完全未计此硬件修订值；source未给数字默认。",
+    "candidate_rule": {
+      "add_runtime_readonly_field": "revision",
+      "known_reset_mask": "0x00",
+      "no_fabricated_zero": true
+    },
+    "status": "REPAIR",
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": 14,
+        "table_or_section": "§2.1 continued",
+        "excerpt": "Read Stepping or Die Revision Code"
+      }
+    ]
+  }
+]

@@ -1,0 +1,83 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISEDHDC2021JUNE 2020
+                                                                          SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+  HDC2021 High-Accuracy, Low-Power Humidity and Temperature Sensor With
+                     Assembly Protection Cover
+
+1 Features                              3 Description
+
+ •  Factory-installed polyimide tape to protect sensor     The HDC2021 is an integrated relative humidity and
+    during assembly                                   temperature sensor with a factory-installed polyimide
+ • RH measurement range: 0% to 100%                tape cover over the opening of the relative humidity
+ •  Temperature measurement range: –40°C to 125°C    sensor element. The tape cover provides protection
+                                                         against pollutants that can appear in certain stages of •  Humidity accuracy: ±2% (typical), ±3% (maximum)
+                                                        the manufacturing process, such as SMT assembly,
+ •  Temperature accuracy: ±0.2°C (typical), ±0.4°C
+                                      PCB board wash, and conformal coating. The tape
+   (maximum)
+                                                     design allows for a full conformal coating of the PCB,
+ •  Supply voltage range: 1.62 V to 3.6 V                                               and includes an adhesive free corner tab for quick
+ •  I2C interface compatibility                          removal using tweezers.
+ •  50 nA sleep mode current
+                                             The HDC2021 device is backward-compatible with the
+ •  550 nA average supply current (11-bit accuracy
+                                             HDC2080, providing high accuracy measurements
+    option, 1 measurement/second)
+                                                           with very low power consumption in a small DFN
+ •  Continuous conversion or one-shot measurement                                                   package. The capacitive-based sensor includes new
+   mode                                                           integrated digital features and a heating element to
+ •  Backward-compatible with HDC2080                   dissipate condensation and moisture. The HDC2021
+2 Applications                                               digital features include programmable interrupt
+                                                         thresholds to provide alerts and system wake-ups
+ •  Thermostats                                          without requiring a microcontroller to continuously
+ •  Smart speakers (with voice assistant)                monitor the system. Combined with programmable
+ •  Washers and dryers                               sampling intervals, low power consumption, and 1.8-V
+ •  HVAC sensor transmitters (temperature, pressure,     supply voltage support, the HDC2021 is designed for
+   and humidity)                                            ultra-low power battery-operated systems.
+ •  HVAC system controllers                                       Device Information
+ •  Wireless environmental sensors                                                                                                                                   (1)
+                                                   PART NUMBER     PACKAGE     BODY SIZE (NOM)
+                                                                                       VDD
+    HDC2021                                                     VDD                VDD          HDC2021       WSON (6)           3.00 mm × 3.00 mm
+
+
+                                                                          SCL
+          RH                                                                                           I2C          (1)   For all available packages, see the orderable addendum at
+           Sensor                                                               SDA                      Master             the end of the data sheet.                                               Registers
+                       ADC                                          +                I2C    DRDY/INT             GPIO                         10
+                                                Logic
+        Temperature                                          ADDR                                                                 Typical
+           Sensor                                                          MCU                       9
+
+
+                                                                                                        8
+                                               Calibration
+                                                       GND           GND                           7
+
+
+                                                                                                        6                Typical Application                                                                                        (r%RH)
+                                                                                                        5
+
+
+                                                                                                        4                                                                                                                                                                                                                                                                                                                                                                                   Accuracy
+                                                                                                        3
+
+
+                                                                                                        2
+
+
+                                                                                                        1
+
+
+                                                                                                        0
+                                                                                                          0     10     20     30     40     50     60     70     80     90    100
+                                                                                      RH (%RH)
+
+                                             RH Accuracy (TA = 30°C)
+
+
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+Copyrightintellectual© 2020 TexaspropertyInstrumentsmattersIncorporatedand other important disclaimers. PRODUCTION DATA.               Submit Document Feedback     1

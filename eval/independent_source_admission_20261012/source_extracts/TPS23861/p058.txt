@@ -1,0 +1,83 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.11  Operating Mode Register
+
+Command = 12h with 1 Data Byte, R/W
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME               Port 4 Mode              Port 3 Mode              Port 2 Mode              Port 1 Mode
+
+ RESET or POR VALUE          AA                 AA                 AA                 AA
+
+Each field configures the operating mode per port.
+
+
+                                  NOTE
+        An Operating Mode write command to 0x12 with a transition from Off Mode to Auto Mode
+           or from Off Mode to Semi-Auto Mode requires an I2C bus processing delay of 1.2 ms
+        when followed by a Detect/Class Enable (0x14) write command. This delay applies from
+           the end of the Operating Mode command (stop pulse) to the end of the Detect/Class
+          Enable command (stop pulse).
+
+
+Bit Descriptions
+
+Port n Mode[1:0]: The selection is as following:
+
+
+                PORT n MODE [1:0]                                  OPERATING MODE
+
+                           00                                                                    Off
+
+                           01                                                      Manual
+
+                           10                                                       Semi-Auto
+
+                           11                                                          Auto
+
+In Off Mode, the port is off and there is neither detection nor classification. In Manual Mode, there  is no
+automatic state change. In Semi-Auto Mode, detection and classification are automated but not the port power
+on, while in Auto Mode all three are automated. See Device Functional Modes for a detailed description of each
+of the four operating modes.
+
+
+                                  NOTE
+          For any port with power enable set (PEx=1 in 0x10), ensure that port power good status in
+         0x10 is also set (PGx=1) prior to changing the mode to Off in the Operating Mode register
+           (0x12).
+
+
+7.5.12  Disconnect Enable Register
+
+Command = 13h with 1 Data Byte, R/W
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                     -                  -                  -                  -       DCDE4    DCDE3    DCDE2    DCDE1
+
+ RESET or POR VALUE            -                  -                  -                  -         A        A        A        A
+
+Enables the disconnect detection mechanism for each port.
+
+Bit Descriptions
+
+DCDE4-DCDE1: DC disconnect enable for each port. Disconnect consists of measuring the port current at SENn
+pin, starting the TDIS timer if this current is below a threshold and turning the port off if a time out occurs. Also,
+the corresponding disconnect bit (DISFn) in the Fault Event Register is set accordingly. The TDIS timer is reset
+each time the current goes higher than the disconnect threshold for 13% of TMPDO. The counter does not
+decrement below zero. Look at the Timing Configuration Register for more details on how to set TMPDO by writing
+to the TDIS field.
+
+7.5.13  Detect/Class Enable Register
+
+Command = 14h with 1 Data Byte, R/W
+
+
+58     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

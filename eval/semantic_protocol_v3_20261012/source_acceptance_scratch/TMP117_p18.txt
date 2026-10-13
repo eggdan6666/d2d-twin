@@ -1,0 +1,43 @@
+7.5 Programming
+7.5.1 EEPROM Programming
+7.5.1.1 EEPROM Overview
+The device has a user-programmable EEPROM that can be used for two purposes:
+•
+Storing power-on reset (POR) values of the high limit register, low limit register, conversion cycle time, 
+averaging mode, conversion mode (continuous or shutdown mode), alert function mode (alert or therm 
+mode), and alert polarity
+•
+Storing four 16-bit locations for general-purpose use. See the EEPROM[4:1] registers for more information.
+On reset, the device goes through a POR sequence that loads the values programmed in the EEPROM into 
+the respective register map locations. This process takes approximately 1.5 ms. When the power-up sequence 
+is complete, the device starts operating in accordance to the configuration parameters that are loaded from 
+the EEPROM. Any I2C writes performed during this initial POR period to the limit registers or the configuration 
+register are ignored. I2C read transactions can still be performed with the device during the power-up period. 
+While the POR sequence is being executed, the EEPROM_Busy status flag in the EEPROM unlock register is 
+set.
+During production, the EEPROM in the TMP117 is programmed with reset values as shown in Table 7-3. The 
+Programming the EEPROM section describes how to change these values. A unique ID is also programmed in 
+the general-purpose EEPROM locations during production. This unique ID is used to support NIST traceability. 
+The TMP117 units are 100% tested on a production setup that is NIST traceable and verified with equipment 
+that is calibrated to ISO/IEC 17025 accredited standards. Only reprogram the general-purpose EEPROM[4:1] 
+locations if NIST traceability is not desired.
+7.5.1.2 Programming the EEPROM
+To prevent accidental programming, the EEPROM is locked by default. When locked, any I2C writes to the 
+register map locations are performed only on the volatile registers and not on the EEPROM.
+Figure 7-7 shows a flow chart describing the EEPROM programming sequence. To program the EEPROM, first 
+unlock the EEPROM by setting the EUN bit in the EEPROM unlock register. After the EEPROM is unlocked, 
+any subsequent I2C writes to the register map locations program a corresponding non-volatile memory location 
+in the EEPROM. Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do 
+not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is 
+set. Read this flag to monitor if the programming is complete. After programming the desired data, issue a 
+general-call reset command to trigger a software reset. The programmed data from the EEPROM are then 
+loaded to the corresponding register map locations as part of the reset sequence. This command also clears the 
+EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the 
+device to perform temperature conversions when the EEPROM is unlocked.
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+www.ti.com
+18
+Submit Document Feedback
+Copyright © 2022 Texas Instruments Incorporated
+Product Folder Links: TMP117

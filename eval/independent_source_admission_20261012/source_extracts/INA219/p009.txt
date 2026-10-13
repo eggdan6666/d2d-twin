@@ -1,0 +1,75 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+8  Detailed Description
+
+8.1  Overview
+The INA219 is a digital current sense amplifier with an I2C- and SMBus-compatible interface. It provides digital
+current, voltage, and power readings necessary for accurate decision-making in precisely-controlled systems.
+Programmable registers allow flexible configuration for measurement resolution as well as continuous-versus-
+triggered operation. Detailed register information appears at the end of this data sheet, beginning with Table 2.
+See the Functional Block Diagram section for a block diagram of the INA219 device.
+
+8.2  Functional Block Diagram
+
+
+
+                                                                          Power (1)
+
+
+                                                                      Bus Voltage (1)
+                                                                      ´
+
+                                                                                      Current (1)
+                            Shunt Voltage
+                                Channel
+                                          ADC
+                           Bus Voltage
+                                Channel
+                                                                                       Full-Scale Calibration(2)
+                                                                      ´
+
+                                                                            Shunt Voltage (1)
+
+
+
+                                                            PGA
+                                                                                                (In Configuration Register)
+
+                        NOTES:
+                                    (1) Read-only                                    Data Registers
+                                    (2) Read/write
+
+8.3  Feature Description
+
+8.3.1  Basic ADC Functions
+
+The two analog inputs to the INA219, IN+ and IN–, connect to a shunt resistor in the bus of interest. The INA219
+is  typically powered by a separate supply from 3 to 5.5 V. The bus being sensed can vary from 0 to
+26 V. There are no special considerations for power-supply sequencing (for example, a bus voltage can be
+present with the supply voltage off, and vice-versa). The INA219 senses the small drop across the shunt for
+shunt voltage, and senses the voltage with respect to ground from IN– for the bus voltage. Figure 13 shows this
+operation.
+
+When the INA219 is in the normal operating mode (that is, MODE bits of the Configuration register are set to
+111),  it continuously converts the shunt voltage up to the number set in the shunt voltage averaging function
+(Configuration register, SADC bits). The device then converts the bus voltage up to the number set in the bus
+voltage averaging (Configuration register, BADC  bits). The Mode control in the Configuration register also
+permits selecting modes to convert only voltage or current, either continuously or in response to an event
+(triggered).
+
+All current and power calculations are performed in the background and do not contribute to conversion time;
+conversion times shown in the Electrical Characteristics: can be used to determine the actual conversion time.
+
+Power-Down mode reduces the quiescent current and turns off current into the INA219 inputs, avoiding any
+supply drain. Full recovery from Power-Down requires 40 μs. ADC Off mode (set by the Configuration register,
+MODE bits) stops all conversions.
+
+Writing any of the triggered convert modes into the Configuration register (even  if the desired mode is already
+programmed into the register) triggers a single-shot conversion. Table 6 lists the triggered convert mode settings.
+
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback      9
+
+                                                   Product Folder Links: INA219

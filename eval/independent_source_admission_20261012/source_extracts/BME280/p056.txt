@@ -1,0 +1,27 @@
+Bosch Sensortec | BME280 Data sheet                                            56 | 60
+
+
+10.4 Function explanation
+
+10.4.1 Communication test
+This function attempts to read the Chip ID. If it is correct, a functioning communication is assumed.
+Note that the write function functionality is not explicitly tested.
+10.4.2 Bond wire test
+A pressure and temperature measurement is performed and uncompensated pressure and
+temperature values are read out. If the measurement results are clipped to the respective minimum or
+maximum ADC values, this is usually caused by defective bond wires. However, a defective sensing
+element could also cause this test to fail.
+Please note that some combinations of bond wire or sensing element defects do not result in clipping
+of the measurement value and will therefore not be detected with this test. These cases can be
+detected by the plausibility test instead.
+10.4.3 Measurement plausibility test
+The pressure and temperature values read out previously are compensated using the read out
+compensation parameters. The compensated temperature and pressure is compared against
+plausibility limits set in bme280_selftest.h, which must be set to match the customer production
+environment. Please use the the plausibility limits as described in chapter 3.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

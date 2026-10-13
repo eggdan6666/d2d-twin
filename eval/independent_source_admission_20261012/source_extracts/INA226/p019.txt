@@ -1,0 +1,79 @@
+                                                                                              INA226
+  www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+  The device acknowledges receipt of each data byte. The controller can terminate data transfer by generating a
+  start or stop condition.
+
+ When reading from the device, the last value stored in the register pointer by a write operation determines which
+  register is read during a read operation. To change the register pointer for a read operation, a new value must
+  be written to the register pointer. This write is accomplished by issuing a target address byte with the R/ W
+   bit low, followed by the register pointer byte. No additional data are required. The controller then generates a
+  start condition and sends the target address byte with the R/ W bit high to initiate the read command. The next
+  byte is transmitted by the target and is the most significant byte of the register indicated by the register pointer.
+  This byte is followed by an Acknowledge from the controller; then the target transmits the least significant byte.
+  The controller acknowledges receipt of the data byte. The controller can terminate data transfer by generating a
+  Not-Acknowledge after receiving any data byte, or generating a start or stop condition. If repeated reads from the
+  same register are desired, continually sending the register pointer bytes is not necessary; the device retains the
+  register pointer value until the value is changed by the next write operation.
+
+  Figure 6-4 shows the write operation timing diagram. Figure 6-5 shows the read operation timing diagram.
+
+                                             Note
+
+       Register bytes are sent most-significant byte first, followed by the least significant byte.
+
+
+
+
+             1                                        9    1                                         9    1                                        9    1                                         9
+
+SCL
+
+
+
+
+
+SDA          1    0    0   A3   A2   A1   A0    R/W      P7   P6   P5   P4   P3   P2   P1   P0       D15 D14  D13  D12 D11 D10  D9  D8       D7   D6  D5   D4  D3  D2  D1  D0
+
+     Start By                                    ACK By                                   ACK By                                   ACK By                                    ACK By       Stop By
+    Controller                                            Target                                            Target                                            Target                                             Target        Controller
+
+                                                                                                 (1)
+                 Frame 1 Two-Wire Target Address Byte                      Frame 2 Register Pointer Byte                            Frame 3 Data MSByte                             Frame 4 Data LSByte
+
+  1.  The value of the Target Address byte is determined by the settings of the A0 and A1 pins. Refer to Table 6-2.
+
+                            Figure 6-4. Timing Diagram for Write Word Format
+
+
+              1                                        9    1                                        9    1                                        9
+
+  SCL
+
+
+
+
+ SDA         1    0    0   A3   A2   A1  A0  R/W       D15 D14  D13  D12  D11 D10  D9  D8       D7  D6   D5  D4  D3  D2  D1  D0
+
+       Start By                                    ACK By                          From        ACK By                  From           No ACK By (3)  Stop
+      Controller                                           Target                              Target         Controller                  Target                Controller
+                                                                                               (1)                                                                                (2)                                                                                     (2)
+                 Frame 1 Two-Wire Target Address Byte                          Frame 2 Data MSByte                            Frame 3 Data LSByte
+
+  1.  The value of the Target Address byte is determined by the settings of the A0 and A1 pins. Refer to Table 6-2.
+  2.  Read data is from the last register pointer location. If a new register is desired, the register pointer must be
+      updated. See Figure 6-7.
+  3. ACK by Controller can also be sent.
+
+                            Figure 6-5. Timing Diagram for Read Word Format
+
+  Figure 6-6 shows the timing diagram for the SMBus Alert response operation. Figure 6-7 illustrates a typical
+  register pointer configuration.
+
+
+
+
+
+  Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+
+                                                    Product Folder Links: INA226

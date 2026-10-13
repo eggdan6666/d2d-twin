@@ -1,0 +1,78 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.25    WAKE_UP_DUR (35h)
+            Wake--up and sleep duration configuration register (R/W)
+
+
+                                              Table 70. WAKE_UP_DUR register
+
+                          WAKE_      WAKE_
+               FF_DUR5                             STATIONARY  SLEEP_ DUR3  SLEEP_ DUR2  SLEEP_ DUR1  SLEEP_ DUR0
+                           DUR1        DUR0
+
+
+                                         Table 71. WAKE_UP_DUR register description
+
+                                            Free-fall duration. In conjunction with FF_DUR [4:0] bit in the FREE_FALL (36h) register.
+             FF_DUR5
+                                1 LSB = 1 * 1/ODR
+
+              WAKE_DUR[1:0]    Wake-up duration. 1 LSB = 1 *1/ODR
+
+                                   Enables stationary detection / motion detection with no automatic ODR change when detecting stationary state
+
+             STATIONARY        Default value: 0
+
+                                              (0: disabled; 1: enabled)
+
+                                      Duration to go in sleep mode
+
+             SLEEP_ DUR[3:0]   Default value is SLEEP_ DUR[3:0] = 0000 (which is 16 * 1/ODR).
+
+                                1 LSB = 512 * 1/ODR
+
+8.26    FREE_FALL (36h)
+               Free-fall duration and threshold configuration register (R/W)
+
+
+                                                Table 72. FREE_FALL register
+
+             FF_DUR4    FF_DUR3    FF_DUR2    FF_DUR1    FF_DUR0    FF_THS2    FF_THS1    FF_THS0
+
+
+                                           Table 73. FREE_FALL register description
+
+                                          Free-fall duration. In conjunction with FF_DUR5 bit in the WAKE_UP_DUR (35h) register.
+             FF_DUR [4:0]
+                               1 LSB = 1 * 1/ODR
+
+             FF_THS [2:0]       Free-fall threshold @ FS = ±2 g (refer to Table 74. FREE_FALL threshold decoding @ ± 2 g FS)
+
+
+                                     Table 74. FREE_FALL threshold decoding @ ± 2 g FS
+
+                             FF_THS[2:0]                                          Threshold decoding (LSB)
+
+                                000                                                       5
+
+                                001                                                       7
+
+                                010                                                       8
+
+                                 011                                                      10
+
+                                100                                                          11
+
+                                101                                                      13
+
+                                 110                                                      15
+
+                                   111                                                      16
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 48/65

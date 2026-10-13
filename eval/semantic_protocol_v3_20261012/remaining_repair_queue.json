@@ -1,0 +1,4178 @@
+[
+  {
+    "inventory_field_id": "TMP117.CONFIG.AVG",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "AVG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.CONV",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "CONV",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "legal_encoding": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "8个CONV编码全有定义；默认100=1s而不是旧注释0.25Hz。CONV与AVG共同决定连续周期，one-shot不受CONV影响。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "cycle_ms_by_avg": [
+            [
+              15.5,
+              125,
+              500,
+              1000
+            ],
+            [
+              125,
+              125,
+              500,
+              1000
+            ],
+            [
+              250,
+              250,
+              500,
+              1000
+            ],
+            [
+              500,
+              500,
+              500,
+              1000
+            ],
+            [
+              1000,
+              1000,
+              1000,
+              1000
+            ],
+            [
+              4000,
+              4000,
+              4000,
+              4000
+            ],
+            [
+              8000,
+              8000,
+              8000,
+              8000
+            ],
+            [
+              16000,
+              16000,
+              16000,
+              16000
+            ]
+          ]
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table 7-7",
+            "section": null,
+            "excerpt": "Conversion Cycle Time in CC Mode CONV[2:0] AVG[1:0] = 00 AVG[1:0] = 01 AVG[1:0] = 10 AVG[1:0] = 11 000 15.5 ms 125 ms 500 ms 1 s 001 125 ms 125 ms 500 ms 1 s 010 250 ms 250 ms 500 ms 1 s 011 500 ms 500 ms 500 ms 1 s 100 "
+          },
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": null,
+            "section": "§7.4.3",
+            "excerpt": "CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready and ALERT flag in the configur"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.DATA_READY",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "DATA_READY",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.CONFIG.DATA_READY",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_flags",
+            "clause": "TEMP or CONFIG read clears DR independently of alert flags"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-6",
+            "section": null,
+            "excerpt": "Data ready flag. This flag indicates that the conversion is complete and the temperature register can be read. Every time the temperature register or configuration register is read, this bit is cleared. This bit is set a"
+          }
+        ],
+        "candidate_rule_sha256": "1da3b2c6b9e374a30c6adbcee71ded9f2bbf9d991a24b8c424f5a823e28ffbb2"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "Data_Ready在温度更新/转换含平均完成时置1；读TEMP或CONFIG均清，不限定T/nA。",
+        "candidate_rule": {
+          "on_read": [
+            "TEMP",
+            "CONFIG"
+          ],
+          "return_preclear_data": true,
+          "require_controlled_asserted_event": true,
+          "exclude_zero_then_zero_as_coverage": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-6",
+            "section": null,
+            "excerpt": "Data ready flag. This flag indicates that the conversion is complete and the temperature register can be read. Every time the temperature register or configuration register is read, this bit is cleared. This bit is set a"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.DR_ALERT",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "DR_ALERT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.EEPROM_BUSY",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "EEPROM_BUSY",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.CONFIG.EEPROM_BUSY",
+        "dimension": "trigger_completion",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_eeprom",
+            "clause": "Busy mirror and explicit POR/program completion"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.2",
+            "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+          }
+        ],
+        "candidate_rule_sha256": "f98a71a1934fbd418a4d26f82a83b91b267730ef40d6868c61aa9e5538337aec"
+      }
+    ],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "两个Busy镜像相同状态；0表示ready，1表示编程/POR加载；读取不是清除事件。",
+        "candidate_rule": {
+          "mirror": [
+            "CONFIG[12]",
+            "EEPROM_UL[14]"
+          ],
+          "complete_when": "Busy=0",
+          "program_time_typical_ms": 7,
+          "por_load_approx_ms": 1.5,
+          "no_read_clear": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.2",
+            "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.HIGH_ALERT",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "HIGH_ALERT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.CONFIG.HIGH_ALERT",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_flags",
+            "clause": "Alert clears on CONFIG read; THERM retains until below-low event"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-6",
+            "section": null,
+            "excerpt": "HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is higher than the high limit 0: Cleared on read of configuration register Therm mode: 1: Set when the conversion result is higher than the therm limit 0:"
+          },
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": null,
+            "section": "§7.4.4.2",
+            "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+          }
+        ],
+        "candidate_rule_sha256": "ffb0cf48d0c9cbfe9b0b829cabf65817f02afa13e25174a32fb5a0d949b7cebe"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "T/nA=0 Alert模式读CONFIG清对应标志；T/nA=1 Therm模式CONFIG读不清。Therm的HIGH由转换阈值/滞回置清，LOW一直0。",
+        "candidate_rule": {
+          "on_read": "CONFIG",
+          "only_if": {
+            "CONFIG.TNA": 0
+          },
+          "THERM_HIGH": "set/clear at conversion completion by high/low limits",
+          "THERM_LOW": "always zero",
+          "require_controlled_asserted_event": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-6",
+            "section": null,
+            "excerpt": "HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is higher than the high limit 0: Cleared on read of configuration register Therm mode: 1: Set when the conversion result is higher than the therm limit 0:"
+          },
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": null,
+            "section": "§7.4.4.2",
+            "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.LOW_ALERT",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "LOW_ALERT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.CONFIG.LOW_ALERT",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_flags",
+            "clause": "Alert low preclear; THERM low remains zero"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-6",
+            "section": null,
+            "excerpt": "LOW_Alert R 0 Low Alert flag: 1: Set when the conversion result is lower than the low limit 0: Cleared when the configuration register is read Therm mode: Always set to 0 13 Data_Ready R 0 Data ready flag. This flag indi"
+          },
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": null,
+            "section": "§7.4.4.2",
+            "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+          }
+        ],
+        "candidate_rule_sha256": "ffb0cf48d0c9cbfe9b0b829cabf65817f02afa13e25174a32fb5a0d949b7cebe"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "T/nA=0 Alert模式读CONFIG清对应标志；T/nA=1 Therm模式CONFIG读不清。Therm的HIGH由转换阈值/滞回置清，LOW一直0。",
+        "candidate_rule": {
+          "on_read": "CONFIG",
+          "only_if": {
+            "CONFIG.TNA": 0
+          },
+          "THERM_HIGH": "set/clear at conversion completion by high/low limits",
+          "THERM_LOW": "always zero",
+          "require_controlled_asserted_event": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-6",
+            "section": null,
+            "excerpt": "LOW_Alert R 0 Low Alert flag: 1: Set when the conversion result is lower than the low limit 0: Cleared when the configuration register is read Therm mode: Always set to 0 13 Data_Ready R 0 Data ready flag. This flag indi"
+          },
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": null,
+            "section": "§7.4.4.2",
+            "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.MOD",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "MOD",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.POL",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "POL",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.TNA",
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "TNA",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.EEPROM_UL.EEPROM_BUSY",
+    "chip": "TMP117",
+    "register": "EEPROM_UL",
+    "field": "EEPROM_BUSY",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.EEPROM_UL.EEPROM_BUSY",
+        "dimension": "trigger_completion",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_eeprom",
+            "clause": "Busy mirror and explicit POR/program completion"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.2",
+            "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+          }
+        ],
+        "candidate_rule_sha256": "f98a71a1934fbd418a4d26f82a83b91b267730ef40d6868c61aa9e5538337aec"
+      }
+    ],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "两个Busy镜像相同状态；0表示ready，1表示编程/POR加载；读取不是清除事件。",
+        "candidate_rule": {
+          "mirror": [
+            "CONFIG[12]",
+            "EEPROM_UL[14]"
+          ],
+          "complete_when": "Busy=0",
+          "program_time_typical_ms": 7,
+          "por_load_approx_ms": 1.5,
+          "no_read_clear": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.2",
+            "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.EEPROM_UL.EUN",
+    "chip": "TMP117",
+    "register": "EEPROM_UL",
+    "field": "EUN",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.EEPROM_UL.EUN",
+        "dimension": "conditional_write",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_eeprom",
+            "clause": "Programming enable and prohibited busy-write stimulus"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.2",
+            "excerpt": "This command also clears the EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the device to perform temperature conversions when the EEPROM is unlocked. 18 Submit Docu"
+          }
+        ],
+        "candidate_rule_sha256": "4623e2c327473c9b900e40f97627bc980ed9ee6651d923b47b25db68b3bd592a"
+      }
+    ],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "EUN0不编程EEPROM但仍写数字逻辑寄存器；EUN1写可编程寄存器对应EEPROM。general-call reset清EUN重新锁定。",
+        "candidate_rule": {
+          "EUN0": "volatile writes allowed",
+          "EUN1": "nonvolatile programming allowed only when not busy",
+          "lock_after_general_call_reset": true,
+          "busy_write_behavior": "EXCLUDE prohibited write oracle"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.2",
+            "excerpt": "This command also clears the EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the device to perform temperature conversions when the EEPROM is unlocked. 18 Submit Docu"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.TEMP_OFFSET.OFF",
+    "chip": "TMP117",
+    "register": "TEMP_OFFSET",
+    "field": "OFF",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.THIGH.H",
+    "chip": "TMP117",
+    "register": "THIGH",
+    "field": "H",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP117.THIGH.H",
+        "dimension": "reset",
+        "source_verdict": "CONDITIONAL",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_eeprom",
+            "clause": "POR reloads supplied NVM image, not unconditional factory value"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 29,
+            "printed_page": "29",
+            "table": "Table 7-8",
+            "section": null,
+            "excerpt": "H[15:0] R/W 6000h 16-bit, read/write register that stores the high limit for comparison with the temperature result. 7.6.5 Low Limit Register (address = 03h) [Factory default reset = 8000h] This register is configured as"
+          },
+          {
+            "pdf_page": 25,
+            "printed_page": "25",
+            "table": "Table 7-3 note (1)",
+            "section": null,
+            "excerpt": "This value is stored in Electrically-Erasable, Programmable Read-Only Memory (EEPROM) during device manufacturing. The device reset value can be changed by writing the relevant code in the EEPROM cells (see the EEPROM Ov"
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Figure 7-14 notes (1)-(2)",
+            "section": null,
+            "excerpt": "These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous conversion mode"
+          }
+        ],
+        "candidate_rule_sha256": "ffb8d74fd1f3cf24c01c5fa86d66641a300bde0cfd0e5dadd3f13994ee7f5a84"
+      },
+      {
+        "inventory_field_id": "TMP117.THIGH.H",
+        "dimension": "conditional_write",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp117_eeprom",
+            "clause": "Volatile EUN0 vs completed EUN1 programming"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ],
+        "candidate_rule_sha256": "f57502dd92f5b6a71d2e59a5ea4f7fa031467039dd7d1397a3b64f5a589b0c96"
+      }
+    ],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP117.TLOW.L",
+    "chip": "TMP117",
+    "register": "TLOW",
+    "field": "L",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "POR加载约1.5ms期间写CONFIG/limits被忽略；EEPROM锁定时写易失寄存器，解锁后可编程对应EEPROM。编程典型7ms；期间禁止I2C写。",
+        "candidate_rule": {
+          "preconditions": [
+            "POR complete",
+            "EEPROM_Busy=0"
+          ],
+          "EUN0": "volatile register only",
+          "EUN1": "program nonvolatile backing, await Busy=0 before next write",
+          "avoid_conversion_while_unlocked": true,
+          "separate_typical_time_from_completion_predicate": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.5.1.1-2",
+            "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+          },
+          {
+            "pdf_page": 30,
+            "printed_page": "30",
+            "table": "Table 7-10",
+            "section": null,
+            "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "AD5592R.ADC_CONFIG.ADC_PIN_MASK",
+    "chip": "AD5592R",
+    "register": "ADC_CONFIG",
+    "field": "ADC_PIN_MASK",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "fact": "I/O pin配置仅在idle、无ADC转换、无register readback且IO_LOCK=0时可重配；IO_LOCK=1写配置被忽略。v2未列这些前置条件。",
+        "candidate_rule": {
+          "requires": {
+            "GEN_CTRL_REG.IO_LOCK": 0,
+            "adc_conversion_active": false,
+            "readback_active": false
+          },
+          "when_locked": "configuration writes ignored",
+          "scope": "I/O pin configuration, not all control registers"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING THE AD5592R",
+            "excerpt": "The I/Ox pins can be reconfigured at any time",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING THE AD5592R",
+            "excerpt": "pin configuration registers are ignored",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "AD5592R.DAC_CONFIG.DAC_PIN_MASK",
+    "chip": "AD5592R",
+    "register": "DAC_CONFIG",
+    "field": "DAC_PIN_MASK",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "fact": "I/O pin配置仅在idle、无ADC转换、无register readback且IO_LOCK=0时可重配；IO_LOCK=1写配置被忽略。v2未列这些前置条件。",
+        "candidate_rule": {
+          "requires": {
+            "GEN_CTRL_REG.IO_LOCK": 0,
+            "adc_conversion_active": false,
+            "readback_active": false
+          },
+          "when_locked": "configuration writes ignored",
+          "scope": "I/O pin configuration, not all control registers"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING THE AD5592R",
+            "excerpt": "The I/Ox pins can be reconfigured at any time",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING THE AD5592R",
+            "excerpt": "pin configuration registers are ignored",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "AD5592R.GEN_CTRL_REG.IO_LOCK",
+    "chip": "AD5592R",
+    "register": "GEN_CTRL_REG",
+    "field": "IO_LOCK",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "fact": "IO_LOCK=1忽略I/O pin配置写，0允许变更；原始字段动作需跨寄存器状态，不能当普通独立RW数据。",
+        "candidate_rule": {
+          "cross_register_effect": "lock I/O configuration writes",
+          "must_test": "unlocked write / locked ignored write separately",
+          "not_claimed": "irreversible lock or all-control lock"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 38,
+            "printed_page": "38",
+            "table_or_section": "Table 17",
+            "excerpt": "IO_LOCK",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          },
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table 17 continued",
+            "excerpt": "changed",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING",
+            "excerpt": "pin configuration registers are ignored",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "AD5592R.PULLDWN_CONFIG.PULL_DWN_MASK",
+    "chip": "AD5592R",
+    "register": "PULLDWN_CONFIG",
+    "field": "PULL_DWN_MASK",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "fact": "I/O pin配置仅在idle、无ADC转换、无register readback且IO_LOCK=0时可重配；IO_LOCK=1写配置被忽略。v2未列这些前置条件。",
+        "candidate_rule": {
+          "requires": {
+            "GEN_CTRL_REG.IO_LOCK": 0,
+            "adc_conversion_active": false,
+            "readback_active": false
+          },
+          "when_locked": "configuration writes ignored",
+          "scope": "I/O pin configuration, not all control registers"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING THE AD5592R",
+            "excerpt": "The I/Ox pins can be reconfigured at any time",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table_or_section": "CONFIGURING THE AD5592R",
+            "excerpt": "pin configuration registers are ignored",
+            "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "ADS1115.CONFIG.OS",
+    "chip": "ADS1115",
+    "register": "CONFIG",
+    "field": "OS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "OS写0无作用，powerdown写1启动；转换中写1无作用。读值报告busy/idle，不能按普通RW恒等读回。",
+        "candidate_rule": {
+          "write0": "no effect",
+          "write1_when_powerdown": "start one conversion",
+          "write1_while_busy": "no effect",
+          "read0": "conversion in progress",
+          "read1": "idle",
+          "exclude_storage_persistence": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 25,
+            "printed_page": "25",
+            "table": "Table 8-3",
+            "section": null,
+            "excerpt": "OS can only be written when in power-down state and has no effect when a conversion is ongoing. When writing: 15 OS R/W 1b 0b : No effect 1b : Start a single conversion (when in power-down state) When reading: 0b : Devic"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "单次启动约25us后OS=0并转换，数据完成后powerdown；OS读1=未在转换。连续模式在完成后立即新转换。",
+        "candidate_rule": {
+          "precondition": "MODE=1 and idle",
+          "on_trigger": "power up, OS=0, start",
+          "complete_when": "conversion data available, OS=1 and powerdown",
+          "powerup_typical_us": 25,
+          "no_unqualified_immediate_OS1_after_write": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": null,
+            "section": "§7.4.2.1",
+            "excerpt": "When the OS bit is asserted, the device powers up in approximately 25 μs, resets the OS bit to 0b, and starts a single conversion. When conversion data are ready for retrieval, the device powers down again. Writing a 1b "
+          },
+          {
+            "pdf_page": 25,
+            "printed_page": "25",
+            "table": "Table 8-3",
+            "section": null,
+            "excerpt": "When reading: 0b : Device is currently performing a conversion. 1b : Device is not currently performing a conversion. Input multiplexer configuration (ADS1115 only) These bits configure the input multiplexer. These bits "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "BMP280.ctrl_meas.mode",
+    "chip": "BMP280",
+    "register": "ctrl_meas",
+    "field": "mode",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "BMP280.ctrl_meas.mode",
+        "dimension": "trigger_completion",
+        "source_verdict": "CONDITIONAL",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "bosch_forced",
+            "clause": "Both forced codes return to sleep on explicit measurement completion"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": "§3.6.2",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "006a8f0105c3a70ed68a34fe3fb27b7bb10fcd1b9c6fa9232a6611b7727b1b16"
+      }
+    ],
+    "repair_dimensions": {
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "00 sleep；01和10均forced；11 normal。BMP280旧说明10/11 normal不符原页。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "mode_names": [
+            "sleep",
+            "forced",
+            "forced",
+            "normal"
+          ]
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": "Table10",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.DEVICE_CONFIG.INT_MODE",
+    "chip": "HDC2021",
+    "register": "DEVICE_CONFIG",
+    "field": "INT_MODE",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "原文0=Clear-on-read mode，1=Comparator mode；旧IR描述成数据就绪/中断模式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "meanings": {
+            "0": "clear-on-read",
+            "1": "comparator"
+          }
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 30,
+            "printed_page": 30,
+            "table_or_section": "Table 7-36",
+            "excerpt": "SOFT_RES CC[2:0] HEAT_EN DRDY/INT_EN INT_POL INT_MODE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.DEVICE_CONFIG.SOFT_RES",
+    "chip": "HDC2021",
+    "register": "DEVICE_CONFIG",
+    "field": "SOFT_RES",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "fact": "SOFT_RES在RESET之后自清；tPOR最大3.5 ms列为设计/特征化参数。",
+        "candidate_rule": {
+          "trigger": "SOFT_RES=1",
+          "completion": "software_reset_complete",
+          "reset_duration_max_ms": 3.5,
+          "timing_hardware_verified": false,
+          "atomic_completed_reset_allowed_only_as_abstraction": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 30,
+            "printed_page": 30,
+            "table_or_section": "Table 7-36",
+            "excerpt": "This bit self-clears after RESET."
+          },
+          {
+            "pdf_page": 7,
+            "printed_page": 7,
+            "table_or_section": "§6.6 tPOR",
+            "excerpt": "Power-On Reset or Software Reset Duration"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.MEAS_CONFIG.MEAS_TRIG",
+    "chip": "HDC2021",
+    "register": "MEAS_CONFIG",
+    "field": "MEAS_TRIG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "HDC2021.MEAS_CONFIG.MEAS_TRIG",
+        "dimension": "trigger_completion",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "hdc_start_complete",
+            "clause": "Start-clear differs from completion"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 31,
+            "printed_page": 31,
+            "table_or_section": "Table 7-38",
+            "excerpt": "This bit self-clears to 0 once the measurement starts."
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "§7.6.5",
+            "excerpt": "temperature and/or humidity conversion is completed"
+          }
+        ],
+        "candidate_rule_sha256": "e6d277ef3fff68da3ce5e070549b010f2886c6e7dfcf1b9a265da7d4025fb95d"
+      }
+    ],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "fact": "MEAS_TRIG在测量开始时自清，而非转换完成时；数据就绪状态才表示conversion complete。",
+        "candidate_rule": {
+          "trigger": "write1",
+          "self_clear_event": "measurement_start",
+          "completion_event": "DRDY_STATUS=1 after conversion",
+          "atomic_start_is_abstraction": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 31,
+            "printed_page": 31,
+            "table_or_section": "Table 7-38",
+            "excerpt": "This bit self-clears to 0 once the measurement starts."
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "§7.6.5",
+            "excerpt": "temperature and/or humidity conversion is completed"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.DRDY_STATUS",
+    "chip": "HDC2021",
+    "register": "STATUS",
+    "field": "DRDY_STATUS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "HDC2021.STATUS.DRDY_STATUS",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "hdc_start_complete",
+            "clause": "STATUS returns preclear DRDY"
+          },
+          {
+            "scenario": "hdc_cross_read",
+            "clause": "Each of four data addresses also clears DRDY"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "§7.6.5",
+            "excerpt": "This bit is cleared when the any of the following registers is read"
+          }
+        ],
+        "candidate_rule_sha256": "20c70bbcde87a840b98488d8d5f3b7e56760283537f641f53b0db9c761f3d9ef"
+      },
+      {
+        "inventory_field_id": "HDC2021.STATUS.DRDY_STATUS",
+        "dimension": "trigger_completion",
+        "source_verdict": "CONDITIONAL",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "hdc_start_complete",
+            "clause": "DRDY only at completed conversion"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "§7.6.5",
+            "excerpt": "temperature and/or humidity conversion is completed"
+          }
+        ],
+        "candidate_rule_sha256": "1f6bbedf873be8046b8403332b3007e6cb18192b760d98926938f31e78f7b468"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "DRDY_STATUS由读0x00/01/02/03/04中任一地址清除，也由reset清除。",
+        "candidate_rule": {
+          "clear_on_reads": [
+            "0x00",
+            "0x01",
+            "0x02",
+            "0x03",
+            "0x04"
+          ],
+          "event_injection": "completed_conversion",
+          "returned_value": "preclear register data",
+          "prevent_new_conversion_between_reads": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "§7.6.5",
+            "excerpt": "This bit is cleared when the any of the following registers is read"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.HH_STATUS",
+    "chip": "HDC2021",
+    "register": "STATUS",
+    "field": "HH_STATUS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "INT_MODE=0时门限状态保持至读STATUS；INT_MODE=1时反映当前转换比较结果。§7.6.5读清简述需与模式正文联合读取。",
+        "candidate_rule": {
+          "clear_on_reads": [
+            "0x04"
+          ],
+          "condition": "INT_MODE=0",
+          "comparator_mode": "current_conversion_threshold_result",
+          "event_injection": "threshold_violation_then_controlled_reads",
+          "no_unconditional_zero_oracle_in_comparator_mode": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 16,
+            "printed_page": 16,
+            "table_or_section": "§7.3.5.2 / Figures 7-3–7-6",
+            "excerpt": "When the INT_MODE bit is set to 1"
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "Table 7-16 / §7.6.5",
+            "excerpt": "DRDY_STATUS TH_STATUS TL_STATUS HH_STATUS HL_STATUS"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.HL_STATUS",
+    "chip": "HDC2021",
+    "register": "STATUS",
+    "field": "HL_STATUS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "INT_MODE=0时门限状态保持至读STATUS；INT_MODE=1时反映当前转换比较结果。§7.6.5读清简述需与模式正文联合读取。",
+        "candidate_rule": {
+          "clear_on_reads": [
+            "0x04"
+          ],
+          "condition": "INT_MODE=0",
+          "comparator_mode": "current_conversion_threshold_result",
+          "event_injection": "threshold_violation_then_controlled_reads",
+          "no_unconditional_zero_oracle_in_comparator_mode": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "§7.3.5.2 / Figures 7-3–7-6",
+            "excerpt": "When the INT_MODE bit is set to 1"
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "Table 7-16 / §7.6.5",
+            "excerpt": "DRDY_STATUS TH_STATUS TL_STATUS HH_STATUS HL_STATUS"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.TH_STATUS",
+    "chip": "HDC2021",
+    "register": "STATUS",
+    "field": "TH_STATUS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "INT_MODE=0时门限状态保持至读STATUS；INT_MODE=1时反映当前转换比较结果。§7.6.5读清简述需与模式正文联合读取。",
+        "candidate_rule": {
+          "clear_on_reads": [
+            "0x04"
+          ],
+          "condition": "INT_MODE=0",
+          "comparator_mode": "current_conversion_threshold_result",
+          "event_injection": "threshold_violation_then_controlled_reads",
+          "no_unconditional_zero_oracle_in_comparator_mode": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 14,
+            "printed_page": 14,
+            "table_or_section": "§7.3.5.2 / Figures 7-3–7-6",
+            "excerpt": "When the INT_MODE bit is set to 1"
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "Table 7-16 / §7.6.5",
+            "excerpt": "DRDY_STATUS TH_STATUS TL_STATUS HH_STATUS HL_STATUS"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.TL_STATUS",
+    "chip": "HDC2021",
+    "register": "STATUS",
+    "field": "TL_STATUS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "INT_MODE=0时门限状态保持至读STATUS；INT_MODE=1时反映当前转换比较结果。§7.6.5读清简述需与模式正文联合读取。",
+        "candidate_rule": {
+          "clear_on_reads": [
+            "0x04"
+          ],
+          "condition": "INT_MODE=0",
+          "comparator_mode": "current_conversion_threshold_result",
+          "event_injection": "threshold_violation_then_controlled_reads",
+          "no_unconditional_zero_oracle_in_comparator_mode": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 15,
+            "table_or_section": "§7.3.5.2 / Figures 7-3–7-6",
+            "excerpt": "When the INT_MODE bit is set to 1"
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": 23,
+            "table_or_section": "Table 7-16 / §7.6.5",
+            "excerpt": "DRDY_STATUS TH_STATUS TL_STATUS HH_STATUS HL_STATUS"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.BD",
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "BD",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "Table2为01/02的POR列写测量值Shunt voltage/Bus voltage，HEX为横线；详细图没有R-0 reset行。旧数值0无独立来源支持。",
+        "candidate_rule": {
+          "known_reset_mask": "0x0",
+          "exclude_fixed_numeric_reset": true,
+          "zero_analog_input_if_used": "an external input assumption, not POR fact"
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "Table 2",
+            "section": null,
+            "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Figure 24",
+            "section": null,
+            "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.CNVR",
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "CNVR",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "Table2为01/02的POR列写测量值Shunt voltage/Bus voltage，HEX为横线；详细图没有R-0 reset行。旧数值0无独立来源支持。",
+        "candidate_rule": {
+          "known_reset_mask": "0x0",
+          "exclude_fixed_numeric_reset": true,
+          "zero_analog_input_if_used": "an external input assumption, not POR fact"
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "Table 2",
+            "section": null,
+            "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Figure 24",
+            "section": null,
+            "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.OVF",
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "OVF",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "Table2为01/02的POR列写测量值Shunt voltage/Bus voltage，HEX为横线；详细图没有R-0 reset行。旧数值0无独立来源支持。",
+        "candidate_rule": {
+          "known_reset_mask": "0x0",
+          "exclude_fixed_numeric_reset": true,
+          "zero_analog_input_if_used": "an external input assumption, not POR fact"
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "Table 2",
+            "section": null,
+            "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Figure 24",
+            "section": null,
+            "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.RSV_2",
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "RSV_2",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "Table2为01/02的POR列写测量值Shunt voltage/Bus voltage，HEX为横线；详细图没有R-0 reset行。旧数值0无独立来源支持。",
+        "candidate_rule": {
+          "known_reset_mask": "0x0",
+          "exclude_fixed_numeric_reset": true,
+          "zero_analog_input_if_used": "an external input assumption, not POR fact"
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "Table 2",
+            "section": null,
+            "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Figure 24",
+            "section": null,
+            "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "总表只规定寄存器R、图bit2未命名，未规定此位恒零或固定数值reset。",
+        "candidate_rule": {
+          "source_access": "register-level RO",
+          "exclude_constant_zero_oracle": true,
+          "do_not_write_nondefault_reserved_bits": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Figure 24",
+            "section": null,
+            "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "Table 2",
+            "section": null,
+            "excerpt": "Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current flowing 04 Current(2) 00000000 00000000 0000 R through the shunt re"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA219.CONFIGURATION.RST",
+    "chip": "INA219",
+    "register": "CONFIGURATION",
+    "field": "RST",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "原文定义写1产生系统复位且该位self-clears；未给此位任意瞬时读必为0的承诺。",
+        "candidate_rule": {
+          "write_value": 1,
+          "after_reset_completed": "all defined defaults restored and RST=0",
+          "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+          "exclude_during_reset_readback_oracle": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": "19",
+            "table": "Table 3 / Figure 19",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. BRNG: Bus Voltage Range Bit 13 0 = 16V FSR 1 = 32V FSR ("
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA219.SHUNT_VOLTAGE.SV",
+    "chip": "INA219",
+    "register": "SHUNT_VOLTAGE",
+    "field": "SV",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "Table2为01/02的POR列写测量值Shunt voltage/Bus voltage，HEX为横线；详细图没有R-0 reset行。旧数值0无独立来源支持。",
+        "candidate_rule": {
+          "known_reset_mask": "0x0",
+          "exclude_fixed_numeric_reset": true,
+          "zero_analog_input_if_used": "an external input assumption, not POR fact"
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "Table 2",
+            "section": null,
+            "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+          },
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Figure 24",
+            "section": null,
+            "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA226.CALIBRATION.UNNAMED_15",
+    "chip": "INA226",
+    "register": "CALIBRATION",
+    "field": "UNNAMED_15",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "逐位表给未命名位与POR，整寄存器为R/W；无逐位RO码或写保护文字。旧RO分类不能称厂商事实。",
+        "candidate_rule": {
+          "exclude_access_oracle": true,
+          "keep_reset_value_in_all_legal_writes": true,
+          "retain_known_por": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA226.CONFIG.RST",
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "RST",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "原文定义写1产生系统复位且该位self-clears；未给此位任意瞬时读必为0的承诺。",
+        "candidate_rule": {
+          "write_value": 1,
+          "after_reset_completed": "all defined defaults restored and RST=0",
+          "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+          "exclude_during_reset_readback_oracle": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA226.CONFIG.UNNAMED_14_12",
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "UNNAMED_14_12",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "逐位表给未命名位与POR，整寄存器为R/W；无逐位RO码或写保护文字。旧RO分类不能称厂商事实。",
+        "candidate_rule": {
+          "exclude_access_oracle": true,
+          "keep_reset_value_in_all_legal_writes": true,
+          "retain_known_por": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA226.MASK_ENABLE.AFF",
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "AFF",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "LEN=1锁存时MASK读清AFF；LEN=0透明模式由下一次无告警转换清。不能无条件读清。",
+        "candidate_rule": {
+          "if_LEN1_on_read": "MASK_ENABLE",
+          "if_LEN0_clear": "next conversion without alert",
+          "require_controlled_alert": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": null,
+            "section": "§7.1.7 AFF",
+            "excerpt": "When the Alert Latch Enable bit is set to Latch mode, the Alert Function Flag bit clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA226.MASK_ENABLE.CVRF",
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "CVRF",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "读MASK_ENABLE清CVRF；写CONFIG除powerdown也清；转换/平均/乘法全部完成置1。",
+        "candidate_rule": {
+          "on_read": "MASK_ENABLE",
+          "on_write": "CONFIG with MODE not 0 or 4",
+          "set_event": "all conversions, averaging, multiplications complete",
+          "require_nonzero_event": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": null,
+            "section": "§7.1.7 CVRF",
+            "excerpt": "Conversion Ready Flag bit clears under the following conditions: 1.) Writing to the Configuration Register (except for Power-Down selection) 2.) Reading the Mask/Enable Register OVF: Math Overflow Flag Bit 2 This bit is "
+          },
+          {
+            "pdf_page": 11,
+            "printed_page": "11",
+            "table": null,
+            "section": "§6.3.1",
+            "excerpt": "Conversion Ready flag (CVRF) bit is set after all conversions, averaging, and multiplication operations are complete. The Conversion Ready flag (CVRF) bit clears under these conditions: • Writing to the Configuration Reg"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA226.MASK_ENABLE.UNNAMED_9_5",
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "UNNAMED_9_5",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "逐位表给未命名位与POR，整寄存器为R/W；无逐位RO码或写保护文字。旧RO分类不能称厂商事实。",
+        "candidate_rule": {
+          "exclude_access_oracle": true,
+          "keep_reset_value_in_all_legal_writes": true,
+          "retain_known_por": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA3221.CONFIG.RST",
+    "chip": "INA3221",
+    "register": "CONFIG",
+    "field": "RST",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "原文定义写1产生系统复位且该位self-clears；未给此位任意瞬时读必为0的承诺。",
+        "candidate_rule": {
+          "write_value": 1,
+          "after_reset_completed": "all defined defaults restored and RST=0",
+          "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+          "exclude_during_reset_readback_oracle": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA3221.MASK_ENABLE.CVRF",
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "CVRF",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "CVRF在所有转换完成置1；MASK读清、CONFIG写清除powerdown/disable选择。旧无条件CONFIG写清说明不精确。",
+        "candidate_rule": {
+          "on_read": "MASK_ENABLE",
+          "on_CONFIG_write_clear_if_MODE_not": [
+            0,
+            4
+          ],
+          "set_event": "all enabled channel conversions complete",
+          "require_nonzero_event": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion ready clears under the following conditions: 1. Writing the Configuration register (except for power-down or disable-mode selections). 2. Reading the Mask/Enable register. 8.2.17 Power-valid Upper-limit Regist"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "INA3221.MASK_ENABLE.TCF",
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "TCF",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "TCF不由读取清除；原文明确power recycled或software reset，旧注释只断电遗漏software reset。",
+        "candidate_rule": {
+          "no_read_clear": true,
+          "reinitialize_event": [
+            "power cycle",
+            "software reset"
+          ],
+          "do_not_keep_forever_constant_1": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "unless the power is recycled or a software reset is issued. The default state for the timing control alert flag is high. 34 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: I"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS2DW12.CTRL2.MUST_BE_ZERO",
+    "chip": "LIS2DW12",
+    "register": "CTRL2",
+    "field": "MUST_BE_ZERO",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "Table32脚注要求该位设0以正确操作，没有RO访问标签或非法写1后读回保证。",
+        "candidate_rule": {
+          "verified_access": null,
+          "fixed_write": 0,
+          "exclude_protection_assertion": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 37,
+            "printed_page": "37",
+            "table_or_section": "Table32 footnote1",
+            "excerpt": "This bit must be set to 0",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS2DW12.OUT_T_L.TEMP_3_0",
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "TEMP_3_0",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "Table22从MSB到LSB为TEMP3 TEMP2 TEMP1 TEMP0 0 0 0 0；当前字段位域上下半字节颠倒。",
+        "candidate_rule": {
+          "verified_access": "RO",
+          "candidate_bits": "7:4",
+          "rename": "TEMP_3_0"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table_or_section": "Table22",
+            "excerpt": "TEMP3",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table_or_section": "§3.6",
+            "excerpt": "left-justified in 12-bit mode",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "12bit温度左对齐形成16bit两补码，TEMP3:0在总线bits7:4，低4位0。",
+        "candidate_rule": {
+          "candidate_bits": "7:4",
+          "legal_values": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table_or_section": "Tables22–23",
+            "excerpt": "TEMP3",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table_or_section": "§3.6",
+            "excerpt": "left-justified in 12-bit mode",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS2DW12.OUT_T_L.ZERO_7_4",
+    "chip": "LIS2DW12",
+    "register": "OUT_T_L",
+    "field": "ZERO_3_0",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "Table22从MSB到LSB为TEMP3 TEMP2 TEMP1 TEMP0 0 0 0 0；当前字段位域上下半字节颠倒。",
+        "candidate_rule": {
+          "verified_access": "RO",
+          "candidate_bits": "3:0",
+          "rename": "ZERO_3_0"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table_or_section": "Table22",
+            "excerpt": "TEMP3",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table_or_section": "§3.6",
+            "excerpt": "left-justified in 12-bit mode",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "12bit温度左对齐形成16bit两补码，TEMP3:0在总线bits7:4，低4位0。",
+        "candidate_rule": {
+          "candidate_bits": "3:0",
+          "legal_values": [
+            0
+          ]
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table_or_section": "Tables22–23",
+            "excerpt": "TEMP3",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          },
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table_or_section": "§3.6",
+            "excerpt": "left-justified in 12-bit mode",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "零位属于温度输出低半字节bits3:0，来源R输出位图明示0；不是强制写0配置位。",
+        "candidate_rule": {
+          "candidate_bits": "3:0",
+          "rename": "ZERO_3_0",
+          "known_zero_mask": "0x0F",
+          "verified_access": "RO"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table_or_section": "Table22",
+            "excerpt": "TEMP3",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS2DW12.WAKE_UP_SRC.FF_IA",
+    "chip": "LIS2DW12",
+    "register": "WAKE_UP_SRC",
+    "field": "FF_IA",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "§8.28仅事件状态描述，无读WAKE_UP_SRC自动清规定；§8.31明确读ALL_INT_SRC使相关已routing到INT pads的function flags同时reset。",
+        "candidate_rule": {
+          "clear_operation": "read ALL_INT_SRC (0x3B)",
+          "scope": "related interrupt function flags routed to INT pads; axis-specific clearing not expressly mapped",
+          "exclude_unqualified_self_CoR": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 50,
+            "printed_page": "50",
+            "table_or_section": "§8.28 Tables77–78",
+            "excerpt": "FF_IA",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          },
+          {
+            "pdf_page": 53,
+            "printed_page": "53",
+            "table_or_section": "§8.31",
+            "excerpt": "Reading this register, all related interrupt function flags",
+            "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.CTRL_REG4.ST",
+    "chip": "LIS3DH",
+    "register": "CTRL_REG4",
+    "field": "ST",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "Table21明确CTRL_REG4 rw，Table38/ST描述定义自检enable；UNSPEC是旧审查排除标签而非厂家access事实。",
+        "candidate_rule": {
+          "verified_access": "RW",
+          "storage_scope": "legal codes only",
+          "exclude_self_test_response": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 31,
+            "printed_page": "31",
+            "table_or_section": "Table21",
+            "excerpt": "CTRL_REG4",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          },
+          {
+            "pdf_page": 37,
+            "printed_page": "37",
+            "table_or_section": "Table38",
+            "excerpt": "Self-test enable",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.XOR",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "XOR",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "XOR",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.YDA",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "YDA",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "YDA",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.YOR",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "YOR",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "YOR",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZDA",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZDA",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "ZDA",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZOR",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZOR",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "ZOR",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZYXDA",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZYXDA",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "ZYXDA",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LIS3DH.STATUS_REG.ZYXOR",
+    "chip": "LIS3DH",
+    "register": "STATUS_REG",
+    "field": "ZYXOR",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table47该字段明确Default value0；v2因寄存器总表Output而全排除status reset过宽。只允许初始/复位边界0。",
+        "candidate_rule": {
+          "known_reset": true,
+          "expected": 0,
+          "register_known_mask": "0xFE",
+          "scope": "default boundary before event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 39,
+            "printed_page": "39",
+            "table_or_section": "Table47",
+            "excerpt": "ZYXOR",
+            "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "LM83.SR1.D2CRIT",
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "D2CRIT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR1.D2RHIGH",
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "D2RHIGH",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR1.LCRIT",
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "LCRIT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR1.LHIGH",
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "LHIGH",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR2.D1CRIT",
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D1CRIT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR2.D1RHIGH",
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D1RHIGH",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR2.D3CRIT",
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D3CRIT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "LM83.SR2.D3RHIGH",
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D3RHIGH",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {}
+  },
+  {
+    "inventory_field_id": "TMP100.CONFIG.OS",
+    "chip": "TMP100",
+    "register": "CONFIG",
+    "field": "OS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "写1在shutdown触发；读是比较器状态且POL反相，TM不影响，不能read_as=1无条件。",
+        "candidate_rule": {
+          "write_action": "one_shot_if_SD1",
+          "read_source": "comparator_hysteresis_state XOR polarity",
+          "remove_global_read_as": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 18,
+            "printed_page": "18",
+            "table": "§7.5.3.6",
+            "excerpt": "The state of the POL bit inverts the polarity of data returned from the OS/ALERT bit."
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP100.TEMP.UNUSED",
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "TEMP bits6:4是高分辨率的转换数据，不是全模式保留。",
+        "candidate_rule": {
+          "always_zero_bits": "3:0",
+          "mode_dependent_bits": "6:4"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 9,
+            "printed_page": "9",
+            "table": "§7.3.1",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 16,
+            "printed_page": "16",
+            "table": "Table7",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP102.CONFIG.AL",
+    "chip": "TMP102",
+    "register": "CONFIG",
+    "field": "AL",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "AL是RO比较器状态并受POL反转，不是恒1。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic": true,
+          "exclude_snapshot_equality": true,
+          "read_source": "comparator hysteresis and POL"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": "19",
+            "table": "§6.5.3.8",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP102.CONFIG.EM",
+    "chip": "TMP102",
+    "register": "CONFIG",
+    "field": "EM",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "fact": "EM改变三个温度寄存器格式，候选旧固定12位harness没有此格式模型。",
+        "candidate_rule": {
+          "storage_test_values": [
+            0
+          ],
+          "functional_values": [
+            0,
+            1
+          ],
+          "exclude_EM1_without_format_model": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": "§6.4.2",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": "Table6-9",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP102.CONFIG.OS",
+    "chip": "TMP102",
+    "register": "CONFIG",
+    "field": "OS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "access": {
+        "status": "REPAIR",
+        "fact": "OS写触发而读转换状态；转换中0，单次完成后1，不是普通RW持久。",
+        "candidate_rule": {
+          "exclude_persistence": true,
+          "read_during_conversion": 0,
+          "read_completed_one_shot": 1
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": "§6.4.4",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP102.TEMP.UNUSED",
+    "chip": "TMP102",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "bits3:0仅在EM=0全0；EM=1 bit3是数据，TEMP bit0=1；门限bit0仍0，旧“bit0有意义”不宜外推。",
+        "candidate_rule": {
+          "baseline_EM": 0,
+          "always_zero_TEMP": "2:1",
+          "always_zero_limits": "2:0",
+          "mode_data_bit": 3
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": "Table6-9",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 19,
+            "printed_page": "19",
+            "table": "Table6-14",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 20,
+            "printed_page": "20",
+            "table": "Table6-16",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP102.THIGH.UNUSED",
+    "chip": "TMP102",
+    "register": "THIGH",
+    "field": "UNUSED",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "bits3:0仅在EM=0全0；EM=1 bit3是数据，TEMP bit0=1；门限bit0仍0，旧“bit0有意义”不宜外推。",
+        "candidate_rule": {
+          "baseline_EM": 0,
+          "always_zero_TEMP": "2:1",
+          "always_zero_limits": "2:0",
+          "mode_data_bit": 3
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": "Table6-9",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 19,
+            "printed_page": "19",
+            "table": "Table6-14",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 20,
+            "printed_page": "20",
+            "table": "Table6-16",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP102.TLOW.UNUSED",
+    "chip": "TMP102",
+    "register": "TLOW",
+    "field": "UNUSED",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "bits3:0仅在EM=0全0；EM=1 bit3是数据，TEMP bit0=1；门限bit0仍0，旧“bit0有意义”不宜外推。",
+        "candidate_rule": {
+          "baseline_EM": 0,
+          "always_zero_TEMP": "2:1",
+          "always_zero_limits": "2:0",
+          "mode_data_bit": 3
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": "17",
+            "table": "Table6-9",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 19,
+            "printed_page": "19",
+            "table": "Table6-14",
+            "excerpt": ""
+          },
+          {
+            "pdf_page": 20,
+            "printed_page": "20",
+            "table": "Table6-16",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP1075.CFGR.OS",
+    "chip": "TMP1075",
+    "register": "CFGR",
+    "field": "OS",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "conditional_write": {
+        "status": "REPAIR",
+        "fact": "当前read_as检查在reset SD0基线写OS，未满足功能触发条件。",
+        "candidate_rule": {
+          "preconditions": {
+            "CFGR.SD": 1
+          }
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": "19",
+            "table": "§7.4.2",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP1075.CFGR.UNUSED_LOW",
+    "chip": "TMP1075",
+    "register": "CFGR",
+    "field": "UNUSED_LOW",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "保留默认，不把unused字段边界翻转通过当厂商存储事实。",
+        "candidate_rule": {
+          "fixed_write": 255,
+          "known_reset": true,
+          "exclude_persistence": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-8 / Figures 7-12–7-13",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP1075.HLIM.UNUSED",
+    "chip": "TMP1075",
+    "register": "HLIM",
+    "field": "UNUSED",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "保留默认，不把unused字段边界翻转通过当厂商存储事实。",
+        "candidate_rule": {
+          "fixed_write": 0,
+          "known_reset": true,
+          "exclude_persistence": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Table 7-10 / Figure 7-15",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP1075.LLIM.UNUSED",
+    "chip": "TMP1075",
+    "register": "LLIM",
+    "field": "UNUSED",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reserved_policy": {
+        "status": "REPAIR",
+        "fact": "保留默认，不把unused字段边界翻转通过当厂商存储事实。",
+        "candidate_rule": {
+          "fixed_write": 0,
+          "known_reset": true,
+          "exclude_persistence": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "Table 7-9 / Figure 7-14",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.CRC_FLAG",
+    "chip": "TMP126",
+    "register": "ALERT_STATUS",
+    "field": "CRC_FLAG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.ALERT_STATUS.CRC_FLAG",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "Nonzero flags clear only on single read without auto increment"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "d5e6c42d69ba8296014acdee3d84495ae77e4a9d57643535aa0dddf5af6b93cf"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "Alert_Status仅single register read且无auto increment时清除；DR另由TEMP_RESULT读取清除。",
+        "candidate_rule": {
+          "preconditions": {
+            "transaction": "single_register_read",
+            "auto_increment": false
+          },
+          "cross_read": null,
+          "requires_nonzero_event_before_read": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.DATA_READY_FLAG",
+    "chip": "TMP126",
+    "register": "ALERT_STATUS",
+    "field": "DATA_READY_FLAG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.ALERT_STATUS.DATA_READY_FLAG",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "Nonzero flags clear only on single read without auto increment"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "f54ff08a416b58d26910ff55aa6fc59bbdde0ea276636ca7d9e34804cbed62e7"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "Alert_Status仅single register read且无auto increment时清除；DR另由TEMP_RESULT读取清除。",
+        "candidate_rule": {
+          "preconditions": {
+            "transaction": "single_register_read",
+            "auto_increment": false
+          },
+          "cross_read": "TEMP_RESULT",
+          "requires_nonzero_event_before_read": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.SLEW_FLAG",
+    "chip": "TMP126",
+    "register": "ALERT_STATUS",
+    "field": "SLEW_FLAG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.ALERT_STATUS.SLEW_FLAG",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "Nonzero flags clear only on single read without auto increment"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "d5e6c42d69ba8296014acdee3d84495ae77e4a9d57643535aa0dddf5af6b93cf"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "Alert_Status仅single register read且无auto increment时清除；DR另由TEMP_RESULT读取清除。",
+        "candidate_rule": {
+          "preconditions": {
+            "transaction": "single_register_read",
+            "auto_increment": false
+          },
+          "cross_read": null,
+          "requires_nonzero_event_before_read": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.THIGH_FLAG",
+    "chip": "TMP126",
+    "register": "ALERT_STATUS",
+    "field": "THIGH_FLAG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.ALERT_STATUS.THIGH_FLAG",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "Nonzero flags clear only on single read without auto increment"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "d5e6c42d69ba8296014acdee3d84495ae77e4a9d57643535aa0dddf5af6b93cf"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "Alert_Status仅single register read且无auto increment时清除；DR另由TEMP_RESULT读取清除。",
+        "candidate_rule": {
+          "preconditions": {
+            "transaction": "single_register_read",
+            "auto_increment": false
+          },
+          "cross_read": null,
+          "requires_nonzero_event_before_read": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.TLOW_FLAG",
+    "chip": "TMP126",
+    "register": "ALERT_STATUS",
+    "field": "TLOW_FLAG",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.ALERT_STATUS.TLOW_FLAG",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "Nonzero flags clear only on single read without auto increment"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "d5e6c42d69ba8296014acdee3d84495ae77e4a9d57643535aa0dddf5af6b93cf"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "Alert_Status仅single register read且无auto increment时清除；DR另由TEMP_RESULT读取清除。",
+        "candidate_rule": {
+          "preconditions": {
+            "transaction": "single_register_read",
+            "auto_increment": false
+          },
+          "cross_read": null,
+          "requires_nonzero_event_before_read": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "§8.6.3",
+            "excerpt": "This register will currently only clear with a single register read without auto increment."
+          },
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.CONFIG.INT_COMP",
+    "chip": "TMP126",
+    "register": "CONFIG",
+    "field": "INT_COMP",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.CONFIG.INT_COMP",
+        "dimension": "trigger_completion",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "Comparator to interrupt clears Alert_Status"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 16,
+            "printed_page": "16",
+            "table": "§8.4.4.1",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "897641123a46747acd7fa7c232847634cab0f3225a25cc9eef97961a1f9faf6d"
+      }
+    ],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "fact": "从Comparator切回Interrupt立即清Alert_Status并reset ALERT pin。",
+        "candidate_rule": {
+          "transition": {
+            "from": 1,
+            "to": 0
+          },
+          "clear_register": "ALERT_STATUS"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 16,
+            "printed_page": "16",
+            "table": "§8.4.4.1",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.CONFIG.ONE_SHOT",
+    "chip": "TMP126",
+    "register": "CONFIG",
+    "field": "ONE_SHOT",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.CONFIG.ONE_SHOT",
+        "dimension": "trigger_completion",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_average",
+            "clause": "One-shot completion sets MODE shutdown and DR"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": "§8.4.3",
+            "excerpt": ""
+          }
+        ],
+        "candidate_rule_sha256": "62798ada69d1f558a53741899866e10cd0f1593f9bad90ca299fe0abb878e69a"
+      }
+    ],
+    "repair_dimensions": {
+      "trigger_completion": {
+        "status": "REPAIR",
+        "fact": "完成后MODE自动置1，DR置1，重复触发会重启转换；读0不能证明完成。",
+        "candidate_rule": {
+          "completion_event": "conversion_complete",
+          "completed_changes": {
+            "CONFIG.MODE": 1,
+            "ALERT_STATUS.DATA_READY_FLAG": 1,
+            "CONFIG.ONE_SHOT": 0
+          },
+          "repeat_trigger": "restart and discard partial"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": "15",
+            "table": "§8.4.3",
+            "excerpt": ""
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP126.TEMP_RESULT.TEMP",
+    "chip": "TMP126",
+    "register": "TEMP_RESULT",
+    "field": "TEMP",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [
+      {
+        "inventory_field_id": "TMP126.TEMP_RESULT.TEMP",
+        "dimension": "read_clear",
+        "source_verdict": "REPAIR",
+        "evidence_class": "MANUFACTURER_FACT",
+        "implementation_status": "PARTIAL_CLAUSES_EXECUTED",
+        "whole_dimension_closed": false,
+        "executed_clauses": [
+          {
+            "scenario": "tmp126_read_clear",
+            "clause": "TEMP read clears DR cross-register"
+          }
+        ],
+        "source_locators": [
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7 Data_Ready_Flag",
+            "excerpt": "Reading Alert_Status register or the Temperature Results register will clear this bit."
+          }
+        ],
+        "candidate_rule_sha256": "9d79f286f210beec6692126c05debecaa30182092b11a14c2fd3c277bb982620"
+      }
+    ],
+    "repair_dimensions": {
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "读TEMP_RESULT也清ALERT_STATUS.DATA_READY_FLAG，不能只按同寄存器read-clear。",
+        "candidate_rule": {
+          "cross_register_clear": {
+            "ALERT_STATUS": "0x01"
+          }
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 28,
+            "printed_page": "28",
+            "table": "Table8-7 Data_Ready_Flag",
+            "excerpt": "Reading Alert_Status register or the Temperature Results register will clear this bit."
+          }
+        ],
+        "applicable": true
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.ONE_SHOT.START",
+    "chip": "TMP461",
+    "register": "ONE_SHOT",
+    "field": "START",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4该行POR为N/A；没有数值00的厂商证据。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "remove_field_reset": true,
+          "remove_register_reset": true,
+          "runtime_value": false,
+          "do_not_turn_NA_into_zero": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "N/A 0F N/A X X X X X X X X One-Shot Start Register(1)"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.BUSY",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "BUSY",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LHIGH",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LHIGH",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "ALERT模式五旗读后清除的前提是致因不再存在；THERM2模式只有OPEN保持读清锁存，温度高旗遵循THERM模式。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "condition": "cause retired / result within limits / remote sensor functional",
+          "ALERT_mode_clear_mask": "0x7C",
+          "THERM2_latched_read_clear_mask": "0x04",
+          "cannot_clear_ALERT_pin_by_status_read": true,
+          "event_injection_required": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": 19,
+            "table_or_section": "Table 5 note (1) / §8.6.1.3",
+            "excerpt": "provided that the condition that caused the setting of the flags is not present anymore"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LLOW",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LLOW",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "ALERT模式五旗读后清除的前提是致因不再存在；THERM2模式只有OPEN保持读清锁存，温度高旗遵循THERM模式。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "condition": "cause retired / result within limits / remote sensor functional",
+          "ALERT_mode_clear_mask": "0x7C",
+          "THERM2_latched_read_clear_mask": "0x04",
+          "cannot_clear_ALERT_pin_by_status_read": true,
+          "event_injection_required": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": 19,
+            "table_or_section": "Table 5 note (1) / §8.6.1.3",
+            "excerpt": "provided that the condition that caused the setting of the flags is not present anymore"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LTHRM",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "LTHRM",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.OPEN",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "OPEN",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "ALERT模式五旗读后清除的前提是致因不再存在；THERM2模式只有OPEN保持读清锁存，温度高旗遵循THERM模式。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "condition": "cause retired / result within limits / remote sensor functional",
+          "ALERT_mode_clear_mask": "0x7C",
+          "THERM2_latched_read_clear_mask": "0x04",
+          "cannot_clear_ALERT_pin_by_status_read": true,
+          "event_injection_required": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": 19,
+            "table_or_section": "Table 5 note (1) / §8.6.1.3",
+            "excerpt": "provided that the condition that caused the setting of the flags is not present anymore"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RHIGH",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RHIGH",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "ALERT模式五旗读后清除的前提是致因不再存在；THERM2模式只有OPEN保持读清锁存，温度高旗遵循THERM模式。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "condition": "cause retired / result within limits / remote sensor functional",
+          "ALERT_mode_clear_mask": "0x7C",
+          "THERM2_latched_read_clear_mask": "0x04",
+          "cannot_clear_ALERT_pin_by_status_read": true,
+          "event_injection_required": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": 19,
+            "table_or_section": "Table 5 note (1) / §8.6.1.3",
+            "excerpt": "provided that the condition that caused the setting of the flags is not present anymore"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RLOW",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RLOW",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "fact": "ALERT模式五旗读后清除的前提是致因不再存在；THERM2模式只有OPEN保持读清锁存，温度高旗遵循THERM模式。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "condition": "cause retired / result within limits / remote sensor functional",
+          "ALERT_mode_clear_mask": "0x7C",
+          "THERM2_latched_read_clear_mask": "0x04",
+          "cannot_clear_ALERT_pin_by_status_read": true,
+          "event_injection_required": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 19,
+            "printed_page": 19,
+            "table_or_section": "Table 5 note (1) / §8.6.1.3",
+            "excerpt": "provided that the condition that caused the setting of the flags is not present anymore"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RTHRM",
+    "chip": "TMP461",
+    "register": "STATUS",
+    "field": "RTHRM",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "reset": {
+        "status": "REPAIR",
+        "fact": "Table 4 STATUS POR为N/A；不能将每位硬编码初始0。",
+        "candidate_rule": {
+          "known_mask": "0x00",
+          "runtime_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 17,
+            "printed_page": 17,
+            "table_or_section": "Table 4",
+            "excerpt": "02 N/A N/A BUSY LHIGH LLOW RHIGH RLOW OPEN RTHRM LTHRM Status Register"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TPS23861.GENERAL_MASK.M250",
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "M250",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "M250选择current sense resistor；1=250mΩ、0=255mΩ，不是250ms定时。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "meanings": {
+            "0": "255 milliohm",
+            "1": "250 milliohm"
+          }
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 63,
+            "printed_page": 63,
+            "table_or_section": "§7.5.16 M250",
+            "excerpt": "Current-sense-resistor-selection bit."
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TPS23861.SUPPLY_EVENT.VDUV",
+    "chip": "TPS23861",
+    "register": "SUPPLY_EVENT",
+    "field": "VDUV",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "VDUV是VDD UVLO事件、VPUV是VPWR UVLO事件；旧说明的检测未启用非原文。",
+        "candidate_rule": {
+          "read_values": [
+            0,
+            1
+          ],
+          "meaning": "VDD UVLO"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 54,
+            "printed_page": 54,
+            "table_or_section": "§7.5.7",
+            "excerpt": "POR VALUE 0 0 1 1 0 0 0 0"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "inventory_field_id": "TPS23861.SUPPLY_EVENT.VPUV",
+    "chip": "TPS23861",
+    "register": "SUPPLY_EVENT",
+    "field": "VPUV",
+    "source_verdict": "REPAIR",
+    "integration_status": "OPEN",
+    "partial_demonstrations": [],
+    "repair_dimensions": {
+      "legal_encoding": {
+        "status": "REPAIR",
+        "fact": "VDUV是VDD UVLO事件、VPUV是VPWR UVLO事件；旧说明的检测未启用非原文。",
+        "candidate_rule": {
+          "read_values": [
+            0,
+            1
+          ],
+          "meaning": "VPWR UVLO"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 54,
+            "printed_page": 54,
+            "table_or_section": "§7.5.7",
+            "excerpt": "POR VALUE 0 0 1 1 0 0 0 0"
+          }
+        ]
+      }
+    }
+  }
+]

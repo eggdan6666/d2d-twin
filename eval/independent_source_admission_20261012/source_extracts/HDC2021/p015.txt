@@ -1,0 +1,56 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.3.5.2.2 Temperature Low (TL)
+
+When TL_ENABLE is enabled in the Interrupt Configuration register (address 0x07) and the temperature is
+ under the programmed threshold level stored in the Temperature Threshold LOW register (address 0x0C), the
+TL_STATUS bit of the Status register (address 0x04) asserts to 1. The interrupt is cleared upon reading the
+ Status register.
+
+The polarity and interrupt mode of the TL_STATUS bit and the DRDY/INT pin can be configured through the
+INT_POL and INT_MODE bits of the Device Configuration Register (address 0x0E). The INT_MODE bit sets the
+ threshold to either comparator mode or clear-on-read mode. When the INT_MODE bit is set to 0, the
+TL_STATUS bit remains set to 1 until it is read. When the INT_MODE bit is set to 1, the TL_STATUS bit status
+ reflects the current temperature conversion result. The polarity of the DRDY/INT pin is set by INT_POL bit.
+
+                      T [°C]
+
+
+
+
+
+                       Temperature Threshold Low
+
+                                                                                                                                                                       Time
+
+               1
+ TL_STATUS                                                                                                           Status Register
+ [INT_MODE = 0]                                                                                    Read
+               0
+ DRDY/INT pin      VDD
+ [INT_MODE = 0]
+ [INT_POL = 1]    0
+ DRDY/INT pin      VDD
+ [INT_MODE = 0]
+ [INT_POL = 0]    0
+
+
+               1
+ TL_STATUS
+ [INT_MODE = 1]
+               0
+ DRDY/INT pin      VDD
+ [INT_MODE = 1]
+ [INT_POL = 1]    0
+ DRDY/INT pin      VDD
+ [INT_MODE = 1]
+ [INT_POL = 0]    0
+
+                       Figure 7-4. INTERRUPT on Threshold - Temperature Low
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    15

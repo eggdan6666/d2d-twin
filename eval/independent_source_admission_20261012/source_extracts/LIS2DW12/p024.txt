@@ -1,0 +1,36 @@
+                                                              LIS2DW12
+                                                                                                                             Digital main blocks
+
+
+5.3.1      Bypass mode
+               In bypass mode (FIFO_CTRL (2Eh) (FMode [2:0])= 000), the FIFO is not operational, no data is collected in FIFO
+            memory, and it remains empty with the only actual sample available in the output registers.
+            Bypass mode is also used to reset the FIFO when in FIFO mode.
+             For each channel, only the first address is used. When new data is available, the old data is overwritten.
+
+5.3.2      FIFO mode
+               In FIFO mode (FIFO_CTRL (2Eh)(FMode [2:0])= 001) data from the X, Y, and Z channels are stored in the FIFO
+                 until it is full, when 32 unread samples are stored in memory, data collecting is stopped.
+            To reset the FIFO content, bypass mode should be written in the FIFO_CTRL (2Eh) register, setting the FMODE
+                [2:0] bits to 000. After this reset command, it is possible to restart FIFO mode, writing the value 001 in
+          FIFO_CTRL (2Eh)(FMODE [2:0]).
+           The FIFO buffer can memorize 32 slots of X, Y, and Z data.
+
+5.3.3      Continuous mode
+            Continuous mode (FIFO_CTRL (2Eh) (FMode[2:0] = 110) provides a continuous FIFO update: when 32 unread
+            samples are stored in memory, as new data arrives the oldest data is discarded and overwritten by the newer.
+         A FIFO threshold flag FIFO_SAMPLES (2Fh) (FIFO_FTH) is asserted when the number of unread samples in
+           FIFO is greater than or equal to (FIFO_CTRL (2Eh)FTH[4:0]).
+                       It is possible to route FIFO_SAMPLES (2Fh)(FTH) to the INT1 pin by writing the INT1_FTH bit to 1 in register
+          CTRL4_INT1_PAD_CTRL (23h) or to the INT2 pin by writing the INT2_FTH bit to 1 in register
+          CTRL5_INT2_PAD_CTRL (24h).
+                       If an overrun occurs, the oldest sample in FIFO is overwritten and the FIFO_OVR flag in FIFO_SAMPLES (2Fh) is
+              asserted.
+               In order to empty the FIFO before it is full, it is also possible to pull from FIFO the number of unread samples
+              available in FIFO_SAMPLES (2Fh) (Diff[5:0]).
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 24/65

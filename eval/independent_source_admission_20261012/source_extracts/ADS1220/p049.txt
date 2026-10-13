@@ -1,0 +1,67 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+Many sensor signals are inherently bandlimited; for example, the output of a thermocouple has a limited rate of
+ change. In this case the sensor signal does not alias back into the pass-band when using a ΔΣ ADC. However,
+ any noise pick-up along the sensor wiring or the application circuitry can potentially alias into the pass-band.
+Power line-cycle frequency and harmonics are one common noise source. External noise can also be generated
+ from electromagnetic interference (EMI) or radio frequency interference (RFI) sources, such as nearby motors
+and cellular phones. Another noise source typically exists on the printed circuit board (PCB) in the form of clocks
+and other digital signals. Analog input filtering helps remove unwanted signals from affecting the measurement
+ result.
+
+A first-order resistor-capacitor (RC) filter is (in most cases) sufficient to either totally eliminate aliasing, or to
+ reduce the effect of aliasing to a level within the noise floor of the sensor. Ideally, any signal beyond fMOD / 2 is
+ attenuated to a level below the noise floor of the ADC. The digital filter of the ADS1220 attenuates signals to a
+ certain degree, as illustrated in the filter response plots in the Digital Filter section. In addition, noise components
+ are typically smaller in magnitude than the actual sensor signal. Therefore, using a first-order RC filter with a
+ cutoff frequency set at the output data rate or 10 times higher is generally a good starting point for a system
+ design.
+
+ Internal to the device, prior to the PGA inputs, is an EMI filter; see Figure 8-2. The cutoff frequency of this filter is
+ approximately 31.8MHz, which helps reject high-frequency interferences.
+
+ 9.1.3 External Reference and Ratiometric Measurements
+
+The full-scale range of the ADS1220 is defined by the reference voltage and the PGA gain (FSR = ±VREF  /
+ Gain). An external reference can be used instead of the integrated 2.048V reference to adapt the FSR to
+ the specific system needs. An external reference must be used  if VIN > 2.048V. For example, an external 5V
+ reference and an AVDD = 5V are required to measure a single-ended signal that can swing between 0V and 5V.
+
+The reference inputs of the device also allow the implementation of ratiometric measurements. In a ratiometric
+measurement the same excitation source that is used to excite the sensor is also used to establish the reference
+ for the ADC. As an example, a simple form of a ratiometric measurement uses the same current source to excite
+ both the resistive sensor element (such as an RTD) and another resistive reference element that is in series with
+ the element being measured. The voltage that develops across the reference element is used as the reference
+ source for the ADC. Because current noise and drift are common to both the sensor measurement and the
+ reference, these components cancel in the ADC transfer function. The output code is only a ratio of the sensor
+ element and the value of the reference resistor. The value of the excitation current source is not part of the ADC
+ transfer function.
+
+ 9.1.4 Establishing a Proper Common-Mode Input Voltage
+
+The ADS1220 can be used to measure various types of input signal configurations: single-ended, pseudo-
+ differential, and fully-differential signals (which can be either unipolar or bipolar). However, configuring the device
+ properly for the respective signal type is important.
+
+ Signals where the negative analog input is fixed and referenced to analog ground (V(AINN) = 0V) are commonly
+ called single-ended signals. The common-mode voltage of a single-ended signal consequently varies between
+0V and VIN / 2. If the PGA is disabled and bypassed, the common-mode input voltage of the ADS1220 can be
+ as low as 100mV below AVSS and as large as 100mV above AVDD. Therefore, the PGA_BYPASS bit must be
+ set to measure single-ended signals when a unipolar analog supply is used (AVSS = 0V). Gains of 1, 2, and 4
+ are still possible in this configuration. Measuring a 0mA to 20mA or 4mA to 20mA signal across a load resistor
+ of 100Ω referenced to GND is a typical example. The ADS1220 can directly measure the signal across the load
+ resistor using a unipolar supply, the internal 2.048V reference, and gain = 1 when the PGA is bypassed.
+
+ If gains larger than 4 are needed to measure a single-ended signal, the PGA must be enabled. In this case, a
+ bipolar supply is required for the ADS1220 to meet the common-mode voltage requirement of the PGA.
+
+ Signals where the negative analog input (AINN) is fixed at a voltage other the 0V are referred to as pseudo-
+ differential signals. The common-mode voltage of a pseudo-differential signal varies between VAINN and VAINN +
+ VIN / 2.
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    49
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,33 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+6.8  SPI Timing Characterization (MPU-6000 only)
+Typical Operating Circuit of Section 7.2, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or
+VDD,TA = 25°C, unless otherwise noted.
+
+ Parameters                          Conditions                    Min      Typical     Max      Units    Notes
+ SPI TIMING
+  fSCLK, SCLK Clock Frequency                                                               1      MHz
+  tLOW, SCLK Low Period                                              400                             ns
+  tHIGH, SCLK High Period                                              400                             ns
+  tSU.CS, CS Setup Time                                                8                              ns
+  tHD.CS, CS Hold Time                                                500                             ns
+  tSU.SDI, SDI Setup Time                                               11                             ns
+  tHD.SDI, SDI Hold Time                                                7                              ns
+  tVD.SDO, SDO Valid Time                       Cload = 20pF                                         100       ns
+  tHD.SDO, SDO Hold Time                       Cload = 20pF                     4                              ns
+  tDIS.SDO, SDO Output Disable Time                                                           10        ns
+
+
+
+
+
+                                  SPI Bus Timing Diagram
+
+
+
+
+
+                                           19 of 52

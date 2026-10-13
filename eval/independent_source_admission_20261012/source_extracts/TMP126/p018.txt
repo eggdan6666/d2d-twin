@@ -1,0 +1,71 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.5 Programming
+ 8.5.1 Temperature Data Format
+
+ Temperature data is represented by a 14-bit, two's complement word with an LSB (Least Significant Bit) equal to
+ 0.03125 °C. The last two bits of the register are always 00.
+
+                              Table 8-1. 14-Bit Temperature Data Format
+                                                                                     Digital Output
+           Temperature
+                                                           Binary                                 Hex
+
+              175°C                              0101 0111 1000 0000                              5780
+
+              150°C                              0100 1011 0000 0000                            4B00
+
+              125°C                               0011 1110 1000 0000                            3E80
+
+              25°C                               0000 1100 1000 0000                           0C80
+
+             0.03125°C                            0000 0000 0000 0100                             0004
+
+               0°C                               0000 0000 0000 0000                             0000
+
+            −0.03125°C                                1111 1111 1111 1100                          FFFC
+
+              −25°C                                  1111 0011 1000 0000                             F380
+
+              −40°C                                 1110 1100 0000 0000                          EC00
+
+              −55°C                                1110 0100 1000 0000                            E480
+
+
+The first data byte is the most significant byte with most significant bit first, permitting only as much data as
+ necessary to be read to determine temperature condition. For example,  if the first four bits of the temperature
+ data indicate an over temperature condition, the host controller could immediately abort communication and take
+ action to remedy the excessive temperature condition.
+
+ 8.5.2 Serial Bus Interface
+
+ Figure 8-9 shows an overview of the TMP126 protocol. The CS pin must be taken low between communication
+ transactions. Data is clocked out on the falling edge of the serial clock (SCLK), while data is clocked in on the
+ rising edge of SCLK. The 16-bit write words are latched to the respective registers after the 16th rising clock
+edge including during burst write mode. If a software reset is enabled, the device will immediately reset after the
+ 16th rising clock edge and will not respond to SPI communication until a new falling edge of the CS is observed.
+ If a software reset is triggered during burst write, any data after the configuration register write will be ignored.
+The SIO buffer is high impedance during reset.
+
+Each transaction with the TMP126 will consist of a command word, followed by the data block, and the optional
+CRC that is enabled in the command word.
+
+       CS
+
+
+                         16-bit             16-bit             16-bit             16-bit
+      SI/O        Command       Host R/W        Host R/W         CRC
+
+
+     SCLK
+
+                            Figure 8-9. TMP126 Communication Overview
+
+
+
+
+
+18    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

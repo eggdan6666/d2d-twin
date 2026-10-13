@@ -1,0 +1,19 @@
+contract_version: "1.0"
+expert_skill: "sci-skills-presubmission-review"
+project_id: "d2d-twin"
+paper_family: "M"
+stage_id: "M4"
+task_id: "semantic-v3/semantic_acceptance"
+task_status: "COMPLETE"
+inputs_reviewed: ["eval/independent_source_admission_20261012/INDEPENDENT_SIGNOFF.md", "eval/independent_source_admission_20261012/candidate_source_policy.json", "eval/independent_source_admission_20261012/candidate_ir", "eval/protocol_v2_20261012/field_policy_inventory.json", "eval/semantic_protocol_v3_20261012/runtime.py", "eval/semantic_protocol_v3_20261012/compiler.py", "eval/semantic_protocol_v3_20261012/scenarios.py", "_setup/build_semantic_v3.py", "corpus/data/raw_pdf/TI/TMP117.pdf", "corpus/data/raw_pdf/TI/TMP126.pdf", "corpus/data/raw_pdf/TI/HDC2021.pdf", "corpus/data/raw_pdf/Bosch/BME280.pdf", "corpus/data/raw_pdf/Bosch/BMP280.pdf"]
+outputs: ["semantic_acceptance.md", "semantic_acceptance_checklist.md", "tests/test_independent_semantics.py", "independent_semantic_execution.log", "independent_semantic_execution.json"]
+evidence_status: ["VERIFIED_SOURCE: direct read of five original PDF page scopes, SHA256 matched source_lock", "VERIFIED_USER_MATERIAL: independent572field source ledger and candidate IR/policy", "EXECUTED_LOCAL: bounded independent runtime/compiler pytest log and code fingerprint manifest", "NOT_EXECUTED: physical timing, hardware, new model generation and fulltarget static/event certification", "VERIFIED_SOURCE: BME280 cover revision1.24 February2024; internal pp27/30 footers retain1.23_012022. Identity is locked PDF bytes; no officialerratum inference."]
+assumptions: ["Named events represent qualifying atomic digital actions, not measured elapsed time", "TMP117 EEPROM tests use an explicit factory image; raw completed-measurement inputs are signed16bit codes with ordered thresholds", "BME active_humidity is an abstract observation hook, not a silicon readable register", "Partial clause links never close whole source dimensions"]
+author_input_needed: []
+manual_actions: []
+quality_checks: ["58 independent runtime/compiler cases passed after guarded execution-proof, raw-code domain and strict threshold equality refinements; exact code hashes and execution log retained", "Seven synthetic fault fixtures detected, distinct from real model samples", "Source mapping and unknown/undefined stimulus guards tested", "No sourcePASS or prior reference output promoted to executable wholefieldPASS", "Production generation admission remains false"]
+conflicts: [{"conflict_id": "GLOBAL_SOURCE_CONFLICTS_RETAINED", "claim": "TMP117 / INA3221 / TPS23861 and other exact conflicting source aspects retain independent unresolved status", "source": "eval/independent_source_admission_20261012/conflict_ledger.json", "resolution": "No majority-value selection or officialerratum claim"}]
+conflict_resolution_status: "UNRESOLVED"
+merge_permission: "orchestrator_only"
+recommended_next_action: "Implement the first explicitly queued unclosed semantic obligation, independently validate nonzero and negative fixtures, and retain the production freeze block until target-wide admission."
+stage_acceptance_recommendation: "REPAIR"

@@ -1,0 +1,31 @@
+1.0 Functional Description (Continued)                                                                           LM83
+D5: T_CRIT mask for Diode 1, when set to 1 a Diode 1 temperature reading that exceeds T_CRIT setpoint will not activate the
+T_CRIT_A pin.
+D4: T_CRIT mask for Diode 2, when set to 1 a Diode 2 temperature reading that exceeds T_CRIT setpoint will not activate the
+T_CRIT_A pin.
+D3: T_CRIT mask for Diode 3, when set to 1 a Diode 3 temperature reading that exceeds T_CRIT setpoint will not activate the
+T_CRIT_A pin.
+D2: T_CRIT mask for Local reading, when set to 1 a Local temperature reading that exceeds T_CRIT setpoint will not activate
+the T_CRIT_A pin.
+D1: INT active state inversion. When INT Inversion is set to a 1 the active state of the INT output will be a logical high. A low would
+then select an active state of a logical low.
+D6 and D0: These bits are always set to 0 and reserved for future use. A write of 1 will return a 0 when read.
+
+2.6 LOCAL, DIODE 1, DIODE 2 and DIODE 3 HIGH SETPOINT REGISTERS (LHS, D1RHS, D2RHS and D3RHS)
+ (Read Address 05h, 07h, 38h, 3Ah /Write Address 0Bh, 0Dh,
+ 50h, 52h):
+  D7    D6    D5    D4    D3    D2    D1    D0
+ MSB    Bit 6    Bit 5    Bit 4    Bit 3    Bit 2    Bit 1   LSB
+D7–D0: HIGH setpoint temperature data. Power up default is LHIGH = RD1HIGH=RD2HIGH=RD3HIGH = 127˚C.
+
+2.7 T_CRIT REGISTER (TCS)
+ (Read Address 42h/Write Address 5Ah):
+  D7    D6    D5    D4    D3    D2    D1    D0
+ MSB    Bit 6    Bit 5    Bit 4    Bit 3    Bit 2    Bit 1   LSB
+D7–D0: T_CRIT setpoint temperature data. Power up default is T_CRIT = 127˚C.
+
+
+
+
+
+                                                           15                                                    www.national.com

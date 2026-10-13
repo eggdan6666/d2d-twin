@@ -1,0 +1,72 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+                    Table 8-34. Mask/Enable Register Field Descriptions (continued)
+     Bit    Field           Type    Reset     Description
+
+     0    CVRF         R/W    0h        Conversion-ready flag. Although the INA3221 can be read at any time, and the data
+                                                from the last conversion are available, the conversion ready bit is provided to help
+                                                   coordinate single-shot conversions. The conversion bit is set after all conversions are
+                                                  complete. Conversion ready clears under the following conditions:
+                                                         1.   Writing the Configuration register (except for power-down or disable-mode
+                                                              selections).
+                                                         2.   Reading the Mask/Enable register.
+
+
+ 8.2.17 Power-valid Upper-limit Register (address = 10h) [reset = 2710h]
+
+ This register contains the value used to determine  if the power-valid conditions are met. The power-valid
+ condition is reached when all bus-voltage channels exceed the value set in this limit register. When the power-
+ valid condition is met, the PV alert pin asserts high to indicate that the INA3221 has confirmed all bus voltage
+ channels are above the power-valid upper-limit value. For the power-valid conditions to be monitored, the bus
+measurements must be enabled through one of the corresponding MODE bits set in the Configuration register.
+The power-valid upper-limit LSB value is 8mV. Power-on reset value is 2710h = 10.000V.
+
+                             Table 8-35. Power-Valid Upper-Limit Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  SIGN  PVU11 PVU10  PVU9  PVU8  PVU7  PVU6  PVU5  PVU4  PVU3  PVU2  PVU1  PVU0  —   —   —
+
+   R-0   R/W-0  R/W-1  R/W-0  R/W-0  R/W-1  R/W-1  R/W-1  R/W-0  R/W-0  R/W-0  R/W-1  R/W-0   R-0    R-0    R-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                    Table 8-36. Power-Valid Upper-Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+     15    SIGN                    R       0h          Power-valid upper-limit data bits
+
+    14-3    PVU11-0                    R/W     4E2h       Power-valid upper-limit data bits
+
+     2-0    Reserved                  R       0h         Reserved
+
+ 8.2.18 Power-Valid Lower-Limit Register (address = 11h) [reset = 2328h]
+
+ This register contains the value used to determine  if any of the bus-voltage channels drops below the power-
+ valid lower-limit when the power-valid conditions are met. This limit contains the value used to compare all
+ bus-channel readings to verify that  all channels remain above the power-valid lower-limit, thus maintaining
+ the power-valid condition. If any bus-voltage channel drops below the power-valid lower-limit, the PV alert pin
+ pulls low to indicate that the INA3221 detects a bus voltage reading below the power-valid lower-limit. For the
+ power-valid condition to be monitored, the bus measurements must be enabled through the mode (MODE3-1)
+ bits set in the Configuration register. The power-valid lower-limit LSB value is 8mV. Power-on reset value is
+2328h = 9.000V.
+
+                             Table 8-37. Power-Valid Lower-Limit Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  SIGN  PVL11  PVL10  PVL9  PVL8  PVL7  PVL6  PVL5  PVL4  PVL3  PVL2  PVL1  PVL0  —   —   —
+
+   R-0   R/W-0  R/W-1  R/W-0  R/W-0  R/W-0  R/W-1  R/W-1  R/W-0  R/W-0  R/W-1  R/W-0  R/W-1   R-0    R-0    R-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                    Table 8-38. Power-Valid Lower-Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+     15    SIGN                    R       0h          Power-valid lower-limit data bits
+
+    14-3    PVL11-0                    R/W     465h        Power-valid lower-limit data bits
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    35
+
+                                                  Product Folder Links: INA3221

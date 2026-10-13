@@ -1,0 +1,64 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.3.5.2.3 Humidity High (HH)
+
+When HH_ENABLE is enabled in the Interrupt Configuration register (address 0x07) and the temperature is
+ under the programmed threshold level stored in the Humidity Threshold HIGH register (address 0x0D), the
+HH_STATUS bit of the Status register (address 0x04) asserts to 1. The interrupt is cleared upon reading the
+ Status register.
+
+The polarity and interrupt mode of the HH_STATUS bit and the DRDY/INT pin can be configured through the
+INT_POL and INT_MODE bits of the Device Configuration Register (address 0x0E). The INT_MODE bit sets the
+ threshold to either comparator mode or clear-on-read mode. When the INT_MODE bit is set to 0, the
+HH_STATUS bit remains set to 1 until it is read. When the INT_MODE bit is set to 1, the HH_STATUS bit status
+ reflects the current temperature conversion result. The polarity of the DRDY/INT pin is set by INT_POL bit.
+
+                  H [%RH]
+
+
+
+                          Humidity Threshold High
+
+
+
+
+
+                                                                                                                                                                        Time
+
+                1
+                                                                                                                    Status Register
+HH_STATUS
+                                                                                                Read
+[INT_MODE = 0]   0
+
+                        VDD
+DRDY/INT pin
+[INT_MODE = 0]
+[INT_POL = 1]     0
+                        VDD
+DRDY/INT pin
+[INT_MODE = 0]
+[INT_POL = 0]     0
+
+
+
+ HH_STATUS      1
+ [INT_MODE = 1]
+                0
+ DRDY/INT pin      VDD
+ [INT_MODE = 1]
+ [INT_POL = 1]
+                0
+ DRDY/INT pin      VDD
+ [INT_MODE = 1]
+ [INT_POL = 0]
+                0
+
+                         Figure 7-5. INTERRUPT on Threshold - Humidity High
+
+
+
+
+
+16    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

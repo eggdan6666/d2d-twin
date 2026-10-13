@@ -1,0 +1,43 @@
+Bosch Sensortec | BME280 Data sheet                                            27 | 60
+
+
+Table 18: Memory map
+
+                                                                                                                        Reset   Register Name    Address       bit7         bit6         bit5         bit4         bit3         bit2         bit1         bit0                                                                                                                                            state
+     hum_lsb        0xFE                                           hum_lsb<7:0>                                          0x00
+    hum_msb       0xFD                                      hum_msb<7:0>                                          0x80
+    temp_xlsb       0xFC                    temp_xlsb<7:4>                    0          0          0          0         0x00
+     temp_lsb       0xFB                                            temp_lsb<7:0>                                          0x00
+    temp_msb       0xFA                                        temp_msb<7:0>                                         0x80
+    press_xlsb       0xF9                     press_xlsb<7:4>                    0          0          0          0         0x00
+     press_lsb        0xF8                                              press_lsb<7:0>                                          0x00
+    press_msb       0xF7                                         press_msb<7:0>                                         0x80
+       config         0xF5                     t_sb[2:0]                                         filter[2:0]                            spi3w_en[0]    0x00
+     ctrl_meas        0xF4                    osrs_t[2:0]                             osrs_p[2:0]                     mode[1:0]           0x00
+       status         0xF3                                                      measuring[0]                         im_update[0]    0x00
+     ctrl_hum        0xF2                                                                                     osrs_h[2:0]                0x00
+   calib26..calib41  0xE1…0xF0                                                  calibration data                                                    individual
+        reset         0xE0                                                         reset[7:0]                                            0x00
+          id          0xD0                                                       chip_id[7:0]                                           0x60
+   calib00..calib25  0x88…0xA1                                                  calibration data                                                    individual
+
+                             Reserved   Calibration    Control      Data       Status                     Registers:                                                         Chip ID     Reset                                   registers      data      registers    registers    registers
+                            do not                       Type:               read only  read / write  read only   read only   read only   write only                            change
+
+5.4  Register description
+5.4.1  Register 0xD0 “id”
+The “id” register contains the chip identification number chip_id[7:0], which is 0x60. This number can
+be read as soon as the device finished the power-on-reset.
+5.4.2  Register 0xE0 “reset”
+The “reset” register contains the soft reset word reset[7:0]. If the value 0xB6 is written to the register,
+the device is reset using the complete power-on-reset procedure. Writing other values than 0xB6 has
+no effect. The readout value is always 0x00.
+5.4.3  Register 0xF2 “ctrl_hum”
+The “ctrl_hum” register sets the humidity data acquisition options of the device. Changes to this
+register only become effective after a write operation to “ctrl_meas”.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

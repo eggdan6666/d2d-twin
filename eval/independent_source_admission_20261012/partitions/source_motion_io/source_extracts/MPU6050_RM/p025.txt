@@ -1,0 +1,87 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           25 of 46  
+   
+4.13 Register 54 – I2C Master Status 
+I2C_MST_STATUS 
+ 
+Type: Read Only 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+36 
+54 
+PASS_ 
+THROUGH 
+I2C_SLV4
+_DONE 
+I2C_LOST
+_ARB 
+I2C_SLV4
+_NACK 
+I2C_SLV3 
+_NACK 
+I2C_SLV2 
+_NACK 
+I2C_SLV1 
+_NACK 
+I2C_SLV0
+_NACK 
+ 
+Description: 
+This register shows the status of the interrupt generating signals in the I2C Master within the MPU-
+60X0.  This register also communicates the status of the FSYNC interrupt to the host processor.  
+Reading this register will clear all the status bits in the register.  
+Parameters: 
+PASS_THROUGH 
+This bit reflects the status of the FSYNC interrupt from an external device 
+into the MPU-60X0. This is used as a way to pass an external interrupt 
+through the MPU-60X0 to the host application processor. When set to 1, this 
+bit will cause an interrupt if FSYNC_INT_EN is asserted in INT_PIN_CFG 
+(Register 55).  
+I2C_SLV4_DONE 
+Automatically sets to 1 when a Slave 4 transaction has completed. This 
+triggers an interrupt if the I2C_MST_INT_EN bit in the INT_ENABLE register 
+(Register 56) is asserted and if the SLV_4_DONE_INT bit is asserted in the 
+I2C_SLV4_CTRL register (Register 52). 
+I2C_LOST_ARB 
+This bit automatically sets to 1 when the I2C Master has lost arbitration of the 
+auxiliary I2C bus (an error condition). This triggers an interrupt if the 
+I2C_MST_INT_EN bit in the INT_ENABLE register (Register 56) is asserted. 
+I2C_SLV4_NACK 
+This bit automatically sets to 1 when the I2C Master receives a NACK in a 
+transaction with Slave 4. This triggers an interrupt if the I2C_MST_INT_EN 
+bit in the INT_ENABLE register (Register 56) is asserted.  
+I2C_SLV3_NACK 
+This bit automatically sets to 1 when the I2C Master receives a NACK in a 
+transaction with Slave 3. This triggers an interrupt if the I2C_MST_INT_EN 
+bit in the INT_ENABLE register (Register 56) is asserted. 
+I2C_SLV2_NACK 
+This bit automatically sets to 1 when the I2C Master receives a NACK in a 
+transaction with Slave 2. This triggers an interrupt if the I2C_MST_INT_EN 
+bit in the INT_ENABLE register (Register 56) is asserted. 
+I2C_SLV1_NACK 
+This bit automatically sets to 1 when the I2C Master receives a NACK in a 
+transaction with Slave 1. This triggers an interrupt if the I2C_MST_INT_EN 
+bit in the INT_ENABLE register (Register 56) is asserted. 
+I2C_SLV0_NACK 
+This bit automatically sets to 1 when the I2C Master receives a NACK in a 
+transaction with Slave 0. This triggers an interrupt if the I2C_MST_INT_EN 
+bit in the INT_ENABLE register (Register 56) is asserted. 
+ 
+ 

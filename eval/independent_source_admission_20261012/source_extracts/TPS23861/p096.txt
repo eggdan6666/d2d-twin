@@ -1,0 +1,49 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+8.4.5  Kelvin Current Sensing Resistor
+
+Load current in each PSE port is sensed as the voltage across a low-end current-sense resistor with a value of
+255 mΩ. Alternatively, a 250-mΩ resistor may be used. If a 250-mΩ sense resistor is used the M250 bit in the
+General Mask 1 Register must be set. For more accurate current sensing, kelvin sensing of the low end of the
+current-sense resistor is provided through pins KSENSA for ports 1 and 2, and KSENSB for ports 3 and 4.
+Figure 59 illustrates the kelvin-sensing scheme.
+
+                                                 3.3 V   48 V
+
+
+                                                                                100 nF
+                                                                                 100 V      PORTn
+                                VDD VPWR
+                                                                    47
+                            SCL                DRAINn
+
+
+                         SDAO              GATEn
+                                       TPS23861                                                                    22
+                               SDAI                SENn
+                                                                              255 m   /
+                                                                              250 m:
+                                 INT
+                                             KSENSx
+
+                               AGND DGND
+
+
+
+
+                                                            Note: only port n shown
+
+                                                                                                                            Copyright © 2016, Texas Instruments Incorporated
+
+
+                             Figure 59. Kelvin Current-Sense Connection
+
+
+
+
+
+96     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

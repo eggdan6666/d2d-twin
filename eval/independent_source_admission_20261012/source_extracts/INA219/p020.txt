@@ -1,0 +1,86 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+
+ SADC:           SADC Shunt ADC Resolution/Averaging
+
+ Bits 3–6             These bits adjust the Shunt ADC resolution (9-, 10-, 11-, or 12-bit) or set the number of samples used when
+                       averaging results for the Shunt Voltage Register (01h).
+                BADC (Bus) and SADC (Shunt) ADC resolution/averaging and conversion time settings are shown in Table 5.
+
+                                      Table 5. ADC Settings(1)
+
+    ADC4        ADC3        ADC2        ADC1            Mode/Samples              Conversion Time
+       0                 X(2)            0             0                   9 bit                        84 μs
+       0                 X(2)            0             1                  10 bit                       148 μs
+       0                 X(2)            1             0                  11 bit                       276 μs
+       0                 X(2)            1             1                  12 bit                       532 μs
+
+       1             0             0             0                  12 bit                       532 μs
+
+       1             0             0             1                    2                           1.06 ms
+
+       1             0             1             0                    4                           2.13 ms
+
+       1             0             1             1                    8                           4.26 ms
+
+       1             1             0             0                    16                           8.51 ms
+
+       1             1             0             1                    32                          17.02 ms
+
+       1             1             1             0                    64                          34.05 ms
+
+       1             1             1             1                   128                         68.10 ms
+
+(1)  Shaded values are default.
+(2)  X = Don't care
+
+
+ MODE:              Operating Mode
+
+ Bits 0–2               Selects continuous, triggered, or power-down mode of operation. These bits default to continuous shunt and bus
+                    measurement mode. The mode settings are shown in Table 6.
+
+                                      Table 6. Mode Settings(1)
+
+      MODE3             MODE2             MODE1                     MODE
+
+           0                      0                      0                             Power-down
+
+           0                      0                      1                         Shunt voltage, triggered
+
+           0                      1                      0                        Bus voltage, triggered
+
+           0                      1                      1                         Shunt and bus, triggered
+
+           1                      0                      0                     ADC off (disabled)
+
+           1                      0                      1                         Shunt voltage, continuous
+
+           1                      1                      0                       Bus voltage, continuous
+
+           1                      1                      1                        Shunt and bus, continuous
+
+(1)  Shaded values are default.
+
+8.6.3  Data Output Registers
+
+8.6.3.1  Shunt Voltage Register (address = 01h)
+
+The Shunt Voltage register stores the current shunt voltage reading, VSHUNT. Shunt Voltage register bits are
+shifted according to the PGA setting selected in the Configuration register (00h). When multiple sign bits are
+present, they will all be the same value. Negative numbers are represented in 2's complement format. Generate
+the 2's complement of a negative number by complementing the absolute value binary number and adding 1.
+Extend the sign, denoting a negative number by setting the MSB = 1. Extend the sign to any additional sign bits
+to form the 16-bit word.
+
+Example: For a value of VSHUNT = –320 mV:
+ 1. Take the absolute value (include accuracy to 0.01 mV) →320.00
+ 2. Translate this number to a whole decimal number →32000
+ 3. Convert it to binary →111 1101 0000 0000
+
+
+20     Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

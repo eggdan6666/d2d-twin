@@ -1,0 +1,31 @@
+                                                              LIS2DW12
+                                                                                            Terminology and functionality
+
+3      Terminology and functionality
+
+
+3.1      Terminology
+
+3.1.1        Sensitivity
+               Sensitivity describes the gain of the sensor and can be determined by applying 1 g acceleration to it. As the
+             sensor can measure DC accelerations this can be done easily by pointing the axis of interest towards the center
+               of the Earth, noting the output value, rotating the sensor by 180 degrees (pointing to the sky) and noting the
+              output value again. By doing so, ±1 g acceleration is applied to the sensor. Subtracting the larger output value
+             from the smaller one, and dividing the result by 2, leads to the actual sensitivity of the sensor. This value changes
+             very little over temperature and time. The sensitivity tolerance describes the range of sensitivities of a large
+              population of sensors.
+
+3.1.2       Zero-g level offset
+             Zero-g level offset describes the deviation of an actual output signal from the ideal output signal if no acceleration
+                 is present. A sensor in a steady state on a horizontal surface measures 0 g on the X-axis and 0 g on the Y-axis
+            whereas the Z-axis measures 1 g. The output is ideally in the middle of the dynamic range of the sensor (content
+               of OUT registers 00h, data expressed as two’s complement number). A deviation from the ideal value in this case
+                 is called zero-g level offset. Offset is to some extent a result of stress to the MEMS sensor and therefore the offset
+            can slightly change after mounting the sensor onto a printed circuit board or exposing it to extensive mechanical
+               stress. Offset changes little over temperature, see “Zero-g level offset change vs. temperature”.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 13/65

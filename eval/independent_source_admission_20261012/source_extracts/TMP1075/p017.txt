@@ -1,0 +1,81 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+ Start Data Transfer: A change in the state of the SDA line from high to low when the SCL line is high defines a
+START condition. Each data transfer is initiated with a START condition.
+
+Stop Data Transfer: A change in the state of the SDA line from low to high when the SCL line is high defines a
+STOP condition. Each data transfer is terminated with a repeated START or STOP condition.
+
+Data Transfer: The number of data bytes transferred between a START and a STOP condition is not limited and
+ is determined by the host device. The receiver acknowledges the transfer of data.
+
+Acknowledge: Each receiving device, when addressed, is obliged to generate an Acknowledge bit. A device
+ that acknowledges must pull down the SDA line during the Acknowledge clock pulse in such a way that the SDA
+ line is stable low during the high period of the Acknowledge clock pulse. Setup and hold times must be taken
+ into account. On a host receive, the termination of the data transfer can be signaled by the host generating a
+ Not-Acknowledge on the last byte that is transmitted by the target device.
+
+ 7.3.4 Two-Wire Timing Diagrams
+
+                    1                                       9    1                                        9
+       SCL                                «
+
+
+       SDA         1    0  A4  A3   A2   A1  A0    R/W      0    0    0    0   P3   P2   P1  P0   «
+
+                Start By                                ACK By                               ACK By
+               Host                                             Device                                          Device
+
+                       Frame 1 Two Wire Device Address Byte                   Frame 2 Pointer Register Byte
+
+                     1                                       9            1                                       9
+      SCL
+  (Continued)
+
+
+
+
+     SDA
+                  D15  D14 D13  D12  D11 D10  D9  D8              D7   D6  D5   D4  D3  D2  D1  D0
+  (Continued)
+                                              ACK By                                      ACK By     Stop By
+                                                               Device                                                    Device       Host
+
+                              Frame 3 Data Byte 1                                Frame 4 Data Byte 2
+
+                      Figure 7-3. Two-Wire Timing Diagram for Write Word Format
+
+                            1                                       9    1                                       9
+             SCL                                …
+
+
+            SDA        A6   A5   A4   A3  A2   A1   A0    R/W      0    0    0    0    0    0   P1   P0   …
+
+                         Start By                                ACK By                               ACK By
+                      Host                                             Device                                          Device
+
+                              Frame 1 Two-Wire Device Address Byte                   Frame 2 Pointer Register Byte
+
+                           1                                       9
+
+            SCL
+          (Continued)
+
+
+
+
+           SDA
+                        D15  D14  D13 D12  D11 D10  D9  D8
+          (Continued)
+                                                    ACK By  StopBy
+                                                                      Device    Host
+
+                                    Frame 3 Data Byte 1
+
+                   Figure 7-4. Two-Wire Timing Diagram for Write Single Byte Format
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    17
+
+                                                  Product Folder Links: TMP1075

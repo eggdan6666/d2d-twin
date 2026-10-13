@@ -1,0 +1,91 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+ 7.1.4 Power Register (03h) (Read-Only)
+
+ If averaging is enabled, this register displays the averaged value.
+
+The Power Register LSB is internally programmed to equal 25 times the programmed value of the Current_LSB.
+
+The Power Register records power in Watts by multiplying the decimal values of the Current Register with the
+ decimal value of the Bus Voltage Register according to Equation 4.
+
+                        Table 7-9. Power Register (03h) (Read-Only) Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+          PD15    PD14    PD13    PD12    PD11    PD10    PD9     PD8     PD7     PD6     PD5     PD4     PD3     PD2     PD1     PD0
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+ 7.1.5 Current Register (04h) (Read-Only)
+
+ If averaging is enabled, this register displays the averaged value.
+
+The value of the Current Register is calculated by multiplying the decimal value in the Shunt Voltage Register
+ with the decimal value of the Calibration Register, according to Equation 3.
+
+                  Table 7-10. Current Register (04h) (Read-Only) Register Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+          CSIGN   CD14    CD13    CD12    CD11    CD10    CD9    CD8    CD7    CD6    CD5    CD4    CD3    CD2    CD1    CD0
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+ 7.1.6 Calibration Register (05h) (Read/Write)
+
+ This register provides the device with the value of the shunt resistor that is present to create the measured
+ differential voltage. The register also sets the resolution of the Current Register. Programming this register
+ sets the Current_LSB and the Power_LSB. This register is also used in overall system calibration. See the
+Programming the Calibration Register for additional information on programming the Calibration Register.
+
+                     Table 7-11. Calibration Register (05h) (Read/Write) Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+       —     FS14    FS13    FS12    FS11    FS10     FS9     FS8     FS7     FS6     FS5     FS4     FS3     FS2     FS1     FS0
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+ 7.1.7 Mask/Enable Register (06h) (Read/Write)
+
+The Mask/Enable Register selects the function that is enabled to control the Alert pin as well as how that pin
+ functions.  If multiple functions are enabled, the highest significant bit position Alert Function (D15-D11) takes
+ priority and responds to the Alert Limit Register.
+
+                         Table 7-12. Mask/Enable Register (06h) (Read/Write)
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+          SOL    SUL    BOL    BUL    POL   CNVR   —    —    —    —    —     AFF    CVRF    OVF    APOL    LEN
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+
+ SOL:              Shunt Voltage Over-Voltage
+
+  Bit 15                  Setting this bit high configures the Alert pin to be asserted if the shunt voltage measurement following a conversion
+                     exceeds the value programmed in the Alert Limit Register.
+
+
+ SUL:              Shunt Voltage Under-Voltage
+
+
+
+
+26    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

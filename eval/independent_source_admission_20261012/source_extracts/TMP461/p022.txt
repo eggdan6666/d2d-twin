@@ -1,0 +1,85 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+8.6.1.9  η-Factor Correction Register
+
+The TMP461 device allows for a different η-factor value to be used for converting remote channel measurements
+to temperature. The remote channel uses sequential current excitation to extract a differential VBE voltage
+measurement to determine the temperature of the remote  transistor. Equation 1 shows  this voltage and
+temperature.
+
+               hkT      I2
+    VBE2 - V BE1 =      ln
+                 q        I1
+                                                                                                                                      (1)
+
+The value η in Equation 1 is a characteristic of the particular transistor used for the remote channel. The power-
+on reset value for the TMP461 device is η = 1.008. The value in the η-factor correction register can be used to
+adjust the effective η-factor according to Equation 2 and Equation 3.
+             § 1.008 u 2088  ·
+           eff    ¨                   ¸
+             © 2088 NADJUST ¹                                                                                                  (2)
+                  § 1.008 u 2088 ·
+   NADJUST   ¨                ¸  2088
+                  ©           eff      ¹                                                                                                (3)
+
+The η-factor correction value must be stored in twos complement format, yielding an effective data range from
+–128 to 127. The η-factor correction value is written to and read from pointer address 23h. The register power-on
+reset value is 00h, thus having no effect unless a different value is written to  it. The resolution of the η-factor
+register is 0.000483.
+
+                                      Table 9. η-Factor Range
+
+                                         NADJUST
+         BINARY                   HEX                   DECIMAL                       η
+
+          0111 1111                      7F                          127                         0.950205
+
+          0000 1010                     0A                          10                         1.003195
+
+          0000 1000                       08                           8                          1.004153
+
+          0000 0110                       06                           6                          1.005112
+
+          0000 0100                       04                           4                          1.006073
+
+          0000 0010                       02                           2                          1.007035
+
+          0000 0001                       01                           1                          1.007517
+
+          0000 0000                       00                           0                            1.008
+
+          1111 1111                     FF                          –1                         1.008483
+
+          1111 1110                    FE                          –2                         1.008966
+
+          1111 1100                   FC                          –4                         1.009935
+
+          1111 1010                    FA                          –6                         1.010905
+
+          1111 1000                      F8                          –8                         1.011877
+
+          1111 0110                      F6                          –10                         1.012851
+
+          1000 0000                       80                         –128                        1.073829
+
+
+8.6.1.10  Remote Temperature Offset Register
+
+The offset register allows the TMP461 device to store any system offset compensation value that may result from
+precision calibration. The value in the register is stored in the same format as the temperature result, and is
+added to the remote temperature result upon every conversion. Combined with the η-factor correction, this
+function allows for very accurate system calibration over the entire temperature range.
+
+8.6.1.11  Manufacturer Identification Register
+
+The TMP461 device allows for the two-wire bus controller to query the device for manufacturer and device IDs to
+enable software identification of the device at the particular two-wire bus address. The manufacturer ID is
+obtained by reading from pointer address FEh. The TMP461 device reads 55h for the manufacturer code.
+
+
+
+22     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

@@ -1,0 +1,48 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.17  Detect/Class Restart Register
+
+Command = 18h with 1 Data Byte, Write Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         RCL4      RCL3      RCL2      RCL1     RDET4     RDET3     RDET2     RDET1
+
+Push button register.
+
+Each bit corresponds to a particular cycle (detect or class restart) per port.
+
+Each cycle can be individually triggered by writing a “1” at that bit location, while writing a “0” does not change
+anything for that event.
+
+In Manual Mode, a single cycle (detect or class  restart)  is  initiated.  In Semi-Auto and Auto Mode, the
+corresponding bit in the Detect/Class Enable register is set, and the TPS23861 operates as prescribed in Device
+Functional Modes section.
+
+During the cool-down cycle following a Start, ICUT or ILIM, any Detect/Class Restart Command for that port is
+accepted, but the corresponding action is delayed until end of cool-down period.
+
+
+                                  NOTE
+        A Detect/Class Restart write command to 0x18 requires an I2C bus processing delay of
+           1.2 ms when followed by a Detect/Class Enable (0x14) write command. This delay applies
+          from the end of the Detect/Class Restart command (stop pulse) to the end of the
+           Detect/Class Enable command (stop pulse).
+
+
+Bit Descriptions
+
+RCL4-RCL1: Restart classification bits.
+
+RDET4-RDET1: Restart detection bits.
+
+
+
+
+
+64     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

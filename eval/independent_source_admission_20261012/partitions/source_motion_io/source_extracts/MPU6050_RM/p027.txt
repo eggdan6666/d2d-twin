@@ -1,0 +1,68 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           27 of 46  
+   
+I2C_BYPASS_EN 
+When this bit is equal to 1 and I2C_MST_EN (Register 106 bit[5]) is equal to 
+0, the host application processor will be able to directly access the auxiliary 
+I2C bus of the MPU-60X0.  
+When this bit is equal to 0, the host application processor will not be able to 
+directly access the auxiliary I2C bus of the MPU-60X0 regardless of the state 
+of I2C_MST_EN (Register 106 bit[5]). 
+ 
+4.15 Register 56 – Interrupt Enable 
+INT_ENABLE 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+38 
+56 
+ 
+- 
+ 
+FIFO 
+_OFLOW 
+_EN 
+I2C_MST 
+_INT_EN 
+- 
+- 
+DATA 
+_RDY_EN 
+ 
+Description: 
+This register enables interrupt generation by interrupt sources. 
+For information regarding the interrupt status for each interrupt generation source, please refer to 
+Register 58. Further information regarding I2C Master interrupt generation can be found in Register 
+54. 
+Bits 2 and 1 are reserved. 
+ 
+Parameters: 
+FIFO_OFLOW_EN 
+When set to 1, this bit enables a FIFO buffer overflow to generate an 
+interrupt. 
+I2C_MST_INT_EN 
+When set to 1, this bit enables any of the I2C Master interrupt sources to 
+generate an interrupt. 
+DATA_RDY_EN 
+When set to 1, this bit enables the Data Ready interrupt, which occurs each 
+time a write operation to all of the sensor registers has been completed. 
+ 
+ 

@@ -1,0 +1,44 @@
+Bosch Sensortec | BME280 Data sheet                                            28 | 60
+
+
+Table 19: Register 0xF2 “ctrl_hum”
+
+    Register 0xF2        Name                           Description
+     “ctrl_hum”
+        Bit 2, 1, 0             osrs_h[2:0]        Controls oversampling of humidity data. See Table
+                                          20 for settings and chapter 3.4.1 for details.
+
+Table 20: register settings osrs_h
+
+   osrs_h[2:0]      Humidity oversampling
+      000        Skipped (output set to 0x8000)
+      001              oversampling ×1
+      010              oversampling ×2
+      011              oversampling ×4
+      100              oversampling ×8
+   101, others          oversampling ×16
+
+5.4.4  Register 0xF3 “status”
+The “status” register contains two bits which indicate the status of the device.
+
+Table 21: Register 0xF3 “status”
+
+    Register 0xF3        Name                           Description
+       “status”
+           Bit 3             measuring[0]         Automatically set to ‘1’ whenever a conversion is
+                                              running and back to ‘0’ when the results have been
+                                                           transferred to the data registers.
+           Bit 0             im_update[0]      Automatically set to ‘1’ when the NVM data are being
+                                             copied to image registers and back to ‘0’ when the
+                                            copying is done. The data are copied at power-on-
+                                                         reset and before every conversion.
+
+5.4.5  Register 0xF4 “ctrl_meas”
+The “ctrl_meas” register sets the pressure and temperature data acquisition options of the device. The
+register needs to be written after changing “ctrl_hum” for the changes to become effective.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

@@ -1,0 +1,99 @@
+7.6 Register Map
+Table 7-3. TMP117 Register Map
+ADDRESS
+TYPE
+RESET
+ACRONYM
+REGISTER NAME
+SECTION
+00h
+R
+8000h
+Temp_Result
+Temperature result register
+Go
+01h
+R/W
+0220h(1)
+Configuration
+Configuration register
+Go
+02h
+R/W
+6000h(1)
+THigh_Limit
+Temperature high limit register
+Go
+03h
+R/W
+8000h(1)
+TLow_Limit
+Temperature low limit register
+Go
+04h
+R/W
+0000h
+EEPROM_UL
+EEPROM unlock register
+Go
+05h
+R/W
+xxxxh(1)
+EEPROM1
+EEPROM1 register
+Go
+06h
+R/W
+xxxxh(1)
+EEPROM2
+EEPROM2 register
+Go
+07h
+R/W
+0000h(1)
+Temp_Offset
+Temperature offset register
+Go
+08h
+R/W
+xxxxh(1)
+EEPROM3
+EEPROM3 register
+Go
+0Fh
+R
+0117h
+Device_ID
+Device ID register
+Go
+(1)
+This value is stored in Electrically-Erasable, Programmable Read-Only Memory (EEPROM) during device manufacturing. The device 
+reset value can be changed by writing the relevant code in the EEPROM cells (see the EEPROM Overview section).
+Table 7-4. TMP117 Access Type Codes
+Access Type
+Code
+Description
+Read Type
+R
+R
+Read
+RC
+R
+C
+Read
+to Clear
+Write Type
+W
+W
+Write
+Reset or Default Value
+-n
+Value after reset or the default 
+value
+www.ti.com
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+Copyright © 2022 Texas Instruments Incorporated
+Submit Document Feedback
+25
+Product Folder Links: TMP117

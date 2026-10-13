@@ -1,0 +1,81 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.4     CTRL1 (20h)
+              Control register 1 (R/W)
+
+
+                                                 Table 27. Control register 1
+
+               ODR3       ODR2       ODR1       ODR0       MODE1      MODE0     LP_MODE1    LP_MODE0
+
+
+                                            Table 28. Control register 1 description
+
+                ODR[3:0]              Output data rate and mode selection (see Table 29. Data rate configuration)
+
+               MODE[1:0]          Mode selection (see Table 30. Mode selection)
+
+               LP_MODE[1:0]         Low-power mode selection (see Table 31. Low-power mode selection)
+
+
+            ODR[3:0] is used to set the power mode and ODR selection. The following table lists the bit settings for power-
+           down mode and each available frequency.
+
+
+                                               Table 29. Data rate configuration
+
+                     ODR[3:0]                                  Power mode / data rate configuration
+
+                      0000         Power-down
+
+                      0001          High-performance / low-power mode 12.5 / 1.6 Hz
+
+                      0010          High-performance / low-power mode 12.5 Hz
+
+                       0011          High-performance / low-power mode 25 Hz
+
+                      0100          High-performance / low-power mode 50 Hz
+
+                      0101          High-performance / low-power mode 100 Hz
+
+                       0110          High-performance / low-power mode 200 Hz
+
+                        0111          High-performance / low-power mode 400 / 200 Hz
+
+                      1000          High-performance / low-power mode 800 / 200 Hz
+
+                      1001          High-performance / low-power mode 1600 / 200 Hz
+
+
+                                                   Table 30. Mode selection
+
+                   MODE[1:0]                                     Mode and resolution
+
+                       00          Low-power mode (12/14-bit resolution)
+
+                       01           High-performance mode (14-bit resolution)
+
+                       10            Single data conversion on-demand mode (12/14-bit resolution)
+
+                         11                -
+
+
+                                             Table 31. Low-power mode selection
+
+                        LP_MODE[1:0]                                    Power mode and resolution
+
+                               00                  Low-power mode 1 (12-bit resolution)
+
+                               01                  Low-power mode 2 (14-bit resolution)
+
+                               10                  Low-power mode 3 (14-bit resolution)
+
+                                 11                  Low-power mode 4 (14-bit resolution)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 36/65

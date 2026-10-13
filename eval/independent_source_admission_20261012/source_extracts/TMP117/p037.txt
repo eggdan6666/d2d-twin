@@ -1,0 +1,49 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+      •  Maximize the air gap between the sensor and the surrounding copper areas (anti-etch), especially when
+       close to the heat source.
+      •  Create a PCB cutout between sensor and other circuits. Leave a narrow channel away from heat source
+      components as a routing bridge into the island.
+      •    If the heat source is top side, avoid running traces on top; instead, route all signals on the bottom side.
+      •  Place the board vertically to improve air flow and to reduce dust collection.
+
+ 10.2 Layout Examples
+
+                                                                                  Via to Power Plane
+
+                                                                                  Via to Ground Plane
+
+                                                                                  Via to Internal Layer
+
+                            5 k     5 k     5 k                                         Internal Layer Trace
+
+                                                                            Top/Bottom Layer Trace
+
+     MCU INT
+
+       I2C Bus
+
+
+                                  SCL                             SDA
+                                              1                            6
+                                                                                                                        0.1 µF
+                                                         Exposed
+                             GND                               V+                                                             Thermal
+                                              2                            5
+                                                       Pad
+
+                                ALERT                              ADD0
+                                              3                            4
+
+
+
+                              Figure 10-1. DRV Layout Recommendation
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    37
+
+                                                  Product Folder Links: TMP117

@@ -1,0 +1,25 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+The AD5592R/AD5592R-1 have a serial interface (SYNC, SCLK,           Bits[14:12] select which DAC is addressed. Bits[11:0] are the 12-bit
+SDI, and SDO), which is compatible with SPI standards, as well as        data loaded to the selected DAC, with Bit 11 being the MSB of
+with most DSPs. The input shift register is 16 bits wide (see Table          the DAC data. Table 13 shows the control register map for the
+10). The MSB (Bit 15) determines what type of write function is          AD5592R/AD5592R-1. The register map allows the operation of
+required. When Bit 15 is 0, a write to the control register is selected.       each of the I/Ox pins to be configured. ADCs can be selected for
+The control register address is selected by Bits[14:11]. Bits[10:9]            inclusion in sampling sequences. DACs can be updated individually
+are reserved and are 0s. Bits[8:0] set the data that is written to             or simultaneously (see the LDAC Mode Operation section). GPIO
+the selected control register. When Bit 15 is 1, data is written to a           settings are also controlled via the register map.
+DAC channel (assuming that channel has been set to be a DAC).
+
+Table 10. Input Shift Register Format
+MSB                                                                                                            LSB
+15           14       13       12       11      10      9       8       7       6       5       4       3       2       1       0
+0                        Control register address         0       0                                           Control register data
+1                DAC address                                                                      12-bit DAC data
+
+
+
+
+
+analog.com                                                                                         Rev. H | 26 of 54

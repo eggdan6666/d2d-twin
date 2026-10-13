@@ -1,0 +1,34 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+10  Serial Interface Considerations (MPU-6050)
+
+10.1 MPU-6050 Supported Interfaces
+The MPU-6050 supports I2C communications on both its primary (microprocessor) serial interface and its
+auxiliary interface.
+
+
+10.2 Logic Levels
+The MPU-6050’s I/O logic levels are set to be VLOGIC, as shown in the table below. AUX_VDDIO must be
+set to 0.
+
+
+        I/O Logic Levels vs. AUX_VDDIO
+
+                      MICROPROCESSOR LOGIC LEVELS        AUXILLARY LOGIC LEVELS       AUX_VDDIO
+                                             (Pins: SDA, SCL, AD0, CLKIN, INT)                     (Pins: AUX_DA, AUX_CL)
+
+           0                         VLOGIC                          VLOGIC
+
+            Note: The power-on-reset value for AUX_VDDIO is 0.
+
+When AUX_VDDIO is set to 0 (its power-on-reset value), VLOGIC is the power supply voltage for both the
+microprocessor system bus and the auxiliary I2C bus, as shown in the figure of Section 10.3.
+
+
+
+
+
+                                           38 of 52

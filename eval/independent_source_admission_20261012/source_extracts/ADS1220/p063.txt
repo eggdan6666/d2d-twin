@@ -1,0 +1,41 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ is a result of the output drive capability of the PGA amplifiers (A1 and A2); see Figure 8-2. The output of
+each amplifier must stay 200mV away from the rails (AVDD and AVSS), otherwise the PGA becomes nonlinear.
+ Consequently, the maximum output swing of the PGA is limited to VOUT = ±[(AVDD – AVSS) – 0.4V].
+ Using a 3mV/V load cell with a 5V excitation yields a maximum differential output voltage of VINMAX = ±15mV,
+ which meets Equation 40 when using a gain of 128.
+
+     VINMAX ≤ ±[(AVDD – AVSS) – 0.4V] / Gain = ±(5V – 0.4V) / 128 = ±36mV                                   (40)
+
+A first-order differential and common-mode RC filter (RF1, RF2, CDIF1, CCM1, and CCM2) is placed on the ADC
+ inputs. The reference has an additional capacitor CDIF2 to limit reference noise. Care must be taken to maintain
+a limited amount of filtering or the measurement is no longer ratiometric.
+
+ To find the repeatability of the readings, perform the following calculation. The load cell produces an output
+ voltage of 15mV at the maximum load of 1kg. At a Gain = 128 and DR = 20SPS the ADS1220 offers a noise-free
+ resolution of 0.41µVpp. The repeatability is then calculated as shown in Equation 41.
+
+     Repeatability = (1kg / 15mV) × 0.41µV = 27mg                                                          (41)
+
+The register settings for this design are shown in Table 9-6.
+
+                                     Table 9-6. Register Settings
+               REGISTER     SETTING                      DESCRIPTION
+                    00h          3Eh      AINP = AIN1, AINN = AIN2, gain = 128, PGA enabled
+                    01h           04h     DR = 20SPS, normal mode, continuous conversion mode
+
+                                                    External reference (REFP1, REFN1), simultaneous 50Hz and 60Hz
+                    02h           98h
+                                                           rejection, PSW = 1b
+
+                    03h           00h     No IDACs used
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    63
+
+                                                  Product Folder Links: ADS1220

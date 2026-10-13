@@ -1,0 +1,60 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 7.3.2 Alert Monitoring
+
+The INA3221 allows programmable thresholds that make sure the intended application operates within the
+ desired operating conditions. Multiple monitoring functions are available using four alert pins: Critical, Warning,
+PV (power valid), and TC (timing control). These alert pins are open-drain connections.
+
+ 7.3.2.1 Critical Alert
+
+The critical-alert feature monitors functions based on individual conversions of each shunt-voltage channel. The
+ critical-alert limit feature compares the shunt-voltage conversion for each shunt-voltage channel to the value
+programmed into the corresponding limit register, to determine if the measured value exceeds the intended limit.
+ Exceeding the programmed limit indicates that the current through the shunt resistor is too high.
+
+ At power-up, the default critical-alert limit value for each channel is set to the positive full-scale value, effectively
+ disabling the alert. Program the corresponding limit registers at any time to begin monitoring for out-of-range
+ conditions. The  Critical  alert pin pulls low  if any channel measurement exceeds the  limit present  in the
+ corresponding-channel critical-alert limit register. When the Critical alert pulls low, read the Mask/Enable register
+ to determine which channel caused the critical alert flag indicator bit (CF1-3) to assert (= 1).
+
+ 7.3.2.1.1 Summation Control Function
+
+The INA3221 also allows the Critical alert pin to be controlled by the summation control function. This function
+adds the single shunt-voltage conversions for the desired channels (set by SCC1-3 in the Mask/Enable register)
+ to compare the combined sum to the programmed limit.
+
+The SCC bits either disable the summation control function or allow the summation control function to switch
+between including two or three channels in the Shunt-Voltage Sum register. The Shunt-Voltage Sum Limit
+ register contains the programmed value that is compared to the value in the Shunt-Voltage Sum register to
+ determine  if the total summed limit is exceeded. If the shunt-voltage sum limit value is exceeded, the Critical
+ alert pin pulls low. Either the summation alert flag indicator bit (SF) or the individual critical alert limit bits (CF1-3)
+ in the Mask/Enable register determine the source of the alert when the Critical alert pin pulls low.
+
+ For the summation limit to have a meaningful value, use the same shunt-resistor value on all included channels.
+ Unless equal shunt-resistor values are used for each channel, do not use this function to add the individual
+ conversion values directly together in the Shunt-Voltage Sum register to report the total current.
+
+ 7.3.2.2 Warning Alert
+
+The warning alert monitors the averaged value of each shunt-voltage channel. The averaged value of each
+ shunt-voltage channel is based on the number of averages set with the averaging mode bits (AVG1-3) in the
+ Configuration register. The average value updates in the shunt-voltage output register each time there is a
+ conversion on the corresponding channel. The device compares the averaged value to the value programmed in
+ the corresponding-channel Warning Alert Limit register to determine if the averaged value has been exceeded,
+ indicating whether the average current is too high. At power-up, the default warning-alert limit value for each
+ channel is set to the positive full-scale value, effectively disabling the alert. The corresponding limit registers can
+be programmed at any time to begin monitoring for out-of-range conditions. The Warning alert pin pulls low  if
+ any channel measurements exceed the limit present in the corresponding-channel Warning Alert Limit register.
+When the Warning alert pin pulls low, read the Mask/Enable register to determine which channel warning alert
+ flag indicator bit (WF1-3) is asserted (= 1).
+
+
+
+
+
+12    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

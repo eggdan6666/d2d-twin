@@ -1,0 +1,83 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+Both local and remote temperature data use two bytes for data storage. The high byte stores the temperature
+with 1°C resolution. The second or low byte stores the decimal fraction value of the temperature and allows a
+higher measurement resolution, as shown in Table 2. The measurement resolution for both the local and the
+remote channels is 0.0625°C.
+
+     Table 2. Decimal Fraction Temperature Data Format (Local and Remote Temperature Low Bytes)
+
+                                                TEMPERATURE REGISTER LOW BYTE VALUE
+                                                                              (0.0625°C Resolution)(1)
+       TEMPERATURE
+                 (°C)                             STANDARD AND EXTENDED BINARY                         HEX
+
+               0                                                 0000 0000                                            00
+
+              0.0625                                               0001 0000                                            10
+
+              0.1250                                               0010 0000                                            20
+
+              0.1875                                               0011 0000                                            30
+
+              0.2500                                               0100 0000                                            40
+
+              0.3125                                               0101 0000                                            50
+
+              0.3750                                               0110 0000                                            60
+
+              0.4375                                               0111 0000                                            70
+
+              0.5000                                               1000 0000                                            80
+
+              0.5625                                               1001 0000                                            90
+
+              0.6250                                               1010 0000                                        A0
+
+              0.6875                                               1011 0000                                        B0
+
+              0.7500                                               1100 0000                                      C0
+
+              0.8125                                               1101 0000                                      D0
+
+              0.8750                                               1110 0000                                        E0
+
+              0.9375                                               1111 0000                                          F0
+
+(1)  Resolution is 0.0625°C per count. All possible values are shown.
+
+8.3.1.1  Standard Binary to Decimal Temperature Data Calculation Example
+
+High-byte conversion (for example, 0111 0011):
+    Convert the right-justified binary high byte to hexadecimal.
+   From hexadecimal, multiply the first number by 160 = 1 and the second number by 161 = 16.
+   The sum equals the decimal equivalent.
+   0111 0011b →73h →(3 × 160) + (7 × 161) = 115.
+
+Low-byte conversion (for example, 0111 0000):
+   To convert the left-justified binary low-byte to decimal, use bits 7 through 4 and ignore bits 3 through 0
+   because they do not affect the value of the number.
+   0111b →(0 × 1 / 2)1 + (1 × 1 / 2)2 + (1 × 1 / 2)3 + (1 × 1 / 2)4 = 0.4375.
+
+8.3.1.2  Standard Decimal to Binary Temperature Data Calculation Example
+
+For positive temperatures (for example, 20°C):
+    (20°C) / (1°C per count) = 20 →14h →0001 0100.
+    Convert the number to binary code with 8-bit, right-justified format, and MSB = 0 to denote a positive sign.
+   20°C is stored as 0001 0100 →14h.
+
+For negative temperatures (for example, –20°C):
+    (|–20|) / (1°C per count) = 20 →14h →0001 0100.
+   Generate the twos complement of a negative number by complementing the absolute value binary number
+   and adding 1.
+   –20°C is stored as 1110 1100 →ECh.
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     11
+
+                                                  Product Folder Links: TMP461

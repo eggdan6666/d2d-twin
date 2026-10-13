@@ -1,0 +1,94 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 6.6 SPI Timing Requirements
+
+ over operating ambient temperature range and DVDD = 2.3V to 5.5V (unless otherwise noted)
+
+                                                                                        MIN           MAX   UNIT
+  td(CSSC)    Delay time, CS falling edge to first SCLK rising edge(2)                                           50                         ns
+  td(SCCS)    Delay time, final SCLK falling edge to CS rising edge                                             25                         ns
+  tw(CSH)     Pulse duration, CS high                                                                    50                         ns
+  tc(SC)     SCLK period                                                                           150                         ns
+  tw(SCH)     Pulse duration, SCLK high                                                                  60                         ns
+  tw(SCL)     Pulse duration, SCLK low                                                                  60                         ns
+  tsu(DI)      Setup time, DIN valid before SCLK falling edge                                                 50                         ns
+  th(DI)       Hold time, DIN valid after SCLK falling edge                                                    25                         ns
+
+                                                      Normal mode, duty-cycle mode                                    14000
+           SPI timeout(1)                                                                                                              tMOD
+                                                         Turbo mode                                                    28000
+
+ (1)  See the SPI Timeout section for more information.
+      tMOD = 1 / fMOD. Modulator frequency fMOD = 256kHz (normal mode, duty-cycle mode) and 512kHz (turbo mode), when using the
+       internal oscillator or an external 4.096MHz clock.
+ (2)  CS can be tied low permanently in case the serial bus is not shared with any other device.
+
+ 6.7 SPI Switching Characteristics
+
+ over operating ambient temperature range, DVDD = 2.3V to 5.5V (unless otherwise noted)
+
+              PARAMETER                       TEST CONDITIONS                 MIN        TYP       MAX   UNIT
+
+            Propagation delay time,
+  tp(CSDO)                              DOUT load = 20pF || 10kΩ to DGND                                         50     ns         CS falling edge to DOUT driven
+
+            Propagation delay time,
+  tp(SCDO)                              DOUT load = 20pF || 10kΩ to DGND                 0                        50     ns         SCLK rising edge to valid new DOUT
+
+            Propagation delay time,
+  tp(CSDOZ)                              DOUT load = 20pF || 10kΩ to DGND                                         50     ns         CS rising edge to DOUT high impedance
+
+ 6.8 Timing Diagrams
+
+
+                                                                                                                                                                                                                tw(CSH)
+
+
+
+                      CS
+
+
+                                                                     ttd(CSSC)t                              ttc(SC)t                                                      tw(SCH)                                           ttd(SCCS)t
+
+
+
+                      SCLK
+
+
+                                                                                     tsu(DI)                                                                            th(DI)                                                  tw(SCL)
+
+
+
+                          DIN
+
+      Single-byte communication is shown. Actual communication can be multiple bytes.
+
+                           Figure 6-1. Serial Interface Timing Requirements
+
+
+
+
+                        CS
+
+
+
+
+
+                        SCLK
+
+
+                                                                           tp(CSDO)                                                           tp(SCDO)                                                                                   tp(CSDOZ)
+
+
+                                            Hi-Z                                                                                                                                      Hi-Z
+                   DOUT/DRDY
+
+      Single-byte communication is shown. Actual communication can be multiple bytes.
+
+                         Figure 6-2. Serial Interface Switching Characteristics
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback     9
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,49 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 26. Bit Descriptions for GPIO_OPENDRAIN_CONFIG (Continued)
+Bits            Bit Name           Description                                                                                                Default Value
+
+5           GPIO5              Set the I/O5 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+4           GPIO4              Set the I/O4 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+3           GPIO3              Set the I/O3 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+2           GPIO2              Set the I/O2 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+1           GPIO1              Set the I/O1 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+0           GPIO0              Set the I/O0 pin as open-drain.                                                                       0x0
+                                         0: The I/O pin is a push/pull output pin.
+                                         1: The I/O pin is an open-drain output pin.
+
+
+Three-State Configuration Register
+
+Name: IO_TS_CONFIG
+
+Selects which pins are three-state.
+
+
+
+
+
+Table 27. Bit Descriptions for IO_TS_CONFIG
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b1101.                                                       0xD
+[10:8]       RESERVED         Reserved. Set these bits to 0b000.                                                                    0x0
+7           TS7                Set the I/O7 pin as three-state output.                                                                  0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is a three-state output pin.
+
+
+analog.com                                                                                         Rev. H | 49 of 54

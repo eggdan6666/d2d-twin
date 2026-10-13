@@ -1,0 +1,66 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.6.5 Alert_Enable Register(Address = 04h) [reset = 0016h]
+
+ This register configures which flags of the Alert_Status register are enabled or disabled. Disabling an Alert flag
+ will cause the ALERT pin to not assert when that flag bit is set. If the flag is enabled the ALERT pin will assert
+when that flag is set. The flag bit will still be set in the register when the Alert functionality is disabled for that bit.
+
+ Currently if there is an active alert on the ALERT pin and the enable for that alert is set to 0b, the TMP126 will
+ not the de-assert the pin until the status register is read or a new conversion occurs.
+
+ Return to Register Map.
+
+                                 Figure 8-23. Alert_Enable Register
+       15            14            13            12             11            10             9             8
+
+                                                    Reserved
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+                 Reserved                  CRC_Alert_En  Slew_Alert_En  THigh_Alert_En  TLow_Alert_En  Data_Ready_Al
+                                                                                                                     ert_En
+
+                   R-000b                      R/W-1b        R/W-0b        R/W-1b        R/W-1b        R/W-0b
+
+                          Table 8-9. Alert_Enable Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:5    Reserved                  R       000h       Reserved
+
+     4     CRC_Alert_En                R/W     1b         Enables the CRC_Flag alert to assert the ALERT pin.
+                                                             0b = CRC_Flag ALERT disabled
+                                                             1b = CRC_Flag ALERT enabled
+
+     3     Slew_Alert_En                R/W     0b         Enables the Slew_Flag assert the ALERT pin while in interrupt
+                                                             mode. When in comparator mode, enables the Slew_Status to
+                                                                           assert the ALERT.
+                                                             0b = Slew_Flag ALERT disabled
+                                                             1b = Slew_Flag ALERT enabled
+
+     2     THigh_Alert_En               R/W     1b         Enables the THigh_Flag assert the ALERT pin while in interrupt
+                                                             mode. When in comparator mode, enables the THigh_Status to
+                                                                           assert the ALERT.
+                                                             0b = THigh_Flag Alert disabled
+                                                             1b = THigh_Flag Alert enabled
+
+     1     TLow_Alert_En                R/W     1b         Enables the TLow_Flag assert the ALERT pin while in interrupt
+                                                             mode. When in comparator mode, enables the TLow_Status to
+                                                                           assert the ALERT.
+                                                             0b = TLow_Flag Alert disabled
+                                                             1b = TLow_Flag Alert enabled
+
+     0     Data_Ready_Alert_En           R/W     0b         Enables the Data_Ready_Flag to assert the ALERT pin.
+                                                             0b = Data_Ready Alert disabled
+                                                             1b = Data_Ready Alert enabled
+
+
+
+
+
+30    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

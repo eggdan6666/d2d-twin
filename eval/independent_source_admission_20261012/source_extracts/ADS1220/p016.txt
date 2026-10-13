@@ -1,0 +1,76 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+7 Parameter Measurement Information
+ 7.1 Noise Performance
+
+ Delta-sigma (ΔΣ) analog-to-digital converters (ADCs) are based on the principle of oversampling. The input
+ signal of a ΔΣ ADC is sampled at a high frequency (modulator frequency) and subsequently filtered and
+ decimated in the digital domain to yield a conversion result at the respective output data rate. The ratio between
+ modulator frequency and output data rate is called oversampling ratio (OSR). By increasing the OSR, and
+ thus reducing the output data rate, the noise performance of the ADC can be optimized. In other words, the
+ input-referred noise drops when reducing the output data rate because more samples of the internal modulator
+ are averaged to yield one conversion result. Increasing the gain also reduces the input-referred noise, which is
+ particularly useful when measuring low-level signals.
+
+ Table 7-1 to Table 7-8 summarize the device noise performance. Data are representative of typical noise
+ performance at TA = 25°C using the internal 2.048V reference. Data shown are the result of averaging readings
+ from a single device over a time period of approximately 0.75 seconds and are measured with the inputs
+ internally shorted together. Table 7-1, Table 7-3, Table 7-5 and Table 7-7 list the input-referred noise in units
+ of μVRMS for the conditions shown. Values in µVPP are shown in parenthesis. Table 7-2, Table 7-4, Table 7-6
+and Table 7-8 list the corresponding data in effective resolution calculated from μVRMS values using Equation 1.
+ Noise-free resolution calculated from peak-to-peak noise values using Equation 2 are shown in parenthesis.
+
+The input-referred noise (Table 7-1, Table 7-3, Table 7-5 and Table 7-7) only changes marginally when using
+an external low-noise reference, such as the REF5020. Use Equation 1 and Equation 2 to calculate effective
+ resolution numbers and noise-free resolution when using a reference voltage other than 2.048V:
+
+     Effective Resolution = ln [2 × VREF / (Gain × VRMS-Noise)] / ln(2)                                                  (1)
+
+     Noise-Free Resolution = ln [2 × VREF / (Gain × VPP-Noise)] / ln(2)                                                 (2)
+                                   Table 7-1. Noise in μVRMS (μVPP)
+                 at AVDD = 3.3V, AVSS = 0V, Normal Mode, and Internal Reference = 2.048V
+  DATA                                        GAIN (PGA Enabled)
+  RATE
+   (SPS)         1             2             4            8           16          32          64          128
+
+    20      3.71 (13.67)     1.54 (5.37)      1.15 (4.15)     0.80 (3.36)    0.35 (1.16)    0.23 (0.73)    0.10 (0.35)    0.09 (0.41)
+
+    45      7.36 (29.54)    2.93 (13.06)     1.71 (9.28)     0.88 (4.06)    0.50 (2.26)    0.29 (1.49)    0.19 (0.82)    0.12 (0.51)
+
+    90      10.55 (47.36)    4.50 (20.75)     2.43 (11.35)    1.51 (6.65)    0.65 (3.62)    0.42 (2.14)    0.27 (1.22)    0.18 (0.85)
+
+    175     11.90 (63.72)    6.45 (34.06)    3.26 (17.76)    1.82 (11.20)    1.01 (5.13)    0.57 (3.09)    0.34 (2.14)    0.26 (1.60)
+
+    330     19.19 (106.93)   9.38 (50.78)    4.25 (26.25)    2.68 (14.13)    1.45 (7.52)    0.79 (4.66)    0.50 (2.69)    0.34 (1.99)
+
+    600     24.78 (151.61)   13.35 (72.27)    6.68 (39.43)    3.66 (19.26)   2.10 (12.77)    1.14 (6.87)    0.70 (4.76)    0.55 (3.34)
+
+   1000    37.53 (227.29)  18.87 (122.68)   9.53 (58.53)    5.37 (31.52)   2.95 (18.08)   1.65 (10.71)    1.03 (6.52)    0.70 (4.01)
+
+    Table 7-2. Effective Resolution From RMS Noise (Noise-Free Resolution From Peak-to-Peak Noise)
+                 at AVDD = 3.3V, AVSS = 0V, Normal Mode, and Internal Reference = 2.048V
+   DATA                                        GAIN (PGA Enabled)
+   RATE
+   (SPS)        1            2            4            8           16           32           64          128
+
+    20     20.08 (18.19)  20.34 (18.54)  19.76 (17.91)  19.28 (17.22)  19.48 (17.75)  19.10 (17.42)  19.33 (17.49)  18.49 (16.26)
+
+    45     19.09 (17.08)  19.42 (17.26)  19.19 (16.75)  19.15 (16.94)  18.95 (16.79)  18.74 (16.39)  18.38 (16.25)  18.00 (15.49)
+
+    90     18.57 (16.40)  18.80 (16.59)  18.68 (16.46)  18.37 (16.23)  18.60 (16.11)  18.20 (15.87)  17.87 (15.67)  17.44 (15.20)
+
+    175     18.39 (15.97)  18.28 (15.88)  18.26 (15.82)  18.10 (15.48)  17.96 (15.61)  17.78 (15.34)  17.53 (14.87)  16.91 (14.29)
+
+    330     17.70 (15.23)  17.74 (15.30)  17.88 (15.25)  17.54 (15.15)  17.43 (15.05)  17.30 (14.74)  16.96 (14.54)  16.50 (13.97)
+
+    600     17.33 (14.72)  17.23 (14.79)  17.23 (14.66)  17.09 (14.70)  16.89 (14.29)  16.77 (14.18)  16.48 (13.72)  15.83 (13.23)
+
+   1000    16.74 (14.14)  16.73 (14.03)  16.71 (14.09)  16.54 (13.99)  16.41 (13.79)  16.25 (13.54)  15.92 (13.26)  15.49 (12.96)
+
+
+
+
+16    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

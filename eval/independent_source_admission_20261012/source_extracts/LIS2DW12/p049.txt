@@ -1,0 +1,56 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.27    STATUS_DUP (37h)
+            Event detection status register (R)
+
+
+                                               Table 75. STATUS_DUP register
+
+                                    SLEEP_    DOUBLE_    SINGLE_
+             OVR      DRDY_T                                             6D_IA        FF_IA      DRDY
+                                       STATE_IA      TAP        TAP
+
+
+                                          Table 76. STATUS_DUP register description
+
+                                   FIFO overrun status flag
+
+          OVR                           (0: FIFO is not completely filled;
+
+                                                1: FIFO is completely filled and at least one sample has been overwritten)
+
+                                       Temperature status
+           DRDY_T
+                                                   (0: data not available; 1: a new set of data is available)
+
+                                       Sleep event status
+            SLEEP_ STATE_IA
+                                                   (0: Sleep event not detected; 1: Sleep event detected)
+
+                                         Double-tap event status
+           DOUBLE_ TAP
+                                                   (0: Double-tap event not detected; 1: Double-tap event detected)
+
+                                            Single-tap event status
+            SINGLE_ TAP
+                                                   (0: Single-tap event not detected; 1: Single-tap event detected)
+
+                                      Source of change in position portrait/landscape/face-up/face-down
+             6D_IA
+                                                   (0: no event detected; 1: a change in position is detected)
+
+                                                 Free-fall event detection status
+              FF_IA
+                                                   (0: free-fall event not detected; 1: free-fall event detected)
+
+                                        Data-ready status
+           DRDY
+                                                   (0: not ready; 1: X-, Y-, and Z-axis new data available)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 49/65

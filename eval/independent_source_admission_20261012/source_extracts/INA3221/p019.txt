@@ -1,0 +1,68 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 7.4.3 Filtering and Input Considerations
+
+ Measuring current  is often noisy, and such noise can be  difficult to define. The INA3221 offers several
+ filtering options by allowing conversion times and the number of averages to be selected independently in
+ the Configuration register. The conversion times can be set independently for the shunt- and bus-voltage
+measurements as well, for added flexibility in configuring power-supply bus monitoring.
+
+The internal ADC is based on a delta-sigma (ΔΣ) front-end with a 500kHz (±30%) typical sampling rate. This
+ architecture has good inherent noise rejection; however, transients that occur at or very close to the sampling-
+ rate harmonics can cause problems. These transient signals are at 1MHz and higher; therefore, the signals are
+managed by incorporating filtering at the INA3221 input. High-frequency signals allow for the use of low-value
+ series resistors on the filter, with negligible effects on measurement accuracy. In general, filtering the INA3221
+ input is only necessary  if there are transients at exact harmonics of the 500kHz (±30%) sampling rate that
+ are greater than 1MHz. Filter using the lowest-possible series resistance (typically 10Ω or less) and a ceramic
+ capacitor. Recommended capacitor values are 0.1μF to 1.0μF. Figure 7-8 shows the INA3221 with an additional
+ filter added at the input.
+
+
+
+                        Power Supply
+                           (0V to 26V)
+
+                                                 RFILTER                                       Ch 1
+                                     ≤ 10
+                                                               Ch 2
+                                                                           VIN+2
+
+
+                                                                CFILTER                                ADC
+                                                                       VIN 2
+                                                 RFILTER
+                                     ≤ 10
+
+
+
+
+                                                                           Ch 3                           Load 2
+                                                            CFILTER: 0.1- F to 1- F
+                                               Ceramic Capacitor
+
+
+                               Figure 7-8. INA3221 With Input Filtering
+
+The INA3221 inputs are specified to tolerate 26V across the inputs. However, overload conditions are another
+ consideration for the INA3221 inputs. For example, a large differential-input scenario can be a short to ground
+on the load side of the shunt. This type of event results in the full power-supply voltage applied across the
+ shunt,  if supported by the power supply or energy-storage capacitors. Keep in mind that removing a short to
+ ground can result in inductive kickbacks that can exceed the 26V differential and common-mode rating of the
+ INA3221. Inductive kickback voltages are best controlled by zener-type transient-absorbing devices (commonly
+ called transzorbs) combined with sufficient energy-storage capacitance.
+
+ In applications that do not have large energy-storage electrolytic capacitors on one or both sides of the shunt, an
+ input overstress condition can result from an excessive dV/dt of the voltage applied to the input. A hard physical
+ short is the most likely cause of this event, particularly in applications without large electrolytic capacitors
+ present. This problem occurs because an excessive dV/dt can activate the INA3221 ESD protection in systems
+where large currents are available. Testing has demonstrated that the addition of 10Ω resistors in series with
+each INA3221 input sufficiently protects the inputs against this dV/dt failure up to the 26V device rating.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+
+                                                  Product Folder Links: INA3221

@@ -1,0 +1,70 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.5 Programming
+ 8.5.1 Serial Interface
+
+The SPI-compatible serial interface of the device is used to read conversion data, read and write the device
+ configuration registers, and control device operation. Only SPI mode 1 (CPOL = 0, CPHA = 1) is supported. The
+ interface consists of five control lines (CS, SCLK, DIN, DOUT/DRDY, and DRDY) but can be used with only four
+ or even three control signals as well. The dedicated data-ready signal (DRDY) can be configured to be shared
+ with DOUT/DRDY. If the serial bus is not shared with any other device, CS can be tied low permanently so that
+ only signals SCLK, DIN, and DOUT/DRDY are required to communicate with the device.
+
+ 8.5.1.1 Chip Select (CS)
+
+ Chip select (CS)  is an active-low input  that selects the device  for SPI communication. This feature  is
+ useful when multiple devices share the same serial bus. CS must remain low for the duration of the serial
+ communication. When CS is taken high, the serial interface is reset, SCLK is ignored, and DOUT/DRDY enters
+a high-impedance state; as such, DOUT/DRDY cannot indicate when data are ready. In situations where multiple
+ devices are present on the bus, the dedicated DRDY pin can provide an uninterrupted monitor of the conversion
+ status. If the serial bus is not shared with another peripheral, CS can be tied low.
+
+ 8.5.1.2 Serial Clock (SCLK)
+
+The serial clock (SCLK) features a Schmitt-triggered input and is used to clock data into and out of the device
+on the DIN and DOUT/DRDY pins, respectively. Even though the input has hysteresis, keep the SCLK signal as
+ clean as possible to prevent glitches from accidentally shifting the data. When the serial interface is idle, hold
+SCLK low.
+
+ 8.5.1.3 Data Ready ( DRDY)
+
+DRDY indicates when a new conversion result is ready for retrieval. When DRDY falls low, new conversion data
+ are ready. DRDY transitions back high on the next SCLK rising edge. When no data are read during continuous
+ conversion mode, DRDY remains low but pulses high for a duration of 2 × tMOD prior to the next DRDY falling
+ edge. The DRDY pin is always actively driven, even when CS is high.
+
+ 8.5.1.4 Data Input (DIN)
+
+The data input pin (DIN) is used along with SCLK to send data (commands and register data) to the device. The
+ device latches data on DIN on the SCLK falling edge. The device never drives the DIN pin.
+
+ 8.5.1.5 Data Output and Data Ready (DOUT/DRDY)
+
+DOUT/DRDY serves a dual-purpose function. This pin is used with SCLK to read conversion and register
+ data from the device. Data on DOUT/DRDY are shifted out on the SCLK rising edge. DOUT/DRDY goes to a
+ high-impedance state when CS is high.
+
+ In addition, the DOUT/DRDY pin can also be configured as a data-ready indicator by setting the DRDYM bit
+ high in the configuration register. DOUT/DRDY then transitions low at the same time that the DRDY pin goes
+ low to indicate new conversion data are available. Both signals can be used to detect  if new data are ready.
+ However, because DOUT/DRDY is disabled when CS is high, the recommended method of monitoring the end
+ of a conversion when multiple devices are present on the SPI bus is to use the dedicated DRDY pin.
+
+ 8.5.1.6 SPI Timeout
+
+The ADS1220 offers an SPI timeout feature that can be used to recover communication when a serial interface
+ transmission is interrupted. This feature is especially useful in applications where CS is permanently tied low
+and is not used to frame a communication sequence. Whenever a complete command is not sent within 14000
+× tMOD (normal mode, duty-cycle mode) or 28000 × tMOD (turbo mode), the serial interface resets and the next
+SCLK pulse starts a new communication cycle. See the Modulator section for details on the modulator frequency
+ (fMOD = 1 / tMOD) in the different operating modes. For the RREG and WREG commands, a complete command
+ includes the command byte plus the register bytes that are read or written.
+
+
+
+
+
+36    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

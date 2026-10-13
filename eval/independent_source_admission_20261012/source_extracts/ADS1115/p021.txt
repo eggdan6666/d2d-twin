@@ -1,0 +1,76 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 7.5.3 Writing To and Reading From the Registers
+
+ To access a specific register from the ADS111x, the controller must first write an appropriate value to register
+ address pointer bits P[1:0] in the Address Pointer register. The Address Pointer register is written to directly after
+ the target address byte, low R/W bit, and a successful target acknowledgment. After the Address Pointer register
+ is written, the target acknowledges, and the controller issues a STOP or a repeated START condition.
+
+When reading from the ADS111x, the previous value written to bits P[1:0] determines the register that is read.
+ To change which register is read, a new value must be written to P[1:0]. To write a new value to P[1:0], the
+ controller issues a target address byte with the R/W bit low, followed by the Address Pointer register byte. No
+ additional data has to be transmitted, and a STOP condition can be issued by the controller. The controller can
+now issue a START condition and send the target address byte with the R/W bit high to begin the read. Figure
+ 7-9 details this sequence. If repeated reads from the same register are desired, there is no need to continually
+send the Address Pointer register, because the ADS111x store the value of P[1:0] until modified by a write
+ operation. However, for every write operation, the Address Pointer register must be written with the appropriate
+ values.
+
+                       1                                        9    1                                        9
+         SCL                                  ¼
+
+
+
+        SDA         1    0    0    1    0   A1 (1)  A0 (1)  R/W         0    0    0    0    0    0   P1   P0
+
+                   Start By                                  ACK By                                ACK By    Stop By
+                  Controller                                         ADS1113/4/5                                      ADS1113/4/5  Controller
+
+                               Frame 1: Target Address Byte                       Frame 2: Address Pointer Register
+
+
+                       1                                        9    1                                        9
+         SCL                                  ¼
+     (Continued)
+
+
+
+        SDA                                                                           (1)        (1)                       1    0    0    1    0   A1    A0   R/W       D15  D14  D13  D12  D11  D10  D9   D8 ¼
+     (Continued)
+
+                   Start By                                  ACK By                           From          ACK By
+                  Controller                                         ADS1113/4/5                        ADS1113/4/5         Controller(2)
+
+                               Frame 3: Target Address Byte                       Frame 4: Data Byte 1 Read Register
+
+
+                 1                                        9
+         SCL
+     (Continued)
+
+
+
+        SDA
+              D7  D6   D5   D4   D3   D2  D1  D0
+     (Continued)
+                                  From            ACK By   Stop By
+                                   ADS1113/4/5              Controller(3) Controler
+
+                         Frame 5: Data Byte 2 Read Register
+
+
+ A.  The values of A0 and A1 are determined by the ADDR pin.
+ B.  The controller can leave SDA high to terminate a single-byte read operation.
+ C.  The controller can leave SDA high to terminate a two-byte read operation.
+
+                      Figure 7-9. Timing Diagram for Reading From the ADS111x
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    21
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

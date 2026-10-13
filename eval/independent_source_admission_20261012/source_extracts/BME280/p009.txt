@@ -1,0 +1,44 @@
+Bosch Sensortec | BME280 Data sheet                                             9 | 60
+
+
+1.2  Humidity parameter specification
+
+Table 2: Humidity parameter specification
+
+ Parameter            Symbol       Condition        Min      Typ     Max     Unit
+ Operating range1          RH        For temperatures       -40      25       85      °C
+                                < 0 °C and > 60 °C                                                       0                100                                                        %RH                                      see Figure 1
+ Supply current                  IDD,H     1 Hz forced mode,                 1.8        2.8     µA
+                                           humidity and
+                                         temperature
+ Absolute accuracy          AH       20…80 %RH,                 ±3          %RH
+ tolerance                          25 °C, including
+                                              hysteresis
+ Hysteresis2              HH     109010 %RH,               ±1          %RH
+                                       25 °C
+
+  Nonlinearity3             NLH    1090 %RH, 25 °C               1          %RH
+ Response time to              900 or 090 %RH,              1                  s
+ complete 63% of step4                    25°C                                    𝜏𝜏63%
+ Resolution               RH                                      0.008         %RH
+ Noise in humidity (RMS)     NH     Highest oversampling,              0.02         %RH
+                                    see chapter 3.6
+ Long term stability           ∆Hstab    10…90 %RH, 25 °C                0.5           %RH/
+                                                                                           year
+
+
+
+
+
+1 When exceeding the operating range (e.g.  for soldering), humidity sensing performance  is temporarily degraded and
+reconditioning is recommended as described in section 7.8. Operating range only for non-condensing environment.
+2 For hysteresis measurement the sequence 103050709070503010 %RH is used. The hysteresis is defined as
+the difference between measurements of the humidity up / down branch and the averaged curve of both branches
+3 Non-linear contributions to the sensor data are corrected during the calculation of the relative humidity by the compensation
+formulas described in section 4.2.3.
+4 The air-flow in direction to the vent-hole of the device has to be dimensioned in a way that a sufficient air exchange inside to
+outside will be possible. To observe effects on the response time-scale of the device an air-flow velocity of approx. 1 m/s is
+needed.
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

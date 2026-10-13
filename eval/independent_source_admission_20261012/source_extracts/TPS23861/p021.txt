@@ -1,0 +1,43 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7  Detailed Description
+
+7.1  Overview
+
+The TPS23861 is a four-port PSE for power over ethernet applications. Each of the four ports provides fully
+automatic detection, classification, protection, and shut down in compliance with the IEEE 802.3at standard.
+
+The schematic of Figure 36 depicts automatic mode operation of the TPS23861, providing turnkey functionality
+ready to power PoE loads. No connection to the I2C bus or any type of host control is required. In Figure 36 the
+TPS23861 automatically:
+
+ 1.  Performs four-point load detection.
+
+ 2.  Performs classification including type-2 (two-finger) of up to Class 4 loads.
+
+ 3.  Enables power with protective foldback current limiting, and ICUT value based on load class.
+
+ 4.  Shuts down in the event of fault loads and shorts.
+
+ 5.  Performs Maintain Power Signature function to ensure removal of power if load is disconnected.
+ 6.  Undervoltage lock out occurs if VPWR falls below VPUV_F (typical 26.5 V).
+
+Following a power-off command, disconnect or shutdown due to a start, ICUT or ILIM fault, the port powers
+down. Following port power off due to a power off command or disconnect, the TPS23861 will continue automatic
+operation starting with a detection cycle.  If the shutdown is due to a start, ICUT or ILIM fault, the TPS23861
+enters into a cool-down period. After the end of the cool-down period the TPS23861 continues automatic
+operation starting with a detection cycle.
+
+The TPS23861 will not automatically apply power to a port under the following circumstances:
+•  The detect status is not Resistance Valid.
+•    If the classification status is overcurrent, class mismatch, or unknown.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     21
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,51 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 16. Bit Descriptions for ADC_SEQ (Continued)
+Bits            Bit Name           Description                                                                                                Default Value
+
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+3          ADC3                Include the ADC3 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+2          ADC2                Include the ADC2 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+1          ADC1                Include the ADC1 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+0          ADC0                Include the ADC0 channel in conversion sequence.                                                      0x0
+                                         0: The selected ADC channel is not included in the conversion sequence.
+                                         1: Include the selected ADC channel in the conversion sequence.
+
+
+General-Purpose Control Register
+
+Name: GEN_CTRL_REG
+
+DAC and ADC control register.
+
+
+
+
+
+Table 17. Bit Descriptions for GEN_CTRL_REG
+Bits            Bit Name                    Description                                                                                       Default Value
+
+15         MSB                        Set this bit to 0.                                                                            0x0
+[14:11]      REG_ADDR                   Register address. Set these bits to 0b0011.                                                     0x3
+10         RESERVED                 Reserved. Set this bit to 0.                                                                   0x0
+9          ADC_BUF_PRECH        ADC buffer precharge.                                                                      0x0
+                                                    0: ADC buffer is not used to precharge the ADC. If the ADC buffer is enabled, it is always powered up.
+                                                    1: ADC buffer is used to precharge the ADC. If the ADC buffer is enabled, it is powered up while the
+                                             conversion takes place and then powered down until the next conversion takes place.
+8          ADC_BUF_EN           ADC buffer enable.                                                                         0x0
+                                                    0: ADC buffer is disabled.
+                                                    1: ADC buffer is enabled.
+7           IO_LOCK                   Lock configuration.                                                                         0x0
+                                                    0: The contents of the I/Ox pin configuration register can be changed.
+
+
+analog.com                                                                                         Rev. H | 38 of 54

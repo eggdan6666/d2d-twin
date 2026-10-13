@@ -1,0 +1,23 @@
+Bosch Sensortec | BME280 Data sheet                                            52 | 60
+
+
+9.4  Response time using IIR filter
+When using the IIR filter, the response time of the sensor depends on the selected filter coefficient and
+the data rate used. It can be calculated using the following formula:
+                                                           75%                                       75%  1000 ⋅𝑛𝑛𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠,                                                                              𝑡𝑡𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟,   =                                                                          𝑂𝑂𝑂𝑂𝑂𝑂For the example above with a data rate of 13.51 Hz, the user could select a filter coefficient of 8.
+According to Table 6, the number of samples needed to reach 75% of a step response using this filter
+setting is 11. The response time with filter is therefore:
+                                       75%  1000 ⋅11                                                                             𝑡𝑡𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟𝑟,   =      = 814 ms                                              13.51
+9.5  Current consumption
+The current consumption depends on the selected oversampling settings, the measurement rate and
+the sensor mode, but not on the IIR filter setting. It can be calculated as:
+                                                      𝑂𝑂𝑂𝑂𝑂𝑂  𝐼𝐼𝐷𝐷𝐷𝐷,𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓= 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷⋅(1 −𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚⋅𝑂𝑂𝑂𝑂𝑂𝑂) +                                 1000               ⋅൫205 + 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷⋅[2 ⋅𝑇𝑇_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑡𝑡≠0 + 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷⋅[2 ⋅𝑃𝑃_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.5]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑝𝑝≠0          + 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷⋅[2 ⋅𝐻𝐻_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.5]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_ℎ≠0൯                                                       𝑂𝑂𝑂𝑂𝑂𝑂  𝐼𝐼𝐷𝐷𝐷𝐷,𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛= 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷𝐷𝐷⋅(1 −𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚⋅𝑂𝑂𝑂𝑂𝑂𝑂) +                                 1000               ⋅൫205 + 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷⋅[2 ⋅𝑇𝑇_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑡𝑡≠0 + 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷⋅[2 ⋅𝑃𝑃_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.5]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑝𝑝≠0          + 𝐼𝐼𝐷𝐷𝐷𝐷𝐷𝐷⋅[2 ⋅𝐻𝐻_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.5]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_ℎ≠0൯Note that the only difference between forced and normal mode current consumption is that the current
+for the inactive time is either IDDSL or IDDSB. For the example above, the current would be
+
+                                                         ⋅                                          13.51           𝐼𝐼𝐷𝐷𝐷𝐷,𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑎𝑎𝑎𝑎= 0.2 ⋅(1 −0.0115  13.51) +     (205 + 350 ⋅[2 ⋅1] + 714 ⋅[2 ⋅4 + 0.5] + [0])                                     1000                                    13.51              = 0.2 ⋅(0.845) +     (205 + 700 + 6069 + 0)                                1000              = 0.2 + 94.2 = 94.4 µA
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

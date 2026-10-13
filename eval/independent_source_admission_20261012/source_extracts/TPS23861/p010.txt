@@ -1,0 +1,45 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+Electrical Characteristics (continued)
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+            PARAMETER                    TEST CONDITIONS            MIN      TYP     MAX   UNIT
+
+ DIGITAL INTERFACE AT VVDD = 3.3 V
+ VIH              Digital input high                                                                2.1                     V
+ VIL              Digital input low                                                                                         0.9    V
+
+                Input voltage hysteresis (SCL,
+ VIT_HYS                                                                                   0.17                     V              SDAI, AIN, A3, RESET, SHTDWN)
+
+ VOL             Digital output Low, SDAO             IOL = 9 mA                                                          0.4    V
+                  Digital output Low, INT                IOL = 3 mA                                                          0.4    V
+ Rpullup         Pullup resistor to VDD            RESET, AIN, A3, SHTDWN               30        50        80    kΩ
+
+ AOUT OUTPUT
+
+                                                 During slave address programming,
+ VOL_AOUT    AOUT output low voltage                                                                                0.7    V                                                   IAOUT = 1 mA
+ EEPROM (I2C Slave Address)
+
+ nEE_cyc     EEPROM endurance             40 V < VVPWR < 57 V                    25                            cycles
+ tWC           Write cycle time (byte or page)      40 V < VVPWR < 57 V                              10       100    ms
+
+ THERMAL SHUTDOWN
+
+ TSD          Thermal shutdown temperature      Temperature rising                     143       154       161     °C
+                 Hysteresis(1)                                                                    8               °C
+
+
+
+
+
+10     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

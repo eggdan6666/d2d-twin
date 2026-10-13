@@ -1,0 +1,38 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.4  Recommended Power-on Procedure
+
+
+              0V
+              at
+                                                         Voltages                                    Power-Up Sequencing
+                     All
+                                                                    1. VLOGIC amplitude must always be ≤VDD
+                                                             amplitude
+                   TVDDR
+                    90%                                      2. TVDDR is VDD rise time: Time for VDD to rise
+                                                           from 10% to 90% of its final value
+
+                                                                    3. TVDDR is ≤100ms               10%
+    VDD
+                                                                    4. TVLGR is VLOGIC rise time: Time for
+                                            TVLGR                 VLOGIC to rise from 10% to 90% of its final
+                             90%                          value
+                                                                    5. TVLGR is ≤3ms
+
+                    10%                                      6. TVLG-VDD is the delay from the start of VDD  VLOGIC
+                                                    ramp to the start of VLOGIC rise
+
+                                                                    7. TVLG-VDD is ≥0
+                      TVLG - VDD
+                                                                    8. VDD and VLOGIC must be monotonic
+                                                     ramps
+
+
+
+
+
+                                           23 of 52

@@ -1,0 +1,32 @@
+TMP100, TMP101
+
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015                                                                 www.ti.com
+
+6.6  Timing Requirements
+
+                                                          FAST MODE      HIGH-SPEED MODE
+                    PARAMETER                                                                  UNIT
+                                                               MIN     MAX      MIN     MAX
+
+ f(SCL)         SCL operating frequency                                                      0.4                   2   MHz
+ t(BUF)          Bus free time between STOP and START condition            1300                 160                ns
+
+                Hold time after repeated START condition.
+ t(HDSTA)                                                               600                 160                ns                    After this period, the first clock is generated.
+
+ t(SUSTA)         Repeated START condition setup time                       600                 160                ns
+ t(SUSTO)       STOP condition setup time                                600                 160                ns
+ t(HDDAT)         Data hold time                                           20       900        20       170     ns
+ t(SUDAT)         Data setup time                                         100                  20                ns
+ t(LOW)         SCL clock LOW period                                   1300                 360                ns
+ t(HIGH)        SCL clock HIGH period                                   600                  60                ns
+ tRC, tFC          Clock rise and fall time                                              300                  40     ns
+ tRD, tFD         Data rise and fall time                                               300                 170     ns
+
+
+
+
+
+6      Submit Documentation Feedback                                                     Copyright © 2002–2015, Texas Instruments Incorporated
+
+                                              Product Folder Links: TMP100 TMP101

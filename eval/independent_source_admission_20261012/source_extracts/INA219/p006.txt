@@ -1,0 +1,82 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+Electrical Characteristics: (continued)
+
+At TA = 25°C, VS = 3.3 V, VIN+ = 12V, VSHUNT = (VIN+ – VIN–) = 32 mV, PGA = /1, and BRNG(1) = 1, unless otherwise noted.
+
+                                                                       INA219A                     INA219B
+             PARAMETER               TEST CONDITIONS                                                           UNIT
+                                                               MIN        TYP    MAX    MIN      TYP   MAX
+
+            Hysteresis                                                                500                        500        mV
+
+ OPEN-DRAIN DIGITAL OUTPUTS (SDA)
+
+            Logic 0 output level                            ISINK = 3 mA                               0.15        0.4                 0.15      0.4   V
+
+            High-level output leakage current         VOUT = VS                                    0.1        1                   0.1       1   μA
+
+ POWER SUPPLY
+
+           Operating supply range                                           3                        5.5       3                   5.5   V
+
+           Quiescent current                                                                       0.7        1                   0.7       1  mA
+
+           Quiescent current, power-down mode                                             6       15                 6      15   μA
+
+          Power-on reset threshold                                                      2                          2          V
+
+7.6 Bus Timing Diagram Definitions(1)
+
+                                                 FAST MODE          HIGH-SPEED MODE
+                                                                                                    UNIT
+                                                      MIN      MAX        MIN      MAX
+
+ ƒ(SCL)       SCL operating frequency                           0.001            0.4         0.001          2.56    MHz
+
+             Bus free time between STOP and START
+ t(BUF)                                                      1300                      160                    ns                 condition
+
+              Hold time after repeated START condition.
+ t(HDSTA)                                                     600                      160                    ns                 After this period, the first clock is generated.
+
+ t(SUSTA)       Repeated START condition setup time               600                      160                    ns
+ t(SUSTO)     STOP condition setup time                         600                      160                    ns
+ t(HDDAT)       Data hold time                                    0          900            0           90      ns
+ t(SUDAT)       Data setup time                                 100                       10                    ns
+ t(LOW)       SCL clock LOW period                           1300                      250                    ns
+ t(HIGH)       SCL clock HIGH period                           600                       60                    ns
+ tF DA         Data fall time                                                300                      150      ns
+ tFCL          Clock fall time                                               300                       40      ns
+ tRCL          Clock rise time                                               300                       40      ns
+ tRCL          Clock rise time for SCLK ≤100kHz                              1000                                 ns
+
+(1)  Values based on a statistical analysis of a one-time sample of devices. Minimum and maximum values are not ensured and not
+     production tested.
+
+                                            t(LOW)
+                                                         tR                       tF                                     t(HDSTA)
+
+
+      SCL
+
+                                              t(HDSTA)                             t(HIGH)   t(SUSTA)                                                                   t(SUSTO)
+                                                                      t(HDDAT)               t(SUDAT)
+
+     SDA
+
+                               t(BUF)
+
+              P        S                                              S                                P
+
+                                   Figure 1. Bus Timing Diagram
+
+
+
+
+
+6      Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

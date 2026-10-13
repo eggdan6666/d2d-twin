@@ -1,0 +1,42 @@
+ Logic Electrical Characteristics (Continued)                                                                   LM83
+
+                                    SMBus TIMEOUT
+
+
+
+
+
+                                                                                                                                                               DS101058-7
+ See drawing DS10105807
+
+ Note 1: Absolute Maximum Ratings indicate limits beyond which damage to the device may occur. DC and AC electrical specifications do not apply when operating
+ the device beyond its rated operating conditions.
+ Note 2: When the input voltage (VI) at any pin exceeds the power supplies (VI < GND or VI > VCC), the current at that pin should be limited to 5 mA. The 20 mA
+ maximum package input current rating limits the number of pins that can safely exceed the power supplies with an input current of 5 mA to four.
+ Parasitic components and or ESD protection circuitry are shown in the figure below for the LM83’s pins. The nominal breakdown voltage of the zener D3 is 6.5 V.
+ Care should be taken not to forward bias the parasitic diode, D1, present on pins: D+, D−, ADD1 and ADD0. Doing so by more than 50 mV may corrupt a temperature
+ or voltage measurement.
+
+    Pin Name       D1   D2   D3   D4                           Pin Name       D1   D2   D3   D4
+                                                           T_CRIT_A & INT               x
+VCC                                 x                          SMBData                     x      x
+D+                    x      x      x                      NC (pins 9 & 15)        x      x      x
+D−                    x      x      x      x                  SMBCLK                      x      x
+ADD0, ADD1           x      x      x                      NC (pin 13)                   x      x
+ Note: An x indicates that the diode exists.
+
+
+
+
+
+                                                                                                                   DS101058-13
+                              FIGURE 1. ESD Protection Input Structure
+
+ Note 3: See AN-450 “Surface Mounting Methods and Their Effect on Product Reliability” or the section titled “Surface Mount” found in a current National Semicon-
+ ductor Linear Data Book for other methods of soldering surface mount devices.
+ Note 4: Human body model, 100 pF discharged through a 1.5 kΩresistor. Machine model, 200 pF discharged directly into each pin.
+ Note 5: Thermal resistance of the QSOP-16 package is xyz˚C/W, junction-to-ambient when attached to a printed circuit board with 2 oz. foil as shown in Figure 3
+  .
+
+
+                                                            7                                                     www.national.com

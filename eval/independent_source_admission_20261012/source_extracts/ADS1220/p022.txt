@@ -1,0 +1,74 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+                                   Table 8-2. PGA Full-Scale Range
+                                GAIN SETTING                 FSR
+
+                                          1                         ±2.048V
+
+                                          2                         ±1.024V
+
+                                          4                         ±0.512V
+
+                                          8                         ±0.256V
+
+                                          16                         ±0.128V
+
+                                          32                         ±0.064V
+
+                                          64                         ±0.032V
+
+                                         128                        ±0.016V
+
+ 8.3.2.1 PGA Common-Mode Voltage Requirements
+
+ To stay within the linear operating range of the PGA, the input signals must meet certain requirements that are
+ discussed in this section.
+
+The outputs of both amplifiers (A1 and A2) in Figure 8-2 cannot swing closer to the supplies (AVSS and AVDD)
+ than 200mV.  If the outputs OUTP and OUTN are driven to within 200mV of the supply rails, the amplifiers
+ saturate and consequently become nonlinear. To prevent this nonlinear operating condition the output voltages
+must meet Equation 6:
+
+    AVSS + 0.2V ≤ VOUTN, VOUTP ≤ AVDD – 0.2V                                                                  (6)
+
+ Translating the requirements of Equation 6 into requirements referred to the PGA inputs (AINP and AINN) is
+ beneficial because there is no direct access to the outputs of the PGA. The PGA employs a symmetrical
+ design, therefore the common-mode voltage at the output of the PGA can be assumed to be the same as the
+common-mode voltage of the input signal, as shown in Figure 8-3.
+
+                                        AINP               +
+
+                                                     A1
+
+                                                                                              -
+                             ½ VIN              RF        OUTP
+
+
+                                                 ½ Gain·VIN
+                 VCM = ½ (V(AINP) + V(AINN))               RG
+
+                                                 ½ Gain·VIN
+                                                                               RF
+
+                             ½ VIN                   OUTN
+
+                                                                                              -
+
+                                                     A2
+
+                                        AINN               +
+
+                               Figure 8-3. PGA Common-Mode Voltage
+
+The common-mode voltage is calculated using Equation 7:
+
+    VCM = ½ (VAINP + VAINN) = ½ (VOUTP + VOUTN)                                                                  (7)
+
+
+
+
+
+22    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

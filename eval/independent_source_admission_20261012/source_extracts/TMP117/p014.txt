@@ -1,0 +1,62 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.4 Device Functional Modes
+
+The TMP117 can be configured to operate in various conversion modes by using the MOD[1:0] bits. These
+modes provide flexibility to operate the device in the most power efficient way necessary for the intended
+ application.
+
+ 7.4.1 Continuous Conversion Mode
+
+When the MOD[1:0] bits are set to 00 or 10 in the configuration register, the device operates in continuous
+ conversion mode. The device continuously performs temperature conversions in this mode, as shown in Figure
+ 7-3, and updates the temperature result register at the end of every active conversion. The user can read the
+ configuration register or the temperature result register to clear the Data_Ready flag. Therefore, the Data_Ready
+ flag can be used to determine when the conversion completes so that an external controller can synchronize
+ reading the result register with conversion result updates. The user can set the DR/nAlert_EN  bit in the
+ configuration register to monitor the state of the Data_Ready flag on the ALERT pin.
+
+ Every conversion cycle consists of an active conversion period followed by a standby period. The device
+ typically consumes 135 µA during active conversion and only 1.25 µA during the low-power standby period.
+ Figure 7-3 shows a current consumption profile of a conversion cycle while in continuous current mode. The
+ duration of the active conversion period and standby period can be configured using the CONV[2:0] and
+ AVG[1:0] bits in the configuration register, thereby allowing the average current consumption of the device to
+be optimized based on the application requirements. Changing the conversion cycle period also affects the
+ temperature result update rate because the temperature result register is updated at the end of every active
+ conversion.
+
+Use Equation 1 to calculate the average current consumption of the device in continuous conversion mode.
+
+     (Active Current Consumption u Active Conversion Time) + (Standby Current Consumption u Standby Time)
+                                        Conversion Cycle Time                                                     (1)
+
+                                                           Start of conversion
+
+                                                                tStandby timet
+                                      Active conversion time
+                                      (Affected by averaging)
+
+
+
+
+
+                                                          Conversion Cycle time Conversion Cycle time
+
+                            Figure 7-3. Conversion Cycle Timing Diagram
+
+ 7.4.2 Shutdown Mode (SD)
+
+When the MOD[1:0] bits are set to 01 in the configuration register, the device instantly aborts the currently
+ running conversion and enters a low-power shutdown mode. In this mode, the device powers down all active
+ circuitry and can be used in conjunction with the OS mode to perform temperature conversions. Engineers
+ can use the TMP117 for battery-operated systems and other low-power consumption applications because the
+ device typically only consumes 250 nA in SD mode.
+
+
+
+
+
+14    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

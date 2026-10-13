@@ -1,0 +1,53 @@
+                                                                           Document Number: PS-MPU-6000A-00
+                     MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                 Release Date: 08/19/2013
+
+
+ 6.4   Electrical Specifications, Continued
+ VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C
+
+PARAMETER                  CONDITIONS                      MIN        TYP       MAX        Units    Notes
+SERIAL INTERFACE
+SPI Operating Frequency, All        MPU-6000 only, Low Speed
+                                                                             100 ±10%                  kHz
+Registers Read/Write                 Characterization
+                             MPU-6000 only, High Speed
+                                                                             1 ±10%               MHz
+                                      Characterization
+SPI Operating Frequency, Sensor    MPU-6000 only
+                                                                             20 ±10%               MHz
+and Interrupt Registers Read Only
+I2C Operating Frequency                 All registers, Fast-mode                                         400        kHz
+                                               All registers, Standard-mode                                     100        kHz
+I2C ADDRESS                 AD0 = 0                                       1101000
+                           AD0 = 1                                       1101001
+DIGITAL INPUTS (SDI/SDA, AD0,
+SCLK/SCL, FSYNC, /CS, CLKIN)
+
+VIH, High Level Input Voltage        MPU-6000                         0.7*VDD                           V
+                             MPU-6050                       0.7*VLOGIC                         V
+VIL, Low Level Input Voltage        MPU-6000                                                  0.3*VDD      V
+
+                             MPU-6050                                                0.3*VLOGIC     V
+CI, Input Capacitance                                                           < 5                    pF
+
+DIGITAL OUTPUT (SDO, INT)
+VOH, High Level Output Voltage       RLOAD=1MΩ; MPU-6000              0.9*VDD                           V
+
+                                RLOAD=1MΩ; MPU-6050             0.9*VLOGIC                         V
+
+VOL1, LOW-Level Output Voltage      RLOAD=1MΩ; MPU-6000                                       0.1*VDD      V
+
+                                RLOAD=1MΩ; MPU-6050                                      0.1*VLOGIC     V
+
+VOL.INT1, INT Low-Level Output       OPEN=1, 0.3mA sink                                                    0.1        V
+Voltage                              Current
+Output Leakage Current          OPEN=1                                         100                   nA
+
+tINT, INT Pulse Width              LATCH_INT_EN=0                                 50                      µs
+
+
+
+
+
+                                            15 of 52

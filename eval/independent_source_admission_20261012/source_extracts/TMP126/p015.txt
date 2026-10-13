@@ -1,0 +1,79 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.4.3 One-Shot Mode
+
+When One_Shot bit is set to 1 in the Configuration register the TMP126 will immediately start a new temperature
+ conversion, referred to as a one-shot conversion, and discard any partial conversion results. After the device
+ completes a one-shot conversion, the device will enter the low power shutdown mode. The Mode bit will be set
+ to 1 and the One_Shot bit will be set to 0 automatically. Figure 8-5 shows a current consumption timing diagram
+ for this mode. At the end of a one-shot conversion, the Data_Ready_Flag in the Alert_Status register is set and
+ can be used to determine when the conversion completes.
+
+                                                            Start of conversion
+
+
+                                                                        tShutdownt
+                                        Active conversion time
+
+
+                               SPI One-Shot Command
+
+
+
+
+                                Temperature Conversion
+
+
+
+
+                                 Temp_Result Updated
+
+
+                                Figure 8-5. One-Shot Timing Diagram
+
+ If the One_Shot bit is continuously written to faster than the active conversion time of the TMP126, the device
+ will continue to restart the temperature conversion with each new write. It is recommended to avoid this behavior
+ as the temperature result does not update until a conversion finishes. If continuous one-shots are being triggered
+ by the system Figure 8-6 depicts how the device would continually partially finish new conversions and not
+ update the Temp_Result register.
+
+                                                                                   Start of first conversion
+
+                                                                                                  Start of new conversions
+                                                                                     Discard partial conversion
+
+
+
+
+
+                                     SPI One-Shot Command
+
+
+                                                 Active conversion time
+
+                                      Temperature Conversion
+
+
+
+
+                                      Temp_Result Updated
+
+                       Figure 8-6. One-Shot Continuous Trigger Timing Diagram
+
+ 8.4.4 Interrupt and Comparator Mode
+
+The ALERT pin of the TMP126 can be programmed to operate in two different modes. In the interrupt mode
+ the TMP126 will assert the ALERT pin  if the temperature exceeds the limits set by temperature limit registers
+and the flags are enabled. After the Alert_Status is read and the interrupt bits cleared, the ALERT pin will be
+ de-asserted. In the Comparator mode, the ALERT pin will assert  if any enabled status bits of the Alert_Status
+ are set. Changes to the Alert_Enable register will be reflected on the ALERT pin after the completed conversion
+ or device read.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    15
+
+                                                  Product Folder Links: TMP126

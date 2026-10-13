@@ -1,0 +1,26 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+
+Table 12. Bit Descriptions for the I/Ox Pin Configuration Registers
+Bit(s)                 Bit Name                  Description
+15            MSB                      Set this bit to 0.
+[14:11]               Register address            Selects which pin configuration register is addressed.
+                                               0100: ADC pin configuration.
+                                               0101: DAC pin configuration.
+                                                0110: pull-down configuration (default condition at power-up).
+                                               1000: GPIO write configuration.
+                                               1010: GPIO read configuration.
+                                                1100: GPIO open-drain configuration.
+                                                1101: three-state configuration.
+[10:8]              Reserved                  Reserved. Set these bits to 0.
+[7:0]               IO7 to IO0                 Enable register function on selected I/Ox pin.
+                                                        0: no function selected.
+                                                        1: set the selected I/Ox pin to the register function.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 28 of 54

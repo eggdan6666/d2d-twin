@@ -1,0 +1,63 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.6.10 EEPROM3 Register (address = 08h) [reset = xxxxh]
+
+ This register function is the same as the EEPROM1 register. To support NIST traceability, do not delete or
+ reprogram the EEPROM[1] register.
+
+ Return to Register Map.
+
+                                   Figure 7-21. EEPROM3 Register
+       15            14            13            12             11            10             9             8
+
+     D15          D14          D13          D12          D11          D10          D9          D8
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+       7             6             5             4             3             2             1             0
+
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+                           Table 7-14. EEPROM3 Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    D[15:0]                     R/W      xxxxh       This 16-bit register is used as a scratch pad. To support NIST
+                                                                                        traceability, do not delete or re-program this register.
+
+
+ 7.6.11 Device ID Register (address = 0Fh) [reset = 0117h]
+
+ This read-only register indicates the device ID.
+
+ Return to Register Map.
+
+                                   Figure 7-22. Device ID Register
+       15            14            13            12             11            10             9             8
+
+     Rev3         Rev2         Rev1         Rev0         DID11         DID10         DID9          DID8
+
+       R-x            R-x            R-x            R-x            R-0            R-0            R-0           R-1
+
+       7             6             5             4             3             2             1             0
+
+     DID7          DID6          DID5          DID4          DID3          DID2          DID1          DID0
+
+      R-0           R-0            R-0            R-1            R-0            R-1            R-1           R-1
+
+                           Table 7-15. Device ID Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:12    Rev[3:0]                  R       0h           Indicates the revision number.
+
+     11:0     DID[11:0]                  R        117h        Indicates the device ID.
+
+
+
+
+
+32    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

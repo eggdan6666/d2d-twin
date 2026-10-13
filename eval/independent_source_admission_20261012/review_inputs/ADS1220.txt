@@ -1,0 +1,20 @@
+REGISTER CONFIG0 @ 0x00 reset=0x00 access=RW runtime=None DESC=配置寄存器 0（§8.6.2.1 Figure 8-32，复位 00h，逐位 R/W）
+  MUX[7:4] RW reset=0 read_as=None read_action=None tier=None DESC=输入多路选择。注意 1111b 是**非法编码值**（手册写 'Reserved'），不是保留位——MVP 不断言非法编码行为
+  GAIN[3:1] RW reset=0 read_as=None read_action=None tier=None DESC=PGA gain: codes0..7 correspond to gain1..128; p.43 Table8-10
+  PGA_BYPASS[0] RW reset=0 read_as=None read_action=None tier=None DESC=1=旁路 PGA
+REGISTER CONFIG1 @ 0x01 reset=0x00 access=RW runtime=None DESC=配置寄存器 1（§8.6.2.2，复位 00h）
+  DR[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=数据速率选择
+  MODE[4:3] RW reset=0 read_as=None read_action=None tier=None DESC=Operating mode: normal/duty-cycle/turbo codes0..2; code3 reserved; p.44
+  CM[2] RW reset=0 read_as=None read_action=None tier=None DESC=0 single-shot, 1 continuous conversion; p.44 Table8-11
+  TS[1] RW reset=0 read_as=None read_action=None tier=None DESC=温度传感器使能
+  BCS[0] RW reset=0 read_as=None read_action=None tier=None DESC=传感器电流检测使能
+REGISTER CONFIG2 @ 0x02 reset=0x00 access=RW runtime=None DESC=配置寄存器 2（§8.6.2.3，复位 00h）
+  VREF[7:6] RW reset=0 read_as=None read_action=None tier=None DESC=Reference codes0..3 all defined; code3 analog supply; p.45 Table8-13
+  FIFTY_SIXTY[5:4] RW reset=0 read_as=None read_action=None tier=None DESC=50/60Hz 抑制
+  PSW[3] RW reset=0 read_as=None read_action=None tier=None DESC=功率开关 / 掉电模式
+  IDAC[2:0] RW reset=0 read_as=None read_action=None tier=None DESC=Codes0..7 all defined; code7=1500 microampere; p.45 Table8-13
+REGISTER CONFIG3 @ 0x03 reset=0x00 access=RW runtime=None DESC=配置寄存器 3（§8.6.2.4，复位 00h）。**bit0 字段名就叫 RESERVED，但访问码是 R/W-0** —— 同一份 TI 文档里第 3 处『reserved 却可写』（前两处：INA3221 Mask/Enable bit15、HDC2021 MEAS_CONFIG bit3），且与同片内『1111b 是保留编码值』完全是两回事
+  I1MUX[7:5] RW reset=0 read_as=None read_action=None tier=None DESC=IDAC1 通道选择
+  I2MUX[4:2] RW reset=0 read_as=None read_action=None tier=None DESC=IDAC2 通道选择
+  DRDYM[1] RW reset=0 read_as=None read_action=None tier=None DESC=数据就绪引脚模式
+  RESERVED[0] RW reset=0 read_as=None read_action=None tier=None DESC=R/W-0 label plus explicit Always write0b; only0 input allowed, no writability scoring; p.46 Table8-14

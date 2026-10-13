@@ -1,0 +1,44 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.4.6 TSTART Indicators of Detect and Class Failures
+
+The start fault indicator reports additional problems in Semi-Auto to the host. This notifies the host that the PSE
+encountered a problem and was unable to turn the port on. The interrupt pin activates when the TSTART mask is
+enabled and one of these fault conditions occur. The conditions are described in Table 9.
+
+                            Table 9. Detect and Class Failure Indicators (1)
+
+                 OPERATING MODE                                  FAULT CONDITION
+
+                                  Off                                                  None
+
+                          Manual                                     Overcurrent condition at the end of tSTART time period
+                                                                          Overcurrent condition at the end of tSTART time period
+
+                                                                                           Detect not valid
+
+                          Semi-Auto                                                    Class unknown
+
+                                                                                       Class mismatch
+
+                                                                                       Class overcurrent
+
+                             Auto                                       Overcurrent condition at the end of tSTART time period
+
+(1)  Conditions that set start fault.
+
+7.4.7  Device Power On Initialization
+
+At device power on and after VDD and VPWR exceed VUVDDR and VUVLOPW_R respectively, TPS23861 initializes
+for tPOR. During this time TPS23861 will not respond to I2C commands. Wait approximately 20 ms after tPOR,
+before sending I2C commands.
+
+
+
+
+
+44     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

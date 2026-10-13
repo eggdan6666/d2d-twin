@@ -1,0 +1,39 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 5.6 Timing Requirements
+ See the Timing Diagrams section for additional information.
+                                                                FAST MODE            HIGH-SPEED MODE
+                                                                                                                    UNIT
+                                                                    MIN       MAX          MIN       MAX
+
+  f(SCL)    SCL operating frequency               V+                           0.001             0.4          0.001            2.85   MHz
+
+            Bus-free time between STOP and START
+  t(BUF)                                                                      600                        160                   ns             condition
+
+           Hold time after repeated START condition.
+  t(HDSTA)                                                                    600                        160                   ns              After this period, the first clock is generated.
+  t(SUSTA)   Repeated START condition setup time      See Figure 6-1                600                        160                   ns
+  t(SUSTO)   STOP condition setup time                                           600                        160                   ns
+  t(HDDAT)   Data hold time                                                     100           900            25           105    ns
+  t(SUDAT)   Data setup time                                                    100                         25                   ns
+  t(LOW)    SCL clock low period                      V+, See Figure 6-1            1300                        210                   ns
+  t(HIGH)    SCL clock high period                  See Figure 6-1                600                         60                   ns
+  tFD       Data fall time                        See Figure 6-1                              300                         80    ns
+
+                                            See Figure 6-1                              300                                 ns
+  tRD       Data rise time                      SCLK ≤ 100 kHz,
+                                                                                        1000                                 ns
+                                            See Figure 6-1
+
+  tFC        Clock fall time                        See Figure 6-1                              300                         40    ns
+  tRC       Clock rise time                       See Figure 6-1                              300                         40    ns
+
+
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

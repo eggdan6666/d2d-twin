@@ -1,0 +1,56 @@
+Bosch Sensortec | BME280 Data sheet                                            37 | 60
+
+
+
+
+
+                         T_setup_csb                                                                                                T_hold_csb
+
+         CSB
+
+
+
+
+                                                                                               T_low_sck   T_high_sck
+
+         SCK
+
+
+
+
+
+           SDI
+
+
+
+
+
+                                     T_setup_sdi                        T_hold_sdi
+         SDO
+
+
+
+
+
+                                                                                           T_delay_sdo
+
+Figure 15: SPI timing diagram
+
+Table 34: SPI timings
+
+  Parameter            Symbol              Condition         Min   Typ   Max    Unit
+ SPI clock input frequency  F_spi                                  0           10   MHz
+ SCK low pulse           T_low_sck                             20                  ns
+ SCK high pulse           T_high_sck                            20                  ns
+ SDI setup time            T_setup_sdi                            20                  ns
+ SDI hold time             T_hold_sdi                             20                  ns
+ SDO output delay         T_delay_sdo  25 pF load, VDDIO=1.6 V min               30     ns
+ SDO output delay         T_delay_sdo  25 pF load, VDDIO=1.2 V min               40     ns
+ CSB setup time           T_setup_csb                           20                  ns
+ CSB hold time            T_hold_csb                            20                  ns
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

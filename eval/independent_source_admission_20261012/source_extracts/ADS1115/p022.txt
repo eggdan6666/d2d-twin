@@ -1,0 +1,65 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+                     1                                        9    1                                         9
+       SCL                                 ¼
+
+
+
+       SDA         1    0    0    1    0    A1(1)   A0(1)  R/W         0    0    0    0    0    0   P1   P0   ¼
+
+                Start By                                  ACK By                                ACK By
+               Controller                                         ADS1113/4/5                                      ADS1113/4/5
+
+                             Frame 1: Target Address Byte                       Frame 2: Address Pointer Register
+
+                     1                                        9            1                                         9
+      SCL
+ (Continued)
+
+
+
+
+     SDA
+                  D15 D14  D13  D12  D11  D10  D9   D8              D7   D6   D5   D4  D3  D2  D1  D0
+ (Continued)
+                                               ACK By                                        ACK By      Stop By
+                                                           ADS1113/4/5                                               ADS1113/4/5    Controller
+
+                               Frame 3: Data Byte 1                                 Frame 4: Data Byte 2
+
+ A.  The values of A0 and A1 are determined by the ADDR pin.
+
+                        Figure 7-10. Timing Diagram for Writing to the ADS111x
+
+
+
+      ALERT
+
+
+                       1                                        9    1                                        9
+
+        SCL
+
+
+
+
+        SDA          0    0    0    1    1    0    0  R/W        1    0    0    1        A1   A0   Status
+
+                 Start By                                  ACK By                           From     NACK By  Stop By
+                Controller                                         ADS1113/4/5                        ADS1113/4/5    Controller  Controller
+
+                      Frame 1: SMBus ALERT Response Address Byte                    Frame 2: Target Address
+
+
+ A.  The values of A0 and A1 are determined by the ADDR pin.
+
+                        Figure 7-11. Timing Diagram for SMBus Alert Response
+
+
+
+
+
+22    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

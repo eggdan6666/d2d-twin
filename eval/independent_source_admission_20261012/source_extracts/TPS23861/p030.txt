@@ -1,0 +1,59 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+If the capacitance-measurement algorithm is unable to discharge the port to less than 2.4 V after two attempts,
+the algorithm terminates the attempt to measure port capacitance, and report an Unable to achieve 2.4 V to take
+first measurement status in the VDSn field of the Port n Detect Voltage Difference Registers. A status of
+Capacitance measurement invalid: Insufficient Δv measured is reported in the Port n Status Registers. A status
+of Unable to discharge PD input capacitance to 2.4 V before timeout, is reported in the VDSn field of the Port n
+Detect Voltage Difference Registers. The host has the option of imposing a longer discharge time and retrying.
+
+Erratic results may be obtained when performing legacy detect in Semi-Auto Mode due to the repeated charging
+of the load.  If the capacitive load is behind a diode or is in parallel with a high resistance, the capacitor may
+eventually charge beyond 2.4 V, and the capacitance measurement fails. Manual Mode is recommended for
+legacy detect when there is no information about the load, or if the load input capacitance charges beyond 2.4 V
+in Semi-Auto Mode.
+
+If the port is open or a small capacitance is present on the port, the port voltage rises quickly when the
+capacitance-measuring current is applied. The voltage on the port is limited to approximately 18 V by an internal
+clamp. A status of Capacitance measurement invalid: Detect measurement beyond clamp voltage is reported in
+the DETECT Pn field of the Port n Status Registers. Depending on the size of the small capacitance, a status of
+First measurement exceeds VDet-clamp (min) or Second measurement exceeds VDet-clamp (min) is reported in the VDSn
+field of the PORT n Detect Voltage Difference Registers.
+
+If a large capacitance or short circuit is present on the port, the port voltage will not change sufficiently over the
+port charging time to assure a reliable measurement. In this case, a status of Capacitance measurement invalid:
+Insufficient Δv measured is reported in the Port n Status Registers, and a status of Δv < 0.5 V (insufficient signal)
+or Unable to achieve 0.4V to take first measurement before timeout is reported in the VDSn field of the Port n
+Detect Voltage Difference Registers.
+
+Legacy detect is an exceptional condition which warrants special handling by the host system. Consequently,
+legacy-detect operation will not be fully supported in Auto Mode. If a legacy device is detected during detection in
+any mode of operation, the detect status is reported as Legacy Detect in the Port n Status Register Detect Pn
+field. It is up to the host to power on the port. If a port is in Auto Mode, legacy detection is enabled and a legacy
+device is detected, the detect status is reported as Legacy Detect in the Port n Status Registers Detect Pn field,
+but the port will not power on automatically. In this respect, operation of the port is identical to the Semi-Auto
+Mode.
+
+In general,  it is expected that a legacy device will not respond to a request for classification. Therefore,  if the
+portis in Semi-Auto, Auto Mode or Manual Mode and LEGMOD = 01, the PSE will not automatically initiate a
+classification cycle even if the CLEn bit is set. On the other hand, if LEGMOD = 10, the TPS23861 is operating in
+Semi-Auto or Auto Mode, classification is enabled via the CLEn bit, and a Resistance valid detect status is
+returned in response to a standard resistance detection cycle, the TPS23861 follows the standard resistance
+detection  cycle  with a  classification  cycle. Furthermore,  following  classification,   if  in Auto Mode,   if  the
+classification status is not unknown, class mismatch or overcurrent, the port automatically powers up. Additionally
+if LEGMOD = 10,  it is possible to initiate a classification cycle under manual control using the CLEn bit in the
+Detect/Class Enable Register or the RCLn bit in the Detect/Class Restart Register or power on the port under
+manual control using the PWONn bit in the Power Enable Register.
+
+If LEGMODn = 10, and a Resistance valid detect status is returned in response to a standard resistance
+detection cycle the TPS23861 will not attempt to measure capacitance on the PI.
+
+
+
+
+
+30     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

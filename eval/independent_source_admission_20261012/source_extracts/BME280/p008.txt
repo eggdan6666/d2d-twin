@@ -1,0 +1,54 @@
+Bosch Sensortec | BME280 Data sheet                                             8 | 60
+
+1. Specification
+
+If not stated otherwise,
+    •    All values are valid over the full voltage range
+    •    All minimum/maximum values are given for the full accuracy temperature range
+    •  Minimum/maximum values of drifts, offsets and temperature coefficients are ±3σ values over
+         lifetime
+    •   Typical values of drifts, offsets and temperature coefficients are ±1σ values over lifetime
+    •   Typical values of currents and state machine timings are determined at 25 °C
+    •  Minimum/maximum values  of currents are determined using corner  lots over complete
+       temperature range
+    •  Minimum/maximum values of state machine timings are determined using corner lots over
+      0…+65 °C temperature range
+
+The specification tables are split into humidity, pressure, and temperature part of BME280.
+1.1  General electrical specification
+
+Table 1: Electrical parameter specification
+
+ Parameter         Symbol        Condition         Min      Typ     Max      Unit
+ Supply Voltage         VDD       ripple max. 50 mVpp     1.71        1.8         3.6      V
+  Internal Domains
+ Supply Voltage          VDDIO                               1.2         1.8         3.6      V
+  I/O Domain
+ Sleep current             IDDSL                                           0.1         0.3      µA
+
+ Standby current          IDDSB                                           0.2         0.5      µA
+  (inactive period of
+ normal mode)
+ Current during            IDDH     Max value at 85 °C               340              µA
+ humidity
+ measurement
+ Current during            IDDP     Max value at -40 °C               714              µA
+ pressure
+ measurement
+ Current during             IDDT     Max value at 85 °C               350              µA
+ temperature
+ measurement
+  Start-up time                   tstartup        Time to first                             2      ms
+                                communication after
+                                   both VDD > 1.58 V
+                               and VDDIO > 0.65 V
+ Power supply       PSRR            full VDD range                             ±0.01   %RH/V
+  rejection ratio (DC)                                                       ±5      Pa/V
+ Standby time             Δtstandby                                   ±5       ±25    %
+ accuracy
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

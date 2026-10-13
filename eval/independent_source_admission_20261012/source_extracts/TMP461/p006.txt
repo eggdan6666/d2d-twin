@@ -1,0 +1,61 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+7.6  Two-Wire Timing Requirements
+
+At –40°C to 125°C and V+ = 1.7 V to 3.6 V, unless otherwise noted.
+
+                                                                      FAST MODE      HIGH-SPEED MODE
+
+                                                                            MIN     MAX       MIN     MAX    UNIT
+
+ f(SCL)         SCL operating frequency                                                    0.001          0.4       0.001        2.17   MHz
+
+ t(BUF)          Bus free time between stop and start condition                              1300                  160                ns
+
+                Hold time after repeated start condition.
+ t(HDSTA)                                                                             600                  160                ns                    After this period, the first clock is generated.
+
+ t(SUSTA)         Repeated start condition setup time                                        600                  160                ns
+
+ t(SUSTO)         Stop condition setup time                                                600                  160                ns
+
+ t(HDDAT)         Data hold time                                                           0       900         0       150     ns
+
+ t(SUDAT)         Data setup time                                                        100                   40                ns
+
+ t(LOW)         SCL clock low period                                                   1300                  320                ns
+
+ t(HIGH)        SCL clock high period                                                   600                   60                ns
+
+ tF – SDA        Data fall time                                                                     300                  130     ns
+
+ tF, tR – SCL      Clock fall and rise time                                                             300                   40     ns
+
+ tR              Rise time for SCL ≤100 kHz                                                       1000                           ns
+
+                                            t(LOW)
+                                                         tR                       tF                                    t(HDSTA)
+
+
+      SCL
+
+                                              t(HDSTA)                             t(HIGH)    t(SUSTA)                                                                  t(SUSTO)
+                                                                      t(HDDAT)               t(SUDAT)
+
+      SDA
+
+                                t(BUF)
+
+              P        S                                              S                                P
+
+                                 Figure 1. Two-Wire Timing Diagram
+
+
+
+
+
+6      Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

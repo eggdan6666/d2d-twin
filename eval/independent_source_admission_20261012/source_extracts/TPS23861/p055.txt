@@ -1,0 +1,69 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.8  Port n Status Register
+
+7.5.8.1  Port 1 Status Register
+
+Command = 0Ch with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                     CLASS P1                              DETECT P1
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+
+7.5.8.2  Port 2 Status Register
+
+Command = 0Dh with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                     CLASS P2                              DETECT P2
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+
+7.5.8.3  Port 3 Status Register
+
+Command = 0Eh with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                     CLASS P3                              DETECT P3
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+
+7.5.8.4  Port 4 Status Register
+
+Command = 0Fh with 1 Data Byte, Read Only
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                     CLASS P4                              DETECT P4
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+Represents the most recent classification and detection results for port n. These bits are cleared when port n is
+turned off.
+
+
+                                  NOTE
+            In order to disable detection for any port with unknown, short circuit, open circuit, or
+       MOSFET fault detection status (0x0C-0x0F), clear the corresponding port DETEx bits in
+         0x14 instead of writing the port off command to 0x12, 0x19, or 0x1A.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     55
+
+                                                 Product Folder Links: TPS23861

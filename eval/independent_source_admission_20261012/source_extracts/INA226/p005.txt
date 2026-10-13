@@ -1,0 +1,92 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+
+                                                                                INA226
+                     THERMAL METRIC(1)                          DGS (VSSOP)            UNIT
+
+                                                                                 10 PINS
+  RθJC(bot)         Junction-to-case (bottom) thermal resistance                                 N/A                 °C/W
+
+ (1)   For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+       note.
+
+ 5.5 Electrical Characteristics
+ TA = 25°C, VVS = 3.3 V, VIN+ = 12 V, VSENSE = (VIN+ – VIN–) = 0 mV and VVBUS = 12 V, unless otherwise noted
+
+               PARAMETER                       TEST CONDITIONS                MIN       TYP      MAX    UNIT
+
+ INPUT
+
+              Shunt voltage input range                                                        –81.9175                     81.92    mV
+            Bus voltage input range(1)                                                           0                     36     V
+
+ CMRR      Common-mode rejection               0 V ≤ VIN+ ≤ 36 V                             126         140               dB
+ VOS         Shunt offset voltage, RTI(2)                                                                             ±2.5         ±10     μV
+              Shunt offset voltage, RTI(2) vs
+                                                –40°C ≤ TA ≤ 125°C                                           0.02           0.1    μV/°C               temperature
+              Shunt offset voltage, RTI(2) vs Power
+ PSRR                                                  2.7 V ≤ VS ≤ 5.5 V                                             ±2.5                μV/V
+               supply
+ VOS        Bus offset voltage, RTI(2)                                                                            ±1.25         ±7.5    mV
+            Bus offset voltage, RTI(2) vs temperature   –40°C ≤ TA ≤ 125°C                                       10          40    μV/°C
+ PSRR      Bus offset voltage, RTI(2) vs power supply                                                                ±0.5              mV/V
+
+  IB             Input bias current (IIN+, IIN– pins)                                                                             0.1               nA
+
+           VBUS input impedance                                                                       830               kΩ
+
+                                                       (IN+ pin) + (IN– pin),                Input leakage (3)                                                                                                                           0.1           0.5     μA
+                                                Power-down mode
+
+ DC ACCURACY
+
+          ADC native resolution                                                                         16                      Bits
+
+                                                   Shunt voltage                                                    2.5               μV
+             1 LSB step size
+                                              Bus voltage                                                   1.25            mV
+
+              Shunt voltage gain error                                                                  0.02%       0.1%
+
+              Shunt voltage gain error vs temperature   –40°C ≤ TA ≤ 125°C                                       10          50   ppm/°C
+
+            Bus voltage gain error                                                                    0.02%       0.1%
+
+            Bus voltage gain error vs temperature     –40°C ≤ TA ≤ 125°C                                       10          50   ppm/°C
+
+                  Differential nonlinearity                                                                                 ±0.1              LSB
+
+                                        CT bit = 000                                            140         154
+
+                                        CT bit = 001                                            204         224
+                                                                                                                              μs
+                                        CT bit = 010                                            332         365
+
+                                        CT bit = 011                                            588         646
+  tCT       ADC conversion time
+                                        CT bit = 100                                                      1.1         1.21
+
+                                        CT bit = 101                                                 2.116        2.328
+                                                                                                      ms
+                                        CT bit = 110                                                4.156        4.572
+
+                                        CT bit = 111                                                8.244        9.068
+
+ SMBus
+           SMBus timeout(4)                                                                            28          35    ms
+
+ DIGITAL INPUT/OUTPUT
+
+                Input capacitance                                                                             3                pF
+
+                                                0 V ≤ VSCL ≤ VVS ,
+                                                0 V ≤ VSDA ≤ VVS,
+             Leakage input current                  0 V ≤ VAlert ≤ VVS ,                                                0.1           1     μA
+                                                0 V ≤ VA0 ≤ VVS ,
+                                                0 V ≤ VA1 ≤ VVS
+ VIH           High-level input voltage                                                           0.7×VVS                      6     V
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback     5
+
+                                                   Product Folder Links: INA226

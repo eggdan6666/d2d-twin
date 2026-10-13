@@ -1,0 +1,61 @@
+Data Sheet                               AD5592R
+
+THEORY OF OPERATION
+
+The AD5592R/AD5592R-1 are 8-channel configurable analog and
+digital input/output ports. The AD5592R/AD5592R-1 have eight
+pins that can be independently configured as a 12-bit DAC output
+channel, a 12-bit ADC input channel, a digital input pin, or a digital
+output pin.
+
+The function of each pin is determined by programming the ADC,
+DAC, or GPIO configuration registers as appropriate. See the Con-
+figuring the AD5592R/AD5592R-1 section and Table 12 for more
+information.
+
+DAC SECTION
+
+The AD5592R/AD5592R-1 contain eight 12-bit DACs and imple-
+ment a segmented string DAC architecture with an internal output
+buffer. Figure 38 shows the internal block diagram of the DAC
+architecture.                                                                                  Figure 39. Simplified Resistor String Structure
+
+                                              Output Buffer
+
+                                                          The output buffer is designed as an input/output rail-to-rail buffer.
+                                                          The output buffer can drive 2 nF capacitance with a 1 kΩ resistor
+                                                                                      in parallel. The slew rate is 1.25 V/µs with a ¼ to ¾ scale settling
+                                                                       time of 6 µs. By default, the DAC outputs update directly after data
+                                                              has been written to the input register. The LDAC register is used to
+                                                                      delay the updates until additional channels have been written to, if
+         Figure 38. Internal Block Diagram of the DAC Architecture                required. See the Readback and LDAC Mode Register section for
+                                                           more information.
+The DAC channels have a shared gain bit that sets the output
+range as 0 V to VREF or 0 V to 2 × VREF. Because the gain bit                                   DAC Output Range
+is shared by all channels, it is not possible to set different output
+ranges on a per channel basis. The input coding to the DAC is          The DAC output voltage range can be configured to 0 V to VREF
+straight binary. The ideal output voltage is given by                         (gain = 1) or 0 V to 2 × VREF (gain = 2) using the DAC range bit
+                                                                                of the general-purpose control register, as shown in Figure 40 and
+                                                                              (4)       Figure 41, respectively. When VREF = VDD, the 0 V to 2 × VREF                  D                                        range does not allow the DAC to swing the output beyond VDD.VOUTwhere: = G × VREF ×  2N
+D is the decimal equivalent of the binary code (0 to 4095) that is
+loaded to the DAC register.
+G = 1 for an output range of 0 V to VREF, or G = 2 for an output
+range of 0 V to 2 × VREF. N = 12.
+
+Resistor String
+
+The simplified segmented resistor string DAC structure is shown
+in Figure 39. The code loaded to the DAC register determines the
+switch on the string that is connected to the output buffer.
+
+Because each resistance in the string has the same value, R, the
+string DAC is guaranteed monotonic.
+
+                                                                                    Figure 40. Output Voltage Range of the DAC with Gain = 1 (Unloaded
+                                                                                                                  Condition)
+
+
+
+
+
+analog.com                                                                                         Rev. H | 23 of 54

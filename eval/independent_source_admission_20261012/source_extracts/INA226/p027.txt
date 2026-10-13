@@ -1,0 +1,78 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+  Bit 14                  Setting this bit high configures the Alert pin to be asserted if the shunt voltage measurement following a conversion
+                      drops below the value programmed in the Alert Limit Register.
+
+
+ BOL:             Bus Voltage Over-Voltage
+
+  Bit 13                  Setting this bit high configures the Alert pin to be asserted if the bus voltage measurement following a conversion
+                     exceeds the value programmed in the Alert Limit Register.
+
+
+ BUL:             Bus Voltage Under-Voltage
+
+  Bit 12                  Setting this bit high configures the Alert pin to be asserted if the bus voltage measurement following a conversion
+                      drops below the value programmed in the Alert Limit Register.
+
+
+ POL:             Power Over-Limit
+
+  Bit 11                  Setting this bit high configures the Alert pin to be asserted if the Power calculation made following a bus voltage
+                    measurement exceeds the value programmed in the Alert Limit Register.
+
+
+ CNVR:             Conversion Ready
+
+  Bit 10                  Setting this bit high configures the Alert pin to be asserted when the Conversion Ready Flag, Bit 3, is asserted
+                          indicating that the device is ready for the next conversion.
+
+
+ AFF:                  Alert Function Flag
+
+  Bit 4                 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be
+                      enabled to assert the Alert pin. Reading the Alert Function Flag following an alert allows the user to determine if the
+                           Alert Function is the source of the Alert.
+                 When the Alert Latch Enable bit is set to Latch mode, the Alert Function Flag bit clears only when the Mask/Enable
+                        Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared
+                         following the next conversion that does not result in an Alert condition.
+
+
+ CVRF:             Conversion Ready Flag
+
+  Bit 3                 Although the device can be read at any time, and the data from the last conversion is available, the Conversion
+                   Ready Flag bit is provided to help coordinate one-shot or triggered conversions. The Conversion Ready Flag bit is
+                         set after all conversions, averaging, and multiplications are complete. Conversion Ready Flag bit clears under the
+                         following conditions:
+                            1.) Writing to the Configuration Register (except for Power-Down selection)
+                            2.) Reading the Mask/Enable Register
+
+
+ OVF:              Math Overflow Flag
+
+  Bit 2                  This bit is set to '1' if an arithmetic operation resulted in an overflow error. The bit indicates that current and power
+                       data can be invalid.
+
+
+ APOL:                Alert Polarity bit; sets the Alert pin polarity.
+
+  Bit 1               1 = Inverted (active-high open collector)
+                    0 = Normal (active-low open collector) (default)
+
+
+ LEN:                  Alert Latch Enable; configures the latching feature of the Alert pin and Alert Flag bits.
+
+  Bit 0               1 = Latch enabled
+                    0 = Transparent (default)
+                 When the Alert Latch Enable bit is set to Transparent mode, the Alert pin and Flag bit resets to the idle states when
+                        the fault has been cleared. When the Alert Latch Enable bit is set to Latch mode, the Alert pin and Alert Flag bit
+                      remains active following a fault until the Mask/Enable Register has been read.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    27
+
+                                                   Product Folder Links: INA226

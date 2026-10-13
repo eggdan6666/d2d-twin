@@ -1,0 +1,58 @@
+Bosch Sensortec | BMP280 Data sheet                                                          12 | 49
+
+
+
+
+
+                                          Start
+                          measurement cycle
+
+
+                         Measure temperature
+                          (oversampling set by osrs_t;            IIR filter enabled?     No
+                                 skip if osrs_t = 0)
+                                                            Yes
+
+                          Measure pressure                                         Copy ADC values
+                         (oversampling set by osrs_p;           IIR filter initialised?    No            to filter memory
+                                 skip if osrs_p = 0)                                                               (initalises IIR filter)
+                                                            Yes
+
+                                                    Update filter memory using                                                                               Copy filter memory                                                                                          filter memory, ADC value                                                                                                                to output registers                                                     and filter coefficient
+
+
+                                                                                    End
+                                                                                   measurement cycle
+
+
+         Figure 2: BMP280 measurement cycle
+
+       The individual blocks of the diagram above will be detailed in the following subchapters.
+
+        3.3.1  Pressure measurement
+        Pressure measurement can be enabled or skipped. Skipping the measurement could be useful if
+      BMP280 is used as temperature sensor. When enabled, several oversampling options exist. Each
+        oversampling step reduces noise and increases the output resolution by one bit, which is stored in the
+      XLSB data register 0xF9. Enabling/disabling the measurement and oversampling settings are selected
+        through the osrs_p[2:0] bits in control register 0xF4.
+
+                                                Table 4: osrs_p settings
+          Oversampling setting         Pressure             Typical pressure         Recommended
+                                    oversampling              resolution               temperature
+                                                                                   oversampling
+
+           Pressure measurement          Skipped                   –                  As needed
+                  skipped            (output set to 0x80000)
+                 Ultra low power               ×1               16 bit / 2.62 Pa                ×1
+             Low power                ×2               17 bit / 1.31 Pa                ×1
+            Standard resolution             ×4               18 bit / 0.66 Pa                ×1
+              High resolution               ×8               19 bit / 0.33 Pa                ×1
+               Ultra high resolution            ×16               20 bit / 0.16 Pa                ×2
+
+         In order to find a suitable setting for osrs_p, please consult chapter 3.4.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

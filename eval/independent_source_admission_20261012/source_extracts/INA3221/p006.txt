@@ -1,0 +1,35 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ at TA = 25°C, VS = 3.3V, VIN+ = 12V, VSHUNT = (VIN+) – (VIN–) = 0mV, and VBUS = VIN– = 12V (unless otherwise noted)
+
+                 PARAMETER                          TEST CONDITIONS               MIN      TYP     MAX   UNIT
+
+            Leakage input current                     0V ≤ VIN ≤ VS                                                  0.1         1    μA
+ VIH          High-level input voltage                                                                         0.7 (VS)                   6    V
+  VIL         Low-level input voltage                                                                         –0.5                 0.3 (VS)    V
+              Low-level output     SDA, critical, warning, PV  VS > +2.7V, IOL = 3mA                          0                      0.4
+ VOL                                                                                                   V
+              voltage          TC                    VS > +2.7V, IOL = 1.2mA                         0                      0.4
+  Vhys        Hysteresis voltage                                                                               500           mV
+
+ POWER SUPPLY
+
+                                                                                                         350       450
+             Quiescent current                                                                                       μA
+                                                     Power-down mode                                             0.5         2
+
+            Power-on reset threshold                                                                           2             V
+
+ (1)   RTI = Referred-to-input.
+ (2)   Input leakage is positive (current flows into the pin) for the conditions shown at the top of this table. Negative leakage currents can
+      occur under different input conditions.
+ (3)  SMBus timeouts in the INA3221 reset the interface whenever SCL is low for more than 28ms.
+
+
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

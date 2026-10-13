@@ -1,0 +1,44 @@
+LIS3DH                                                                Registers description
+
+8.23    INT1_THS (32h)
+
+
+                                      Table 58. INT1_THS register
+
+                0      THS6     THS5     THS4     THS3     THS2     THS1     THS0
+
+                                    Table 59. INT1_THS description
+
+                                    Interrupt 1 threshold. Default value: 000 0000
+                          1 LSb = 16 mg @ FS = ±2 g
+                 THS[6:0]    1 LSb = 32 mg @ FS = ±4 g
+                          1 LSb = 62 mg @ FS = ±8 g
+                          1 LSb = 186 mg @ FS = ±16 g
+
+
+8.24   INT1_DURATION (33h)
+
+
+                                   Table 60. INT1_DURATION register
+
+                0       D6       D5       D4       D3       D2       D1       D0
+
+
+                                 Table 61. INT1_DURATION description
+
+                               Duration value. Default value: 000 0000
+               D[6:0]
+                          1 LSb = 1/ODR
+
+          The D[6:0] bits set the minimum duration of the Interrupt 2 event to be recognized. Duration
+            steps and maximum values depend on the ODR chosen.
+
+            Duration time is measured in N/ODR, where N is the content of the duration register.
+
+
+
+
+
+                                      DocID17530 Rev 2                                      43/54
+
+                                                                                                                            54

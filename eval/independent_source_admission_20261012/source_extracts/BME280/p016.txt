@@ -1,0 +1,50 @@
+Bosch Sensortec | BME280 Data sheet                                            16 | 60
+
+
+
+                                     cycle time = rate of force mode                 current
+                                                   tmeasure
+        IDDP
+        IDDT
+        IDDH
+          T P H      T P H
+
+
+       IDDSB
+       IDDSL                                                                                                             Measurement               Measurement               Measurement                                                              Measurement               Measurement               Measurement
+                                                                                   timetime              WriteWrite     PORPOR              Mode[1:0] = 01       Data readout  Mode[1:0] = 01              settingssettings
+Figure 4: Forced mode timing diagram
+
+3.3.4  Normal mode
+Normal mode comprises an automated perpetual cycling between an (active) measurement period
+and an (inactive) standby period.
+The measurements are performed in accordance to the selected measurement and filter options. The
+standby time is determined by the setting t_sb[2:0] and can be set to between 0.5 and 1000 ms
+according to Table 27.
+The total cycle time depends on the sum of the active time (see chapter 9) and standby time tstandby.
+The current in the standby period (IDDSB) is slightly higher than in sleep mode. After setting the
+measurement and filter options and enabling normal mode, the last measurement results can always
+be obtained at the data registers without the need of further write accesses.
+Using normal mode is recommended when using the IIR filter. This is useful for applications in which
+short-term disturbances (e.g. blowing into the sensor) should be filtered. The timing diagram is shown
+below:
+
+
+                                      cycle time = tmeasure + tstandby                current
+                                                   tmeasure                  tstandby
+        IDDP
+        IDDT
+       IDDH
+          T P H      T P H
+
+
+       IDDSB
+       IDDSL                                                                                                            Measurement               Measurement               Measurement                                                              Measurement               Measurement               Measurement
+                                                                                   time              Write    POR              Mode[1:0] = 11                  Data readout              settings                                               when needed
+Figure 5: Normal mode timing diagram
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

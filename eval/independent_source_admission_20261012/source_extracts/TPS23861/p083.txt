@@ -1,0 +1,63 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.35.4  Port 4 Detect Voltage Difference Register
+
+Command = 6Eh with 2 Data Byte (LSByte first, MSByte second), Read
+
+LSB: 6Eh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                                            Port 4 Voltage Difference [7:0]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+MSB: 6Fh
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME                           VDS4[3:0]                               Port 4 Voltage Difference [11:8]
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+This register is used to determine the presence of a legacy PD by measuring the PD input capacitance on the PI.
+A charge is injected into the PI, and the resulting Δv is reported. The Δv value shown is useable only if VDSn[3:0]
+= 0001.
+The I2C data transmission is a 2-byte transfer.
+
+Bit Descriptions
+
+Port n Voltage Difference[11:0]: 12-bit data conversion result of the difference in voltage on the port as a result
+of a fixed charge injected into the port. The equation defining the resistance measured is:
+            k   C #
+      N u VSTEP
+
+    where
+              •  C = Port capacitance, F
+              •   k = 81 x 10-6 coulomb
+              •  N = 12-bit value in Port n Detect Voltage Difference Register
+              •   VSTEP = LSB Value                                                                                                  (7)
+
+
+                                  NOTE
+         The expression for port capacitance ignores the effect of any conductance in parallel with
+           the capacitance being measured. The effect of parallel conductance is to give a higher
+           value than the actual value of any capacitance present.
+
+
+
+           USEABLE CAPACITANCE RANGE                     VOLTAGE DIFFERENCE LSB VALUE
+
+                       10 to 100 µF                                                     4.884 mV
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     83
+
+                                                 Product Folder Links: TPS23861

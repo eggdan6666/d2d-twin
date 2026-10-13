@@ -1,0 +1,41 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.23  Disconnect Threshold Register
+
+Command = 29h with 1 Data Byte, Read/Write
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME             DCTH4              DCTH3              DCTH2              DCTH1
+
+ RESET or POR VALUE            00                     00                     00                     00
+
+Disconnect current thresholds may be programmed individually for each port.
+
+7.5.23.1  Bits Description
+
+DCTHn[1:0]: A 2-bit field used to set the current threshold for disconnect.  If the port is powered on and the
+current goes below the disconnect threshold set by DCTHn, the TDIS counter is started. If the TDIS timer times
+out the port is powered down.
+
+
+                  DCTHn FIELD                               DISCONNECT THRESHOLD, mA
+
+                           00                                                                 7.5
+
+                           01                                                       15
+
+                           10                                                       30
+
+                           11                                                       50
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     69
+
+                                                 Product Folder Links: TPS23861

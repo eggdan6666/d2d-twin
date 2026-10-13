@@ -1,0 +1,82 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+6  Specifications
+
+6.1  Absolute Maximum Ratings
+Over operating free-air temperature, voltages are referenced to DGND and AGND tied together (unless otherwise noted) (1)
+
+                                                                                       MIN       MAX        UNIT
+
+ Input voltage            VPWR                                                                         –0.3          70         V
+
+ Input voltage            VDD                                                                           –0.3           4          V
+
+ Voltage               AGND                                                                         –0.3            0.3         V
+ Voltage                     SDAI, SDAO(2), SCL, AIN, AOUT, SHTDWN, RESET, INT, A3(2)                    –0.3           4          V
+ Output voltage             GATE1-4 (3)(4)                                                                  –0.3          13         V
+ Input voltage                  SEN1-4(5), KSENSA, KSENSB                                                   –0.3           3          V
+ Voltage                        DRAIN1-4(2)(6)                                                                  –0.3          70         V
+
+ Voltage                   N/C pin                                                                0           70         V
+
+ Sinking current                INT, SDAO                                                                         20        mA
+
+ Lead temperature 1.6 mm (1/16-inch) from case for 10 seconds                                                         260          °C
+
+ Storage temperature range, Tstg                                                                      –65          150          °C
+
+(1)  Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress ratings
+     only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under Recommended
+     Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device reliability.
+(2)  Do not apply external voltage sources directly.
+(3)  Application of voltage is not implied – these are internally driven pins.
+(4)    If there is a short between drain and gate, the GATE pin may internally permanently disconnect to prevent cascade damage. The three
+     other ports will continue to operate.
+(5)  SEN1-4 will be tolerant to 15-V transients to avoid fault propagation when a MOSFET fails in short-circuit.
+(6)  Short transients (µs range) up to 80 V are allowed.
+
+6.2 ESD Ratings
+
+                                                                             VALUE     UNIT
+                                Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)            ±2000       V
+ V(ESD)    Electrostatic discharge       Charged-device model (CDM), per JEDEC specification JESD22-
+                                      C101(2)                                                         ±500       V
+
+(1)  JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)  JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+6.3 Recommended Operating Conditions
+
+Over operating free-air temperature, voltages are referenced to DGND (unless otherwise noted)
+
+                                                                     MIN     NOM      MAX    UNIT
+
+ VVDD                                                                                      3.0           3.3           3.6     V
+ VVPWR                                                                       44         48         57     V
+
+                Voltage slew rate on DRAIN1-4                                                             1     V/µs
+
+ TJ             Operating junction temperature                                           -40                    125     °C
+ TA             Operating free-air temperature                                           -40                     85     °C
+
+6.4  Thermal Information
+
+                                                                                  TPS23861
+                          THERMAL METRIC(1)                         PW (TSSOP)       UNIT
+
+                                                                                        28 PINS
+
+ RθJA            Junction-to-ambient thermal resistance                                                   70.9           °C/W
+ RθJC(top)         Junction-to-case (top) thermal resistance                                                 16.2           °C/W
+ RθJB            Junction-to-board thermal resistance                                                     28.2           °C/W
+ ψJT              Junction-to-top characterization parameter                                                   0.6           °C/W
+ ψJB             Junction-to-board characterization parameter                                             27.8           °C/W
+
+(1)  For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+     report.
+
+6      Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

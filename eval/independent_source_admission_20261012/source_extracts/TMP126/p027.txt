@@ -1,0 +1,72 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.3 Alert_Status Register(Address = 02h) [reset = 0000h]
+
+ This register show the current alert status of the TMP126. This register will currently only clear with a single
+ register read without auto increment.
+
+ Return to Register Map.
+
+                                  Figure 8-21. Alert_Status Register
+       15            14            13            12             11            10             9             8
+
+                                                    Reserved
+
+                                                       R-00h
+
+       7             6             5             4             3             2             1             0
+
+   CRC_Flag     Slew_Status     Slew_Flag     THigh_Status   TLow_Status    THigh_Flag     TLow_Flag   Data_Ready_Fl
+                                                                                                         ag
+
+     RC-0b          R-0b         RC-0b          R-0b          R-0b         RC-0b        RC-0b        RC-0b
+
+                          Table 8-7. Alert_Status Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:8    Reserved                  R       00h        Reserved
+
+     7     CRC_Flag                 RC      0b       CRC checksum error flag indicator. This indicates that the write
+                                                                            transaction CRC checksum failed and the register settings were
+                                                                         discarded.
+                                                             0b = The most recent CRC enabled write transaction was
+                                                                           successful.
+                                                             1b = The most recent CRC enabled write transaction failed.
+
+     6     Slew_Pos_Status             R       0b           Positive slew rate status indicator. This bit is set if there is a
+                                                                                positive slew rate exceeding the Slew_Rate_Limit.
+                                                                         0b: The most recent temperature conversion result is below the
+                                                                      Slew_Rate_Limit.
+                                                                         1b: The most recent temperature conversion result is above the
+                                                                      Slew_Rate_Limit.
+
+     5     Slew_Flag                 RC      0b         Slew rate flag indicator. This indicates that the current there was
+                                                             a temperature slew rate beyond the slew rate limit threshold.
+                                                                Reading Alert_Status register will clear this bit.
+                                                             0b = The most recent temperature conversion has not crossed
+                                                                         the Slew_Rate_Limit threshold.
+                                                             1b = A temperature conversion has crossed the
+                                                                    Slew_Rate_Limit threshold.
+
+     4     THigh_Status               R       0b         High temperature status indicator.
+                                                                         0b: The most recent temperature conversion result is below the
+                                                                        Thigh_Limit
+                                                                         1b: The most recent temperature conversion is above the
+                                                                        THigh_Limit. Once set, this bit will not clear until a temperature
+                                                                      conversion is below THigh_Limit - THigh_Hyst
+
+     3     TLow_Status               R       0b        Low temperature status indicator.
+                                                                         0b: The most recent temperature conversion result is above the
+                                                                  TLow_Limit
+                                                                         1b: The most recent temperature conversion is below the
+                                                                        THigh_Limit. Once set, this bit will not clear until a temperature
+                                                                      conversion is above TLow_Limit + TLow_Hyst
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    27
+
+                                                  Product Folder Links: TMP126

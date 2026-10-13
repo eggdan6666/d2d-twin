@@ -1,0 +1,60 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+ two-wire address wins the arbitration. If the TMP102 device wins the arbitration, the ALERT pin inactivates at
+ the completion of the SMBus alert command. If the TMP102 device loses the arbitration, the ALERT pin remains
+ active.
+
+ 6.3.8 General Call
+
+The TMP102 device responds to a two-wire general call address (000 0000)  if the eighth bit is 0. The device
+ acknowledges the general call address and responds to commands in the second byte. If the second byte is
+0000 0110, the TMP102 device internal registers are reset to power-up values. The TMP102 device does not
+ support the general address acquire command.
+
+ 6.3.9 High-Speed (HS) Mode
+
+ For the two-wire bus to operate at frequencies above 400 kHz, the controller device must issue an HS-Mode
+ controller code (0000 1xxx) as the first byte after a START condition to switch the bus to high-speed operation.
+The TMP102 device does not acknowledge this byte, but switches the input filters on SDA and SCL and the
+ output filters on SDA to operate in HS-mode, allowing transfers of up to 2.85 MHz. After sending the HS-Mode
+ controller code and NACK bit, user must send a repeated start before sending the target address. The bus
+ continues to operate in HS-Mode until a STOP condition occurs on the bus. Upon receiving the STOP condition,
+ the TMP102 device switches the input and output filters back to fast-mode operation.
+
+ 6.3.10 Timeout Function
+
+The TMP102 device resets the serial interface  if SCL is held low for 30 ms (typ) between a start and stop
+ condition. The TMP102 device releases the SDA line if the SCL pin is pulled low and waits for a start condition
+ from the host controller. To avoid activating the time-out function, maintaining a communication speed of at least
+1 kHz for SCL operating frequency is necessary..
+
+ 6.3.11 Timing Diagrams
+The TMP102 device is two-wire, SMBus, and I2C-interface compatible. Figure 6-1, Figure 6-2, Figure 6-3, and
+ Figure 6-4 list the various operations on the TMP102 device. Parameters for Figure 6-1 are defined in the Timing
+ Requirements table. The bus definitions are defined as follows:
+
+ Acknowledge    Each receiving device, when addressed, is obliged to generate an acknowledge bit. A
+                   device that acknowledges must pull down the SDA line during the acknowledge clock pulse
+                        in such a way that the SDA line is stable low during the high period of the Acknowledge
+                    clock pulse. Setup and hold times must be taken into account. On a controller receive,
+                    the termination of the data transfer can be signaled by the controller generating a not-
+                  acknowledge (1) on the last byte that has been transmitted by the target.
+ Bus Idle          Both SDA and SCL lines remain high.
+ Data Transfer    The number of data bytes transferred between a START and a STOP condition is not
+                       limited and is determined by the controller device. The TMP102 device can also be used for
+                     single byte updates. To update only the MS byte, terminate the communication by issuing a
+               START or STOP communication on the bus.
+ Start Data      A change in the state of the SDA line, from high to low, when the SCL line is high, defines a
+ Transfer        START condition. Each data transfer is initiated with a START condition.
+ Stop Data      A change in the state of the SDA line from low to high when the SCL line is high defines
+ Transfer         a STOP condition. Each data transfer is terminated with a repeated START or STOP
+                      condition.
+
+
+
+
+
+12    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

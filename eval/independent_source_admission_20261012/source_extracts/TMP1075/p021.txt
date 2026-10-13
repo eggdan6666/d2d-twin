@@ -1,0 +1,77 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+ 7.5 Register Map
+
+                                  Table 7-5. TMP1075 Register Map
+  ADDRESS      TYPE     RESET        ACRONYM                 REGISTER NAME            SECTION
+
+      00h         R        0000h  TEMP                        Temperature result register                Go
+
+      01h         R/W       00FFh  CFGR                           Configuration register                    Go
+
+      02h         R/W       4B00h  LLIM                     Low limit register                       Go
+
+      03h         R/W       5000h  HLIM                        High limit register                       Go
+     0Fh (1)        R        7500h   DIEID                        Device ID register                      Go
+
+ (1)   Device ID register not available on TMP1075N
+
+                                           Note
+
+    TMP1075 Configuration register supports single byte read and write for software compatibility with
+     xx75 standard temperature sensors.
+
+ 7.5.1 Register Descriptions
+
+                               Table 7-6. TMP1075 Access Type Codes
+ Access Type               Code                          Description
+
+ Read Type
+
+ R                     R                         Read
+
+ Write Type
+
+ W                W                                Write
+
+ Reset or Default Value
+
+ -n                                                             Value after reset or the default value
+
+ 7.5.1.1 Temperature Register (address = 00h) [default reset = 0000h]
+
+The temperature register of the TMP1075 is a 12-bit, read-only register that stores the result of the most recent
+ conversion (see Figure 7-11). Data is represented in binary two's complement format. The first 12 bits are used
+ to indicate temperature, with all remaining bits equal to zero. The least significant byte does not have to be read
+ if that information is not needed. Following power-up or reset, the temperature register value is 0°C until the first
+ conversion is complete.
+
+                                  Figure 7-11. Temperature Register
+       15            14            13            12             11            10             9             8
+
+      T11           T10           T9           T8           T7           T6           T5           T4
+
+      R-0           R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+       7             6             5             4             3             2             1             0
+
+      T3           T2           T1           T0            0             0             0             0
+
+      R-0           R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+                           Table 7-7. Temperature Register Field Description
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:4     T[11:0]                   R       000h         12-bit, read-only register that stores the most recent
+                                                                     temperature conversion results.
+
+     3:0  —                      R       0h         Not used
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    21
+
+                                                  Product Folder Links: TMP1075

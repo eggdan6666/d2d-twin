@@ -1,0 +1,48 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.4.4  Auto
+
+In Auto Mode the TPS23861 automatically cycles the port through detection, classification and power on. The
+ICUT and PoEP fields are set automatically based on the classification status.  If a class 0, 1, 2 or 3 PD is
+recognized, ICUTn is set to 000 (374 mA) and the PoEPn bit is cleared. If a class 4 PD is recognized, ICUTn is
+set to 110 (645 mA) and the PoEPn bit is set. Auto Mode and the AUTO bit are related, but are not identical.
+When the Bit  is set,  all ports are placed in Auto Mode; additionally, several other registers are set. See
+Independent Operation when the AUTO Bit is Set section.
+
+Following a power-off command, disconnect or shutdown due to a Start, ICUT or ILIM fault, the port powers off.
+Following port power  off due to a power  off command or disconnect, the TPS23861 continues automatic
+operation starting with a detection cycle (if DETEn is set). If the shutdown is due to a Start, ICUT or ILIM fault,
+the TPS23861 enters into a cool-down period. During the cool-down period any port power-on command using
+Power Enable Command is ignored. The length of the cool-down period is set in the CLDN field of the Cool
+Down/Gate Drive Register. After the end of the cool-down period the TPS23861 continues automatic operation
+starting with a detection cycle, assuming DETEn is set.
+
+The TPS23861 will not automatically apply power to a port, even  if Operating Mode is set to Auto, under the
+following circumstances.
+•  The detect status is not Resistance Valid. This means that the DETEn bit must be set in order to power on in
+   Auto Mode.
+
+
+                                  NOTE
+        A write to the DETEn bit or CLEn bit will not stick if the port is in Off Mode.
+
+•    If the classification status is overcurrent or, class mismatch.
+
+The TPS23861 starts in Auto Mode after a power-on reset or when the RESET pin is de-asserted. When a valid
+PD is connected as TPS23861 comes out of reset, then the ports will sequence through detection, classification,
+and power on as shown in Figure 44. Staggered port power on prevents the sudden inrush of current from the
+VPWR supply when multiple PDs are already connected.
+
+
+
+
+
+                      Figure 44. Port Sequencing after RESET Pin De-Assertion
+
+
+
+42     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,59 @@
+                                                                           Document Number: PS-MPU-6000A-00
+                     MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                 Release Date: 08/19/2013
+
+
+ 6.3   Electrical and Other Common Specifications
+ VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C
+
+PARAMETER                  CONDITIONS                      MIN        TYP       MAX        Units    Notes
+TEMPERATURE SENSOR
+Range                                                                                  -40 to +85                  °C
+Sensitivity                        Untrimmed                                       340                    LSB/ºC
+Temperature Offset                35oC                                                 -521                  LSB
+Linearity                           Best fit straight line (-40°C to
+                                                                                ±1                     °C
+                                 +85°C)
+VDD POWER SUPPLY
+Operating Voltages                                                        2.375                        3.46       V
+
+Normal Operating Current           Gyroscope + Accelerometer + DMP                        3.9                mA
+
+                                Gyroscope + Accelerometer
+                           (DMP disabled)                                           3.8                mA
+
+                                Gyroscope + DMP
+                                    (Accelerometer disabled)                                  3.7                mA
+
+                                Gyroscope only
+                           (DMP & Accelerometer disabled)                          3.6                mA
+
+                                   Accelerometer only
+                           (DMP & Gyroscope disabled)                         500                   µA
+Accelerometer Low Power Mode      1.25 Hz update rate                                10                   µA
+Current
+                               5 Hz update rate                                   20                   µA
+
+                               20 Hz update rate                                  70                   µA
+
+                               40 Hz update rate                                  140                   µA
+
+Full-Chip Idle Mode Supply Current                                                    5                    µA
+Power Supply Ramp Rate            Monotonic ramp. Ramp rate is 10%
+                                                                                            100       ms                                         to 90% of the final value
+VLOGIC REFERENCE VOLTAGE   MPU-6050 only
+Voltage Range                 VLOGIC must be ≤VDD at all times       1.71                 VDD       V
+Power Supply Ramp Rate            Monotonic ramp. Ramp rate is 10%
+                                                                                            3        ms
+                                         to 90% of the final value
+Normal Operating Current                                                           100                   µA
+TEMPERATURE RANGE
+Specified Temperature Range        Performance parameters are not
+                                       applicable beyond Specified               -40                      +85         °C
+                                 Temperature Range
+
+
+
+
+
+                                            14 of 52

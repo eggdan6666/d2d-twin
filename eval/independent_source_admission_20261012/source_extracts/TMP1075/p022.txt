@@ -1,0 +1,79 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 7.5.1.2 Configuration Register (address = 01h) [default reset = 00FFh (60A0h TMP1075N)]
+
+The configuration register is an 16-bit read/write register used to store bits that control the operational modes
+ of the temperature sensor. Read and write operations are performed MSB first. Figure 7-12 shows the format of
+ the configuration register for the TMP1075, followed by a breakdown of the register bits. The power-up or reset
+ value of the configuration register are all bits equal to 00FFh (TMP1075N: 60A0h). Only single byte writes and
+ reads must be used when pointing to the configuration register for proper operation on the TMP1075N orderable.
+
+                            Figure 7-12. Configuration Register: TMP1075
+       15            14            13            12             11            10             9             8
+
+     OS          R1          R0           F1           F0         POL        TM         SD
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+       1             1             1             1             1             1             1             1
+
+     R/W-1         R/W-1         R/W-1         R/W-1         R/W-1         R/W-1         R/W-1         R/W-1
+
+                           Figure 7-13. Configuration Register: TMP1075N
+       15            14            13            12             11            10             9             8
+
+     OS          R1          R0           F1           F0         POL        TM         SD
+
+     R/W-0          R-1            R-1          R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+       1             0               x             0             0             0             0             0
+
+    Reserved       Reserved       Reserved       Reserved       Reserved       Reserved       Reserved       Reserved
+
+                          Table 7-8. Configuration Register Field Description
+    BIT    FIELD        TYPE            RESET                DESCRIPTION
+
+    15   OS          R/W               0                        One-shot conversion mode. Writing 1, starts a single
+                                                                            temperature conversion. Read returns 0.
+
+   14:13    R[1:0]        R/W               0                         Conversion rate setting when device is in continuous
+                   R (TMP1075N)       11 (TMP1075N)            conversion mode
+                                                                                 00: 27.5 ms conversion rate
+                                                                                 01: 55 ms conversion rate
+                                                                                 10: 110 ms conversion rate
+                                                                                     11: 220 ms conversion rate (250 ms TMP1075N)
+
+   12:11    F[1:0]         R/W               0                         Consecutive fault measurements to trigger the alert
+                                                                                      function
+                                                                                 00: 1 fault
+                                                                                 01: 2 faults
+                                                                                 10: 3 faults (4 faults TMP1075N)
+                                                                                     11: 4 faults (6 faults TMP1075N)
+
+    10   POL         R/W               0                              Polarity of the output pin
+                                                                                          0: Active low ALERT pin
+                                                                                          1: Active high ALERT pin
+
+     9    TM          R/W               0                           Selects the function of the ALERT pin
+                                                                                          0: ALERT pin functions in comparator mode
+                                                                                          1: ALERT pin functions in interrupt mode
+
+     8    SD          R/W               0                         Sets the device in shutdown mode to conserve power
+                                                                                          0: Device is in continuous conversion
+                                                                                          1: Device is in shutdown mode
+
+     7:0  —           R/W               FFh                      Not used
+                                         A0h (TMP1075N)          Reserved on TMP1075N package
+
+
+
+
+
+22    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

@@ -1,0 +1,70 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 5.5 Electrical Characteristics (continued)
+ at VDD = 3.3V, data rate = 8SPS, and full-scale input voltage range (FSR) = ±2.048V (unless otherwise noted); maximum
+ and minimum specifications apply from TA = –40°C to +125°C; typical specifications are at TA = 25°C
+           PARAMETER                 TEST CONDITIONS             MIN       TYP     MAX    UNIT
+
+ POWER-SUPPLY
+                                                      TA = 25°C                              0.5          2
+                                      Power-down
+                                                                                                    5
+ IVDD         Supply current                                                                         µA
+                                                      TA = 25°C                        150        200
+                                           Operating
+                                                                                                  300
+
+                              VDD = 5.0V                                                0.9
+ PD         Power dissipation         VDD = 3.3 V                                                0.5          mW
+                              VDD = 2.0V                                                0.3
+
+ (1)   This parameter expresses the full-scale range of the ADC scaling. No more than VDD + 0.3V must be applied to the analog inputs of
+      the device. See Table 7-1 for more information.
+ (2)    Best-fit INL; covers 99% of full-scale
+ (3)   Includes all errors from onboard PGA and voltage reference
+
+ 5.6 Timing Requirements: I2C
+ over operating ambient temperature range and VDD = 2.0V to 5.5V (unless otherwise noted)
+                                                      FAST MODE        HIGH-SPEED MODE
+
+                                                          MIN     MAX       MIN     MAX    UNIT
+ fSCL       SCL clock frequency                                        0.01          0.4         0.01          3.4   MHz
+ tBUF        Bus free time between START and STOP condition           600                   160                 ns
+             Hold time after repeated START condition.
+ tHDSTA                                                          600                   160                 ns                After this period, the first clock is generated.
+ tSUSTA       Setup time for a repeated START condition                  600                   160                 ns
+ tSUSTO      Setup time for STOP condition                            600                   160                 ns
+ tHDDAT      Data hold time                                           0                     0                 ns
+ tSUDAT       Data setup time                                        100                    10                 ns
+ tLOW       Low period of the SCL clock pin                          1300                   160                 ns
+ tHIGH        High period for the SCL clock pin                          600                    60                 ns
+  tF              Fall time for both SDA and SCL signals(1)                              300                   160     ns
+ tR           Rise time for both SDA and SCL signals(1)                              300                   160     ns
+
+ (1)   For high-speed mode maximum values, the capacitive load on the bus line must not exceed 400pF.
+
+                                   tLOW
+                                                           tR                          tF                                                  t HDSTA
+
+
+      SCL
+
+                                                                t HDSTA                          tHIGH     t SUSTA                                                                                                   t SUSTO
+                                                                                                    t HDDAT                      t SUDAT
+
+     SDA
+                       tBUF
+
+
+             P      S                                           S                             P
+
+                                   Figure 5-1. I2C Interface Timing
+
+
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

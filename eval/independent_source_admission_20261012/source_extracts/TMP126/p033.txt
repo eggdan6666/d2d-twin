@@ -1,0 +1,70 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.9 Slew_Limit Register (Address = 08h) [reset = 0500h]
+
+ This register is used to configure the temperature slew rate limit of the TMP126. The limit is formatted in a 13-bit
+ unsigned format with the LSB (Least Significant Bit) equal to 0.03125°C/s. The range of the register is 0°C to
+ +256°C. The default value on start-up is 0140h or 10°C/s. The slew rate limit will trigger a slew rate alert on
+ positive slew rates that are greater than the unsigned limit as enabled by the Alert_Enable register.
+
+ Return to Register Map.
+
+                                  Figure 8-27. Slew_Limit Register
+       15            14            13            12             11            10             9             8
+
+    Reserved                                                  Slew_Rate_Limit[12:6]
+
+      R-0b                                                  R/W-05h
+
+       7             6             5             4             3             2             1             0
+
+                                        Slew_Rate_Limit[5:0]                                           Reserved
+
+                                       R/W-00h                                                   R-00b
+
+                          Table 8-13. Slew_Limit Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15     Reserved                  R       00b        Reserved
+
+    14:2    Slew_Rate_Limit[12:0]           R/W     0140h       13-bit temperature slew rate limit setting.
+                                                                  Temperature low limit is represented by a 13-bit unsigned word
+                                                                            with a LSB (Least Significant Bit) equal to 0.03125°C/s. The
+                                                                               default setting for this is 10°C/s.
+
+     1:0    Reserved                  R       00b        Reserved
+
+
+ 8.6.10 Unique_ID1 register (Address = 09h) [reset = xxxxh]
+
+ This register contains bits 47:32 of the Unique ID for the device. The Unique ID of the device is used for NIST
+ traceability purposes.
+
+ Return to Register Map.
+
+                                  Figure 8-28. Unique_ID1 Register
+       15            14            13            12             11            10             9             8
+
+                                                         Unique_ID[47:40]
+
+                                                          R-xxh
+
+       7             6             5             4             3             2             1             0
+
+                                                         Unique_ID[39:32]
+
+                                                          R-xxh
+
+                          Table 8-14. Unique_ID4 Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:0    Unique_ID[47:32]             R        xxxxh        Bits 47:32 of the device Unique ID
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    33
+
+                                                  Product Folder Links: TMP126

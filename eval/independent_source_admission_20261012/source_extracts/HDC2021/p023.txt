@@ -1,0 +1,69 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.5 Status (Address 0x04)
+
+                              Table 7-15. Status Register (Address 0x04)
+
+       7              6              5              4              3             2            1            0
+
+ DRDY_STATUS   TH_STATUS    TL_STATUS    HH_STATUS    HL_STATUS      RES        RES        RES
+
+                            Table 7-16. Status Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7    DRDY_STATUS              R       0          DataReady bit status
+                                                             0 = Data Not Ready
+                                                             1 = Data Ready
+
+     6    TH_STATUS                R       0          Temperature threshold HIGH Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     5     TL_STATUS                R       0          Temperature threshold LOW Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     4    HH_STATUS               R       0           Humidity threshold HIGH Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     3    HL_STATUS                R       0           Humidity threshold LOW Interrupt status
+                                                             0 = No interrupt
+                                                             1 = Interrupt
+
+     2    RES                                    0          Reserved
+
+     1    RES                                    0          Reserved
+
+     0    RES                                    0          Reserved
+
+
+The DRDY_STATUS bit indicates that temperature and/or humidity conversion is completed, and its behavior is
+ defined by the Device Configuration Register (0x0E). This bit is cleared when the any of the following registers is
+ read: Temperature Low (0x00), Temperature High (0x01), Humidity Low (0x02), Humidity High (0x03), and
+ Status (0x04). The bit is also cleared upon RESET.
+
+The TL_STATUS bit indicates that the Temperature Threshold LOW value is exceeded, and its behavior is
+ defined by the Device Configuration Register (0x0E). The bit is cleared when the Status Register (0x04) is read.
+The bit is also cleared upon RESET.
+
+The TH_STATUS bit indicates that the Temperature Threshold HIGH value is exceeded, and its behavior is
+ defined by the 0x0E Configuration register value. The bit is cleared when the Status Register (0x04) is read. The
+ bit is also cleared upon RESET.
+
+The HH_STATUS bit indicates that the Humidity Threshold HIGH value is exceeded, and its behavior is defined
+ by the Device Configuration Register (0x0E). The bit is cleared when the Status Register (0x04) is read. The bit
+ is also cleared upon RESET.
+
+The HL_STATUS bit indicates that the Humidity Threshold LOW value is exceeded, and its behavior is defined
+ by the Device Configuration Register (0x0E). The bit is cleared when the Status Register (0x04) is read. The bit
+ is also cleared upon RESET.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    23

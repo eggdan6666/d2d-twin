@@ -1,0 +1,370 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "MPU6050",
+  "vendor": "InvenSense",
+  "interface": "I2C",
+  "reg_width": 8,
+  "i2c": {
+    "addresses_7bit": [
+      "0x68",
+      "0x69"
+    ],
+    "note": "7-bit address b110100X; AD0 selects LSB; Product Specification p.33"
+  },
+  "source_url": "https://invensense.tdk.com/wp-content/uploads/2015/02/MPU-6000-Register-Map.pdf",
+  "source_local": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+  "source_sha256": "519650CBC502A3E89DDBA6D6F115734B6C7060D451938C0DC36B6232DAAE7014",
+  "source_evidence": "RM-MPU-6000A-00 Revision 4.2, 46-page local mirror; register map p.6-8, CONFIG p.13, GYRO_CONFIG p.14, accelerometer outputs p.29, WHO_AM_I p.45. Official web index confirms the same document number, revision and release date.",
+  "registers": [
+    {
+      "name": "SMPLRT_DIV",
+      "addr": "0x19",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "Sample-rate divider; official register map p.8 and detailed description",
+      "fields": [
+        {
+          "name": "SMPLRT_DIV",
+          "bits": "7:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Sample Rate = gyroscope output rate / (1 + divider)"
+        }
+      ]
+    },
+    {
+      "name": "CONFIG",
+      "addr": "0x1A",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "FSYNC sampling and digital low-pass filter; official map p.8 and description",
+      "fields": [
+        {
+          "name": "EXT_SYNC_SET",
+          "bits": "5:3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "External frame synchronization selection"
+        },
+        {
+          "name": "DLPF_CFG",
+          "bits": "2:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Digital low-pass filter configuration"
+        },
+        {
+          "name": "RESERVED_7_6",
+          "bits": "7:6",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "GYRO_CONFIG",
+      "addr": "0x1B",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "Gyroscope self-test and full-scale selection; official map p.8 and detailed description",
+      "fields": [
+        {
+          "name": "XG_ST",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "desc": "X gyro self-test"
+        },
+        {
+          "name": "YG_ST",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Y gyro self-test"
+        },
+        {
+          "name": "ZG_ST",
+          "bits": "5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Z gyro self-test"
+        },
+        {
+          "name": "FS_SEL",
+          "bits": "4:3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Gyroscope full-scale range"
+        },
+        {
+          "name": "RESERVED_2_0",
+          "bits": "2:0",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_CONFIG",
+      "addr": "0x1C",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "Accelerometer self-test and full-scale selection; official map p.8",
+      "fields": [
+        {
+          "name": "XA_ST",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "desc": "X accel self-test"
+        },
+        {
+          "name": "YA_ST",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Y accel self-test"
+        },
+        {
+          "name": "ZA_ST",
+          "bits": "5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Z accel self-test"
+        },
+        {
+          "name": "AFS_SEL",
+          "bits": "4:3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Accelerometer full-scale range"
+        },
+        {
+          "name": "RESERVED_2_0",
+          "bits": "2:0",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_XOUT_H",
+      "addr": "0x3B",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "High byte of 16-bit X accelerometer measurement; official p.29",
+      "fields": [
+        {
+          "name": "ACCEL_XOUT_15_8",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Measurement high byte"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_XOUT_L",
+      "addr": "0x3C",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "Low byte of 16-bit X accelerometer measurement; official p.29",
+      "fields": [
+        {
+          "name": "ACCEL_XOUT_7_0",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Measurement low byte"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_YOUT_H",
+      "addr": "0x3D",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "High byte of 16-bit Y accelerometer measurement; official p.29",
+      "fields": [
+        {
+          "name": "ACCEL_YOUT_15_8",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Measurement high byte"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_YOUT_L",
+      "addr": "0x3E",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "Low byte of 16-bit Y accelerometer measurement; official p.29",
+      "fields": [
+        {
+          "name": "ACCEL_YOUT_7_0",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Measurement low byte"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_ZOUT_H",
+      "addr": "0x3F",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "High byte of 16-bit Z accelerometer measurement; official p.29",
+      "fields": [
+        {
+          "name": "ACCEL_ZOUT_15_8",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Measurement high byte"
+        }
+      ]
+    },
+    {
+      "name": "ACCEL_ZOUT_L",
+      "addr": "0x40",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "Low byte of 16-bit Z accelerometer measurement; official p.29",
+      "fields": [
+        {
+          "name": "ACCEL_ZOUT_7_0",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Measurement low byte"
+        }
+      ]
+    },
+    {
+      "name": "PWR_MGMT_1",
+      "addr": "0x6B",
+      "access": "RW",
+      "reset": "0x40",
+      "desc": "Power, sleep, temperature and clock control; official map p.8. Non-zero reset.",
+      "fields": [
+        {
+          "name": "DEVICE_RESET",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "read_as": 0,
+          "desc": "Device reset control; auto-clears to 0 after whole-device reset (register detail pp.40-41)",
+          "tier": "UNVERIFIED"
+        },
+        {
+          "name": "SLEEP",
+          "bits": "6",
+          "access": "RW",
+          "reset": 1,
+          "desc": "Sleep mode"
+        },
+        {
+          "name": "CYCLE",
+          "bits": "5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Cycle mode"
+        },
+        {
+          "name": "TEMP_DIS",
+          "bits": "3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Disable temperature sensor"
+        },
+        {
+          "name": "CLKSEL",
+          "bits": "2:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Clock source selection"
+        },
+        {
+          "name": "RESERVED_4",
+          "bits": "4",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved bit; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "WHO_AM_I",
+      "addr": "0x75",
+      "access": "RO",
+      "reset": "0x68",
+      "desc": "Device identity; official p.45. Bits 7 and 0 are hard-coded zero.",
+      "fields": [
+        {
+          "name": "WHO_AM_I",
+          "bits": "6:1",
+          "access": "RO",
+          "reset": 52,
+          "desc": "Upper six bits of 7-bit I2C address"
+        },
+        {
+          "name": "ZERO_7",
+          "bits": "7",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Hard-coded zero"
+        },
+        {
+          "name": "ZERO_0",
+          "bits": "0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Hard-coded zero"
+        }
+      ]
+    }
+  ],
+  "excluded_blocks": [
+    "FIFO, interrupt, auxiliary-I2C and dynamic gyro/temperature registers remain excluded until their stateful read/write semantics are reviewed.",
+    "I2C electrical waveform timing is recorded as metadata; the direct-register harness does not score bus-level ACK/START/STOP behavior.",
+    "DEVICE_RESET whole-device side effects are documented but not independently asserted by the direct-register harness."
+  ],
+  "address_encoding": {
+    "i2c_register_address": "8-bit register address byte",
+    "write_sequence": "START -> AD+W -> ACK -> RA -> ACK -> DATA bytes -> ACK -> STOP",
+    "read_sequence": "START -> AD+W -> ACK -> RA -> ACK -> repeated START -> AD+R -> ACK/DATA -> NACK -> STOP",
+    "burst_auto_increment": true,
+    "spi_supported": false,
+    "source_local": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+    "source_pages": "33-37"
+  },
+  "admission_status": "FORMAL_GOLD_ADMITTED_2026-10-10",
+  "admission_evidence": {
+    "source_review": "INDEPENDENT_IR_REVIEW_SIGNOFF.md",
+    "post_repair_recheck": "POST_REPAIR_RECHECK.md",
+    "candidate_harness": "_setup/CANDIDATE_ADMISSION_REPORT.md",
+    "promotion_note": "Promoted after source PASS and isolated candidate simulator PASS; protocol extensions remain supplemental."
+  },
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

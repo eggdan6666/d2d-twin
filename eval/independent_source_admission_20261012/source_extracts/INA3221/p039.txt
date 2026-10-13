@@ -1,0 +1,70 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ regardless of whether the device has power applied or not. Place the required power-supply bypass capacitors
+ as close as possible to the supply and ground terminals of the device to provide stability. A typical value for
+ this supply bypass capacitor is 0.1μF. Applications with noisy or high-impedance power supplies can require
+ additional decoupling capacitors to reject power-supply noise.
+
+ 9.4 Layout
+ 9.4.1 Layout Guidelines
+
+ Connect the input pins (IN+ and IN–) of all the used channels to the sensing resistor using a Kelvin connection
+ or a 4-wire connection. These connection techniques verify that only the current-sensing resistor impedance
+ is detected between the input pins. Poor routing of the current-sensing resistor commonly results in additional
+ resistance present between the input pins. Given the very low ohmic value of the current-sensing resistor,
+ any additional high-current carrying impedance causes significant measurement errors. Place the power-supply
+ bypass capacitor as close as possible to the supply and ground pins.
+
+ 9.4.2 Layout Example
+
+                                                                                                                                         Supply
+                                                                                                                                                                                                      Load                                                                                                                  Power                                                   To
+                                                                    Bus
+                                              To
+
+
+                To Load                             Connect to                Timing Control Output             To Bus Power Supply
+                                                     bus power-
+                                                            supply rail
+
+                                                                                            VPU           IN+2   2IN      TC
+
+
+
+                                                  IN 3                                    IN+1
+
+
+                                               IN+3                                       IN 1
+
+
+                                                                                                         Connect
+                                 GND                              PV
+                             Supply                                                                                            to VPU
+                          Bypass
+                            Capacitor                                                                                                   Critical
+                                      VS                                                   Critical
+                                                                                                               Output
+
+              To Bus Power                                                                                  To Load
+                   Supply
+                                                              A0        SCL        SDA                                                                                                                                                                                                                                                                                                     Warning
+
+
+
+
+
+                                                                                                            Via to Ground Plane
+
+                                                                                                            Via to Power Plane                                                                        I2C- and SMBUS-
+                                                           Compatible Interface    Warning Output
+
+                                     Figure 9-4. Layout Example
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    39
+
+                                                  Product Folder Links: INA3221

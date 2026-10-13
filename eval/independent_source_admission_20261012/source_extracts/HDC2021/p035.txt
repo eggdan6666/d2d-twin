@@ -1,0 +1,66 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+9 Power Supply Recommendations
+
+The HDC2021 requires a voltage supply within 1.62 V and 3.6 V. TI recommends a multilayer ceramic bypass
+X7R capacitor of 0.1 µF between the VDD and GND pins located close to the device.
+10 Layout
+ 10.1 Layout Guidelines
+
+The HDC2021’s relative humidity-sensing element is located on the top side of the package.
+
+ TI recommends that the user eliminate the copper layers below the device (GND, VDD) and create slots in the
+PCB around the device to enhance the thermal isolation of the HDC2021. To ensure the temperature sensor
+ performance, TI highly recommends that the user follow the Land Pattern, Solder Mask, and Solder Paste
+ examples depicted in the Mechanical, Packaging, and Orderable Informationsection.
+
+ 10.1.1 Guidelines for HDC2021 Storage and PCB Assembly
+ 10.1.1.1 Storage and Handling
+
+As with all humidity sensors, the HDC2021 must follow special guidelines regarding handling and storage that
+ are not common with standard semiconductor devices. Long exposure to UV and visible light, or exposure to
+ chemical vapors for prolonged periods, should be avoided as it may affect RH% accuracy. Additionally, the
+ device should be protected from out-gassed solvent vapors produced during manufacturing, transport, operation,
+and package materials (that is, adhesive tapes, stickers, bubble foils). For further detailed information, see
+ Humidity Sensor: Storage and Handling Guidelines (SNIA025).
+
+ 10.1.1.2 Soldering Reflow
+
+ For PCB assembly, standard reflow soldering ovens may be used. The HDC2021 uses the standard soldering
+ profile IPC/JEDEC J-STD-020 with peak temperatures at 260°C. When soldering the HDC2021, it is mandatory
+ to use no-clean solder paste, and the paste must not be exposed to water or solvent rinses during assembly
+because these contaminants may affect sensor accuracy. After reflow, it is expected that the sensor will
+ generally output a shift in relative humidity, which, once the polyimide tape is peeled off, will reduce over time as
+ the sensor is exposed to typical indoor ambient conditions. These conditions include 30-40% RH at room
+ temperature during a duration of several days. Following this rehydration procedure allows the polymer to
+ correctly settle after reflow and return to the calibrated RH accuracy.
+
+ 10.1.1.3 Rework
+
+The polyimide tape of the HDC2021 can withstand at least three standard reflow cycles. In the case of tape
+ removal, TI recommends to limit the HDC2021 to a single IR reflow with no rework, but a second reflow may be
+ possible if the following guidelines are met:
+
+ •  The exposed polymer (humidity sensor) is kept clean and undamaged.
+ •  The no-clean solder paste is used and the process is not exposed to any liquids, such as water or solvents.
+ •  The peak soldering temperature does not exceed 260°C.
+ 10.1.1.4 High Temperature and Humidity Exposure
+
+Long exposure outside the recommended operating conditions may temporarily offset the RH output. The
+recommended humidity operating range is 20% to 80% RH (non-condensing) over 0°C to 60°C. Prolonged
+ operation beyond these ranges may shift the sensor reading with a slow recovery time.
+
+ 10.1.1.5 Bake/Rehydration Procedure
+
+ Prolonged exposure to extreme conditions or harsh contaminants may impact sensor performance. In the case
+ that permanent offset is observed from contaminants, the following procedure is suggested, which may recover
+ or reduce the error observed in sensor performance:
+ 1. Baking: 100°C, at less than 5%RH, for 5 to 10 hours
+ 2. Rehydration: Between 20°C to 30°C, 60%RH to 75%RH, for 6 to 12 hours
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    35

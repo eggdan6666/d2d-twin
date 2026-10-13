@@ -1,0 +1,72 @@
+LIS3DH                                                    Terminology and functionality
+
+
+          The turn-on time to transition to another operating mode is given in Table 11.
+
+
+                           Table 11. Turn-on time for operating mode transition
+
+                                                                            Turn-on time
+                            Operating mode change
+                                                                               [ms]
+
+                12-bit mode to 8-bit mode                                      1/ODR
+
+                12-bit mode to 10-bit mode                                     1/ODR
+
+                10-bit mode to 8-bit mode                                      1/ODR
+
+                10-bit mode to 12-bit mode                                     7/ODR
+
+                 8-bit mode to 10-bit mode                                      1/ODR
+
+                 8-bit mode to 12-bit mode                                      7/ODR
+
+
+
+                           Table 12. Current consumption of operating modes
+
+                                       Low-power mode    Normal mode     High resolution
+                  Operating mode [Hz]         (8-bit data output)  (10-bit data output)  (12-bit data output)
+                                                     [μA]               [μA]                [μA]
+
+            1                                   2                2                 2
+
+            10                                  3                4                 4
+
+            25                                  4                6                 6
+
+            50                                  6                 11                 11
+
+            100                                 10               20                20
+
+            200                                 18               38                38
+
+            400                                 36               73                73
+
+            1344                                                     --               185               185
+
+            1620                               100                         --                           --
+
+            5376                               185                         --                           --
+
+
+3.2.2      Self-test
+
+          The self-test allows the user to check the sensor functionality without moving it. The self-test
+             function is off when the self-test bit (ST) is programmed to ‘0‘. When the self-test bit is
+          programmed to ‘1‘, an actuation force is applied to the sensor, simulating a definite input
+             acceleration. In this case the sensor outputs exhibit a change in their DC levels which are
+             related to the selected full scale through the device sensitivity. When the self-test is
+             activated, the device output level is given by the algebraic sum of the signals produced by
+            the acceleration acting on the sensor and by the electrostatic test-force. If the output signals
+          change within the amplitude specified inside Table 4, then the sensor is working properly
+          and the parameters of the interface chip are within the defined specifications.
+
+
+
+
+
+                                      DocID17530 Rev 2                                      17/54
+
+                                                                                                                            54

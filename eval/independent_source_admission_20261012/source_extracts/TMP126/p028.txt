@@ -1,0 +1,41 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+                    Table 8-7. Alert_Status Register Field Descriptions (continued)
+     Bit     Field                          Type     Reset      Description
+
+     2     THigh_Flag                RC      0b         High temperature flag indicator. This indicates that the latest
+                                                                     temperature conversion has cross above the THigh_Limit
+                                                                                 register threshold or crossed below the THigh_Limit -
+                                                                 THigh_Hyst threshold. Reading Alert_Status register will clear
+                                                                                       this bit.
+                                                             0b = The most recent temperature conversion has not crossed
+                                                                         the THigh_Limit or the hysteresis threshold.
+                                                                         1b: A temperature conversion crossed the THigh_Limit or
+                                                                    crossed below the THigh_Limit - THigh_Hyst threshold. Once
+                                                                         the THigh_Flag is set, THigh_Flag will not be set again until a
+                                                                     temperature conversion is below THigh_Limit - THigh_Hyst
+
+     1     TLow_Flag                 RC      0b        Low temperature flag indicator. This indicates that the latest
+                                                                     temperature conversion has cross below the TLow_Limit
+                                                                                 register threshold or crossed above the Tlow_Limit + TLow_Hyst
+                                                                             threshold. Reading Alert_Status register will clear this bit.
+                                                             0b = The most recent temperature conversion has not crossed
+                                                                         the TLow_Limit or the hysteresis threshold.
+                                                                         1b: A temperature conversion crossed below the TLow_Limit.
+                                                         Once the TLow_Flag is set, TLow_Flag will not be set again until
+                                                                     temperature conversion is above TLow_Limit + TLow_Hyst
+
+     0     Data_Ready_Flag            RC      0b         Data Ready flag indicator. This indicates that there is an unread
+                                                                     temperature conversion. Reading Alert_Status register or the
+                                                                  Temperature Results register will clear this bit.
+                                                             0b = Data in Temp_Result has been read already
+                                                             1b = Data in Temp_Result is unread
+
+
+
+
+
+28    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

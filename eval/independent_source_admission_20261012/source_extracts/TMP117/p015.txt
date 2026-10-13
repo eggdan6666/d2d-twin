@@ -1,0 +1,45 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.4.3 One-Shot Mode (OS)
+
+When MOD[1:0] bits are set to 11 in the configuration register, the TMP117 will run a temperature conversion
+ referred to as a one-shot conversion. After the device completes a one-shot conversion, the device goes to the
+ low-power shutdown mode. A one-shot conversion cycle, unlike the continuous conversion mode, only consists
+ of the active conversion time and no standby period. Thus, the duration of a one-shot conversion is only affected
+ by the AVG bit settings. The CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a
+ timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready
+and ALERT flag in the configuration register is set. The Data_Ready flag can be used to determine when the
+ conversion completes. The user can perform an I2C read on the configuration register or temperature result
+ register to clear the Data_Ready flag. The user can also set the DR/nAlert_EN bit in the configuration register to
+ monitor the state of the Data_Ready flag on the ALERT pin.
+
+ One-shot mode cannot be programmed to a default start-up mode.  If the EEPROM is programmed to be in
+ one-shot mode on start-up, it will default to shutdown mode instead.
+
+                                                           Start of conversion
+
+                                                                      tShutdownt
+                                      Active conversion time
+                                      (Affected by averaging)
+
+
+                            I2C Command
+
+                       Figure 7-4. One-Shot Timing Diagram With AVG[1:0] = 00
+
+ 7.4.4 Therm and Alert Modes
+
+The built-in therm and alert functions of the TMP117 can alert the user if the temperature has crossed a certain
+ temperature limit or if the device is within a certain temperature range. At the end of every conversion, including
+ averaging, the TMP117 compares the converted temperature result to the values stored in the low limit register
+and high limit register. The device then either sets or clears the corresponding status flags in the configuration
+ register, as described in this section.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    15
+
+                                                  Product Folder Links: TMP117

@@ -1,0 +1,51 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+6.6   Electrical Specifications, Continued
+Typical Operating Circuit of Section 7.2, VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or
+VDD, TA = 25°C
+
+ Parameters                              Conditions                    Min      Typical    Max    Units   Notes
+ INTERNAL CLOCK SOURCE              CLK_SEL=0,1,2,3
+ Gyroscope Sample Rate, Fast            DLPFCFG=0                              8              kHz
+                                  SAMPLERATEDIV = 0
+ Gyroscope Sample Rate, Slow              DLPFCFG=1,2,3,4,5, or 6                    1              kHz
+                                  SAMPLERATEDIV = 0
+ Accelerometer Sample Rate                                                        1              kHz
+
+
+ Clock Frequency Initial Tolerance           CLK_SEL=0, 25°C                   -5                 +5    %
+                                         CLK_SEL=1,2,3; 25°C                -1                 +1    %
+ Frequency Variation over Temperature      CLK_SEL=0                                -15 to +10       %
+                                       CLK_SEL=1,2,3                           ±1         %
+ PLL Settling Time                        CLK_SEL=1,2,3                            1        10    ms
+ EXTERNAL 32.768kHz CLOCK           CLK_SEL=4
+ External Clock Frequency                                                             32.768            kHz
+ External Clock Allowable Jitter                 Cycle-to-cycle rms                        1 to 2              µs
+ Gyroscope Sample Rate, Fast            DLPFCFG=0                                8.192             kHz
+                                  SAMPLERATEDIV = 0
+ Gyroscope Sample Rate, Slow              DLPFCFG=1,2,3,4,5, or 6                     1.024             kHz
+                                  SAMPLERATEDIV = 0
+ Accelerometer Sample Rate                                                            1.024             kHz
+
+
+ PLL Settling Time                                                                1        10    ms
+ EXTERNAL 19.2MHz CLOCK            CLK_SEL=5
+ External Clock Frequency                                                                 19.2           MHz
+ Gyroscope Sample Rate                         Full programmable range            3.9                8000    Hz
+ Gyroscope Sample Rate, Fast Mode        DLPFCFG=0                              8              kHz
+                                  SAMPLERATEDIV = 0
+ Gyroscope Sample Rate, Slow Mode         DLPFCFG=1,2,3,4,5, or 6                    1              kHz
+                                  SAMPLERATEDIV = 0
+ Accelerometer Sample Rate                                                        1              kHz
+
+
+ PLL Settling Time                                                                1        10    ms
+
+
+
+
+
+                                           17 of 52

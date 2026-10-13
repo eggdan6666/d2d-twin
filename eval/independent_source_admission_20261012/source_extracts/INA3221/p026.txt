@@ -1,0 +1,69 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 8.2.1 Configuration Register (address = 00h) [reset = 7127h]
+
+The Configuration register settings control the operating modes for the shunt- and bus-voltage measurements for
+ the three input channels. This register controls the conversion time settings for both the shunt- and bus-voltage
+measurements and the averaging mode used. The Configuration register is used to independently enable or
+ disable each channel, as well as select the operating mode that controls which signals are selected to be
+ measured.
+
+ This register can be read from at any time without impacting or affecting either device settings or conversions in
+ progress. Writing to this register halts any conversion in progress until the write sequence is completed, resulting
+ in a new conversion starting, based on the new Configuration register contents. This architecture prevents any
+ uncertainty in the conditions used for the next completed conversion.
+
+                                  Table 8-3. Configuration Register
+   15     14      13      12      11      10      9       8       7       6       5       4       3       2        1        0
+
+                                                          VBUS    VBUS    VBUS    VSH     VSH     VSH   MODE  MODE  MODE  RST   CH1en   CH2en   CH3en   AVG2   AVG1   AVG0                                                   CT2    CT1    CT0    CT2    CT1    CT0      3        2        1
+
+  RW-0   RW-1   RW-1   RW-1   RW-0   RW-0   RW-0   RW-1   RW-0   RW-0   RW-1   RW-0   RW-0   RW-1    RW-1    RW-1
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                         Table 8-4. Configuration Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15    RST                       R/W     0h         Reset bit. Set this bit = 1 to generate a system reset that is the
+                                                       same as a power-on reset (POR). This bit resets all registers to
+                                                                               default values and self-clears.
+     14    CH1en                      R/W     7h         Channel enable mode. These bits allow each channel to be
+                                                                       independently enabled or disabled.
+     13    CH2en                                                             0 = Channel disable
+     12    CH3en                                             1 = Channel enable (default)
+
+    11-9    AVG2-0                     R/W     0h          Averaging mode. These bits set the number of samples that are
+                                                                             collected and averaged together.
+                                                             000 = 1 (default)
+                                                             001 = 4
+                                                             010 = 16
+                                                                011 = 64
+                                                             100 = 128
+                                                             101 = 256
+                                                                110 = 512
+                                                                   111 = 1024
+     8-6    VBUSCT2-0                  R/W     4h          Bus-voltage conversion time. These bits set the conversion time
+                                                                                       for the bus-voltage measurement.
+                                                             000 = 140μs
+                                                             001 = 204μs
+                                                             010 = 332μs
+                                                                011 = 588μs
+                                                             100 = 1.1ms (default)
+                                                             101 = 2.116ms
+                                                                110 = 4.156ms
+                                                                   111 = 8.244ms
+     5-3    VSHCT2-0                   R/W     4h          Shunt-voltage conversion time. These bits set the conversion
+                                                                        time for the shunt-voltage measurement.
+                                                           The conversion-time bit settings for VSHCT2-0 are the same as
+                                                             VBUSCT2-0 (bits 8-6) listed in the previous row.
+
+
+
+
+
+26    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

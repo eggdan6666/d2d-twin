@@ -1,0 +1,289 @@
+[
+  {
+    "chip": "BMP280",
+    "register": "ctrl_meas",
+    "field": "mode",
+    "property": "desc",
+    "old": "00:sleep 01:forced 10/11:normal",
+    "new": "00 sleep, 01/10 forced, 11 normal; forced returns to sleep after measurement; Table10 p.15",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": "Table10",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": null,
+    "property": "desc",
+    "old": "温度结果，二进制补码，左对齐；默认分辨率 R1R0=00 → 9 位、1 LSB=0.5°C，占 bits[15:7]，未用低位恒 0（§7.3.1 与 §7.5.1.2 前文：『For 9-, 10-, or 11-bit resolution, the MSBs in the Temperature Register are used with the unused least significant bits equal to zero』）；上电读到 0°C 直至首次转换完成",
+    "new": "Twelve-bit read-only register at bits15:4, bits3:0 zero. Effective conversion resolution selected by R1:R0=9/10/11/12bits; at POR default9bits, unneeded result LSBs zero until higher resolution selected. Result0 before first conversion completes.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "T",
+    "property": "bits",
+    "old": "15:7",
+    "new": "15:4",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "T",
+    "property": "desc",
+    "old": "T[8:0] 9 位温度（默认分辨率）",
+    "new": "Full twelve-bit register format; R1:R0 selects effective ADC resolution and zeros unused LSBs.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "bits",
+    "old": "6:0",
+    "new": "3:0",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "desc",
+    "old": "恒 0（R1R0=11 时才扩展为 [15:4] 12 位）",
+    "new": "Low four bits always zero in the twelve-bit temperature register format; bits6:4 belong to conversion data.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "tier",
+    "old": "UNVERIFIED",
+    "new": "SOURCE_EXPLICIT_ZERO",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "TEMP",
+    "field": "UNUSED",
+    "property": "tier_evidence",
+    "old": "PDF p.9 只写了温度寄存器『unused LSBs set to zero』，TLOW/THIGH 的 [6:0] 未定位到 Type 行",
+    "new": "Table7 p.16 explicitly shows bits3:0 zero; effective resolution unused LSBs from §7.3.1 p.9.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Table7",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP100",
+    "register": "CONFIG",
+    "field": "OS",
+    "property": "read_as",
+    "old": 1,
+    "new": null,
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "§7.5.3.6",
+        "excerpt": ""
+      }
+    ],
+    "op": "remove"
+  },
+  {
+    "chip": "TMP100",
+    "register": "CONFIG",
+    "field": "OS",
+    "property": "desc",
+    "old": "OS/ALERT：关断态写 1 触发单次转换；读为比较器状态——POL=0 时常态读 1，连续故障达 THIGH 后读 0（§7.4.2）。默认态（温度 0°C < THIGH）读 1，故复位读回 0x80",
+    "new": "Write1 triggers one-shot only when SD1. Read reports comparator state with POL inversion; not an invariant1 and not a conversion-busy bit.",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "§7.5.3.6",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP102",
+    "register": "TLOW",
+    "field": "UNUSED",
+    "property": "desc",
+    "old": "恒 0（EM=1 时 bit0 有意义）",
+    "new": "Normal EM0: bits3:0 zero; Extended EM1: bit3 is threshold data, bits2:0 remain zero (Tables6-14/6-16).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table6-14",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 20,
+        "printed_page": "20",
+        "table": "Table6-16",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "TMP102",
+    "register": "THIGH",
+    "field": "UNUSED",
+    "property": "desc",
+    "old": "恒 0（EM=1 时 bit0 有意义）",
+    "new": "Normal EM0: bits3:0 zero; Extended EM1: bit3 is threshold data, bits2:0 remain zero (Tables6-14/6-16).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table6-14",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 20,
+        "printed_page": "20",
+        "table": "Table6-16",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "BMP280",
+    "register": "press_xlsb",
+    "field": null,
+    "property": "desc",
+    "old": "raw 压力 up[3:0]（低 4 位有效，其余恒 0）",
+    "new": "Raw output low four data bits occupy register bits7:4; bits3:0 are explicitly RO zero (Table18 p.24).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Table18",
+        "excerpt": ""
+      }
+    ]
+  },
+  {
+    "chip": "BMP280",
+    "register": "temp_xlsb",
+    "field": null,
+    "property": "desc",
+    "old": "raw 温度 ut[3:0]（低 4 位有效，其余恒 0）",
+    "new": "Raw output low four data bits occupy register bits7:4; bits3:0 are explicitly RO zero (Table18 p.24).",
+    "certainty": "MANUFACTURER_FACT",
+    "locators": [
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Table18",
+        "excerpt": ""
+      }
+    ]
+  }
+]

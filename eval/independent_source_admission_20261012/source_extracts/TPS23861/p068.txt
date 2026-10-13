@@ -1,0 +1,51 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.22  Interrupt Timer Register
+
+Command = 27h with 1 Data Byte, Read/Write
+
+
+    BITS        D7         D6         D5         D4         D3         D2         D1         D0
+
+  BIT NAME      R27[7]        R27[6]        R27[5]        R27[4]       TMR[3]      TMR[2]      TMR[1]      TMR[0]
+
+ RESET OR       0            0            0            0            0            0            0            0
+ POR VALUE
+
+Bit Descriptions
+
+TMR[3:0]: Non-critical interrupts may be deferred using an internal timer. Once loaded with a non-zero value, the
+internal timer counts continuously with period calculated as follows:
+t N u t STEP
+
+where
+       •     t = Timer period, ms
+       •  N = 4-bit value in TMR[3:0] field
+       •   tSTEP = 10 ms                                                                                                              (1)
+
+Non-critical  interrupts generated  within the TPS23861  will be passed  to the  interrupt-handling hardware
+whenever the timer counts down to 0. (The timer then reloads and continues to count.)
+
+
+                                  NOTE
+            ‘interrupt-handling hardware’ includes all interrupt-enabling functionality as well.
+
+
+Critical and non-critical interrupts are defined in Table 6. When the TMR[3:0] field is read, the contents will be the
+contents last written by firmware.
+
+When TMR[3:0] = 0 all interrupts will be handled as they are generated. In other words, this function is disabled
+when TMR[3:0] = 0000.
+
+Reserved: Bits R27[7:4] are reserved for future use. Undesirable behavior may result  if the value of these bits
+are changed from the reset value.
+
+
+
+
+
+68     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

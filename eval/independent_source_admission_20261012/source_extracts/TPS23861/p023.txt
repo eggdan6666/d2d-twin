@@ -1,0 +1,67 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+Overview (continued)
+
+7.1.1  Detailed Pin Description
+
+The following descriptions refer to the pinout and the functional block diagram.
+
+DRAIN1-DRAIN4: Port 1-4 output voltage monitor and detect sense. Used to measure the port output voltage,
+for port voltage monitoring, port-power-good detection and foldback action. Detection probe currents also flow
+into this pin. The TPS23861 uses an innovative 4-point technique in order to provide a reliable PD detection.
+Detection is performed by sinking two different current levels via the DRAINn pin, while the PD voltage is
+measured from VPWR to DRAINn. The 4-point measurement provides the capability to distinguish between an
+IEEE-standard-compliant PD and a capacitive or legacy load.  If the Port n is not used, DRAINn can be left
+floating or tied to AGND.
+
+GATE1-GATE4: Port 1-4 gate drive output used for external N-channel MOSFET gate control. At port turn on, it
+is driven positive by a low-current source to turn the MOSFET on. GATEn is pulled low whenever any of the
+input supplies are low or  if an over-current timeout has occurred. GATEn will also be pulled low  if its port is
+turned off during fast shutdown. Leave floating if unused. For a robust design, a current-foldback function limits
+the power dissipation  of the MOSFET during low resistance load or a  short-circuit event. The foldback
+mechanism measures the port voltage across AGND and DRAINn to reduce the current-limit threshold as shown
+in Figure 14, Figure 57, and Figure 58. The fast overload protection is for major faults like a direct short. This
+forces down the current within the current limit in less than a microsecond. When ICUT threshold is exceeded
+while a port is on, a timer starts. During that time, linear current limiting makes sure the current will not exceed
+ILIM combined with current-foldback action. When the timer reaches its tOVLD (or tSTART if at port turn on) limit, the
+port shuts off. When the port current goes below ICUT , the counter counts down at a rate 1/16th of the increment
+rate, and it must reach a count of zero before the port can be turned on again.
+
+KSENSA, KSENSB: Kelvin point connection used to perform a differential voltage measurement across the
+associated current sense resistors. KSENSA is shared between SEN1 and SEN2, while KSENSB is shared
+between SEN3 and SEN4. In order to optimize the accuracy of the measurement, the PCB layout (see
+Figure 61) must be done carefully to minimize impact of PCB trace resistance.
+
+SHTDWN: Shutdown, active low. This pin is internally pulled up to VDD, with internal 1-µs to 5-µs deglitch filter.
+The Port Power Priority register is used to determine which port(s) is (are) shut down in response to an external
+assertion of the SHTDWN pin. The turn-off procedure is similar to a port reset or a reset command (Reset
+register).
+
+
+                                  NOTE
+            After a SHTDWN cycle occurs, the I2C host should reinitialize the TPS23861 register set
+          according to the desired user configuration. More detail regarding use of the SHTDWN pin
+            to power off low priority ports can be obtained by consulting a Texas Instruments technical
+           representative.
+
+
+RESET: Reset input, active low. When asserted, the TPS23861 resets, turning off  all ports and forcing the
+registers to their power-up state. This pin is internally pulled up to VDD, with internal 1-µs to 5-µs deglitch filter.
+External RC network can be used to delay the turn-on. There  is also an internal power-on-reset which  is
+independent of the RESET input.
+
+
+                                  NOTE
+            After RESET pin de-assertion, there is a delay of approximately 20 ms before TPS23861
+         can process I2C commands. For more information, refer to the application note TPS23861
+         Power-On Considerations, SLVA723.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     23
+
+                                                 Product Folder Links: TPS23861

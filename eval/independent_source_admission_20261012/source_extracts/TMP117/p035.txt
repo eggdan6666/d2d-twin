@@ -1,0 +1,41 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 8.2.3 Application Curves
+
+
+        70                                                              90
+
+                                                                        80
+        60
+           (mC) 50                                                              70
+                                                                                                                                                         (mC) 60
+        40                                                              50                 Change
+        30                                                              40                                                                                                                                                                                                                                                                                                                                                                                                                                                                           Self-Heating 30
+        20                              Temperature                                                                 20
+        10
+                                            1.9 V     4 V      5.5 V             10                  700 uWt     500 uWt     370 uWt
+                                     3 V       5 V                                           630 uWt     410 uWt     225 uWt
+         0                                                               0
+          0    10   20   30   40   50   60   70   80   90              -50   -25    0    25   50   75   100  125  150  175
+                               Time (Sec)                                                        Temperature (qC)
+ Figure 8-2. Self-Heating in Still Air vs. Temperature  Figure 8-3. Self-Heating in Still Air vs. Temperature
+             and Dissipated Power                     and Dissipated Power at 25°C
+
+9 Power Supply Recommendations
+
+The TMP117 operates on a power-supply range from 1.7 V to 5.5 V. A power-supply bypass capacitor
+ is required, which must be placed as close to the supply and ground pins of the device as possible. A
+recommended value for this supply bypass capacitor is 100 nF. Applications with noisy or high-impedance power
+ supplies may require additional decoupling capacitors to reject power-supply noise.
+
+The package thermal pad  is not connected to the device ground and should be  left unsoldered for best
+measurement accuracy. If the thermal pad is soldered, it must be left floating or grounded.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    35
+
+                                                  Product Folder Links: TMP117

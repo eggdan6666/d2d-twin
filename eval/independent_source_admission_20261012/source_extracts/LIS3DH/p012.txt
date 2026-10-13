@@ -1,0 +1,66 @@
+Mechanical and electrical specifications                                        LIS3DH
+
+2.2     Temperature sensor characteristics
+          Vdd = 2.5 V, T = 25 °C unless otherwise noted (b)
+
+                         Table 5. Temperature sensor characteristics
+ Symbol             Parameter               Test condition    Min.       Typ.(1)     Max.      Unit
+
+         Temperature sensor output change vs  TSDr                                                               1                     digit/°C(2)
+          temperature
+
+ TODR  Temperature refresh rate                             ODR              Hz
+
+   Top    Operating temperature range                               -40                +85       °C
+
+1.  Typical specifications are not guaranteed.
+
+2.  8-bit resolution.
+
+2.3      Electrical characteristics
+          Vdd = 2.5 V, T = 25 °C unless otherwise noted (c)
+
+                              Table 6. Electrical characteristics
+ Symbol              Parameter               Test conditions     Min.       Typ.(1)     Max.     Unit
+
+  Vdd   Supply voltage                                              1.71        2.5         3.6     V
+ Vdd_IO  I/O pins supply voltage(2)                                     1.71               Vdd+0.1   V
+
+   Idd    Current consumption in normal mode     50 Hz ODR                     11              μA
+
+   Idd    Current consumption in normal mode     1 Hz ODR                     2              μA
+
+  IddLP   Current consumption in low-power mode  50 Hz ODR                    6              μA
+
+          Current consumption in power-down
+ IddPdn                                                                             0.5             μA
+       mode
+
+  VIH    Digital high-level input voltage                            0.8*Vdd_IO                  V
+
+   VIL    Digital low-level input voltage                                                 0.2*Vdd_IO  V
+
+ VOH   High-level output voltage                                0.9*Vdd_IO                  V
+
+  VOL   Low-level output voltage                                                     0.1*Vdd_IO  V
+  BW   System bandwidth(3)                                         ODR/2            Hz
+
+  Top    Operating temperature range                                  -40                +85     °C
+
+1.  Typical specification are not guaranteed.
+
+2.   It is possible to remove Vdd maintaining Vdd_IO without blocking the communication busses, in this condition the
+   measurement chain is powered off.
+
+3.  Refer to Table 25 for the ODR value and configuration.
+
+
+
+
+
+                 b.  The product is factory calibrated at 2.5 V. Temperature sensor operation is guaranteed in the range 2 V - 3.6 V.
+
+                  c.  The product is factory calibrated at 2.5 V. The operational power supply range is from 1.71 V to 3.6 V.
+
+
+12/54                                  DocID17530 Rev 2

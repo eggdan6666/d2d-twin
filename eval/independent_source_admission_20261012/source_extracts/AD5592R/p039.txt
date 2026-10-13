@@ -1,0 +1,49 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 17. Bit Descriptions for GEN_CTRL_REG (Continued)
+Bits            Bit Name                    Description                                                                                       Default Value
+
+                                                    1: The contents of the I/Ox pin configuration register cannot be changed.
+6           ALL_DAC                     Write all DACs.                                                                            0x0
+                                                    0: For future DAC writes, the DAC address bits determine which DAC is written to.
+                                                    1: For future DAC writes, the DAC address bits are ignored, and all channels configured as DACs are
+                                          updated with the same data.
+5          ADC_RANGE           ADC input range select.                                                                     0x0
+                                                    0: ADC gain is 0 V to VREF.
+                                                    1: ADC gain is 0 V to 2 × VREF.
+4          DAC_RANGE           DAC output range select.                                                                    0x0
+                                                    0: DAC output range is 0 V to VREF.
+                                                    1: DAC output range is 0 V to 2 × VREF.
+[3:0]        RESERVED                 Reserved. Set these bits to 0b0000.                                                           0x0
+
+
+ADC Pin Configuration Register
+
+Name: ADC_CONFIG
+
+Selects which pins are ADC inputs.
+
+
+
+
+
+Table 18. Bit Descriptions for ADC_CONFIG
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b0100.                                                             0x4
+[10:8]       RESERVED         Reserved. Set these bits to 0b000.                                                                    0x0
+7          ADC7                Select the I/O7 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+6          ADC6                Select the I/O6 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+5          ADC5                Select the I/O5 pin as ADC input.                                                                     0x0
+                                         0: The I/O pin function is determined by the pin configuration registers.
+                                         1: The I/O pin is an ADC input.
+4          ADC4                Select the I/O4 pin as ADC input.                                                                     0x0
+
+analog.com                                                                                         Rev. H | 39 of 54

@@ -1,0 +1,142 @@
+7.6.4 High Limit Register (address = 02h) [Factory default reset = 6000h]
+This register is a 16-bit, read/write register that stores the high limit for comparison with the temperature result. 
+One LSB equals 7.8125 m°C. The range of the register is ±256 °C. Negative numbers are represented in binary 
+two's complement format. Following power-up or a general-call reset, the high-limit register is loaded with the 
+stored value from the EEPROM. The factory default reset value is 6000h.
+Return to Register Map.
+Figure 7-15. High Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+H15
+H14
+H13
+H12
+H11
+H10
+H9
+H8
+R/W-0
+R/W-1
+R/W-1
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+7
+6
+5
+4
+3
+2
+1
+0
+H7
+H6
+H5
+H4
+H3
+H2
+H1
+H0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+Table 7-8. High Limit Register Field Descriptions
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+15:0
+H[15:0]
+R/W
+6000h
+16-bit, read/write register that stores the high limit for comparison 
+with the temperature result.
+7.6.5 Low Limit Register (address = 03h) [Factory default reset = 8000h]
+This register is configured as a 16-bit, read/write register that stores the low limit for comparison with the 
+temperature result. One LSB equals 7.8125 m°C. The range of the register is ±256 °C. Negative numbers 
+are represented in binary two's complement format. The data format is the same as the temperature register. 
+Following power-up or reset, the low-limit register is loaded with the stored value from the EEPROM. The factory 
+default reset value is 8000h.
+Return to Register Map.
+Figure 7-16. Low Limit Register
+15
+14
+13
+12
+11
+10
+9
+8
+L15
+L14
+L13
+L12
+L11
+L10
+L9
+L8
+R/W-1
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+7
+6
+5
+4
+3
+2
+1
+0
+L7
+L6
+L5
+L4
+L3
+L2
+L1
+L0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+R/W-0
+Table 7-9. Low Limit Register Field Descriptions
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+15:0
+L[15:0]
+R/W
+8000h
+16-bit, read/write register that stores the low limit for comparison 
+with the temperature result.
+www.ti.com
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+Copyright © 2022 Texas Instruments Incorporated
+Submit Document Feedback
+29
+Product Folder Links: TMP117

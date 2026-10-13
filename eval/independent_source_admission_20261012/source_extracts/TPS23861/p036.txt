@@ -1,0 +1,55 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+
+            AIN-AOUT daisy-chain connection allows the I2C                          All devices respond to global address 30h
+            address of each device to be programmed separately                     regardless of the state of the A3 pin. SCL
+SDAI
+
+
+
+
+
+                   1 VDD     VPWR 28                      1 VDD     VPWR 28                                1 VDD     VPWR 28                      1 VDD     VPWR 28
+
+                   2 RESET      N/C 27                      2 RESET      N/C 27                                2 RESET      N/C 27                      2 RESET      N/C 27
+
+                   3 SCL     AOUT 26                      3 SCL     AOUT 26                                3 SCL     AOUT 26                      3 SCL     AOUT 26
+
+                   4  SDAI        AIN 25                      4  SDAI        AIN 25                                4  SDAI        AIN 25                      4  SDAI        AIN 25
+                   5 SDAO  SHTDWN 24                      5 SDAO  SHTDWN 24                                5 SDAO  SHTDWN 24                      5 SDAO  SHTDWN 24         VDD
+                   6  INT         A3 23                      6  INT         A3 23                                6  INT         A3 23                      6  INT         A3 23
+
+                   7 DGND    AGND 22                      7 DGND    AGND 22                                7 DGND    AGND 22                      7 DGND    AGND 22
+                                       U2               U1                                                                                Un-1                                                                                            Un
+                         GATE2 21                      8 SEN3                                                                                                                                         GATE2 21                   8 SEN3                                                            GATE2 21                                8 SEN3                                                                                                       GATE2 21                      8 SEN3
+
+                   9 DRAIN3  DRAIN2 20                      9 DRAIN3  DRAIN2 20                                9 DRAIN3  DRAIN2 20                      9 DRAIN3  DRAIN2 20
+
+                   10 GATE3    SEN2 19                      10 GATE3    SEN2 19                                10 GATE3    SEN2 19                     10 GATE3    SEN2 19
+
+                   11 KSENSB KSENSA 18                      11 KSENSB KSENSA 18                                11 KSENSB KSENSA 18                     11 KSENSB KSENSA 18
+
+                   12 SEN4    GATE1 17                      12 SEN4    GATE1 17                                12 SEN4    GATE1 17                     12 SEN4    GATE1 17
+
+                   13 DRAIN4  DRAIN1 16                      13 DRAIN4  DRAIN1 16                                13 DRAIN4  DRAIN1 16                     13 DRAIN4  DRAIN1 16
+
+                   14 GATE4    SEN1 15                      14 GATE4    SEN1 15                                14 GATE4    SEN1 15                     14 GATE4    SEN1 15
+
+
+
+           If U1 or U2 is programmed with                                                                                              If Un-1 or Un is programmed with
+I2C address [a7a6a5a4a3a2a1a0] the device will                                             I2C address [a7a6a5a4a3a2a1a0] the device will
+respond to the I2C address [a7a6a5a40a2a1a0]                                        respond to the I2C address [a7a6a5a41a2a1a0]
+      because the A3 pin is tied low.                                                 because the A3 pin is tied high.
+
+                   Figure 41. I2C Slave Address and AUTO Bit Programming Circuit
+
+
+
+
+
+36     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

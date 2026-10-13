@@ -1,0 +1,60 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+10.3 Logic Levels Diagram for AUX_VDDIO = 0
+The figure below depicts a sample circuit with a third party magnetometer attached to the auxiliary I2C bus. It
+shows logic levels and voltage connections for AUX_VDDIO = 0. Note: Actual configuration will depend on
+the auxiliary sensors used.
+
+                                                                                                            VLOGIC
+
+
+
+                                                                                                         VDD_IO
+                                                                   (0V - VLOGIC)                SYSTEM BUS
+                                                                                                System
+                         VDD                                                                        Processor IO
+                                                       VLOGIC
+
+
+
+
+                                                         (0V - VLOGIC)
+                          VDD    INT
+                                                                           VLOGIC
+                                                             (0V - VLOGIC)
+              (0V - VLOGIC)                 SDA
+                         CLKIN                        (0V - VLOGIC)
+              (0V - VLOGIC)                     SCL
+                       FSYNC
+
+      VLOGIC
+                      MPU-6050
+                                                                         VDD_IO
+                       VLOGIC                                                3rd Party             (0V, VLOGIC)
+                                                       Magnetometer   CS
+                                                               (0V - VLOGIC)                                          (0V - VLOGIC)
+                              AUX_DA                   SDA                  INT 1
+                (0V, VLOGIC)                                     (0V - VLOGIC)                                          (0V - VLOGIC)
+                     AD0        AUX_CL                       SCL                  INT 2
+                                                                                                                                  (0V, VLOGIC)
+                                                                                 SA0
+
+
+
+
+                             I/O Levels and Connections for AUX_VDDIO = 0
+
+
+Notes:
+    1. AUX_VDDIO determines the IO voltage levels of AUX_DA and AUX_CL
+       (0 = set output levels relative to VLOGIC)
+    2. All other MPU-6050 logic IOs are referenced to VLOGIC.
+
+
+
+
+
+                                           39 of 52

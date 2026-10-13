@@ -1,0 +1,36 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.5.14  Port Power Priority Register
+
+Command = 15h with 1 Data Byte, R/W
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         FSE4      FSE3      FSE2      FSE1       R15[3]      R15[2]      R15[1]      R15[0]
+
+ RESET or POR VALUE      A        A        A        A          0          0          0          0
+
+Bit Descriptions
+
+FSE4-FSE1: Port power priority bits to support Fast Shutdown; one bit per port. It is used to specify which port or
+ports is/are shut down in response to an external assertion of the SHTDWN pin fast shutdown signal. The turn-
+off procedure is similar to a port reset using Reset command (Reset register). If one of these bits is set while the
+SHTDWN pin is low, that port is shut down as well.
+
+1 = When the SHTDWN is forced to a low level, the corresponding port is powered off.
+
+0 = SHTDWN signal has no impact on the port.
+
+Reserved: Bits R15[3:0] are reserved for future use. Undesirable behavior may result  if the value of these bits
+are changed from their reset value.
+
+
+
+
+
+60     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

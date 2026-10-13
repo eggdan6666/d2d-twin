@@ -1,0 +1,47 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 24. Bit Descriptions for GPIO_INPUT (Continued)
+Bits            Bit Name              Description                                                                                             Default value
+
+0           GPIO0                Set the I/O0 pin as GPIO input.                                                                     0x0
+                                            0: The I/O pin function is determined by the pin configuration registers.
+                                            1: The I/O pin is a general-purpose input pin.
+
+
+Power-Down/Reference Control Register
+
+Name: PD_REF_CTRL
+
+Powers down DACs and enables/disables the reference.
+
+
+
+
+
+Table 25. Bit Descriptions for PD_REF_CTRL
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address. Set these bits to 0b1011.                                                         0xB
+10          PD_ALL           Power down DACs and Internal Reference.                                                             0x0
+                                         0: The reference and DACs power-down states are determined by EN_REF and PD7 to PD0 bits.
+                                         1: The reference, DACs and ADC are powered down.
+9          EN_REF           Enable internal reference. Set this bit to 0 if an external reference is used.                                    0x0
+                                         0: The reference and its buffer are powered down.
+                                         1: The reference and its buffer are powered up. The reference is available on the VREF pin.
+8          RESERVED         Reserved. Set this bit to 0.                                                                           0x0
+7          PD7              Power down the DAC7 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+6          PD6              Power down the DAC6 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+5          PD5              Power down the DAC5 channel.                                                                      0x0
+                                         0: The channel is in normal operating mode.
+                                         1: The channel is powered down if it is configured as a DAC.
+
+
+
+analog.com                                                                                         Rev. H | 47 of 54

@@ -1,0 +1,40 @@
+Digital interfaces                                                          LIS3DH
+
+
+
+        Table 19. Transfer when master is receiving (reading) one byte of data from slave
+
+  Master   ST   SAD + W        SUB        SR   SAD + R              NMAK   SP
+
+   Slave                 SAK        SAK                SAK   DATA
+
+
+     Table 20. Transfer when master is receiving (reading) multiple bytes of data from slave
+
+ Master ST SAD+W     SUB     SR SAD+R         MAK      MAK      NMAK SP
+
+  Slave            SAK      SAK           SAK DATA      DATA      DATA
+
+           Data are transmitted in byte format (DATA). Each data transfer contains 8 bits. The number
+              of bytes transferred per transfer is unlimited. Data is transferred with the Most Significant bit
+          (MSb) first. If a receiver can’t receive another complete byte of data until it has performed
+         some other function, it can hold the clock line, SCL LOW to force the transmitter into a wait
+              state. Data transfer only continues when the receiver is ready for another byte and releases
+            the data line. If a slave receiver doesn’t acknowledge the slave address (i.e. it is not able to
+            receive because it is performing some real-time function) the data line must be left HIGH by
+            the slave. The Master can then abort the transfer. A LOW-to-HIGH transition on the SDA
+               line while the SCL line is HIGH is defined as a STOP condition. Each data transfer must be
+            terminated by the generation of a STOP (SP) condition.
+
+              In order to read multiple bytes, it is necessary to assert the most significant bit of the sub-
+           address field. In other words, SUB(7) must be equal to 1 while SUB(6-0) represents the
+           address of first register to be read.
+
+              In the presented communication format MAK is Master acknowledge and NMAK is No
+           Master Acknowledge.
+
+
+
+
+
+26/54                                  DocID17530 Rev 2

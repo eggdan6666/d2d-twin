@@ -1,0 +1,58 @@
+Data Sheet                               AD5592R
+
+SPECIFICATIONS
+
+VDD = 2.7 V to 5.5 V, VLOGIC = 2.7 V to 5.5 V (AD5592R-1 only), VREF = 2.5 V (external), RL = 2 kΩ to GND, CL = 200 pF to GND, typical values
+are at TA = 25°C, unless otherwise noted. Typical specifications are verified by characterization, not production tested.
+
+Table 2.
+Parameter                                      Min         Typ      Max          Unit1       Test Conditions/Comments
+TEMPERATURE RANGE
+   Specified Performance2                           −40                   +105        °C
+                                               −40                   +125        °C       AD5592RWBCPZ-RL7 and AD5592RWBCPZ-1-RL7
+ADC PERFORMANCE                                                                                                                          fIN = 10 kHz sine wave
+   Resolution                                                  12                           Bits
+   Input Range                                    0                      VREF       V        When using the internal ADC buffer, there is a dead band
+                                                                                                                            of 0 V to 5 mV
+                                                0                     2 × VREF    V
+   Integral Nonlinearity (INL)                         −2                    +2         LSB
+                                                      −2.5                     +2.5        LSB       VDD = 5.5 V, input range = 0 V to VREF, AD5592RWBCPZ-
+                                                                                     RL7 and AD5592RWBCPZ-1-RL7
+   Differential Nonlinearity (DNL)                      −1                    +1         LSB
+   Offset Error                                                           ±5        mV
+  Gain Error                                                                        0.3      % FSR
+  Throughput Rate3                                                      400        kSPS
+                                                                       350        kSPS     AD5592RWBCPZ-RL7 and AD5592RWBCPZ-1-RL7
+   Track Time (tTRACK)3, 4                            500                                 ns
+  Conversion Time (tCONV)3, 4                                              2            µs
+                                                            2          2.36         µs       AD5592RWBCPZ-RL7 and AD5592RWBCPZ-1-RL7
+   Signal-to-Noise Ratio (SNR)                                    69                   dB        VDD = 2.7 V, input range = 0 V to VREF
+                                                            67                   dB        VDD = 5.5 V, input range = 0 V to VREF
+                                                            61                   dB        VDD = 5.5 V, input range = 0 V to 2 × VREF
+   Signal-to-Noise-and-Distortion (SINAD) Ratio                      69                   dB        VDD = 2.7 V, input range = 0 V to VREF
+                                                            67                   dB        VDD = 3.3 V, input range = 0 V to VREF
+                                                            60                   dB        VDD = 5.5 V, input range = 0 V to 2 × VREF
+   Total Harmonic Distortion (THD)                                −91                  dB        VDD = 2.7 V, input range = 0 V to VREF
+                                                           −89                  dB        VDD = 3.3 V, input range = 0 V to VREF
+                                                           −72                  dB        VDD = 5.5 V, input range = 0 V to 2 × VREF
+  Peak Harmonic or Spurious Noise (SFDR)                         91                   dB        VDD = 2.7 V, input range = 0 V to VREF
+                                                            91                   dB        VDD = 3.3 V, input range = 0 V to VREF
+                                                            72                   dB        VDD = 5.5 V, input range = 0 V to 2 × VREF
+   Aperture Delay3                                             15                     ns        VDD = 3 V
+                                                            12                     ns        VDD = 5 V
+   Aperture Jitter3                                              50                     ps
+   Channel-to-Channel Isolation                                  −95                  dB             fIN = 5 kHz
+   Input Capacitance                                            45                   pF
+   Full Power Bandwidth                                                 8.2                MHz        At 3 dB
+                                                                         1.6                MHz        At 0.1 dB
+DAC PERFORMANCE5
+   Resolution                                                  12                           Bits
+   Output Range                                   0                      VREF       V
+                                                0                     2 × VREF    V
+   Integral Nonlinearity (INL)                         −1                    +1         LSB
+   Differential Nonlinearity (DNL)                      −1                    +1         LSB
+   Offset Error                                    −3                    +3        mV
+   Offset Error Drift3                                            8                      µV/°C
+
+
+analog.com                                                                                          Rev. H | 6 of 54

@@ -1,0 +1,80 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 8.3 Power Supply Recommendations
+
+The TMP1075 D, DGK, and DSG packages operate with a power supply in the range of 1.7 V to 5.5 V
+(TMP1075N DRL package operates from 1.62 V to 3.6 V). A power-supply bypass capacitor is required for
+ precision and stability. Place this power-supply bypass capacitor as close to the supply and ground pins of
+ the device as possible. A typical value for this supply bypass capacitor is 0.01 μF. Applications with noisy or
+ high-impedance power supplies can require a bigger bypass capacitor to reject power-supply noise.
+
+ For minimizing device self-heating and improving temperature precision, TI recommends to:
+ •  Use the minimum supply voltage rail available
+ •  Avoid communication over I2C bus during ADC conversion
+ •  Use one-shot mode to minimize power consumption
+ •  Set I2C signal levels VIL close to ground and VIH above 90% of V+
+ •  Maintain the I2C bus signals positive edge less than 1 µs by using a pullup resistor < 10 kΩ
+ •  Connect the address pins A0 and A1 to either ground or V+
+ 8.4 Layout
+ 8.4.1 Layout Guidelines
+
+ Place the power-supply bypass capacitor as close to the supply and ground pins as possible. The recommended
+ value of this bypass capacitor is 0.01 μF. Pullup the open-drain output pins SDA and ALERT through 5-kΩ pullup
+ resistors. The SCL requires a pullup resistor only if the microprocessor output is open drain.
+
+ 8.4.2 Layout Example
+
+
+                                                                               Via to Power or Ground Plane
+
+
+                                                                               Via to Internal Layer
+
+
+
+
+                                                                                                                Supply Bypass
+                                                                                                                           Capacitor
+
+                                                          Pull-Up Resistors
+
+                                     SDA            V+                                     Supply Voltage
+
+
+                                           SCL            A0
+
+
+                                        ALERT          A1
+
+
+                                GND           A2
+
+
+
+
+
+                                           Serial Bus Traces
+
+
+                                                                      Ground Plane for
+                                                                          Thermal Coupling
+                                                                                              to Heat Source
+
+
+
+
+
+                                                                           Heat Source
+
+
+
+                               Figure 8-2. Layout Example (D Package)
+
+
+
+
+
+26    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

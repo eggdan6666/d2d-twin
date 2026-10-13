@@ -1,0 +1,78 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.3.3  Class and Detect Fields
+
+The results of the detection cycle and classification cycle are each stored in a 4-bit field for each port in the
+Detect Pn and Class Pn fields of the Port n Status Register. The results of a detection and classification event
+are encoded as follows.
+
+                                  Table 2. Detect Pn Field Encoding
+
+                   DETECT Pn                                     DETECT STATUS
+
+                          0000                                           Unknown (POR value)
+
+                          0001                                                      Short circuit (<500 Ω)
+
+                          0010                                                     Reserved
+
+                          0011                                                     Resistance too low
+
+                          0100                                                      Resistance valid
+
+                          0101                                                     Resistance too high
+
+                          0110                                             Open circuit
+
+                          0111                                                     Reserved
+
+                          1000                                       MOSFET fault
+
+                          1001                                                   Legacy detect
+
+                          1010                                Capacitance measurement invalid: Detect measurement beyond
+                                                                                   clamp voltage
+
+                          1011                                  Capacitance measurement invalid: Insufficient Δv measured
+
+                          1100                              Capacitance measurement is valid, but outside the range of a legacy
+                                                                                                     device.
+
+
+                                  Table 3. Class Pn Field Encoding
+
+                    CLASS Pn                                      CLASSIFICATION STATUS
+
+                          0000                                                Unknown
+
+                          0001                                                         Class 1
+
+                          0010                                                         Class 2
+
+                          0011                                                         Class 3
+
+                          0100                                                         Class 4
+
+                          0101                                             Reserved – read as class 0
+
+                          0110                                                         Class 0
+
+                          0111                                                          Overcurrent
+
+                          1000                                                      Class mismatch
+
+A class mismatch can occur only during two-event classification.  If the classification statuses for the first and
+second event are different, and the second classification status is not “Overcurrent”, the Classification Status will
+be set to Class Mismatch. If the status of the first classification event is “Overcurrent”, the classification status is
+set to “Overcurrent” in the Class Pn field, and there will be no second classification event in any case. If in Auto
+Mode, the port will not power on automatically, but it still can be powered on through the Power Enable Register.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     27
+
+                                                 Product Folder Links: TPS23861

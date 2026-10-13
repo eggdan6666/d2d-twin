@@ -1,0 +1,36 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.6.13 Device_ID register (Address = 0Ch) [reset = 2126h]
+
+ This register indicates the device ID and device revision.
+
+ Return to Register Map.
+
+                                   Figure 8-31. Device_ID Register
+       15            14            13            12             11            10             9             8
+
+                              Rev[3:0]                                                                ID[11:8]
+
+                           R-2h                                                      R-1h
+
+       7             6             5             4             3             2             1             0
+
+                                                                       ID[7:0]
+
+                                                       R-26h
+
+                           Table 8-17. Device_ID Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+    15:12    Rev[3:0]                  R       2h         Device revision indicator.
+
+     11:0     ID[11:0]                   R       126h       Device ID indicator.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    35
+
+                                                  Product Folder Links: TMP126

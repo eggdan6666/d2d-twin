@@ -1,0 +1,39 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "semantic-v3/source_acceptance",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "task_summary": "Validate independent admission integrity and independently spot-check decisive repair facts directly against PDFs",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/protocol_v2_20261012",
+    "corpus/data/raw_pdf"
+  ],
+  "expected_outputs": [
+    "source_acceptance.md",
+    "source_acceptance.json"
+  ],
+  "evidence_boundaries": [
+    "Read original PDFs; never trust prior report labels as proof",
+    "Do not modify prior evidence/formal IR/harness/model results",
+    "No SCNet, API, hardware or historical rescoring",
+    "No source-conflict majority resolution"
+  ],
+  "acceptance_checks": [
+    "Independent bundle hashes",
+    "572 identities/4004 dimensions",
+    "109 patch replay and geometry",
+    "TMP117 EEPROM/TNA, LIS2 OUT_T_L,TMP461 reset,TPS address, TMP100 format source spot checks"
+  ],
+  "known_missing_items": [
+    "No physical temporal measurements; abstract events must be labeled"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

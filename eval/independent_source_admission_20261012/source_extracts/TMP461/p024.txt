@@ -1,0 +1,73 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+Typical Application (continued)
+
+
+                                          1.7 V to 3.6 V                                                  1.7 V to 3.6 V
+
+
+
+
+                                                 10
+                                              A1     Processor or ASIC
+                                      1                           9
+                                    V+              SCL
+
+                                      2                           8
+                                   D+             SDA                                           TMP461                                           SMBus
+                                                                                                                                      Controller
+                                                                 7        Built-In Thermal                    3                                           D-     ALERT/THERM2
+      Transistor, Diode
+                                      4                           6
+                                THERM        GND
+
+                                              A0
+                                                     5
+
+
+                                                                                                            Overtemperature Shutdown
+
+
+          Figure 19. TMP461 Basic Connections Using a Processor Built-In Remote Transistor
+
+
+9.2.1  Design Requirements
+
+The TMP461 device is designed to be used with either discrete transistors or substrate transistors built into
+processor chips and application-specific integrated circuits (ASICs). Either NPN or PNP transistors can be used,
+as long as the base-emitter junction is used as the remote temperature sense. NPN transistors must be diode-
+connected. PNP transistors can either be transistor- or diode-connected (see Figure 18).
+
+Errors in remote temperature sensor readings are typically the consequence of the ideality factor and current
+excitation used by the TMP461 device versus the manufacturer-specified operating current for a given transistor.
+Some manufacturers specify a high-level and low-level current for the temperature-sensing substrate transistors.
+The TMP461 device uses 7.5 μA for ILOW and 120 μA for IHIGH.
+
+The ideality factor (η) is a measured characteristic of a remote temperature sensor diode as compared to an
+ideal diode. The TMP461 allows for different η-factor values; see the η-Factor Correction Register section.
+
+The ideality factor for the TMP461 device is trimmed to be 1.008. For transistors that have an ideality factor that
+does not match the TMP461, Equation 4 can be used to calculate the temperature error.
+
+
+                                  NOTE
+          For Equation 4 to be used correctly, the actual temperature (°C) must be converted to
+           Kelvin (K).
+
+          h - 1.008
+    TERR =           ´ (273.15 + T( °C))
+              1.008
+
+    where
+              •   TERR = error in the TMP461 device because η ≠1.008,
+              •   η = ideality factor of the remote temperature sensor,
+              •   T(°C) = actual temperature, and                                                                                   (4)
+
+In Equation 4, the degree of delta is the same for °C and K.
+
+
+24     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

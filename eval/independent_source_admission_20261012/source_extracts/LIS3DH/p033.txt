@@ -1,0 +1,64 @@
+LIS3DH                                                                Registers description
+
+8      Registers description
+
+8.1    STATUS_REG_AUX (07h)
+
+                                  Table 22. STATUS_REG_AUX register
+         321OR   3OR    2OR    1OR     321DA   3DA     2DA     1DA
+
+                                Table 23. STATUS_REG_AUX description
+
+          321OR          1, 2 and 3-axis data overrun. Default value: 0
+                                    (0: no overrun has occurred; 1: a new set of data has overwritten the previous set)
+
+          3OR            3-axis data overrun. Default value: 0
+                                    (0: no overrun has occurred;
+                                  1: new data for the 3-axis has overwritten the previous data)
+
+          2OR            2-axis data overrun. Default value: 0
+                                    (0: no overrun has occurred;
+                                  1: new data for the 2-axis has overwritten the previous data)
+
+          1OR            1-axis data overrun. Default value: 0
+                                    (0: no overrun has occurred;
+                                  1: new data for the 1-axis has overwritten the previous data)
+
+           321DA           1, 2 and 3-axis new data available. Default value: 0
+                                    (0: a new set of data is not yet available; 1: a new set of data is available)
+
+          3DA            3-axis new data available. Default value: 0
+                                    (0: new data for the 3-axis is not yet available;
+                                  1: new data for the 3-axis is available)
+
+          2DA          2 -axis new data available. Default value: 0
+                                    (0: new data for the 2-axis is not yet available;
+                                  1: new data for the 2-axis is available)
+
+          1DA            1-axis new data available. Default value: 0
+                                    (0: new data for the 1-axis is not yet available;
+                                  1: new data for the 1-axis is available)
+
+
+8.2    OUT_ADC1_L (08h), OUT_ADC1_H (09h)
+
+             Auxiliary 10-bit ADC channel 1 conversion. For auxiliary ADC setting refer to Section 3.7:
+             Auxiliary ADC and temperature sensor.
+
+
+8.3    OUT_ADC2_L (0Ah), OUT_ADC2_H (0Bh)
+
+             Auxiliary 10-bit ADC channel 2 conversion. For auxiliary ADC setting refer to Section 3.7:
+             Auxiliary ADC and temperature sensor.
+
+
+8.4    OUT_ADC3_L (0Ch), OUT_ADC3_H (0Dh)
+
+             Auxiliary 10-bit ADC channel 3 conversion or temperature sensor data output. Refer to
+            Section 3.7: Auxiliary ADC and temperature sensor.
+
+
+
+                                      DocID17530 Rev 2                                      33/54
+
+                                                                                                                            54

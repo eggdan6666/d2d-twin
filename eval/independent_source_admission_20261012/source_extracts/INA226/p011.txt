@@ -1,0 +1,62 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+The device has two operating modes, continuous and triggered, that determine how the ADC operates following
+ these conversions. When the device is in the normal operating mode (that is, MODE bits of the Configuration
+ Register (00h) are set to '111'), the device continuously converts a shunt voltage reading followed by a bus
+ voltage reading. After the shunt voltage reading, the current value is calculated (based on Equation 3). This
+ current value is then used to calculate the power result (using Equation 4). These values are subsequently
+ stored in an accumulator, and the measurement/calculation sequence repeats until the number of averages set
+ in the Configuration Register (00h) is reached. Following every sequence, the present set of values measured
+and calculated are appended to previously collected values. After all of the averaging has been completed, the
+ final values for shunt voltage, bus voltage, current, and power are updated in the corresponding registers that
+ can then be read. These values remain in the data output registers until the values are replaced by the next fully
+ completed conversion results. Reading the data output registers does not affect a conversion in progress.
+
+The mode control in the Conversion Register (00h) also permits selecting modes to convert only the shunt
+ voltage or the bus voltage to further allow the user to configure the monitoring function to  fit the specific
+ application requirements.
+
+ All current and power calculations are performed in the background and do not contribute to conversion time.
+
+ In triggered mode, writing any of the triggered convert modes into the Configuration Register (00h) (that is,
+MODE bits of the Configuration Register (00h) are set to ‘001’, ‘010’, or ‘011’) triggers a single-shot conversion.
+ This action produces a single set of measurements; thus, to trigger another single-shot conversion, the
+ Configuration Register (00h) must be written to a second time, even if the mode does not change.
+
+ In addition to the two operating modes (continuous and triggered), the device also has a power-down mode
+ that reduces the quiescent current and turns off current into the device inputs, reducing the impact of supply
+ drain when the device is not being used. Full recovery from power-down mode requires 40µs. The registers of
+ the device can be written to and read from while the device is in power-down mode. The device remains in
+power-down mode until one of the active modes settings are written into the Configuration Register (00h).
+
+ Although the device can be read at any time, and the data from the last conversion remain available, the
+ Conversion Ready flag bit (Mask/Enable Register, CVRF bit) is provided to help coordinate one-shot or triggered
+ conversions. The Conversion Ready flag (CVRF) bit is set after all conversions, averaging, and multiplication
+ operations are complete.
+
+The Conversion Ready flag (CVRF) bit clears under these conditions:
+
+ •  Writing to the Configuration Register (00h), except when configuring the MODE bits for power-down mode; or
+ •  Reading the Mask/Enable Register (06h)
+
+ 6.3.1.1 Power Calculation
+
+The Current and Power are calculated following shunt voltage and bus voltage measurements as shown
+ in Figure 6-1. Current is calculated following a shunt voltage measurement based on the value set in the
+ Calibration Register. If there is no value loaded into the Calibration Register, the current value stored is zero.
+Power is calculated following the bus voltage measurement based on the previous current calculation and bus
+ voltage measurement. If there is no value loaded in the Calibration Register, the power value stored is also zero.
+ Again, these calculations are performed in the background and do not add to the overall conversion time. These
+ current and power values are considered intermediate results (unless the averaging is set to 1) and are stored in
+an internal accumulation register, not the corresponding output registers. Following every measured sample, the
+ newly-calculated values for current and power are appended to this accumulation register until all of the samples
+have been measured and averaged based on the number of averages set in the Configuration Register (00h).
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    11
+
+                                                   Product Folder Links: INA226

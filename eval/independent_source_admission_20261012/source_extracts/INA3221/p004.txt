@@ -1,0 +1,64 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+6 Specifications
+ 6.1 Absolute Maximum Ratings
+
+ over operating free-air temperature range (unless otherwise noted)(1)
+
+                                                                         MIN       MAX        UNIT
+ Voltage                       Supply, VS                                                           6         V
+                                                               Differential (VIN+) – (VIN–)(2)              –26          26
+                               IN+, IN–
+ Analog inputs                             Common-mode (VIN+) + (VIN–) / 2          –0.3          26         V
+                     VPU                                                               26
+
+                                       Critical, warning, power valid                                             6
+  Digital outputs                                                                              V
+                             Timing control                                                        26
+
+                           Data line, SDA                                  (GND – 0.3)       6
+ Serial bus                                                                                 V
+                             Clock line, SCL                                 (GND – 0.3)       6
+
+                                   Input, into any pin                                                     5
+ Current                                                                         mA
+                              Open-drain, digital output                                               10
+                               Operating, TA                                           –40         125
+ Temperature                   Junction, TJ                                                         150          °C
+                               Storage, Tstg                                            –65         150
+
+ (1)   Operation outside the Absolute Maximum Ratings may cause permanent device damage. Absolute Maximum Ratings do not imply
+       functional operation of the device at these or any other conditions beyond those listed under Recommended Operating Conditions.
+           If used outside the Recommended Operating Conditions but within the Absolute Maximum Ratings, the device may not be fully
+       functional, and this may affect device reliability, functionality, performance, and shorten the device lifetime.
+ (2)   VIN+ and VIN– can have a differential voltage of –26V to +26V; however, the voltage at these pins must not exceed the range of –0.3V
+       to +26V.
+
+ 6.2 ESD Ratings
+
+                                                                                VALUE    UNIT
+                              Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)                 ±2500
+                                                                                          V
+ V(ESD)      Electrostatic discharge  Charged-device model (CDM), per JEDEC specification JESD22C101(2)         ±1000
+                               Machine model                                                      ±200
+
+ (1)  JEDEC document JEP155 states that 500V HBM allows safe manufacturing with a standard ESD control process.
+ (2)  JEDEC document JEP157 states that 250V CDM allows safe manufacturing with a standard ESD control process.
+
+ 6.3 Recommended Operating Conditions
+
+ over operating free-air temperature range (unless otherwise noted)
+
+                                                                     MIN     NOM     MAX    UNIT
+
+ Operating supply voltage                                                                  2.7                        5.5     V
+ Operating temperature, TA                                                     –40                   125     °C
+
+
+
+
+
+4     Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

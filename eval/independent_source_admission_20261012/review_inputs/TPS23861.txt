@@ -1,0 +1,48 @@
+REGISTER INTERRUPT @ 0x00 reset=0x80 access=RO runtime=None DESC=中断寄存器（§7.5，POR 值 1000,0000 = 80h：SUPF=1 其余 0）。TSD||VDUV||VPUV 上电即成立，故 SUPF 复位为 1——非零复位值的又一个实例
+  FLAGS[7:0] RO reset=128 read_as=None read_action=None tier=None DESC=SUPF/STRTF/IFAULT/CLASC/DETC/DISF/PGC/PEC
+REGISTER POWER_EVENT @ 0x02 reset=0x00 access=RO runtime=None DESC=电源事件（详情表：Command=02h Read Only；Command=03h Clear on Read；『a read at each location returns the same register data with the exception that the Clear-on-Read command clears all bits』）
+  EV[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=PGC4-1 / PEC4-1
+REGISTER DETECT_EVENT @ 0x04 reset=0x00 access=RO runtime=None DESC=检测/分类事件（04h 读 / 05h 读即清）
+  EV[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=CLASS4-1 / DETECT4-1
+REGISTER FAULT_EVENT @ 0x06 reset=0x00 access=RO runtime=None DESC=故障事件（06h 读 / 07h 读即清）
+  EV[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=DISCON4-1 / ICUT4-1
+REGISTER START_EVENT @ 0x08 reset=0x00 access=RO runtime=None DESC=启动/ILIM 事件（08h 读 / 09h 读即清）
+  EV[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=ILIM4-1 / STRT4-1
+REGISTER SUPPLY_EVENT @ 0x0A reset=0x30 access=RO runtime=None DESC=供电事件（详情表 POR VALUE 逐位：TSD=0 - =0 VDUV=1 VPUV=1 其余 0 → 30h）。注意 0Bh 读完清零，**清零后 0Ah 读到 00h 而非复位值 30h**——这是断言⑧第二条判据成立的原因
+  TSD[7] RO reset=0 read_as=None read_action=None tier=None DESC=热关断
+  RSV6[6] RO reset=0 read_as=None read_action=None tier=None DESC=无功能（记号 -）
+  VDUV[5] RO reset=1 read_as=None read_action=None tier=None DESC=电压检测未启用 = 1（POR 即 1）
+  VPUV[4] RO reset=1 read_as=None read_action=None tier=None DESC=同上
+  RSV3_0[3:0] RO reset=0 read_as=None read_action=None tier=None DESC=无功能
+REGISTER PORT1_STATUS @ 0x0C reset=0x00 access=RO runtime=None DESC=端口 1 状态（CLASS/DETECT）
+  ST[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=CLASS P1 / DETECT P1
+REGISTER PORT2_STATUS @ 0x0D reset=0x00 access=RO runtime=None DESC=端口 2 状态
+  ST[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=CLASS/DETECT P2
+REGISTER PORT3_STATUS @ 0x0E reset=0x00 access=RO runtime=None DESC=端口 3 状态
+  ST[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=CLASS/DETECT P3
+REGISTER PORT4_STATUS @ 0x0F reset=0x00 access=RO runtime=None DESC=端口 4 状态
+  ST[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=CLASS/DETECT P4
+REGISTER POWER_STATUS @ 0x10 reset=0x00 access=RO runtime=None DESC=电源状态（PG4-1 / PE4-1，逐位 8 个名字，1 位/名）
+  PG[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=Power Good 端口 4-1
+  PE[3:0] RO reset=0 read_as=None read_action=None tier=None DESC=Power Enable 端口 4-1
+REGISTER GENERAL_MASK @ 0x17 reset=0x80 access=RW runtime=None DESC=总屏蔽（§7.5 General Mask，POR 1000,0000）。手册位名里同时出现 **`-`（无功能）** 与 **`R`（ROM 位）** 两种记号，且 INTEN 复位为 1
+  INTEN[7] RW reset=1 read_as=None read_action=None tier=None DESC=INT 输出总使能，POR=1
+  RSV6[6] RO reset=0 read_as=None read_action=None tier=None DESC=无功能位（-）
+  RSV5[5] RO reset=0 read_as=None read_action=None tier=None DESC=无功能位（-）
+  MAINS[4] RW reset=0 read_as=None read_action=None tier=None DESC=主电源检测使能
+  RSV3[3] RO reset=0 read_as=None read_action=None tier=None DESC=无功能位（-）
+  RSV2[2] RO reset=0 read_as=None read_action=None tier=None DESC=无功能位（-）
+  ROM1[1] RO reset=0 read_as=None read_action=None tier=None DESC=记号 R = ROM 编程位（读器件版本），不可写
+  M250[0] RW reset=0 read_as=None read_action=None tier=None DESC=250ms 定时模式
+REGISTER RESTART @ 0x18 reset=0x00 access=W runtime=None DESC=检测/分类重启**命令寄存器**（WO，表内 RST STATE 为 -）。纯写、无可读回 → 现有断言只声明它存在，不断言（见 Q2）
+REGISTER POWER_ENABLE @ 0x19 reset=0x00 access=W runtime=None DESC=端口使能/关断命令（WO）：POFF4-1 / PWON4-1
+REGISTER RESET_CMD @ 0x1A reset=0x00 access=W runtime=None DESC=复位命令（WO）：RESP4-1 复位端口状态机、RESAL 复位所有告警、CLINP/CLRAIN 清分类
+REGISTER INTERRUPT_TIMER @ 0x27 reset=0x00 access=RW runtime=None DESC=中断定时（表内位名 R R R R + TMR3-0）：高 4 位是 ROM 位，低 4 位可写
+  ROM[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=记号 R = ROM 位
+  TMR[3:0] RW reset=0 read_as=None read_action=None tier=None DESC=定时选择
+REGISTER TEMPERATURE @ 0x2C reset=0x00 access=RO runtime=None DESC=芯片温度（RO，运行时值但手册给了 POR 00h）
+  TMP[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=温度字节
+REGISTER POE_PLUS @ 0x40 reset=0x00 access=RW runtime=None DESC=PoE Plus 使能。**RST STATE 写作 `0000,----`**：高 4 位有确定复位值 0（A 档），低 4 位是 **`-` 即 don't-care**——手册用符号明确表达『这个位的复位值没定义』，这是 Q0 里 C 档最干净的一个实例
+  POEP[7:4] RW reset=0 read_as=None read_action=None tier=None DESC=各端口 PoE Plus 使能（POR=0）
+  RSVD_LO[3:0] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=RST STATE 标 '-'，复位值未定义 ⇒ 不判分只记录
+REGISTER FIRMWARE_REV @ 0xFE reset=0x00 access=RO runtime=True DESC=固件版本（表内 RST STATE = `RRRR,RRR R`，整字节 ROM 编程值）⇒ runtime_value，跳过复位值断言

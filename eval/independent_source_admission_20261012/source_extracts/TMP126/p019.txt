@@ -1,0 +1,75 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 8.5.2.1 Command Word Structure
+
+ Figure 8-10 shows that the command word can be divided into 6 discrete sections detailed below.
+
+                                          Controller controls SIO line
+
+
+                                        Peripheral controls SIO line
+
+
+
+                         CRC Data Block Length               Sub-Address
+
+          CS Pulled low
+
+                           X CRC L4  L3  L1  L0  A R/W A7  A6  A5  A4  A3  A2  A1  A0
+
+
+
+                         CRC Enable         R/W
+
+
+                              Don’t Care       Auto Increment
+
+                                Figure 8-10. TMP126 Command Word
+
+ 8.5.2.1.1 Don't Care
+
+ Bit 15 of the command word is a don't care and the TMP126 will ignore this bit.
+
+ 8.5.2.1.2 CRC Enable
+
+ Bit 14 of the command word is the CRC enable bit. Setting this bit to 1 will enable the CRC checksum at the end
+ of the communication as described in the CRC section.
+
+ 8.5.2.1.3 CRC Data Block Length
+
+ Bits [13:10] of the command word is the CRC data block length. These bits are used to indicate how long the
+ transaction will be when the CRC checksum is used. If these bits are all set to 0 or the combination of the bits
+ set to 1 exceeds 1010 (i. e. 1011, 1100, 1101, 1110 or 1111), the CRC enable will be ignored.
+
+ 8.5.2.1.4 Auto Increment
+
+ Bit 9 of the command word is the auto-increment bit.
+
+ Setting this bit to 1 will cause the address pointer of the TMP126 to increment by after every word of data on
+a read or write transaction. If the bit is set to 0, the address pointer is not incremented and reads/writes will
+ continue to only apply the Sub-Address specified in the command word.
+
+ 8.5.2.1.5 Read/Write
+
+ Bit 8 of the command word is the read/write bit.
+
+ Setting this bit to 1 will issue a read command. During a read command the TMP126 will control the SIO pin after
+ the command word. Setting this bit to 0 will issue a write command. During a write command the controller will
+ control the SIO pin and the TMP126 will internally set the SIO pin to high impedance.
+
+ 8.5.2.1.6 Sub-Address
+
+ Bits [7:0] of the command word make up the register Sub-Address.
+
+ This is the register map address that will be used for reading or writing data depending on the read/write
+ bit. Writes to Sub-Addresses outside the register map will be ignored. Reads from Sub-Addresses outside the
+ register map will return all '0's.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    19
+
+                                                  Product Folder Links: TMP126

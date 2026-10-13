@@ -1,0 +1,60 @@
+Digital main blocks                                                        LIS3DH
+
+5       Digital main blocks
+
+5.1     FIFO
+
+          The LIS3DH embeds a 32-level FIFO for each of the three output channels, X, Y and Z.
+
+            This allows consistent power saving for the system, since the host processor does not need
+              to continuously poll data from the sensor, but it can wake up only when needed and burst
+            the significant data out from the FIFO.
+
+              In order to enable the FIFO buffer, the FIFO_EN bit in CTRL_REG5 (24h) must be set to ‘1’.
+
+            This buffer can work according to the following different modes: Bypass mode, FIFO mode,
+           Stream mode and Stream-to-FIFO mode. Each mode is selected by the FM [1:0] bits in
+         FIFO_CTRL_REG (2Eh). Programmable FIFO watermark level, FIFO empty or FIFO
+            overrun events can be enabled to generate dedicated interrupts on the INT1 pin
+             (configuration through CTRL_REG3 (22h)).
+
+              In the FIFO_SRC_REG (2Fh) register the EMPTY bit is equal to ‘1’ when all FIFO samples
+            are ready and FIFO is empty.
+
+              In the FIFO_SRC_REG (2Fh) register the WTM bit goes to ‘1’ if new data is written in the
+             buffer and FIFO_SRC_REG (2Fh) (FSS [4:0]) is greater than or equal to FIFO_CTRL_REG
+            (2Eh) (FTH [4:0]). FIFO_SRC_REG (2Fh) (WTM) goes to ‘0’ if reading an X, Y, Z data slot
+           from FIFO and FIFO_SRC_REG (2Fh) (FSS [4:0]) is less than or equal to
+         FIFO_CTRL_REG (2Eh) (FTH [4:0]).
+
+              In the FIFO_SRC_REG (2Fh) register the OVRN_FIFO bit is equal to ‘1’ if the FIFO slot is
+             overwritten.
+
+5.1.1    Bypass mode
+
+              In Bypass mode the FIFO is not operational and for this reason it remains empty. For each
+           channel only the first address is used. The remaining FIFO levels are empty.
+
+          Bypass mode must be used in order to reset the FIFO buffer when a different mode is
+            operating (i.e. FIFO mode).
+
+5.1.2    FIFO mode
+
+              In FIFO mode, the buffer continues filling data from the X, Y and Z accelerometer channels
+               until it is full (a set of 32 samples stored). When the FIFO is full, it stops collecting data from
+            the input channels and the FIFO content remains unchanged.
+
+         An overrun interrupt can be enabled, I1_OVERRUN = '1' in the CTRL_REG3 (22h) register,
+               in order to be raised when the FIFO stops collecting data. When the overrun interrupt
+            occurs, the first data has been overwritten and the FIFO stops collecting data from the input
+            channels.
+
+             After the last read it is necessary to exit Bypass mode in order to reset the FIFO content.
+             After this reset command, it is possible to restart FIFO mode just by selecting the FIFO
+         mode configuration (FM[1:0] bits) in register FIFO_CTRL_REG (2Eh).
+
+
+
+
+
+22/54                                  DocID17530 Rev 2

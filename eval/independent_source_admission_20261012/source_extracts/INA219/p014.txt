@@ -1,0 +1,81 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+Programming (continued)
+
+8.5.5.1  Serial Bus Address
+
+To communicate with the INA219, the master must first address slave devices through a slave address byte. The
+slave address byte consists of seven address bits, and a direction bit indicating the intent of executing a read or
+write operation.
+
+The INA219 has two address pins, A0 and A1. Table 1 describes the pin logic levels for each of the 16 possible
+addresses. The state of pins A0 and A1 is sampled on every bus communication and should be set before any
+activity on the interface occurs. The address pins are read at the start of each communication event.
+
+                         Table 1. INA219 Address Pins and Slave Addresses
+
+                             A1           A0           SLAVE ADDRESS
+
+                        GND        GND                 1000000
+
+                        GND            VS+                 1000001
+
+                        GND         SDA                 1000010
+
+                        GND          SCL                 1000011
+
+                                  VS+         GND                 1000100
+                                  VS+            VS+                 1000101
+                                  VS+         SDA                 1000110
+                                  VS+          SCL                 1000111
+
+                          SDA        GND                 1001000
+
+                          SDA            VS+                 1001001
+
+                          SDA         SDA                 1001010
+
+                          SDA          SCL                 1001011
+
+                            SCL        GND                 1001100
+
+                            SCL            VS+                 1001101
+
+                            SCL         SDA                 1001110
+
+                            SCL          SCL                 1001111
+
+8.5.5.2  Serial Interface
+The INA219 operates only as a slave device on the I2C bus and SMBus. Connections to the bus are made
+through the open-drain I/O lines SDA and SCL. The SDA and SCL pins feature integrated spike suppression
+filters and Schmitt triggers to minimize the effects of input spikes and bus noise. The INA219 supports the
+transmission protocol for fast (1- to 400-kHz) and high-speed (1-kHz to 2.56-MHz) modes. All data bytes are
+transmitted most significant byte first.
+
+8.5.6  Writing to and Reading from the INA219
+
+Accessing a particular register on the INA219 is accomplished by writing the appropriate value to the register
+pointer. Refer to Table 2 for a complete list of registers and corresponding addresses. The value for the register
+pointer as shown in Figure 18 is the first byte transferred after the slave address byte with the R/W bit LOW.
+Every write operation to the INA219 requires a value for the register pointer.
+
+Writing to a register begins with the first byte transmitted by the master. This byte is the slave address, with the
+R/W bit LOW. The INA219 then acknowledges receipt of a valid address. The next byte transmitted by the
+master is the address of the register to which data will be written. This register address value updates the
+register pointer to the desired register. The next two bytes are written to the register addressed by the register
+pointer. The INA219 acknowledges receipt of each data byte. The master may terminate data transfer by
+generating a START or STOP condition.
+
+When reading from the INA219, the last value stored in the register pointer by a write operation determines
+which register is read during a read operation. To change the register pointer for a read operation, a new value
+must be written to the register pointer. This write is accomplished by issuing a slave address byte with the R/W
+bit LOW, followed by the register pointer byte. No additional data are required. The master then generates a
+START condition and sends the slave address byte with the R/W bit HIGH to initiate the read command. The
+next byte is transmitted by the slave and is the most significant byte of the register indicated by the register
+
+
+14     Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

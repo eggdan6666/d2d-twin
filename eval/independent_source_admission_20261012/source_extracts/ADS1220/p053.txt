@@ -1,0 +1,63 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ In addition to biasing the thermocouple, RB1 and RB2 are also useful for detecting an open thermocouple lead.
+When one of the thermocouple leads fails open, the biasing resistors pull the analog inputs (AIN0 and AIN1)
+ to AVDD and AVSS, respectively. The ADC consequently reads a full-scale value, which is outside the normal
+measurement range of the thermocouple voltage, to indicate this failure condition.
+
+ Although the device digital filter attenuates high-frequency components of noise, performance can be further
+ improved by providing a first-order, passive RC filter at the inputs. Equation 16 calculates the cutoff frequency
+ that is created by the differential RC filter formed by RF1, RF2, and the differential capacitor CDIF.
+
+      fC = 1 / [2π × (RF1 + RF2) × CDIF]                                                                       (16)
+
+Two common-mode  filter capacitors (CM1 and CM2) are also added to offer attenuation of high-frequency,
+common-mode noise components. Select a differential capacitor CDIF that is at least an order of magnitude
+ (10 times) larger than the common-mode capacitors (CM1 and CM2) because mismatches in the common-mode
+ capacitors can convert common-mode noise into differential noise.
+
+The filter resistors RF1 and RF2 also serve as current-limiting resistors. These resistors limit the current into the
+ analog inputs (AIN0 and AIN1) of the device to safe levels if an overvoltage on the inputs occur. Care must be
+ taken when choosing the filter resistor values because the input currents flowing into and out of the device cause
+a voltage drop across the resistors. This voltage drop shows up as an additional offset error at the ADC inputs.
+ Limit the filter resistor values to below 1kΩ, if possible.
+
+The filter component values used in this design are: RF1 = RF2 = 1kΩ, CDIF = 100nF, and CCM1 = CCM2 = 10nF.
+The highest measurement resolution is achieved when matching the largest potential input signal to the FSR
+ of the ADC by choosing the highest possible gain. From the design requirement, the maximum thermocouple
+ voltage occurs at TTC = 1250°C and is VTC = 50.644mV as defined in the tables published by the National
+ Institute of Standards and Technology (NIST) using a cold-junction temperature of TCJ = 0°C. A thermocouple
+ produces an output voltage that is proportional to the temperature difference between the thermocouple tip
+and the cold junction. If the cold junction is at a temperature below 0°C, the thermocouple produces a voltage
+ larger than 50.644mV. The isothermal block area is constrained by the operating temperature range of the
+ device. Therefore, the isothermal block temperature is limited to –40°C. A K-type thermocouple at TTC = 1250°C
+ produces an output voltage of VTC = 50.644mV – (–1.527mV) = 52.171mV when referenced to a cold-junction
+ temperature of TCJ = –40°C. The maximum gain that can be applied when using the internal 2.048V reference is
+ then calculated as (2.048V / 52.171mV) = 39.3. The next smaller PGA gain setting the device offers is 32.
+
+The device integrates a high-precision temperature sensor that can be used to measure the temperature of
+ the cold junction. To measure the internal temperature of the ADS1220, the device must be set to internal
+ temperature sensor mode by setting the TS bit to 1b in the configuration register. For best performance, careful
+ board layout is critical to achieve good thermal conductivity between the cold junction and the device package.
+
+ However, the device does not perform automatic  cold-junction compensation  of the thermocouple. This
+ compensation must be done in the microcontroller that interfaces to the device. The microcontroller requests
+one or multiple readings of the thermocouple voltage from the device and then sets the device to internal
+ temperature sensor mode (TS = 1b) to acquire the temperature of the cold junction. An algorithm similar to the
+ following must be implemented on the microcontroller to compensate for the cold-junction temperature:
+
+ 1.  Measure the thermocouple voltage, VTC, between AIN0 and AIN1.
+ 2.  Measure the temperature of the cold junction, TCJ, using the temperature sensor mode of the ADS1220.
+ 3.  Convert the cold-junction temperature into an equivalent thermoelectric voltage, VCJ, using the tables or
+    equations provided by NIST.
+ 4.  Add VTC and VCJ and translate the summation back into a thermocouple temperature using the NIST tables
+     or equations again.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    53
+
+                                                  Product Folder Links: ADS1220

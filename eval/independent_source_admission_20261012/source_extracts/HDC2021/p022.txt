@@ -1,0 +1,54 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6.3 Humidity Low (Address 0x02)
+
+                          Table 7-11. Humidity Low Register (Address 0x02)
+
+       7             6             5             4             3             2             1             0
+
+                                                      HUMIDITY[7:0]
+
+                         Table 7-12. Humidity Low Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+     [7:0]   HUMIDITY [7:0]              R       0           Humidity data- lower byte
+
+The humidity data is a 16-bits value that spans accross the Humidity Low (address 0x02) and Humidity High
+ (address 0x03) registers. The Humidity Low register containts the lower-byte of the 16-bits humidity data.
+
+The humidity can be calculated from the output data using Equation 3:
+
+                          § HUMIDITY [15 : 0] ·
+    Humidity (%RH)   ¨         16         ¸ u 100                          ©      2           ¹                                                                            (3)
+
+ 7.6.4 Humidity High (Address 0x03)
+
+                          Table 7-13. Humidity High Register (Address 0x03)
+
+       7             6             5             4             3             2             1             0
+
+                                                     HUMIDITY[15:8]
+
+                         Table 7-14. Humidity High Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+    [15:8]   HUMIDITY[15:8]             R       0           Humidity data- higher byte
+
+
+The humidity data is a 16-bits value that spans accross the Humidity Low (address 0x02) and Humidity High
+ (address 0x03) registers. The Humidity High register containts the higher-byte of the 16-bits temperature data.
+
+The humidity can be calculated from the output data using Equation 4:
+
+                          § HUMIDITY [15 : 0] ·
+    Humidity (%RH)   ¨         16         ¸ u 100                          ©      2           ¹                                                                            (4)
+
+
+
+
+
+22    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

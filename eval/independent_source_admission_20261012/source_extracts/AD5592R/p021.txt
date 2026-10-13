@@ -1,0 +1,46 @@
+Data Sheet                               AD5592R
+
+TERMINOLOGY
+
+ADC TERMINOLOGY                                         Thus, for a 12-bit converter, SINAD is 74 dB.
+Integral Nonlinearity (INL)                            Total Harmonic Distortion (THD)
+
+INL is the maximum deviation from a straight line passing through       THD is the ratio of the rms sum of harmonics to the fundamental.
+the endpoints of the ADC transfer function. The end-points of the          For the AD5592R/AD5592R-1, it is defined as
+transfer function are zero scale, a point that is 1 LSB below the first
+code transition, and full scale, a point that is 1 LSB above the last                                                                                           (2)
+code transition.                                                                                    V22 + V32 + V42 + V52 + V62                                                                                            V1Differential Nonlinearity (DNL)                THDwhere: dB = 20 × log
+                                                              V1 is the rms amplitude of the fundamental.
+DNL is the difference between the measured and the ideal 1 LSB          V2, V3, V4, V5, and V6 are the rms amplitudes of the second through
+change between any two adjacent codes in the ADC.                      the sixth harmonics.
+Offset Error                                 Peak Harmonic or Spurious Noise (SFDR)
+Offset error is the deviation of the first code transition (00 … 000) to      Peak harmonic or spurious noise is defined as the ratio of the rms
+(00 … 001) from the ideal, that is, AGND + 1 LSB.                        value of the next largest component in the ADC output spectrum
+                                                                      (up to fS/2 and excluding dc) to the rms value of the fundamental.Offset Error Match
+                                                                         Normally, the value of this specification is determined by the largest
+Offset error match is the difference in offset error between any two        harmonic in the spectrum, but for ADCs where the harmonics are
+channels.                                                               buried in the noise floor, it is a noise peak.
+
+Gain Error                            DAC TERMINOLOGY
+Gain error is the deviation of the last code transition (111 … 110) to      Relative Accuracy or Integral Nonlinearity (INL)
+(111 … 111) from the ideal (that is, VREF − 1 LSB) after the offset                                                                   For the DAC, relative accuracy or integral nonlinearity is a meas-error has been adjusted out.                                                                urement of the maximum deviation, in LSBs, from a straight line
+Channel-to-Channel Isolation                              passing through the endpoints of the DAC transfer function. A
+                                                                                   typical INL vs. code plot is shown in Figure 18.
+Channel-to-channel isolation is a measure of the level of crosstalk
+between channels. It is measured by applying a full-scale, 5 kHz         Differential Nonlinearity (DNL)
+sine wave signal to all non-selected ADC input channels and deter-                                                                                    Differential nonlinearity is the difference between the measuredmining how much that signal is attenuated in the selected channel.                                                             change and the ideal 1 LSB change between any two adjacentThis specification is the worst case across all ADC channels for the                                                                    codes. A specified differential nonlinearity of ±1 LSB maximum en-AD5592R/AD5592R-1.                                                                    sures monotonicity. This DAC is guaranteed monotonic by design.
+Track-and-Hold Acquisition Time                   A typical DNL vs. code plot can be seen in Figure 19.
+The track-and-hold amplifier enters hold mode on the falling edge of     Zero Code Error
+SYNC and returns to track mode when the conversion is complete.                                                                 Zero code error is a measurement of the output error when zeroThe track-and-hold acquisition time is the minimum time required                                                              code (0x000) is loaded to the DAC register. Ideally, the outputfor the track-and-hold amplifier to remain in track mode for its                                                                                             is 0 V. The zero code error is always positive in the AD5592R/output to reach and settle to within ±1 LSB of the applied input                                                          AD5592R-1 because the output of the DAC cannot go below 0 Vsignal, given a step change to the input signal.                                                            due to a combination of the offset errors in the DAC and the output
+Signal-to-Noise-and-Distortion (SINAD) Ratio             amplifier. Zero code error is expressed in mV.
+SINAD is the measured ratio of signal-to-noise-and-distortion at       Gain Error
+the output of the ADC. The signal is the rms amplitude of the                                                               Gain error is a measure of the span error of the DAC. It is thefundamental. Noise is the sum of all non-fundamental signals up                                                                           deviation in slope of the DAC transfer characteristic from the ideal
+to half the sampling frequency (fS/2), excluding dc. The ratio is                                                                 expressed as % FSR.dependent on the number of quantization levels in the digitization
+process; the more levels, the smaller the quantization noise. The        Offset Error Drift
+theoretical SINAD ratio for an ideal N-bit converter with a sine wave
+                                                                            Offset error drift is a measurement of the change in offset error withinput is given by
+                                                            a change in temperature. It is expressed in µV/°C.
+SINAD (dB) = 6.02N + 1.76                                             (1)
+
+
+analog.com                                                                                         Rev. H | 21 of 54

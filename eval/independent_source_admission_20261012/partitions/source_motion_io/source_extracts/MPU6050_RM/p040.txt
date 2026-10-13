@@ -1,0 +1,73 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           40 of 46  
+   
+4.28 Register 107 – Power Management 1 
+PWR_MGMT_1 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+6B 
+107 
+DEVICE 
+_RESET 
+SLEEP 
+CYCLE 
+- 
+TEMP_DIS 
+CLKSEL[2:0] 
+ 
+Description: 
+This register allows the user to configure the power mode and clock source. It also provides a bit for 
+resetting the entire device, and a bit for disabling the temperature sensor. 
+By setting SLEEP to 1, the MPU-60X0 can be put into low power sleep mode. When CYCLE is set to 
+1 while SLEEP is disabled, the MPU-60X0 will be put into Cycle Mode. In Cycle Mode, the device 
+cycles between sleep mode and waking up to take a single sample of data from accelerometer at a 
+rate determined by LP_WAKE_CTRL (register 108). To configure the wake frequency, use 
+LP_WAKE_CTRL within the Power Management 2 register (Register 108). 
+An internal 8MHz oscillator, gyroscope based clock, or external sources can be selected as the 
+MPU-60X0 clock source. When the internal 8 MHz oscillator or an external source is chosen as the 
+clock source, the MPU-60X0 can operate in low power modes with the gyroscopes disabled.  
+Upon power up, the MPU-60X0 clock source defaults to the internal oscillator. However, it is highly 
+recommended that the device be configured to use one of the gyroscopes (or an external clock 
+source) as the clock reference for improved stability. The clock source can be selected according to 
+the following table. 
+CLKSEL 
+Clock Source 
+0 
+Internal 8MHz oscillator 
+1 
+PLL with X axis gyroscope reference 
+2 
+PLL with Y axis gyroscope reference 
+3 
+PLL with Z axis gyroscope reference 
+4 
+PLL with external 32.768kHz reference 
+5 
+PLL with external 19.2MHz reference 
+6 
+Reserved 
+7 
+Stops the clock and keeps the timing generator 
+in reset 
+For further information regarding the MPU-60X0 clock source, please refer to the MPU-6000/MPU-
+6050 Product Specification document.  
+Bit 4 is reserved. 

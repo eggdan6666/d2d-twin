@@ -1,0 +1,55 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.2   Typical Operating Circuit
+
+
+                                             SCL/      GND                                                          GND                                       SDA/
+                                       SDI     SCLK              C3                                                                                   SDA    SCL              C3
+                                                    2.2nF                                                                                   2.2nF
+
+
+
+                          24  23  22  21  20  19                                                            24  23  22  21  20  19
+
+        CLKIN         1                         18                                    CLKIN         1                         18
+
+                       2                         17                                                    2                         17
+                                            GND                                                          GND
+                       3                         16                                                    3                         16
+                MPU-6000                                   MPU-6050
+                       4                         15                                                    4                         15
+                                                    VDD                                                           VDD
+                       5                         14                                                    5                         14
+
+     AUX_DA         6                         13                              AUX_DA         6                         13
+
+                           7   8   9  10  11  12                   C2                                    7   8   9  10  11  12                 C2
+                                                                          0.1µF                                                                                0.1µF
+
+      AUX_CL                                                               AUX_CL
+                                               GND                                                        GND
+                                   C1                                            VLOGIC                   C1
+                                            0.1µF                                                                                  0.1µF
+                                      /CS     AD0/                                      FSYNC      INT                                        10nFC4                AD0                                      FSYNC      INT
+                                              SDO   GND                                               GND        GND
+
+                                        Typical Operating Circuits
+
+7.3   Bill of Materials for External Components
+
+    Component                     Label     Specification                      Quantity
+     Regulator Filter Capacitor (Pin 10)  C1       Ceramic, X7R, 0.1µF ±10%, 2V      1
+   VDD Bypass Capacitor (Pin 13)    C2       Ceramic, X7R, 0.1µF ±10%, 4V      1
+    Charge Pump Capacitor (Pin 20)   C3       Ceramic, X7R, 2.2nF ±10%, 50V     1
+    VLOGIC Bypass Capacitor (Pin 8)   C4*      Ceramic, X7R, 10nF ±10%, 4V       1
+
+      * MPU-6050 Only.
+
+
+
+
+
+                                           22 of 52

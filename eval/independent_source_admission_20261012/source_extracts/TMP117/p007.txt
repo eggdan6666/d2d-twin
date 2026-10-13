@@ -1,0 +1,65 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+ 150 °C (unless otherwise noted); Typical specifications are at TA = 25 °C and V+ = 3.3 V (unless otherwise noted)
+          PARAMETER                     TEST CONDITIONS                 MIN     TYP    MAX  UNIT
+
+          Power-on-reset threshold
+ VPOR                                 Supply rising                                                        1.6           V           voltage
+
+         Brownout detect               Supply falling                                                       1.1           V
+ tRESET   Reset Time                  Time required by device to reset                                     1.5           ms
+
+ (1)   Repeatability is the ability to reproduce a reading when the measured temperature is applied consecutively, under the same conditions.
+ (2)   Long term stability is determined using accelerated operational life testing at a junction temperature of 150°C.
+ (3)   Hysteresis is defined as the ability to reproduce a temperature reading as the temperature varies from room → hot
+     →room→cold→room. The temperatures used for this test are -40°C, 25°C, and 150°C.
+ (4)   Quiescent current between conversions
+
+ 6.6 Switching Characteristics
+ Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+ 150 °C (unless otherwise noted); Typical specifications are at TA = 25 °C and V+ = 3.3 V (unless otherwise noted)
+            PARAMETER                   TEST CONDITIONS            MIN      TYP     MAX   UNIT
+
+ EEPROM
+
+ Programming time                                                                           7            ms
+
+ Number of writes                                                                     1,000     50,000              Times
+
+ Data retention time                                                               10       100               Years
+
+ 6.7 Two-Wire Interface Timing
+ Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+ 150 °C (unless otherwise noted)
+                                                                    FAST-MODE
+                                                                                                   UNIT
+                                                                          MIN       MAX
+ fSCL         SCL operating frequency                                                1           400     KHz
+ tBUF          Bus free time between STOP and START conditions                        1300                      ns
+                Hold time after repeated START condition.
+ tHD;STA                                                                           600                      ns                    After this period, the first clock is generated(1)
+ tSU;STA         Repeated START condition setup time                                    600                      ns
+ tSU;STO       STOP condition setup time                                             600                      ns
+ tHD;DAT         Data hold time                                                         0                      ns
+ tVD;DAT         Data valid time(2)                                                                                0.9       µs
+ tSU;DAT         Data setup time                                                      100                      ns
+ tLOW         SCL clock low period                                                1300                      ns
+ tHIGH         SCL clock high period                                                 600                      ns
+                                                                                 20 ×
+  tF – SDA       Data fall time                                                                      300       ns                                                                                 (V+ /5.5)
+  tF, tR – SCL     Clock fall and rise time                                                              300       ns
+ tR              Rise time for SCL ≤ 100 kHz                                                        1000       ns
+                    Serial bus timeout (SDA bus released if there is no clock)                      20            40     ms
+
+ (1)  The maximum tHD;DAT could be 0.9 µs for Fast-Mode, and is less than the maximum tVD;DAT by a transition time.
+ (2)   tVD;DATA = time for data signal from SCL "LOW" to SDA output ("HIGH" to "LOW", depending on which is worse).
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback     7
+
+                                                  Product Folder Links: TMP117

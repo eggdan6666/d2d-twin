@@ -1,0 +1,23 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+Changing an ADC Sequence                           As the command to stop the sequence is written, an ADC conver-
+                                                                         sion is also taking place. This conversion must finish before a new
+The channels included in an ADC sequence can be changed by                                                              sequence can be written to the ADC sequence register. Allow a
+first stopping an existing conversion sequence (see Figure 49). The                                                          minimum of 2 µs between starting the write to end the current
+ADC conversion sequence is stopped by clearing the REP, TEMP,                                                              sequence and starting the write to select a new sequence. After
+and ADC7 to ADC0 bits in the ADC sequence register (see the                                                                            selecting the new sequence, allow an ADC track time of 500 ns
+ADC Sequence Register section) to 0.                                                                       before initiating the next conversion.
+
+
+
+
+
+                                         Figure 49. Changing a Multichannel, Repeating, ADC Conversion Sequence
+
+
+
+
+
+analog.com                                                                                         Rev. H | 31 of 54

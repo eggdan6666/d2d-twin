@@ -1,0 +1,78 @@
+                                                                           TMP100, TMP101
+
+www.ti.com                                                                   SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+
+8  Application and Implementation
+
+
+                                  NOTE
+           Information  in  the  following  applications  sections  is  not  part  of  the  TI component
+            specification, and TI does not warrant its accuracy or completeness. TI’s customers are
+           responsible for determining suitability of components for their purposes. Customers should
+            validate and test their design implementation to confirm system functionality.
+
+
+8.1  Application Information
+
+The TMP100 and TMP101 devices are used to measure the printed circuit board (PCB) temperature of the board
+location where the devices are mounted. The TMP100 features two address pins to allow up to eight devices to
+be addressed on a single I2C interface. The TMP101 device features one address pin and an ALERT pin,
+allowing up to three devices to be connected per bus. The TMP100 and TMP101 devices require no external
+components for operation except for pullup resistors on SCL, SDA, and ALERT (TMP101 device), although a
+0.1-μF bypass capacitor is recommended.
+
+The sensing device of the TMP100 and TMP101 devices is the chip  itself. Thermal paths run through the
+package leads as well as the plastic package. The die flag of the lead frame is connected to GND. The lower
+thermal resistance of metal causes the leads to provide the primary thermal path. The GND pin of the TMP100 or
+TMP101 device is directly connected to the metal lead frame, and is the best choice for thermal input.
+
+8.2  Typical Application
+                                                                       Supply Voltage                                                                                     Supply Voltage
+                                                                                        2.7 V to 5.5 V                                                                                                        2.7 V to 5.5 V
+
+
+
+                                                                                    Supply Bypass                                                                                     Supply Bypass
+                                                                                             Capacitor                                                                                                  Capacitor
+                                         Pull-Up Resistors                                      0.01 PF                                                 Pull-Up Resistors                                      0.01 PF
+                                                5-k                                                                                                              5-k
+
+
+
+
+                                       TMP100                                                                      TMP101
+     Two-Wire                                                                    6                                        1                                                                                                            Two-Wire                                                                                                                                                                       6                                                                                                                                           1                                     SCL            SDA                                                                                                                          SCL            SDA   Host         Controller                                                                                                              Host                                                                                                                                       Controller
+
+                                        2                                                                                                                                                                      5                                                                    5                                                                      2                                 GND           ADD0                                                                                                          GND           ADD0
+
+                                        3                                                                    4                                                                      3                                                                                                                                                                      4
+                                    ADD1             V+                                                                                                                          ALERT            V+
+
+
+
+   Figure 12. Typical Connections of the TMP100       Figure 13. Typical Connections of the TMP101
+
+
+8.2.1  Design Requirements
+
+The TMP100 and TMP101 devices require pullup resistors on the SCL, SDA, and ALERT (TMP101 device) pins.
+The recommended value for the pullup resistor is 5-kΩ. In some applications, the pullup resistor can be lower or
+higher than 5-kΩ but must not exceed 3 mA of current on the SCL and SDA pins, and must not exceed 4 mA on
+the ALERT (TMP101) pin. A 0.1-μF bypass capacitor is recommended, as shown in Figure 12 and Figure 13.
+The SCL, SDA, and ALERT lines can be pulled up to a supply that is equal to or higher than VS through the
+pullup resistors. For the TMP100, to configure one of eight different addresses on the bus, connect ADD0 and
+ADD1 to either the GND pin, V+ pin, or float. Float indicates the pin is left unconnected. For the TMP101 device,
+to configure one of three different addresses on the bus, connect ADD0 to either the GND pin, V+ pin, or float.
+
+8.2.2  Detailed Design Procedure
+
+Place the TMP100 and TMP101 devices in close proximity to the heat source that must be monitored, with a
+proper layout for good thermal coupling. This placement ensures that temperature changes are captured within
+the shortest possible time interval. To maintain accuracy in applications that require air or surface temperature
+measurement, care must be taken to isolate the package and leads from ambient air temperature. A thermally-
+conductive adhesive is helpful in achieving accurate surface temperature measurement.
+
+
+Copyright © 2002–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     19
+
+                                              Product Folder Links: TMP100 TMP101

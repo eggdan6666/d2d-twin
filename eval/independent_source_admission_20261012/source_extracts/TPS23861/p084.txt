@@ -1,0 +1,55 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+VDSn[3:0]: Most recent detect voltage difference result status on Port n. If “0001” state, the 12-bit Δv value is
+useable.
+
+This measurement is made on a port if legacy detect is enabled using the Legacy Detect Mode Register.
+
+VDSn is set to the Power-On Reset State (0000b) when legacy detection is enabled until a Δv measurement is
+made.
+
+The detection result is maintained in the register in any operating mode following the measurement.
+
+The selection is as following:
+
+
+                         VDSn[3:0]                           VOLTAGE-DIFFERENCE MEASUREMENT STATUS
+
+                          0000                                                  Power-on reset
+
+                          0001                                                           Valid measurement
+
+                          0010                              Unable to discharge PD input capacitance to 2.4 V before timeout
+
+                          0011                              Unable to achieve 0.4V to take first measurement before timeout
+
+                          0100                                                    First measurement exceeds VDet-clamp (min)
+
+                          0101                                  Second measurement exceeds VDet-clamp (min)
+
+                          0110                                    ΔV < 0.5 V (insufficient signal)
+
+
+7.5.36  Reserved Registers
+•  Register 0x1B
+•  Register 0x1D
+•  Register 0x1E
+•  Register 0x1F
+•  Register 0x22
+•  Register 0x23
+•  Register 0x24
+•  Register 0x25
+•  Register 0x59
+
+Reserved: These registers are reserved for manufacturing or future use. Undesirable behavior may result  if
+these registers are written to.
+
+
+
+
+
+84     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

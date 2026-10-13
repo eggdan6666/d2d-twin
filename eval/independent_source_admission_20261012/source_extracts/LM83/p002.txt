@@ -1,0 +1,44 @@
+                                                                                    November 1999                                                                                         LM83
+
+ LM83
+ Triple-Diode Input and Local Digital Temperature Sensor
+ with Two-Wire Interface                                                                                                                                                                                                                                                                           Triple-Diode
+                                                     n On-board local temperature sensing General Description
+                                                     n SMBus and I2C compatible interface, supports
+ The LM83 is a digital temperature sensor with a 2 wire serial                                               SMBus 1.1 TIMEOUT
+  interface that senses the voltage and thus the temperature of                                                     n Two interrupt outputs: INT and T_CRIT_A                Input  three remote diodes using a Delta-Sigma analog-to-digital
+                                                     n Register readback capability  converter with a digital over-temperature detector. The LM83
+  accurately senses its own temperature as well as the tem-   n 7 bit plus sign temperature data format, 1 ˚C resolution                                                                   and  perature of three external devices, such as Pentium II® Pro-   n 2 address select pins allow connection of 9 LM83s on a
+  cessors or diode connected 2N3904s. The temperature of      single bus
+  any ASIC can be detected using the LM83 as long as a dedi-
+  cated diode (semiconductor junction) is available on the die.                              Key Specifications  Using the SMBus interface a host can access the LM83’s                                                          Local
+  registers at any time. Activation of a T_CRIT_A output oc-   j Supply Voltage                        3.0V to 3.6V
+  curs when any temperature is greater than a programmable   j Supply Current                     0.8mA (max)
+  comparator limit, T_CRIT. Activation of an INT output occurs   j Local Temp Accuracy (includes quantization error) when any temperature is greater than its corresponding pro-  grammable comparator HIGH limit.                                              0˚C to +85˚C     ±3.0˚C (max)    Digital
+ The host can program as well as read back the state of the   j Remote Diode Temp Accuracy (includes quantization
+ T_CRIT register and the four T_HIGH registers. Three state     error)
+  logic inputs allow two pins (ADD0, ADD1) to select up to 9                      +25˚C to +100˚C      ±3˚C (max)
+ SMBus address locations for the LM83. The sensor powers                                                                            0˚C to +125˚C      ±4˚C (max)  up with default thresholds of 127˚C for T_CRIT and  all
+  T_HIGHs. The LM83 is pin for pin and register compatible
+  with the LM84 as well as the Maxim MAX1617 and the Ana-  Applications
+  log Devices ADM1021.                                 n System Thermal Management                                                     n Computers                                                                                              Temperature
+ Features                                        n Electronic Test Equipment
+  n Accurately senses die temperature of 3 remote ICs, or     n Office Electronics
+    diode junctions                                     n HVAC                                                                                                                                      Sensor
+ Simplified Block Diagram
+                                                                                         with
+                                                                                                                                                                                  Two-Wire
+                                                                                                                                                                                                         Interface
+
+
+
+
+
+                                                                                                                                                 DS101058-1
+
+
+   SMBus™is a trademark of the Intel Corporation.
+   Pentium II® is a registered trademark of the Intel Corporation.
+   I2C® is a registered trademark of the Philips Corporation.
+
+© 2000 National Semiconductor Corporation   DS101058                                                              www.national.com

@@ -1,0 +1,46 @@
+                                                           (Continued)LM83   Logic Electrical Characteristics
+         Note 6: Typicals are at TA = 25˚C and represent most likely parametric norm.
+         Note 7: Limits are guaranteed to National’s AOQL (Average Outgoing Quality Level).
+         Note 8:  The Temperature Error will vary less than ±1.0 ˚C for a variation in VCC of 3 V to 3.6 V from the nominal of 3.3 V.
+         Note 9: Quiescent current will not increase substantially with an active SMBus.
+         Note 10: This specification is provided only to indicate how often temperature data is updated. The LM83 can be read at any time without regard to conversion state
+          (and will yield last conversion result).
+         Note 11: Default values set at power up.
+         Note 12: Holding the SMBData and/or SMBCLK lines Low for a time interval greater than tTIMEOUT will cause the LM83 to reset SMBData and SMBCLK to the IDLE
+            state of an SMBus communication (SMBCLK and SMBData set High).
+
+
+
+
+
+                                                                                                                               DS101058-5
+                     FIGURE 2. Temperature-to-Digital Transfer Function (Non-linear scale for clarity)
+
+
+
+
+
+                                                                                                      DS101058-24
+                      FIGURE 3. Printed Circuit Board Used for Thermal Resistance Specifications
+
+      1.0 Functional Description
+       The LM83 temperature sensor incorporates a band-gap type        1.  Remote Diode 2 (D2RT)
+        temperature sensor using a Local or three Remote diodes        2.  Remote Diode 1 (D1RT)
+       and an 8-bit ADC (Delta-Sigma Analog-to-Digital Converter).                                                                                  3.  Remote Diode 3 (D3RT)       The LM83 is compatible with the serial SMBus and I2C two
+         wire interfaces. Digital comparators compare Local (LT) and       This round robin sequence takes approximately 480 ms to
+       Remote (D1RT, D2RT and D3RT) temperature readings to       complete as each temperature is digitized in approximately
+        user-programmable  setpoints  (LHS,  D1RHS,  D2RHS,      120 ms.
+      D3RHS and TCS). Activation of the INT output indicates that
+                                                                          1.2 INT OUTPUT and T_HIGH LIMITS       a comparison is greater than the limit preset in a HIGH reg-
+            ister. The T_CRIT setpoint (TCS) interacts with all the tem-      Each temperature reading (LT, D1RT, D2RT, and D3RT) is
+         perature readings. Activation of the T_CRIT_A output indi-       associated with a T_HIGH setpoint register (LHS, D1RHS,
+         cates that any or  all of the temperature readings have      D2RHS, D3RHS). At the end of a temperature reading a digi-
+        exceed the T_CRIT setpoint.                                                 tal comparison determines whether that reading has exceed
+                                                                                                      its HIGH setpoint. If the temperature reading is greater than
+         1.1 CONVERSION SEQUENCE                                  the HIGH setpoint, a bit is set in one of the Status Registers,
+                                                                                  to indicate which temperature reading, and the INT output is       The LM83 converts its own temperature as well as 3 remote
+        diode temperatures in the following sequence:                      activated.
+          1.  Local Temperature (LT)                                     Local and remote temperature diodes are sampled in se-
+                                                              quence by the A/D converter. The INT output and the Status
+
+      www.national.com                                                8

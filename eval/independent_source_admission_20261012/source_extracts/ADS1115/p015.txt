@@ -1,0 +1,70 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 7.3.3 Full-Scale Range (FSR) and LSB Size
+
+A programmable gain amplifier (PGA) is implemented before the ΔΣ ADC of the ADS1114 and ADS1115. The
+ full-scale range is configured by bits PGA[2:0] in the Config register and can be set to ±6.144V, ±4.096V,
+ ±2.048V, ±1.024V, ±0.512V, and ±0.256V. Table 7-1 shows the FSR together with the corresponding LSB size.
+ Equation 4 shows how to calculate the LSB size from the selected full-scale range.
+
+    LSB = FSR / 216                                                                                               (4)
+
+                         Table 7-1. Full-Scale Range and Corresponding LSB
+                                                Size
+                                FSR                  LSB SIZE
+                                           ±6.144V(1)                     187.5μV
+                                           ±4.096V(1)                    125μV
+
+                                      ±2.048V                       62.5μV
+
+                                      ±1.024V                      31.25μV
+
+                                      ±0.512V                      15.625μV
+
+                                      ±0.256V                      7.8125μV
+
+                                       (1)   This parameter expresses the full-scale range of the ADC
+                                            scaling. Do not apply more than VDD + 0.3V to the analog
+                                          inputs of the device.
+
+The FSR of the ADS1113 is fixed at ±2.048V.
+
+ Analog input voltages must never exceed the analog input voltage limits given in the Absolute Maximum Ratings.
+ If a VDD supply voltage greater than 4V is used, the ±6.144V full-scale range allows input voltages to extend
+up to the supply. Although in this case (or whenever the supply voltage is less than the full-scale range; for
+ example, VDD = 3.3V and full-scale range = ±4.096V), a full-scale ADC output code cannot be obtained. For
+ example, with VDD = 3.3V and FSR = ±4.096V, only differential signals up to VIN = ±3.3V can be measured. The
+code range that represents voltages |VIN| > 3.3V is not used in this case.
+ 7.3.4 Voltage Reference
+
+The ADS111x have an integrated voltage reference. An external reference cannot be used with these devices.
+
+The ADS111x does not use a traditional band-gap reference to generate the internal voltage reference. For that
+ reason, the reference does not have an actual specified voltage value. Instead of using the reference voltage
+ value and the gain setting to derive the full-scale range of the ADC, use the FSR values provided in Table 7-1
+ directly.
+
+ Errors associated with the initial voltage reference accuracy and the reference drift with temperature are included
+ in the gain error and gain drift specifications in the Electrical Characteristics table.
+
+ 7.3.5 Oscillator
+
+The ADS111x have an integrated oscillator running at 1MHz. No external clock can be applied to operate these
+ devices. The internal oscillator drifts over temperature and time. The output data rate scales proportionally with
+ the oscillator frequency.
+
+ 7.3.6 Output Data Rate and Conversion Time
+
+The ADS111x offer programmable output data rates. Use the DR[2:0] bits in the Config register to select output
+ data rates of 8SPS, 16SPS, 32SPS, 64SPS, 128SPS, 250SPS, 475SPS, or 860SPS.
+
+ Conversions in the ADS111x settle within a single cycle; thus, the conversion time is equal to 1 / DR.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    15
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

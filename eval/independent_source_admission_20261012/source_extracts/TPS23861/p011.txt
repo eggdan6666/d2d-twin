@@ -1,0 +1,72 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+6.6  Timing Requirements
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+                                                                     MIN       TYP      MAX    UNIT
+
+ fSCL       SCL clock frequency                                                10                    400     kHz
+ tLOW      LOW period of SCL clock                                                     1.3                             µs
+ tHIGH       HIGH period of SCL clock                                                    0.6                             µs
+         SDAO output fall time, SDAO, 2.3 →0.8 V, Cb = 10 pF, 10-kΩ pullup                                                                             21                    250      ns
+                to 3.3 V
+ tfo
+         SDAO output fall time, SDAO, 2.3 →0.8 V, Cb = 400 pF, 1.3-kΩ                                                                             60                    250      ns
+               pullup to 3.3 V
+
+ CI2C       SCL capacitance                                                                          10     pF
+ CI2C_SDA     SDAI, SDAO capacitance                                                                    6     pF
+ tSU,DATW     Data set-up time (write operation)                                     100                              ns
+             Data set-up time (read operation), SDAO, 2.3 ↔0.8 V, Cb = 400 pF, tSU,DATR                                                                     600                              ns              1.3-kΩ pull up to 3.3 V
+
+ tHD,DATW     Data hold time (write operation)                                        0                              ns
+ tHD,DATR     Data hold time (read operation)                                       150                    600      ns
+ tfSDA          Input fall times of SDAI, 2.3 →0.8 V                                    20                    250      ns
+ trSDA          Input rise times of SDAI, 0.8 →2.3 V                                   20                    300      ns
+  tr             Input rise time of SCL, 0.8 →2.3 V                                     20                    300      ns
+  tf             Input fall time of SCL, 2.3 →0.8 V                                     20                    200      ns
+ tBUF        Bus free time between a stop and start condition                              1.3                             µs
+ tHD,STA      Hold time after (repeated) start condition                                      0.6                             µs
+ tSU,STA      Repeated start condition set-up time                                          0.6                             µs
+ tSU,STO      Stop condition set-up time                                                    0.6                             µs
+ tFLT_INT(1)     Fault to INT assertion, Time to internally register an interrupt in                         150                 µs             response to a fault
+
+ tARA_INT    ARA to INT negation                                                                      500      ns
+ tDG         Suppressed spike pulse width, SDAI and SCL                            50                              ns
+ tRDG       RESET input minimum pulse width (deglitch time)                                                 5      µs
+ tWDT_I2C      I2C Watchdog trip delay                                                      1.1           2.2           3.3       s
+ tSTP_AOUT    Delay STOP bit to AOUT high during I2C address programming                                         1.25      µs
+
+(1)  These parameters are provided for reference only, and do not constitute part of TI's published specifications for purposes of TI's product
+     warranty.
+
+                                                                                                                                             trSDA
+
+
+SDAI/
+SDAO
+              tfSDA
+                                                                                                                                                                                        tfo
+                          tLOW            tr          tSU,DAT             tf                                                                         tBUF
+
+
+SCL
+
+                                        tHIGH                            tHD,STA                                 tHD,DAT            tSU,STA                               tSU,STO
+
+                Start Condition                                                 Repeated                            Stop Condition
+                                                                                           Start Condition                                             Start Condition
+                                       Figure 1. I2C Timings
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     11
+
+                                                 Product Folder Links: TPS23861

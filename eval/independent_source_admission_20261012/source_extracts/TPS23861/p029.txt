@@ -1,0 +1,75 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.3.8  Legacy Device Detection
+
+Legacy PDs which are not compliant with IEEE 802.3at can be identified on port n under control of the LEGMOD
+field in the Legacy Detect Mode Register. Two modes of legacy detection are supported. When LEGMODn = 10,
+port n  is probed  for IEEE 802.3at-based compliance (based on resistance measurement) followed by a
+capacitance-based detection scheme for legacy devices. When LEGMODn= 01, port n performs a capacitance-
+based detection scheme only. This allows the host to probe for a potential legacy PD without pre-charging the
+PD capacitance before trying to measure the value of the capacitance.
+
+To measure capacitance, a fixed charge is injected into the Power Interface (PI) and the voltage difference
+induced by the charge  is measured and reported in the Port n Detect Voltage Difference Registers. The
+capacitance  is inversely proportional to the voltage difference. The voltage difference  is compared against
+thresholds to accept capacitance values above 6 µF pursuant to the qualifications which follow.
+The Port n Detect Voltage Difference Register consists of two contiguous bytes in the I2C addressable register
+space. Together these registers contain a 12-bit unsigned representation of the voltage difference along with a 4-
+bit status field named VDSn. When VDSn = 0001 the voltage-difference value represents a valid measurement.
+The capacitance measurement may  fail due  to an excessively small  or  large capacitance,  or an  input
+capacitance which cannot be discharged because  it is behind a diode. These cases are reported in the VDSn
+field as well as in the DETECT Pn field in the Port n Status Registers. See Table 5.
+
+                  Table 5. Capacitance Measurement Characteristics and Capabilities
+
+            PARAMETER                           CONDITIONS                VALUE         UNIT
+
+ Minimum measurable capacitance             Maximum 500-kΩ parallel resistance; maximum           6.1            μF
+                                           measurement voltage of 16.5 V at port
+
+ Maximum measurable capacitance              Minimum 17-kΩ parallel resistance                    100            μF
+
+ Maximum measurable capacitance              Minimum 10-kΩ parallel resistance                    67            μF
+
+ Nominal port charging current                                                                  540           μA
+
+ Nominal measurement time                                                                   150          ms
+
+ Minimum voltage at port for commencement of                                                               0.4           V
+ measurement
+
+ Maximum voltage at port for commencement of                                                              2.4           V
+ measurement
+
+ Duration of port-discharge period                       First discharge attempt                             250          ms
+
+ Duration of port-discharge period                Second discharge attempt                          500          ms
+
+ Maximum voltage at port at the beginning or end                                                          16.5          V
+ of measurement
+
+A resistance in parallel with the capacitance at the input of the PD affects the accuracy of the capacitance-
+measurement algorithm. A parallel resistance causes the capacitance on the port to appear higher. This fact is
+reflected in Table 5 . Capacitance up to 100 μF can be measured with a parallel resistance as low as 17 kΩ,
+whereas if the parallel resistance is as low as 10-kΩ, capacitance up to 67 μF can be measured.
+
+The voltage on the port must be in the range of 0.4 V to 2.4 V to begin capacitance measurement. This voltage
+as measured at the PSE includes the voltage drops across any diodes in the path of the capacitance.  If the
+voltage measured is too high (due to charge on the PD capacitance), the TPS23861 makes two attempts to
+discharge the port by applying a 100-kΩ load across the port. The first discharge attempt is 250-ms duration; the
+second attempt 500 ms.
+
+
+                                  NOTE
+                  It may not be possible to discharge the PD capacitance rapidly if the capacitance is on the
+           other side of a diode.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     29
+
+                                                 Product Folder Links: TPS23861

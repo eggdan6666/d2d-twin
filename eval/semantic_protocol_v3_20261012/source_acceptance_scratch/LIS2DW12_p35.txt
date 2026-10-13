@@ -1,0 +1,50 @@
+8 
+Register description
+8.1 
+OUT_T_L (0Dh)
+Temperature output register in 12-bit resolution (R)
+Table 22. OUT_T_L register
+TEMP3
+TEMP2
+TEMP1
+TEMP0
+0
+0
+0
+0
+Table 23. OUT_T_L register description
+TEMP[3:0]
+The 8 least significant bits of the temperature sensor output. 0 LSB = 25°C. Sensitivity = 16 LSB/°C.
+Together with OUT_T_H (0Eh), it forms the output value expressed as a 16-bit word in two's complement.
+8.2 
+OUT_T_H (0Eh)
+Temperature output register in 12-bit resolution (R)
+Table 24. OUT_T_H register
+TEMP11
+TEMP10
+TEMP9
+TEMP8
+TEMP7
+TEMP6
+TEMP5
+TEMP4
+Table 25. OUT_T_H register description
+TEMP[11:4]
+The 8 most significant bits of the temperature sensor output. 0 LSB = 25°C. Sensitivity = 16 LSB/°C.
+Together with OUT_T_L (0Dh), it forms the output value expressed as a 16-bit word in two's complement
+8.3 
+WHO_AM_I (0Fh)
+Who_AM_I register (R). This register is a read-only register. Its value is fixed at 44h.
+Table 26. WHO_AM_I register default values
+0
+1
+0
+0
+0
+1
+0
+0
+LIS2DW12
+Register description
+DS11811 - Rev 9
+page 35/65

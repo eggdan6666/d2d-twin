@@ -1,0 +1,51 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 7.5.1.5 Device ID Register (address = 0Fh) [default reset = 7500]
+
+ Figure 7-16 shows this read-only register reads the device ID, and this register only available on the TMP1075
+non-N orderables.
+
+                                   Figure 7-16. Device ID Register
+       15            14            13            12             11            10             9             8
+
+     DID15         DID14         DID13         DID12         DID11         DID10         DID9          DID8
+
+      R-0           R-1            R-1            R-1            R-0            R-1            R-0           R-1
+
+       7             6             5             4             3             2             1             0
+
+     DID7          DID6          DID5          DID4          DID3          DID2          DID1          DID0
+
+      R-0           R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+                           Table 7-11. Device ID Register Field Description
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    DID[15:0]                    R/W     7500h        16-bit, read-only register that stores the die ID for the device.
+                                                           The MSB reads the static value 75h to indicate the device name
+                                                                                       for TMP1075
+
+8 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 8.1 Application Information
+
+The TMP1075 can measure the PCB temperature of the location where the user mounts the device. The
+TMP1075 features two-wire SMBus and I2C interface compatibility, with the TMP1075 allowing up to 32
+(TMP1075N: 4) devices on one bus. The TMP1075 requires a pullup resistor on the SDA pin, and if needed, on
+ the SCL and ALERT pins. A 0.01-μF bypass capacitor is also required (see Figure 8-1 ).
+
+
+
+
+
+24    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

@@ -1,0 +1,1621 @@
+[
+  {
+    "chip": "AD5592R",
+    "register": "ADC_SEQ",
+    "field": "REP",
+    "dimension": "reserved_policy",
+    "competing_evidence": "通用SPI格式p.26将bits10:9称保留，但Table16明确bit9 REP；逐寄存器解释需显式源冲突策略。",
+    "candidate_main_rule": {
+      "interpretation": "per-register detail for REP bit9; preserve generic-format discrepancy",
+      "official_erratum": false
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "SERIAL INTERFACE; Table 10",
+        "excerpt": "Bits[10:9] are reserved",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 37,
+        "printed_page": "37",
+        "table_or_section": "Table 16",
+        "excerpt": "REP",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+    "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "AD5592R",
+    "register": "DAC_RD",
+    "field": "DAC_RD_EN",
+    "dimension": "legal_encoding",
+    "competing_evidence": "正文写bits4:3=11使能；两位组表仅写0/1描述，01/10行为未明确。",
+    "candidate_main_rule": {
+      "legal_values": [
+        0,
+        3
+      ],
+      "excluded_values": [
+        1,
+        2
+      ],
+      "reason": "conservative specified combinations; not official erratum"
+    },
+    "locators": [
+      {
+        "pdf_page": 29,
+        "printed_page": "29",
+        "table_or_section": "DAC READBACK",
+        "excerpt": "Set the Bits[4:3] to 11",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 36,
+        "printed_page": "36",
+        "table_or_section": "Table 15",
+        "excerpt": "1: DAC register readback enabled",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+    "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "AD5592R",
+    "register": "SW_RESET",
+    "field": "SW_RESET_CODE",
+    "dimension": "reserved_policy",
+    "competing_evidence": "p.26通用bits10:9保留规则与Table28整域key不兼容；不得先强制清零而破坏0x5AC。",
+    "candidate_main_rule": {
+      "selector_exception": "SW_RESET key uses bits10:0",
+      "preserve_conflict": true
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "Table10",
+        "excerpt": "Bits[10:9] are reserved",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 50,
+        "printed_page": "50",
+        "table_or_section": "Table28",
+        "excerpt": "10110101100: Reset",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+    "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "CNVR",
+    "dimension": "read_clear",
+    "competing_evidence": "p23规定POWER读清CNVR；p10却写Status读清且提convert pin，而寄存器表/引脚没有对应对象。章节表述冲突，不能 silently修成同一语义。",
+    "candidate_main_rule": {
+      "main_profile": "source conflict retained; read-clear excluded until policy interpretation frozen",
+      "optional_register_detail_priority": "reading POWER clears BUS_VOLTAGE.CNVR",
+      "not_same_register_read_clear": true,
+      "require_asserted_CNVR_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Power Measurement Current and bus voltage are converted at different points in time, depending on the resolution and averagin"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA219",
+    "register": "BUS_VOLTAGE",
+    "field": "CNVR",
+    "dimension": "trigger_completion",
+    "competing_evidence": "CNVR在所有转换/平均/乘法完成置1；CONFIG写清的措辞p10为任意CONFIG写(除模式0/4)、p23为new mode写(除0/4)。",
+    "candidate_main_rule": {
+      "set_event": "all conversions, averaging, multiplications complete",
+      "common_clear": "CONFIG write selecting active different mode",
+      "same_mode_CONFIG_write_clear": "quarantine source wording ambiguity",
+      "no_timing_or_event_model": "exclude CNVR dynamic assertions"
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Writing a new mode into the Operating Mode bits in the Configuration Register (except for Power-Down or Disable) 2.) Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Writing to the Configuration register, except when configuring the MODE bits for power down or ADC off (disable) modes • Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Powe"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA226",
+    "register": "DIE_ID",
+    "field": "ID",
+    "dimension": "reset",
+    "competing_evidence": "Table7-1给2260/2261按产地；Table7-15却全部POR=0。两处不同，不能仅用runtime跳过后声称无冲突。",
+    "candidate_main_rule": {
+      "main_reset_known_mask": "0x0",
+      "exclude_fixed_ID_reset": true,
+      "optional_summary_priority_expected_set": [
+        "0x2260",
+        "0x2261"
+      ],
+      "split_device_and_revision_fields": true
+    },
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-1 note (3)",
+        "section": null,
+        "excerpt": "Die COO: 2260 = USA or Japan, 2261 = USA 7.1.1 Configuration Register (00h) (Read/Write) Table 7-2. Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE DID: Device ID Bits Bits 4-15 Stores the device identification bits RID: Die Revision ID Bits Bit 0-3 Stores the device revision identification bits 28 Submit Document Feedback C"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "AFF",
+    "dimension": "conditional_write",
+    "competing_evidence": "p13说锁存AFF/ALERT直到CONFIG写或MASK读；p27说AFF锁存only MASK读清。CONFIG写清AFF保持来源冲突。",
+    "candidate_main_rule": {
+      "CONFIG_write_clear_AFF": "excluded main profile; text disagreement retained",
+      "MASK_read_clear_AFF": "supported when LEN=1"
+    },
+    "locators": [
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table": null,
+        "section": "§6.3.1.2",
+        "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read. The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every bus voltage co"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared following the next conversion that does not result in an Alert conditi"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "TCF",
+    "dimension": "reset",
+    "competing_evidence": "位图RW-1、寄存器0002及正文default high支持1；同一单比特的Table8-34 reset列却为11h，超范围。保留数值表达冲突。",
+    "candidate_main_rule": {
+      "main_por_expected_bit": 1,
+      "support": "register header, bitmap, default-high prose",
+      "table_literal": "11h",
+      "classification": "source representation conflict, not official erratum"
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-33",
+        "section": null,
+        "excerpt": "RW-1 RW-0 LEGEND: R/W = Read/Write; R = Read only; -n = value after reset Table 8-34. Mask/Enable Register Field Descriptions Bit Field Type Reset Description 15 Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation cha"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. Th"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA3221",
+    "register": "SHUNT_SUM_LIMIT",
+    "field": "SVL",
+    "dimension": "reset",
+    "competing_evidence": "标题/位图7FFE与表数据reset0冲突；仅SIGN15与Reserved0的0一致。",
+    "candidate_main_rule": {
+      "register_known_mask": "0x8001",
+      "expected_register": "0x0000",
+      "field_known_mask": "0x8000",
+      "exclude_register_mask": "0x7ffe",
+      "do_not_promote_16383_to_unconditional_fact": true
+    },
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Tables 8-31 / 8-32",
+        "section": null,
+        "excerpt": "Shunt-Voltage Sum-Limit Register (address = 0Eh) [reset = 7FFEh] This register contains the value that is compared to the Shunt-Voltage Sum register value following each completed cycle of all selected channels to detect"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-31",
+        "section": null,
+        "excerpt": "Table 8-31. Shunt-Voltage Sum-Limit Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 SIGN SVL13 SVL12 SVL11 SVL10 SVL9 SVL8 SVL7 SVL6 SVL5 SVL4 SVL3 SVL2 SVL1 SVL0 — RW-0 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 R"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-32",
+        "section": null,
+        "excerpt": "Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions Bit Field Type Reset Description 15 SIGN R 0h Sign bit. 0 = positive number 1 = negative number in twos complement format 14-1 SVL13-0 R 0h Shunt-voltage su"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA3221",
+    "register": "SHUNT_SUM_LIMIT",
+    "field": "SVL",
+    "dimension": "access",
+    "competing_evidence": "Table8-31全位RW；Table8-32同位R。整个0E的访问oracle隔离。SVL[15:1]还合并独立SIGN与SVL[14:1]。",
+    "candidate_main_rule": {
+      "exclude_all_write_and_ro_protection_oracles": true,
+      "mapped_address_still_valid": true,
+      "candidate_split_fields": [
+        "SIGN[15]",
+        "SVL[14:1]",
+        "Reserved[0]"
+      ]
+    },
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-31",
+        "section": null,
+        "excerpt": "Table 8-31. Shunt-Voltage Sum-Limit Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 SIGN SVL13 SVL12 SVL11 SVL10 SVL9 SVL8 SVL7 SVL6 SVL5 SVL4 SVL3 SVL2 SVL1 SVL0 — RW-0 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 R"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-32",
+        "section": null,
+        "excerpt": "Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions Bit Field Type Reset Description 15 SIGN R 0h Sign bit. 0 = positive number 1 = negative number in twos complement format 14-1 SVL13-0 R 0h Shunt-voltage su"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "INA3221",
+    "register": "SHUNT_SUM_LIMIT",
+    "field": "UNUSED",
+    "dimension": "access",
+    "competing_evidence": "Table8-31全位RW；Table8-32同位R。整个0E的访问oracle隔离。SVL[15:1]还合并独立SIGN与SVL[14:1]。",
+    "candidate_main_rule": {
+      "exclude_all_write_and_ro_protection_oracles": true,
+      "mapped_address_still_valid": true,
+      "candidate_split_fields": [
+        "SIGN[15]",
+        "SVL[14:1]",
+        "Reserved[0]"
+      ]
+    },
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-31",
+        "section": null,
+        "excerpt": "Table 8-31. Shunt-Voltage Sum-Limit Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 SIGN SVL13 SVL12 SVL11 SVL10 SVL9 SVL8 SVL7 SVL6 SVL5 SVL4 SVL3 SVL2 SVL1 SVL0 — RW-0 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 R"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-32",
+        "section": null,
+        "excerpt": "Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions Bit Field Type Reset Description 15 SIGN R 0h Sign bit. 0 = positive number 1 = negative number in twos complement format 14-1 SVL13-0 R 0h Shunt-voltage su"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LIS2DW12",
+    "register": "FIFO_CTRL",
+    "field": "FMODE",
+    "dimension": "trigger_completion",
+    "competing_evidence": "Table55的011写trigger deasserted，正文§5.3.4写trigger event；100表名bypass-to-continuous却终态写FIFO，而正文§5.3.5写continuous。原文歧义保留，不能称官方勘误。",
+    "candidate_main_rule": {
+      "static_legal_codes": [
+        0,
+        1,
+        3,
+        4,
+        6
+      ],
+      "exclude_event_mode_oracle": [
+        3,
+        4
+      ],
+      "FMODE_0_effect": "bypass resets FIFO content",
+      "conflict_id": "MOTION-LIS2-FIFO-MODE-SOURCE"
+    },
+    "locators": [
+      {
+        "pdf_page": 44,
+        "printed_page": "44",
+        "table_or_section": "Table55",
+        "excerpt": "then FIFO mode",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table_or_section": "§5.3.4",
+        "excerpt": "FIFO mode starts upon an internal trigger event",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "§5.3.5",
+        "excerpt": "starts in continuous mode upon an internal trigger event",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table_or_section": "§5.3.1",
+        "excerpt": "Bypass mode is also used to reset",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf",
+    "sha256": "5208623aa91c63a33be0e930518c20f5210c4eb76932350f35369687ae1d0dd5",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "D2CRIT",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x02",
+      "safe_condition": "conversion below T_CRIT",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "D2RHIGH",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x02",
+      "safe_condition": "conversion <= corresponding HIGH",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "LCRIT",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x02",
+      "safe_condition": "conversion below T_CRIT",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "LHIGH",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x02",
+      "safe_condition": "conversion <= corresponding HIGH",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D1CRIT",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x35",
+      "safe_condition": "conversion below T_CRIT",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D1RHIGH",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x35",
+      "safe_condition": "conversion <= corresponding HIGH",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D3CRIT",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x35",
+      "safe_condition": "conversion below T_CRIT",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D3RHIGH",
+    "dimension": "read_clear",
+    "competing_evidence": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+    "candidate_main_rule": {
+      "read_address": "0x35",
+      "safe_condition": "conversion <= corresponding HIGH",
+      "read_returns_preclear_data": true,
+      "no_new_conversion_between_reads": true,
+      "active_fault_clear_timing": "exclude"
+    },
+    "locators": [
+      {
+        "pdf_page": 10,
+        "printed_page": 9,
+        "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+        "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": 11,
+        "table_or_section": "§1.9",
+        "excerpt": "INT, so long as a temperature comparison does not signal a"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "MPU6050",
+    "register": "CONFIG",
+    "field": "DLPF_CFG",
+    "dimension": "legal_encoding",
+    "competing_evidence": "§4.3表7列Reserved（带Fs8kHz），§4.2却明确0 or7禁用DLPF。先只0–6，保留文档7含义冲突，不能宣称7无任何定义。",
+    "candidate_main_rule": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "excluded_values": [
+        7
+      ],
+      "exclusion_reason": "source internally ambiguous",
+      "conflict_id": "MOTION-MPU-DLPF7-SOURCE"
+    },
+    "locators": [
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table_or_section": "§4.3 DLPF table",
+        "excerpt": "RESERVED",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 12,
+        "printed_page": "12",
+        "table_or_section": "§4.2",
+        "excerpt": "DLPF_CFG = 0 or 7",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+    "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "MPU6050",
+    "register": "GYRO_CONFIG",
+    "field": "XG_ST",
+    "dimension": "access",
+    "competing_evidence": "§3 overview p.6对应high3bits为-，但§4.4 p.14具体位表/正文命名XG/YG/ZG_ST可写自检；须记录布局差异，不默认为官方勘误。",
+    "candidate_main_rule": {
+      "verified_access": "RW under detailed-register interpretation",
+      "interpretation": "detail-first provisional",
+      "conflict_id": "MOTION-MPU-GYRO-ST-LAYOUT"
+    },
+    "locators": [
+      {
+        "pdf_page": 6,
+        "printed_page": "6",
+        "table_or_section": "§3 overview GYRO_CONFIG",
+        "excerpt": "GYRO_CONFIG",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 14,
+        "printed_page": "14",
+        "table_or_section": "§4.4",
+        "excerpt": "XG_ST",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+    "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "MPU6050",
+    "register": "GYRO_CONFIG",
+    "field": "YG_ST",
+    "dimension": "access",
+    "competing_evidence": "§3 overview p.6对应high3bits为-，但§4.4 p.14具体位表/正文命名XG/YG/ZG_ST可写自检；须记录布局差异，不默认为官方勘误。",
+    "candidate_main_rule": {
+      "verified_access": "RW under detailed-register interpretation",
+      "interpretation": "detail-first provisional",
+      "conflict_id": "MOTION-MPU-GYRO-ST-LAYOUT"
+    },
+    "locators": [
+      {
+        "pdf_page": 6,
+        "printed_page": "6",
+        "table_or_section": "§3 overview GYRO_CONFIG",
+        "excerpt": "GYRO_CONFIG",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 14,
+        "printed_page": "14",
+        "table_or_section": "§4.4",
+        "excerpt": "XG_ST",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+    "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "MPU6050",
+    "register": "GYRO_CONFIG",
+    "field": "ZG_ST",
+    "dimension": "access",
+    "competing_evidence": "§3 overview p.6对应high3bits为-，但§4.4 p.14具体位表/正文命名XG/YG/ZG_ST可写自检；须记录布局差异，不默认为官方勘误。",
+    "candidate_main_rule": {
+      "verified_access": "RW under detailed-register interpretation",
+      "interpretation": "detail-first provisional",
+      "conflict_id": "MOTION-MPU-GYRO-ST-LAYOUT"
+    },
+    "locators": [
+      {
+        "pdf_page": 6,
+        "printed_page": "6",
+        "table_or_section": "§3 overview GYRO_CONFIG",
+        "excerpt": "GYRO_CONFIG",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 14,
+        "printed_page": "14",
+        "table_or_section": "§4.4",
+        "excerpt": "XG_ST",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+    "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TMP1075",
+    "register": "DIEID",
+    "field": "DID",
+    "dimension": "access",
+    "competing_evidence": "总表/正文/位图为RO，Table7-11 TYPE列R/W，属于来源冲突，不能称官方勘误。",
+    "candidate_main_rule": {
+      "main_policy": "exclude disputed write-access oracle",
+      "optional_hypothesis": "prose_and_diagram_priority_RO",
+      "variant": "non-N"
+    },
+    "locators": [
+      {
+        "pdf_page": 21,
+        "printed_page": "21",
+        "table": "Table7-5",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Figure7-16 / Table7-11",
+        "excerpt": ""
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TMP1075.pdf",
+    "sha256": "266c9a50a80b100884e9cf378b320ea51412023057fed8ba4fbdf85502340cf2",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "SOFT_RESET",
+    "dimension": "access",
+    "competing_evidence": "图7-14 bit1为R-0，表7-6续表为R/W并写明写1复位；属于同文件来源冲突。",
+    "candidate_main_rule": {
+      "diagram_access": "R",
+      "table_access": "R/W",
+      "recommended_separate_exploratory_profile": "table_text_priority",
+      "main_claim": "retain conflict; no official erratum asserted"
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Figure 7-14",
+        "section": null,
+        "excerpt": "Soft_Reset — R/W-0 R/W-0 R/W-1 R/W-0 R/W-0 R/W-0 R-0 R-0 Table 7-6. Configuration Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15 HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is highe"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "Software reset bit. When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TMP117",
+    "register": "CONFIG",
+    "field": "SOFT_RESET",
+    "dimension": "trigger_completion",
+    "competing_evidence": "表述写1触发2ms software reset且该位always读0；动作证据存在，但图访问冲突未解决。",
+    "candidate_main_rule": {
+      "table_text_profile": {
+        "write_value": 1,
+        "duration_ms": 2,
+        "read_as": 0
+      },
+      "main_profile": "conditional text interpretation; retain reset completion phase"
+    },
+    "locators": [
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit c"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TMP117",
+    "register": "DEVICE_ID",
+    "field": "ID",
+    "dimension": "reset",
+    "competing_evidence": "低12位DID=0x117一致；高4位Rev图R-x、表reset0且是器件修订号。",
+    "candidate_main_rule": {
+      "known_mask": "0x0fff",
+      "expected_register": "0x0117",
+      "exclude_mask": "0xf000",
+      "apply_mask_to_all_reset_and_snapshot_oracles": true
+    },
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Figure 7-22",
+        "section": null,
+        "excerpt": "Rev3 Rev2 Rev1 Rev0 DID11 DID10 DID9 DID8 R-x R-x R-x R-x R-0 R-0 R-0 R-1 7 6 5 4 3 2 1 0 DID7 DID6 DID5 DID4 DID3 DID2 DID1 DID0 R-0 R-0 R-0 R-1 R-0 R-1 R-1 R-1 Table 7-15. Device ID Register Field Descriptions BIT FIEL"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "Indicates the revision number. 11:0 DID[11:0] R 117h Indicates the device ID. 32 Submit Document Feedback Copyright © 2022 Texas Instruments Incorporated Product Folder Links: TMP117"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "ROM1",
+    "dimension": "reset",
+    "competing_evidence": "Table10整字节80h与详细R17[3:1] Reserved初值粒度冲突保留。",
+    "candidate_main_rule": {
+      "known_mask": "0x00",
+      "preserve_fresh_observed_value": true,
+      "do_not_assign_numeric_reset": true
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table 10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16 reset/POR row",
+        "excerpt": "Reserved"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+    "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "ROM1",
+    "dimension": "reserved_policy",
+    "competing_evidence": "R17[3:1] reserved不可改初值；R不是ROM，更无器件version功能。",
+    "candidate_main_rule": {
+      "preserve_write": true,
+      "exclude_fixed_reset_and_access_oracle": true,
+      "conflict_id": "TPS23861_R17_SOURCE_GRANULARITY_CONFLICT"
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table 10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16 reset/POR row",
+        "excerpt": "Reserved"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+    "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "RSV2",
+    "dimension": "reset",
+    "competing_evidence": "Table10整字节80h与详细R17[3:1] Reserved初值粒度冲突保留。",
+    "candidate_main_rule": {
+      "known_mask": "0x00",
+      "preserve_fresh_observed_value": true,
+      "do_not_assign_numeric_reset": true
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table 10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16 reset/POR row",
+        "excerpt": "Reserved"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+    "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "RSV2",
+    "dimension": "reserved_policy",
+    "competing_evidence": "R17[3:1] reserved不可改初值；R不是ROM，更无器件version功能。",
+    "candidate_main_rule": {
+      "preserve_write": true,
+      "exclude_fixed_reset_and_access_oracle": true,
+      "conflict_id": "TPS23861_R17_SOURCE_GRANULARITY_CONFLICT"
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table 10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16 reset/POR row",
+        "excerpt": "Reserved"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+    "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "RSV3",
+    "dimension": "reset",
+    "competing_evidence": "Table10整字节80h与详细R17[3:1] Reserved初值粒度冲突保留。",
+    "candidate_main_rule": {
+      "known_mask": "0x00",
+      "preserve_fresh_observed_value": true,
+      "do_not_assign_numeric_reset": true
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table 10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16 reset/POR row",
+        "excerpt": "Reserved"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+    "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "chip": "TPS23861",
+    "register": "GENERAL_MASK",
+    "field": "RSV3",
+    "dimension": "reserved_policy",
+    "competing_evidence": "R17[3:1] reserved不可改初值；R不是ROM，更无器件version功能。",
+    "candidate_main_rule": {
+      "preserve_write": true,
+      "exclude_fixed_reset_and_access_oracle": true,
+      "conflict_id": "TPS23861_R17_SOURCE_GRANULARITY_CONFLICT"
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table 10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16 reset/POR row",
+        "excerpt": "Reserved"
+      }
+    ],
+    "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+    "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "ROOT-TMP1075-ID-CONFLICT",
+    "chip": "TMP1075",
+    "targets": [
+      "DIEID.DID"
+    ],
+    "problem": "Table7-11 TYPE RW vs prose/map/diagram RO，旧注释称笔误/erratum缺官方证据",
+    "old": "official-looking erratum claim",
+    "candidate_rule": {
+      "conflict_status": "UNRESOLVED",
+      "mask_access_dispute": true,
+      "optional_RO_assumption": "prose+diagram priority"
+    },
+    "locators": [
+      {
+        "pdf_page": 21,
+        "printed_page": "21",
+        "table": "Table7-5",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Figure7-16 / Table7-11",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major",
+    "evidence_class": "SOURCE_CONFLICT",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "ROOT-BME-VERSION",
+    "chip": "BME280",
+    "targets": [
+      "source version"
+    ],
+    "problem": "封面1.24与正文1.23标识并存",
+    "old": "single revision label",
+    "candidate_rule": {
+      "source_lock": "full file SHA256",
+      "retain_cover_and_footer": true
+    },
+    "locators": [
+      {
+        "pdf_page": 1,
+        "printed_page": "1",
+        "table": "cover",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "footer",
+        "excerpt": ""
+      }
+    ],
+    "severity": "minor",
+    "evidence_class": "SOURCE_CONFLICT",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "TMP117_SOFT_RESET_SOURCE_CONFLICT",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.SOFT_RESET"
+    ],
+    "problem": "图R/tableR/W冲突不得称已官方确认勘误",
+    "old": "proofread_record erratum_found says manual erratum",
+    "candidate_rule": {
+      "diagram_access": "R",
+      "table_access": "R/W",
+      "recommended_separate_exploratory_profile": "table_text_priority",
+      "main_claim": "retain conflict; no official erratum asserted"
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Figure 7-14",
+        "section": null,
+        "excerpt": "Soft_Reset — R/W-0 R/W-0 R/W-1 R/W-0 R/W-0 R/W-0 R-0 R-0 Table 7-6. Configuration Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15 HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is highe"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "Software reset bit. When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "TMP117_REV_RESET_CONFLICT",
+    "chip": "TMP117",
+    "targets": [
+      "DEVICE_ID.ID"
+    ],
+    "problem": "保留既有高4bit来源冲突和统一mask",
+    "old": "candidate ID fullreset0117",
+    "candidate_rule": {
+      "known_mask": "0x0fff",
+      "expected_register": "0x0117",
+      "exclude_mask": "0xf000",
+      "apply_mask_to_all_reset_and_snapshot_oracles": true
+    },
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Figure 7-22",
+        "section": null,
+        "excerpt": "Rev3 Rev2 Rev1 Rev0 DID11 DID10 DID9 DID8 R-x R-x R-x R-x R-0 R-0 R-0 R-1 7 6 5 4 3 2 1 0 DID7 DID6 DID5 DID4 DID3 DID2 DID1 DID0 R-0 R-0 R-0 R-1 R-0 R-1 R-1 R-1 Table 7-15. Device ID Register Field Descriptions BIT FIEL"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "Indicates the revision number. 11:0 DID[11:0] R 117h Indicates the device ID. 32 Submit Document Feedback Copyright © 2022 Texas Instruments Incorporated Product Folder Links: TMP117"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "existing v2 DEVICE_ID known_mask0FFF already handles bounded reset",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "TMP117_EEPROM2_RESET_SOURCE_CONFLICT",
+    "chip": "TMP117",
+    "targets": [
+      "EEPROM2"
+    ],
+    "problem": "标题0000 vs 总表/详细表xxxx及图R/W-x",
+    "old": "runtime0 placeholder hides conflicting header",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-12",
+        "section": null,
+        "excerpt": "Table 7-12. EEPROM2 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§7.6.8 title",
+        "excerpt": "[reset = 0000h] This register function the same as the EEPROM1 register. Return to Register Map. Figure 7-19. EEPROM2 Register 15 14 13 12 11 10 9 8 D15 D14 D13 D12 D11 D10 D9 D8 R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3",
+        "section": null,
+        "excerpt": "EEPROM2 EEPROM2 register Go 07h R/W 0000h(1) Temp_Offset Temperature offset register Go 08h R/W xxxxh(1) EEPROM3 EEPROM3 register Go 0Fh R 0117h Device_ID Device ID register Go (1) This value is stored in Electrically-Er"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "INA219_CNVR_CLEAR_SOURCE_CONFLICT",
+    "chip": "INA219",
+    "targets": [
+      "BUS_VOLTAGE.CNVR"
+    ],
+    "problem": "p10Status/convert pin vs p23Power/newMODE应登记冲突",
+    "old": "CNVR no read_action and static0",
+    "candidate_rule": {
+      "main_profile": "source conflict retained; read-clear excluded until policy interpretation frozen",
+      "optional_register_detail_priority": "reading POWER clears BUS_VOLTAGE.CNVR",
+      "not_same_register_read_clear": true,
+      "require_asserted_CNVR_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Power Measurement Current and bus voltage are converted at different points in time, depending on the resolution and averagin"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "source_sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "manual_version": "SBOS448G, August 2008, revised December 2015",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "INA226_AFF_CONFIG_CLEAR_SOURCE_CONFLICT",
+    "chip": "INA226",
+    "targets": [
+      "MASK_ENABLE.AFF"
+    ],
+    "problem": "p13CONFIG写清 vs p27onlyMASK读清未解决",
+    "old": "not registered",
+    "candidate_rule": {
+      "CONFIG_write_clear_AFF": "excluded main profile; text disagreement retained",
+      "MASK_read_clear_AFF": "supported when LEN=1"
+    },
+    "locators": [
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table": null,
+        "section": "§6.3.1.2",
+        "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read. The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every bus voltage co"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared following the next conversion that does not result in an Alert conditi"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "INA226_DIE_ID_RESET_SOURCE_CONFLICT",
+    "chip": "INA226",
+    "targets": [
+      "DIE_ID.ID"
+    ],
+    "problem": "Table7-15零POR与Table7-1 2260/61不一致",
+    "old": "runtime2260 variants only",
+    "candidate_rule": {
+      "main_reset_known_mask": "0x0",
+      "exclude_fixed_ID_reset": true,
+      "optional_summary_priority_expected_set": [
+        "0x2260",
+        "0x2261"
+      ],
+      "split_device_and_revision_fields": true
+    },
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-1 note (3)",
+        "section": null,
+        "excerpt": "Die COO: 2260 = USA or Japan, 2261 = USA 7.1.1 Configuration Register (00h) (Read/Write) Table 7-2. Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE DID: Device ID Bits Bits 4-15 Stores the device identification bits RID: Die Revision ID Bits Bit 0-3 Stores the device revision identification bits 28 Submit Document Feedback C"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "INA3221_0E_SOURCE_CONFLICT",
+    "chip": "INA3221",
+    "targets": [
+      "SHUNT_SUM_LIMIT.SVL"
+    ],
+    "problem": "维持0E reset/access来源冲突，不用图优先当事实",
+    "old": "SVL candidate16383",
+    "candidate_rule": {
+      "register_known_mask": "0x8001",
+      "expected_register": "0x0000",
+      "field_known_mask": "0x8000",
+      "exclude_register_mask": "0x7ffe",
+      "do_not_promote_16383_to_unconditional_fact": true
+    },
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Tables 8-31 / 8-32",
+        "section": null,
+        "excerpt": "Shunt-Voltage Sum-Limit Register (address = 0Eh) [reset = 7FFEh] This register contains the value that is compared to the Shunt-Voltage Sum register value following each completed cycle of all selected channels to detect"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-31",
+        "section": null,
+        "excerpt": "Table 8-31. Shunt-Voltage Sum-Limit Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 SIGN SVL13 SVL12 SVL11 SVL10 SVL9 SVL8 SVL7 SVL6 SVL5 SVL4 SVL3 SVL2 SVL1 SVL0 — RW-0 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 R"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-32",
+        "section": null,
+        "excerpt": "Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions Bit Field Type Reset Description 15 SIGN R 0h Sign bit. 0 = positive number 1 = negative number in twos complement format 14-1 SVL13-0 R 0h Shunt-voltage su"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "existing v2 knownmask8001/exclude_writes already handles central conflict",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "INA3221_TCF_SOFT_RESET_AND_LITERAL",
+    "chip": "INA3221",
+    "targets": [
+      "MASK_ENABLE.TCF"
+    ],
+    "problem": "soft reset重新初始化遗漏；reset列11h另有单比特表达冲突",
+    "old": "TCF desc only powercycle clear",
+    "candidate_rule": {
+      "no_read_clear": true,
+      "reinitialize_event": [
+        "power cycle",
+        "software reset"
+      ],
+      "do_not_keep_forever_constant_1": true
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "unless the power is recycled or a software reset is issued. The default state for the timing control alert flag is high. 34 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: I"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "INA3221_TCF_RESET_LITERAL_CONFLICT",
+    "chip": "INA3221",
+    "targets": [
+      "MASK_ENABLE.TCF"
+    ],
+    "problem": "11h超字段范围与RW1/0002冲突",
+    "old": "not registered",
+    "candidate_rule": {
+      "main_por_expected_bit": 1,
+      "support": "register header, bitmap, default-high prose",
+      "table_literal": "11h",
+      "classification": "source representation conflict, not official erratum"
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-33",
+        "section": null,
+        "excerpt": "RW-1 RW-0 LEGEND: R/W = Read/Write; R = Read only; -n = value after reset Table 8-34. Mask/Enable Register Field Descriptions Bit Field Type Reset Description 15 Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation cha"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. Th"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  },
+  {
+    "id": "TPS23861_R17_SOURCE_GRANULARITY_CONFLICT",
+    "chip": "TPS23861",
+    "targets": [
+      "GENERAL_MASK.RSV3",
+      "GENERAL_MASK.RSV2",
+      "GENERAL_MASK.ROM1"
+    ],
+    "problem": "总览80h与详细Reserved初值粒度冲突保持；ROM1功能是误释。",
+    "old": "numeric0 / RO / ROM revision",
+    "candidate_rule": {
+      "known_reset_mask": "0xF1",
+      "preserve_write_mask": "0x0E",
+      "exclude_access_mask": "0x0E",
+      "source_conflict": "UNRESOLVED",
+      "not_official_erratum": true
+    },
+    "locators": [
+      {
+        "pdf_page": 45,
+        "printed_page": 45,
+        "table_or_section": "Table10",
+        "excerpt": "1000,0000"
+      },
+      {
+        "pdf_page": 63,
+        "printed_page": 63,
+        "table_or_section": "§7.5.16",
+        "excerpt": "Reserved"
+      }
+    ],
+    "severity": "BLOCKER",
+    "status": "UNRESOLVED",
+    "official_erratum": false
+  }
+]

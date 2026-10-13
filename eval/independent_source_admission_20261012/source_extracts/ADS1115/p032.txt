@@ -1,0 +1,65 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 9.1.7 Quick-Start Guide
+
+ This section provides a brief example of ADS111x communications. Hardware for this design includes: one
+ADS111x configured with an I2C address of 1001000b; a microcontroller with an I2C  interface; discrete
+components such as resistors, capacitors, and serial connectors; and a 2-V to 5V power supply. Figure 9-5
+shows the basic hardware configuration.
+The ADS111x communicate with the controller (microcontroller) through an I2C interface. The controller provides
+a clock signal on the SCL pin and data are transferred using the SDA pin. The ADS111x never drive the SCL pin.
+ For information on programming and debugging the microcontroller being used, see the device-specific product
+ data sheet.
+
+The first byte sent by the controller is the ADS111x address, followed by the R/W bit that instructs the ADS111x
+ to listen for a subsequent byte. The second byte is the Address Pointer register byte. The third and fourth bytes
+ sent from the controller are written to the register indicated in register address pointer bits P[1:0]. See Figure 7-9
+and Figure 7-10 for read and write operation timing diagrams, respectively. All read and write transactions with
+ the ADS111x must be preceded by a START condition, and followed by a STOP condition.
+
+ For example, to write to the configuration register to set the ADS111x to continuous-conversion mode and then
+ read the conversion result, send the following bytes in this order:
+
+ 1.  Write to Config register:
+      •   First byte: 10010000b (first 7-bit I2C address followed by a low R/W bit)
+      •  Second byte: 00000001b (points to Config register)
+      •  Third byte: 10000100b (MSB of the Config register to be written)
+      •  Fourth byte: 10000011b (LSB of the Config register to be written)
+ 2.  Write to Address Pointer register:
+      •   First byte: 10010000b (first 7-bit I2C address followed by a low R/W bit)
+      •  Second byte: 00000000b (points to Conversion register)
+ 3.  Read Conversion register:
+      •   First byte: 10010001b (first 7-bit I2C address followed by a high R/W bit)
+      •  Second byte: the ADS111x responds with the MSB of the Conversion register.
+      •  Third byte: the ADS111x responds with the LSB of the Conversion register.
+
+                                                                                  3.3 V
+                                              ADS111x
+                                               VDD
+                                                                           0.1 µF
+                                             GND                      3.3 V         I2C-Capable Controller
+                                                                                            MSP430F2002)
+                                     AIN0
+
+                                     AIN1                                                                                            3.3 V
+                                              ADDR       10 k     10 k
+                       AIN2 (ADS1115 Only)
+                                                   SCL                           SCL (P1.6)    VDD
+                       AIN3 (ADS1115 Only)                                                                                    0.1 µF
+                                                 SDA                         SDA (P1.7)    GND
+
+                                                  ALERT
+                                                   (ADS1114/5 Only)
+
+                                                                               JTAG                       Serial/UART
+
+                              Figure 9-5. Basic Hardware Configuration
+
+
+
+
+
+32    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

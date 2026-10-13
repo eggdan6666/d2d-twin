@@ -1,0 +1,84 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.5  Block Diagram
+
+
+
+
+            1
+   CLKIN
+            22          CLOCK       Clock        MPU-60X0
+ CLKOUT
+
+
+                Self
+                 test         X Accel       ADC                            Interrupt                                        12   INT
+                                                                              Status
+                                                                              Register
+                                                                                                                      8
+                                                                                                                                                  (/CS)
+                Self
+                       Y Accel       ADC                                               Slave I2C and               9   AD0 / (SDO)                 test
+                                                                                                SPI Serial                 23                                                                       FIFO
+                                                                                                                Interface                  SCL / (SCLK)
+                                                                                                                      24
+                                                                                                 SDA / (SDI)
+                Self                         Z Accel       ADC                         Config                 test
+
+                                                                                                                      7
+                                                                                                      AUX_CL                                                                                                                                                                Signal               Registers             Master I2C        Serial
+                Self                                                                                             Serial         Interface
+                 test         X Gyro       ADC                                                     Interface       Bypass      6
+                                                                     Sensor                         Mux          AUX_DA
+                                                                            Registers
+                                                                                                                      11                Self                                                                                                                                                                                                                              Conditioning                                                       FSYNC
+                 test         Y Gyro       ADC
+                                                                            Factory
+                                                                                 Calibration                                                                                                                   Digital Motion
+                                                                                              Processor
+                Self
+                test          Z Gyro        ADC                                            (DMP)
+
+
+
+
+                     Temp Sensor     ADC
+
+
+
+                          Charge
+                                                                                                   Bias & LDO
+                      Pump
+
+                       20                                                             13       18       10       8
+
+               CPOUT                                             VDD    GND   REGOUT [VLOGIC]
+
+
+                      Note:  Pin names in round brackets ( ) apply only to MPU-6000
+                             Pin names in square brackets [ ] apply only to MPU-6050
+
+
+7.6  Overview
+The MPU-60X0 is comprised of the following key blocks and functions:
+
+       Three-axis MEMS rate gyroscope sensor with 16-bit ADCs and signal conditioning
+       Three-axis MEMS accelerometer sensor with 16-bit ADCs and signal conditioning
+       Digital Motion Processor (DMP) engine
+       Primary I2C and SPI (MPU-6000 only) serial communications interfaces
+       Auxiliary I2C serial interface for 3rd party magnetometer & other sensors
+       Clocking
+       Sensor Data Registers
+      FIFO
+       Interrupts
+       Digital-Output Temperature Sensor
+       Gyroscope & Accelerometer Self-test
+       Bias and LDO
+      Charge Pump
+
+
+
+                                           24 of 52

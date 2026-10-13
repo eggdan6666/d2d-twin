@@ -1,0 +1,50 @@
+Bosch Sensortec | BME280 Data sheet                                            38 | 60
+
+7. Pin-out and connection diagram
+7.1  Pin-out
+
+
+    8                                 1             1                                 8
+   VDD                       GND        GND                                VDD
+                                                                      Pin 1
+                                                                marker
+
+    7                                 2             2                                 7
+  GND                        CSB        CSB                       GND
+              TOP VIEW                             BOTTOM VIEW
+                 (pads not visible)                                        (pads visible)
+    6                                 3             3                                 6
+   VDDIO                              SDI           SDI                                     VDDIO
+
+
+                   Vent hole
+    5                                 4             4                                 5
+  SDO                        SCK        SCK                       SDO
+
+
+Figure 16: Pin-out top and bottom view
+
+Note: The pin numbering of BME280 is performed in the untypical clockwise direction when seen in top
+view and counter-clockwise when seen in bottom view.
+
+Table 35: Pin description
+
+ Pin  Name    I/O Type       Description              Connect to
+                                             SPI 4W    SPI 3W       I²C
+  1   GND    Supply         Ground               GND
+  2   CSB        In          Chip select      CSB     CSB        VDDIO
+  3    SDI      In/Out       Serial data input      SDI    SDI/SDO    SDA
+  4   SCK        In         Serial clock input    SCK     SCK      SCL
+  5   SDO     In/Out      Serial data output    SDO     DNC    GND for
+                                                                                   default
+                                                                     address
+  6     VDDIO    Supply       Digital / Interface                   VDDIO
+                                  supply
+  7   GND    Supply         Ground               GND
+  8     VDD     Supply      Analog supply                  VDD
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

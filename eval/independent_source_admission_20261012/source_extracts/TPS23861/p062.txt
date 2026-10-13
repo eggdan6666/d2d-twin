@@ -1,0 +1,72 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+The selection is as following:
+
+                   TSTART [1:0]                                   NOMINAL tSTART (ms)
+
+                           00                                                       60
+
+                           01                                                       30
+
+                           10                                                      120
+
+                           11                                                      Reserved
+
+TICUT[1:0]: ICUT fault timing, which is the overcurrent time duration before port turn off (tOVLD).
+This timer is loaded with its maximum count corresponding to tOVLD after expiration of the tSTART period; the timer
+counts down when the port current exceeds ICUT. If the ICUT timer counts down to zero, the port is powered off.
+After the port is powered off the cool-down period commences. The cool-down period is set with the CLDN field
+in the Cool Down/Gate Drive Register. During the cool-down period the port  will not engage in detection,
+classification, or powered-up operation. When the port is powered up and while the port current is below ICUT,
+the same counter increments at a rate 1/16th of the count-down rate (independent of the setting in the CLDN
+field). The counter does not increment past the maximum count corresponding to the programmed TICUT value.
+
+
+                                  NOTE
+           At the end of cool-down cycle, when in Semi-Auto or Auto Mode, a detection cycle is
+           automatically restarted if the detect enable bit is set.
+
+
+                                  NOTE
+                  If ILIM and ICUT are set to same value,  it is a race condition between ILIM and ICUT in
+         TPS23861 and it depends on the firmware as to the winner.
+
+
+The selection is as following:
+
+                          TICUT[1:0]                                    NOMINAL tOVLD (ms)
+
+                           00                                                       60
+
+                           01                                                       30
+
+                           10                                                      120
+
+                           11                                                      240
+
+TDIS[1:0]: Disconnect delay, which is the time to turn off a port once there is a disconnect condition.
+
+After port power on and the completion of the tSTART period the TDIS counter is started when the port current
+drops below the disconnect threshold established in the DCTHn fields, and the counter is reset each time the
+current goes continuously higher than the disconnect threshold  for 13% of tMPDO. The counter does not
+decrement below zero. The selection is as following:
+
+                                       TDIS[1:0]                                     NOMINAL tMPDO (ms)
+
+                  0                                     0                                    360
+
+                  0                                     1                                    90
+
+                  1                                     0                                    180
+
+                  1                                     1                                    720
+
+
+
+
+
+62     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

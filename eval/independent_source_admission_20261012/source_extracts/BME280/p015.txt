@@ -1,0 +1,40 @@
+Bosch Sensortec | BME280 Data sheet                                            15 | 60
+
+
+The modes will be explained in detail in chapters 3.3.2 (sleep mode), 3.3.3 (forced mode) and 3.3.4
+(normal mode).
+3.3.1  Sensor mode transitions
+The supported mode transitions are shown in Figure 3. If the device is currently performing a
+measurement, execution of mode switching commands is delayed until the end of the currently
+running measurement period. Further mode change commands or other write commands to the
+register ctrl_hum are ignored until the mode change command has been executed. Mode transitions
+other than the ones shown below are tested for stability but do not represent recommended use of the
+device.
+
+
+              Power OFF
+                (VDD or VDDIO = 0)
+                                                      Normal                      VDD and VDDIO                                                                          (cyclic standby and                          supplied                        =00      measurement periods)                                   Mode[1:0]                         =11
+                                                           Mode[1:0] = 01                                    Mode[1:0]                  Sleep
+                                      Mode[1:0] = 01      (one measurementForced
+                                                                        period)
+
+Figure 3: Sensor mode transition diagram
+
+3.3.2  Sleep mode
+Sleep mode is entered by default after power on reset. In sleep mode, no measurements are
+performed and power consumption (IDDSM) is at a minimum. All registers are accessible; Chip-ID and
+compensation coefficients can be read. There are no special restrictions on interface timings.
+3.3.3  Forced mode
+In forced mode, a single measurement is performed in accordance to the selected measurement and
+filter options. When the measurement is finished, the sensor returns to sleep mode and the
+measurement results can be obtained from the data registers. For a next measurement, forced mode
+needs to be selected again. This is similar to BMP180 operation. Using forced mode is recommended
+for applications which require low sampling rate or host-based synchronization. The timing diagram is
+shown below.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

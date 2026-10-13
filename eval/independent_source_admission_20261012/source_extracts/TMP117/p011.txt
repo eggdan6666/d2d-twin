@@ -1,0 +1,58 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+7 Detailed Description
+ 7.1 Overview
+
+The TMP117 is a digital output temperature sensor designed for thermal-management and thermal-protection
+ applications. The TMP117 is two-wire, SMBus, and I2C interface-compatible. The device is specified over an
+ ambient air operating temperature range of –55 °C to 150 °C. Figure 7-1 shows a block diagram of the TMP117.
+
+ 7.2 Functional Block Diagrams
+
+                                                           V+
+
+
+
+
+
+        ADD0
+
+         SCL
+                                                      Serial             Register
+         SDA                                 Interface          Bank
+
+
+
+                                                                                                  ALERT
+                                           EEPROM
+
+
+                                                                                           Oscillator        Control
+                                                                                                Logic
+
+
+                                      Internal
+                               Thermal
+                           BJT
+
+
+                                   Temperature
+                                     Sensor            ADC
+                                               Circuitry
+
+
+
+
+
+                                                                                       Copyright © 2017, Texas Instruments Incorporated                                                GND
+
+                                  Figure 7-1. Internal Block Diagram
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    11
+
+                                                  Product Folder Links: TMP117

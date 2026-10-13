@@ -1,0 +1,72 @@
+78
+TPS23861
+SLUSBX9I –MARCH 2014–REVISED JULY 2019
+www.ti.com
+Product Folder Links: TPS23861
+Submit Documentation Feedback
+Copyright © 2014–2019, Texas Instruments Incorporated
+7.5.31
+I2C Watchdog Register
+Command = 42h with 1 Data Byte, R/W
+BITS
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT NAME
+IWD[3:0]
+WDS
+RESET or POR VALUE
+1
+0
+1
+1
+0
+The I2C watchdog timer monitors the I2C clock line in order to prevent hung software situations that could leave
+ports in a hazardous state. The timer can be reset by either edge on SCL input. If the watchdog timer times out,
+the WDS bit is set. Depending on the value of IWD, all ports may be powered down. The nominal watchdog time-
+out period is 2 seconds.
+When the ports are powered down due to a watchdog event, the corresponding bits are cleared in the Detection
+Event Register (CLSCn, DETn), Fault Event register (DISFn, ICUTn), Start/ILIM Event Register (STRTn), Port n
+Status Registers (Class Pn, Detect Pn) and Detect/Class Enable Register (CLEn, DETEn).
+The corresponding PEn and PGn bits of the Power Status Register are also updated accordingly.
+Bit Descriptions
+IWD3 - IWD0: I2C Watchdog disable. When equal to 1011, the watchdog is masked. Otherwise, it is umasked
+and the watchdog is operational.
+WDS: I2C Watchdog timer status, valid even if the watchdog is masked. When set, it means that the watchdog
+timer has expired without any activity on I2C clock line. Writing 0 at WDS location clears it.
+NOTE
+when the watchdog timer expires and if the watchdog is unmasked, all ports are also
+turned off.
+When the ports are turned OFF due to I2C watchdog, the corresponding bits in Detection Event Register
+(CLSCn, DETCn), Fault Event Register (DISFn, ICUTn), Start Event Register (STRTn), Port n Status register
+(Class Pn, Detect Pn), Detect/Class Enable Register (CLEn, DETEn) and Power-On Fault Register (PFn) are
+also cleared. The corresponding PGCn and PECn bits of Power Event register is set if there is a change. The
+corresponding PEn and PGn bits of Power Status Register are updated accordingly.
+7.5.32
+Device ID Register
+Command = 43h with 1 Data Byte, R/W
+BITS
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+BIT NAME
+DID
+SR
+RESET or POR VALUE
+1
+1
+1
+SR[4:0]
+Bit Descriptions
+DID: Device ID number (111).
+SR: Silicon Revision number.

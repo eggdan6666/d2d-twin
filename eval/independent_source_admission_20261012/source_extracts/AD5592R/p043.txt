@@ -1,0 +1,46 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+Table 21. Bit Descriptions for CONFIG_READ_AND_LDAC (Continued)
+Bits            Bit Name              Description                                                                                              Default Value
+
+6          REG_RD_EN          Enable Configuration Register readback. Note that the LDAC mode bits are always used regardless of the       0x0
+                           REG_RD_EN bit.
+                                            0: No readback is initiated.
+                                            1: REG_RD bits select which register is read back. REG_RD_EN automatically clears when the read is
+                                       complete.
+[5:2]        REG_RD                         If REG_RD_EN bit is 1, REG_RD bits determine which register is to be read back.                           0x0
+                                     0000: NOP.
+                                     0001: DAC readback.
+                                     0010: ADC sequence.
+                                      0011: General-purpose configuration.
+                                     0100: ADC pin configuration.
+                                     0101: DAC pin configuration.
+                                      0110: Pull-down configuration.
+                                       0111: LDAC configuration.
+                                     1000: GPIO write configuration.
+                                     1001: GPIO write data.
+                                     1010: GPIO read configuration.
+                                      1011: Power-down and reference control.
+                                      1100: Open-drain configuration.
+                                      1101: Three-state pin configuration.
+                                         1111: Software reset.
+[1:0]        LDAC_MODE          Determines how data written to an input register of a DAC is handled.                                     0x0
+                                        00: Data written to an input register is immediately copied to a DAC register, and the DAC output updates.
+                                        01: Data written to an input register is not copied to a DAC register. The DAC output is not updated.
+                                        10: Data in the input registers is copied to the corresponding DAC registers. When the data has been
+                                            transferred, the DAC outputs are updated simultaneously.
+
+
+GPIO Write Configuration Register
+
+Name: GPIO_CONFIG
+
+Selects which pins are general-purpose outputs. This register is used to set I/O7 as a BUSY output.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 43 of 54

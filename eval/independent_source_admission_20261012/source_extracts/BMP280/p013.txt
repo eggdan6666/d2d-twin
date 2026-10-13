@@ -1,0 +1,54 @@
+Bosch Sensortec | BMP280 Data sheet                                                          13 | 49
+
+
+        3.3.2  Temperature measurement
+       Temperature measurement can be enabled or skipped. Skipping the measurement could be useful to
+       measure pressure extremely rapidly. When enabled, several oversampling options exist. Each
+        oversampling step reduces noise and increases the output resolution by one bit, which is stored in the
+      XLSB data register 0xFC. Enabling/disabling the temperature measurement and oversampling setting
+        are selected through the osrs_t[2:0] bits in control register 0xF4.
+
+                                           Table 5: osrs_t settings
+               osrs_t[2:0]             Temperature oversampling               Typical temperature
+                                                                                     resolution
+
+               000                          Skipped                             –
+                                             (output set to 0x80000)
+               001                          ×1                         16 bit / 0.0050 °C
+               010                          ×2                         17 bit / 0.0025 °C
+                011                          ×4                         18 bit / 0.0012 °C
+               100                          ×8                         19 bit / 0.0006 °C
+             101, 110, 111                     ×16                         20 bit / 0.0003 °C
+
+              It is recommended to base the value of osrs_t on the selected value of osrs_p as per Table 4.
+       Temperature oversampling above ×2 is possible, but will not significantly improve the accuracy of the
+        pressure output any further. The reason for this is that the noise of the compensated pressure value
+       depends more on the raw pressure than on the raw temperature noise. Following the recommended
+         setting will result in an optimal noise-to-power ratio.
+
+        3.3.3  IIR filter
+       The environmental pressure is subject to many short-term changes, caused e.g. by slamming of a
+        door or window, or wind blowing into the sensor. To suppress these disturbances in the output data
+        without causing additional interface traffic and processor work load, the BMP280 features an internal
+         IIR filter. It effectively reduces the bandwidth of the output signals6. The output of a next measurement
+        step is filter using the following formula:
+
+                                   data _ filtered _ old ⋅ ( filter _ coefficient − )1 + data _ ADC                    data _ filtered =
+                                                                          filter _ coefficient
+
+       where data_filtered_old is the data coming from the previous acquisition, and data_ADC is the data
+       coming from the ADC before IIR filtering.
+
+       The IIR filter can be configured using the filter[2:0] bits in control register 0xF5 with the following
+         options:
+
+
+
+
+
+             6 Since most pressure sensors do not sample continuously, filtering can suffer from signals with a frequency higher than the
+         sampling rate of the sensor. E.g. environmental fluctuations caused by windows being opened and closed might have a frequency
+        <5 Hz. Consequently, a sampling rate of ODR = 10 Hz is sufficient to obey the Nyquist theorem.
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

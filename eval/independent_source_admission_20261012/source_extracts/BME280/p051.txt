@@ -1,0 +1,31 @@
+Bosch Sensortec | BME280 Data sheet                                            51 | 60
+
+9. Appendix B: Measurement time and current calculation
+
+In this chapter, formulas are given to calculate measurement rate, filter bandwidth and current
+consumption in different settings.
+9.1  Measurement time
+The active measurement time depends on the selected values for humidity, temperature and pressure
+oversampling and can be calculated in milliseconds using the formulas below.
+                   𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚,𝑡𝑡𝑡𝑡𝑡𝑡= 1 + [2 ⋅𝑇𝑇_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑡𝑡≠0 + [2 ⋅𝑃𝑃_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.5]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑝𝑝≠0                + [2 ⋅𝐻𝐻_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.5]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_ℎ≠0          𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚,𝑚𝑚𝑚𝑚𝑚𝑚= 1.25 + [2.3 ⋅𝑇𝑇_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑡𝑡≠0 + [2.3 ⋅𝑃𝑃_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.575]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_𝑝𝑝≠0             + [2.3 ⋅𝐻𝐻_𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜+ 0.575]𝑜𝑜𝑜𝑜𝑜𝑜𝑜𝑜_ℎ≠0For example, using temperature oversampling ×1, pressure oversampling ×4 and no humidity
+measurement, the measurement time is:
+                                            𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚,𝑡𝑡𝑡𝑡𝑡𝑡= 1 + [2 ⋅1] + [2 ⋅4 + 0.5] + [0] = 11.5 ms                               𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚,𝑚𝑚𝑚𝑚𝑚𝑚= 1.25 + [2.3 ⋅1] + [2.3 ⋅4 + 0.575] + [0] = 13.325 ms
+9.2  Measurement rate in forced mode
+In forced mode, the measurement rate depends on the rate at which it is forced by the master. The
+highest possible frequency in Hz can be calculated as:
+                                             1000                                                              𝑂𝑂𝑂𝑂𝑅𝑅𝑚𝑚𝑚𝑚𝑚𝑚,𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓=                                                                                                                    𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚If measurements are forced faster than they can be executed, the data rate saturates at the attainable
+data rate. For the example above with 11.5 ms measurement time, the typically achievable output data
+rate would be:
+                                          1000                                                         𝑂𝑂𝑂𝑂𝑅𝑅𝑚𝑚𝑚𝑚𝑚𝑚,𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓𝑓=    = 87 Hz9.3  Measurement rate in normal mode     11.5
+The measurement rate in normal mode depends on the measurement time and the standby time and
+can be calculated in Hz using the following formula:
+                                              1000                                                   𝑂𝑂𝑂𝑂𝑅𝑅𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛_𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚=                                                                                       𝑡𝑡𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚+ 𝑡𝑡𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠𝑠The accuracy of tstandby is described in the specification parameter Δtstandby. For the example above with
+11.5 ms measurement time, setting normal mode with a standby time of 62.5 ms would result in a data
+rate of:
+                                         1000                                                𝑂𝑂𝑂𝑂𝑅𝑅𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛𝑛_𝑚𝑚𝑚𝑚𝑚𝑚𝑚𝑚=       = 13.51 Hz                                              11.5 + 62.5
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

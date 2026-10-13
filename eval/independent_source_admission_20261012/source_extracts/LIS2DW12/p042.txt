@@ -1,0 +1,71 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.10    OUT_T (26h)
+            Temperature output register in 8-bit resolution (R)
+
+
+                                                   Table 43. OUT_T register
+
+             TEMP7      TEMP6      TEMP5      TEMP4      TEMP3      TEMP2      TEMP1      TEMP0
+
+
+                                             Table 44. OUT_T register description
+
+                               Temperature sensor output data.
+
+              TEMP[7:0]      The value is expressed as two’s complement sign. Sensitivity = 1°C/LSB
+
+                            0 LSB represents T = 25°C ambient.
+
+8.11    STATUS (27h)
+             Status register (R)
+
+
+                                                  Table 45. STATUS register
+
+                                    SLEEP_    DOUBLE_    SINGLE_
+              FIFO_THS     WU_IA                                              6D_IA        FF_IA      DRDY
+                                      STATE       TAP        TAP
+
+
+                                            Table 46. STATUS register description
+
+                           FIFO threshold status flag
+            FIFO_THS
+                                        (0: FIFO filling is lower than threshold level; 1: FIFO filling is equal to or higher than the threshold level.)
+
+                           Wake-up event detection status
+            WU_IA
+                                        (0: wake-up event not detected; 1: wake-up event detected)
+
+                              Sleep event status.
+            SLEEP_STATE
+                                        (0: sleep event not detected; 1: sleep event detected)
+
+                                Double-tap event status
+           DOUBLE_TAP
+                                        (0: double-tap event not detected; 1: double-tap event detected)
+
+                                  Single-tap event status
+            SINGLE_TAP
+                                        (0: single-tap event not detected; 1: single-tap event detected)
+
+                             Source of change in position portrait/landscape/face-up/face-down
+             6D_IA
+                                        (0: no event detected; 1: a change in position detected)
+
+                                      Free-fall event detection status
+              FF_IA
+                                        (0: free-fall event not detected; 1: free-fall event detected)
+
+                               Data-ready status
+           DRDY
+                                        (0: not ready; 1: X-, Y- and Z-axis new data available)
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 42/65

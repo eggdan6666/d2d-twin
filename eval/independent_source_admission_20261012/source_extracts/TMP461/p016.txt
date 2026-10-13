@@ -1,0 +1,81 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+Programming (continued)
+
+                               Table 3. TMP461 Slave Address Options
+
+                                                                 SLAVE ADDRESS
+
+      A1 CONNECTION            A0 CONNECTION               BINARY                   HEX
+
+         GND                  GND                       1001 000                        48
+
+         GND                              Float                       1001 001                        49
+
+         GND                      V+                       1001 010                     4A
+
+               Float                  GND                       1001 011                     4B
+
+               Float                              Float                       1001 100                    4C
+
+               Float                      V+                       1001 101                    4D
+
+            V+                   GND                       1001 110                     4E
+
+            V+                                Float                       1001 111                      4F
+
+            V+                       V+                       1010 000                        50
+
+
+8.5.1.4  Read and Write Operations
+
+Accessing a particular register on the TMP461 device is accomplished by writing the appropriate value to the
+pointer register. The value for the pointer register is the first byte transferred after the slave address byte with the
+R/W bit low. Every write operation to the TMP461 device requires a value for the pointer register (see Figure 15).
+
+When reading from the TMP461 device, the last value stored in the pointer register by a write operation is used
+to determine which register is read by a read operation. To change which register is read for a read operation, a
+new value must be written to the pointer register. This transaction is accomplished by issuing a slave address
+byte with the R/W bit low, followed by the pointer register byte; no additional data are required. The master can
+then generate a start condition and send the slave address byte with the R/W bit high to initiate the read
+command; see Figure 16 for details of this sequence.
+
+If repeated reads from the same register are desired, continually sending the pointer register bytes is not
+necessary because the TMP461 retains the pointer register value until it is changed by the next write operation.
+The register bytes are sent MSB first, followed by the LSB.
+
+Terminate read operations by issuing a not-acknowledge command at the end of the last byte to be read. For a
+single-byte operation, the master must leave the SDA line high during the acknowledge time of the first byte that
+is read from the slave.
+
+8.5.1.5  Timeout Function
+
+The TMP461 device resets the serial interface if either SCL or SDA are held low for 25 ms (typical) between a
+start and stop condition. If the TMP461 device is holding the bus low, the device releases the bus and waits for a
+start condition. To avoid activating the timeout function, maintaining a communication speed of at least 1 kHz for
+the SCL operating frequency is necessary.
+
+8.5.1.6  High-Speed Mode
+
+For the two-wire bus to operate at frequencies above 1 MHz, the master device must issue a high-speed mode
+(HS-mode) master code (0000 1xxx) as the first byte after a start condition to switch the bus to high-speed
+operation. The TMP461 device does not acknowledge this byte, but switches the input filters on SDA and SCL
+and the output filter on SDA to operate in HS-mode, thus allowing transfers at up to 2.17 MHz. After the HS-
+mode master code is issued, the master transmits a two-wire slave address to initiate a data transfer operation.
+The bus continues to operate in HS-mode until a stop condition occurs on the bus. Upon receiving the stop
+condition, the TMP461 device switches the input and output filters back to fast mode operation.
+
+8.5.2  General-Call Reset
+
+The TMP461 device supports reset using the two-wire general-call address 00h (0000 0000b). The TMP461
+device acknowledges the general-call address and responds to the second byte. If the second byte is 06h (0000
+0110b), the TMP461 device executes a software reset. This software reset restores the power-on reset state to
+all TMP461 registers and aborts any conversion in progress. The TMP461 device takes no action in response to
+other values in the second byte.
+
+
+16     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

@@ -1,0 +1,57 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.3.4  Register State Following a Fault
+
+Following an ICUT, ILIM or inrush fault on port n, the port is shut off, and the appropriate fault bit is set in the
+Fault Event Register or Start/ILIM Event Register. In addition, the following registers are affected.
+•  The PGn and PEn in the Power Status Register are cleared.
+•  The CLSCn and DETCn bits in the Detection Event register are cleared.
+•  The corresponding Port n Status Registers are cleared.
+•  The PGCn and PECn bits in the Power Event Register are set.
+•  The PORT n Voltage Registers is cleared.
+
+7.3.5  Disconnect
+
+The TPS23861 supports DC disconnection. Disconnect threshold and timing are set using the DCTHn field in the
+Disconnect Threshold Register and the TDIS field in the Timing Configuration Register respectively. Following a
+disconnect event on port n, the following registers are affected.
+•  The DISFn bit in the Fault Event Register is set.
+•  The PGn and PEn in the Power Status Register are cleared.
+•  The CLSCn and DETCn status bits in the Detection Event Register are cleared.
+•  The corresponding Port n Status Registers are cleared.
+•  The PGCn and PECn bits in the Power Event Register are set.
+•  The corresponding Port n Voltage Registers are cleared.
+
+7.3.6  Disconnect Threshold
+
+The disconnect current range is selectable through the DCTHn 2-bit fields in the Disconnect Threshold Register.
+The encoding of the DCTHn fields is presented in Table 4.
+
+                                   Table 4. DCTHn Field Encoding
+
+                  DCTHn FIELD                               DISCONNECT THRESHOLD, mA
+
+                           00                                                                 7.5
+
+                           01                                                       15
+
+                           10                                                       30
+
+                           11                                                       50
+
+
+7.3.7  Fast Shutdown Mode
+
+The TPS23861 responds to a low level on the SHTDWN pin by immediately turning off all ports preconfigured as
+low priority through the FSEn bits in the Port Power Priority Register. Reaction time is typically 2 µs. If an FSEn
+bit is set while the SHTDWN pin is low, the corresponding port is turned off and reset.
+
+
+
+
+
+28     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

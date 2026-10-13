@@ -1,0 +1,61 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.6     CTRL3 (22h)
+              Control register 3 (R/W)
+
+
+                                                 Table 33. Control register 3
+
+                                                                                     SLP_        SLP_
+                ST2         ST1       PP_OD         LIR      H_LACTIVE       0
+                                                                          MODE_SEL   MODE_1
+
+
+                                            Table 34. Control register 3 description
+
+                               Enables self-test. Default value: 00
+                ST[2:1]
+                                      (00: self-test disabled; other: see Table 35. Self-test mode selection)
+
+                                   Push-pull/open-drain selection on interrupt pad. Default value: 0
+           PP_OD
+                                          (0: push-pull; 1: open-drain)
+
+                                Latched interrupt. Switches between latched (1 logic) and pulsed (0 logic) mode for function source signals
+              LIR             and interrupts routed to pins (wake-up, single/double-tap). Default value: 0
+                                          (0: interrupt request not latched; 1: interrupt request latched)
+
+                                       Interrupt active high, low. Default value: 0
+            H_LACTIVE
+                                          (0: active high; 1: active low)
+
+                                   Single data conversion on demand mode selection:
+
+           SLP_MODE_SEL  (0: enabled with external trigger on INT2;
+
+                                       1: enabled by I²C/SPI writing SLP_MODE_1 to 1)
+
+                                   Single data conversion on-demand mode enable. When SLP_MODE_SEL = 1 and this bit is set to 1 logic,
+           SLP_MODE_1     single data conversion on-demand mode starts. When accelerometer data are available in the registers,
+                                          this bit is set to 0 automatically and the device is ready for another triggered session.
+
+
+                                              Table 35. Self-test mode selection
+
+                  ST2            ST1                                            Self-test mode
+
+                     0                0         Normal mode
+
+                     0                1           Positive sign self-test
+
+                     1                0          Negative sign self-test
+
+                     1                1              -
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 38/65

@@ -1,0 +1,78 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+7  Specifications
+
+7.1  Absolute Maximum Ratings
+over operating free-air temperature range (unless otherwise noted)(1)
+
+                                                               MIN             MAX           UNIT
+
+ VS             Supply voltage                                                                  6            V
+ Analog Inputs    Differential (VIN+ – VIN–)(2)                                   –26                  26           V
+ IN+, IN–       Common-mode(VIN+ + VIN–) / 2                                        -0.3                  26           V
+
+ SDA                                               GND – 0.3                6            V
+
+ SCL                                               GND – 0.3             VS + 0.3         V
+
+ Input current into any pin                                                                       5          mA
+
+ Open-drain digital output current                                                                 10          mA
+
+ Operating temperature                                                   –40                  125             °C
+
+ TJ              Junction temperature                                                            150             °C
+ Tstg            Storage temperature                                       –65                  150             °C
+
+(1)  Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress ratings
+     only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under Recommended
+     Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device reliability.
+(2)  VIN+ and VIN– may have a differential voltage of –26 to 26 V; however, the voltage at these pins must not exceed the range –0.3 to 26 V.
+
+7.2 ESD Ratings
+
+                                                                                VALUE    UNIT
+                  Human body model (HBM), per ANSI/ESDA/JEDEC JS-001, all pins(1)                     ±4000
+           Electrostatic
+ V(ESD)                Charged device model (CDM), per JEDEC specification JESD22-C101, all pins(2)            ±750     V          discharge
+                      Machine Model (MM)                                                             ±200
+
+(1)  JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)  JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+7.3 Recommended Operating Conditions
+
+over operating free-air temperature range (unless otherwise noted)
+
+                                                                     MIN     NOM      MAX    UNIT
+
+ VCM                                                                                    12              V
+ V S                                                                                                     3.3              V
+ TA                                                                         –25                     85     ºC
+
+7.4  Thermal Information
+
+                                                                                INA219
+                   THERMAL METRIC(1)                       D (SOIC)        DCN (SOT)       UNIT
+
+                                                                        8 PINS              8 PINS
+
+ RθJA        Junction-to-ambient thermal resistance                                  111.3                135.4         °C/W
+ RθJC(top)     Junction-to-case (top) thermal resistance                                  55.9                  68.1          °C/W
+ RθJB        Junction-to-board thermal resistance                                  52                   48.9          °C/W
+ ψJT         Junction-to-top characterization parameter                                10.7                    9.9          °C/W
+ ψJB         Junction-to-board characterization parameter                              51.5                  48.4          °C/W
+ RθJC(bot)     Junction-to-case (bottom) thermal resistance                           N/A                N/A          °C/W
+
+(1)  For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+     report, SPRA953.
+
+
+
+
+
+4      Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

@@ -1,0 +1,78 @@
+Table 7-6. Configuration Register Field Descriptions (continued)
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+1
+Soft_Reset
+R/W
+0
+Software reset bit.
+When set to 1 it triggers software reset with a duration of 2 ms
+This bit will always read back 0
+0
+—
+R
+0
+Not used
+(1)
+These bits can be stored in EEPROM. The factory setting for this register is 0220.
+(2)
+The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous 
+conversion mode.
+Table 7-7. Conversion Cycle Time in CC Mode
+CONV[2:0]
+AVG[1:0] = 00
+AVG[1:0] = 01
+AVG[1:0] = 10
+AVG[1:0] = 11
+000
+15.5 ms
+125 ms
+500 ms
+1 s
+001
+125 ms
+125 ms
+500 ms
+1 s
+010
+250 ms
+250 ms
+500 ms
+1 s
+011
+500 ms
+500 ms
+500 ms
+1 s
+100
+1 s
+1 s
+1 s
+1 s
+101
+4 s
+4 s
+4 s
+4 s
+110
+8 s
+8 s
+8 s
+8 s
+111
+16 s
+16 s
+16 s
+16 s
+If the time to complete the conversions needed for a given averaging setting is higher than the conversion setting 
+cycle time, there will be no stand by time in the conversion cycle.
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+www.ti.com
+28
+Submit Document Feedback
+Copyright © 2022 Texas Instruments Incorporated
+Product Folder Links: TMP117

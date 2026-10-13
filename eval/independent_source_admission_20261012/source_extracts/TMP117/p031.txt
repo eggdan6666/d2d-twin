@@ -1,0 +1,63 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+ 7.6.8 EEPROM2 Register (address = 06h) [reset = 0000h]
+
+ This register function the same as the EEPROM1 register.
+
+ Return to Register Map.
+
+                                   Figure 7-19. EEPROM2 Register
+       15            14            13            12             11            10             9             8
+
+     D15          D14          D13          D12          D11          D10          D9          D8
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+       7             6             5             4             3             2             1             0
+
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x         R/W-x
+
+                           Table 7-12. EEPROM2 Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    D[15:0]                     R/W      xxxxh       This 16-bit register can be used as a scratch pad.
+
+
+ 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]
+
+ This 16-bit register is to be used as a user-defined temperature offset register during system calibration. The
+ offset will be added to the temperature result after linearization. It has a same resolution of 7.8125 m°C and
+same range of ±256 °C as the temperature result register. The data format is the same as the temperature
+ register.  If the added result is out of boundary, then the temperature result will show as the maximum or
+minimum value.
+
+ Return to Register Map.
+
+                               Figure 7-20. Temperature Offset Register
+       15            14            13            12             11            10             9             8
+
+     D15          D14          D13          D12          D11          D10          D9          D8
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+       7             6             5             4             3             2             1             0
+
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0         R/W-0
+
+                      Table 7-13. Temperature Offset Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0    D[15:0]                     R/W     0          Temperature offset data from system calibration.
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    31
+
+                                                  Product Folder Links: TMP117

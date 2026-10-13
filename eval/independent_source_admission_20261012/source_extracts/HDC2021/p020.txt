@@ -1,0 +1,63 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.6 Register Maps
+
+The HDC2021 contains registers that hold configuration information, temperature and humidity measurement
+ results, and status information.
+
+                                       Table 7-6. Register Map
+
+                                              RESET VALUE
+  ADDRESS (HEX)            NAME                                          DESCRIPTION
+                                                            (HEX)
+
+        0x00            TEMPERATURE LOW                0                      Temperature data [7:0]
+
+        0x01            TEMPERATURE HIGH                0                      Temperature data [15:8]
+
+        0x02                HUMIDITY LOW                  0                         Humidity data [7:0]
+
+        0x03                HUMIDITY HIGH                  0                         Humidity data [15:8]
+
+        0x04                  STATUS                     0                 DataReady and threshold status
+
+                                                                      Maximum measured temperature
+        0x05            TEMPERATURE MAX                0
+                                                                                                  (one-shot mode only)
+
+                                                                       Maximum measured humidity
+        0x06                HUMIDITY MAX                  0
+                                                                                                  (one-shot mode only)
+
+        0x07             INTERRUPT ENABLE                0                               Interrupt enable
+
+        0x08           TEMP_OFFSET_ADJUST              0                   Temperature offset adjustment
+
+        0x09            HUM_OFFSET_ADJUST               0                      Humidity offset adjustment
+
+        0x0A               TEMP_THR_L                   1                     Temperature threshold low
+
+        0x0B               TEMP_THR_H                 FF                    Temperature threshold high
+
+       0x0C                 RH_THR_L                    0                        Humidity threshold low
+
+       0x0D                RH_THR_H                  FF                      Humidity threshold high
+
+        0x0E           DEVICE CONFIGURATION              0              Soft reset and interrupt reporting configuration
+
+        0x0F       MEASUREMENT CONFIGURATION          0                 Device measurement configuration
+
+       0xFC          MANUFACTURER ID LOW             49                     Manufacturer ID lower-byte
+
+       0xFD          MANUFACTURER ID HIGH             54                    Manufacturer ID higher-byte
+
+       0xFE               DEVICE ID LOW               D0                       Device ID lower-byte
+
+        0xFF               DEVICE ID HIGH                  7                       Device ID higher0byte
+
+
+
+
+
+20    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

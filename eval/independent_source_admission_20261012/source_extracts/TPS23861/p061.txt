@@ -1,0 +1,75 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.15  Timing Configuration Register
+
+Command = 16h with 1 Data Byte, R/W
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME               TLIM              TSTART                TICUT                  TDIS
+
+ RESET or POR VALUE       0          0          0          0          0          0          0          0
+
+These bits define the timing configuration for all four ports.
+
+
+                                  NOTE
+         The PGn and PEn bits in the Power Status Register are cleared when there is a Start,
+         ICUT or ILIM condition.
+
+
+Bit Descriptions
+
+TLIM[1:0]: ILIM fault timing, which is the foldback current limit time duration before port turn off. This timer is
+loaded with its maximum count corresponding to tLIM after expiration of the tSTART period; the timer counts down
+when the port is limiting its output current to ILIM. If the ILIM timer counts down to zero, the port is powered off.
+After the port is powered off the cool-down period commences. The cool-down period is selected by the CLDN
+field in the Cool Down/Gate Drive register. During the cool-down period the port will not engage in detection,
+classification, or powered-up operation. When the port is powered up and while the port current is below ILIM,
+the same counter increments at a rate 1/16th of the count-down rate (independent of the setting in the CLDN
+field). The counter does not increment past the maximum count corresponding to the programmed TLIM value.
+
+
+                                  NOTE
+           At the end of the cool-down period, when in Semi-Auto or Auto Mode, a detection cycle is
+           automatically restarted if the detect enable bit is set.
+
+
+                                  NOTE
+                  If ILIM and ICUT are set to same value,  it is a race condition between ILIM and ICUT in
+         TPS23861 and it depends on the firmware as to the winner.
+
+When a POEPn bit in the PoE Plus Register is cleared, the tLIM used for the associated port is always the
+nominal value (~60 ms). If the POEPn bit is set, then tLIM for associated port is programmable with the following
+selection:
+
+                           TLIM[1:0]                            NOMINAL tLIM (ms) WHEN PoEPn BIT IS SET
+
+                           00                                                       60
+
+                           01                                                       30
+
+                           10                                                       15
+
+                           11                                                       10
+
+TSTART[1:0]: This 2-bit field sets the length of the tSTART period, which is the maximum allowed overcurrent time
+during inrush. If at the end of the tSTART period the current is still limited to IINRUSH , the port is powered off. This is
+followed by a cool-down period, set with the CLDN field in the Cool Down/Gate Drive Register, during which the
+port cannot be turned on if in Semi-Auto or Auto Mode.
+
+
+                                  NOTE
+           At the end of cool-down cycle, when in Semi-Auto or Auto Mode, a detection cycle is
+           automatically restarted if the class and detect enable bits are set.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     61
+
+                                                 Product Folder Links: TPS23861

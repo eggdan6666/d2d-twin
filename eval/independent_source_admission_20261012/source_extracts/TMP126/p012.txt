@@ -1,0 +1,57 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.3.2 Slew Rate Warning
+
+The slew rate warning is an adjustable alert option that can be adjusted with the Slew_Limit register.
+
+The slew rate warning will notify the system of temperature spikes as they occur, allowing the system to react
+and correct for the increase in temperature before reaching thermal operating limits. Compared to throttling a
+ system after crossing a thermal limit, the slew rate warning will allow a more safe system operation and greater
+ reliability by not exceeding specified system operating conditions.
+
+
+                                                        High temperature limit
+
+
+
+
+                                            System adjusts to fix temperature
+                                                   spike before hitting overtemperature
+                                                                   condition
+
+
+
+                                               Low temperature limit                                                                                                                                             Temperature
+
+                           Time
+
+
+
+                ALERT
+
+                                   Figure 8-2. Slew Rate Warning
+
+The Slew_Limit register is used to set the unsigned limit. The TMP126 will monitor the temperature slew rate and
+compare the positive change of temperature from the current conversion to the previous against the Slew_Limit.
+ If the slew rate exceeds the Slew_Limit, the respective bits in the Alert_Status register will be set to indicate
+ the warning. Figure 8-3 depicts the timing of the Slew Rate Warning relative to the temperature conversions.
+The slew rate check is always applied to the current temperature conversion and the previous temperature
+ conversion.
+
+ Note the following considerations when using the Slew Rate Warning feature:
+
+ •  Calculating the slew rate requires a fixed time period and is only available in continuous mode.
+ •  Similar to other timing parameters of the device, consider that the slew rate calculation interval is impacted by
+    the timing variation (tVAR) of the device.
+ •  Slew rate calculation is supported for positive temperature changes (temperature increase) only.
+ •  Take the sensor response time into account when using the Slew Rate Warning feature as the response time
+   impacts how quickly the sensor responses to temperature changes.
+
+
+
+
+
+12    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

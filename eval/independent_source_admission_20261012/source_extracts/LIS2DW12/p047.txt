@@ -1,0 +1,64 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.23    INT_DUR (33h)
+               Interrupt duration register (R/W)
+
+
+                                                 Table 66. INT_DUR register
+
+             LATENCY3   LATENCY2   LATENCY1   LATENCY0     QUIET1      QUIET0     SHOCK1    SHOCK0
+
+
+                                            Table 67. INT_DUR register description
+
+                               Duration of maximum time gap for double-tap recognition. When double-tap recognition is enabled, this
+                                   register expresses the maximum time between two successive detected taps to determine a double-tap event.
+              LATENCY[3:0]
+                                 Default value is LATENCY[3:0] = 0000 (which is 16 * 1/ODR)
+
+                           1 LSB = 32 * 1/ODR
+
+                            Expected quiet time after a tap detection: this register represents the time after the first detected tap in which
+                                there must not be any overthreshold event.
+               QUIET[1:0]
+                                 Default value is QUIET[1:0] = 00 (which is 2 * 1/ODR)
+
+                           1 LSB = 4 * 1/ODR
+
+                        Maximum duration of overthreshold event: this register represents the maximum time of an overthreshold
+                                  signal detection to be recognized as a tap event.
+              SHOCK[1:0]
+                                 Default value is SHOCK[1:0] = 00 (which is 4 * 1/ODR)
+
+                           1 LSB = 8 *1/ODR
+
+8.24    WAKE_UP_THS (34h)
+           Wake-up threshold register (R/W)
+
+
+                                              Table 68. WAKE_UP_THS register
+
+              SINGLE_
+            DOUBLE_   SLEEP_ ON   WK_THS5    WK_THS4    WK_THS3   WK_THS 2   WK_THS 1   WK_THS 0
+                TAP
+
+
+                                         Table 69. WAKE_UP_THS register description
+
+                                         Enables single/double-tap event. Default value: 0
+            SINGLE_DOUBLE_ TAP
+                                                       (0: only single-tap event is enabled; 1: single and double-tap events are enabled)
+
+                                         Enables sleep (inactivity). Default value: 0
+           SLEEP_ON
+                                                       (0: sleep disabled; 1: sleep enabled)
+
+             WK_THS[5:0]              Wake-up threshold, 6-bit unsigned 1 LSB = 1/64 of FS. Default value: 000000
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 47/65

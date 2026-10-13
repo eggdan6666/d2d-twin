@@ -1,0 +1,66 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 8.2.2 Detailed Design Procedure
+ 8.2.2.1 Noise and Averaging
+
+The device temperature sampling distribution (with averaging disabled) covers an area of approximately six
+ neighboring codes. The noise area of the six codes remains the same at  full supply and  full temperature
+ range with a standard deviation of approximately 1 LSB. The device provides an averaging tool for 1, 8, 32,
+ or 64 conversions. As shown in Figure 6-7, the 8-sample averaging reduces the internal noise distribution to
+a theoretical minimum of 2 LSB. This averaging means that if the system temperature slowly changes and the
+ supply voltage is stable, then the 8-sample averaging can be enough to neutralize the device noise and provide
+ stable temperature readings. However,  if the system environment is noisy (such as when measuring air flow
+ temperatures, power supply fluctuations, intensive communication on a serial bus, and so forth), then higher
+ averaging numbers are recommended to be used.
+
+ 8.2.2.2 Self-Heating Effect (SHE)
+
+ During ADC conversion, some power is dissipated that heats the device despite the small power consumption
+ of the TMP117. Consider the self-heating effect (SHE) for certain precise measurements. Figure 8-2 shows the
+ device SHE in still air at 25 °C after the supply is switched on. The device package is soldered to the 11-mm
+× 20-mm × 1.1-mm size coupon board. The board is placed horizontally, with the device on top. The TMP117
+ is in continuous conversion mode with 64 sampling averaging and zero conversion cycle time. There is no
+ digital bus activity aside from reading temperature data one time each second. As shown in Figure 8-2, the SHE
+ stabilization time in still air is greater when the device dissipates more power.
+
+The SHE drift is strongly proportional to the device dissipated power. The SHE drift is also proportional to the
+ device temperature because the consumption current with the same supply voltage increases with temperature.
+ Figure 8-3 shows the SHE drifts versus temperature and dissipated power at 25 °C for the same coupon board
+and the same conditions described previously.
+
+ To estimate the SHE for similar size boards, calculate the device consumption power for 25 °C and use the
+ corresponding power line shown in Figure 8-3. For example, in CC mode without DC at a 3.3-V supply at 25 °C,
+ the device dissipates 410 µWt. So self-heating in still air is approximately 40 m°C for the described condition and
+ rises to 52 m°C at 150 °C.
+
+The following methods can reduce the SHE:
+ •  System calibration removes not only the self-heating error and power-supply rejection ratio (PSRR) effect
+    but also compensates the temperature shift caused by the thermal resistance between the device and the
+   measured object.
+ •    If practical, use the device one-shot mode. If continuous conversion is needed, use the conversion cycle
+   mode with significant standby time. For example, in most cases an 8-sample averaging (125 ms) with a
+   1-second conversion cycle provides enough time for the device to cool down to the environment temperature
+   and removes the SHE.
+ •  Use the minimal acceptable power supply voltage.
+ •  Use a printed-circuit board (PCB) layout that provides minimal thermal resistance to the device.
+ •  Avoid using small-value pullup resistors on the SDA and ALERT pins. Instead, use pullup resistors larger
+   than 2 kΩ.
+ •  Ensure that the SCL and SDA signal levels remain below 10% or above 90% of the device supply voltage.
+ •  Avoid heavy bypass traffic on the data line. Communication to other devices on the same data line increases
+    the supply current even if the device is in SD mode.
+ •  Use the highest available communication speed.
+
+ 8.2.2.3 Synchronized Temperature Measurements
+
+When four temperature measurements are needed in four different places simultaneously, triggering a reset
+ is recommended. In this method, four devices are programed with control registers set to CC mode with a
+ conversion cycle time of 16 s. All four devices are connected to same two-wire bus with four different bus
+ addresses. The bus general-call reset command is issued by the master. This command triggers all devices
+ to reset (which takes approximately 1.5 ms) and triggers a simultaneous temperature sampling according to
+ configuration registers setting. The master has 16 seconds to read data from the devices.
+
+
+34    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

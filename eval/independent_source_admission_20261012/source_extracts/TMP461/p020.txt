@@ -1,0 +1,67 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+8.6.1.4  Configuration Register
+
+The configuration register sets the temperature range, the ALERT/THERM modes, and controls the shutdown
+mode. The configuration register is set by writing to pointer address 09h, and is read by reading from pointer
+address 03h. Table 6 summarizes the bits of the configuration register.
+
+                           Table 6. Configuration Register Bit Descriptions
+
+                        CONFIGURATION REGISTER (Read = 03h, Write = 09h, POR = 00h)
+
+         BIT NUMBER               NAME                  FUNCTION          POWER-ON RESET VALUE
+
+                                                         0 = ALERT enabled
+              7                    MASK1                                                     0
+                                                         1 = ALERT masked
+
+                                                         0 = Run
+              6                     SD                                                       0
+                                                         1 = Shut down
+
+                                                         0 = ALERT
+              5                  ALERT/THERM2                                                 0
+                                                         1 = THERM2
+
+               4:3                        Reserved      —                                        0
+
+                                                         0 = –40°C to +127°C
+              2                   RANGE                                                     0
+                                                         1 = –64°C to +191°C
+
+               1:0                        Reserved      —                                        0
+
+MASK1 (bit 7) of the configuration register masks the ALERT output. If MASK1 is 0 (default), the ALERT output
+is enabled. If MASK1 is set to 1, the ALERT output is disabled. This configuration applies only  if the value of
+ALERT/THERM2 (bit 5) is 0 (that is, pin 7 is configured as the ALERT output).  If pin 7 is configured as the
+THERM2 output, the value of the MASK1 bit has no effect.
+
+The shutdown bit (SD, bit 6) enables or disables the temperature-measurement circuitry. If SD = 0 (default), the
+TMP461 device converts continuously at the rate set in the conversion rate register. When SD is set to 1, the
+TMP461 device stops converting when the current conversion sequence is complete and enters a shutdown
+mode. When SD is set to 0 again, the TMP461 resumes continuous conversions. When SD = 1, a single
+conversion can be started by writing to the one-shot start register; see the One-Shot Start Register section for
+more information.
+
+ALERT/THERM2 (bit 5) sets the configuration of pin 7.  If the ALERT/THERM2 bit is 0 (default), then pin 7 is
+configured as the ALERT output; if this bit is set to 1, then pin 7 is configured as the THERM2 output.
+
+The temperature range is set by configuring RANGE (bit 2) of the configuration register. Setting this bit low
+(default) configures the TMP461 device for the standard measurement range (–40°C to +127°C); temperature
+conversions are stored in the standard binary format. Setting bit 2 high configures the TMP461 device for the
+extended measurement range (–64°C to +191°C); temperature conversions are stored in the extended binary
+format (see Table 1).
+
+The remaining bits of the configuration register are reserved and must always be set to 0. The power-on reset
+value for this register is 00h.
+
+
+
+
+
+20     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

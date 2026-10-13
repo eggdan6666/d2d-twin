@@ -1,0 +1,45 @@
+Data Sheet                               AD5592R
+
+PIN CONFIGURATIONS AND FUNCTION DESCRIPTIONS
+
+
+
+
+
+           Figure 9. AD5592R-1 16-Lead LFCSP Pin Configuration                             Figure 10. AD5592R-1 16-Ball WLCSP Pin Configuration
+
+Table 9. AD5592R-1 Pin Function Descriptions
+             Pin No.
+LFCSP        WLCSP        Mnemonic       Description
+1              B4             VDD            Power Supply Input. The AD5592R-1 operates from 2.7 V to 5.5 V, and this pin must be decoupled with a 0.1 µF
+                                                            capacitor to GND.
+2 to 5, 8 to 10      B3, C4, C3, C2,    I/O0 to I/O6        Input/Output 0 Through Input/Output 6. These pins can be independently configured as DACs, ADCs, or
+                  D1, D4, C1                          general-purpose digital inputs or outputs. The function of each pin is determined by programming the I/Ox pin
+                                                             configuration registers (see Table 11 and Table 12).
+6              D3              VREF             Reference Input/Output. When the internal reference is enabled, the 2.5 V reference voltage is available on
+                                                                     this pin. A 0.1 µF capacitor connected from the VREF pin to GND is recommended to achieve the specified
+                                                     performance from the AD5592R-1. When the internal reference is disabled, an external reference must be applied
+                                                                to this pin. The voltage range for the external reference is 1 V to VDD.
+7              D2          SDO            Data Out. Logic output. The conversion results from the ADC, register reads, and temperature sensor information
+                                                        are provided on this output as a serial data stream. The bits are clocked out on the rising edge of the SCLK input.
+                                               The MSB is placed on the SDO pin on the falling edge of SYNC. Because the SCLK can idle high or low, the next
+                                                                            bit is clocked out on the first rising edge of SCLK that follows a falling edge SCLK while SYNC is low (see Figure
+                                                                     4).
+11              B2                I/O7               Input/Output 7. This pin can be configured as a DAC, ADC, or general-purpose digital input or output. The function
+                                                                of this pin is determined by programming the I/Ox pin configuration registers (see Table 11 and Table 12). I/O7 can
+                                                           also be configured as a BUSY signal to indicate when an ADC conversion is taking place (see Table 22).
+12             B1          GND            Ground Reference Point for All Circuitry on the AD5592R-1.
+13             A1              SDI             Data In. Logic input. Data to be written to the DACs and control registers is provided on this input and is clocked
+                                                                   into the register on the falling edge of SCLK.
+14             A2            SCLK              Serial Clock Input. Data is clocked into the input shift register on the falling edge of the serial clock input. Data can
+                                                be transferred at rates of up to 50 MHz when writing to the DACs. SCLK has a maximum speed of 20 MHz when
+                                                        performing a conversion or clocking data from the AD5592R-1.
+15             A3               VLOGIC             Interface Power Supply. The voltage of this pin ranges from 1.62 V to 5.5 V.
+16             A4           SYNC             Synchronization. Active low control input. SYNC is the frame synchronization signal for the input data. When
+                                       SYNC goes low, data is transferred in on the falling edges of the next 16 clocks.
+
+
+
+
+
+analog.com                                                                                         Rev. H | 15 of 54

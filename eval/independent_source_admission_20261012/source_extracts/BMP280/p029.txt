@@ -1,0 +1,40 @@
+Bosch Sensortec | BMP280 Data sheet                                                          29 | 49
+
+
+        5.2.2  I²C read
+       To be able to read registers, first the register address must be sent in write mode (slave address
+        111011X0). Then either a stop or a repeated start condition must be generated. After this the slave is
+       addressed in read mode (RW = ‘1’) at address 111011X1, after which the slave sends out data from
+        auto-incremented register addresses until a NOACKM and stop condition occurs. This is depicted in
+         Figure 8, where two bytes are read from register 0xF6 and 0xF7.
+
+                                                                               Control byte
+
+                    Start          Slave Address     RW ACKS              Register address (F6h)          ACKS
+
+
+              S    1   1   1   0   1   1  X   0          1    1    1    1    0    1    1   0
+
+                                                                            Data byte                                      Data byte
+
+                    Start          Slave Address     RW ACKS           Register data - address F6h       ACKM          Register data - address F7h      NOACKM  Stop
+
+
+              S    1   1   1   0   1   1  X   1             bit7   bit6   bit5   bit4   bit3   bit2   bit1  bit0             bit7   bit6  bit5  bit4  bit3  bit2  bit1  bit0          P
+
+                                               Figure 8: I²C multiple byte read
+
+       5.3  SPI interface
+       The SPI interface is compatible with SPI mode ‘00’ (CPOL = CPHA = ‘0’) and mode ‘11’ (CPOL =
+     CPHA = ‘1’). The automatic selection between mode ‘00’ and ‘11’ is determined by the value of SCK
+         after the CSB falling edge.
+
+       The SPI interface has two modes: 4-wire and 3-wire. The protocol is the same for both. The 3-wire
+      mode is selected by setting ‘1’ to the register spi3w_en. The pad SDI is used as a data pad in 3-wire
+       mode.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

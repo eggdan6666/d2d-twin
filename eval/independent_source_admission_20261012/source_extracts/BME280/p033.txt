@@ -1,0 +1,67 @@
+Bosch Sensortec | BME280 Data sheet                                            33 | 60
+
+
+BMP280’s I²C address. The SDO pin cannot be left floating; if left floating, the I²C address will be
+undefined.
+
+The I²C interface uses the following pins:
+    •  SCK:   serial clock (SCL)
+    •   SDI:   data (SDA)
+    •  SDO:  Slave address LSB (GND = ‘0’, VDDIO = ‘1’)
+
+CSB must be connected to VDDIO to select I²C interface. SDI is bi-directional with open drain to GND: it
+must be externally connected to VDDIO via a pull up resistor. Refer to chapter 7 for connection
+instructions.
+The following abbreviations will be used in the I²C protocol figures:
+    •  S               Start
+    •  P            Stop
+    •  ACKS        Acknowledge by slave
+    •  ACKM        Acknowledge by master
+    •  NACKM       Not acknowledge by master
+
+6.2.1  I²C write
+Writing is done by sending the slave address in write mode (RW = ‘0’), resulting in slave address
+111011X0 (‘X’ is determined by state of SDO pin. Then the master sends pairs of register addresses
+and register data. The transaction is ended by a stop condition. This is depicted in Figure 9.
+
+                                                                    Control byte                                  Data byte
+
+           Start          Slave Address     RW ACKS         Register address (A0h)      ACKS           Register data - address A0h        ACKS
+
+
+        S    1   1   1   0   1   1  X   0          1   0   1   0   0   0   0   0             bit7   bit6   bit5   bit4   bit3   bit2   bit1  bit0     …
+
+                                                                    Control byte                                  Data byte
+
+                                                                     Register address (A1h)      ACKS           Register data - address A1h        ACKS  Stop
+
+
+                          …    1   0   1   0   0   0   0   1             bit7   bit6   bit5   bit4   bit3   bit2   bit1  bit0        P
+
+Figure 9: I²C multiple byte write (not auto-incremented)
+
+6.2.2  I²C read
+To be able to read registers, first the register address must be sent in write mode (slave address
+111011X0). Then either a stop or a repeated start condition must be generated. After this the slave is
+addressed in read mode (RW = ‘1’) at address 111011X1, after which the slave sends out data from
+auto-incremented register addresses until a NOACKM and stop condition occurs. This is depicted in
+Figure 10, where register 0xF6 and 0xF7 are read.
+
+                                                                  Control byte
+
+     Start          Slave Address     RW ACKS              Register address (F6h)          ACKS
+
+
+    S    1   1   1   0   1   1  X   0          1    1    1    1    0    1    1   0
+
+                                                               Data byte                                      Data byte
+
+     Start          Slave Address     RW ACKS           Register data - address F6h       ACKM          Register data - address F7h      NOACKM  Stop
+
+
+    S    1   1   1   0   1   1  X   1             bit7   bit6   bit5   bit4   bit3   bit2   bit1  bit0             bit7   bit6  bit5  bit4  bit3  bit2  bit1  bit0          P
+
+Figure 10: I²C multiple byte read
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

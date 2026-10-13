@@ -1,0 +1,1438 @@
+[
+  {
+    "id": "TMP117_ALERT_MODE_QUALIFIED_READ_CLEAR",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.HIGH_ALERT"
+    ],
+    "problem": "无条件清HIGH/LOW与Therm模式不符",
+    "old": "HIGH_ALERT/LOW_ALERT read_action=clear unconditional",
+    "candidate_rule": {
+      "on_read": "CONFIG",
+      "only_if": {
+        "CONFIG.TNA": 0
+      },
+      "THERM_HIGH": "set/clear at conversion completion by high/low limits",
+      "THERM_LOW": "always zero",
+      "require_controlled_asserted_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is higher than the high limit 0: Cleared on read of configuration register Therm mode: 1: Set when the conversion result is higher than the therm limit 0:"
+      },
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": null,
+        "section": "§7.4.4.2",
+        "excerpt": "I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set or cleared at the end of conversions based on the value of the temperature result compared to the high and low"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_DATA_READY_CROSS_REGISTER_CLEAR",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.DATA_READY"
+    ],
+    "problem": "TEMP读也清DATA_READY必须纳入事件策略",
+    "old": "field-only CONFIG CoR metadata",
+    "candidate_rule": {
+      "on_read": [
+        "TEMP",
+        "CONFIG"
+      ],
+      "return_preclear_data": true,
+      "require_controlled_asserted_event": true,
+      "exclude_zero_then_zero_as_coverage": true
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "Data ready flag. This flag indicates that the conversion is complete and the temperature register can be read. Every time the temperature register or configuration register is read, this bit is cleared. This bit is set a"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_EEPROM_VOLATILE_AND_NVM_GATE",
+    "chip": "TMP117",
+    "targets": [
+      "EEPROM_UL.EUN"
+    ],
+    "problem": "锁定不等同全部写被忽略；EEPROM空字段隐藏有效scratch行为",
+    "old": "旧Q1称EEPROM1-3写仅EUN1有效",
+    "candidate_rule": {
+      "EUN0": "volatile writes allowed",
+      "EUN1": "nonvolatile programming allowed only when not busy",
+      "lock_after_general_call_reset": true,
+      "busy_write_behavior": "EXCLUDE prohibited write oracle"
+    },
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.1-2",
+        "excerpt": "Any I2C writes performed during this initial POR period to the limit registers or the configuration register are ignored. I2C read transactions can still be performed with the device during the power-up period. While the"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "EEPROM is locked for programming: writes to all EEPROM addresses (such as configuration, limits, and EEPROM locations 1-4) are written to registers in digital logic and are not programmed in the EEPROM 1: EEPROM unlocked"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "This command also clears the EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the device to perform temperature conversions when the EEPROM is unlocked. 18 Submit Docu"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_ALL_EEPROM_BACKED_RESETS",
+    "chip": "TMP117",
+    "targets": [
+      "TEMP_OFFSET.OFF"
+    ],
+    "problem": "不止门限，offset和多个CONFIG位也EEPROM后备",
+    "old": "factory condition only described in report for THIGH/TLOW",
+    "candidate_rule": {
+      "factory_eeprom_profile_expected": 0,
+      "general_reset_rule": "reload EEPROM image",
+      "wait_for_por_load_complete": true,
+      "por_busy_reset_is_temporal": true,
+      "eeprom_configuration_mask": "0x07fc",
+      "MOD1_nonpersistent": true
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-13",
+        "section": null,
+        "excerpt": "Temperature offset data from system calibration. Copyright © 2022 Texas Instruments Incorporated Submit Document Feedback 31 Product Folder Links: TMP117"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3 note (1)",
+        "section": null,
+        "excerpt": "This value is stored in Electrically-Erasable, Programmable Read-Only Memory (EEPROM) during device manufacturing. The device reset value can be changed by writing the relevant code in the EEPROM cells (see the EEPROM Ov"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Figure 7-14 notes (1)-(2)",
+        "section": null,
+        "excerpt": "These bits can be stored in EEPROM. The factory setting for this register is 0220. (2) The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous conversion mode"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_BUSY_MIRROR_AND_COMPLETION",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.EEPROM_BUSY"
+    ],
+    "problem": "Busy镜像、POR1.5ms及编程7ms尚未模型化",
+    "old": "EEPROM excluded block says 2ms busy",
+    "candidate_rule": {
+      "mirror": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "complete_when": "Busy=0",
+      "program_time_typical_ms": 7,
+      "por_load_approx_ms": 1.5,
+      "no_read_clear": true
+    },
+    "locators": [
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": "Table 7-10",
+        "section": null,
+        "excerpt": "mirror of the EEPROM busy flag (bit 12) in the configuration register. 0: Indicates that the EEPROM is ready, which means that the EEPROM has finished the last transaction and is ready to accept new commands 1: Indicates"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_CONV_PERIOD_DESCRIPTION",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.CONV"
+    ],
+    "problem": "默认CONV100/AVG01周期1s，旧0.25Hz不符",
+    "old": "CONV desc default100 T/nA0 0.25Hz",
+    "candidate_rule": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "cycle_ms_by_avg": [
+        [
+          15.5,
+          125,
+          500,
+          1000
+        ],
+        [
+          125,
+          125,
+          500,
+          1000
+        ],
+        [
+          250,
+          250,
+          500,
+          1000
+        ],
+        [
+          500,
+          500,
+          500,
+          1000
+        ],
+        [
+          1000,
+          1000,
+          1000,
+          1000
+        ],
+        [
+          4000,
+          4000,
+          4000,
+          4000
+        ],
+        [
+          8000,
+          8000,
+          8000,
+          8000
+        ],
+        [
+          16000,
+          16000,
+          16000,
+          16000
+        ]
+      ]
+    },
+    "locators": [
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-7",
+        "section": null,
+        "excerpt": "Conversion Cycle Time in CC Mode CONV[2:0] AVG[1:0] = 00 AVG[1:0] = 01 AVG[1:0] = 10 AVG[1:0] = 11 000 15.5 ms 125 ms 500 ms 1 s 001 125 ms 125 ms 500 ms 1 s 010 250 ms 250 ms 500 ms 1 s 011 500 ms 500 ms 500 ms 1 s 100 "
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.4.3",
+        "excerpt": "CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready and ALERT flag in the configur"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_MOD_ONE_SHOT_BOUNDARY",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.MOD"
+    ],
+    "problem": "shutdown operating state不支持自创MOD读回1",
+    "old": "MOD3 omitted persistence but completion readback not defined",
+    "candidate_rule": {
+      "legal_values": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "readback_values": {
+        "2": 0
+      },
+      "completion_event": "temperature update / Data_Ready",
+      "post_completion_operating_state": "shutdown",
+      "post_completion_MOD_readback": "not explicitly established; exclude numerical oracle",
+      "exclude_unbounded_persistence_for_3": true
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-6",
+        "section": null,
+        "excerpt": "reads back = 00) 11: One-shot conversion (OS) 9:7 CONV[2:0] R/W 100 Conversion cycle bit. See Table 7-7 for the standby time between conversions. 6:5 AVG[1:0] R/W 01 Conversion averaging modes. Determines the number of c"
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.4.3",
+        "excerpt": "After the device completes a one-shot conversion, the device goes to the low-power shutdown mode. A one-shot conversion cycle, unlike the continuous conversion mode, only consists of the active conversion time and no sta"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "existing v2 normalizes2->0 and excludes3 persistence; completion/event remains conditional"
+  },
+  {
+    "id": "TMP117_SOFT_RESET_SOURCE_CONFLICT",
+    "chip": "TMP117",
+    "targets": [
+      "CONFIG.SOFT_RESET"
+    ],
+    "problem": "图R/tableR/W冲突不得称已官方确认勘误",
+    "old": "proofread_record erratum_found says manual erratum",
+    "candidate_rule": {
+      "diagram_access": "R",
+      "table_access": "R/W",
+      "recommended_separate_exploratory_profile": "table_text_priority",
+      "main_claim": "retain conflict; no official erratum asserted"
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Figure 7-14",
+        "section": null,
+        "excerpt": "Soft_Reset — R/W-0 R/W-0 R/W-1 R/W-0 R/W-0 R/W-0 R-0 R-0 Table 7-6. Configuration Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15 HIGH_Alert R 0 High Alert flag: 1: Set when the conversion result is highe"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-6 continued",
+        "section": null,
+        "excerpt": "Software reset bit. When set to 1 it triggers software reset with a duration of 2 ms This bit will always read back 0 0 — R 0 Not used (1) These bits can be stored in EEPROM. The factory setting for this register is 0220"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "TMP117_REV_RESET_CONFLICT",
+    "chip": "TMP117",
+    "targets": [
+      "DEVICE_ID.ID"
+    ],
+    "problem": "保留既有高4bit来源冲突和统一mask",
+    "old": "candidate ID fullreset0117",
+    "candidate_rule": {
+      "known_mask": "0x0fff",
+      "expected_register": "0x0117",
+      "exclude_mask": "0xf000",
+      "apply_mask_to_all_reset_and_snapshot_oracles": true
+    },
+    "locators": [
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Figure 7-22",
+        "section": null,
+        "excerpt": "Rev3 Rev2 Rev1 Rev0 DID11 DID10 DID9 DID8 R-x R-x R-x R-x R-0 R-0 R-0 R-1 7 6 5 4 3 2 1 0 DID7 DID6 DID5 DID4 DID3 DID2 DID1 DID0 R-0 R-0 R-0 R-1 R-0 R-1 R-1 R-1 Table 7-15. Device ID Register Field Descriptions BIT FIEL"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "Indicates the revision number. 11:0 DID[11:0] R 117h Indicates the device ID. 32 Submit Document Feedback Copyright © 2022 Texas Instruments Incorporated Product Folder Links: TMP117"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "existing v2 DEVICE_ID known_mask0FFF already handles bounded reset"
+  },
+  {
+    "id": "TMP117_EEPROM2_RESET_SOURCE_CONFLICT",
+    "chip": "TMP117",
+    "targets": [
+      "EEPROM2"
+    ],
+    "problem": "标题0000 vs 总表/详细表xxxx及图R/W-x",
+    "old": "runtime0 placeholder hides conflicting header",
+    "candidate_rule": {
+      "candidate_field": {
+        "name": "D",
+        "bits": "15:0",
+        "source_access": "R/W"
+      },
+      "reset_known_mask": "0x0",
+      "EUN0": "volatile write persists until reset, not EEPROM programming",
+      "EUN1": "program backing cell only when Busy=0; wait completion before next write",
+      "reset": "reload persistent contents",
+      "program_typical_ms": 7,
+      "busy_mirrors": [
+        "CONFIG[12]",
+        "EEPROM_UL[14]"
+      ],
+      "no_assertion_on_prohibited_busy_writes": true
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 7-12",
+        "section": null,
+        "excerpt": "Table 7-12. EEPROM2 Register Field Descriptions BIT FIELD TYPE RESET DESCRIPTION 15:0 D[15:0] R/W xxxxh This 16-bit register can be used as a scratch pad. 7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]"
+      },
+      {
+        "pdf_page": 30,
+        "printed_page": "30",
+        "table": null,
+        "section": "§7.6.7",
+        "excerpt": "Writes to this address when the EEPROM is locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked causes the corresponding EEPROM location to be programmed. See the "
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.5.1.2",
+        "excerpt": "Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is set. Read this flag to monitor "
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§7.6.8 title",
+        "excerpt": "[reset = 0000h] This register function the same as the EEPROM1 register. Return to Register Map. Figure 7-19. EEPROM2 Register 15 14 13 12 11 10 9 8 D15 D14 D13 D12 D11 D10 D9 D8 R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x R/W-x"
+      },
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 7-3",
+        "section": null,
+        "excerpt": "EEPROM2 EEPROM2 register Go 07h R/W 0000h(1) Temp_Offset Temperature offset register Go 08h R/W xxxxh(1) EEPROM3 EEPROM3 register Go 0Fh R 0117h Device_ID Device ID register Go (1) This value is stored in Electrically-Er"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+    "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+    "manual_version": "SNOSD82D, June 2018, revised September 2022",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA219_VOLTAGE_NUMERIC_RESET_UNSUPPORTED",
+    "chip": "INA219",
+    "targets": [
+      "SHUNT_VOLTAGE.SV"
+    ],
+    "problem": "Table2测量值/HEX横线不是0reset",
+    "old": "SHUNT/BUS all fields reset0",
+    "candidate_rule": {
+      "known_reset_mask": "0x0",
+      "exclude_fixed_numeric_reset": true,
+      "zero_analog_input_if_used": "an external input assumption, not POR fact"
+    },
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Shunt voltage Shunt voltage measurement data. Shunt voltage — R 02 Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current "
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "UNDEFINED_BEHAVIOR",
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "source_sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "manual_version": "SBOS448G, August 2008, revised December 2015",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA219_CNVR_CLEAR_SOURCE_CONFLICT",
+    "chip": "INA219",
+    "targets": [
+      "BUS_VOLTAGE.CNVR"
+    ],
+    "problem": "p10Status/convert pin vs p23Power/newMODE应登记冲突",
+    "old": "CNVR no read_action and static0",
+    "candidate_rule": {
+      "main_profile": "source conflict retained; read-clear excluded until policy interpretation frozen",
+      "optional_register_detail_priority": "reading POWER clears BUS_VOLTAGE.CNVR",
+      "not_same_register_read_clear": true,
+      "require_asserted_CNVR_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": null,
+        "section": "§8.6.3.2",
+        "excerpt": "Reading the Power Register OVF: Math Overflow Flag Bit 0 The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that current and power data may be meaningless. 8.6.3.3 P"
+      },
+      {
+        "pdf_page": 10,
+        "printed_page": "10",
+        "table": null,
+        "section": "§8.3.1",
+        "excerpt": "Reading the Status register • Triggering a single-shot conversion with the convert pin 8.3.1.1 Power Measurement Current and bus voltage are converted at different points in time, depending on the resolution and averagin"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "source_sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "manual_version": "SBOS448G, August 2008, revised December 2015",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA219_RSV2_CONSTANT_ZERO_UNSUPPORTED",
+    "chip": "INA219",
+    "targets": [
+      "BUS_VOLTAGE.RSV_2"
+    ],
+    "problem": "未命名图位不能推出恒零",
+    "old": "RSV_2 RO reset0 and description恒读0",
+    "candidate_rule": {
+      "source_access": "register-level RO",
+      "exclude_constant_zero_oracle": true,
+      "do_not_write_nondefault_reserved_bits": true
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Figure 24",
+        "section": null,
+        "excerpt": "Figure 24. Bus Voltage Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 BD12 BD11 BD10 BD9 BD8 BD7 BD6 BD5 BD4 BD3 BD2 BD1 BD0 — CNVR OVF At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV. CNVR: Conve"
+      },
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "Table 2",
+        "section": null,
+        "excerpt": "Bus voltage Bus voltage measurement data. Bus voltage — R 03 Power(2) Power measurement data. 00000000 00000000 0000 R Contains the value of the current flowing 04 Current(2) 00000000 00000000 0000 R through the shunt re"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "UNDEFINED_BEHAVIOR",
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "source_sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "manual_version": "SBOS448G, August 2008, revised December 2015",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA219_RST_COMPLETION_SCOPE",
+    "chip": "INA219",
+    "targets": [
+      "CONFIGURATION.RST"
+    ],
+    "problem": "self-clears不是任意瞬时always0",
+    "old": "read_as0 / desc reads always0",
+    "candidate_rule": {
+      "write_value": 1,
+      "after_reset_completed": "all defined defaults restored and RST=0",
+      "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+      "exclude_during_reset_readback_oracle": true
+    },
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table 3 / Figure 19",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. BRNG: Bus Voltage Range Bit 13 0 = 16V FSR 1 = 32V FSR ("
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+    "source_sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "manual_version": "SBOS448G, August 2008, revised December 2015",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA226_RST_COMPLETION_SCOPE",
+    "chip": "INA226",
+    "targets": [
+      "CONFIG.RST"
+    ],
+    "problem": "self-clears不是任意瞬时always0",
+    "old": "read_as0 / desc reads always0",
+    "candidate_rule": {
+      "write_value": 1,
+      "after_reset_completed": "all defined defaults restored and RST=0",
+      "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+      "exclude_during_reset_readback_oracle": true
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "§7.1.1 RST",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA3221_RST_COMPLETION_SCOPE",
+    "chip": "INA3221",
+    "targets": [
+      "CONFIG.RST"
+    ],
+    "problem": "self-clears不是任意瞬时always0",
+    "old": "read_as0 / desc reads always0",
+    "candidate_rule": {
+      "write_value": 1,
+      "after_reset_completed": "all defined defaults restored and RST=0",
+      "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+      "exclude_during_reset_readback_oracle": true
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 8-4",
+        "section": null,
+        "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA226_UNNAMED_ACCESS_UNDEFINED",
+    "chip": "INA226",
+    "targets": [
+      "CONFIG.UNNAMED_14_12"
+    ],
+    "problem": "三组未命名位逐位RO未在来源定义",
+    "old": "CONFIG14:12/CAL15/MASK9:5 all RO",
+    "candidate_rule": {
+      "exclude_access_oracle": true,
+      "keep_reset_value_in_all_legal_writes": true,
+      "retain_known_por": true
+    },
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-2",
+        "section": null,
+        "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "UNDEFINED_BEHAVIOR",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA226_CVRF_CLEAR_EVENTS",
+    "chip": "INA226",
+    "targets": [
+      "MASK_ENABLE.CVRF"
+    ],
+    "problem": "必须控制完成事件后检验MASK读清和CONFIG例外",
+    "old": "CVRF no read_action static0",
+    "candidate_rule": {
+      "on_read": "MASK_ENABLE",
+      "on_write": "CONFIG with MODE not 0 or 4",
+      "set_event": "all conversions, averaging, multiplications complete",
+      "require_nonzero_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 CVRF",
+        "excerpt": "Conversion Ready Flag bit clears under the following conditions: 1.) Writing to the Configuration Register (except for Power-Down selection) 2.) Reading the Mask/Enable Register OVF: Math Overflow Flag Bit 2 This bit is "
+      },
+      {
+        "pdf_page": 11,
+        "printed_page": "11",
+        "table": null,
+        "section": "§6.3.1",
+        "excerpt": "Conversion Ready flag (CVRF) bit is set after all conversions, averaging, and multiplication operations are complete. The Conversion Ready flag (CVRF) bit clears under these conditions: • Writing to the Configuration Reg"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA226_AFF_LATCH_CLEAR",
+    "chip": "INA226",
+    "targets": [
+      "MASK_ENABLE.AFF"
+    ],
+    "problem": "AFF清除受LEN模式限制",
+    "old": "AFF no read_action static0",
+    "candidate_rule": {
+      "if_LEN1_on_read": "MASK_ENABLE",
+      "if_LEN0_clear": "next conversion without alert",
+      "require_controlled_alert": true
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "When the Alert Latch Enable bit is set to Latch mode, the Alert Function Flag bit clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA226_AFF_CONFIG_CLEAR_SOURCE_CONFLICT",
+    "chip": "INA226",
+    "targets": [
+      "MASK_ENABLE.AFF"
+    ],
+    "problem": "p13CONFIG写清 vs p27onlyMASK读清未解决",
+    "old": "not registered",
+    "candidate_rule": {
+      "CONFIG_write_clear_AFF": "excluded main profile; text disagreement retained",
+      "MASK_read_clear_AFF": "supported when LEN=1"
+    },
+    "locators": [
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table": null,
+        "section": "§6.3.1.2",
+        "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read. The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every bus voltage co"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared following the next conversion that does not result in an Alert conditi"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA226_DIE_ID_RESET_SOURCE_CONFLICT",
+    "chip": "INA226",
+    "targets": [
+      "DIE_ID.ID"
+    ],
+    "problem": "Table7-15零POR与Table7-1 2260/61不一致",
+    "old": "runtime2260 variants only",
+    "candidate_rule": {
+      "main_reset_known_mask": "0x0",
+      "exclude_fixed_ID_reset": true,
+      "optional_summary_priority_expected_set": [
+        "0x2260",
+        "0x2261"
+      ],
+      "split_device_and_revision_fields": true
+    },
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-1 note (3)",
+        "section": null,
+        "excerpt": "Die COO: 2260 = USA or Japan, 2261 = USA 7.1.1 Configuration Register (00h) (Read/Write) Table 7-2. Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT"
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table 7-15",
+        "section": null,
+        "excerpt": "POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE DID: Device ID Bits Bits 4-15 Stores the device identification bits RID: Die Revision ID Bits Bit 0-3 Stores the device revision identification bits 28 Submit Document Feedback C"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA3221_0E_SOURCE_CONFLICT",
+    "chip": "INA3221",
+    "targets": [
+      "SHUNT_SUM_LIMIT.SVL"
+    ],
+    "problem": "维持0E reset/access来源冲突，不用图优先当事实",
+    "old": "SVL candidate16383",
+    "candidate_rule": {
+      "register_known_mask": "0x8001",
+      "expected_register": "0x0000",
+      "field_known_mask": "0x8000",
+      "exclude_register_mask": "0x7ffe",
+      "do_not_promote_16383_to_unconditional_fact": true
+    },
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Tables 8-31 / 8-32",
+        "section": null,
+        "excerpt": "Shunt-Voltage Sum-Limit Register (address = 0Eh) [reset = 7FFEh] This register contains the value that is compared to the Shunt-Voltage Sum register value following each completed cycle of all selected channels to detect"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-31",
+        "section": null,
+        "excerpt": "Table 8-31. Shunt-Voltage Sum-Limit Register 15 14 13 12 11 10 9 8 7 6 5 4 3 2 1 0 SIGN SVL13 SVL12 SVL11 SVL10 SVL9 SVL8 SVL7 SVL6 SVL5 SVL4 SVL3 SVL2 SVL1 SVL0 — RW-0 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 RW-1 R"
+      },
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": "Table 8-32",
+        "section": null,
+        "excerpt": "Table 8-32. Shunt-Voltage Sum-Limit Register Field Descriptions Bit Field Type Reset Description 15 SIGN R 0h Sign bit. 0 = positive number 1 = negative number in twos complement format 14-1 SVL13-0 R 0h Shunt-voltage su"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "existing v2 knownmask8001/exclude_writes already handles central conflict"
+  },
+  {
+    "id": "INA3221_CVRF_CONFIG_POWERDOWN_EXCEPTION",
+    "chip": "INA3221",
+    "targets": [
+      "MASK_ENABLE.CVRF"
+    ],
+    "problem": "CONFIG写清CVRF有powerdown/disable例外",
+    "old": "writeCONFIG clears unconditionally desc",
+    "candidate_rule": {
+      "on_read": "MASK_ENABLE",
+      "on_CONFIG_write_clear_if_MODE_not": [
+        0,
+        4
+      ],
+      "set_event": "all enabled channel conversions complete",
+      "require_nonzero_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": "Table 8-34 continued",
+        "section": null,
+        "excerpt": "Conversion ready clears under the following conditions: 1. Writing the Configuration register (except for power-down or disable-mode selections). 2. Reading the Mask/Enable register. 8.2.17 Power-valid Upper-limit Regist"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA3221_TCF_SOFT_RESET_AND_LITERAL",
+    "chip": "INA3221",
+    "targets": [
+      "MASK_ENABLE.TCF"
+    ],
+    "problem": "soft reset重新初始化遗漏；reset列11h另有单比特表达冲突",
+    "old": "TCF desc only powercycle clear",
+    "candidate_rule": {
+      "no_read_clear": true,
+      "reinitialize_event": [
+        "power cycle",
+        "software reset"
+      ],
+      "do_not_keep_forever_constant_1": true
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "unless the power is recycled or a software reset is issued. The default state for the timing control alert flag is high. 34 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: I"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA3221_TCF_RESET_LITERAL_CONFLICT",
+    "chip": "INA3221",
+    "targets": [
+      "MASK_ENABLE.TCF"
+    ],
+    "problem": "11h超字段范围与RW1/0002冲突",
+    "old": "not registered",
+    "candidate_rule": {
+      "main_por_expected_bit": 1,
+      "support": "register header, bitmap, default-high prose",
+      "table_literal": "11h",
+      "classification": "source representation conflict, not official erratum"
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-33",
+        "section": null,
+        "excerpt": "RW-1 RW-0 LEGEND: R/W = Read/Write; R = Read only; -n = value after reset Table 8-34. Mask/Enable Register Field Descriptions Bit Field Type Reset Description 15 Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation cha"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. Th"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "SOURCE_CONFLICT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA3221_EARLY_CONFIG_DISABLES_TIMING",
+    "chip": "INA3221",
+    "targets": [
+      "CONFIG.MODE"
+    ],
+    "problem": "CONFIG写不止换模式/重启，还会提前停止timing功能",
+    "old": "CONFIG write halts conversion only",
+    "candidate_rule": {
+      "on_write": "halt/restart conversion",
+      "CVRF_clear_unless_powerdown": true,
+      "TC_sequence_early_CONFIG_write": "disables timing control until power cycle/software reset"
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": null,
+        "section": "§8.2.1",
+        "excerpt": "Writing to this register halts any conversion in progress until the write sequence is completed, resulting in a new conversion starting, based on the new Configuration register contents. This architecture prevents any un"
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": null,
+        "section": "§7.3.2.4",
+        "excerpt": "Writing to the Configuration register before the timing control alert function completes the full sequence results in disabling the timing control alert until power is cycled or a software reset is issued. 7.3.2.5 Defaul"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "INA3221_FLAGS_RW_LABEL_ABSTRACTION",
+    "chip": "INA3221",
+    "targets": [
+      "MASK_ENABLE.CF"
+    ],
+    "problem": "硬件标志的RO是抽象；保留原表RW码及写不清状态",
+    "old": "CF/SF/WF/PVF/TCF/CVRF codedRO",
+    "candidate_rule": {
+      "source_label": "R/W",
+      "effective_role": "hardware managed status",
+      "exclude_ordinary_RW_persistence": true,
+      "software_ignores_write_to_status": "abstraction assumption, not a quoted RO code"
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "Writing to this register does not clear the flag bit status. To make sure that there is no uncertainty in the warning function setting that resulted in a flag bit being set, the Mask/Enable register must be read from to "
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "Critical-alert flag indicator. These bits are asserted if the corresponding channel measurement has exceeded the critical alert limit resulting in the Critical alert pin being asserted. Read these bits to determine which"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "ABSTRACTION_ASSUMPTION",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1115_OS_TRIGGER_STATUS_GATE",
+    "chip": "ADS1115",
+    "targets": [
+      "CONFIG.OS"
+    ],
+    "problem": "OS不是可持久写的普通RW",
+    "old": "OS ordinary RW, no field special policy",
+    "candidate_rule": {
+      "write0": "no effect",
+      "write1_when_powerdown": "start one conversion",
+      "write1_while_busy": "no effect",
+      "read0": "conversion in progress",
+      "read1": "idle",
+      "exclude_storage_persistence": true
+    },
+    "locators": [
+      {
+        "pdf_page": 25,
+        "printed_page": "25",
+        "table": "Table 8-3",
+        "section": null,
+        "excerpt": "OS can only be written when in power-down state and has no effect when a conversion is ongoing. When writing: 15 OS R/W 1b 0b : No effect 1b : Start a single conversion (when in power-down state) When reading: 0b : Devic"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1115.pdf",
+    "source_sha256": "eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834",
+    "manual_version": "SBAS444E (ADS1113/ADS1114/ADS1115), May 2009, revised December 2024",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1115_CONFIG_APPLIES_AFTER_OLD_CONVERSION",
+    "chip": "ADS1115",
+    "targets": [
+      "CONFIG.MUX"
+    ],
+    "problem": "CONFIG写不中止旧转换，新配置下一次才生效",
+    "old": "no condition policy",
+    "candidate_rule": {
+      "storage_readback_vs_effective_conversion_configuration": "separate",
+      "continuous_update_applies": "after current old-config conversion completes",
+      "OS_stimulus": "0 for ordinary field persistence baseline"
+    },
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": null,
+        "section": "§7.4.2.2",
+        "excerpt": "When writing new configuration settings, the currently ongoing conversion completes with the previous configuration settings. Thereafter, continuous conversions with the new configuration settings start. To switch to sin"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1115.pdf",
+    "source_sha256": "eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834",
+    "manual_version": "SBAS444E (ADS1113/ADS1114/ADS1115), May 2009, revised December 2024",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1115_COMPARATOR_READ_CONVERSION_EFFECT",
+    "chip": "ADS1115",
+    "targets": [
+      "CONFIG.COMP_LAT"
+    ],
+    "problem": "CONVERSION读取解除锁存输出，不是CONFIG bit读清",
+    "old": "no external alert state in register contract",
+    "candidate_rule": {
+      "field_read_action": "none declared",
+      "cross_register_side_effect": "CONVERSION read clears latched ALERT output",
+      "condition": "COMP_LAT=1, comparator enabled and asserted",
+      "need_alert_state_model": true
+    },
+    "locators": [
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": null,
+        "section": "§7.3.7",
+        "excerpt": "This latched assertion can only be cleared by issuing an SMBus alert response or by reading the Conversion register. The ALERT/RDY pin can be configured as active high or active low by the COMP_POL bit in the Config regi"
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 8-3 continued",
+        "section": null,
+        "excerpt": "remains latched until conversion data are read by the controller or an appropriate SMBus alert response is sent by the controller. The device responds with an address, and is the lowest address currently asserting the AL"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1115.pdf",
+    "source_sha256": "eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834",
+    "manual_version": "SBAS444E (ADS1113/ADS1114/ADS1115), May 2009, revised December 2024",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1115_THRESHOLDS_FUNCTION_CONSTRAINT",
+    "chip": "ADS1115",
+    "targets": [
+      "LO_THRESH.THRESH"
+    ],
+    "problem": "补码HI>LO/PGA变化更新及RDY组合必须分开",
+    "old": "threshold unrestricted storage only",
+    "candidate_rule": {
+      "storage_data_domain": "all 16-bit patterns",
+      "comparator_function_precondition": "signed HI > signed LO",
+      "pga_changed": "update thresholds for desired analog limits",
+      "RDY_mode_condition": {
+        "HI_THRESH.MSB": 1,
+        "LO_THRESH.MSB": 0
+      },
+      "storage_only_precondition": "disable comparator (COMP_QUE=3)"
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§8.1.4",
+        "excerpt": "Hi_thresh register value must always be greater than the Lo_thresh register value. The threshold register formats are shown in Figure 8-6. When set to RDY mode, the ALERT/RDY pin outputs the OS bit when in single-shot mo"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§8.1.4",
+        "excerpt": "conversion-ready function of the ALERT/RDY pin is enabled by setting the Hi_thresh register MSB to 1b and the Lo_thresh register MSB to 0b. To use the comparator function of the ALERT/RDY pin, the Hi_thresh register valu"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1115.pdf",
+    "source_sha256": "eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834",
+    "manual_version": "SBAS444E (ADS1113/ADS1114/ADS1115), May 2009, revised December 2024",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1220_ANY_CONFIG_WRITE_RESTARTS",
+    "chip": "ADS1220",
+    "targets": [
+      "CONFIG1.CM"
+    ],
+    "problem": "任意配置写都有conversion事件，CM1并不代替START/SYNC",
+    "old": "only static register interface, commands excluded",
+    "candidate_rule": {
+      "CONFIG_write_single_shot": "start/restart one conversion",
+      "CONFIG_write_ongoing": "restart current conversion",
+      "CONFIG_write_from_powerdown": "wake and one conversion regardless CM",
+      "continuous_start": "CM=1 then START/SYNC",
+      "completion": "DRDY high-to-low / new output available",
+      "config_readback_is_not_conversion_validation": true
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": null,
+        "section": "§8.4.2.1-2",
+        "excerpt": "every write access to any configuration register also starts a new conversion. Writing to any configuration register while a conversion is ongoing functions as a new START/SYNC command that stops the current conversion a"
+      },
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": null,
+        "section": "§8.4.3.4",
+        "excerpt": "Writing to any configuration register wakes up the device as well, but only starts a single conversion regardless of the selected conversion mode (CM). Copyright © 2026 Texas Instruments Incorporated Submit Document Feed"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1220.pdf",
+    "source_sha256": "ba264d1644fe9de625c075ddcee61eb4c59cce2780ba416cd831216c40f755cf",
+    "manual_version": "SBAS501D, May 2013, revised May 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1220_TEMP_MODE_OVERRIDES_CONFIG0_VREF",
+    "chip": "ADS1220",
+    "targets": [
+      "CONFIG2.VREF"
+    ],
+    "problem": "TS1使CONFIG0无效且实际内部reference，不证明读回位改写",
+    "old": "no mode override policy",
+    "candidate_rule": {
+      "temperature_sensor_override_if": "CONFIG1.TS=1",
+      "CONFIG0_effect": "none on temperature conversion",
+      "effective_VREF": "internal reference regardless selection",
+      "storage_fields": "do not fabricate readback normalization",
+      "any_CONFIG_write": "start/restart as §8.4.2; separate command/event profile"
+    },
+    "locators": [
+      {
+        "pdf_page": 33,
+        "printed_page": "33",
+        "table": null,
+        "section": "§8.3.13",
+        "excerpt": "settings of configuration register 0 have no effect and the device uses the internal reference for measurement, regardless of the selected voltage reference source. Temperature readings follow the same process as the ana"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1220.pdf",
+    "source_sha256": "ba264d1644fe9de625c075ddcee61eb4c59cce2780ba416cd831216c40f755cf",
+    "manual_version": "SBAS501D, May 2013, revised May 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1220_IDAC_STARTUP_AND_POWERDOWN",
+    "chip": "ADS1220",
+    "targets": [
+      "CONFIG2.IDAC"
+    ],
+    "problem": "IDAC先设置后routing，单次完成不自动关",
+    "old": "only legal codes defined",
+    "candidate_rule": {
+      "program_sequence": [
+        "IDAC current",
+        "wait startup if claiming stable current",
+        "I1MUX/I2MUX routing"
+      ],
+      "startup_max_us": 200,
+      "single_shot_complete": "IDAC stays active",
+      "POWERDOWN": "IDAC off, stored register retained"
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.8",
+        "excerpt": "IDACs require up to 200µs to start up after the IDAC current is programmed to the respective value using the IDAC[2:0] bits. Set the IDAC current to the respective value using the IDAC[2:0] bits and then select the routi"
+      },
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.8",
+        "excerpt": "IDACs remain active between any two conversions if the IDAC[2:0] bits are set to a value other than 000b. However, the IDACs are powered down whenever the POWERDOWN command is issued. The analog supply current increases "
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1220.pdf",
+    "source_sha256": "ba264d1644fe9de625c075ddcee61eb4c59cce2780ba416cd831216c40f755cf",
+    "manual_version": "SBAS501D, May 2013, revised May 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1220_PSW_STATE_PERSISTENCE",
+    "chip": "ADS1220",
+    "targets": [
+      "CONFIG2.PSW"
+    ],
+    "problem": "PSW1单次完成后保持关合，POWERDOWN才开",
+    "old": "PSW desc says power switch/powerdown mode",
+    "candidate_rule": {
+      "PSW0": "open",
+      "PSW1_START_SYNC": "close",
+      "POWERDOWN": "open",
+      "single_shot_completion": "retain closed if PSW1",
+      "config_write_side_effect": "separate conversion restart"
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": null,
+        "section": "§8.3.9",
+        "excerpt": "switch stays closed between conversions in single-shot conversion mode in case the PSW bit is set to 1b. The switch can be opened at any time by setting the PSW bit to 0b. By default, the switch is always open. 8.3.10 Se"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1220.pdf",
+    "source_sha256": "ba264d1644fe9de625c075ddcee61eb4c59cce2780ba416cd831216c40f755cf",
+    "manual_version": "SBAS501D, May 2013, revised May 2026",
+    "prior_policy_handling": "NEW_OR_MORE_PRECISE_SOURCE_REVIEW_CANDIDATE"
+  },
+  {
+    "id": "ADS1220_RESERVED_ALWAYS_WRITE_ZERO",
+    "chip": "ADS1220",
+    "targets": [
+      "CONFIG3.RESERVED"
+    ],
+    "problem": "0-only合法刺激没有可写性对照",
+    "old": "existing policy correct fixed0; prior IR desc reserved却可写 should not imply1",
+    "candidate_rule": {
+      "fixed_write": 0,
+      "known_reset": true,
+      "exclude_nonzero_write_oracle": true,
+      "skip_writability_due_to_no_legal_alternative": true
+    },
+    "locators": [
+      {
+        "pdf_page": 46,
+        "printed_page": "46",
+        "table": "Table 8-14",
+        "section": null,
+        "excerpt": "Always write 0b 46 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: ADS1220"
+      }
+    ],
+    "severity": "P1",
+    "evidence_class": "MANUFACTURER_FACT",
+    "source_path": "corpus/data/raw_pdf/TI/ADS1220.pdf",
+    "source_sha256": "ba264d1644fe9de625c075ddcee61eb4c59cce2780ba416cd831216c40f755cf",
+    "manual_version": "SBAS501D, May 2013, revised May 2026",
+    "prior_policy_handling": "existing v2 fixedwrite0/only0 already handles illegal bit1 write"
+  },
+  {
+    "id": "RESERVED_NONDEFAULT_WRITE_UNDEFINED",
+    "chip": "INA3221",
+    "targets": [
+      "CRIT1.UNUSED",
+      "WARN1.UNUSED",
+      "CRIT2.UNUSED",
+      "WARN2.UNUSED",
+      "CRIT3.UNUSED",
+      "WARN3.UNUSED",
+      "MASK_ENABLE.RSVD15"
+    ],
+    "problem": "Reserved/RW0仅访问码与reset，不定义非零存储功能；分开保留事实与undefined操作",
+    "old": "6 limit RESERVED fields unrestricted ordinaryRW; RSVD15 policy already excludes",
+    "candidate_rule": {
+      "retain_source_RW_label": true,
+      "retain_reset0": true,
+      "main_profile_default_only": true,
+      "exclude_nondefault_write_oracle": true
+    },
+    "locators": [
+      {
+        "pdf_page": 31,
+        "printed_page": "31",
+        "table": "Table 8-18",
+        "section": null,
+        "excerpt": "Table 8-18. Channel-1 Critical-Alert Limit Register Field Descriptions Bit Field Type Reset Description 15-3 C1L12-0 R/W FFFh Channel-1 critical-alert-limit data bits 2-0 Reserved R/W 0h Reserved 8.2.9 Warning-Alert Chan"
+      },
+      {
+        "pdf_page": 32,
+        "printed_page": "32",
+        "table": "Table 8-24",
+        "section": null,
+        "excerpt": "Table 8-24. Channel-2 Warning-Alert Limit Register Field Descriptions Bit Field Type Reset Description 15-3 W2L12-0 R/W FFFh Channel-2 warning-alert-limit data bits 2-0 Reserved R/W 0h Reserved 8.2.12 Channel-3 Critical-"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation channel control. These bits determine which shunt voltage measurement channels are enabled to fill the Shunt-Voltage Sum register. The selection of these bits does n"
+      }
+    ],
+    "severity": "P2",
+    "evidence_class": "UNDEFINED_BEHAVIOR",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "prior_policy_handling": "existing v2 quarantines MASK.RSVD15; six limit Reserved fields newly require separation"
+  }
+]

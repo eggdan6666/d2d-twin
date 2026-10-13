@@ -1,0 +1,89 @@
+                                 Product        Order         Technical            Tools &          Support &
+                                  Folder       Now        Documents         Software        Community
+
+
+                                                                             TPS23861
+
+                                                                                   SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+        TPS23861 IEEE 802.3at Quad Port Power-over-Ethernet PSE Controller
+
+1  Features                              3  Description
+1•  IEEE 802.3at Quad Port PSE controller             The  TPS23861    is  an   easy-to-use,    flexible,
+                                                    IEEE802.3at  PSE   solution.  As   shipped,      it
+   –  Auto Detect, classification                                                           automatically manages four 802.3at ports without the
+   –  Auto Turn-On and disconnect                   need for any external control.
+   –  Efficient 255-mΩ sense resistor                                              The  TPS23861   automatically  detects  Powered
+•  Pin-Out enables Two-Layer PCB                    Devices (PDs) that have a valid signature, determines
+•   Kelvin Current Sensing                           power requirements according to classification and
+                                                          applies power. Two-event classification is supported
+•   4-Point detection
+                                                                    for  type-2  PDs.  The  TPS23861  supports DC
+•  Automatic mode – as shipped                         disconnection and  the  external FET  architecture
+   – No External terminal setting required               allows  designers  to  balance  size,  efficiency and
+                                                             solution cost requirements.   – No Initial I2C communication required
+•  Semi-Automatic mode – set by I2C command        The unique pin-out enables 2-layer PCB designs via
+                                                                 logical  grouping  and   clear  upper  and  lower
+   –  Continuous Identification and Classification                                                                  differentiation of I2C and power pins. This delivers
+   –  Meets IEEE 400-ms TPON specification               best-in-class thermal performance, Kelvin accuracy
+   –  Fast-Port shutdown input                      and low-build cost.
+   –  Operates best when used in conjunction with        In addition  to automatic operation, the TPS23861
+      system reference code                            supports Semi-Auto Mode via I2C control for precision
+      http://www.ti.com/product/TPS23861/toolssoftw     monitoring  and   intelligent  power  management.
+      are                                          Compliance with the 400-ms TPON  specification  is
+                                                   ensured  whether  in  semi-automatic  or  automatic•  Optional I2C control and monitoring
+                                                mode.
+•  –40°C to 125°C Temperature range
+•  TSSOP 28 Package 9.8 mm x 6.6 mm                            Device Information(1)
+
+                                                  PART NUMBER     PACKAGE       BODY SIZE
+2  Applications                                      TPS23861        TSSOP (28)         9.80 mm x 6.60 mm
+•  Ethernet switches and routers                                     (1) For all available packages, see the orderable addendum at
+•   Surveillance NVR and DVRs                                      the end of the data sheet.
+•   Residential gateways
+•  PoE Pass-Through systems
+•  Wireless backhaul
+               Simplified Schematic                                        TOPFETs UniformlyCONDUCTORSSpread Over Surface
+
+                                3.3 V   48 V
+
+
+                                                                   100 nF
+                                                                   100 V      PORTn
+                     VDD VPWR
+                                                      47
+               RESET              DRAINn
+
+
+              SHTDWN            GATEn
+
+                                                      22
+                                   SENn
+                           TPS23861                           255 m                                      BOTTOM GND PLANE
+                                                                                                                                           Continuous, Robust Backside GND Plane
+                 A3                KSENSx
+
+                SCL                      INT
+
+                  SDAI              SDAO
+
+                   AIN                AOUT
+                    AGND DGND
+
+
+
+
+                                            Note: only port n shown
+
+                                                                                                     Copyright © 2016, Texas Instruments Incorporated
+
+
+
+
+
+1
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+        intellectual property matters and other important disclaimers. PRODUCTION DATA.

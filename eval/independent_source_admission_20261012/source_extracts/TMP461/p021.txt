@@ -1,0 +1,84 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+8.6.1.5  Conversion Rate Register
+
+The conversion rate register (read address 04h, write address 0Ah) controls the rate at which temperature
+conversions are performed. This register adjusts the idle time between conversions but not the conversion time
+itself, thereby allowing the TMP461 power dissipation to be balanced with the temperature register update rate.
+Table 7 lists the conversion rate options and corresponding time between conversions. The default value of the
+register is 08h, which gives a default rate of 16 conversions per second.
+
+                                      Table 7. Conversion Rate
+
+             VALUE                  CONVERSIONS PER SECOND                 TIME (Seconds)
+
+                 00h                                     0.0625                                  16
+
+                 01h                                      0.125                                   8
+
+                 02h                                       0.25                                    4
+
+                 03h                                          0.5                                    2
+
+                 04h                                    1                                     1
+
+                 05h                                    2                                           0.5
+
+                 06h                                    4                                         0.25
+
+                 07h                                    8                                       0.125
+
+                 08h                                16 (default)                             0.0625 (default)
+
+                 09h                                   32                                    0.03125
+
+
+8.6.1.6  One-Shot Start Register
+
+When the TMP461 device is in shutdown mode (SD = 1 in the configuration register), a single conversion is
+started by writing any value to the one-shot start register, pointer address 0Fh. This write operation starts one
+conversion and comparison cycle on either both the local and remote sensors or on only one or the other sensor,
+depending on the LEN and REN values configured in the channel enable register (read address 16h, write
+address 16h). The TMP461 device returns to shutdown mode when the cycle completes. The value of the data
+sent in the write command is irrelevant and is not stored by the TMP461 device.
+
+8.6.1.7  Channel Enable Register
+
+The channel enable register (read address 16h, write address 16h) enables or disables the temperature
+conversion of remote and local temperature sensors. LEN (bit 0) of the channel enable register enables/disables
+the conversion of local temperature. REN (bit 1) of the channel enable register enables/disables the conversion
+of remote temperature. Both LEN and REN are set to 1 (default), this enables the ADC to convert both local and
+remote temperatures. If LEN is set to 0, the local temperature conversion is disabled and similarly if REN is set
+to 0, the remote temperature conversion is disabled.
+
+Both local and remote temperatures are converted by the internal ADC as a default mode. Channel Enable
+register can be configured to achieve power savings by reducing the total ADC conversion time to half for
+applications that do not require both remote and local temperature information.
+
+8.6.1.8  Consecutive ALERT Register
+
+The Consecutive ALERT register (read address 22h, write address 22h) controls the number of out-of-limit
+temperature measurements required  for ALERT  to be asserted. Table 8 summarizes the values  of the
+consecutive ALERT register. The number programmed in the consecutive ALERT applies to both the remote and
+local temperature results. When the number of times that the temperature result consecutively exceeds the high
+limit register value is equal to the value programmed in the consecutive ALERT register, ALERT is asserted.
+Similarly, the consecutive ALERT register setting is also applicable to the low-limit register.
+
+                                    Table 8. Consecutive ALERT
+
+         REGISTER VALUE            NUMBER OF OUT-OF-LIMIT MEASUREMENTS REQUIRED TO ASSERT ALERT
+
+                 01h                                                   1 (default)
+
+                 03h                                                       2
+
+                 07h                                                       3
+
+                 0Fh                                                       4
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     21
+
+                                                  Product Folder Links: TMP461

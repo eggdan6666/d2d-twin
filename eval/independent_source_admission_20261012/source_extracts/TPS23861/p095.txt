@@ -1,0 +1,59 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+8.4.4  Foldback Protection (ILIM)
+
+The TPS23861 features two types of foldback protection mechanisms for complete MOSFET protection. During
+inrush at port power on, the foldback is based on the port voltage as shown in Figure .
+
+
+                                  NOTE
+         The inrush-current profile remains the same no matter what the state is of the PoEPn bit in
+           the PoE Plus Register.
+
+
+After the port has been powered on and Power Good is valid, a dual-slope foldback current limit is applied,
+providing protection against partial and total short-circuit at port output, while still being able to maintain the port
+powered during normal transients in the TPS23861 input voltage or load current. Refer to Figure 58. Note that
+setting the POEPn bit selects the 2x curve while clearing it selects the 1x curve.
+
+The TLIM timer starts counting down when the current-limit threshold in Figure 57 and Figure 58 is reached.
+When it reaches zero the port is powered down. If the ILIM current-limit condition is cleared while the TLIM timer
+is counting, the TLIM timer counts up, at a slower rate, without exceeding the maximum count corresponding to
+the setting in the TLIM field which is located in the Timing Configuration Register.
+
+If the port experiences a short circuit, the TPS23861 forces zero volts on the gate of the external FET to protect it
+from destruction. Within microseconds the foldback circuit engages, and until the ILIM timeout is reached, the
+port current is controlled according to the foldback schedule.
+
+The ILIM current limit is to be applied such that  its setting is greater than the setting of the ICUT current
+threshold. That is, an ICUT current-limit condition should occur before the TPS23861 asserts foldback control
+over the port current via an ILIM current limit. To this end, the ILIM current limit must be set greater than the
+ICUT current threshold. This must be accomplished by the host except when in Auto Mode (or the AUTO bit is
+set). In that case, the settings for ICUT and ILIM will be properly set based on classification results before the
+port is powered on.
+                            1.2
+                                                                  1X                            1.1
+                                                                  2X
+                         1
+                            0.9
+                        (A) 0.8
+                                        Limit 0.7                            0.6
+                            0.5                                                         Current 0.4
+                            0.3
+                            0.2
+                            0.1
+                         0
+                          0    5   10   15   20   25   30   35   40   45   50
+                                MOSFET Drain Voltage (V)                                                                                              D001
+
+                             Figure 58. Foldback Port On (ILIM vs VDRAIN)
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     95
+
+                                                 Product Folder Links: TPS23861

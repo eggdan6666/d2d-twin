@@ -1,0 +1,63 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+3  Product Overview
+
+3.1  MPU-60X0 Overview
+MotionInterface™  is  becoming  a  “must-have”  function  being  adopted  by  smartphone  and  tablet
+manufacturers due to the enormous value it adds to the end user experience. In smartphones, it finds use in
+applications such as gesture commands for applications and phone control, enhanced gaming, augmented
+reality, panoramic photo capture and viewing, and pedestrian and vehicle navigation.  With its ability to
+precisely and accurately track user motions, MotionTracking technology can convert handsets and tablets
+into powerful 3D  intelligent devices that can be used in applications ranging from health and fitness
+monitoring to location-based services.  Key requirements for MotionInterface enabled devices are small
+package size, low power consumption, high accuracy and repeatability, high shock tolerance, and application
+specific performance programmability – all at a low consumer price point.
+
+The MPU-60X0  is the  world’s  first  integrated 6-axis MotionTracking device  that combines a  3-axis
+gyroscope, 3-axis accelerometer, and a  Digital Motion Processor™ (DMP)  all  in a small 4x4x0.9mm
+package. With its dedicated I2C sensor bus, it directly accepts inputs from an external 3-axis compass to
+provide a complete 9-axis MotionFusion™ output. The MPU-60X0 MotionTracking device, with its 6-axis
+integration, on-board MotionFusion™, and run-time calibration firmware, enables manufacturers to eliminate
+the costly and complex selection, qualification, and system level integration of discrete devices, guaranteeing
+optimal motion performance for consumers. The MPU-60X0 is also designed to interface with multiple non-
+inertial digital sensors, such as pressure sensors, on  its auxiliary I2C port.  The MPU-60X0 is footprint
+compatible with the MPU-30X0 family.
+
+The MPU-60X0 features three 16-bit analog-to-digital converters (ADCs) for digitizing the gyroscope outputs
+and three 16-bit ADCs for digitizing the accelerometer outputs. For precision tracking of both fast and slow
+motions, the parts feature a user-programmable gyroscope full-scale range of ±250, ±500, ±1000, and
+±2000°/sec (dps) and a user-programmable accelerometer full-scale range of ±2g, ±4g, ±8g, and ±16g.
+
+An on-chip 1024 Byte FIFO buffer helps lower system power consumption by allowing the system processor
+to read the sensor data in bursts and then enter a low-power mode as the MPU collects more data. With all
+the necessary on-chip processing and sensor components required to support many motion-based use
+cases, the MPU-60X0 uniquely enables low-power MotionInterface applications in portable applications with
+reduced processing requirements for the system processor. By providing an integrated MotionFusion output,
+the DMP in the MPU-60X0 offloads the intensive MotionProcessing computation requirements from the
+system processor, minimizing the need for frequent polling of the motion sensor output.
+Communication with all registers of the device is performed using either I2C at 400kHz or SPI at 1MHz
+(MPU-6000 only). For applications requiring faster communications, the sensor and interrupt registers may
+be read using SPI at 20MHz (MPU-6000 only). Additional features include an embedded temperature sensor
+and an on-chip oscillator with ±1% variation over the operating temperature range.
+
+By leveraging its patented and volume-proven Nasiri-Fabrication platform, which integrates MEMS wafers
+with companion CMOS electronics through wafer-level bonding, InvenSense has driven the MPU-60X0
+package  size down  to a  revolutionary  footprint  of 4x4x0.9mm (QFN),  while  providing  the  highest
+performance, lowest noise, and the lowest cost semiconductor packaging required for handheld consumer
+electronic devices. The part features a robust 10,000g shock tolerance, and has programmable low-pass
+filters for the gyroscopes, accelerometers, and the on-chip temperature sensor.
+
+For power supply flexibility, the MPU-60X0 operates from VDD power supply voltage range of 2.375V-3.46V.
+Additionally, the MPU-6050 provides a VLOGIC reference pin (in addition to its analog supply pin: VDD),
+which sets the logic levels of its I2C interface. The VLOGIC voltage may be 1.8V±5% or VDD.
+The MPU-6000 and MPU-6050 are identical, except that the MPU-6050 supports the I2C serial interface only,
+and has a separate VLOGIC reference pin. The MPU-6000 supports both I2C and SPI interfaces and has a
+single supply pin, VDD, which is both the device’s logic reference supply and the analog supply for the part.
+The table below outlines these differences:
+
+
+
+                                            7 of 52

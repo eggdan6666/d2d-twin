@@ -1,0 +1,91 @@
+TMP100, TMP101
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+www.ti.com
+7.5.2
+Temperature Register
+The Temperature Register of the TMP100 or TMP101 devices is a 12-bit, read-only register that stores the
+output of the most recent conversion. Two bytes must be read to obtain data, and are described in Table 6 and
+Table 7. The first 12 bits are used to indicate temperature, with all remaining bits equal to zero. Data format for
+temperature is summarized in Table 1. Following power-up or reset, the Temperature Register reads 0°C until
+the first conversion is complete.
+Table 6. Byte 1 of the Temperature Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+T11
+T10
+T9
+T8
+T7
+T6
+T5
+T4
+Table 7. Byte 2 of the Temperature Register
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+T3
+T2
+T1
+T0
+0
+0
+0
+0
+7.5.3
+Configuration Register
+The Configuration Register is an 8-bit read and write register used to store bits that control the operational
+modes of the temperature sensor. Read and write operations are performed MSB-first. The format of the
+Configuration Register for the TMP100 and TMP101 devices is shown in Table 8, followed by a breakdown of the
+register bits. The power-up or reset value of the Configuration Register is all bits equal to 0. The OS/ALERT bit
+reads as 1 after power-up or reset value.
+Table 8. Configuration Register Format
+BYTE
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+1
+OS/ALERT
+R1
+R0
+F1
+F0
+POL
+TM
+SD
+7.5.3.1
+Shutdown Mode (SD)
+The Shutdown Mode of the TMP100 and TMP101 devices allows the user to save maximum power by shutting
+down all device circuitry other than the serial interface, which reduces current consumption to less than 1 µA. For
+the TMP100 and TMP101 devices, Shutdown Mode is enabled when the SD bit is 1. The device shuts down
+when the current conversion is completed. For SD equal to 0, the device maintains continuous conversion.
+7.5.3.2
+Thermostat Mode (TM)
+The Thermostat Mode bit of the TMP101 device indicates to the device whether to operate in Comparator Mode
+(TM = 0) or Interrupt Mode (TM = 1). For more information on comparator and interrupt modes, see High- and
+Low-Limit Registers.
+7.5.3.3
+Polarity (POL)
+The Polarity bit of the TMP101 device lets the user adjust the polarity of the ALERT pin output. If the POL bit is
+set to 0 (default), the ALERT pin becomes active low. When the POL bit is set to 1, the ALERT pin becomes
+active high and the state of the ALERT pin is inverted. The operation of the ALERT pin in various modes is
+illustrated in Figure 11.
+16
+Submit Documentation Feedback
+Copyright © 2002–2015, Texas Instruments Incorporated
+Product Folder Links: TMP100 TMP101

@@ -1,0 +1,89 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+8 Register Maps
+
+The INA3221 uses a bank of registers for holding configuration settings, measurement results, minimum and
+maximum limits, and status information. Table 8-1 summarizes the INA3221 registers; see the Functional Block
+Diagram section for an illustration of the registers.
+
+ 8.1 Summary of Register Set
+
+                                 Table 8-1. Summary of Register Set
+  POINTER                                                                     POWER-ON RESET
+ ADDRESS
+    (Hex)      REGISTER NAME                       DESCRIPTION                          BINARY        HEX    TYPE(1)
+
+                                                All-register reset, shunt and bus voltage ADC conversion times and
+      0       Configuration                                                                        01110001 00100111     7127     R/ W
+                                         averaging, operating mode.
+
+      1      Channel-1 Shunt Voltage  Averaged shunt voltage value.                                  00000000 00000000     0000    R
+
+      2      Channel-1 Bus Voltage    Averaged bus voltage value.                                   00000000 00000000     0000    R
+
+      3      Channel-2 Shunt Voltage  Averaged shunt voltage value.                                  00000000 00000000     0000    R
+
+      4      Channel-2 Bus Voltage    Averaged bus voltage value.                                   00000000 00000000     0000    R
+
+      5      Channel-3 Shunt Voltage  Averaged shunt voltage value.                                  00000000 00000000     0000    R
+
+      6      Channel-3 Bus Voltage    Averaged bus voltage value.                                   00000000 00000000     0000    R
+
+             Channel-1 Critical Alert    Contains limit value to compare each conversion value to determine
+      7                                                                                                01111111 11111000     7FF8     R/ W
+                Limit                                         if the corresponding limit has been exceeded.
+
+             Channel-1 Warning Alert   Contains limit value to compare to averaged measurement to
+      8                                                                                                01111111 11111000     7FF8     R/ W
+                Limit                     determine if the corresponding limit has been exceeded.
+
+             Channel-2 Critical Alert    Contains limit value to compare each conversion value to determine
+      9                                                                                                01111111 11111000     7FF8     R/ W
+                Limit                                         if the corresponding limit has been exceeded.
+
+             Channel-2 Warning Alert   Contains limit value to compare to averaged measurement to
+     A                                                                                                01111111 11111000     7FF8     R/ W
+                Limit                     determine if the corresponding limit has been exceeded.
+
+             Channel-3 Critical Alert    Contains limit value to compare each conversion value to determine
+     B                                                                                                01111111 11111000     7FF8     R/ W
+                Limit                                         if the corresponding limit has been exceeded.
+
+             Channel-3 Warning Alert   Contains limit value to compare to averaged measurement to
+    C                                                                                                01111111 11111000     7FF8     R/ W
+                Limit                     determine if the corresponding limit has been exceeded.
+
+                                       Contains the summed value of the each of the selected shunt
+    D      Shunt-Voltage Sum                                                                 00000000 00000000     0000    R
+                                          voltage conversions.
+
+                                       Contains limit value to compare to the Shunt Voltage Sum register to
+     E      Shunt-Voltage Sum Limit                                                                    01111111 11111110     7FFE     R/ W
+                                       determine if the corresponding limit has been exceeded.
+
+                                               Alert configuration, alert status indication, summation control and
+     F      Mask/Enable                                                                      00000000 00000010     0002     R/ W
+                                              status.
+
+                                       Contains limit value to compare all bus voltage conversions to
+     10      Power-Valid Upper Limit                                                               00100111 00010000     2710     R/ W
+                                       determine if the Power Valid level has been reached.
+
+                                       Contains limit value to compare all bus voltage conversions to
+      11      Power-Valid Lower Limit   determine if the any voltage rail has dropped below the Power Valid     00100011 00101000     2328     R/ W
+                                         range.
+
+    FE      Manufacturer ID           Contains unique manufacturer identification number.                01010100 01001001     5449    R
+
+     FF      Die ID                   Contains unique die identification number.                         00110010 00100000     3220    R
+
+ (1)   Type: R = read-only, R/ W = read/write.
+
+
+
+
+
+24    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

@@ -1,0 +1,57 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.16  General Mask 1 Register
+
+Command = 17h with 1 Data Byte, Read/Write
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME         INTEN                         MAINS      R17[3]      R17[2]      R17[1]      M250
+
+ RESET or POR VALUE       1          0          0          0       Reserved    Reserved    Reserved       0
+
+Bit Descriptions
+
+INTEN: INT pin enable bit. Writing a 1 permits any bit of the Interrupt Register to activate the INT output.
+
+
+                                  NOTE
+            Activating INTEN has no impact on the Event Registers.
+
+
+1 = Any enabled bit of the Interrupt register can activate the INT output.
+
+0 = INT output cannot be activated.
+
+Reserved: Bits R17[3], R17[2] and R17[1] are reserved for future use. Undesirable behavior may result  if the
+value of these bits are changed from the reset value.
+
+MAINS: Detection Voltage Measurement Duration Bit. Set or clear this bit to correspond to the mains frequency
+local to where the TPS23861 is being used in a system. The A/D converter will perform 16 conversions during
+the detection cycle. The results of these 16 conversions are averaged resulting in a total acquisition time equal to
+one cycle of the mains frequency. This technique greatly reduces mains-induced interference in the detection
+cycle measurement.
+
+1 = Convert port voltage during detection at a rate of 960 A/D conversions per second. This corresponds to 16
+conversions during one period of 60-Hz mains frequency.
+
+0 = Convert port voltage during detection at a rate of 800 A/D conversions per second. This corresponds to 16
+conversions during one period of 50-Hz mains frequency.
+
+M250: Current-sense-resistor-selection bit. Setting this bit directs the TPS23861 to use ICUT and classification
+look-up tables corresponding to a 250-mΩ current-sense resistor.
+
+1 = Set this bit if a 250-mΩ current-sense resistor is used as a current-sense resistor.
+
+0 = Clear this bit if a 255-mΩ current-sense resistor is used as a current-sense resistor.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     63
+
+                                                 Product Folder Links: TPS23861

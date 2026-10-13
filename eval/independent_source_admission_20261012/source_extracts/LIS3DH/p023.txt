@@ -1,0 +1,60 @@
+LIS3DH                                                                            Digital main blocks
+
+5.1.3    Stream mode
+
+              In Stream mode the FIFO continues filling data from the X, Y, and Z accelerometer channels
+               until the buffer is full (a set of 32 samples stored) at which point the FIFO buffer index
+              restarts from the beginning and older data is replaced by the current data. The oldest values
+            continue to be overwritten until a read operation frees the FIFO slots.
+
+         An overrun interrupt can be enabled, I1_OVERRUN = '1' in the CTRL_REG3 (22h) register,
+               in order to read the entire contents of the FIFO at once. If, in the application, it is mandatory
+            not to lose data and it is not possible to read at least one sample for each axis within one
+        ODR period, a watermark interrupt can be enabled in order to read partially the FIFO and
+            leave memory slots free for incoming data.
+
+             Setting the FTH [4:0] bit in the FIFO_CTRL_REG (2Eh) register to an N value, the number
+              of X, Y and Z data samples that should be read at the rise of the watermark interrupt is up to
+            (N+1).
+
+5.1.4     Stream-to-FIFO mode
+
+              In Stream-to-FIFO mode, data from the X, Y and Z accelerometer channels are collected in
+          a combination of Stream mode and FIFO mode. The FIFO buffer starts operating in Stream
+         mode and switches to FIFO mode when the selected interrupt occurs.
+
+          The FIFO operating mode changes according to the INT1 pin value if the TR bit is set to ‘0’
+               in the FIFO_CTRL_REG (2Eh) register or the INT2 pin value if the TR bit is set to‘1’ in the
+         FIFO_CTRL_REG (2Eh) register.
+
+         When the interrupt pin is selected and the interrupt event is configured on the corresponding
+              pin, the FIFO operates in Stream mode if the pin value is equal to ‘0’ and it operates in FIFO
+         mode if the pin value is equal to ‘1’. Switching modes is dynamically performed according to
+            the pin value.
+
+           Stream-to-FIFO can be used in order to analyze the sampling history that generates an
+              interrupt. The standard operation is to read the contents of FIFO when the FIFO mode is
+             triggered and the FIFO buffer is full and stopped.
+
+5.1.5     Retrieving data from FIFO
+
+          FIFO data is read from OUT_X_L (28h), OUT_X_H (29h), OUT_Y_L (2Ah), OUT_Y_H
+            (2Bh) and OUT_Z_L (2Ch), OUT_Z_H (2Dh). When the FIFO is in Stream, Stream-to-FIFO
+             or FIFO mode, a read operation from the OUT_X_L (28h), OUT_X_H (29h), OUT_Y_L
+            (2Ah), OUT_Y_H (2Bh) or OUT_Z_L (2Ch), OUT_Z_H (2Dh) registers provides the data
+            stored in the FIFO. Each time data is read from the FIFO, the oldest X, Y and Z data are
+            placed in the OUT_X_L (28h), OUT_X_H (29h), OUT_Y_L (2Ah), OUT_Y_H (2Bh) and
+         OUT_Z_L (2Ch), OUT_Z_H (2Dh) registers and both single read and read burst operations
+           can be used.
+
+          The address to be read is automatically updated by the device and it rolls back to 0x28
+         when register 0x2D is reached. In order to read all FIFO levels in a multiple byte read,
+          192 bytes (6 output registers of 32 levels) have to be read.
+
+
+
+
+
+                                      DocID17530 Rev 2                                      23/54
+
+                                                                                                                            54

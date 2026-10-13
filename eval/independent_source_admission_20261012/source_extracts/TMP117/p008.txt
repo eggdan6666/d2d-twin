@@ -1,0 +1,74 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 6.8 Timing Diagram
+
+                                     tLOW                                                                   tF
+                                             tR                            tHIGH
+            VIH
+    SCL
+             VIL
+                                            tHD;STA            tHD;DAT                               tSU;STA          tSU;STO
+                        tBUF                                                        tSU;DAT                                                               tVD;DAT
+            VIH
+    SDA
+             VIL
+
+            P     S                                    S                    P
+
+                                Figure 6-1. Two-Wire Timing Diagram
+
+ 6.9 Typical Characteristics
+
+ at TA = 25°C, V+ = 3.3 V, and measurement taken in oil bath (unless otherwise noted)
+
+         0.5                                                                           0.5
+                 Average        TMP117 Min/Max                                     Average        TMP117 Min/Max
+         0.4                 Average r3V                                                       0.4       Average r3V
+         0.3                                                                           0.3
+       (qC)  0.2                                                                                                            (qC)  0.2
+
+         0.1                                                                           0.1           Error                                                                                                                                                                                Error
+         0                                                                0
+
+         -0.1                                                                                -0.1
+
+         -0.2                                                                                -0.2                        Temperature                                                                                                                                                                                                                                                                                                                                                                                                  Temperature
+         -0.3                                                                                -0.3
+
+         -0.4                                                                                -0.4
+
+         -0.5                                                                                -0.5
+           -55    -30     -5    20    45    70    95   120   145                 -55    -30     -5    20    45    70    95   120   145
+                              Temperature (qC)                       Accu                                 Temperature (qC)                WCSP
+               1-Hz conversion cycle, 8 averages mode                         1-Hz conversion cycle, 8 averages mode
+
+   Figure 6-2. DRV Package Temperature Error vs Temperature     Figure 6-3. YBG Package Temperature Error vs Temperature
+
+        70                                                             70
+                                                 TA = -40 qC                                      V+ = 1.8 V, St. Dev = 0.89
+        50                                       TA = 25 qC              60                         V+ = 3.3 V, St. Dev = 1.01
+                                                 TA = 125 qC                                      V+ = 5.5 V, St. Dev = 1.05
+
+        30                                                             50        (mqC)
+                                                                                                                 (%)
+           Error  10                                                             40
+
+        -10                                                             30                                                                                                                                                                                                                                                                                                                                                                                        Population
+        -30                                                             20                        Temperature
+
+        -50                                                             10
+
+        -70                                                              0
+           1.8     2.3     2.8     3.3     3.8     4.3     4.8     5.3                      -4     -3     -2     -1    0    1    2    3    4
+                              Supply Voltage (V)                  TMP1Temp                             Data Distribution (LSB)                     DataDataDataData
+         Figure 6-4. Temperature Error vs Supply Voltage          Figure 6-5. Data Reading Distribution Over Supply Voltage (No
+                                                                                      Averaging)
+
+
+
+
+
+8     Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

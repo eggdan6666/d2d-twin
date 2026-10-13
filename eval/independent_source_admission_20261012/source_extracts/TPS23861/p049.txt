@@ -1,0 +1,85 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.2  Interrupt Enable Register
+
+Command = 01h with 1 Data Byte, Read/Write
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME        SUPEN    STRTEN      IFEN     CLCEN     DEEN      DISEN    PGSEN    PESEN
+
+ RESET or POR VALUE       1         A        A          0          0         A          0          0
+
+Each bit corresponds to a particular event or fault as defined in the Interrupt Register.
+
+Writing a 1 into a bit allows the corresponding event to generate an interrupt on the INT pin.
+
+Writing a 0 into a bit masks the corresponding event/fault from activating the INT pin.
+
+
+                                  NOTE
+         The bits of the Interrupt Register always change state according to events or faults,
+           regardless of the state of the Interrupt Enable Register. The INTEN bit of the General
+        Mask 1 Register must also be set in order to allow an event to activate the INT output.
+
+
+Bit Descriptions
+
+SUPEN: Supply event fault enable bit.
+
+1 = Supply event fault activates the INT output.
+
+0 = Supply event fault has no impact on INT output.
+
+STRTEN: Start fault enable bit.
+
+1 = Start fault activates the INT output.
+
+0 = Start fault has no impact on INT output.
+
+IFEN: IFAULT enable bit.
+
+1 = ICUT or ILIM Fault occurrence activates the INT output.
+
+0 = ICUT or ILIM Fault occurrence has no impact on INT output.
+
+CLCEN: Classification cycle interrupt enable bit.
+
+1 = Classification cycle occurrence activates the INT output.
+
+0 = Classification cycle occurrence has no impact on INT output.
+
+DEEN: Detection cycle interrupt enable bit.
+
+1 = Detection cycle occurrence activates the INT output.
+
+0 = Detection cycle occurrence has no impact on INT output.
+
+DISEN: Disconnect event interrupt enable bit.
+
+1 = Disconnect event occurrence activates the INT output.
+
+0 = Disconnect event occurrence has no impact on INT output.
+
+PGSEN: Power good status change interrupt enable bit.
+
+1 = Power good status change activates the INT output.
+
+0 = Power good status change has no impact on INT output.
+
+PESEN: Power enable status change interrupt enable bit.
+
+1 = Power enable status change activates the INT output.
+
+0 = Power enable status change has no impact on INT output.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     49
+
+                                                 Product Folder Links: TPS23861

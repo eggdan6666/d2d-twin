@@ -1,0 +1,51 @@
+LIS3DH                                            Mechanical and electrical specifications
+
+
+                             Table 4. Mechanical characteristics
+ Symbol      Parameter                 Test conditions             Min.    Typ.(1)   Max.     Unit
+
+          Zero-g level change  TCOff                   Max delta from 25 °C                             ±0.5           mg/°C
+          vs temperature
+
+           Acceleration noise    FS bit set to 00, High-Resolution mode
+   An                                                                 220            μg/√Hz
+           density                (Table 10), ODR > 1300 Hz
+
+                        FS bit set to 00
+                                                                17            360     LSb
+                                    X-axis; Normal mode
+
+            Self-test           FS bit set to 00
+   Vst                                                          17            360     LSb           output change(5)(6)(7)   Y-axis; Normal mode
+
+                        FS bit set to 00
+                                                                17            360     LSb
+                                    Z-axis; Normal mode
+
+          Operating
+   Top                                                                   -40            +85     °C
+          temperature range
+
+1.  Typical specifications are not guaranteed.
+
+2.  Verified by wafer level test and measurement of initial offset and sensitivity.
+
+3.  Typical zero-g level offset value after MSL3 preconditioning.
+
+4.  Offset can be eliminated by enabling the built-in high-pass filter.
+
+5.  The sign of “Self-test output change” is defined by the ST bits in CTRL_REG4 (23h), for all axes.
+
+6.  “Self-test output change” is defined as the absolute value of:
+    OUTPUT[LSb](Self test enabled) - OUTPUT[LSb](Self test disabled). 1LSb = 4 mg at 10-bit representation, ±2 g full scale.
+
+7.  After enabling the self-test, correct data is obtained after two samples (low-power mode / normal mode) or after eight
+    samples (high-resolution mode).
+
+
+
+
+
+                                      DocID17530 Rev 2                                       11/54
+
+                                                                                                                            54

@@ -1,0 +1,86 @@
+                               Product        Sample &         Technical            Tools &          Support &
+                                Folder         Buy            Documents         Software        Community
+
+
+                                                                           TMP100, TMP101
+
+                                                                             SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+          TMP10x Temperature Sensor With I2C and SMBus Interface with
+                              Alert Function in SOT-23 Package
+
+1  Features                              3  Description
+1•   Digital Output: SMBus™, Two-Wire, and I2C         The TMP100  and TMP101  devices  are  digital
+                                                      temperature sensors ideal for negative temperature   Interface Compatibility
+                                                                 coefficient (NTC) and positive temperature coefficient
+•   Resolution: 9 to 12 Bits, User-Selectable                                                  (PTC) thermistor replacement. The devices offer a
+•  Accuracy:                                                   typical accuracy of ±1°C without requiring calibration
+   –  ±1°C (Typical) from –55°C to 125°C                 or external component  signal  conditioning. Device
+                                                      temperature sensors are highly  linear and do not
+   –  ±2°C (Maximum) from –55°C to 125°C                                                           require complex  calculations  or  look-up  tables  to
+•  Low Quiescent Current: 45-μA, 0.1-μA Standby        derive  the  temperature. The  on-chip,  12-bit ADC
+•  Wide Supply Range: 2.7 V to 5.5 V                      offers resolutions down to 0.0625°C. The devices are
+                                                            available in 6-Pin SOT-23 packages.•  TMP100 Features Two Address Pins
+•  TMP101 Features One Address Pin and an          The TMP100 and TMP101 devices feature SMBus,
+                                                    Two-Wire,  and  I2C  interface  compatibility.  The  ALERT Pin
+                                          TMP100 device allows up to eight devices on one
+•  6-Pin SOT-23 Package                                                        bus. The TMP101 device  offers an SMBus  Alert
+                                                            function with up to three devices per bus.
+2  Applications
+                                              The TMP100 and TMP101 devices are  ideal  for
+•  Power-Supply Temperature Monitoring                                                   extended temperature measurement in a variety of
+•  Computer Peripheral Thermal Protection              communication, computer, consumer, environmental,
+•  Notebook Computers                                        industrial, and instrumentation applications.
+•   Cell Phones                                  The TMP100 and TMP101 devices are specified for
+                                                         operation over a temperature range  of −55°C  to•   Battery Management
+                                                    125°C.
+•   Office Machines
+•  Thermostat Controls                                           Device Information(1)
+•  Environmental Monitoring and HVAC                 PART NUMBER     PACKAGE    BODY SIZE (NOM)
+•  Electromechanical Device Temperature               TMP100           SOT-23 (6)        2.90 mm × 1.60 mm
+                                                     TMP101           SOT-23 (6)        2.90 mm × 1.60 mm
+
+                                                                                  (1) For all available packages, see the orderable addendum at
+                                                                            the end of the data sheet.
+
+
+                                          Simplified Schematics
+
+         Temperature                                                       Temperature
+
+
+                           Diode                                                           Diode
+                   1                         Control    6                           1                         Control    6
+          SCL           Temp.                      SDA          SCL          Temp.                      SDA
+                                                Logic                                                                Logic
+                          Sensor                                                         Sensor
+
+
+
+                        ∆Σ                                                      ∆Σ
+                   2                            Serial     5                           2                            Serial     5
+        GND         ADC                       ADD0       GND         ADC                       ADD0
+                                                    Interface                                                                    Interface
+                           Converter                                                            Converter
+
+
+
+
+                                                Config                                                               Config
+                   3                               4                           3                               4
+        ADD1        OSC           and Temp        V+         ALERT        OSC          and Temp        V+
+                                                Register                                                                Register
+
+
+
+                            TMP100                                               TMP101
+
+
+
+
+
+1
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+        intellectual property matters and other important disclaimers. PRODUCTION DATA.

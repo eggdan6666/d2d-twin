@@ -1,0 +1,47 @@
+Data Sheet                               AD5592R
+
+APPLICATIONS INFORMATION
+
+MICROPROCESSOR INTERFACING                     can also be used. This method is the same as when using the
+                                                           ADSP-BF531.
+Microprocessor interfacing to the AD5592R/AD5592R-1 is via a
+serial bus that uses a standard protocol compatible with DSPs and
+microcontrollers. The communications channel requires a 4-wire
+interface consisting of a clock signal, a data input signal, a data
+output signal, and a synchronization signal. The devices require a
+16-bit data-word with data valid on the falling edge of SCLK.
+
+AD5592R/AD5592R-1 TO SPI INTERFACE
+
+The SPI interface of the AD5592R/AD5592R-1 is designed to be
+easily connected to industry-standard DSPs and microcontrollers.
+Figure 51 shows the AD5592R/AD5592R-1 connected to the Ana-
+log Devices, Inc., ADSP-BF531 Blackfin® DSP. The Blackfin has an
+integrated SPI port that can be connected directly to the SPI pins of
+the AD5592R/AD5592R-1.
+
+                                                                                                 Figure 52. ADSP-BF527 SPORT Interface
+
+                                     LAYOUT GUIDELINES
+
+                                                                                In any circuit where accuracy is important, careful consideration
+                                                                                of the power supply and ground return layout helps to ensure the
+                                                                         rated performance. The printed circuit board (PCB) on which the
+                                                      AD5592R or the AD5592R-1 is mounted must be designed so that
+                                                                        the AD5592R/AD5592R-1 lie on the analog plane.
+
+                                                          The AD5592R/AD5592R-1 must have ample supply bypassing of
+                                                            10 µF in parallel with 0.1 µF on each supply, located as close to the
+                                                              package as possible, ideally right up against the device. The 10 µF
+                   Figure 51. ADSP-BF531 SPI Interface                         capacitors are the tantalum bead type. The 0.1 µF capacitor must
+                                                              have low effective series resistance (ESR) and low effective series
+AD5592R/AD5592R-1 TO SPORT INTERFACE                                                                     inductance (ESI). Ceramic capacitors, for example, provide a low
+                                                              impedance path to ground at high frequencies to handle transientThe Analog Devices ADSP-BF527 has two serial ports (SPORT).
+                                                                          currents due to internal logic switching.Figure 52 shows how a SPORT interface can be used to control
+the AD5592R/AD5592R-1. The ADSP-BF527 has an SPI port that
+
+
+
+
+
+analog.com                                                                                         Rev. H | 34 of 54

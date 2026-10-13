@@ -1,0 +1,468 @@
+{
+  "chip": "TMP102",
+  "source": {
+    "device": "TMP102",
+    "path": "corpus/data/raw_pdf/TI/TMP102.pdf",
+    "sha256": "c9da6620ef95f75ce94372f670a84d168e05922dd32cebfaa6517083f15ebfaf",
+    "pdf_pages": 33,
+    "version_first_page_text": "                                                                                  TMP102\n                                                                                  SBOS397I – AUGUST 2007 – REVISED JUNE 2024\n  TMP102 Low-Power Digital Temperature Sensor With SMBus and Two-Wire Serial\n                                  Interface in SOT563\n\n1 Features                              3 Description\n\n•  SOT563 package (1.6mm × 1.6mm) is a 68%        The TMP102 device is a digital temperature sensor\n   smaller footprint than SOT-23                      designed for NTC/PTC thermistor replacement where\n•  Accuracy without calibration:                         high  accuracy  is  required. The  device  offers an\n   –  2.0°C (maximum) from –25°C to 85°C            accuracy  of  ±0.5°C  without  requiring  calibration\n   –  3.0°C (maximum) from –40°C to 125°C             or  external component  signal  conditioning. Device\n•  Low quiescent current:                             temperature sensors are highly  linear and do not\n   –  7.5μA active (maximum)                           require complex  calculations  or  lookup  tables  to\n   –  0.35μA shutdown (maximum)                      derive the temperature. The on-chip 12-bit ADC offers\n•  Supply range: 1.4V to 3.6V                            resolutions down to 0.0625°C.\n•  Resolution: 12 bits                            The 1.6mm × 1.6mm SOT563 package  is 68%\n•   Digital output: SMBus, two-wire, and I2C interface     smaller  footprint  than an SOT-23  package. The\n   compatibility                              TMP102 device features SMBus™, two-wire and I2C\n•  NIST traceable                                          interface compatibility, and allows up to four devices\n2 Applications                                on one bus. The device also features an SMBus\n                                                                  alert function. The device is specified to operate over\n•  Portable electronics                                supply voltages from 1.4V to 3.6V with the maximum\n•  Power-supply temperature monitoring                quiescent current  of 7.5µA over the  full operating\n•  Connected peripherals and printers                   range.\n•  PC and notebooks\n                                             The TMP102  device   is  designed  for  extended•  Battery management\n                                                     temperature   measurement    in   a    variety    of•  Enterprise machine\n                                                    communication, computer, consumer, environmental,•  Thermostat\n                                                                  industrial,  and  instrumentation  applications.  The•  Electromechanical device temperatures\n                                                      device is specified for operation over a temperature•  General temperature measurements:\n                                                   range of –40°C to 125°C.\n   –  Factory automation & control\n   –  Test & measurement                        The TMP102  production  units  are 100%  tested\n   –  Medical and healthcare                           against sensors  that  are  NIST-traceable and  are\n                                                                                    Supply Voltage        verified  with  equipment  that  are  NIST-traceable\n                                                                                    1.4V to 3.6V       through ISO/IEC 17025 accredited calibrations.\n\n                                                                                         Supply Bypass\n                                                                                                  Capacitor                 Package Information\n                                              Pullup Resistors                                 0.01µF\n                                       5kΩ                             PART NUMBER      PACKAGE(1)    PACKAGE SIZE(2)\n\n                                                    TMP102          SOT563 (6)        1.60mm × 1.60mm\n\n                                       TMP102                                  (1)   For more information, see Section 10.\n      Two-Wire                            1                           6                         (2)  The package size (length × width) is a nominal value and\n    Host Controller                        SCL            SDA                              includes pins, where applicable.\n\n                                         2                           5\n                                 GND              V+                                                  Temperature\n\n                                         3                                                                    4\n                                                                                                                                Diode                                      ALERT          ADD0                                                                                                                  1                                                                                                                                                                    Control    6\n                                                                                           SCL           Temp.                     SDA\n                                                                                                                                                               Logic\n                                                                                                                              Sensor\n\n\n\n\n\n                                                                                                                  2                                                                                                                                                                                  Serial     5               Simplified Schematic                                    GND           DS                                                                                                                         A/D                                                                                                                                      V+\n                                                                                                                                                                              Interface\n                                                                                                                                       Converter\n\n\n\n                                                                                                                  3                          Config.    4\n                                                                                          ALERT        OSC          and Temp.       ADD0\n                                                                                                                                                                  Register\n\n\n                                                               Block Diagram\n\n     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,\n       intellectual property matters and other important disclaimers. PRODUCTION DATA."
+  },
+  "ir": {
+    "schema": "d2d-ir-v1",
+    "schema_note": "来源 = d2d/parsed/TMP102/auto/TMP102.md（MinerU 解析 TI SBOS410）+ 人工校对；SVD 可映射",
+    "device": "TMP102",
+    "vendor": "TI",
+    "interface": "I2C",
+    "reg_width": 16,
+    "i2c": {
+      "addresses_7bit": [
+        "0x48",
+        "0x49",
+        "0x4A",
+        "0x4B"
+      ],
+      "note": "ADD0 引脚四态接法（GND/V+/SDA/SCL），§6.3.4 Table 6-4；MVP 不建模总线地址",
+      "pointer_register": "写命令首字节为 8 位指针（P7..P2 恒 0，P1P0 选寄存器，上电 00）；MVP 断言不覆盖指针本身"
+    },
+    "registers": [
+      {
+        "name": "TEMP",
+        "addr": "0x00",
+        "access": "RO",
+        "reset": "0x0000",
+        "desc": "12 位二进制补码温度（EM=1 时 13 位），1 LSB=0.0625°C；上电读到 0°C 直至首次转换完成，§6.5.2",
+        "fields": [
+          {
+            "name": "T",
+            "bits": "15:4",
+            "access": "RO",
+            "reset": 0,
+            "desc": "T[11:0] 最近一次转换结果"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "恒 0（EM=1 时 bit0 为 EM 标志）",
+            "tier": "UNVERIFIED",
+            "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+          }
+        ]
+      },
+      {
+        "name": "CONFIG",
+        "addr": "0x01",
+        "access": "RW",
+        "reset": "0x60A0",
+        "desc": "16 位配置寄存器，§6.5.3；byte1=OS,R1,R0,F1,F0,POL,TM,SD；byte2=CR1,CR0,AL,EM,0,0,0,0；上电 0x60A0",
+        "fields": [
+          {
+            "name": "OS",
+            "bits": "15",
+            "access": "RW",
+            "reset": 0,
+            "desc": "shutdown 态写 1 触发单次转换；转换期间读 0（§6.5.3.6；转换完成后行为见 open_questions[1]）"
+          },
+          {
+            "name": "R1",
+            "bits": "14",
+            "access": "RO",
+            "reset": 1,
+            "desc": "只读！分辨率位，出厂设 11（§6.5.3.5）"
+          },
+          {
+            "name": "R0",
+            "bits": "13",
+            "access": "RO",
+            "reset": 1,
+            "desc": "只读！同上"
+          },
+          {
+            "name": "F1",
+            "bits": "12",
+            "access": "RW",
+            "reset": 0,
+            "desc": "故障队列 00:1 01:2 10:4 11:6 连续故障（§6.5.3.4 Table 6-12）"
+          },
+          {
+            "name": "F0",
+            "bits": "11",
+            "access": "RW",
+            "reset": 0,
+            "desc": "同上"
+          },
+          {
+            "name": "POL",
+            "bits": "10",
+            "access": "RW",
+            "reset": 0,
+            "desc": "ALERT 极性 0:低有效 1:高有效"
+          },
+          {
+            "name": "TM",
+            "bits": "9",
+            "access": "RW",
+            "reset": 0,
+            "desc": "0:比较器模式 1:中断模式"
+          },
+          {
+            "name": "SD",
+            "bits": "8",
+            "access": "RW",
+            "reset": 0,
+            "desc": "1=关断模式"
+          },
+          {
+            "name": "CR1",
+            "bits": "7",
+            "access": "RW",
+            "reset": 1,
+            "desc": "CR[1:0] codes00/01/10/11 = 0.25/1/4/8Hz; default10=4Hz; p.15 Table6-5"
+          },
+          {
+            "name": "CR0",
+            "bits": "6",
+            "access": "RW",
+            "reset": 0,
+            "desc": "Low bit of conversion rate; see CR1 corrected code table"
+          },
+          {
+            "name": "AL",
+            "bits": "5",
+            "access": "RO",
+            "reset": 1,
+            "desc": "只读！比较器状态位：POL=0 时常态读 1，超 THIGH 连续故障后读 0（§6.5.3.8）"
+          },
+          {
+            "name": "EM",
+            "bits": "4",
+            "access": "RW",
+            "reset": 0,
+            "desc": "扩展模式 0:12 位 1:13 位"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "恒 0",
+            "tier": "UNVERIFIED",
+            "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+          }
+        ]
+      },
+      {
+        "name": "TLOW",
+        "addr": "0x02",
+        "access": "RW",
+        "reset": "0x4B00",
+        "desc": "低温阈值 12 位，复位 75°C，格式同 TEMP，§6.5.4",
+        "fields": [
+          {
+            "name": "L",
+            "bits": "15:4",
+            "access": "RW",
+            "reset": 1200,
+            "desc": "L[11:0]"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "恒 0（EM=1 时 bit0 有意义）",
+            "tier": "UNVERIFIED",
+            "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+          }
+        ]
+      },
+      {
+        "name": "THIGH",
+        "addr": "0x03",
+        "access": "RW",
+        "reset": "0x5000",
+        "desc": "高温阈值 12 位，复位 80°C，§6.5.4",
+        "fields": [
+          {
+            "name": "H",
+            "bits": "15:4",
+            "access": "RW",
+            "reset": 1280,
+            "desc": "H[11:0]"
+          },
+          {
+            "name": "UNUSED",
+            "bits": "3:0",
+            "access": "RO",
+            "reset": 0,
+            "desc": "恒 0（EM=1 时 bit0 有意义）",
+            "tier": "UNVERIFIED",
+            "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+          }
+        ]
+      }
+    ],
+    "proofread_record": {
+      "date": "2026-10-07",
+      "method": "从 MinerU 解析文本提炼初稿；PDF 对照校验中（用户环节）",
+      "erratum_found": "Table 6-10 复位行被 OCR 打残（'OS0/R11' 粘连、复位行只剩 4 格）——byte1 复位值按 §6.5.3.5 prose（R1R0 启动=11）+ byte2 完整表格推得 0x60A0",
+      "open_questions": [
+        "Q1: CONFIG 复位值 0x60A0 的 byte1 复位行 OCR 残缺——请对照 PDF Table 6-10 逐位确认（重点 R0 复位是 1 还是 0）",
+        "Q2: OS 位转换完成后读 0 还是回读 1？§6.5.3.6 只说『转换期间读 0』——IR 暂不设 read_as 断言，仅测可写持久性",
+        "Q3: R1/R0/AL 三个 RO 位位于 RW 寄存器内——新增的『RW 内 RO 位保护』断言会检查写全 1 后它们保持复位值，AL 依赖环境温度的运行时语义未断言（仿真在默认态 AL=1）",
+        "Q4: 13 位扩展模式（EM=1）未纳入 MVP 断言"
+      ]
+    }
+  },
+  "prior_policy": {},
+  "inventory": [
+    {
+      "chip": "TMP102",
+      "register": "TEMP",
+      "field": "T",
+      "bits": "15:4",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xfff0",
+      "known_protection_bit_mask": "0xfff0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "TEMP",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "OS",
+      "bits": "15",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8000",
+      "known_protection_bit_mask": "0x8000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "R1",
+      "bits": "14",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x4000",
+      "known_protection_bit_mask": "0x4000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "R0",
+      "bits": "13",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x2000",
+      "known_protection_bit_mask": "0x2000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "F1",
+      "bits": "12",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x1000",
+      "known_protection_bit_mask": "0x1000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "F0",
+      "bits": "11",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x800",
+      "known_protection_bit_mask": "0x800",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "POL",
+      "bits": "10",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x400",
+      "known_protection_bit_mask": "0x400",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "TM",
+      "bits": "9",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x200",
+      "known_protection_bit_mask": "0x200",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "SD",
+      "bits": "8",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x100",
+      "known_protection_bit_mask": "0x100",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "CR1",
+      "bits": "7",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "CR0",
+      "bits": "6",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x40",
+      "known_protection_bit_mask": "0x40",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "AL",
+      "bits": "5",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x20",
+      "known_protection_bit_mask": "0x20",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "EM",
+      "bits": "4",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x10",
+      "known_protection_bit_mask": "0x10",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "CONFIG",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "TLOW",
+      "field": "L",
+      "bits": "15:4",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xfff0",
+      "known_protection_bit_mask": "0xfff0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "TLOW",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "THIGH",
+      "field": "H",
+      "bits": "15:4",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0xfff0",
+      "known_protection_bit_mask": "0xfff0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    {
+      "chip": "TMP102",
+      "register": "THIGH",
+      "field": "UNUSED",
+      "bits": "3:0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": true,
+      "known_reset_bit_mask": "0x0",
+      "known_protection_bit_mask": "0x0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    }
+  ]
+}

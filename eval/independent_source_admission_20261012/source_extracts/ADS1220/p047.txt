@@ -1,0 +1,84 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+9 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 9.1 Application Information
+
+The ADS1220 is a precision, 24-bit, ΔΣ ADC that offers many integrated features to ease the measurement
+ of the most common sensor types including various types  of temperature and bridge sensors. Primary
+ considerations when designing an application with the ADS1220 include analog input filtering, establishing
+an appropriate external reference for ratiometric measurements, and setting the common-mode input voltage
+ for the internal PGA. Connecting and configuring the serial interface appropriately is another concern. These
+ considerations are discussed in the following sections.
+
+ 9.1.1 Serial Interface Connections
+
+The principle serial interface connections for the ADS1220 are shown in Figure 9-1.
+
+
+
+
+                                                                                         Microcontroller with SPI Interface
+                                                                                                                                           GPIO          SCLK          DOUT        DIN          DVDD          DVSS                     GPIO/IRQ
+
+
+
+
+
+                                    O                                       O                                           O                                               O
+                                                                                                            0.1 PF    O                                                                        47                                                                               47                                                                                      47                                                                                             47
+                                                                                                                   47
+
+                                                                                                         3.3 V
+
+
+
+
+
+                                                           1  SCLK              DIN 16
+
+
+                                                           2 CS        DOUT/DRDY 15
+
+                                                           3  CLK           DRDY 14                     3.3 V
+
+
+                                                           4 DGND          DVDD 13
+                                                                             Device
+                                                           5 AVSS          AVDD 12              3.3 V      0.1 PF
+
+                                                           6  AIN3/REFN1  AIN0/REFP1 11
+                                                                                                                   0.1 PF
+
+                                                           7  AIN2               AIN1 10
+
+
+                                                           8 REFN0         REFP0  9
+
+
+                               Figure 9-1. Serial Interface Connections
+
+Most microcontroller SPI peripherals can operate with the ADS1220. The interface operates in SPI mode 1
+where CPOL = 0 and CPHA = 1. In SPI mode 1, SCLK idles low and data are launched or changed only on
+SCLK rising edges; data are latched or read by the controller and peripheral on SCLK falling edges. Details of
+ the SPI communication protocol employed by the device can be found in the SPI Timing Requirements section.
+
+ Place 47Ω resistors in series with all digital input and output pins (CS, SCLK, DIN, DOUT/DRDY, and DRDY).
+ This resistance smooths sharp transitions, suppresses overshoot, and offers some overvoltage protection. Care
+must be taken to meet  all SPI timing requirements because the additional resistors interact with the bus
+ capacitances present on the digital signal lines.
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    47
+
+                                                  Product Folder Links: ADS1220

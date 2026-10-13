@@ -1,0 +1,59 @@
+REGISTER TEMP_LOW @ 0x00 reset=0x00 access=RO runtime=None DESC=温度低字节（§7.6.1 Table 7-8，16 位温度跨 0x00/0x01）
+  TEMP7_0[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=TEMP[7:0]
+REGISTER TEMP_HIGH @ 0x01 reset=0x00 access=RO runtime=None DESC=温度高字节（§7.6.2 Table 7-10）
+  TEMP15_8[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=TEMP[15:8]
+REGISTER HUM_LOW @ 0x02 reset=0x00 access=RO runtime=None DESC=湿度低字节（§7.6.3 Table 7-12）
+  HUM7_0[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=HUMIDITY[7:0]
+REGISTER HUM_HIGH @ 0x03 reset=0x00 access=RO runtime=None DESC=湿度高字节（§7.6.4）
+  HUM15_8[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=HUMIDITY[15:8]
+REGISTER STATUS @ 0x04 reset=0x00 access=RO runtime=None DESC=状态（§7.6.5 Table 7-16）：全 8 位只读；bit2:0 的 RES 行**TYPE 列 TI 未填**
+  DRDY_STATUS[7] RO reset=0 read_as=None read_action=None tier=None DESC=数据就绪
+  TH_STATUS[6] RO reset=0 read_as=None read_action=None tier=None DESC=温度高门限中断状态
+  TL_STATUS[5] RO reset=0 read_as=None read_action=None tier=None DESC=温度低门限中断状态
+  HH_STATUS[4] RO reset=0 read_as=None read_action=None tier=None DESC=湿度高门限中断状态
+  HL_STATUS[3] RO reset=0 read_as=None read_action=None tier=None DESC=湿度低门限中断状态
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=Reserved（TI 未给访问码，按 Q0 现约定编成 RO 硬连 0）
+REGISTER TEMP_MAX @ 0x05 reset=0x00 access=RO runtime=None DESC=单次模式最大温度（§7.6.6，Table 7-18 type R）
+  TMAX[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=TEMPERATUREMAX[7:0]
+REGISTER HUM_MAX @ 0x06 reset=0x00 access=RO runtime=None DESC=单次模式最大湿度（§7.6.7）
+  HMAX[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=HUMIDITYMAX[7:0]
+REGISTER INTERRUPT_ENABLE @ 0x07 reset=0x00 access=RW runtime=None DESC=中断使能（§7.6.8 Table 7-22）：bit7:3 标 R/W；bit2:0 的 RES 行 TYPE 列空白
+  DRDY_ENABLE[7] RW reset=0 read_as=None read_action=None tier=None DESC=数据就绪中断使能
+  TH_ENABLE[6] RW reset=0 read_as=None read_action=None tier=None DESC=温度高门限中断使能
+  TL_ENABLE[5] RW reset=0 read_as=None read_action=None tier=None DESC=温度低门限中断使能
+  HH_ENABLE[4] RW reset=0 read_as=None read_action=None tier=None DESC=湿度高门限中断使能
+  HL_ENABLE[3] RW reset=0 read_as=None read_action=None tier=None DESC=湿度低门限中断使能
+  UNUSED[2:0] RO reset=0 read_as=None read_action=None tier=UNVERIFIED DESC=Reserved（同上，受 Q0 约定影响）
+REGISTER TEMP_OFFSET @ 0x08 reset=0x00 access=RW runtime=None DESC=温度偏移调整（§7.6.9 Table 7-24，R/W）
+  TOFF[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=加到转换结果的偏移量
+REGISTER HUM_OFFSET @ 0x09 reset=0x00 access=RW runtime=None DESC=湿度偏移调整（§7.6.10 Table 7-26，R/W；bit7=–25%RH 的补码语义未断言）
+  HOFF[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=HUM_OFFSET_ADJUST[7:0]
+REGISTER TEMP_THR_L @ 0x0A reset=0x01 access=RW runtime=None DESC=温度低门限（§7.6.11 Table 7-28，R/W，**复位值 0x01 非零**）
+  TT_L[7:0] RW reset=1 read_as=None read_action=None tier=None DESC=TEMP_THRES_LOW[7:0]
+REGISTER TEMP_THR_H @ 0x0B reset=0xFF access=RW runtime=None DESC=温度高门限（Table 7-6 复位 FF）
+  TT_H[7:0] RW reset=255 read_as=None read_action=None tier=None DESC=TEMP_THRES_HIGH[7:0]
+REGISTER RH_THR_L @ 0x0C reset=0x00 access=RW runtime=None DESC=湿度低门限（§7.6.13）
+  RH_L[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=RH_THRES_LOW[7:0]
+REGISTER RH_THR_H @ 0x0D reset=0xFF access=RW runtime=None DESC=湿度高门限（复位 FF）
+  RH_H[7:0] RW reset=255 read_as=None read_action=None tier=None DESC=RH_THRES_HIGH[7:0]
+REGISTER DEVICE_CONFIG @ 0x0E reset=0x00 access=RW runtime=None DESC=器件配置（§7.6.15 Table 7-35/7-36）：全 8 位标 R/W。bit7 SOFT_RES『1 = Trigger a Soft Reset. This bit **self-clears after RESET**』→ 与 INA3221 的 CONFIG.RST 同类（位级自清零软复位），与 BME280 的 0xE0 独立 W 寄存器是两种机制
+  SOFT_RES[7] RW reset=0 read_as=0 read_action=None tier=None DESC=写 1 触发软复位（所有寄存器回默认值），该位自清零 → 读恒 0
+  CC[6:4] RW reset=0 read_as=None read_action=None tier=None DESC=连续/单次转换与采样率 000=one-shot … 111=5Hz
+  HEAT_EN[3] RW reset=0 read_as=None read_action=None tier=None DESC=片内加热器使能
+  DRDY_INT_EN[2] RW reset=0 read_as=None read_action=None tier=None DESC=DRDY/INT 引脚输出使能
+  INT_POL[1] RW reset=0 read_as=None read_action=None tier=None DESC=中断极性
+  INT_MODE[0] RW reset=0 read_as=None read_action=None tier=None DESC=0=数据就绪模式 1=中断模式
+REGISTER MEAS_CONFIG @ 0x0F reset=0x00 access=RW runtime=None DESC=测量配置（§7.6.16 Table 7-37/7-38）。注意 bit3 名字就叫 RES 却标 **R/W**（与 HDC 系列一贯写法），bit2:1 的 MEAS_CONF 与 bit1:0 的 TACC/HACC 各有『11: NA』非法编码
+  TACC[7:6] RW reset=0 read_as=None read_action=None tier=None DESC=温度精度 00=14bit 01=11bit 10=9bit 11=NA
+  HACC[5:4] RW reset=0 read_as=None read_action=None tier=None DESC=湿度精度，同上
+  RSVD3[3] RW reset=0 read_as=None read_action=None tier=None DESC=Reserved，但 Table 7-38 标 R/W（可写！）
+  MEAS_CONF[2:1] RW reset=0 read_as=None read_action=None tier=None DESC=00=湿度+温度 01=仅温度 10/11=NA
+  MEAS_TRIG[0] RW reset=0 read_as=None read_action=None tier=None DESC=写 1 启动单次测量；转换完成后硬件清 0——MVP 不建模转换过程，见 Q3
+REGISTER MANUF_ID_L @ 0xFC reset=0x49 access=RO runtime=None DESC=厂商 ID 低字节 = 0x49（'I'）
+  ID[7:0] RO reset=73 read_as=None read_action=None tier=None DESC=0x49
+REGISTER MANUF_ID_H @ 0xFD reset=0x54 access=RO runtime=None DESC=厂商 ID 高字节 = 0x54（'T'）
+  ID[7:0] RO reset=84 read_as=None read_action=None tier=None DESC=0x54
+REGISTER DEVICE_ID_L @ 0xFE reset=0xD0 access=RO runtime=None DESC=器件 ID 低字节 = 0xD0
+  ID[7:0] RO reset=208 read_as=None read_action=None tier=None DESC=0xD0
+REGISTER DEVICE_ID_H @ 0xFF reset=0x07 access=RO runtime=None DESC=器件 ID 高字节 = 0x07（Table 7-6 描述串印成『higher0byte』，是原文粘连，不影响数值）
+  ID[7:0] RO reset=7 read_as=None read_action=None tier=None DESC=0x07

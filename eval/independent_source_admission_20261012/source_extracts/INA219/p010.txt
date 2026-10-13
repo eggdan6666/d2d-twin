@@ -1,0 +1,81 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                 www.ti.com
+
+Feature Description (continued)
+
+
+                      V SHUNT = VIN+ - VIN-
+                                    Typically < 50mV
+
+                             +         -
+
+
+
+                               RSHUNT
+                     Supply                   Load
+                                                       INA219 Power-Supply Voltage
+                                                  3V to 5.5V
+
+
+                                                                                                                                                                     3.3V Supply
+
+
+
+                                   VIN+        VIN-                   VS                                                           INA219
+
+                                              ´       Power Register                                                        Data (SDA)
+
+                                                                                                                                                             2                                             Clock (SCL)
+   VBUS = VIN- - GND                                                                                  Current Register                       I C-/SMBUS-
+                                                                                                                            Compatible           A0
+ Range of 0V to 26V                        PGA           ADC                                                          Interface
+Typical Application 12V                                                                                 Voltage Register                              A1
+
+
+
+
+
+                            GND
+
+
+                Figure 13. INA219 Configured for Shunt and Bus Voltage Measurement
+
+
+Although the INA219 can be read at any time, and the data from the last conversion remain available, the
+conversion ready bit (Status register, CNVR bit) is provided to help coordinate one-shot or triggered conversions.
+The conversion ready bit is set after all conversions, averaging, and multiplication operations are complete.
+
+The conversion ready bit clears under any of these conditions:
+•   Writing to the Configuration register, except when configuring the MODE bits for power down or ADC off
+    (disable) modes
+•  Reading the Status register
+•   Triggering a single-shot conversion with the convert pin
+
+8.3.1.1  Power Measurement
+
+Current and bus voltage are converted at different points in time, depending on the resolution and averaging
+mode settings. For instance, when configured for 12-bit and 128 sample averaging, up to 68 ms in time between
+sampling these two values is possible. Again, these calculations are performed in the background and do not add
+to the overall conversion time.
+
+8.3.1.2 PGA Function
+
+If larger full-scale shunt voltages are desired, the INA219 provides a PGA function that increases the full-scale
+range up to 2, 4, or 8 times (320 mV). Additionally, the bus voltage measurement has two full-scale ranges: 16 or
+32 V.
+
+8.3.1.3  Compatibility With TI Hot Swap Controllers
+
+The INA219 is designed for compatibility with hot swap controllers such the TI TPS2490. The TPS2490 uses a
+high-side shunt with a limit at 50 mV; the INA219 full-scale range of 40 mV enables the use of the same shunt for
+current sensing below this limit. When sensing is required at (or through) the 50-mV sense point of the TPS2490,
+the PGA of the INA219 can be set to /2 to provide an 80-mV full-scale range.
+
+
+
+
+
+10     Submit Documentation Feedback                                                     Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA219

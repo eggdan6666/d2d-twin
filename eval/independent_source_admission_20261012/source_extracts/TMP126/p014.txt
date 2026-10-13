@@ -1,0 +1,70 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+ 8.4 Device Functional Modes
+
+The TMP126 can be configured to operate  in various conversion modes by using the Mode  bit  in the
+ configuration register. These modes provide flexibility to operate the device in the most power efficient way
+ necessary for the intended application.
+
+ 8.4.1 Continuous Conversion Mode
+
+When the Mode bit is set to 0 in the Configuration register, the device operates in continuous conversion
+mode. Figure 8-4 shows that the device continuously performs temperature conversions in this mode. The
+TMP126 does not wait until the end of the conversion period to update the temperature, instead the temperature
+ result register is updated at the end of the temperature conversion. After a completed active conversion, the
+Data_Ready flag bit is set to 1. The user can read the interrupt/status register or the temperature result register
+ to clear the Data_Ready flag. Therefore, the Data_Ready_Flag can be used to determine when the conversion
+ completes so that an external controller can synchronize reading the result register with conversion result
+ updates. The user can set the Data_Ready_Flag_En bit in the configuration register to monitor the state of the
+ Data_Ready_Flag on the ALERT pin.
+
+ Every conversion period consists of an active temperature conversion followed by a standby period. During
+ standby the TMP126 will de-activate all measurement circuitry to conserve power but will remain available for
+ any SPI communication. The device typically consumes 75 µA during the temperature conversion and only 1
+µA during the low-power standby period. The duration of the temperature conversion will remain fixed, but the
+ conversion period can be configured using the Conv_Period[2:0] bit field in the Configuration register, allowing
+ the average current consumption of the device to be optimized based on the application requirements. Changing
+ the conversion period also affects the temperature result update rate due to the temperature result register being
+ updated at the end of every temperature conversion.
+
+Use Equation 1 to calculate the average current consumption of the device in continuous conversion mode.
+
+
+
+                                                                                                                                 (1)
+
+                                                         Start of conversion
+
+                                                                 tStandby timet
+                                     Active conversion time
+
+
+                              Temperature Conversion
+
+
+
+                                                           Conversion Period       Conversion Period
+
+                            Figure 8-4. Conversion Period Timing Diagram
+
+ 8.4.2 Shutdown Mode
+
+When the Mode bit is set to 1 in the Configuration register, the device immediately enters the low-power
+ shutdown mode. If the TMP126 is making a temperature conversion, the device will stop the conversion and
+ discard the partial result. In this mode, the device powers down all active circuitry and can be used in conjunction
+ with the One_Shot bit to perform temperature conversions. Engineers can use the TMP126 for battery-operated
+ systems and other low-power consumption applications because the device typically only consumes 350 nA in
+Shutdown Mode.
+
+ Changing between continuous and shutdown will not clear any active alerts in the Alert_Status register and the
+ALERT pin will continue to be asserted until cleared by the host. The slew rate alert will not be triggered again in
+ shutdown mode but will not clear until read if it is already set.
+
+
+
+
+
+14    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

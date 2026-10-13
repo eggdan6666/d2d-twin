@@ -1,0 +1,62 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 8.1.4 Lo_thresh (P[1:0] = 10b) [reset = 8000h] and Hi_thresh (P[1:0] = 11b) [reset = 7FFFh] Registers
+
+These two registers are applicable to the ADS1115 and ADS1114. These registers serve no purpose in the
+ADS1113. The upper and lower threshold values used by the comparator are stored in two 16-bit registers in
+ 2's complement format. The comparator is implemented as a digital comparator; therefore, the values in these
+ registers must be updated whenever the PGA settings are changed.
+
+The conversion-ready function of the ALERT/RDY pin is enabled by setting the Hi_thresh register MSB to 1b and
+ the Lo_thresh register MSB to 0b. To use the comparator function of the ALERT/RDY pin, the Hi_thresh register
+ value must always be greater than the Lo_thresh register value. The threshold register formats are shown in
+ Figure 8-6. When set to RDY mode, the ALERT/RDY pin outputs the OS bit when in single-shot mode, and
+ provides a continuous-conversion ready pulse when in continuous-conversion mode.
+
+                                   Figure 8-6. Lo_thresh Register
+       15            14            13            12             11            10             9             8
+
+                                                            Lo_thresh[15:8]
+
+                                                     R/W-80h
+
+       7             6             5             4             3             2             1             0
+
+                                                              Lo_thresh[7:0]
+
+                                                     R/W-00h
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                                    Table 8-4. Hi_thresh Register
+       15            14            13            12             11            10             9             8
+
+                                                              Hi_thresh[15:8]
+
+                                                    R/W-7Fh
+
+       7             6             5             4             3             2             1             0
+
+                                                                Hi_thresh[7:0]
+
+                                                   R/W-FFh
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                    Table 8-5. Lo_thresh and Hi_thresh Register Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+     15:0     Lo_thresh[15:0]  R/W       8000h     Low threshold value
+
+     15:0     Hi_thresh[15:0]   R/W      7FFFh     High threshold value
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    27
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

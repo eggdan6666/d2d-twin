@@ -1,0 +1,40 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "semantic-v3/semantic_acceptance",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "Independently review executable semantic-v3 contracts and fault fixtures for fail-open/source mismatch",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/protocol_v2_20261012",
+    "corpus/data/raw_pdf"
+  ],
+  "expected_outputs": [
+    "semantic_acceptance.md",
+    "semantic_acceptance.json"
+  ],
+  "evidence_boundaries": [
+    "Read original PDFs; never trust prior report labels as proof",
+    "Do not modify prior evidence/formal IR/harness/model results",
+    "No SCNet, API, hardware or historical rescoring",
+    "No source-conflict majority resolution"
+  ],
+  "acceptance_checks": [
+    "No prose policy treated as executable",
+    "No reference output copied as oracle",
+    "Closed repairs have actual tests",
+    "Unimplemented facts block production freeze",
+    "Nonzero event and negative fixtures"
+  ],
+  "known_missing_items": [
+    "No physical temporal measurements; abstract events must be labeled"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

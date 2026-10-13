@@ -1,0 +1,77 @@
+LIS3DH                                                                    Register mapping
+
+7      Register mapping
+
+
+          The table given below provides a list of the 8-bit registers embedded in the device and the
+            corresponding addresses.
+
+                                    Table 21. Register address map
+
+                                                      Register address
+                   Name             Type                         Default     Comment
+                                              Hex     Binary
+
+                Reserved (do not modify)             00 - 06                          Reserved
+
+               STATUS_REG_AUX                r       07    000 0111   Output
+
+                 OUT_ADC1_L                    r       08    000 1000   Output
+
+                OUT_ADC1_H                   r       09    000 1001   Output
+
+                 OUT_ADC2_L                    r      0A    000 1010   Output
+
+                OUT_ADC2_H                   r      0B    000 1011   Output
+
+                 OUT_ADC3_L                    r      0C    000 1100   Output
+
+                OUT_ADC3_H                   r      0D    000 1101   Output
+
+                Reserved (do not modify)              0E                            Reserved
+
+                 WHO_AM_I                     r       0F    000 1111  00110011   Dummy register
+
+                Reserved (do not modify)             10 - 1D                          Reserved
+
+                 CTRL_REG0            rw      1E    001 1110 00010000
+
+               TEMP_CFG_REG          rw      1F    001 1111 00000000
+
+                 CTRL_REG1            rw       20    010 0000 00000111
+
+                 CTRL_REG2            rw       21    010 0001 00000000
+
+                 CTRL_REG3            rw       22    010 0010 00000000
+
+                 CTRL_REG4            rw       23    010 0011 00000000
+
+                 CTRL_REG5            rw       24    010 0100 00000000
+
+                 CTRL_REG6            rw       25    010 0101 00000000
+
+                REFERENCE            rw       26    010 0110 00000000
+
+                 STATUS_REG                    r       27    010 0111   Output
+
+                   OUT_X_L                       r       28    010 1000   Output
+
+                  OUT_X_H                      r       29    010 1001   Output
+
+                   OUT_Y_L                       r      2A    010 1010   Output
+
+                  OUT_Y_H                      r      2B    010 1011   Output
+
+                   OUT_Z_L                       r      2C    010 1100   Output
+
+                  OUT_Z_H                       r      2D    010 1101   Output
+
+                FIFO_CTRL_REG          rw      2E    010 1110 00000000
+
+                FIFO_SRC_REG                  r       2F    010 1111   Output
+
+
+
+                                      DocID17530 Rev 2                                      31/54
+
+                                                                                                                            54

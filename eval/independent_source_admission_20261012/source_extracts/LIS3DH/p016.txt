@@ -1,0 +1,63 @@
+Terminology and functionality                                                LIS3DH
+
+3      Terminology and functionality
+
+3.1     Terminology
+
+3.1.1      Sensitivity
+
+              Sensitivity describes the gain of the sensor and can be determined, for example, by
+            applying 1 g acceleration to it. As the sensor can measure DC accelerations this can be
+          done easily by pointing the axis of interest towards the center of the Earth, noting the output
+             value, rotating the sensor by 180 degrees (pointing to the sky) and noting the output value
+            again. By doing so, ±1 g acceleration is applied to the sensor. Subtracting the larger output
+            value from the smaller one, and dividing the result by 2, leads to the actual sensitivity of the
+            sensor. This value changes very little over temperature and also time. The sensitivity
+            tolerance describes the range of sensitivities of a large population of sensors.
+
+3.1.2     Zero-g level
+
+          The zero-g level offset (TyOff) describes the deviation of an actual output signal from the
+             ideal output signal if no acceleration is present. A sensor in a steady state on a horizontal
+            surface measures 0 g for the X-axis and 0 g for the Y-axis whereas the Z-axis measures 1 g.
+          The output is ideally in the middle of the dynamic range of the sensor (content of OUT
+             registers 00h, data expressed as 2’s complement number). A deviation from ideal value in
+               this case is called Zero-g offset. Offset is to some extent a result of stress to MEMS sensor
+          and therefore the offset can slightly change after mounting the sensor onto a printed circuit
+           board or exposing it to extensive mechanical stress. Offset changes little over temperature,
+           see Table 4 “Zero-g level change vs. temperature” (TCOff). The zero-g level tolerance
+             (TyOff) describes the standard deviation of the range of zero-g levels of a population of
+            sensors.
+
+
+3.2      Functionality
+
+3.2.1     High-resolution, normal mode, low-power mode
+
+          LIS3DH provides three different operating modes: high-resolution mode, normal mode and
+           low-power mode.
+
+          The table below summarizes how to select the operating mode.
+
+                                  Table 10. Operating mode selection
+
+                            CTRL_REG1[3] CTRL_REG4[3]            Turn-on    So @ ±2g
+               Operating mode                     BW [Hz]
+                                 (LPen bit)       (HR bit)               time [ms]     [mg/digit]
+
+            Low-power mode
+                                    1             0        ODR/2      1           16
+                  (8-bit data output)
+
+            Normal mode
+                                    0             0        ODR/2       1.6           4
+                 (10-bit data output)
+
+               High-resolution mode
+                                    0             1        ODR/9    7/ODR         1
+                 (12-bit data output)
+
+             Not allowed               1             1                 --              --                   --
+
+
+16/54                                  DocID17530 Rev 2

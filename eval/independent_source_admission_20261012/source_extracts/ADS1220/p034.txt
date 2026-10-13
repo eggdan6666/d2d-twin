@@ -1,0 +1,48 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.4 Device Functional Modes
+ 8.4.1 Power-Up and Reset
+
+When the device powers up, a reset is performed. The reset process takes approximately 50µs. After this
+ power-up reset time, all internal circuitry (including the voltage reference) are stable and communication with
+ the device is possible. As part of the reset process, the device sets all bits in the configuration registers to the
+ respective default settings. By default, the device is set to single-shot conversion mode. After power-up, the
+ device performs a single conversion using the default register settings and then enters a low-power state. When
+ the conversion is complete, the DRDY pin transitions from high to low. The high-to-low transition of the DRDY
+ pin can be used to signal that the ADS1220 is operational and ready to use. The power-up behavior is intended
+ to prevent systems with tight power-supply requirements from encountering a current surge during power-up.
+
+ 8.4.2 Conversion Modes
+
+The device can be operated in one of two conversion modes that can be selected by the CM  bit in the
+ configuration register. These conversion modes are single-shot and continuous-conversion mode.
+
+ 8.4.2.1 Single-Shot Conversion Mode
+
+ In single-shot conversion mode, the device only performs a conversion when a START/SYNC command is
+ issued. The device consequently performs one single conversion and returns to a low-power state afterwards.
+The internal oscillator and all analog circuitry (except for the excitation current sources) are turned off while the
+ device waits in this low-power state until the next conversion is started. In addition, every write access to any
+ configuration register also starts a new conversion. Writing to any configuration register while a conversion is
+ ongoing functions as a new START/SYNC command that stops the current conversion and restarts a single new
+ conversion. Each conversion is fully settled (assuming the analog input signal settles to the final value before the
+ conversion starts) because the device digital filter settles within a single cycle.
+
+ 8.4.2.2 Continuous Conversion Mode
+
+ In continuous conversion mode, the device continuously performs conversions. When a conversion completes,
+ the device places the result in the output buffer and immediately begins another conversion.
+
+ To start continuous conversion mode, the CM bit must be set to 1b followed by a START/SYNC command. The
+ first conversion starts 210 × tCLK (normal mode, duty-cycle mode) or 114 × tCLK (turbo mode) after the last SCLK
+ falling edge of the START/SYNC command. Writing to any configuration register during an ongoing conversion
+ restarts the current conversion. Send a START/SYNC command immediately after the CM bit is set to 1b.
+
+
+
+
+
+34    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

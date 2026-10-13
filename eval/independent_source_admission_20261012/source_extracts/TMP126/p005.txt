@@ -1,0 +1,57 @@
+                                                                                   TMP126
+www.ti.com                                                                           SNIS209C – JULY 2021 – REVISED JUNE 2022
+
+ 7.5 Electrical Characteristics
+ Over free-air temperature range and VDD = 1.62 V to 5.5 V (unless otherwise noted); Typical specifications are at TA = 25 °C
+ and VDD = 3.3 V (unless otherwise noted)
+            PARAMETER                      TEST CONDITIONS               MIN    TYP    MAX  UNIT
+
+ TEMPERATURE SENSOR
+
+                                         20 °C to 30 °C                                     -0.25                0.25   °C
+
+                                               -20 °C to 85 °C                                        -0.3                  0.3   °C
+ TERR (1)     TMP126 Temperature accuracy    -40 °C to 125 °C                                      -0.4                  0.4   °C
+                                               -55 °C to 150 °C                                      -0.5                  0.5   °C
+
+                                               -55 °C to 175 °C                                   -0.75                0.75   °C
+          (1)     TMP126N TERR                                         -40 °C to 150 °C      1-Hz conversion cycle        -0.8                  0.8   °C              Temperature accuracy
+
+ PSR      DC power supply rejection        One-shot mode                                           12.7           m°C/V
+
+                                                   Including sign bit                                       14                Bits
+ TRES         Temperature resolution
+                                    LSB                                                   31.25          m°C
+                                       VDD = 3.3 V TREPEAT       Repeatability(2)                                                                    ±1           LSB                                           1-Hz conversion cycle
+ TLTD         Long-term stability and drift(3)     1000 hours at 175 °C                                      0.07             °C
+                                                 Single layer Flex PCB
+                                                                                                               0.6               s
+             Response time (Stirred Liquid)    0.2032 mm thickness  τ = 63 %
+  tLIQUID
+          DCK Package                     2-layer FR4 PCB     25 °C to 75 °C
+                                                                                                               1.3               s
+                                             1.5748 mm thickness
+
+              Temperature cycling and
+                                                                                                         ±0.5           LSB                 hysteresis(4)
+ tCONV         Active conversion time                                                                4.5       6        7.5   ms
+                                             Conversion Period
+ tVAR          Timing variation                Slew Rate Result                                  -15               15  %
+                                          Slew Rate Limit
+
+ DIGITAL INPUT/OUTPUT
+ CIN           Input capacitance                            f = 1 MHz                                                      20   pF
+ VIH           Input logic high level           SCLK, SIO, CS                                0.7 * VDD              VDD   V
+ VIL            Input logic low level            SCLK, SIO, CS                                 0            0.3 * VDD   V
+  IIN            Input leakage current           SCLK, SIO, CS                                       -0.5                  0.5   μA
+ VOH        SIO output high level              IOH = 3 mA                            VDD - 0.4              VDD   V
+ VOL        SIO output low level                IOL = -3 mA                                    0                  0.4   V
+ VOL        ALERT output logic low level       IOL = -3 mA                                    0                  0.4   V
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback     5
+
+                                                  Product Folder Links: TMP126

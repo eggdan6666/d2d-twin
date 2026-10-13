@@ -1,0 +1,72 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.13 MPU-60X0 Solution for 9-axis Sensor Fusion Using I2C Interface
+In the figure below, the system processor is an I2C master to the MPU-60X0. In addition, the MPU-60X0 is an
+I2C master to the optional external compass sensor. The MPU-60X0 has limited capabilities as an I2C
+Master, and depends on the system processor to manage the initial configuration of any auxiliary sensors.
+The MPU-60X0 has an interface bypass multiplexer, which connects the system processor I2C bus pins 23
+and 24 (SDA and SCL) directly to the auxiliary sensor I2C bus pins 6 and 7 (AUX_DA and AUX_CL).
+
+Once the auxiliary sensors have been configured by the system processor, the interface bypass multiplexer
+should be disabled so that the MPU-60X0 auxiliary I2C master can take control of the sensor I2C bus and
+gather data from the auxiliary sensors.
+For further information regarding I2C master control, please refer to Section 10.
+
+
+
+
+
+                                                                                                           I2C Processor Bus: for reading all
+                                                  Interrupt                12                     sensor data from MPU and for
+                                              Status                       INT
+                                                                                                 configuring external sensors (i.e.
+                                              Register
+                                                                               compass in this example)
+
+                                                                  8   /CS
+                                                                 VDD
+     MPU-60X0                                         9   AD0/SDO
+                                                                 VDD or GND
+                                            Slave I2C
+                                                                 23   SCL/SCLK                      SCL                                               or SPI
+                                                                                                            System                                                    Serial
+                                                  Interface                24   SDA/SDI                      SDA     Processor
+                      FIFO
+
+                                                                           Sensor I2C Bus: for
+                                                                                     configuring and reading
+                       Config                                                 from external sensors
+                        Register
+                                                                                                          Optional
+                                         Sensor                  7   AUX_CL           SCL
+                     Sensor             Master I2C       Interface
+                        Register                 Serial        Bypass                             Compass
+                                                                  6   AUX_DA          SDA                                                 Interface       Mux
+
+                       Factory
+                        Calibration
+                                                      Digital
+                                           Motion
+                                          Processor
+                                         (DMP)
+                                                                                                   Interface bypass mux allows
+                                                                                                     direct configuration of
+                                                                          compass by system processor
+
+
+
+
+                                        Bias & LDO
+
+                                    13      18       10
+
+                          VDD    GND   REGOUT
+
+
+
+
+
+                                           28 of 52

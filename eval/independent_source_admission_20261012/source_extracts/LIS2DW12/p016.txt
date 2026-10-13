@@ -1,0 +1,61 @@
+                                                              LIS2DW12
+                                                                                            Terminology and functionality
+
+
+3.2.2       Single data conversion on-demand mode
+           The device features a single data conversion on-demand mode that is valid for both sets of operating modes (low-
+             noise disabled or enabled) in the four low-power modes. This mode is enabled by writing the MODE[1:0] bits to 10
+                in CTRL1 (20h). Low power modes are selected by writing the LP_MODE[1:0] bits in CTRL1 (20h).
+           The trigger for output data generation can be managed through the I²C/SPI or by applying a clock signal on the
+            INT2 pin acting here as an input by writing the SLP_MODE_ SEL bit in CTRL3 (22h):
+                  •    When SLP_MODE_SEL = 0, output data generation is triggered by the clock signal on the INT2 pin (see
+                    Figure 5. Single data conversion on-demand functionality).
+                  •    When SLP_MODE_SEL = 1, output data generation starts when the SLP_MODE_1 bit is set to 1 logic
+                   through the I²C/SPI. When XL data are available in the registers, this bit is automatically set to 0 and the
+                   device is ready for another triggered session.
+             Output data are generated according to the selected low-power mode.
+          When output data is saved in an output register or FIFO, the device goes to power-down mode and waits for a
+          new trigger.
+                 All ODRs in the range from 0 to up to 200 Hz are supported due to the INT2 clock input.
+         A DRDY signal or FIFO flags are available on the INT1 pin.
+           Power consumption is the same as that of standard low-power modes for the same ODR.
+
+                                   Figure 5. Single data conversion on-demand functionality
+
+
+                      Trigger Signal (INT2 pin)
+
+
+
+
+                                 T_on             PD                T_on
+
+
+              DRDY (INT1 pin)
+
+
+
+
+             At the end of turn-on time T_on, the DRDY interrupt is activated, output data are available to be read and the
+             device goes into power-down. T_on values depend on the low-power mode as follows:
+           T_on (typ.) =
+                  •     1.20 ms for low-power mode 1
+                  •     1.70 ms for low-power mode 2
+                  •     2.30 ms for low-power mode 3
+                  •     3.55 ms for low-power mode 4
+
+3.2.3        Self-test
+           The self-test allows checking the sensor functionality without moving it. The self-test function is off when the self-
+                test bits (ST) are programmed to 00. When the self-test bits are changed, an actuation force is applied to the
+              sensor, simulating a definite input acceleration. In this case, the sensor outputs exhibit a change in their DC
+                levels, which are related to the selected full scale through the device sensitivity. When the self-test is activated,
+              the device output level is given by the algebraic sum of the signals produced by the acceleration acting on the
+             sensor and by the electrostatic test-force. If the output signals change within the amplitude specified in
+             Table 3. Mechanical characteristics, then the sensor is working properly and the parameters of the interface chip
+             are within the defined specifications.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 16/65

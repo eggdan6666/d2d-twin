@@ -1,0 +1,63 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+                                 Table of Contents
+
+ 1 Features............................................................................1      7.4 Device Functional Modes..........................................14
+ 2 Applications.....................................................................1      7.5 Programming............................................................ 18
+ 3 Description.......................................................................1      7.6 Register Map.............................................................25
+ 4 Revision History.............................................................. 2    8 Application and Implementation..................................33
+ 5 Pin Configuration and Functions...................................4      8.1 Application Information............................................. 33
+ 6 Specifications.................................................................. 5      8.2 Typical Application.................................................... 33
+   6.1 Absolute Maximum Ratings ....................................... 5    9 Power Supply Recommendations................................35
+   6.2 ESD Ratings .............................................................. 5    10 Layout...........................................................................36
+   6.3 Recommended Operating Conditions ........................5      10.1 Layout Guidelines................................................... 36
+   6.4 Thermal Information ...................................................5      10.2 Layout Examples.................................................... 37
+   6.5 Electrical Characteristics ............................................6    11 Device and Documentation Support..........................39
+   6.6 Switching Characteristics ...........................................7      11.1 Documentation Support.......................................... 39
+   6.7 Two-Wire Interface Timing ......................................... 7      11.2 Receiving Notification of Documentation Updates..39
+   6.8 Timing Diagram...........................................................8      11.3 Support Resources................................................. 39
+   6.9 Typical Characteristics................................................8      11.4 Trademarks............................................................. 39
+ 7 Detailed Description......................................................11      11.5 Electrostatic Discharge Caution..............................39
+   7.1 Overview................................................................... 11      11.6 Glossary..................................................................39
+   7.2 Functional Block Diagrams....................................... 11    12 Mechanical, Packaging, and Orderable
+   7.3 Feature Description...................................................12          Information.................................................................... 39
+
+
+4 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+
+Changes from Revision C (April 2021) to Revision D (September 2022)                        Page
+ •  Changed device numbers in the Bus Overview section................................................................................... 20
+
+Changes from Revision B (March 2019) to Revision C (April 2021)                            Page
+ •  Updated the numbering format for tables, figures, and cross-references throughout the document..................1
+ •  Changed minimum supply rating to 1.7 V for restricted temperature range....................................................... 1
+ •  Updated minimum supply voltage in Description................................................................................................1
+ •  Added 1.7 V supply rating for in Recommended Operating Conditions............................................................. 5
+ •  Updated Long term stability and drift conditions from 300 hrs to 1000 hrs.........................................................6
+ •  Corrected ALERT Pin Output Voltage vs Pin Sink Current labels...................................................................... 8
+ •  Added I2C behavior notes................................................................................................................................ 20
+ •  Updated Power Supply Recommendations to reflect new 1.7 V supply rating.................................................35
+ •  Updated documentation links........................................................................................................................... 39
+
+Changes from Revision A (October 2018) to Revision B (March 2019)                         Page
+ •  Moved the medical grade specs and RTD replacement information to the Features section ........................... 1
+ •  Changed application bullets................................................................................................................................1
+ •  Added YBG (DSBGA) package information....................................................................................................... 1
+ •  Added YBG package accuracy image................................................................................................................1
+ •  Changed accuracy image to indicate DRV package.......................................................................................... 1
+ •  Changed TJ(MAX) from 150 °C to 155 °C..........................................................................................................5
+ •  Added YBG package thermal information.......................................................................................................... 5
+ •  Added YBG package temperature accuracy chart............................................................................................. 8
+ •  Changed conversion cycle timing diagram.......................................................................................................14
+ •  Changed one-shot timing diagram with AVG[1:0] = 00.....................................................................................15
+ •  Changed alert mode timing diagram.................................................................................................................16
+ •  Changed therm mode timing diagram.............................................................................................................. 17
+ •  Changed write word command timing diagram................................................................................................ 22
+ •  Changed read word command timing diagram.................................................................................................22
+ •  Changed SMBus alert timing diagram..............................................................................................................22
+
+2     Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

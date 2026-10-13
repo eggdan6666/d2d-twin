@@ -1,0 +1,48 @@
+Bosch Sensortec | BME280 Data sheet                                            18 | 60
+
+
+    •  When the IIR filter is disabled, the temperature  resolution is 16 + (osrs_t – 1) bit, e.g. 18 bit
+      when osrs_t is set to ‘3’.
+3.4.4  IIR filter
+The humidity value inside the sensor does not fluctuate rapidly and does not require low pass filtering.
+However, the environmental pressure is subject to many short-term changes, caused e.g. by
+slamming of a door or window, or wind blowing into the sensor. To suppress these disturbances in the
+output data without causing additional interface traffic and processor work load, the BME280 features
+an internal IIR filter. It effectively reduces the bandwidth of the temperature and pressure output
+signals10 and increases the resolution of the pressure and temperature output data to 20 bit. The
+output of a next measurement step is filtered using the following formula:
+                          data_filtered_old⋅(filter_coefficient−1)+data_ADC             data_filtered=                                            filter_coefficient
+                     is the data coming from the current filter memory, and             is the data coming
+from current ADC acquisition.                 is the new value of filter memory and the value that will beData_filtered_old                                               data_ADCsent to the output registers.                                Data_filtered
+The IIR filter can be configured to different filter coefficients, which slows down the response to the
+sensor inputs. Note that the response time with enabled IIR filter depends on the number of samples
+generated, which means that the data output rate must be known to calculate the actual response
+time. For register configuration, please refer to Table 28. A sample response time calculation is shown
+in chapter 9.4.
+
+Table 6: filter settings
+
+    Filter coefficient    Samples to reach ≥75 %
+                              of step response
+        Filter off                 1
+        2                   2
+        4                   5
+        8                    11
+        16                  22
+
+In order to find a suitable setting for filter, please consult chapter 3.5.
+
+When writing to the register filter, the filter is reset. The next ADC values will the pass through the filter
+unchanged and become the initial memory values for the filter. If temperature or pressure
+measurements are skipped, the corresponding filter memory will be kept unchanged even though the
+output registers are set to 0x80000. When the previously skipped measurement is re-enabled, the
+output will be filtered using the filter memory from the last time when the measurement was not
+skipped. If this is not desired, please write to the filter register in order to re-initialize the filter.
+
+
+10 Since the BME280 does not sample continuously, filtering can suffer from signals with a frequency higher than the sampling
+rate of the sensor. E.g. environmental fluctuations caused by windows being opened and closed might have a frequency <5 Hz.
+Consequently, a sampling rate of ODR = 10 Hz is sufficient to obey the Nyquist theorem.
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

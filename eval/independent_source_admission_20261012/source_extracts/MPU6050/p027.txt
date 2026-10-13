@@ -1,0 +1,33 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+7.12  Self-Test
+Please refer to the MPU-6000/MPU-6050 Register Map and Register Descriptions document for more details
+on self test.
+
+Self-test allows for the testing of the mechanical and electrical portions of the sensors. The self-test for each
+measurement axis can be activated by means of the gyroscope and accelerometer self-test registers
+(registers 13 to 16).
+
+When self-test is activated, the electronics cause the sensors to be actuated and produce an output signal.
+The output signal is used to observe the self-test response.
+
+The self-test response is defined as follows:
+
+         Self-test response = Sensor output with self-test enabled – Sensor output without self-test enabled
+
+The self-test response for each accelerometer axis  is defined in the accelerometer specification table
+(Section 6.2), while that for each gyroscope axis is defined in the gyroscope specification table (Section 6.1).
+
+When the value of the self-test response is within the min/max limits of the product specification, the part has
+passed self test. When the self-test response exceeds the min/max values, the part is deemed to have failed
+self-test.  Code  for operating  self  test code  is included within the MotionApps software provided by
+InvenSense.
+
+
+
+
+
+                                           27 of 52

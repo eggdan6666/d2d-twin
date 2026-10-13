@@ -1,0 +1,200 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "ADS1220",
+  "vendor": "TI",
+  "interface": "SPI",
+  "reg_width": 8,
+  "i2c": {
+    "addresses_7bit": [],
+    "note": "SPI 器件，寄存器用 5 位地址经 WREG/RREG 命令访问（§8.6.1）；地址与数据分阶段传输，不属帧内寻址 ⇒ 契合 read/write_register 契约。CS/SCLK 时序 MVP 不建模"
+  },
+  "registers": [
+    {
+      "name": "CONFIG0",
+      "addr": "0x00",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "配置寄存器 0（§8.6.2.1 Figure 8-32，复位 00h，逐位 R/W）",
+      "fields": [
+        {
+          "name": "MUX",
+          "bits": "7:4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "输入多路选择。注意 1111b 是**非法编码值**（手册写 'Reserved'），不是保留位——MVP 不断言非法编码行为"
+        },
+        {
+          "name": "GAIN",
+          "bits": "3:1",
+          "access": "RW",
+          "reset": 0,
+          "desc": "PGA gain: codes0..7 correspond to gain1..128; p.43 Table8-10"
+        },
+        {
+          "name": "PGA_BYPASS",
+          "bits": "0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "1=旁路 PGA"
+        }
+      ],
+      "conversion_write_side_effect": {
+        "single_shot_write": "starts/restarts one conversion",
+        "write_during_conversion": "restarts current conversion",
+        "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+        "continuous_start": "CM1 followed by START/SYNC"
+      }
+    },
+    {
+      "name": "CONFIG1",
+      "addr": "0x01",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "配置寄存器 1（§8.6.2.2，复位 00h）",
+      "fields": [
+        {
+          "name": "DR",
+          "bits": "7:5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "数据速率选择"
+        },
+        {
+          "name": "MODE",
+          "bits": "4:3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Operating mode: normal/duty-cycle/turbo codes0..2; code3 reserved; p.44"
+        },
+        {
+          "name": "CM",
+          "bits": "2",
+          "access": "RW",
+          "reset": 0,
+          "desc": "0 single-shot, 1 continuous conversion; p.44 Table8-11"
+        },
+        {
+          "name": "TS",
+          "bits": "1",
+          "access": "RW",
+          "reset": 0,
+          "desc": "温度传感器使能"
+        },
+        {
+          "name": "BCS",
+          "bits": "0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "传感器电流检测使能"
+        }
+      ],
+      "conversion_write_side_effect": {
+        "single_shot_write": "starts/restarts one conversion",
+        "write_during_conversion": "restarts current conversion",
+        "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+        "continuous_start": "CM1 followed by START/SYNC"
+      }
+    },
+    {
+      "name": "CONFIG2",
+      "addr": "0x02",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "配置寄存器 2（§8.6.2.3，复位 00h）",
+      "fields": [
+        {
+          "name": "VREF",
+          "bits": "7:6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Reference codes0..3 all defined; code3 analog supply; p.45 Table8-13"
+        },
+        {
+          "name": "FIFTY_SIXTY",
+          "bits": "5:4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "50/60Hz 抑制"
+        },
+        {
+          "name": "PSW",
+          "bits": "3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Low-side switch control:0 open,1 closes on START/SYNC and opens on POWERDOWN. In single-shot mode switch remains closed between conversions if PSW1; single conversion completion does not open it."
+        },
+        {
+          "name": "IDAC",
+          "bits": "2:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Codes0..7 all defined; code7=1500 microampere; p.45 Table8-13"
+        }
+      ],
+      "conversion_write_side_effect": {
+        "single_shot_write": "starts/restarts one conversion",
+        "write_during_conversion": "restarts current conversion",
+        "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+        "continuous_start": "CM1 followed by START/SYNC"
+      }
+    },
+    {
+      "name": "CONFIG3",
+      "addr": "0x03",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "配置寄存器 3（§8.6.2.4，复位 00h）。**bit0 字段名就叫 RESERVED，但访问码是 R/W-0** —— 同一份 TI 文档里第 3 处『reserved 却可写』（前两处：INA3221 Mask/Enable bit15、HDC2021 MEAS_CONFIG bit3），且与同片内『1111b 是保留编码值』完全是两回事",
+      "fields": [
+        {
+          "name": "I1MUX",
+          "bits": "7:5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "IDAC1 通道选择"
+        },
+        {
+          "name": "I2MUX",
+          "bits": "4:2",
+          "access": "RW",
+          "reset": 0,
+          "desc": "IDAC2 通道选择"
+        },
+        {
+          "name": "DRDYM",
+          "bits": "1",
+          "access": "RW",
+          "reset": 0,
+          "desc": "数据就绪引脚模式"
+        },
+        {
+          "name": "RESERVED",
+          "bits": "0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "R/W-0 label plus explicit Always write0b; only0 input allowed, no writability scoring; p.46 Table8-14"
+        }
+      ],
+      "conversion_write_side_effect": {
+        "single_shot_write": "starts/restarts one conversion",
+        "write_during_conversion": "restarts current conversion",
+        "write_from_powerdown": "wakes and starts one conversion irrespective CM",
+        "continuous_start": "CM1 followed by START/SYNC"
+      }
+    }
+  ],
+  "excluded_blocks": [
+    "转换数据寄存器（RDAT 读回的 24 位结果）与器件 ID 不在四个配置寄存器地址空间内，MVP 不建模",
+    "所有『1111b / 111b / 11b : Reserved』是**非法编码值**（写进去行为未定义），不是保留位；MVP 不断言"
+  ],
+  "source_repair_note_v2": "This note and policy supersede conflicting historical descriptions/proofread_record; legal input is explicit in source_policy.json.",
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

@@ -1,0 +1,82 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.5.20  Legacy Detect Mode Register
+
+Command = 20h with 1 Data Byte, Read/Write
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME           LEGMOD4           LEGMOD3           LEGMOD2           LEGMOD1
+
+ RESET or POR VALUE            00                     00                     00                     00
+
+Legacy-detect operation is described in Legacy Device Detection. The TPS23861 can perform a legacy-detect
+operation only or a standard detection followed by a legacy-detect operation when directed by the RDETn push-
+button command in the Detect/Class Restart Register, or in Semi-Auto or Auto Mode when the DETEn bit in the
+Detect/Class Enable Register is set. Note that in Semi-Auto or in Auto Mode, the port will not automatically
+power up if a legacy device is detected. In these cases, the port must be powered on by the host.
+
+Bit Descriptions
+
+LEGMODn[1:0]: Legacy-detection-mode field. This field defines the Legacy-Detect Mode of Port n as follows.
+
+
+            LEGMODn[1:0]                                LEGACY DETECT MODE
+
+                  00                   Legacy detect disabled; if DETEn bit in Detect/Class Enable Register is set, a standard
+                                                (resistance only) detection sequence will be performed.
+
+                  01                   Legacy detect sequence only; if DETEn bit in Detect/Class Enable Register is set, a legacy
+                                               detect sequence will be performed
+
+                  10                    Standard + legacy detect sequence; if DETEn bit in Detect/Class Enable Register is set, a
+                                            standard detection followed by legacy detect sequence will be performed
+
+                  11                   Reserved
+
+
+7.5.21  Two-Event Classification Register
+
+Command = 21h with 1 Data Byte, Read/Write
+
+
+         BITS            D7        D6        D5        D4        D3        D2        D1        D0
+
+       BIT NAME            TECLEN4            TECLEN3            TECLEN2            TECLEN1
+
+ RESET or POR VALUE           0A                   0A                   0A                   0A
+
+The Two-Event Classification Register controls whether a second physical-layer classification event occurs after
+a class 4 PD is classified under the following circumstances:
+•   In Manual Mode, when CLEn is set or a pushbutton RCLn bit is written.
+•   In Semi-Auto Mode, when CLEn is set or a PWONn pushbutton command is written.
+•   In Auto Mode
+
+Bit Descriptions
+
+TECLENn[1:0]: The TECLENn field sets the conditions for PSE-initiated two-event physical layer classification
+as follows. The details of these conditions depend on the operating mode as outlined in the preceding paragraph
+and the Device Functional Modes section.
+
+                                 Table 11. TECLENn Field Encoding
+
+             TECLENn[1:0]                   CONDITIONS FOR TWO-EVENT PHYSICAL-LAYER CLASSIFICATION
+
+                  00                    Two-event physical-layer classification is disabled
+
+                  01               A second classification event is initiated if a class 4 classification event occurs
+
+                  10                   Reserved
+
+                  11               A second classification event is initiated if a class 4 classification event occurs
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     67
+
+                                                 Product Folder Links: TPS23861

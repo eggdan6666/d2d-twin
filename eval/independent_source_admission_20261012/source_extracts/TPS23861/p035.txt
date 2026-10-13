@@ -1,0 +1,51 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.3.13  I2C Slave Address and AUTO Bit Programming
+
+
+                                  NOTE
+        When using the I2C interface the host software should wait 22 ms minimum after a reset to
+          ensure valid I2C transactions.
+
+
+                                  NOTE
+          Please note EEPROM endurance of 25 write cycles. Writing to the EEPROM more than
+             this may result in erratic behavior.
+
+
+The TPS23861 includes a means to program in EEPROM the following two fields:
+•  A seven bit I2C slave address for operation with a host processor.
+•  AUTO bit which allows the TPS23861 to operate independently without a host processor.
+
+The benefits this approach include:
+•  Up to 125 similar devices become addressable.
+•  Provides a high level of flexibility.
+   –  Helps to resolve conflicts with other peripherals on same I2C bus.
+   –  The I2C address can be programmed at production subassembly module level or motherboard level.
+   –  Allows a simple approach to field-installed upgrades or expansions to PSE systems.
+•  No physical address line required, no bank selection required.
+•  Smaller package. No address line pins and no AUTO pin.
+
+
+                                  NOTE
+          For compatibility with legacy systems, the module A3 bank addressing is provided by use
+            of the A3 input pin.
+
+As shown in Figure 41, the initial I2C address programming access is established by a local daisy chain chip
+select connection between multiple TPS23861 devices. The AIN pin plays the role of a “moving chip select”
+during address programming.
+
+
+                                  NOTE
+          Global write command including an unlock code (AAh) is required in order to write to the
+           I2C slave address register.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     35
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,38 @@
+Digital interfaces                                                          LIS3DH
+
+6.2.3     SPI read in 3-wire mode
+
+            3-wire mode is entered by setting the bit SIM (SPI serial interface mode selection) to ‘1’ in
+         CTRL_REG4 (23h).
+
+                               Figure 11. SPI read protocol in 3-wire mode
+
+
+
+             &6
+
+            63&
+
+              6', 2
+
+                          5:                          '2  '2 '2 '2 '2 '2 '2  '2
+                                06 $'  $'  $'  $'  $'  $'
+
+          The SPI read command is performed with 16 clock pulses:
+
+              bit 0: READ bit. The value is 1.
+
+              bit 1: MS bit. When 0, does not increment the address; when 1, increments the address in
+             multiple reads.
+
+              bit 2-7: address AD(5:0). This is the address field of the indexed register.
+
+              bit 8-15: data DO(7:0) (read mode). This is the data that is read from the device (MSb first).
+
+          The multiple read command is also available in 3-wire mode.
+
+
+
+
+
+30/54                                  DocID17530 Rev 2

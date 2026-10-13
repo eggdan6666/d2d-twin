@@ -1,0 +1,69 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+9 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections  is not part of the TI component specification,
+     and  TI does  not  warrant  its accuracy  or completeness.  TI’s customers  are  responsible  for
+     determining suitability of components for their purposes, as well as validating and testing their design
+     implementation to confirm system functionality.
+
+ 9.1 Application Information
+
+The TMP126 can be operated with a 4-wire SPI bus in a 3-wire bus configuration with the use of a isolation
+ resistor for a typical application. The wide supply and temperature range support of the TMP126 allow the device
+ to support a wide variety of use cases. The integrated optional CRC ensures data integrity during communication
+and the slew rate alert allows the device to autonomously monitor for rapid temperature changes.
+
+ 9.2 Typical Application
+
+The TMP126 features a 3-wire SPI interface that can easily be connected to a 4-wire SPI MCU with the use of a
+ isolation resistor.
+
+                                                                        1.62 V to 5.5 V
+
+
+
+                                                         10 k
+                                                                                                                  0.1 µF
+                                             VDD
+                      GPIO
+                                             ALERT
+                      GPIO
+                                           10 k             CS
+                                              TMP126                      Data_Out                                       Temperature        MCU
+                                                   SIO                    source                         Data_In
+                                             SCLK
+
+                      CLK                     GND
+
+
+                               Figure 9-1. TMP126 Typical Connections
+
+ 9.2.1 Design Requirements
+
+ For this design example, use the parameters listed below.
+
+                  PARAMETER                                                   Value
+                          Supply (VDD)                                                   1.62 V to 5.5 V
+                             Isolation Resistor                                               10 kΩ
+
+ 9.2.2 Detailed Design Procedure
+
+The TMP126 will convert temperature at a default 1 s interval with an adjustable conversion period between 6
+ms and 2 s. Reading faster than the conversion period will not disrupt device operation and can safely be done if
+ desired.
+
+The TMP126 should be placed as close to the temperature source as possible with a proper layout for thermal
+ coupling. Placing the device as close as possible ensures that temperature changes are captured in the shortest
+ possible time interval.
+
+
+
+
+
+36    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

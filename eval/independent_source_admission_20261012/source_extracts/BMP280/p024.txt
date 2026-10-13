@@ -1,0 +1,47 @@
+Bosch Sensortec | BMP280 Data sheet                                                          24 | 49
+
+
+      4. Global memory map and register description
+
+       4.1   General remarks
+          All communication with the device is performed by reading from and writing to registers. Registers
+       have a width of 8 bits. There are several registers which are reserved; they should not be written to
+       and no specific value is guaranteed when they are read. For details on the interface, consult chapter
+         5.
+
+       4.2   Memory map
+       The memory map is given in Table 18 below. Reserved registers are not shown.
+
+                                                Table 18: Memory map
+
+                                                                                                                                  Reset              Register Name    Address       bit7         bit6         bit5         bit4         bit3         bit2         bit1         bit0                                                                                                                                                        state
+               temp_xlsb       0xFC                    temp_xlsb<7:4>                    0          0          0          0         0x00
+               temp_lsb       0xFB                                            temp_lsb<7:0>                                          0x00
+             temp_msb       0xFA                                        temp_msb<7:0>                                         0x80
+               press_xlsb       0xF9                     press_xlsb<7:4>                    0          0          0          0         0x00
+                press_lsb        0xF8                                              press_lsb<7:0>                                          0x00
+             press_msb       0xF7                                         press_msb<7:0>                                         0x80
+                  config         0xF5                     t_sb[2:0]                                         filter[2:0]                            spi3w_en[0]    0x00
+                ctrl_meas        0xF4                    osrs_t[2:0]                             osrs_p[2:0]                     mode[1:0]           0x00
+                  status         0xF3                                                      measuring[0]                         im_update[0]    0x00
+                    reset         0xE0                                                         reset[7:0]                                            0x00
+                       id          0xD0                                                       chip_id[7:0]                                           0x58
+               calib25...calib00  0xA1…0x88                                                  calibration data                                                    individual
+
+                                       Reserved   Calibration    Control      Data       Status                                Registers:                                                            Revision     Reset                                               registers      data      registers    registers    registers
+                                     do not                                 Type:               read only  read / write  read only   read only   read only   write only                                                 write
+
+       4.3  Register description
+        4.3.1  Register 0xD0 “id”
+       The “id” register contains the chip identification number chip_id[7:0], which is 0x58. This number can
+       be read as soon as the device finished the power-on-reset.
+        4.3.2  Register 0xE0 “reset”
+       The “reset” register contains the soft reset word reset[7:0]. If the value 0xB6 is written to the register,
+        the device is reset using the complete power-on-reset procedure. Writing other values than 0xB6 has
+       no effect. The readout value is always 0x00.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

@@ -1,0 +1,40 @@
+Bosch Sensortec | BMP280 Data sheet                                                          37 | 49
+
+
+       6.3   Connection diagram I2C
+
+                          VDD      VDDIO
+
+
+                                   8                        1
+                                    VDD                GND
+
+                                                     Vent hole
+                                   7                        2
+                         GND                 CSB
+                                    TOP VIEW
+                                              (pads not visible)
+                                   6                        3                                                                SDA
+                                         VDDIO                     SDI
+
+
+
+         I2C address bit 0                5                        4                                                                    SCL
+       GND: '0'; VDDIO: '1'           SDO                 SCK
+
+                           C1      C2
+
+
+                                  Figure 17: I²C connection diagram (Pin1 marking indicated)
+
+
+        Notes:
+            •  The recommended value for C1, C2 is 100 nF.
+            •  A direct connection between CSB and VDDIO is recommended. If CSB is detected as low during
+                  startup, the interface will be locked into SPI mode. See chapter 5.1.
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

@@ -1,0 +1,409 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "TPS23861",
+  "vendor": "TI",
+  "interface": "I2C",
+  "reg_width": 8,
+  "i2c": {
+    "addresses_7bit": [
+      "0x54",
+      "0x55",
+      "0x56",
+      "0x57"
+    ],
+    "note": "SLA<6:0> 由出厂编程决定（寄存器 11h，只在解锁码后可写，见 §7.5 表注 3）；MVP 不建模总线地址"
+  },
+  "registers": [
+    {
+      "name": "INTERRUPT",
+      "addr": "0x00",
+      "access": "RO",
+      "reset": "0x80",
+      "desc": "中断寄存器（§7.5，POR 值 1000,0000 = 80h：SUPF=1 其余 0）。TSD||VDUV||VPUV 上电即成立，故 SUPF 复位为 1——非零复位值的又一个实例",
+      "fields": [
+        {
+          "name": "FLAGS",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 128,
+          "desc": "SUPF/STRTF/IFAULT/CLASC/DETC/DISF/PGC/PEC"
+        }
+      ]
+    },
+    {
+      "name": "POWER_EVENT",
+      "addr": "0x02",
+      "cor_addr": "0x03",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "电源事件（详情表：Command=02h Read Only；Command=03h Clear on Read；『a read at each location returns the same register data with the exception that the Clear-on-Read command clears all bits』）",
+      "fields": [
+        {
+          "name": "EV",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "PGC4-1 / PEC4-1"
+        }
+      ]
+    },
+    {
+      "name": "DETECT_EVENT",
+      "addr": "0x04",
+      "cor_addr": "0x05",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "检测/分类事件（04h 读 / 05h 读即清）",
+      "fields": [
+        {
+          "name": "EV",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "CLASS4-1 / DETECT4-1"
+        }
+      ]
+    },
+    {
+      "name": "FAULT_EVENT",
+      "addr": "0x06",
+      "cor_addr": "0x07",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "故障事件（06h 读 / 07h 读即清）",
+      "fields": [
+        {
+          "name": "EV",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "DISCON4-1 / ICUT4-1"
+        }
+      ]
+    },
+    {
+      "name": "START_EVENT",
+      "addr": "0x08",
+      "cor_addr": "0x09",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "启动/ILIM 事件（08h 读 / 09h 读即清）",
+      "fields": [
+        {
+          "name": "EV",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "ILIM4-1 / STRT4-1"
+        }
+      ]
+    },
+    {
+      "name": "SUPPLY_EVENT",
+      "addr": "0x0A",
+      "cor_addr": "0x0B",
+      "access": "RO",
+      "reset": "0x30",
+      "desc": "供电事件（详情表 POR VALUE 逐位：TSD=0 - =0 VDUV=1 VPUV=1 其余 0 → 30h）。注意 0Bh 读完清零，**清零后 0Ah 读到 00h 而非复位值 30h**——这是断言⑧第二条判据成立的原因",
+      "fields": [
+        {
+          "name": "TSD",
+          "bits": "7",
+          "access": "RO",
+          "reset": 0,
+          "desc": "热关断"
+        },
+        {
+          "name": "RSV6",
+          "bits": "6",
+          "access": "RO",
+          "reset": 0,
+          "desc": "无功能（记号 -）"
+        },
+        {
+          "name": "VDUV",
+          "bits": "5",
+          "access": "RO",
+          "reset": 1,
+          "desc": "VDD UVLO事件；POR置1，VDD低于VUVDD_F置1；CoR地址0Bh清。"
+        },
+        {
+          "name": "VPUV",
+          "bits": "4",
+          "access": "RO",
+          "reset": 1,
+          "desc": "VPWR UVLO事件；POR置1，VPWR低于VPUV_F置1；RESET输入行为需按供电轨。"
+        },
+        {
+          "name": "RSV3_0",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "无功能"
+        }
+      ]
+    },
+    {
+      "name": "PORT1_STATUS",
+      "addr": "0x0C",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "端口 1 状态（CLASS/DETECT）",
+      "fields": [
+        {
+          "name": "ST",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "CLASS P1 / DETECT P1"
+        }
+      ]
+    },
+    {
+      "name": "PORT2_STATUS",
+      "addr": "0x0D",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "端口 2 状态",
+      "fields": [
+        {
+          "name": "ST",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "CLASS/DETECT P2"
+        }
+      ]
+    },
+    {
+      "name": "PORT3_STATUS",
+      "addr": "0x0E",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "端口 3 状态",
+      "fields": [
+        {
+          "name": "ST",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "CLASS/DETECT P3"
+        }
+      ]
+    },
+    {
+      "name": "PORT4_STATUS",
+      "addr": "0x0F",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "端口 4 状态",
+      "fields": [
+        {
+          "name": "ST",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "CLASS/DETECT P4"
+        }
+      ]
+    },
+    {
+      "name": "POWER_STATUS",
+      "addr": "0x10",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "电源状态（PG4-1 / PE4-1，逐位 8 个名字，1 位/名）",
+      "fields": [
+        {
+          "name": "PG",
+          "bits": "7:4",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Power Good 端口 4-1"
+        },
+        {
+          "name": "PE",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Power Enable 端口 4-1"
+        }
+      ]
+    },
+    {
+      "name": "GENERAL_MASK",
+      "addr": "0x17",
+      "access": "RW",
+      "reset": "0x80",
+      "desc": "总屏蔽（§7.5 General Mask，POR 1000,0000）。手册位名里同时出现 **`-`（无功能）** 与 **`R`（ROM 位）** 两种记号，且 INTEN 复位为 1",
+      "fields": [
+        {
+          "name": "INTEN",
+          "bits": "7",
+          "access": "RW",
+          "reset": 1,
+          "desc": "INT 输出总使能，POR=1"
+        },
+        {
+          "name": "RSV6",
+          "bits": "6",
+          "access": "RO",
+          "reset": 0,
+          "desc": "无功能位（-）"
+        },
+        {
+          "name": "RSV5",
+          "bits": "5",
+          "access": "RO",
+          "reset": 0,
+          "desc": "无功能位（-）"
+        },
+        {
+          "name": "MAINS",
+          "bits": "4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "主电源检测使能"
+        },
+        {
+          "name": "RSV3",
+          "bits": "3",
+          "access": "RO",
+          "reset": 0,
+          "desc": "无功能位（-）"
+        },
+        {
+          "name": "RSV2",
+          "bits": "2",
+          "access": "RO",
+          "reset": 0,
+          "desc": "无功能位（-）"
+        },
+        {
+          "name": "ROM1",
+          "bits": "1",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R17[1] reserved，详细初值Reserved与总览80h粒度冲突；保持新实例观测初值，不解释为ROM/revision。"
+        },
+        {
+          "name": "M250",
+          "bits": "0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Current-sense-resistor-selection：1=250mΩ，0=255mΩ；选择ICUT/classification look-up tables。"
+        }
+      ]
+    },
+    {
+      "name": "RESTART",
+      "addr": "0x18",
+      "access": "W",
+      "reset": "0x00",
+      "desc": "检测/分类重启**命令寄存器**（WO，表内 RST STATE 为 -）。纯写、无可读回 → 现有断言只声明它存在，不断言（见 Q2）",
+      "fields": []
+    },
+    {
+      "name": "POWER_ENABLE",
+      "addr": "0x19",
+      "access": "W",
+      "reset": "0x00",
+      "desc": "端口使能/关断命令（WO）：POFF4-1 / PWON4-1",
+      "fields": []
+    },
+    {
+      "name": "RESET_CMD",
+      "addr": "0x1A",
+      "access": "W",
+      "reset": "0x00",
+      "desc": "复位命令（WO）：RESP4-1 复位端口状态机、RESAL 复位所有告警、CLINP/CLRAIN 清分类",
+      "fields": []
+    },
+    {
+      "name": "INTERRUPT_TIMER",
+      "addr": "0x27",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "中断定时（表内位名 R R R R + TMR3-0）：高 4 位是 ROM 位，低 4 位可写",
+      "fields": [
+        {
+          "name": "ROM",
+          "bits": "7:4",
+          "access": "RO",
+          "reset": 0,
+          "desc": "R27[7:4] reserved，RESET/POR明确0，写入保持0；非ROM，无非法写后行为保证。"
+        },
+        {
+          "name": "TMR",
+          "bits": "3:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "定时选择"
+        }
+      ]
+    },
+    {
+      "name": "TEMPERATURE",
+      "addr": "0x2C",
+      "access": "RO",
+      "reset": "0x00",
+      "desc": "芯片温度（RO，运行时值但手册给了 POR 00h）",
+      "fields": [
+        {
+          "name": "TMP",
+          "bits": "7:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "温度字节"
+        }
+      ]
+    },
+    {
+      "name": "POE_PLUS",
+      "addr": "0x40",
+      "access": "RW",
+      "reset": "0x00",
+      "desc": "PoE Plus 使能。**RST STATE 写作 `0000,----`**：高 4 位有确定复位值 0（A 档），低 4 位是 **`-` 即 don't-care**——手册用符号明确表达『这个位的复位值没定义』，这是 Q0 里 C 档最干净的一个实例",
+      "fields": [
+        {
+          "name": "POEP",
+          "bits": "7:4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "各端口 PoE Plus 使能（POR=0）"
+        },
+        {
+          "name": "RSVD_LO",
+          "bits": "3:0",
+          "access": "UNSPEC",
+          "desc": "RST STATE 标 '-'，复位值未定义 ⇒ 不判分只记录"
+        }
+      ]
+    },
+    {
+      "name": "FIRMWARE_REV",
+      "addr": "0x41",
+      "access": "RO",
+      "reset": "0x00",
+      "runtime_value": true,
+      "desc": "固件版本（表内 RST STATE = `RRRR,RRR R`，整字节 ROM 编程值）⇒ runtime_value，跳过复位值断言",
+      "fields": []
+    }
+  ],
+  "excluded_blocks": [
+    "**含 'A' 记号的寄存器整体不建模**（01h Interrupt Enable、12h Operating Mode、13h Disconnect Enable、14h Detect/Class Enable、15h Port PWR Priority）：表注 2 明写『Bits labeled “A” assume the state of the bit programmed into register 0x11 after POR』——复位值由出厂编程决定，不可知，属第四档（programmed/ROM），既不是硬连也不是未定义",
+    "03h/05h/07h/09h/0Bh 不单独列寄存器：它们是前者的 Clear-on-Read 别名地址，用 cor_addr 注解表达（否则同一存储会被断成两个独立寄存器）",
+    "11h I2C Slave Address：表注 3『Read/Write during slave address programming when preceded by the unlock code』⇒ 解锁门控写，MVP 不断言",
+    "16h/20h/21h/29h/2Ah/2Bh：汇总表的位名数量与 8 位不对齐，位域划分需查 §7.5 各详情表才能确定，未确认前不入断言（宁可少断言，不猜）"
+  ],
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

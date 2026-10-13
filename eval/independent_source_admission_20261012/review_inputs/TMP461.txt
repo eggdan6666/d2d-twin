@@ -1,0 +1,71 @@
+REGISTER TEMP_LOCAL_HIGH @ 0x00 reset=0x00 access=RO runtime=None DESC=本地温度高字节（LT[11:4]，只读，1 LSB=1°C 补码）。上电复位值 00h
+  LT_HIGH[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=本地温度高 8 位
+REGISTER TEMP_REMOTE_HIGH @ 0x01 reset=0x00 access=RO runtime=None DESC=远端温度高字节（RT[11:4]，只读，1 LSB=1°C 补码）。上电复位值 00h
+  RT_HIGH[7:0] RO reset=0 read_as=None read_action=None tier=None DESC=远端温度高 8 位
+REGISTER STATUS @ 0x02 reset=0x00 access=RO runtime=None DESC=状态寄存器（§8.6.1.3，只读）。D7 为 ADC 转换状态；D6-D2 为限值与断线标志，手册注明读该寄存器即清除这 5 个标志（read-to-clear）；D1-D0 为 THERM 状态，自动复位
+  BUSY[7] RO reset=0 read_as=None read_action=None tier=None DESC=1=ADC 转换中，0=空闲
+  LHIGH[6] RO reset=0 read_as=None read_action=clear tier=None DESC=本地高温告警标志，读即清
+  LLOW[5] RO reset=0 read_as=None read_action=clear tier=None DESC=本地低温告警标志，读即清
+  RHIGH[4] RO reset=0 read_as=None read_action=clear tier=None DESC=远端高温告警标志，读即清
+  RLOW[3] RO reset=0 read_as=None read_action=clear tier=None DESC=远端低温告警标志，读即清
+  OPEN[2] RO reset=0 read_as=None read_action=clear tier=None DESC=远端二极管断线标志，读即清
+  RTHRM[1] RO reset=0 read_as=None read_action=None tier=None DESC=远端 THERM 超温标志
+  LTHRM[0] RO reset=0 read_as=None read_action=None tier=None DESC=本地 THERM 超温标志
+REGISTER CONFIG @ 0x03 reset=0x00 access=RW runtime=None DESC=配置寄存器（§8.6.1.4）。读地址 03h，写地址 09h（触发断言⑦读写别名）。D4:D3 与 D1:D0 为保留位，明文规定恒 0
+  MASK1[7] RW reset=0 read_as=None read_action=None tier=None DESC=0=使能 ALERT，1=屏蔽 ALERT
+  SD[6] RW reset=0 read_as=None read_action=None tier=None DESC=0=连续转换，1=关断（Shutdown）
+  ALERT_THERM2[5] RW reset=0 read_as=None read_action=None tier=None DESC=0=引脚 7 设为 ALERT，1=引脚 7 设为 THERM2
+  RSV_4_3[4:3] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+  RANGE[2] RW reset=0 read_as=None read_action=None tier=None DESC=温度范围：0=-40°C~+127°C，1=-64°C~+191°C
+  RSV_1_0[1:0] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+REGISTER CONV_RATE @ 0x04 reset=0x08 access=RW runtime=None DESC=转换速率寄存器（§8.6.1.5）。读地址 04h，写地址 0Ah（读写别名）。默认 08h（16 SPS）
+  RSV_7_4[7:4] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+  CR[3:0] RW reset=8 read_as=None read_action=None tier=None DESC=转换速率代码（00h-09h，默认 08h）
+REGISTER LOCAL_HIGH_LIMIT @ 0x05 reset=0x7F access=RW runtime=None DESC=本地高温限值高字节（§8.6 Table 4）。读地址 05h，写地址 0Bh（读写别名）。默认 7Fh（127°C）
+  LTHL[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=本地高温限值高字节（LTHL[11:4]）
+REGISTER LOCAL_LOW_LIMIT @ 0x06 reset=0x80 access=RW runtime=None DESC=本地低温限值高字节（§8.6 Table 4）。读地址 06h，写地址 0Ch（读写别名）。默认 80h（-128°C）
+  LTLL[7:0] RW reset=128 read_as=None read_action=None tier=None DESC=本地低温限值高字节（LTLL[11:4]）
+REGISTER REMOTE_HIGH_LIMIT_HIGH @ 0x07 reset=0x7F access=RW runtime=None DESC=远端高温限值高字节（§8.6 Table 4）。读地址 07h，写地址 0Dh（读写别名）。默认 7Fh（127°C）
+  RTHL_HIGH[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=远端高温限值高字节（RTHL[11:4]）
+REGISTER REMOTE_LOW_LIMIT_HIGH @ 0x08 reset=0x80 access=RW runtime=None DESC=远端低温限值高字节（§8.6 Table 4）。读地址 08h，写地址 0Eh（读写别名）。默认 80h（-128°C）
+  RTLL_HIGH[7:0] RW reset=128 read_as=None read_action=None tier=None DESC=远端低温限值高字节（RTLL[11:4]）
+REGISTER ONE_SHOT @ 0x0F reset=0x00 access=W runtime=None DESC=单次转换启动寄存器（§8.6.1.6，只写）。关断模式下写任意数据启动一次转换。不作为软复位键
+  START[7:0] W reset=0 read_as=None read_action=None tier=None DESC=写任意值启动单次转换
+REGISTER TEMP_REMOTE_LOW @ 0x10 reset=0x00 access=RO runtime=None DESC=远端温度低字节（RT[3:0] 位于高 4 位，只读，0.0625°C 分辨率）。低 4 位为 0
+  RT_LOW[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=远端温度小数部分（RT[3:0]）
+  RSV_3_0[3:0] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+REGISTER REMOTE_OFFSET_HIGH @ 0x11 reset=0x00 access=RW runtime=None DESC=远端温度偏移高字节（RTOS[11:4]，§8.6.1.10）。默认 00h
+  RTOS_HIGH[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=远端偏移高字节
+REGISTER REMOTE_OFFSET_LOW @ 0x12 reset=0x00 access=RW runtime=None DESC=远端温度偏移低字节（RTOS[3:0] 位于高 4 位）。低 4 位恒 0
+  RTOS_LOW[7:4] RW reset=0 read_as=None read_action=None tier=None DESC=远端偏移低 4 位
+  RSV_3_0[3:0] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+REGISTER REMOTE_HIGH_LIMIT_LOW @ 0x13 reset=0xF0 access=RW runtime=None DESC=远端高温限值低字节（RTHL[3:0] 位于高 4 位）。POR 默认 F0h
+  RTHL_LOW[7:4] RW reset=15 read_as=None read_action=None tier=None DESC=远端高温限值低 4 位（高半字节为 0xF）
+  RSV_3_0[3:0] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+REGISTER REMOTE_LOW_LIMIT_LOW @ 0x14 reset=0x00 access=RW runtime=None DESC=远端低温限值低字节（RTLL[3:0] 位于高 4 位）。默认 00h
+  RTLL_LOW[7:4] RW reset=0 read_as=None read_action=None tier=None DESC=远端低温限值低 4 位
+  RSV_3_0[3:0] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+REGISTER TEMP_LOCAL_LOW @ 0x15 reset=0x00 access=RO runtime=None DESC=本地温度低字节（LT[3:0] 位于高 4 位，只读）。低 4 位为 0
+  LT_LOW[7:4] RO reset=0 read_as=None read_action=None tier=None DESC=本地温度小数部分（LT[3:0]）
+  RSV_3_0[3:0] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+REGISTER CHANNEL_ENABLE @ 0x16 reset=0x03 access=RW runtime=None DESC=通道使能寄存器（§8.6.1.7）。REN (bit 1) 远端使能，LEN (bit 0) 本地使能。默认 03h。高 6 位保留恒 0
+  RSV_7_2[7:2] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+  REN[1] RW reset=1 read_as=None read_action=None tier=None DESC=远端通道转换使能
+  LEN[0] RW reset=1 read_as=None read_action=None tier=None DESC=本地通道转换使能
+REGISTER REMOTE_THERM_LIMIT @ 0x19 reset=0x7F access=RW runtime=None DESC=远端 THERM 门限寄存器（§8.6 Table 4）。默认 7Fh（127°C）
+  RTH[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=远端 THERM 门限（RTH[11:4]）
+REGISTER LOCAL_THERM_LIMIT @ 0x20 reset=0x7F access=RW runtime=None DESC=本地 THERM 门限寄存器（§8.6 Table 4）。默认 7Fh（127°C）
+  LTH[7:0] RW reset=127 read_as=None read_action=None tier=None DESC=本地 THERM 门限（LTH[11:4]）
+REGISTER THERM_HYSTERESIS @ 0x21 reset=0x0A access=RW runtime=None DESC=THERM 迟滞寄存器（§8.6 Table 4）。默认 0Ah（10°C）
+  HYS[7:0] RW reset=10 read_as=None read_action=None tier=None DESC=THERM 迟滞温度（HYS[11:4]）
+REGISTER CONSECUTIVE_ALERT @ 0x22 reset=0x01 access=RW runtime=None DESC=连续告警判定寄存器（§8.6.1.8）。D3:D1 为连续违例次数代码 CONAL[2:0]；D0 硬连恒 1；高 4 位保留恒 0
+  RSV_7_4[7:4] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+  CONAL[3:1] RW reset=0 read_as=None read_action=None tier=None DESC=连续越限计数：000b=1次, 001b=2次, 011b=3次, 111b=4次
+  FIXED_1[0] RO reset=1 read_as=None read_action=None tier=A DESC=硬件固定为 1（Table 4 POR=01h，bit 0 标 1）
+REGISTER N_FACTOR @ 0x23 reset=0x00 access=RW runtime=None DESC=η-因子校正寄存器（§8.6.1.9）。8 位补码，范围 -128 到 127。默认 00h
+  NC[7:0] RW reset=0 read_as=None read_action=None tier=None DESC=η-因子校正值（NC[7:0]）
+REGISTER DIGITAL_FILTER @ 0x24 reset=0x00 access=RW runtime=None DESC=数字滤波控制寄存器（§8.6 Table 4）。DF[1:0] 控制滤波级别，默认 00h（禁用）。高 6 位保留恒 0
+  RSV_7_2[7:2] RO reset=0 read_as=None read_action=None tier=C DESC=保留位，恒 0
+  DF[1:0] RW reset=0 read_as=None read_action=None tier=None DESC=数字滤波器配置：00b=禁用, 01b=Level 1, 10b=Level 2
+REGISTER MANUFACTURER_ID @ 0xFE reset=0x55 access=RO runtime=None DESC=制造商识别码寄存器（§8.6.1.11，只读）。固定值 55h（TI 标识）
+  ID[7:0] RO reset=85 read_as=None read_action=None tier=None DESC=TI 制造商代码 55h

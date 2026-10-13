@@ -1,0 +1,45 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.4.5  Push-Button Power On Response
+
+The port behavior of the TPS23861 to a commanded power on from the push-button register varies depending
+upon both the detect and class enable registers.
+
+                                  Table 8. Summarized Response(1)
+
+       OPERATING MODE        DETECT EN BIT  CLASS EN BIT               PORT BEHAVIOR
+
+                   Off                         x                 x                           Port does not power on
+
+              Manual                       x                 x                         Port immediately powers on
+
+                                        0               0                           Port does not power on
+
+                                        1               0             Port powers on after completion of next good detect
+             Semi-Auto                    0               1                           Port does not power on
+
+                                                                                 Port powers on after completion of next good detect and
+                                        1               1
+                                                                                                                   classification
+
+                                                                          Pushbutton power on ignored. Port follows Auto Mode
+                Auto                         x                 x
+                                                                                                                rules
+
+(1)  Response to a push-button power on.
+
+
+
+
+
+                              Figure 45. Semi-Auto Sequenced Turn On
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     43
+
+                                                 Product Folder Links: TPS23861

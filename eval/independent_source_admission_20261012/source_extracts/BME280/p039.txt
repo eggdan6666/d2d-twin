@@ -1,0 +1,42 @@
+Bosch Sensortec | BME280 Data sheet                                            39 | 60
+
+
+7.2  Connection diagram I2C
+
+                         VDD      VDDIO
+
+
+                                  8                                 1
+                                   VDD                       GND
+
+
+
+                                  7                                 2
+                         GND                        CSB
+                                       TOP VIEW                                                                                           R1  R2
+                                                  (pads not visible)
+                                  6                                 3                                                                            SDA
+                                        VDDIO                              SDI
+
+
+                                                    Vent hole
+        I2C address bit 0                5                                 4                                                                                SCL
+      GND: '0'; VDDIO: '1'           SDO                        SCK
+
+                          C1      C2
+
+
+
+Figure 17: I²C connection diagram
+
+Notes:
+    •  The recommended value for C1, C2 is 100 nF
+    •  The value for the pull-up resistors R1, R2 should be based on the interface timing and the bus
+        load; a normal value is 4.7 kΩ
+    •  A direct connection between CSB and VDDIO is required
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

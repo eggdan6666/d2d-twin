@@ -1,0 +1,206 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "TMP102",
+  "vendor": "TI",
+  "interface": "I2C",
+  "reg_width": 16,
+  "i2c": {
+    "addresses_7bit": [
+      "0x48",
+      "0x49",
+      "0x4A",
+      "0x4B"
+    ],
+    "note": "ADD0 引脚四态接法（GND/V+/SDA/SCL），§6.3.4 Table 6-4；MVP 不建模总线地址",
+    "pointer_register": "写命令首字节为 8 位指针（P7..P2 恒 0，P1P0 选寄存器，上电 00）；MVP 断言不覆盖指针本身"
+  },
+  "registers": [
+    {
+      "name": "TEMP",
+      "addr": "0x00",
+      "access": "RO",
+      "reset": "0x0000",
+      "desc": "12 位二进制补码温度（EM=1 时 13 位），1 LSB=0.0625°C；上电读到 0°C 直至首次转换完成，§6.5.2",
+      "fields": [
+        {
+          "name": "T",
+          "bits": "15:4",
+          "access": "RO",
+          "reset": 0,
+          "desc": "T[11:0] 最近一次转换结果"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "恒 0（EM=1 时 bit0 为 EM 标志）",
+          "tier": "UNVERIFIED",
+          "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+        }
+      ]
+    },
+    {
+      "name": "CONFIG",
+      "addr": "0x01",
+      "access": "RW",
+      "reset": "0x60A0",
+      "desc": "16 位配置寄存器，§6.5.3；byte1=OS,R1,R0,F1,F0,POL,TM,SD；byte2=CR1,CR0,AL,EM,0,0,0,0；上电 0x60A0",
+      "fields": [
+        {
+          "name": "OS",
+          "bits": "15",
+          "access": "RW",
+          "reset": 0,
+          "desc": "shutdown 态写 1 触发单次转换；转换期间读 0（§6.5.3.6；转换完成后行为见 open_questions[1]）"
+        },
+        {
+          "name": "R1",
+          "bits": "14",
+          "access": "RO",
+          "reset": 1,
+          "desc": "只读！分辨率位，出厂设 11（§6.5.3.5）"
+        },
+        {
+          "name": "R0",
+          "bits": "13",
+          "access": "RO",
+          "reset": 1,
+          "desc": "只读！同上"
+        },
+        {
+          "name": "F1",
+          "bits": "12",
+          "access": "RW",
+          "reset": 0,
+          "desc": "故障队列 00:1 01:2 10:4 11:6 连续故障（§6.5.3.4 Table 6-12）"
+        },
+        {
+          "name": "F0",
+          "bits": "11",
+          "access": "RW",
+          "reset": 0,
+          "desc": "同上"
+        },
+        {
+          "name": "POL",
+          "bits": "10",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ALERT 极性 0:低有效 1:高有效"
+        },
+        {
+          "name": "TM",
+          "bits": "9",
+          "access": "RW",
+          "reset": 0,
+          "desc": "0:比较器模式 1:中断模式"
+        },
+        {
+          "name": "SD",
+          "bits": "8",
+          "access": "RW",
+          "reset": 0,
+          "desc": "1=关断模式"
+        },
+        {
+          "name": "CR1",
+          "bits": "7",
+          "access": "RW",
+          "reset": 1,
+          "desc": "CR[1:0] codes00/01/10/11 = 0.25/1/4/8Hz; default10=4Hz; p.15 Table6-5"
+        },
+        {
+          "name": "CR0",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Low bit of conversion rate; see CR1 corrected code table"
+        },
+        {
+          "name": "AL",
+          "bits": "5",
+          "access": "RO",
+          "reset": 1,
+          "desc": "只读！比较器状态位：POL=0 时常态读 1，超 THIGH 连续故障后读 0（§6.5.3.8）"
+        },
+        {
+          "name": "EM",
+          "bits": "4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "扩展模式 0:12 位 1:13 位"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "恒 0",
+          "tier": "UNVERIFIED",
+          "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+        }
+      ]
+    },
+    {
+      "name": "TLOW",
+      "addr": "0x02",
+      "access": "RW",
+      "reset": "0x4B00",
+      "desc": "低温阈值 12 位，复位 75°C，格式同 TEMP，§6.5.4",
+      "fields": [
+        {
+          "name": "L",
+          "bits": "15:4",
+          "access": "RW",
+          "reset": 1200,
+          "desc": "L[11:0]"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Normal EM0: bits3:0 zero; Extended EM1: bit3 is threshold data, bits2:0 remain zero (Tables6-14/6-16).",
+          "tier": "UNVERIFIED",
+          "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+        }
+      ]
+    },
+    {
+      "name": "THIGH",
+      "addr": "0x03",
+      "access": "RW",
+      "reset": "0x5000",
+      "desc": "高温阈值 12 位，复位 80°C，§6.5.4",
+      "fields": [
+        {
+          "name": "H",
+          "bits": "15:4",
+          "access": "RW",
+          "reset": 1280,
+          "desc": "H[11:0]"
+        },
+        {
+          "name": "UNUSED",
+          "bits": "3:0",
+          "access": "RO",
+          "reset": 0,
+          "desc": "Normal EM0: bits3:0 zero; Extended EM1: bit3 is threshold data, bits2:0 remain zero (Tables6-14/6-16).",
+          "tier": "UNVERIFIED",
+          "tier_evidence": "PDF p.8 只写了『The unused bits in the temperature register always read 0』（仅覆盖温度寄存器），CONFIG/TLOW/THIGH 的 [3:0] 未在文本层找到逐位 Type 行"
+        }
+      ]
+    }
+  ],
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

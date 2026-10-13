@@ -1,0 +1,75 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.5.3 Commands
+
+The device offers six different commands to control device operation, as shown in Table 8-7. Four commands
+ are stand-alone instructions (RESET, START/SYNC, POWERDOWN, and RDATA). The commands to read
+(RREG) and write (WREG) configuration register data from and to the device require additional information as
+ part of the instruction.
+
+                                   Table 8-7. Command Definitions
+       COMMAND                            DESCRIPTION                    COMMAND BYTE(1)
+
+ RESET                       Reset the device                                                    0000 011xb
+
+ START/SYNC                      Start or restart conversions                                           0000 100xb
+
+ POWERDOWN                  Enter power-down mode                                             0000 001xb
+
+ RDATA                     Read data by command                                              0001 xxxxb
+
+ RREG                     Read nn registers starting at address rr                                  0010 rrnnb
+
+ WREG                           Write nn registers starting at address rr                                  0100 rrnnb
+
+ (1)   Operands: rr = configuration register (00b to 11b), nn = number of bytes – 1 (00b to 11b), and x = don't care.
+
+ 8.5.3.1 RESET (0000 011xb)
+
+ Resets the device to the default values. Wait at least (50µs + 32 × tCLK) after the RESET command is sent
+ before sending any other command.
+
+ 8.5.3.2 START/SYNC (0000 100xb)
+
+ In single-shot conversion mode, the START/SYNC command is used to start a single conversion, or (when sent
+ during an ongoing conversion) to reset the digital filter, and then restarts a single new conversion. When the
+ device is set to continuous conversion mode, the START/SYNC command must be issued one time to start
+ converting continuously. Sending the START/SYNC command while converting in continuous-conversion mode
+ resets the digital filter and restarts continuous conversions.
+
+ 8.5.3.3 POWERDOWN (0000 001xb)
+
+The POWERDOWN command places the device into power-down mode. This command shuts down all internal
+ analog components, opens the low-side switch, turns off both IDACs, but holds all register values. In case
+ the POWERDOWN command is issued while a conversion is ongoing, the conversion completes before the
+ADS1220 enters power-down mode. As soon as a START/SYNC command is issued, all analog components
+ return to the previous states.
+
+ 8.5.3.4 RDATA (0001 xxxxb)
+
+The RDATA command loads the output shift register with the most recent conversion result. This command can
+be used when DOUT/ DRDY or DRDY are not monitored to indicate that a new conversion result is available.
+ If a conversion finishes in the middle of the RDATA command byte, the state of the DRDY pin at the end of the
+ read operation signals whether the old or the new result is loaded. If the old result is loaded, DRDY stays low,
+ indicating that the new result is not read out. The new conversion result loads when DRDY is high.
+
+ 8.5.3.5 RREG (0010 rrnnb)
+
+The RREG command reads the number of bytes specified by nn (number of bytes to be read – 1) from the
+ device configuration register, starting at register address rr. The command is completed after nn + 1 bytes are
+ clocked out after the RREG command byte. For example, the command to read three bytes (nn = 10b) starting
+ at configuration register 1 (rr = 01b) is 0010 0110b.
+
+ 8.5.3.6 WREG (0100 rrnnb)
+
+The WREG command writes the number of bytes specified by nn (number of bytes to be written – 1) to the
+ device configuration register, starting at register address rr. The command is completed after nn + 1 bytes are
+ clocked in after the WREG command byte. For example, the command to write two bytes (nn = 01b) starting at
+ configuration register 0 (rr = 00b) is 0100 0001b. The configuration registers are updated on the last SCLK falling
+ edge.
+
+
+38    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

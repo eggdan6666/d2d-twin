@@ -1,0 +1,58 @@
+Data Sheet                               AD5592R
+
+TERMINOLOGY
+
+Gain Temperature Coefficient                     DC crosstalk due to load current change is a measure of the impact
+                                                                                that a change in load current on one DAC has to another DAC kept
+Gain temperature coefficient is a measurement of the change in                                                                                at midscale. It is expressed in μV/mA.
+gain error with changes in temperature. It is expressed in ppm of
+FSR/°C.                                                   Digital Crosstalk
+Offset Error                                                                  Digital crosstalk is the glitch impulse transferred to the output of one
+                                                DAC at midscale in response to a full-scale code change (all 0s
+Offset error is a measurement of the difference between VOUT               to all 1s and vice versa) in the input register of another DAC. It is
+(actual) and VOUT (ideal), expressed in mV, in the linear region of         measured in standalone mode and is expressed in nV-sec.
+the transfer function. Offset error can be negative or positive.
+                                            Analog Crosstalk
+DC Power Supply Rejection Ratio (PSRR)
+                                                                 Analog crosstalk is the glitch impulse transferred to the output of
+PSRR indicates how the output of the DAC is affected by changes                                                            one DAC due to a change in the output of another DAC. It is
+in the supply voltage. PSRR is the ratio of the change in VOUT to a        measured by loading one of the input registers with a full-scale
+change in VDD for a full-scale output of the DAC. It is measured in        code change (all 0s to all 1s and vice versa), then executing
+mV/V. VREF is held at 2 V, and VDD is varied by ±10%.                     software LDAC (see Table 21), and monitoring the output of the
+                                                DAC whose digital code was not changed. The area of the glitch isOutput Voltage Settling Time
+                                                                 expressed in nV-sec.
+Output voltage settling time is the amount of time it takes for the
+                                          DAC-to-DAC Crosstalkoutput of a DAC to settle to a specified level for a ¼ to ¾ full-scale
+input change and is measured from the rising edge of SYNC.                                                           DAC-to-DAC crosstalk is the glitch impulse transferred to the output
+                                                                                of one DAC due to a digital code change and subsequent analogDigital-to-Analog Glitch Impulse
+                                                                        output change of another DAC. It is measured by loading the attack
+Digital-to-analog glitch impulse is the impulse injected into the            channel with a full-scale code change (all 0s to all 1s and vice
+analog output when the input code in the DAC register changes            versa), using the write to and update commands while monitoring
+state. It is normally specified as the area of the glitch in nV-sec, and        the output of the victim channel that is at midscale. The energy of
+is measured when the digital input code is changed by 1 LSB at the        the glitch is expressed in nV-sec.
+major carry transition (0x7FF to 0x800).
+                                                    Multiplying Bandwidth
+Digital Feedthrough
+                                                          The amplifiers within the DAC have a finite bandwidth; the multiply-
+Digital feedthrough is a measure of the impulse injected into the            ing bandwidth is a measure of this. A sine wave on the reference
+analog output of the DAC from the digital inputs of the DAC, but             (with full-scale code loaded to the DAC) appears on the output.
+is measured when the DAC output is not updated. It is specified in       The multiplying bandwidth is the frequency at which the output
+nV-sec, and measured with a full-scale code change on the data           amplitude falls to 3 dB below the input.
+bus, that is, from all 0s to all 1s and vice versa.
+                                                  Voltage Reference Temperature Coefficient
+Reference Feedthrough                            (TC)
+Reference feedthrough is the ratio of the amplitude of the signal at         Voltage reference TC is a measure of the change in the reference
+the DAC output to the reference input when the DAC output is not          output voltage with a change in temperature. The voltage reference
+being updated. It is expressed in dB.                          TC is calculated using the box method, which defines the TC as the
+                                                      maximum change in the reference output over a given temperatureNoise Spectral Density
+                                                                 range expressed in ppm/°C, as follows:
+Noise spectral density is a measurement of the internally generated
+random noise. Random noise is characterized as a spectral density                                                                                        (3)(nV/√Hz). It is measured by loading the DAC to midscale and                  VREF MAX −VREF MIN                                                              × Temp Rangemeasuring noise at the output. It is measured in nV/√Hz.                 where:TC =  VREF NOM                                                      × 106
+                                                                      VREF(MAX) is the maximum reference output measured over the totalDC Crosstalk                                                                    temperature range.
+DC crosstalk is the dc change in the output level of one DAC in             VREF(MIN) is the minimum reference output measured over the total
+response to a change in the output of another DAC. It is measured        temperature range.
+with a full-scale output change on one DAC (or soft power-down           VREF(NOM) is the nominal reference output voltage, 2.5 V.
+and power-up) while monitoring another DAC maintained at mid-        Temp Range is the specified temperature range of −40°C to
+scale. It is expressed in μV.                                         +125°C.
+
+analog.com                                                                                         Rev. H | 22 of 54

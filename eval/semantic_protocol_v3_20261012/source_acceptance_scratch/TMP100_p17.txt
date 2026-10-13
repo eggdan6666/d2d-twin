@@ -1,0 +1,80 @@
+Measured
+Temperature
+THIGH
+TLOW
+TMP101 ALERT PIN
+(Comparator Mode)
+POL = 0
+TMP101 ALERT PIN
+(Interrupt Mode)
+POL = 0
+TMP101 ALERT PIN
+(Comparator Mode)
+POL = 1
+TMP101 ALERT PIN
+(Interrupt Mode)
+POL = 1
+Read
+Read
+Time
+Read
+TMP100, TMP101
+www.ti.com
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+Figure 11. Output Transfer Function Diagrams
+7.5.3.4
+Fault Queue (F1, F0)
+A fault condition occurs when the measured temperature exceeds the user-defined limits set in the THIGH and
+TLOW Registers. Additionally, the number of fault conditions required to generate an alert can be programmed
+using the Fault Queue. The Fault Queue is provided to prevent a false alert resulting from environmental noise.
+The Fault Queue requires consecutive fault measurements in order to trigger the alert function. If the temperature
+falls below TLOW before reaching the number of programmed consecutive faults limit, the count is reset to 0.
+Table 9 defines the number of measured faults that can be programmed to trigger an alert condition in the
+device.
+Table 9. Fault Settings of the TMP100 and TMP101
+F1
+F0
+CONSECUTIVE FAULTS
+0
+0
+1
+0
+1
+2
+1
+0
+4
+1
+1
+6
+7.5.3.5
+Converter Resolution (R1, R0)
+The Converter Resolution bits control the resolution of the internal analog-to-digital converter (ADC), thus
+allowing the user to maximize efficiency by programming for higher resolution or faster conversion time. Table 10
+identifies the Resolution bits and the relationship between resolution and conversion time.
+Table 10. Resolution of the TMP100 and TMP101
+CONVERSION TIME
+R1
+R0
+RESOLUTION
+(Typical)
+0
+0
+9 bits (0.5°C)
+40 ms
+0
+1
+10 bits (0.25°C)
+80 ms
+1
+0
+11 bits (0.125°C)
+160 ms
+1
+1
+12 bits (0.0625°C)
+320 ms
+Copyright © 2002–2015, Texas Instruments Incorporated
+Submit Documentation Feedback
+17
+Product Folder Links: TMP100 TMP101

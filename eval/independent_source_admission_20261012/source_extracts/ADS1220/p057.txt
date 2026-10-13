@@ -1,0 +1,65 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+When designing the circuit, care must also be taken to meet the compliance voltage requirement of the IDACs.
+The IDACs require that the maximum voltage drop developed across the current path to AVSS be equal or less
+ than AVDD – 0.9V to operate accurately. This requirement means that Equation 26 must be met at all times.
+
+    AVSS + IIDAC1 × (RLEAD1 + RRTD) + (IIDAC1 + IIDAC2) × (RLEAD3 + RREF) ≤ AVDD – 0.9V                        (26)
+
+The device also offers the possibility to route the IDACs to the same inputs used for measurement. If the filter
+ resistor values RF1 and RF2 are small enough and well matched, IDAC1 can be routed to AIN1 and IDAC2 to
+AIN0 in Figure 9-6. In this manner, even two 3-wire RTDs sharing the same reference resistor can be measured
+ with a single device.
+
+ This design example discusses the implementation of a 3-wire Pt100 measurement to be used to measure
+ temperatures ranging from –200°C to +850°C as stated in Table 9-3. The excitation current for the Pt100 is
+ chosen as IIDAC1 = 500µA, which means a combined current of 1mA is flowing through the reference resistor,
+ RREF. As mentioned previously, besides creating the reference voltage for the ADS1220, the voltage across
+RREF also sets the common-mode voltage for the RTD measurement. In general, select the largest reference
+ voltage possible while still maintaining the compliance voltage of the IDACs as well as meeting the common-
+mode voltage requirement of the PGA. Set the common-mode voltage at or near half the analog supply (in this
+ case 3.3V / 2 = 1.65V), which in most cases satisfies the common-mode voltage requirements of the PGA. The
+ value for RREF is then calculated by Equation 27:
+
+    RREF = VREF / (IIDAC1 + IIDAC2) = 1.65V / 1mA = 1.65kΩ                                                   (27)
+
+The stability of RREF is critical to achieve good measurement accuracy over temperature and time. Choosing a
+ reference resistor with a temperature coefficient of ±10ppm/°C or better is advisable. If a 1.65kΩ value is not
+ readily available, another value near 1.65kΩ (such as 1.62kΩ or 1.69kΩ) can certainly be used as well.
+
+As a last step, the PGA gain must be selected to match the maximum input signal to the FSR of the ADC. The
+ resistance of a Pt100 increases with temperature. Therefore, the maximum voltage to be measured (VINMAX)
+ occurs at the positive temperature extreme. At 850°C, a Pt100 has an equivalent resistance of approximately
+391Ω as per the NIST tables. The voltage across the Pt100 equates to Equation 28:
+
+     VINMAX = VRTD (at 850°C) = RRTD (at 850°C) × IIDAC1 = 391Ω × 500µA = 195.5mV                                (28)
+
+The maximum gain that can be applied when using a 1.65V reference is then calculated as (1.65V / 195.5mV) =
+ 8.4. The next smaller PGA gain setting available in the ADS1220 is 8. At a gain of 8, the ADS1220 offers a FSR
+ value as described in Equation 29:
+
+   FSR = ±VREF / Gain = ±1.65V / 8 = ±206.25mV                                                          (29)
+
+ This range allows for margin with respect to initial accuracy and drift of the IDACs and reference resistor.
+
+ After selecting the values for the IDACs, RREF, and PGA gain, make sure to double check that the settings meet
+ the common-mode voltage requirements of the PGA and the compliance voltage of the IDACs. To determine the
+ true common-mode voltage at the ADC inputs (AIN0 and AIN1) the lead resistance must be taken into account
+ as well.
+
+The smallest common-mode voltage occurs at the lowest measurement temperature (–200°C) with RLEADx = 0Ω
+and is calculated using Equation 30 and Equation 31.
+
+    VCMMIN = VREF + (IIDAC1 + IIDAC2) × RLEAD3 + IIDAC2 × RLEAD2 + ½ IIDAC1 × RRTD (at –200°C)                      (30)
+
+    VCMMIN = 1.65V + ½ 500µA × 18.52Ω = 1.655V                                                          (31)
+
+ Actually, assuming VCMMIN = VREF is a sufficient approximation.
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    57
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,67 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 8.6.2.1 Configuration Register 0 (Address = 00h) [reset = 00h]
+
+                                Figure 8-32. Configuration Register 0
+       7             6             5             4             3             2             1             0
+
+                           MUX[3:0]                                               GAIN[2:0]               PGA_BYPASS
+
+                        R/W-0000b                                        R/W-000b                     R/W-0b
+
+                        Table 8-10. Configuration Register 0 Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+                                                     Input multiplexer configuration
+                                               These bits configure the input multiplexer.
+                                                    For settings where AINN = AVSS, the PGA must be disabled (PGA_BYPASS = 1)
+                                               and only gains 1, 2, and 4 can be used.
+                                               0000b : AINP = AIN0, AINN = AIN1
+                                               0001b : AINP = AIN0, AINN = AIN2
+                                               0010b : AINP = AIN0, AINN = AIN3
+                                                0011b : AINP = AIN1, AINN = AIN2
+                                               0100b : AINP = AIN1, AINN = AIN3
+                                               0101b : AINP = AIN2, AINN = AIN3     7:4     MUX[3:0]       R/W       0000b
+                                                0110b : AINP = AIN1, AINN = AIN0
+                                                  0111b : AINP = AIN3, AINN = AIN2
+                                               1000b : AINP = AIN0, AINN = AVSS
+                                               1001b : AINP = AIN1, AINN = AVSS
+                                               1010b : AINP = AIN2, AINN = AVSS
+                                                1011b : AINP = AIN3, AINN = AVSS
+                                                1100b : (VREFPx – VREFNx) / 4 monitor (PGA bypassed)
+                                                1101b : (AVDD – AVSS) / 4 monitor (PGA bypassed)
+                                                  1110b : AINP and AINN shorted to (AVDD + AVSS) / 2
+                                                   1111b : Reserved
+
+                                               Gain configuration
+                                               These bits configure the device gain.
+                                                  Gains 1, 2, and 4 can be used without the PGA. In this case, gain is obtained by a
+                                                         switched-capacitor structure.
+                                               000b : Gain = 1
+                                               001b : Gain = 2
+     3:1     GAIN[2:0]      R/W       000b
+                                               010b : Gain = 4
+                                                 011b : Gain = 8
+                                               100b : Gain = 16
+                                               101b : Gain = 32
+                                                 110b : Gain = 64
+                                                  111b : Gain = 128
+
+                                                   Disables and bypasses the internal low-noise PGA
+                                                         Disabling the PGA reduces overall power consumption and allows the common-
+                                          mode voltage range (VCM) to span from AVSS – 0.1V to AVDD + 0.1V.
+                                             The PGA can only be disabled for gains 1, 2, and 4.
+     0    PGA_BYPASS   R/W       0b
+                                             The PGA is always enabled for gain settings 8 to 128, regardless of the
+                                        PGA_BYPASS setting.
+                                               0b : PGA enabled
+                                               1b : PGA disabled and bypassed
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    43
+
+                                                  Product Folder Links: ADS1220

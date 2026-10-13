@@ -1,0 +1,45 @@
+REGISTER TEMP_RESULT @ 0x00 reset=0x0000 access=RO runtime=None DESC=温度转换结果（§8.6.1 p.26）。14-bit 二进制补码，LSB = 0.03125°C，占 15:2 位，低 2 位恒 0
+  TEMP[15:2] RO reset=0 read_as=None read_action=None tier=None DESC=Temp_Result[13:0]，14-bit 补码，0.03125°C/LSB（Table 8-6：Type R，Reset 0000h）
+  RESERVED_1_0[1:0] RO reset=0 read_as=None read_action=None tier=None DESC=Reserved，Type R，Reset 00b，原文『These two bits will always read 00b』⇒ A 档（有文档明示读 0，计分）
+REGISTER SLEW_RESULT @ 0x01 reset=0x0000 access=RO runtime=None DESC=斜率计算结果（§8.6.2 p.26-27）。14-bit 补码，LSB = 0.03125°C/s；非连续转换模式下回默认值（动态量，复位值仍是确定的 0000h，可断言）
+  SLEW[15:2] RO reset=0 read_as=None read_action=None tier=None DESC=Slew_Result[13:0]。位划分照 §8.6.2 的 14-bit 描述与 00h 同格式推断——p.26 图 8-2 的位标在解析稿里丢失，属人工核验项（见 proofread_record P1）
+  RESERVED_1_0[1:0] RO reset=0 read_as=None read_action=None tier=None DESC=低 2 位读 0，同 00h 格式推断（P1）
+REGISTER ALERT_STATUS @ 0x02 reset=0x0000 access=RO runtime=None DESC=告警状态（§8.6.3 p.27-28，Table 8-7）。**TI 在这里逐位标了 RC＝Read-Clear**，是基准里第一个由手册明文给出读清零语义的寄存器；高 8 位 Reserved 标 R
+  RESERVED_15_8[15:8] RO reset=0 read_as=None read_action=None tier=None DESC=Reserved，Type R，Reset 00h ⇒ A 档计分
+  CRC_FLAG[7] RO reset=0 read_as=None read_action=clear tier=None DESC=CRC_Flag，Type **RC**：上一次使能 CRC 的写事务校验失败则置 1，读该寄存器即清除
+  SLEW_POS_STATUS[6] RO reset=0 read_as=None read_action=None tier=None DESC=正斜率状态，Type R，Reset 0b
+  SLEW_FLAG[5] RO reset=0 read_as=None read_action=clear tier=None DESC=斜率标志，Type RC（读清零）
+  THIGH_STATUS[4] RO reset=0 read_as=None read_action=None tier=None DESC=高温状态位，Type R
+  TLOW_STATUS[3] RO reset=0 read_as=None read_action=None tier=None DESC=低温状态位，Type R
+  THIGH_FLAG[2] RO reset=0 read_as=None read_action=clear tier=None DESC=高温标志，Type RC
+  TLOW_FLAG[1] RO reset=0 read_as=None read_action=clear tier=None DESC=低温标志，Type RC
+  DATA_READY_FLAG[0] RO reset=0 read_as=None read_action=clear tier=None DESC=数据就绪标志，Type RC。读清零掩码 = 1011_0111b = 0xB7
+REGISTER CONFIG @ 0x03 reset=0x0006 access=RW runtime=None DESC=配置寄存器（§8.6.4 p.29，Figure 8-22 + Table 8-8）。复位 0006h＝Conv_Period=110b(1s)。同时含**两个自清零位**：bit8 软复位、bit4 单次转换触发
+  RESERVED_15_9[15:9] RO reset=0 read_as=None read_action=None tier=A DESC=Reserved，图标注 R-00h ⇒ A 档计分（写进去必须仍读 0）
+  RESETS[8] RW reset=0 read_as=0 read_action=None tier=None DESC=Table 8-8 里 Type 标 **R/W**、Reset 0b，但描述写『写 1b 触发 0.5ms 软件复位，且该位永远读回 0b』⇒ 写触发＋自清零（⑤），不是普通可写位
+  AVG[7] RW reset=0 read_as=None read_action=None tier=None DESC=平均使能：1b＝每次测量做 8 次转换平均
+  RESERVED_6[6] RO reset=0 read_as=None read_action=None tier=A DESC=Reserved，图标注 R-0b ⇒ A 档
+  INT_COMP[5] RW reset=0 read_as=None read_action=None tier=None DESC=0b＝中断模式，1b＝比较器模式
+  ONE_SHOT[4] RW reset=0 read_as=0 read_action=None tier=None DESC=单次转换触发，原文『This bit will always read 0h』⇒ 写触发＋自清零（⑤）；触发后转换完成回到 shutdown
+  MODE[3] RW reset=0 read_as=None read_action=None tier=None DESC=0b＝连续转换，1b＝关断
+  CONV_PERIOD[2:0] RW reset=6 read_as=None read_action=None tier=None DESC=codes0..7 = 6/31.25/62.5/125/250/500ms/1/2s; code7=2s(0.5Hz); p.29 Table8-8
+REGISTER ALERT_ENABLE @ 0x04 reset=0x0016 access=RW runtime=None DESC=告警使能（§8.6.5 p.30，Table 8-9）。复位 0016h＝CRC_Alert_En=1, THigh=1, TLow=1
+  RESERVED_15_5[15:5] RO reset=0 read_as=None read_action=None tier=A DESC=Reserved，图标注 R-000h ⇒ A 档
+  CRC_ALERT_EN[4] RW reset=1 read_as=None read_action=None tier=None DESC=使能 CRC_Flag 驱动 ALERT 引脚，默认 1
+  SLEW_ALERT_EN[3] RW reset=0 read_as=None read_action=None tier=None DESC=使能 Slew_Flag（中断模式）/Slew_Status（比较器模式）
+  THIGH_ALERT_EN[2] RW reset=1 read_as=None read_action=None tier=None DESC=高温告警输出使能，默认 1
+  TLOW_ALERT_EN[1] RW reset=1 read_as=None read_action=None tier=None DESC=低温告警输出使能，默认 1
+  DATA_READY_ALERT_EN[0] RW reset=0 read_as=None read_action=None tier=None DESC=数据就绪告警输出使能
+REGISTER TLOW_LIMIT @ 0x05 reset=0xF380 access=RW runtime=None DESC=低温限值（§8.6.6 p.31，Table 8-10）。复位 F380h＝-25°C。**寄存器复位值与位域复位值不同尺度**：Table 给 15:2 字段复位 3CE0h（14-bit 原生宽度），寄存器复位是它左移 2 位的 F380h ⇒ 掩码/对齐陷阱，正是 ④a 想测的
+  TLOW_LIMIT[15:2] RW reset=15584 read_as=None read_action=None tier=None DESC=TLow_Limit[13:0]，14-bit 补码，0.03125°C/LSB；Table 8-10 标 3CE0h（=0xF380>>2）
+  RESERVED_1_0[1:0] RO reset=0 read_as=None read_action=None tier=A DESC=图标注 R-00b，原文『always read 00b』⇒ A 档
+REGISTER THIGH_LIMIT @ 0x06 reset=0x2A80 access=RW runtime=None DESC=高温限值（§8.6.7 p.31，Table 8-11）。复位 2A80h＝+85°C；同 05h 的尺度差异：字段原生值 AA0h（0x2A80>>2）
+  THIGH_LIMIT[15:2] RW reset=2720 read_as=None read_action=None tier=None DESC=THigh_Limit[13:0]，14-bit 补码；Table 给 AA0h
+  RESERVED_1_0[1:0] RO reset=0 read_as=None read_action=None tier=A DESC=R-00b ⇒ A 档
+REGISTER HYSTERESIS @ 0x07 reset=0x0A0A access=RW runtime=None DESC=迟滞（§8.6.8 p.32，Table 8-12）。两个 8-bit 无符号字段，LSB=0.5°C，各默认 0Ah＝5°C。全 16 位可写
+  THIGH_HYST[15:8] RW reset=10 read_as=None read_action=None tier=None DESC=高温迟滞＝THigh_Limit - THigh_Hyst
+  TLOW_HYST[7:0] RW reset=10 read_as=None read_action=None tier=None DESC=低温迟滞＝TLow_Limit + TLow_Hyst
+REGISTER SLEW_LIMIT @ 0x08 reset=0x0500 access=RW runtime=None DESC=斜率限值（§8.6.9 p.33，Table 8-13）。13-bit 无符号字段占 14:2，LSB=0.03125°C/s，默认 0140h＝10°C/s（寄存器复位 0500h＝0140h<<2）。bit15 与 bit1:0 标 R-0b
+  RESERVED_15[15] RO reset=0 read_as=None read_action=None tier=A DESC=R-00b ⇒ A 档
+  SLEW_RATE_LIMIT[14:2] RW reset=320 read_as=None read_action=None tier=None DESC=Slew_Rate_Limit[12:0]，Table 给 0140h（＝0x0500>>2）
+  RESERVED_1_0[1:0] RO reset=0 read_as=None read_action=None tier=A DESC=R-00b ⇒ A 档

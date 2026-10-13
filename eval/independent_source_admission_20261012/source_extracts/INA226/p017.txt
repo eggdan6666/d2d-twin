@@ -1,0 +1,41 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+ 6.5.4 Default Settings
+
+The default power-up states of the registers are shown in the Register Maps section of this data sheet.
+These registers are volatile, and  if programmed to a value other than the default values shown in Table 7-1,
+ the registers must be re-programmed at every device power-up. Detailed information on programming the
+ Calibration Register specifically is given in the Programming section and calculated based on Equation 1.
+
+
+ 6.5.5 Bus Overview
+The INA226 offers compatibility with both I2C and SMBus interfaces. The I2C and SMBus protocols are
+ essentially compatible with one another.
+The I2C interface is used throughout this datasheet as the primary example, with SMBus protocol specified only
+when a difference between the two systems is discussed. Two lines, SCL and SDA, connect the device to the
+ bus. Both SCL and SDA are open drain connections.
+
+The device that initiates a data transfer is called a controller, and the devices controlled by the controller are
+ targets. The bus must be controlled by a controller device that generates the serial clock (SCL), controls the bus
+ access, and generates START and STOP conditions.
+
+ To address a specific device, the controller initiates a start condition by pulling the data signal line (SDA) from
+a high to a low logic level while SCL is high. All targets on the bus shift in the target address byte on the rising
+edge of SCL, with the last bit indicating whether a read or write operation is intended. During the ninth clock
+ pulse, the target being addressed responds to the controller by generating an Acknowledge and pulling SDA low.
+
+ Data transfer is then initiated and eight bits of data are sent, followed by an Acknowledge bit. During data
+ transfer, SDA must remain stable while SCL is high. Any change in SDA while SCL is high is interpreted as a
+ start or stop condition.
+
+ After all data have been transferred, the controller generates a stop condition, indicated by pulling SDA from low
+ to high while SCL is high. The device includes a 28ms time out on the interface to prevent locking up the bus.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    17
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,86 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+                           Table 7-5. VSHCT Bit Settings [5:3] Combinations
+                                             (continued)
+                           VSHCT2     VSHCT1     VSHCT0     CONVERSION
+                              D8         D7         D6             TIME(1)
+
+                                   1            1            1           8.244ms
+
+                                       (1)  Shaded values are default.
+
+ MODE:             Operating Mode
+
+ Bits 0-2               Selects continuous, triggered, or power-down mode of operation. These bits default to continuous shunt and bus
+                    measurement mode. The mode settings are shown in Table 7-6.
+
+                             Table 7-6. Mode Settings [2:0] Combinations
+                            MODE3     MODE2     MODE1                                                                                MODE(1)
+                                 D2         D1         D0
+
+                                       0            0            0       Power-Down (or Shutdown)
+
+                                       0            0            1         Shunt Voltage, Triggered
+
+                                       0            1            0         Bus Voltage, Triggered
+
+                                       0            1            1         Shunt and Bus, Triggered
+
+                                       1            0            0       Power-Down (or Shutdown)
+
+                                       1            0            1         Shunt Voltage, Continuous
+
+                                       1            1            0         Bus Voltage, Continuous
+
+                                       1            1            1        Shunt and Bus, Continuous
+
+                                       (1)  Shaded values are default.
+
+ 7.1.2 Shunt Voltage Register (01h) (Read-Only)
+
+The Shunt Voltage  Register  stores  the  current shunt  voltage  reading, VSHUNT. Negative numbers are
+ represented  in  two's complement  format. Generate  the  two's complement  of a  negative number by
+ complementing the absolute value binary number and adding 1. An MSB = '1' denotes a negative number.
+
+Example: For a value of VSHUNT = –80mV:
+ 1.  Take the absolute value: 80mV
+ 2.  Translate this number to a whole decimal number (80mV ÷ 2.5µV) = 32000
+ 3.  Convert this number to binary = 0111 1101 0000 0000
+ 4.  Complement the binary result = 1000 0010 1111 1111
+ 5.  Add '1' to the complement to create the two's complement result = 1000 0011 0000 0000 = 8300h
+
+ If averaging is enabled, this register displays the averaged value.
+
+ Full-scale range = 81.92mV (decimal = 7FFF); LSB: 2.5μV.
+
+                    Table 7-7. Shunt Voltage Register (01h) (Read-Only) Description
+  BIT #      D15     D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+           SIGN    SD14    SD13    SD12    SD11    SD10    SD9     SD8     SD7     SD6     SD5     SD4     SD3     SD2     SD1     SD0
+ NAME
+
+ POR
+             0        0        0        0        0        0        0        0        0        0        0        0        0        0        0        0
+ VALUE
+
+ 7.1.3 Bus Voltage Register (02h) (Read-Only)
+
+The Bus Voltage Register stores the most recent bus voltage reading, VBUS.
+
+ If averaging is enabled, this register displays the averaged value.
+
+ Full-scale range = 40.96V (decimal = 7FFF); LSB = 1.25mV.
+
+                     Table 7-8. Bus Voltage Register (02h) (Read-Only) Description
+  BIT #       D15(1)    D14     D13     D12     D11     D10     D9      D8      D7      D6      D5      D4      D3      D2      D1      D0
+
+  BIT
+       —     BD14    BD13    BD12    BD11    BD10    BD9     BD8     BD7     BD6     BD5     BD4     BD3     BD2     BD1     BD0
+ NAME
+
+
+24    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,76 @@
+Registers description                                                      LIS3DH
+
+
+            Write operation at this address is possible only after system boot.
+
+                                        Table 55. Interrupt mode
+
+             AOI     6D                                   Interrupt mode
+
+               0       0   OR combination of interrupt events
+
+               0       1      6-direction movement recognition
+
+               1       0   AND combination of interrupt events
+
+               1       1      6-direction position recognition
+
+
+            Difference between AOI-6D = ‘01’ and AOI-6D = ‘11’.
+
+          AOI-6D = ‘01’ is movement recognition. An interrupt is generated when the orientation
+          moves from an unknown zone to known zone. The interrupt signal remains for a duration
+         ODR.
+
+          AOI-6D = ‘11’ is direction recognition. An interrupt is generated when the orientation is
+             inside a known zone. The interrupt signal remains until the orientation is inside the zone.
+
+
+8.22   INT1_SRC (31h)
+
+
+                                      Table 56. INT1_SRC register
+
+                0          IA       ZH       ZL      YH       YL      XH       XL
+
+                                    Table 57. INT1_SRC description
+
+                           Interrupt active. Default value: 0
+                 IA
+                             (0: no interrupt has been generated; 1: one or more interrupts have been generated)
+
+                  Z high. Default value: 0
+            ZH
+                             (0: no interrupt, 1: Z high event has occurred)
+
+                  Z low. Default value: 0
+              ZL
+                             (0: no interrupt; 1: Z low event has occurred)
+
+                 Y high. Default value: 0
+           YH
+                             (0: no interrupt, 1: Y high event has occurred)
+
+                 Y low. Default value: 0
+             YL
+                             (0: no interrupt, 1: Y low event has occurred)
+
+                 X high. Default value: 0
+           XH
+                             (0: no interrupt, 1: X high event has occurred)
+
+                 X low. Default value: 0
+             XL
+                             (0: no interrupt, 1: X low event has occurred)
+
+              Interrupt 1 source register. Read-only register.
+
+           Reading at this address clears the INT1_SRC (31h) IA bit (and the interrupt signal on the
+           INT 1 pin) and allows the refresh of data in INT1_SRC (31h) if the latched option was
+           chosen.
+
+
+
+
+
+42/54                                  DocID17530 Rev 2

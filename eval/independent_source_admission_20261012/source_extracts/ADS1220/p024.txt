@@ -1,0 +1,58 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+The following discussion explains how to apply Equation 12 through Equation 14 to a hypothetical application.
+The setup for this example is AVDD = 3.3V, AVSS = 0V, and gain = 16, using an external reference,
+VREF = 2.5V. The maximum possible differential input voltage VIN = (VAINP – VAINN) that can be applied is then
+ limited to the full-scale range of FSR = ±2.5V / 16 = ±0.156V. Consequently, Equation 12 through Equation 14
+ yield an allowed VCM range of 1.45V ≤ VCM ≤ 1.85V.
+ If the sensor signal connected to the inputs in this hypothetical application does not make use of the entire
+ full-scale range but is limited to VIN (MAX) = ±0.1V, for example, then this reduced input signal amplitude relaxes
+ the VCM restriction to 1.0V ≤ VCM ≤ 2.3V.
+ In the case of a fully-differential sensor signal, each input (AINP, AINN) can swing up to ±50mV around the
+common-mode voltage (VAINP + VAINN) / 2, which must remain between the limits of 1.0V and 2.3V. The output
+ of a symmetrical Wheatstone bridge is an example of a fully-differential signal. Figure 8-6 shows a situation
+where the common-mode voltage of the input signal is at the lowest limit. VOUTN is exactly at 0.2V in this case.
+Any further decrease in common-mode voltage (VCM) or increase in differential input voltage (VIN) drives VOUTN
+ below 0.2V and saturates amplifier A2.
+
+                                     V(AINP) = 1.05 V               +
+
+                                                A1
+
+                                                                                     -
+                                       50 mV             RF             V(OUTP) = 1.8 V
+
+
+                                                                     800 mV
+                      VCM = 1.0 V              RF/7.5
+
+                                                                     800 mV
+                                                                        RF
+
+                                       50 mV                            V(OUTN) = 0.2 V
+
+                                                                                     -
+
+                                                A2
+
+                                    V(AINN) = 0.95 V               +
+
+                          Figure 8-6. Example Where VCM is at Lowest Limit
+
+ In contrast, the signal of an RTD is of a pseudo-differential nature  (if implemented as shown in the RTD
+Measurement section), where the negative input is held at a constant voltage other than 0V and only the voltage
+on the positive input changes. When a pseudo-differential signal must be measured, the negative input in this
+example must be biased at a voltage between 0.95V and 2.25V. The positive input can then swing up to
+ VINMAX = 100mV above the negative input. In this case the common-mode voltage changes at the same time
+ the voltage on the positive input changes. That is, while the input signal swings between 0V ≤ VIN ≤ VINMAX, the
+common-mode voltage swings between VAINN ≤ VCM ≤ VAINN + ½ VINMAX. The requirements for the entire signal
+ range are met if the common-mode voltage requirements for the maximum input voltage VINMAX are satisfied.
+
+
+
+
+
+24    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

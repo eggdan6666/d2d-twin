@@ -1,0 +1,67 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 7.3 Feature Description
+ 7.3.1 Multiplexer
+
+The ADS1115 contains an input multiplexer (MUX), as shown in Figure 7-4. Either four single-ended or two
+ differential signals can be measured. Additionally, AIN0 and AIN1 can be measured differentially to AIN3. The
+ multiplexer is configured by bits MUX[2:0] in the Config register. When single-ended signals are measured, the
+ negative input of the ADC is internally connected to GND by a switch within the multiplexer.
+
+                                     VDD                            ADS1115
+
+
+
+                                      AIN0
+
+                                           VDD
+
+
+                                    GND
+                                                                                 AINP
+                                      AIN1
+                                                                               AINN
+                                      VDD
+
+
+                                          GND
+                                      AIN2
+
+                                           VDD
+
+
+                                    GND
+                                      AIN3
+
+
+
+                                          GND
+
+
+                                                                GND
+
+                                    Figure 7-4. Input Multiplexer
+
+The ADS1113 and ADS1114 do not have an input multiplexer and can measure either one differential signal
+ or one single-ended signal. For single-ended measurements, connect the AIN1 pin to GND externally. In
+ subsequent sections of this data sheet, AINP refers to AIN0 and AINN refers to AIN1 for the ADS1113 and
+ADS1114.
+
+ Electrostatic discharge (ESD) diodes connected to VDD and GND protect the ADS111x analog inputs. Keep the
+ absolute voltage of any input within the range shown in Equation 3 to prevent the ESD diodes from turning on.
+
+   GND – 0.3V < V(AINX) < VDD + 0.3V                                                                           (3)
+
+ If the voltages on the input pins can potentially violate these conditions, use external Schottky diodes and series
+ resistors to limit the input current to safe values (see the Absolute Maximum Ratings table). Overdriving an input
+on the ADS1115 can affect conversions taking place on other inputs. If overdriving an input is possible, clamp the
+ signal with external Schottky diodes.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    13
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

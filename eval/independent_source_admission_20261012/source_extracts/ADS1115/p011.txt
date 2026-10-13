@@ -1,0 +1,73 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+6 Parameter Measurement Information
+ 6.1 Noise Performance
+
+ Delta-sigma (ΔΣ) analog-to-digital converters (ADCs) are based on the principle of oversampling. The input
+ signal of a ΔΣ ADC is sampled at a high frequency (modulator frequency) and subsequently filtered and
+ decimated in the digital domain to yield a conversion result at the respective output data rate. The ratio between
+ modulator frequency and output data rate is called oversampling ratio (OSR). By increasing the OSR, and
+ thus reducing the output data rate, the noise performance of the ADC can be optimized. In other words, the
+ input-referred noise drops when reducing the output data rate because more samples of the internal modulator
+ are averaged to yield one conversion result. Increasing the gain also reduces the input-referred noise, which is
+ particularly useful when measuring low-level signals.
+
+ Table 6-1 and Table 6-2 summarize the ADS111x noise performance. Data are representative of typical noise
+ performance at TA = 25°C with the inputs shorted together externally. Table 6-1 shows the input-referred noise
+ in units of μVRMS for the conditions shown. The µVPP values are shown in parentheses. Table 6-2 shows the
+ effective resolution calculated from μVRMS values using Equation 1. The noise-free resolution calculated from
+ peak-to-peak noise values using Equation 2 are shown in parentheses.
+
+     Effective Resolution = ln (FSR / VRMS-Noise) / ln(2)                                                              (1)
+
+     Noise-Free Resolution = ln (FSR / VPP-Noise) / ln(2)                                                             (2)
+
+                            Table 6-1. Noise in μVRMS (μVPP) at VDD = 3.3V
+                                            FSR (Full-Scale Range) DATA RATE
+    (SPS)         ±6.144V           ±4.096V           ±2.048V          ±1.024V          ±0.512 V          ±0.256 V
+
+      8          187.5 (187.5)        125 (125)           62.5 (62.5)        31.25 (31.25)      15.62 (15.62)       7.81 (7.81)
+
+      16         187.5 (187.5)        125 (125)           62.5 (62.5)        31.25 (31.25)      15.62 (15.62)       7.81 (7.81)
+
+      32         187.5 (187.5)        125 (125)           62.5 (62.5)        31.25 (31.25)      15.62 (15.62)       7.81 (7.81)
+
+      64         187.5 (187.5)        125 (125)           62.5 (62.5)        31.25 (31.25)      15.62 (15.62)       7.81 (7.81)
+
+     128         187.5 (187.5)        125 (125)           62.5 (62.5)        31.25 (31.25)      15.62 (15.62)       7.81 (12.35)
+
+     250        187.5 (252.09)       125 (148.28)         62.5 (84.03)       31.25 (39.54)      15.62 (16.06)       7.81 (18.53)
+
+     475        187.5 (266.92)       125 (227.38)         62.5 (79.08)       31.25 (56.84)      15.62 (32.13)       7.81 (25.95)
+
+     860        187.5 (430.06)       125 (266.93)        62.5 (118.63)       31.25 (64.26)      15.62 (40.78)       7.81 (35.83)
+
+   Table 6-2. Effective Resolution from RMS Noise (Noise-Free Resolution from Peak-to-Peak Noise) at
+                                VDD = 3.3V
+                                            FSR (Full-Scale Range)  DATA RATE
+     (SPS)         ±6.144V          ±4.096V          ±2.048V          ±1.024V           ±0.512 V          ±0.256 V
+
+      8           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)
+
+      16           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)
+
+      32           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)
+
+      64           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)           16 (16)
+
+     128          16 (16)           16 (16)           16 (16)           16 (16)           16 (16)          16 (15.33)
+
+     250         16 (15.57)        16 (15.75)        16 (15.57)        16 (15.66)        16 (15.96)        16 (14.75)
+
+     475         16 (15.49)        16 (15.13)        16 (15.66)        16 (15.13)        16 (14.95)        16 (14.26)
+
+     860         16 (14.8)         16 (14.9)         16 (15.07)        16 (14.95)        16 (14.61)         16 (13.8)
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    11
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

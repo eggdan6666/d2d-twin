@@ -1,0 +1,262 @@
+{
+  "schema": "d2d-ir-source-candidate-v3",
+  "device": "AD5592R",
+  "vendor": "ADI",
+  "interface": "SPI",
+  "reg_width": 16,
+  "address_encoding": {
+    "word": "16-bit serial input word",
+    "control_selector_bits": "14:11",
+    "control_word_bit15": 0,
+    "dac_write_bit15": 1,
+    "source_pages": "26,35-36,51",
+    "reserved_command_data_bits": "Per-register command definitions prevail provisionally; Table10 generic bits10:9 statement conflicts with REP9 and SW_RESET key10:0. No official erratum verified."
+  },
+  "registers": [
+    {
+      "name": "DAC_RD",
+      "addr": "0x1",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "DAC readback selection; p.36",
+      "fields": [
+        {
+          "name": "DAC_RD_EN",
+          "bits": "4:3",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Enable DAC input-register readback"
+        },
+        {
+          "name": "DAC_CH_SEL",
+          "bits": "2:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Select DAC channel 0-7"
+        },
+        {
+          "name": "RESERVED_10_5",
+          "bits": "10:5",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "ADC_SEQ",
+      "addr": "0x2",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "ADC conversion sequence; p.37-38",
+      "fields": [
+        {
+          "name": "REP",
+          "bits": "9",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Repeat sequence"
+        },
+        {
+          "name": "TEMP",
+          "bits": "8",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Include temperature indicator"
+        },
+        {
+          "name": "ADC_CH_MASK",
+          "bits": "7:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Enable ADC0-ADC7"
+        },
+        {
+          "name": "RESERVED_10",
+          "bits": "10",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bit; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "GEN_CTRL_REG",
+      "addr": "0x3",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "General-purpose DAC/ADC control; p.38-39",
+      "fields": [
+        {
+          "name": "ADC_BUF_PRECH",
+          "bits": "9",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ADC buffer precharge"
+        },
+        {
+          "name": "ADC_BUF_EN",
+          "bits": "8",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ADC buffer enable"
+        },
+        {
+          "name": "IO_LOCK",
+          "bits": "7",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Lock I/O configuration"
+        },
+        {
+          "name": "ALL_DAC",
+          "bits": "6",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Apply future DAC write to all DAC channels"
+        },
+        {
+          "name": "ADC_RANGE",
+          "bits": "5",
+          "access": "RW",
+          "reset": 0,
+          "desc": "ADC input range"
+        },
+        {
+          "name": "DAC_RANGE",
+          "bits": "4",
+          "access": "RW",
+          "reset": 0,
+          "desc": "DAC output range"
+        },
+        {
+          "name": "RESERVED_10",
+          "bits": "10",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bit; set to zero"
+        },
+        {
+          "name": "RESERVED_3_0",
+          "bits": "3:0",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "ADC_CONFIG",
+      "addr": "0x4",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "ADC pin configuration; p.39-40",
+      "fields": [
+        {
+          "name": "ADC_PIN_MASK",
+          "bits": "7:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Select I/O0-I/O7 as ADC inputs"
+        },
+        {
+          "name": "RESERVED_10_8",
+          "bits": "10:8",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "DAC_CONFIG",
+      "addr": "0x5",
+      "access": "RW",
+      "reset": "0x0000",
+      "desc": "DAC pin configuration; p.40-41",
+      "fields": [
+        {
+          "name": "DAC_PIN_MASK",
+          "bits": "7:0",
+          "access": "RW",
+          "reset": 0,
+          "desc": "Select I/O0-I/O7 as DAC outputs"
+        },
+        {
+          "name": "RESERVED_10_8",
+          "bits": "10:8",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "PULLDWN_CONFIG",
+      "addr": "0x6",
+      "access": "RW",
+      "reset": "0x00FF",
+      "desc": "85 kOhm pull-down configuration; p.41-42",
+      "fields": [
+        {
+          "name": "PULL_DWN_MASK",
+          "bits": "7:0",
+          "access": "RW",
+          "reset": 255,
+          "desc": "Enable pull-down on I/O0-I/O7"
+        },
+        {
+          "name": "RESERVED_10_8",
+          "bits": "10:8",
+          "access": "UNSPEC",
+          "reset": 0,
+          "desc": "Reserved command-data bits; set to zero"
+        }
+      ]
+    },
+    {
+      "name": "SW_RESET",
+      "addr": "0xF",
+      "access": "W",
+      "reset": "0x0000",
+      "desc": "Software reset command; write 10110101100 to bits 10:0; p.50",
+      "fields": [
+        {
+          "name": "SW_RESET_CODE",
+          "bits": "10:0",
+          "access": "W",
+          "reset": 0,
+          "desc": "Reset code"
+        }
+      ],
+      "write_key": "0x5AC"
+    }
+  ],
+  "excluded_blocks": [
+    "DAC_WR and ADC_RESULT/DAC_DATA_RD readback framing are excluded until SPI transaction timing is specified.",
+    "GPIO, power/reference and LDAC behaviors are deferred.",
+    "Direct-register harness does not score power-up delay, software-reset timing, or IO_LOCK cross-register side effects."
+  ],
+  "stateful_semantics": {
+    "power_up_delay_us": 250,
+    "software_reset": "SW_RESET key 0x5AC restores register and I/O defaults; reset timing/visibility requires protocol adapter.",
+    "io_lock": "GEN_CTRL_REG.IO_LOCK blocks later I/O configuration writes; not scored by direct-register harness."
+  },
+  "admission_status": "FORMAL_GOLD_ADMITTED_2026-10-10",
+  "admission_evidence": {
+    "source_review": "INDEPENDENT_IR_REVIEW_SIGNOFF.md",
+    "post_repair_recheck": "POST_REPAIR_RECHECK.md",
+    "candidate_harness": "_setup/CANDIDATE_ADMISSION_REPORT.md",
+    "promotion_note": "Promoted after source PASS and isolated candidate simulator PASS; protocol extensions remain supplemental."
+  },
+  "base_schema": "d2d-ir-v1",
+  "schema_note": "Prospective independent source-admission draft; no source certification from historical reference/model scores. Read together with candidate_source_policy.json.",
+  "source_admission": {
+    "status": "PROVISIONAL_GENERATION_INPUT_NOT_ADMITTED",
+    "audit": "../field_evidence.json",
+    "policy": "../candidate_source_policy.json",
+    "scope": "selected inventory only; disputed and dynamic assertions must use explicit aspect policy",
+    "historical_notes": "../legacy_ir_annotations.json",
+    "official_errata_verified": false
+  }
+}

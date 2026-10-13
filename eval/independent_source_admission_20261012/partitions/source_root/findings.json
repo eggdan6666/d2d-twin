@@ -1,0 +1,497 @@
+[
+  {
+    "id": "ROOT-TMP100-OS",
+    "chip": "TMP100",
+    "targets": [
+      "CONFIG.OS",
+      "CONFIG.POL"
+    ],
+    "problem": "read_as=1覆盖动态比较器/POL副作用",
+    "old": "global read_as=1",
+    "candidate_rule": {
+      "exclude_unconditional_readback": true,
+      "read_source": "comparator state and POL",
+      "trigger_requires_SD": 1
+    },
+    "locators": [
+      {
+        "pdf_page": 18,
+        "printed_page": "18",
+        "table": "§7.5.3.6",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP100-FORMAT",
+    "chip": "TMP100",
+    "targets": [
+      "TEMP.T",
+      "TEMP.UNUSED"
+    ],
+    "problem": "9位TEMP分区外推至全部可写resolution",
+    "old": "TEMP[15:7], UNUSED[6:0]",
+    "candidate_rule": {
+      "format_by_R": "9–12bits",
+      "always_zero": "3:0",
+      "baseline_resolution": "00"
+    },
+    "locators": [
+      {
+        "pdf_page": 9,
+        "printed_page": "9",
+        "table": "§7.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "Tables6–7",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP102-OS-AL",
+    "chip": "TMP102",
+    "targets": [
+      "CONFIG.OS",
+      "CONFIG.AL",
+      "CONFIG.POL"
+    ],
+    "problem": "动态状态被普通存储/恒值保护覆盖",
+    "old": "OS ordinary RW; AL protected fixed1",
+    "candidate_rule": {
+      "exclude_OS_persistence": true,
+      "exclude_AL_snapshot_equality": true,
+      "event_model": "conversion and hysteresis and POL"
+    },
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": "§6.4.4",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "§6.5.3.8",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP102-EM",
+    "chip": "TMP102",
+    "targets": [
+      "CONFIG.EM",
+      "TEMP",
+      "TLOW",
+      "THIGH"
+    ],
+    "problem": "EM1改变位格式，旧mask不覆盖；门限bit0不是EM标志",
+    "old": "fixed12bits; threshold desc bit0 meaningful",
+    "candidate_rule": {
+      "static_EM_test_values": [
+        0
+      ],
+      "extended_format": "15:3",
+      "TEMP_bit0": 1,
+      "threshold_bits2_0": 0
+    },
+    "locators": [
+      {
+        "pdf_page": 17,
+        "printed_page": "17",
+        "table": "Table6-9",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "Table6-14",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 20,
+        "printed_page": "20",
+        "table": "Table6-16",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP1075-UNUSED",
+    "chip": "TMP1075",
+    "targets": [
+      "CFGR.UNUSED_LOW",
+      "LLIM.UNUSED",
+      "HLIM.UNUSED"
+    ],
+    "problem": "TYPE RW与not-used功能未定义并存",
+    "old": "unrestricted boundary RW testing",
+    "candidate_rule": {
+      "preserve_defaults": true,
+      "exclude_nondefault_function_oracle": true,
+      "pure_storage_if_explicit_assumption_only": true
+    },
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table7-8",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "Tables7-9–7-10",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP1075-OS",
+    "chip": "TMP1075",
+    "targets": [
+      "CFGR.OS"
+    ],
+    "problem": "写触发需shutdown；always read0不证明完成",
+    "old": "read_as under SD0 reset baseline",
+    "candidate_rule": {
+      "preconditions": {
+        "CFGR.SD": 1
+      },
+      "completion": "conversion complete",
+      "variant": "non-N"
+    },
+    "locators": [
+      {
+        "pdf_page": 19,
+        "printed_page": "19",
+        "table": "§7.4.2",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP1075-TM",
+    "chip": "TMP1075",
+    "targets": [
+      "CFGR.TM",
+      "CFGR.SD"
+    ],
+    "problem": "遗漏模式写清fault counter/alert history副作用",
+    "old": "storage-only",
+    "candidate_rule": {
+      "TM_write": "clear fault count and alert history",
+      "SD_command": "clear interrupt history"
+    },
+    "locators": [
+      {
+        "pdf_page": 20,
+        "printed_page": "20",
+        "table": "§7.4.4 / §7.4.4.2",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP1075-ID-CONFLICT",
+    "chip": "TMP1075",
+    "targets": [
+      "DIEID.DID"
+    ],
+    "problem": "Table7-11 TYPE RW vs prose/map/diagram RO，旧注释称笔误/erratum缺官方证据",
+    "old": "official-looking erratum claim",
+    "candidate_rule": {
+      "conflict_status": "UNRESOLVED",
+      "mask_access_dispute": true,
+      "optional_RO_assumption": "prose+diagram priority"
+    },
+    "locators": [
+      {
+        "pdf_page": 21,
+        "printed_page": "21",
+        "table": "Table7-5",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Figure7-16 / Table7-11",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major",
+    "evidence_class": "SOURCE_CONFLICT"
+  },
+  {
+    "id": "ROOT-TMP126-COR",
+    "chip": "TMP126",
+    "targets": [
+      "ALERT_STATUS.CRC_FLAG",
+      "ALERT_STATUS.SLEW_FLAG",
+      "ALERT_STATUS.THIGH_FLAG",
+      "ALERT_STATUS.TLOW_FLAG",
+      "ALERT_STATUS.DATA_READY_FLAG",
+      "TEMP_RESULT.TEMP"
+    ],
+    "problem": "缺single read无auto increment约束与跨TEMP清DR",
+    "old": "unconditional per-register clear",
+    "candidate_rule": {
+      "single_register_read_only": true,
+      "auto_increment": false,
+      "cross_clear": {
+        "TEMP_RESULT": "ALERT_STATUS.DATA_READY_FLAG"
+      },
+      "require_nonzero_event": true
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "§8.6.3",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table8-7",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-TMP126-MODE",
+    "chip": "TMP126",
+    "targets": [
+      "CONFIG.ONE_SHOT",
+      "CONFIG.INT_COMP",
+      "CONFIG.MODE",
+      "SLEW_RESULT.SLEW"
+    ],
+    "problem": "遗漏one-shot完成置MODE1，模式切换clear/abort副作用，负slew数值未保证",
+    "old": "read_as0 only",
+    "candidate_rule": {
+      "one_shot_complete": "MODE1 DR1",
+      "comparator_to_interrupt": "clear ALERT_STATUS",
+      "shutdown": "abort partial conversion; slew result0; keep alerts",
+      "negative_slew": "exclude numeric oracle"
+    },
+    "locators": [
+      {
+        "pdf_page": 14,
+        "printed_page": "14",
+        "table": "§8.4.2",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": "§8.4.3",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 16,
+        "printed_page": "16",
+        "table": "§8.4.4.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "§8.6.2",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-BOSCH-DYNAMIC",
+    "chip": "BME280",
+    "targets": [
+      "status",
+      "data registers",
+      "ctrl_hum",
+      "ctrl_meas"
+    ],
+    "problem": "状态/输出动态与切换/写入commit条件未在静态策略明确执行",
+    "old": "fresh instance only",
+    "candidate_rule": {
+      "freeze_events_for_protection": true,
+      "wait_pending_transition": true,
+      "ctrl_hum_commit": "write ctrl_meas",
+      "separate_burst_read_consistency": true
+    },
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": "§3.3.1",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "§5.4.3",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 28,
+        "printed_page": "28",
+        "table": "Table21",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-BMP-MODE",
+    "chip": "BMP280",
+    "targets": [
+      "ctrl_meas.mode",
+      "press_xlsb",
+      "temp_xlsb"
+    ],
+    "problem": "候选描述仍把10写normal，寄存器描述把XLSB有效位置写低四位",
+    "old": "10/11 normal; XLSB low nibble valid",
+    "candidate_rule": {
+      "mode": {
+        "0": "sleep",
+        "1": "forced",
+        "2": "forced",
+        "3": "normal"
+      },
+      "XLSB_position": "7:4",
+      "unused": "3:0"
+    },
+    "locators": [
+      {
+        "pdf_page": 15,
+        "printed_page": "15",
+        "table": "Table10",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "Table18",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table24",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table25",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-BMP-FILTER",
+    "chip": "BMP280",
+    "targets": [
+      "config.filter"
+    ],
+    "problem": "该版BMP没有BME式others编码逐行表；泛边界7不能算功能编码认证",
+    "old": "generic max7",
+    "candidate_rule": {
+      "alias_function_not_certified": [
+        5,
+        6,
+        7
+      ],
+      "coefficient_set": [
+        "off",
+        2,
+        4,
+        8,
+        16
+      ]
+    },
+    "locators": [
+      {
+        "pdf_page": 14,
+        "printed_page": "14",
+        "table": "Table6",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table23",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major",
+    "evidence_class": "UNDEFINED_BEHAVIOR"
+  },
+  {
+    "id": "ROOT-BOSCH-UNMAPPED",
+    "chip": "BMP280",
+    "targets": [
+      "unmapped address behavior"
+    ],
+    "problem": "原手册reserved registers读值不保证，旧未定义地址read0属于基准约定",
+    "old": "unmapped reads zero",
+    "candidate_rule": {
+      "source_guarantee": "none",
+      "mark_as": "ABSTRACTION_ASSUMPTION",
+      "exclude_from_silicon_fact": true
+    },
+    "locators": [
+      {
+        "pdf_page": 24,
+        "printed_page": "24",
+        "table": "§4.1",
+        "excerpt": ""
+      }
+    ],
+    "severity": "major"
+  },
+  {
+    "id": "ROOT-BME-VERSION",
+    "chip": "BME280",
+    "targets": [
+      "source version"
+    ],
+    "problem": "封面1.24与正文1.23标识并存",
+    "old": "single revision label",
+    "candidate_rule": {
+      "source_lock": "full file SHA256",
+      "retain_cover_and_footer": true
+    },
+    "locators": [
+      {
+        "pdf_page": 1,
+        "printed_page": "1",
+        "table": "cover",
+        "excerpt": ""
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "footer",
+        "excerpt": ""
+      }
+    ],
+    "severity": "minor",
+    "evidence_class": "SOURCE_CONFLICT"
+  }
+]

@@ -1,0 +1,42 @@
+                                                              LIS2DW12
+                                                                                            Terminology and functionality
+
+
+3.3      Sensing element
+         A proprietary process is used to create a surface micromachined accelerometer. The technology allows
+             processing suspended silicon structures, which are attached to the substrate in a few points called anchors and
+             are free to move in the direction of the sensed acceleration. In order to be compatible with the traditional
+            packaging techniques, a cap is placed on top of the sensing element to avoid blocking the moving parts during
+              the molding phase of the plastic encapsulation. When an acceleration is applied to the sensor, the proof mass
+              displaces from its nominal position, causing an imbalance in the capacitive half-bridge. This imbalance is
+           measured using charge integration in response to a voltage pulse applied to the capacitor.
+             At steady-state the nominal value of the capacitors are a few pF and when an acceleration is applied, the
+          maximum variation of the capacitive load is in the fF range.
+
+3.4       IC interface
+           The complete measurement chain is composed of a low-noise capacitive amplifier, which converts the capacitive
+             unbalancing of the MEMS sensor into an analog voltage using an analog-to-digital converter.
+           The acceleration data may be accessed through an I²C/SPI interface thus making the device particularly suitable
+                for direct interfacing with a microcontroller.
+           The LIS2DW12 features a data-ready signal, which indicates when a new set of measured acceleration data is
+               available, thus simplifying data synchronization in the digital system that uses the device.
+
+3.5      Factory calibration
+           The IC interface is factory-calibrated for sensitivity (So) and zero-g level offset.
+           The trim values are stored inside the device in nonvolatile memory. Anytime the device is turned on, the trimming
+            parameters are downloaded into the registers to be used during active operation. This allows using the device
+              without further calibration. If an accidental write occurs in the registers where trimming parameters are stored, the
+         BOOT bit in CTRL2 (21h) can help to retrieve the correct trimming parameters from nonvolatile memory without
+              the need to switch on/off the device. This bit is automatically reset at the end of the download operation. Setting
+                this bit has no impact on the control registers.
+
+3.6      Temperature sensor
+           The temperature is available in OUT_T_L (0Dh), OUT_T_H (0Eh) stored as two's complement data, left-justified
+                in 12-bit mode and in OUT_T (26h) stored as two's complement data, left-justified in 8-bit mode.
+             Refer to Table 5. Temperature sensor characteristics for the conversion factor.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 18/65

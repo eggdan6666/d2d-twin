@@ -1,0 +1,77 @@
+TMP100, TMP101
+
+SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015                                                                 www.ti.com
+
+
+
+
+            ALERT
+
+
+                              1                                        9    1                                        9
+
+              SCL
+
+
+
+
+
+             SDA          0    0    0    1    1    0    0  R/W        1    0    0    1   A2   A1   A0    Sta tus
+
+
+                          Start By                                  ACK By                            From     NACK By  Stop By
+                      Master                                 TMP100 or TMP101               TMP100 orTMP101  Master    Master
+
+                             Frame 1 SMBus ALERT Response Address Byte               Frame 2 Slave Address From TMP100
+
+                             Figure 9. Timing Diagram for SMBus ALERT
+
+
+7.4  Device Functional Modes
+
+7.4.1  Shutdown Mode (SD)
+
+The Shutdown Mode of the TMP100 and TMP101 devices lets the user save maximum power by shutting down
+all device circuitry other than the serial interface, which reduces current consumption to less than 1 µA. For the
+TMP100 and TMP101 devices, Shutdown Mode is enabled when the SD bit is 1. The device shuts down when
+the current conversion is completed. For SD equal to 0, the device maintains continuous conversion.
+
+7.4.2 OS/ALERT (OS)
+
+The TMP100 and TMP101 devices feature a One-Shot Temperature Measurement Mode. When the device is in
+Shutdown Mode, writing 1 to the OS/ALERT bit starts a single temperature conversion. The device returns to the
+shutdown state at the completion of the single conversion. This feature is useful to reduce power consumption in
+the TMP100 and TMP101 devices when continuous monitoring of temperature is not required.
+
+Reading the OS/ALERT bit provides information about the Comparator Mode status. The state of the POL bit
+inverts the polarity of data returned from the OS/ALERT bit. For POL = 0, the OS/ALERT reads as 1 until the
+temperature equals or exceeds THIGH for the programmed number of consecutive faults, causing the OS/ALERT
+bit to read as 0. The OS/ALERT bit continues to read as 0 until the temperature falls below TLOW for the
+programmed number of consecutive faults when the OS/ALERT bit again reads as 1. The status of the TM bit
+does not affect the status of the OS/ALERT bit.
+
+7.4.3  Thermostat Mode (TM)
+
+The Thermostat Mode bit of the TMP101 device indicates to the device whether to operate in Comparator Mode
+(TM = 0) or Interrupt Mode (TM = 1). For more information on comparator and interrupt modes, see the High-
+and Low-Limit Registers section.
+
+7.4.3.1  Comparator Mode (TM = 0)
+
+In Comparator Mode (TM = 0), the ALERT pin is activated when the temperature equals or exceeds the value in
+the THIGH register and remains active until the temperature falls below the value in the TLOW register. For more
+information on the Comparator Mode, see the High- and Low-Limit Registers section.
+
+7.4.3.2  Interrupt Mode (TM = 1)
+
+In Interrupt Mode (TM = 1), the ALERT pin is activated when the temperature exceeds THIGH or goes below the
+TLOW registers. The ALERT pin is cleared when the host controller reads the temperature register. For more
+information on the interrupt mode, see the High- and Low-Limit Registers section.
+
+
+
+
+
+14     Submit Documentation Feedback                                                     Copyright © 2002–2015, Texas Instruments Incorporated
+
+                                              Product Folder Links: TMP100 TMP101

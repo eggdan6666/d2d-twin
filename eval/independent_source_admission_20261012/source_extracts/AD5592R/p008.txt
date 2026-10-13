@@ -1,0 +1,57 @@
+Data Sheet                               AD5592R
+
+SPECIFICATIONS
+
+Table 2. (Continued)
+Parameter                                      Min         Typ      Max          Unit1       Test Conditions/Comments
+   Line Regulation                                              20                     µV/V      TA = 25°C, sweeping VDD from 2.7 V to 5.5 V
+                                                            10                     µV/V      TA = 25°C, sweeping VDD from 2.7 V to 3.3 V
+  Load Regulation
+     Sourcing                                                 210                  µV/mA     TA = 25°C, −5 mA ≤ load current ≤ +5 mA
+     Sinking                                                  120                  µV/mA     TA = 25°C, −5 mA ≤ load current ≤ +5 mA
+   Output Current Load Capability                                  ±5               mA       VDD ≥ 3 V
+GPIO OUTPUT
+   ISOURCE, ISINK                                                         1.6               mA
+   Output Voltage
+     High (VOH)                                 VDD − 0.2                      V          ISOURCE = 1 mA
+    Low (VOL)                                                                      0.4        V             ISINK = 1 mA
+GPIO INPUT
+   Input Voltage                                                                             VDD = 2.7 V to 5.5 V
+     High (VIH)                                           0.7 × VDD                      V
+    Low (VIL)                                                                      0.3 × VDD    V
+   Input Capacitance                                            20                   pF
+   Hysteresis                                                            0.2                 V
+   Input Current                                                ±1                  µA
+LOGIC INPUTS
+  AD5592R Input Voltage                                                                     VDD = 2.7 V to 5.5 V
+     High (VINH)                                          0.7 × VDD                      V
+    Low (VINL)                                                                     0.3 × VDD    V
+  AD5592R-1 Input Voltage
+     High (VINH)                                          0.7 × VLOGIC                     V          VLOGIC = 2.7 V to 5.5 V
+                                                          0.9 × VLOGIC                                       VLOGIC = 1.8 V to 2.7 V
+    Low (VINL)                                                                     0.3 × VLOGIC  V          VLOGIC = 2.7 V to 5.5 V
+                                                                                     0.1 × VLOGIC              VLOGIC = 1.8 V to 2.7 V
+   Input Current (IIN)                               −1                    +1         µA           Typically 10 nA, RESET = 1 µA typical
+   Input Capacitance (CIN)                                                 10          pF
+LOGIC OUTPUT (SDO)
+   Output High Voltage (VOH)                                                                              ISOURCE = 200 µA
+    AD5592R                                  VDD − 0.2                      V         VDD = 2.7 V to 5.5 V
+    AD5592R-1                                      VLOGIC − 0.2                                       VLOGIC = 2.7 V to 5.5 V
+                                                      VLOGIC − 0.1                                       VLOGIC = 1.8 V to 2.7 V
+   Output Low Voltage (VOL)                                                                                                 ISINK = 200 µA
+    AD5592R                                                                      0.4        V         VDD = 2.7 V to 5.5 V
+    AD5592R-1                                                                    0.4        V          VLOGIC = 2.7 V to 5.5 V
+                                                                                     0.2        V          VLOGIC = 1.8 V to 2.7 V
+   Floating-State Output Capacitance                               10                   pF
+TEMPERATURE SENSOR3
+   Resolution                                                  12                           Bits
+   Operating Range2                               −40                   +105        °C
+                                               −40                   +125        °C       AD5592RWBCPZ-RL7 and AD5592RWBCPZ-1-RL7
+  Accuracy                                                   ±3                    °C        5 sample averaging
+   Track Time                                                           5            µs       ADC buffer enabled
+                                                                       20           µs       ADC buffer disabled
+POWER REQUIREMENTS
+  VDD                                                   2.7                        5.5        V
+
+
+analog.com                                                                                          Rev. H | 8 of 54

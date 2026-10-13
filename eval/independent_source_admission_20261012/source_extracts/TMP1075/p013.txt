@@ -1,0 +1,77 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+ 7.3 Feature Description
+ 7.3.1 Digital Temperature Output
+
+The digital output from each temperature measurement conversion is stored in the read-only temperature
+ register. Which is a 12-bit, read-only register that stores the output of the most recent conversion. Two bytes
+must be read to obtain data. However, only the  first 12 MSBs are used to indicate temperature while the
+ remaining 4 LSB are set to zero. Table 7-1 lists the data format for the temperature. Negative numbers are
+ represented in binary two's-complement format. After power-up or reset, the temperature register reads 0°C until
+ the first conversion is complete.
+
+                                 Table 7-1. Temperature Data Format
+          TEMPERATURE                                         DIGITAL OUTPUT
+                      (°C)                                               BINARY                          HEX
+
+                 127.9375                           0111 1111 1111 0000                          7FF0
+
+                  100                            0110 0100 0000 0000                           6400
+
+                  80                            0101 0000 0000 0000                           5000
+
+                  75                            0100 1011 0000 0000                         4B00
+
+                  50                             0011 0010 0000 0000                           3200
+
+                  25                            0001 1001 0000 0000                           1900
+
+                    0.25                           0000 0000 0100 0000                           0040
+
+                  0.0625                          0000 0000 0001 0000                           0010
+
+                   0                            0000 0000 0000 0000                           0000
+
+                 –0.0625                             1111 1111 1111 0000                         FFF0
+
+                   –0.25                              1111 1111 1100 0000                        FFC0
+
+                  –25                             1110 0111 0000 0000                          E700
+
+                  –50                            1100 1110 0000 0000                        CE00
+
+                 –128                           1000 000 0000 0000                           8000
+
+ 7.3.2 I2C and SMBus Serial Interface
+The TMP1075 operates as a  target device on the two-wire, SMBus and I2C interface-compatible bus.
+ Connections to the bus are made through the open-drain I/O line SDA and SCL input pin. The SDA and SCL
+ pins feature integrated spike suppression filters and Schmitt triggers to minimize the effects of input spikes and
+ bus noise. The TMP1075 supports the transmission protocol for fast mode up to 400 kHz and high-speed mode
+up to 2.56 MHz. All data bytes are transmitted MSB first.
+
+ 7.3.2.1 Bus Overview
+
+The device that initiates the data transfer is called a host, and the devices controlled by the host are the target.
+The bus must be controlled by a host device that generates the SCL that controls the bus access and generates
+ the START and STOP conditions.
+
+ To address a specific device, a START condition is initiated. This is indicated by the host pulling the data line
+SDA from a high to low logic level when SCL is high. All target devices on the bus shift in the device address
+ byte on the rising edge of the clock with the last bit indicating whether a read or write operation is intended.
+ During the ninth clock pulse, the device being addressed responds to the host by generating an Acknowledge
+and pulling SDA low.
+
+ Data transfer is then initiated and sent over eight clock pulses followed by an Acknowledge bit. During data
+ transfer, SDA must remain stable when SCL is high because any change in SDA when SCL is high is interpreted
+ as a control signal.
+
+When all data are transferred, the host generates a STOP condition indicated by pulling SDA from low to high
+ logic level when SCL is high.
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    13
+
+                                                  Product Folder Links: TMP1075

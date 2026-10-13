@@ -1,0 +1,22 @@
+REGISTER CONFIGURATION @ 0x00 reset=0x399F access=RW runtime=None DESC=配置寄存器（p.18 Table 2，POR 二进制 00111001 10011111 = 399Fh）
+  RST[15] RW reset=0 read_as=0 read_action=None tier=None DESC=软复位位。写 1 触发系统复位恢复出厂值，此位自动清零（this bit self-clears）
+  RSV_14[14] RW reset=0 read_as=None read_action=None tier=B DESC=保留位，手册位图标注 R/W-0
+  BRNG[13] RW reset=1 read_as=None read_action=None tier=None DESC=总线电压量程：0=16V, 1=32V（默认 1）
+  PG[12:11] RW reset=3 read_as=None read_action=None tier=None DESC=PGA 增益与分流电压量程（默认 11b=÷8, ±320mV）
+  BADC[10:7] RW reset=3 read_as=None read_action=None tier=None DESC=总线 ADC 分辨率/采样平均（默认 0011b=12-bit）
+  SADC[6:3] RW reset=3 read_as=None read_action=None tier=None DESC=分流 ADC 分辨率/采样平均（默认 0011b=12-bit）
+  MODE[2:0] RW reset=7 read_as=None read_action=None tier=None DESC=工作模式（默认 111b=分流与总线连续测量）
+REGISTER SHUNT_VOLTAGE @ 0x01 reset=0x0000 access=RO runtime=None DESC=分流电压测量值（p.18 Table 2，TYPE=R，补码）
+  SV[15:0] RO reset=0 read_as=None read_action=None tier=None DESC=分流电压原始采样数据
+REGISTER BUS_VOLTAGE @ 0x02 reset=0x0000 access=RO runtime=None DESC=总线电压测量值（p.18 Table 2，TYPE=R）
+  BD[15:3] RO reset=0 read_as=None read_action=None tier=None DESC=总线电压数据（13 位，LSB=4mV）
+  RSV_2[2] RO reset=0 read_as=None read_action=None tier=A DESC=保留位，恒读 0
+  CNVR[1] RO reset=0 read_as=None read_action=None tier=None DESC=转换完成就绪标志
+  OVF[0] RO reset=0 read_as=None read_action=None tier=None DESC=算术溢出标志
+REGISTER POWER @ 0x03 reset=0x0000 access=RO runtime=None DESC=功率计算值（p.18 Table 2，TYPE=R；因 CALIBRATION 上电为 0 故 POR=0000h）
+  PWR[15:0] RO reset=0 read_as=None read_action=None tier=None DESC=功率计算原始数据
+REGISTER CURRENT @ 0x04 reset=0x0000 access=RO runtime=None DESC=电流计算值（p.18 Table 2，TYPE=R；因 CALIBRATION 上电为 0 故 POR=0000h）
+  CURR[15:0] RO reset=0 read_as=None read_action=None tier=None DESC=电流计算原始数据
+REGISTER CALIBRATION @ 0x05 reset=0x0000 access=RW runtime=None DESC=校准寄存器（p.23 §8.6.2.6）。bit 0 硬件固定恒 0（void bit），bits 15:1 设定满量程电流与 LSB
+  FS[15:1] RW reset=0 read_as=None read_action=None tier=None DESC=满量程校准值（FS[15:1]）
+  FS0[0] RO reset=0 read_as=None read_action=None tier=A DESC=无效空位，硬件恒为 0，写 1 无效

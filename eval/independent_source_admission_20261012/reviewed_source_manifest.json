@@ -1,0 +1,447 @@
+{
+  "source_boundary": "Local manufacturer PDFs supplied by repository; current vendor website bytes and official errata not checked",
+  "sources": [
+    {
+      "device": "BME280",
+      "path": "corpus/data/raw_pdf/Bosch/BME280.pdf",
+      "sha256": "a2ccdb449fec94380742fe8eec851a11d9bd4142252d332b34682b4deecd7d89",
+      "pdf_pages": 60,
+      "version_first_page_text": "BME280\nCombined humidity and pressure sensor\n\n\n\n\n\nBME280 – Data sheet\nDocument revision           1.24\nDocument release date      February 2024\nDocument number         BST-BME280-DS001-24\nSales Part Number (SPN)    0 273 141 185\nNotes                     Data and descriptions in this document are subject to change without\n                                notice. Product photos and pictures are for illustration purposes only\n                         and may differ from the real product appearance",
+      "manual_version": "BST-BME280-DS001-24, cover revision 1.24 February 2024; body footer DS001-23 Revision_1.23_012022 (retained mismatch)",
+      "reviewed_pages": [
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "source_path": "corpus/data/raw_pdf/Bosch/BME280.pdf"
+    },
+    {
+      "device": "BMP280",
+      "path": "corpus/data/raw_pdf/Bosch/BMP280.pdf",
+      "sha256": "473ff27d9df698b4757e36b36209f83b9f637b592c999d5fabe2a9453a488da6",
+      "pdf_pages": 49,
+      "version_first_page_text": "BMP280\nDigital Pressure Sensor\n\n\n\n\n\nBMP280 – Data sheet\n Document revision           1.26\n Document release date      October 2021\n Document number         BST-BMP280-DS001-26\n Sales part number         0 273 300 436\n Ordering code              0.273.300.436-1NV\n Notes                     Data and descriptions in this document are subject to change without\n                                 notice. Product photos and pictures are for illustration purposes only\n                         and may differ from the real product appearance",
+      "manual_version": "BST-BMP280-DS001-26 revision 1.26 October 2021",
+      "reviewed_pages": [
+        14,
+        15,
+        17,
+        20,
+        24,
+        25,
+        26,
+        27
+      ],
+      "source_path": "corpus/data/raw_pdf/Bosch/BMP280.pdf"
+    },
+    {
+      "device": "TMP100",
+      "path": "corpus/data/raw_pdf/TI/TMP100.pdf",
+      "sha256": "4099b7e562d9333140b60526c32908a082ef300d019266161e9a2b118e52fc29",
+      "pdf_pages": 31,
+      "version_first_page_text": "                               Product        Sample &         Technical            Tools &          Support &\n                                Folder         Buy            Documents         Software        Community\n\n\n                                                                           TMP100, TMP101\n\n                                                                             SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015\n          TMP10x Temperature Sensor With I2C and SMBus Interface with\n                              Alert Function in SOT-23 Package\n\n1  Features                              3  Description\n1•   Digital Output: SMBus™, Two-Wire, and I2C         The TMP100  and TMP101  devices  are  digital\n                                                      temperature sensors ideal for negative temperature   Interface Compatibility\n                                                                 coefficient (NTC) and positive temperature coefficient\n•   Resolution: 9 to 12 Bits, User-Selectable                                                  (PTC) thermistor replacement. The devices offer a\n•  Accuracy:                                                   typical accuracy of ±1°C without requiring calibration\n   –  ±1°C (Typical) from –55°C to 125°C                 or external component  signal  conditioning. Device\n                                                      temperature sensors are highly  linear and do not\n   –  ±2°C (Maximum) from –55°C to 125°C                                                           require complex  calculations  or  look-up  tables  to\n•  Low Quiescent Current: 45-μA, 0.1-μA Standby        derive  the  temperature. The  on-chip,  12-bit ADC\n•  Wide Supply Range: 2.7 V to 5.5 V                      offers resolutions down to 0.0625°C. The devices are\n                                                            available in 6-Pin SOT-23 packages.•  TMP100 Features Two Address Pins\n•  TMP101 Features One Address Pin and an          The TMP100 and TMP101 devices feature SMBus,\n                                                    Two-Wire,  and  I2C  interface  compatibility.  The  ALERT Pin\n                                          TMP100 device allows up to eight devices on one\n•  6-Pin SOT-23 Package                                                        bus. The TMP101 device  offers an SMBus  Alert\n                                                            function with up to three devices per bus.\n2  Applications\n                                              The TMP100 and TMP101 devices are  ideal  for\n•  Power-Supply Temperature Monitoring                                                   extended temperature measurement in a variety of\n•  Computer Peripheral Thermal Protection              communication, computer, consumer, environmental,\n•  Notebook Computers                                        industrial, and instrumentation applications.\n•   Cell Phones                                  The TMP100 and TMP101 devices are specified for\n                                                         operation over a temperature range  of −55°C  to•   Battery Management\n                                                    125°C.\n•   Office Machines\n•  Thermostat Controls                                           Device Information(1)\n•  Environmental Monitoring and HVAC                 PART NUMBER     PACKAGE    BODY SIZE (NOM)\n•  Electromechanical Device Temperature               TMP100           SOT-23 (6)        2.90 mm × 1.60 mm\n                                                     TMP101           SOT-23 (6)        2.90 mm × 1.60 mm\n\n                                                                                  (1) For all available packages, see the orderable addendum at\n                                                                            the end of the data sheet.\n\n\n                                          Simplified Schematics\n\n         Temperature                                                       Temperature\n\n\n                           Diode                                                           Diode\n                   1                         Control    6                           1                         Control    6\n          SCL           Temp.                      SDA          SCL          Temp.                      SDA\n                                                Logic                                                                Logic\n                          Sensor                                                         Sensor\n\n\n\n                        ∆Σ                                                      ∆Σ\n                   2                            Serial     5                           2                            Serial     5\n        GND         ADC                       ADD0       GND         ADC                       ADD0\n                                                    Interface                                                                    Interface\n                           Converter                                                            Converter\n\n\n\n\n                                                Config                                                               Config\n                   3                               4                           3                               4\n        ADD1        OSC           and Temp        V+         ALERT        OSC          and Temp        V+\n                                                Register                                                                Register\n\n\n\n                            TMP100                                               TMP101\n\n\n\n\n\n1\n\n\n\n     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,\n        intellectual property matters and other important disclaimers. PRODUCTION DATA.",
+      "manual_version": "SBOS231I revised November 2015",
+      "reviewed_pages": [
+        9,
+        14,
+        16,
+        17,
+        18
+      ],
+      "source_path": "corpus/data/raw_pdf/TI/TMP100.pdf"
+    },
+    {
+      "device": "TMP102",
+      "path": "corpus/data/raw_pdf/TI/TMP102.pdf",
+      "sha256": "c9da6620ef95f75ce94372f670a84d168e05922dd32cebfaa6517083f15ebfaf",
+      "pdf_pages": 33,
+      "version_first_page_text": "                                                                                  TMP102\n                                                                                  SBOS397I – AUGUST 2007 – REVISED JUNE 2024\n  TMP102 Low-Power Digital Temperature Sensor With SMBus and Two-Wire Serial\n                                  Interface in SOT563\n\n1 Features                              3 Description\n\n•  SOT563 package (1.6mm × 1.6mm) is a 68%        The TMP102 device is a digital temperature sensor\n   smaller footprint than SOT-23                      designed for NTC/PTC thermistor replacement where\n•  Accuracy without calibration:                         high  accuracy  is  required. The  device  offers an\n   –  2.0°C (maximum) from –25°C to 85°C            accuracy  of  ±0.5°C  without  requiring  calibration\n   –  3.0°C (maximum) from –40°C to 125°C             or  external component  signal  conditioning. Device\n•  Low quiescent current:                             temperature sensors are highly  linear and do not\n   –  7.5μA active (maximum)                           require complex  calculations  or  lookup  tables  to\n   –  0.35μA shutdown (maximum)                      derive the temperature. The on-chip 12-bit ADC offers\n•  Supply range: 1.4V to 3.6V                            resolutions down to 0.0625°C.\n•  Resolution: 12 bits                            The 1.6mm × 1.6mm SOT563 package  is 68%\n•   Digital output: SMBus, two-wire, and I2C interface     smaller  footprint  than an SOT-23  package. The\n   compatibility                              TMP102 device features SMBus™, two-wire and I2C\n•  NIST traceable                                          interface compatibility, and allows up to four devices\n2 Applications                                on one bus. The device also features an SMBus\n                                                                  alert function. The device is specified to operate over\n•  Portable electronics                                supply voltages from 1.4V to 3.6V with the maximum\n•  Power-supply temperature monitoring                quiescent current  of 7.5µA over the  full operating\n•  Connected peripherals and printers                   range.\n•  PC and notebooks\n                                             The TMP102  device   is  designed  for  extended•  Battery management\n                                                     temperature   measurement    in   a    variety    of•  Enterprise machine\n                                                    communication, computer, consumer, environmental,•  Thermostat\n                                                                  industrial,  and  instrumentation  applications.  The•  Electromechanical device temperatures\n                                                      device is specified for operation over a temperature•  General temperature measurements:\n                                                   range of –40°C to 125°C.\n   –  Factory automation & control\n   –  Test & measurement                        The TMP102  production  units  are 100%  tested\n   –  Medical and healthcare                           against sensors  that  are  NIST-traceable and  are\n                                                                                    Supply Voltage        verified  with  equipment  that  are  NIST-traceable\n                                                                                    1.4V to 3.6V       through ISO/IEC 17025 accredited calibrations.\n\n                                                                                         Supply Bypass\n                                                                                                  Capacitor                 Package Information\n                                              Pullup Resistors                                 0.01µF\n                                       5kΩ                             PART NUMBER      PACKAGE(1)    PACKAGE SIZE(2)\n\n                                                    TMP102          SOT563 (6)        1.60mm × 1.60mm\n\n                                       TMP102                                  (1)   For more information, see Section 10.\n      Two-Wire                            1                           6                         (2)  The package size (length × width) is a nominal value and\n    Host Controller                        SCL            SDA                              includes pins, where applicable.\n\n                                         2                           5\n                                 GND              V+                                                  Temperature\n\n                                         3                                                                    4\n                                                                                                                                Diode                                      ALERT          ADD0                                                                                                                  1                                                                                                                                                                    Control    6\n                                                                                           SCL           Temp.                     SDA\n                                                                                                                                                               Logic\n                                                                                                                              Sensor\n\n\n\n\n\n                                                                                                                  2                                                                                                                                                                                  Serial     5               Simplified Schematic                                    GND           DS                                                                                                                         A/D                                                                                                                                      V+\n                                                                                                                                                                              Interface\n                                                                                                                                       Converter\n\n\n\n                                                                                                                  3                          Config.    4\n                                                                                          ALERT        OSC          and Temp.       ADD0\n                                                                                                                                                                  Register\n\n\n                                                               Block Diagram\n\n     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,\n       intellectual property matters and other important disclaimers. PRODUCTION DATA.",
+      "manual_version": "SBOS397I revised June 2024",
+      "reviewed_pages": [
+        15,
+        17,
+        18,
+        19,
+        20
+      ],
+      "source_path": "corpus/data/raw_pdf/TI/TMP102.pdf"
+    },
+    {
+      "device": "TMP1075",
+      "path": "corpus/data/raw_pdf/TI/TMP1075.pdf",
+      "sha256": "266c9a50a80b100884e9cf378b320ea51412023057fed8ba4fbdf85502340cf2",
+      "pdf_pages": 49,
+      "version_first_page_text": "                                                                                   TMP1075\n                                                                             SBOS854F – MARCH 2018 – REVISED JUNE 2024\n  TMP1075 Temperature Sensor With I2C and SMBus Interface in Industry Standard\n                     LM75 Form Factor and Pinout\n\n1 Features                                       Compatible with two-wire SMBus and I2C interfaces,\n                                                        the TMP1075 support up to 32 device addresses and•  Temperature accuracy:\n                                                       provides SMBus Reset and Alert function.\n   –  ±0.25°C (typical) from −55°C to 125°C\n   –  ±1°C (maximum) from −40 °C to 110°C          The TMP1075 D, DGK, and DSG packages are\n   –  ±2°C (maximum) from −55°C to 125°C              specified for operation over a temperature range of\n•  Low power consumption:                        −55°C to 125°C and the TMP1075N DRL package is\n   –  2.7μA Average current                              specified over the −40°C to 125°C temperature range.\n   –  0.37μA Shutdown current                                             The TMP1075 units are 100% tested on a production\n•  Supply range options from: 1.62V to 5.5V                                                     setup  that  is  NIST  traceable  and  verified  with\n•  Temperature independent of supply                                                  equipment  that  is  calibrated  to  ISO/IEC  17025\n•   Digital interface: SMBus, I2C                                                        accredited standards.\n•  Software compatibility with industry standard LM75\n   and TMP75                                             Package Information\n•  Can coexist in I3C mixed fast mode bus                     PART NUMBER          PACKAGE(1)          PACKAGE SIZE(2)\n•  Resolution: 12 Bits                                                         VSSOP (DGK, 8)         3.00mm × 4.90mm\n•  Supports up to 32 I2C addresses                           TMP1075             SOIC (D, 8)             4.90mm × 6.00mm\n•  ALERT pin function                                                  WSON (DSG, 8)          2.00mm × 2.00mm\n•  NIST traceability                                                                  SOT563 (DRL, 6)(3)       1.60mm × 1.60mm\n2 Applications                                                      (1)(2)   ForThe morepackageinformation,size (lengthsee ×Sectionwidth) is11.a nominal value and\n                                                                            includes pins, where applicable.\n•  Power-supply temperature monitoring                                                                               (3)   Available as the TMP1075N orderable.\n•  Connected peripherals & printers\n•  PC and notebooks                                                                                                                                                       1.7VSupplyto 5.5VVoltage(TMP1075)\n•  Mobile phones                                                                                                                                                          1.62V to 3.6V (TMP1075N)\n\n                                                                                                                                                                                               Resistors\n                                                                                                                                                                                                         Supply Bypass•  Battery management                                                                                                                         Pullup5k\n•  Enterprise machine                                                                                                                                                                     Capacitor0.01µF\n•  Thermostat\n•  Wireless environmental sensor and HVAC                                                             SDA                V+\n•  Electro mechanical device temperature                                           Two-Wire                        SCL                 A0\n                                                                                                                              Host Controller\n3 Description                                                                                                                      ALERT              A1*\n                                                                                                                                                                 A2*\nThe TMP1075  is  the most  accurate and  lowest                                       GND\npower replacement to the industry standard LM75                                                            *Pin isTMP1075Nnot available on\nand TMP75  digital temperature sensors. Available\nin  SOIC-8,  VSSOP-8, WSON-8,  and  SOT563-6                  Simplified Schematic\npackages,  the  TMP1075   offers   pin-to-pin  and\nsoftware compatibility to quickly upgrade any existing                          2.53          Average      Average r3V     Min/Max Limit\nxx75 design. The TMP1075 additional new packages                       2\nare a 2.0mm × 2.0mm DFN and a 1.6mm × 1.6mm                                 (qC)  1.51\nSOT563-6 reducing the printed circuit board (PCB)                                                   Error  0.5\nfootprint by 82% and 89% compared to the SOIC                            -0.50\npackage, respectively.                                                                                          -1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        Temperature  -1.5\nThe  TMP1075  has  a  ±1°C  accuracy  over  a                             -2\nwide temperature range and offers an on-chip 12-                            -2.5-3\nbit  analog-to-digital  converter  (ADC)  providing  a                            -55   -35   -15    5 Temperature25   45 (qC) 65   85   105  125D00X\ntemperature resolution of 0.0625°C.\n                                                DGK and D packages\n\n                                                            Temperature Accuracy\n\n\n\n     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,\n       intellectual property matters and other important disclaimers. PRODUCTION DATA.",
+      "manual_version": "SBOS854F revised June 2024; non-N orderables only",
+      "reviewed_pages": [
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+      ],
+      "source_path": "corpus/data/raw_pdf/TI/TMP1075.pdf"
+    },
+    {
+      "device": "TMP126",
+      "path": "corpus/data/raw_pdf/TI/TMP126.pdf",
+      "sha256": "6d9bab59b2814422d7bc1dff8fbd203df26e92ee40075b613c1f1fbb59eddfef",
+      "pdf_pages": 49,
+      "version_first_page_text": "                                                                                  TMP126\n                                                                                     SNIS209C – JULY 2021 – REVISED JUNE 2022\nTMP126 Low-Power, 0.25°C SPI Temperature Sensor With 175°C Operation, CRC and\n                             Slew Rate Alert\n\n1 Features                              3 Description\n\n•  High accuracy                               The TMP126 is a 0.25°C accuracy digital temperature\n   – TMP126:                                             that supports an ambient temperature range of –55°C\n        •  ±0.25°C (maximum) from 20°C to 30°C          to 175°C. The TMP126  features a  14-bit signed\n        •  ±0.3°C (maximum) from –20°C to 85°C         temperature  resolution (0.03125°C per LSB) while\n        •  ±0.4°C (maximum) from –40°C to 125°C        operating over a supply range of 1.62 V to 5.5 V.\n        •  ±0.5°C (maximum) from –55°C to 150°C       With a fast conversion rate, low supply current, and a\n        •  ±0.75°C (maximum) from 150°C to 175°C       simple 3-wire SPI compatible interface, the TMP126 is\n   – TMP126N:                                    designed for a wide range of applications.\n        •  ±0.8°C (maximum) from –40°C to 150°C      The TMP126 includes additional advanced features\n•  Fast measurement intervals with no self-heating        for increased  reliability in harsh environments such\n   concerns                                       as  optional CRC  checksum   for  data   integrity,\n•  Operating temperature range:                     programmable alert  limits, a temperature slew rate\n   – TMP126: –55°C to 175°C                         warning, and an enhanced operational temperature\n   – TMP126N: –40°C to 150°C                       range. The device utilizes a NIST traceable factory\n•  Supply range: 1.62 V to 5.5 V                           calibration  for guaranteed accuracy and comes  in\n•  Factory-calibrated                              a small SOT package for close placement to heat\n   –  NIST traceability                               sources along with fast response times.\n•  Low power consumption                                                              Device Information\n•  Programmable temperature alert limits                                                  PART NUMBER     PACKAGE(1)    BODY SIZE (NOM)\n•  Temperature slew rate warning\n                                                    TMP126         SOT-SC70 (6)       2.00 mm × 1.25 mm•  Optional Cyclic Redundancy Check (CRC)\n•  3-wire SPI interface                                                (1)   For all available packages, see the orderable addendum at\n                                                                           the end of the data sheet.\n2 Applications\n\n•  Wireless communication equipment\n•  Field transmitters\n•  Medical equipment\n•  Grid infrastructure\n•  Building and factory automation\n•  Servo drives\n•  Avionics\n•  Lasers\n\n                                                          1.62 V to 5.5 V                        0.8\n                                                                                                                          0.7       VDDVDD == 1.623.3 VV                              DS Max\n                                                                                                                          0.6       VDD = 5.5 V\n                                         10 k\n                                                                                              0.1 µF                    0.5\n                                   VDD                                              0.4\n           GPIO\n                                                                                                                          0.3                                   ALERT                                                         (C)\n           GPIO                                                                                                0.2                           10 k             CS                                                                                       Error  0.1\n           PICO                       TMP126                                  0\n   MCU                              SIO                                                          -0.1\n           POCI                                                                                                      -0.2\n                                  SCLK                                                       -0.3                                                                                                                                                                                                                                                                                                                                                                                                                                                             Temperature\n           CLK                     GND                                                 -0.4\n                                                                                                                                  -0.5\n\n                                                                                                                                  -0.6\n               Simplified Application                                                -0.7-0.8                                              DS Min\n                                                                                                                        -55     -30      -5     20     45     70     95     120    145    170\n                                                                                                             Temperature (C)\n                                                      Average Temperature Accuracy\n\n\n\n\n\n     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,\n       intellectual property matters and other important disclaimers. PRODUCTION DATA.",
+      "manual_version": "SNIS209C revised June 2022",
+      "reviewed_pages": [
+        14,
+        15,
+        16,
+        18,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ],
+      "source_path": "corpus/data/raw_pdf/TI/TMP126.pdf"
+    },
+    {
+      "device": "TMP117",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "manual_version": "SNOSD82D, June 2018, revised September 2022",
+      "pdf_pages": 50,
+      "source_depth": "full local original manufacturer PDF available; full relevant register and functional sections reviewed",
+      "reviewed_pdf_pages": [
+        15,
+        17,
+        18,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "printed_page_mapping": "physical PDF pages reviewed equal printed pages",
+      "independent_hash_matches_review_input": true,
+      "visual_pages": [
+        27,
+        31,
+        32
+      ],
+      "mutable_web_source_checked": false
+    },
+    {
+      "device": "INA219",
+      "source_path": "corpus/data/raw_pdf/TI/INA219.pdf",
+      "sha256": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+      "manual_version": "SBOS448G, August 2008, revised December 2015",
+      "pdf_pages": 38,
+      "source_depth": "full local original manufacturer PDF available; full relevant register and functional sections reviewed",
+      "reviewed_pdf_pages": [
+        9,
+        10,
+        12,
+        18,
+        19,
+        20,
+        23,
+        24
+      ],
+      "printed_page_mapping": "physical PDF pages reviewed equal printed pages",
+      "independent_hash_matches_review_input": true,
+      "visual_pages": [
+        10,
+        23
+      ],
+      "mutable_web_source_checked": false
+    },
+    {
+      "device": "INA226",
+      "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+      "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+      "manual_version": "SBOS547C, June 2011, revised August 2026",
+      "pdf_pages": 41,
+      "source_depth": "full local original manufacturer PDF available; full relevant register and functional sections reviewed",
+      "reviewed_pdf_pages": [
+        11,
+        12,
+        13,
+        15,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "printed_page_mapping": "physical PDF pages reviewed equal printed pages",
+      "independent_hash_matches_review_input": true,
+      "visual_pages": [
+        28
+      ],
+      "mutable_web_source_checked": false
+    },
+    {
+      "device": "INA3221",
+      "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+      "sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+      "manual_version": "SBOS576C, May 2012, revised September 2026",
+      "pdf_pages": 50,
+      "source_depth": "full local original manufacturer PDF available; full relevant register and functional sections reviewed",
+      "reviewed_pdf_pages": [
+        11,
+        15,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "printed_page_mapping": "physical PDF pages reviewed equal printed pages",
+      "independent_hash_matches_review_input": true,
+      "visual_pages": [
+        33,
+        34
+      ],
+      "mutable_web_source_checked": false
+    },
+    {
+      "device": "ADS1115",
+      "source_path": "corpus/data/raw_pdf/TI/ADS1115.pdf",
+      "sha256": "eefff4d412ce2dcd7e659f47238edc9b2fa02e5971f2625af730502033701834",
+      "manual_version": "SBAS444E (ADS1113/ADS1114/ADS1115), May 2009, revised December 2024",
+      "pdf_pages": 57,
+      "source_depth": "full local original manufacturer PDF available; full relevant register and functional sections reviewed",
+      "reviewed_pdf_pages": [
+        16,
+        18,
+        24,
+        25,
+        26,
+        27
+      ],
+      "printed_page_mapping": "physical PDF pages reviewed equal printed pages",
+      "independent_hash_matches_review_input": true,
+      "visual_pages": [],
+      "mutable_web_source_checked": false
+    },
+    {
+      "device": "ADS1220",
+      "source_path": "corpus/data/raw_pdf/TI/ADS1220.pdf",
+      "sha256": "ba264d1644fe9de625c075ddcee61eb4c59cce2780ba416cd831216c40f755cf",
+      "manual_version": "SBAS501D, May 2013, revised May 2026",
+      "pdf_pages": 80,
+      "source_depth": "full local original manufacturer PDF available; full relevant register and functional sections reviewed",
+      "reviewed_pdf_pages": [
+        31,
+        33,
+        34,
+        35,
+        43,
+        44,
+        45,
+        46
+      ],
+      "printed_page_mapping": "physical PDF pages reviewed equal printed pages",
+      "independent_hash_matches_review_input": true,
+      "visual_pages": [
+        46
+      ],
+      "mutable_web_source_checked": false
+    },
+    {
+      "chip": "AD5592R",
+      "path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+      "sha256": "f64878eb9d2c5f02cf9838f66d49cdb517db127b553fd70cf566a8536a2fb2d3",
+      "manual_version": "AD5592R/AD5592R-1 Data Sheet Rev. H",
+      "pdf_pages": 54,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false,
+      "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+    },
+    {
+      "chip": "LIS3DH",
+      "path": "corpus/data/raw_pdf/ST/LIS3DH.pdf",
+      "sha256": "852bfcf1a993f04cc147f26a26612a22fdc307c234f3e53d2c24c850ad421533",
+      "manual_version": "DocID17530 Rev 2",
+      "pdf_pages": 54,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false,
+      "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+    },
+    {
+      "chip": "LIS2DW12",
+      "path": "corpus/data/raw_pdf/ST/lis2dw12.pdf",
+      "sha256": "5208623aa91c63a33be0e930518c20f5210c4eb76932350f35369687ae1d0dd5",
+      "manual_version": "DS11811 Rev 9",
+      "pdf_pages": 65,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false,
+      "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+    },
+    {
+      "chip": "MPU6050",
+      "path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf",
+      "sha256": "519650cbc502a3e89ddba6d6f115734b6c7060d451938c0dc36b6232daae7014",
+      "manual_version": "RM-MPU-6000A-00 Revision 4.2; 08/19/2013",
+      "pdf_pages": 46,
+      "source_role": "PRIMARY_REGISTER_MAP_SOURCE",
+      "source_depth": "full local manufacturer PDF; relevant original pages text-read; selected original pages visually inspected",
+      "official_current_download_verified": false,
+      "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+    },
+    {
+      "chip": "MPU6050",
+      "path": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf",
+      "sha256": "a4fdf69590b8cbab1cf0a5bcd359327b0ac022061fb233855aff2e191e7e3584",
+      "manual_version": "PS-MPU-6000A-00 Revision 3.4; 08/19/2013",
+      "pdf_pages": 52,
+      "source_role": "SUPPLEMENTARY_PRODUCT_SPECIFICATION",
+      "source_depth": "full local PDF available; scope and electrical characteristics read",
+      "official_current_download_verified": false,
+      "note": "prepare.py initial device-name match was supplementary PS, not RM. RM p.40 and PS p.40 are different sections; never exchange their locators.",
+      "source_path": "corpus/data/raw_pdf/InvenSense/MPU6050.pdf"
+    },
+    {
+      "chip": "HDC2021",
+      "path": "corpus/data/raw_pdf/TI/HDC2021.pdf",
+      "sha256": "bbe3256eb811eb000f871eb3740449bd9ad2adf60db91d859ac433131d6d0a27",
+      "manual_version": "SNAS773A, December 2019, revised June 2020",
+      "pdf_pages": 48,
+      "printed_page_rule": "pdf_page = printed_page for reviewed technical pages",
+      "reviewed_technical_pages": [
+        7,
+        11,
+        13,
+        14,
+        15,
+        16,
+        17,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ],
+      "visual_pages": [
+        31
+      ],
+      "source_status": "VERIFIED_SOURCE (local original PDF, no current website comparison)",
+      "source_path": "corpus/data/raw_pdf/TI/HDC2021.pdf"
+    },
+    {
+      "chip": "LM83",
+      "path": "corpus/data/raw_pdf/TI/LM83.pdf",
+      "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+      "pdf_pages": 23,
+      "printed_page_rule": "pdf_page - 1 (wrapper precedes National document)",
+      "reviewed_technical_pages": [
+        9,
+        10,
+        11,
+        12,
+        14,
+        15,
+        16
+      ],
+      "visual_pages": [
+        10
+      ],
+      "source_status": "VERIFIED_SOURCE (local original PDF, no current website comparison)",
+      "source_path": "corpus/data/raw_pdf/TI/LM83.pdf"
+    },
+    {
+      "chip": "TMP461",
+      "path": "corpus/data/raw_pdf/TI/TMP461.pdf",
+      "sha256": "ad98b47e7b831b44da5cedb8454220cbc2ee0220f32de48d5ebf1e81eb7bf740",
+      "manual_version": "SBOS722B, June 2015, revised August 2016",
+      "pdf_pages": 38,
+      "printed_page_rule": "pdf_page = printed_page for reviewed technical pages",
+      "reviewed_technical_pages": [
+        12,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22
+      ],
+      "visual_pages": [
+        17,
+        19
+      ],
+      "source_status": "VERIFIED_SOURCE (local original PDF, no current website comparison)",
+      "source_path": "corpus/data/raw_pdf/TI/TMP461.pdf"
+    },
+    {
+      "chip": "TPS23861",
+      "path": "corpus/data/raw_pdf/TI/TPS23861.pdf",
+      "sha256": "65262ce4766a5f8e3b9f580ac02782ad7d5e35b39045fa5346288c21e240c093",
+      "manual_version": "SLUSBX9I, March 2014, revised July 2019",
+      "pdf_pages": 107,
+      "printed_page_rule": "pdf_page = printed_page for reviewed technical pages",
+      "reviewed_technical_pages": [
+        35,
+        37,
+        42,
+        43,
+        45,
+        46,
+        47,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        63,
+        64,
+        65,
+        66,
+        68,
+        71,
+        77,
+        84
+      ],
+      "visual_pages": [
+        63,
+        66
+      ],
+      "source_status": "VERIFIED_SOURCE (local original PDF, no current website comparison)",
+      "source_path": "corpus/data/raw_pdf/TI/TPS23861.pdf"
+    }
+  ],
+  "preflight_warning": "prepare.py initial filename match for MPU6050 is product specification; actual register review uses separately hashed original manufacturer RM mirror, recorded here and in each field."
+}

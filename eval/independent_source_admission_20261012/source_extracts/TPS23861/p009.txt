@@ -1,0 +1,70 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+Electrical Characteristics (continued)
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+            PARAMETER                    TEST CONDITIONS            MIN      TYP     MAX   UNIT
+
+ PORT CURRENT SENSE
+
+                                                 VDRAINn = 0 V, ICUT port n[2:0] =                                                                                      90.60      95.37     100.14   mV
+                                                  000, default
+
+                                                 VDRAINn = 0 V, ICUT port n[2:0] =                                                                                      26.65      28.05      29.45   mV
+                                           001
+
+                                                 VDRAINn = 0 V, ICUT port n[2:0] = VCUT          ICUT limit                                                                49.42      52.02      54.62   mV                                           010
+
+                                                 VDRAINn = 0 V, ICUT port n[2:0] =                                                                                    156.27      164.5     172.72   mV
+                                           110
+
+                                                 VDRAINn = 0 V, ICUT port n[2:0] =                                                                                    222.87      234.6     246.33   mV
+                                           111
+
+ δICUT/ICUT      ICUT tolerance                                              –5%              5%
+
+                                                   At port turn on,
+                                                                                10        23        31   mV
+                                         VVPWR – VDRAINn = 1 V
+ VINRUSH          IInrush limit                     VVPWR - VDRAINn = 10 V                  20        33        46   mV
+                                         VVPWR - VDRAINn = 30 V                 102                 114.7   mV
+                                         VVPWR – VDRAINn = 55 V                 102                 114.7   mV
+                                                 VDRAINn = 1 V                         102                 114.7   mV
+                                                 VDRAINn = 13 V                        102                 114.7   mV
+ VLIM          ILIM limit with PoEPn = 0
+                                                 VDRAINn = 30 V                         15        23        31   mV
+                                                 VDRAINn = 48 V                         15        23        31   mV
+                                                 VDRAINn = 1 V                         260      270.3       285   mV
+                                                 VDRAINn = 10 V                        127       140       153   mV
+ VLIM2X        ILIM limit with PoEPn = 1
+                                                 VDRAINn = 30 V                         15        23        31   mV
+                                                 VDRAINn = 48 V                         15        23        31   mV
+
+                                                 Threshold for GATE to be less than
+ VSHORT       ISHORT threshold with PoEPn = 0    1 V,                                 140                 183   mV
+                                           2 μs after application of pulse
+
+ VSHORT2X     ISHORT threshold with PoEPn = 1                                        357                 408   mV
+ IBIAS         Sense pin bias current               Port ON or during class                    -2.25                   0    µA
+
+                                    DCTHn = 00, default                    1.275                   2.55   mV
+
+                                    DCTHn = 01                             2.55                     5.1   mV
+ VI(min)         Disconnect threshold
+                                    DCTHn = 10                                5.1                   10.2   mV
+
+                                    DCTHn = 11                                8.5                  17   mV
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback      9
+
+                                                 Product Folder Links: TPS23861

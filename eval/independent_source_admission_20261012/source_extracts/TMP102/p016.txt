@@ -1,0 +1,76 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 6.4.5.2 Interrupt Mode (TM = 1)
+
+ In Interrupt mode (TM = 1), the Alert pin is activated with the conditions described in High- and Low-Limit
+ Registers. The Alert pin is cleared when the host controller reads the temperature register. For more information
+on the interrupt mode, see the High- and Low-Limit Registers.
+
+ 6.5 Programming
+ 6.5.1 Pointer Register
+
+ Figure 6-6 illustrates the internal register structure of the TMP102 device. The 8-bit Pointer Register of the
+ device is used to address a given data register. The Pointer Register uses the two least-significant bytes (LSBs)
+ (see Table 6-15 and Table 6-16) to identify which of the data registers must respond to a read or write command.
+ Table 6-6 identifies the bits of the Pointer Register byte. During a write command, P2 through P7 must always be
+ '0'. Table 6-7 describes the pointer address of the registers available in the TMP102 device. The power-up reset
+ value of P1 and P0 is 00. By default, the TMP102 device reads the temperature on power up.
+
+
+                                                                  Pointer
+                                                                Register
+
+
+
+
+                                                 Temperature
+                                                        Register
+
+
+
+                                                                          SCL
+                                                      Configuration
+                                                        Register
+                                                                                        I/O
+                                                                                   Control
+                                                                                       Interface
+                                               TLOW
+                                                        Register
+                                                                      SDA
+
+
+                                                       THIGH
+                                                        Register
+
+                                Figure 6-6. Internal Register Structure
+
+                                   Table 6-6. Pointer Register Byte
+      P7           P6           P5           P4           P3           P2           P1           P0
+
+       0             0             0             0             0             0                  Register Bits
+
+                                    Table 6-7. Pointer Addresses
+        P1               P0                                    REGISTER
+
+         0                  0                                   Temperature Register (Read Only)
+
+         0                  1                                       Configuration Register (Read/Write)
+         1                  0                                  TLOW Register (Read/Write)
+         1                  1                                       THIGH Register (Read/Write)
+
+ 6.5.2 Temperature Register
+
+The Temperature Register of the TMP102 is configured as a 12-bit, read-only register (Configuration Register
+EM bit = 0, see the Extended Mode section), or as a 13-bit, read-only register (Configuration Register EM bit = 1)
+ that stores the output of the most recent conversion. Two bytes must be read to obtain data, and are described
+ in Table 6-8 and Table 6-9. Note that byte 1 is the most significant byte, followed by byte 2, the least significant
+ byte. The first 12 bits (13 bits in Extended mode) are used to indicate temperature. The least significant byte
+does not have to be read if that information is not needed.
+
+
+
+
+16    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

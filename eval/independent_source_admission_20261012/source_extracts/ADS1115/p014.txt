@@ -1,0 +1,67 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 7.3.2 Analog Inputs
+
+The ADS111x use a switched-capacitor input stage where capacitors are continuously charged and then
+ discharged to measure the voltage between AINP and AINN. The frequency at which the input signal is sampled
+ is called the sampling frequency or the modulator frequency (fMOD). The ADS111x has a 1MHz internal oscillator
+ that is further divided by a factor of 4 to generate fMOD at 250kHz. The capacitors used in this input stage
+ are small, and to external circuitry, the average loading appears resistive. Figure 7-5 shows this structure. The
+ capacitor values set the resistance and switching rate. Figure 7-6 shows the timing for the switches in Figure
+ 7-5. During the sampling phase, switches S1 are closed. This event charges CA1 to V(AINP), CA2 to V(AINN), and
+CB to (V(AINP) – V(AINN)). During the discharge phase, S1 is first opened and then S2 is closed. Both CA1 and
+CA2 then discharge to approximately 0.7V and CB discharges to 0V. This charging draws a very small transient
+ current from the source driving the ADS111x analog inputs. The average value of this current can be used to
+ calculate the effective impedance (Zeff), where Zeff = VIN / IAVERAGE.
+
+                                                                                                                     0.7 V
+
+
+                                     CA1                                            ZCM
+                      AINP                                      0.7 V    Equivalent
+                             S1                S2                         Circuit            AINP                               CB
+                                                                                                      ZDIFF
+                             S1                S2
+                     AINN                                      0.7 V                     AINN
+                                                        fMOD = 250 kHz                   ZCM
+                                      CA2
+
+                                                                                                                     0.7 V
+
+                              Figure 7-5. Simplified Analog Input Circuit
+
+                                                                        tSAMPLE
+                              ON
+                                      S1
+                                 OFF
+
+
+                              ON
+                                      S2
+                                 OFF
+
+                                 Figure 7-6. S1 and S2 Switch Timing
+
+The common-mode input impedance is measured by applying a common-mode signal to the shorted AINP and
+AINN inputs and measuring the average current consumed by each pin. The common-mode input impedance
+changes depending on the full-scale range, but is approximately 6MΩ for the default full-scale range. In Figure
+ 7-5, the common-mode input impedance is ZCM.
+The differential input impedance is measured by applying a differential signal to AINP and AINN inputs where
+one input is held at 0.7V. The current that flows through the pin connected to 0.7 V is the differential current and
+ scales with the full-scale range. In Figure 7-5, the differential input impedance is ZDIFF.
+Make sure to consider the typical value of the input impedance. Unless the input source has a low impedance,
+ the ADS111x input impedance can affect the measurement accuracy. For sources with high-output impedance,
+ buffering can be necessary. Active buffers introduce noise, and also introduce offset and gain errors. Consider all
+ of these factors in high-accuracy applications.
+
+The clock oscillator frequency drifts slightly with temperature; therefore, the input impedances also drift. For most
+ applications, this input impedance drift is negligible, and can be ignored.
+
+
+
+
+
+14    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

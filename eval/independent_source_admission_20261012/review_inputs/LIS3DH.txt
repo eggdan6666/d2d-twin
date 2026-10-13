@@ -1,0 +1,46 @@
+REGISTER WHO_AM_I @ 0x0F reset=0x33 access=RO runtime=None DESC=Device identification; p.31,34
+  ID[7:0] RO reset=51 read_as=None read_action=None tier=None DESC=Fixed ID 0x33
+REGISTER CTRL_REG0 @ 0x1E reset=0x10 access=RW runtime=None DESC=SDO/SA0 pull-up control; p.31,34
+  SDO_PU_DISC[7] RW reset=0 read_as=None read_action=None tier=None DESC=Disconnect SDO/SA0 pull-up
+  FIXED_6[6] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Must remain at reset default for correct operation
+  FIXED_5[5] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Must remain at reset default for correct operation
+  FIXED_4[4] UNSPEC reset=1 read_as=None read_action=None tier=None DESC=Must remain at reset default 1 for correct operation
+  FIXED_3_0[3:0] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Must remain at reset default for correct operation
+REGISTER TEMP_CFG_REG @ 0x1F reset=0x00 access=RW runtime=None DESC=Auxiliary ADC and temperature enable; p.31,34
+  ADC_EN[7] RW reset=0 read_as=None read_action=None tier=None DESC=Enable auxiliary ADC
+  TEMP_EN[6] RW reset=0 read_as=None read_action=None tier=None DESC=Enable temperature sensor
+  FIXED_5_0[5:0] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Fixed zero bits
+REGISTER CTRL_REG1 @ 0x20 reset=0x07 access=RW runtime=None DESC=ODR, low-power and axis enables; p.31,35
+  ODR[7:4] RW reset=0 read_as=None read_action=None tier=None DESC=Output data rate and power mode; Table 31 defines 0x0-0x9 only
+  LPen[3] RW reset=0 read_as=None read_action=None tier=None DESC=Low-power mode
+  Zen[2] RW reset=1 read_as=None read_action=None tier=None DESC=Z-axis enable
+  Yen[1] RW reset=1 read_as=None read_action=None tier=None DESC=Y-axis enable
+  Xen[0] RW reset=1 read_as=None read_action=None tier=None DESC=X-axis enable
+REGISTER CTRL_REG4 @ 0x23 reset=0x00 access=RW runtime=None DESC=BDU, endian, full scale, resolution and SPI mode; p.31,37
+  BDU[7] RW reset=0 read_as=None read_action=None tier=None DESC=Block data update
+  BLE[6] RW reset=0 read_as=None read_action=None tier=None DESC=Endian selection
+  FS[5:4] RW reset=0 read_as=None read_action=None tier=None DESC=Full-scale selection
+  HR[3] RW reset=0 read_as=None read_action=None tier=None DESC=High-resolution mode
+  ST[2:1] UNSPEC reset=0 read_as=None read_action=None tier=None DESC=Self-test mode; 11 is invalid/reserved and is not scored as ordinary RW persistence
+  SIM[0] RW reset=0 read_as=None read_action=None tier=None DESC=3-wire SPI mode
+REGISTER STATUS_REG @ 0x27 reset=None access=RO runtime=True DESC=XYZ availability and overrun flags; p.31,39
+  ZYXOR[7] RO reset=0 read_as=None read_action=None tier=None DESC=XYZ overrun
+  ZOR[6] RO reset=0 read_as=None read_action=None tier=None DESC=Z overrun
+  YOR[5] RO reset=0 read_as=None read_action=None tier=None DESC=Y overrun
+  XOR[4] RO reset=0 read_as=None read_action=None tier=None DESC=X overrun
+  ZYXDA[3] RO reset=0 read_as=None read_action=None tier=None DESC=XYZ data available
+  ZDA[2] RO reset=0 read_as=None read_action=None tier=None DESC=Z data available
+  YDA[1] RO reset=0 read_as=None read_action=None tier=None DESC=Y data available
+  XDA[0] RO reset=0 read_as=None read_action=None tier=None DESC=X data available
+REGISTER OUT_X_L @ 0x28 reset=None access=RO runtime=True DESC=X acceleration low byte; p.31,40
+  DATA[7:0] RO reset=None read_as=None read_action=None tier=None DESC=Two's-complement left-justified output
+REGISTER OUT_X_H @ 0x29 reset=None access=RO runtime=True DESC=X acceleration high byte; p.31,40
+  DATA[7:0] RO reset=None read_as=None read_action=None tier=None DESC=Two's-complement left-justified output
+REGISTER OUT_Y_L @ 0x2A reset=None access=RO runtime=True DESC=Y acceleration low byte; p.31,40
+  DATA[7:0] RO reset=None read_as=None read_action=None tier=None DESC=Two's-complement left-justified output
+REGISTER OUT_Y_H @ 0x2B reset=None access=RO runtime=True DESC=Y acceleration high byte; p.31,40
+  DATA[7:0] RO reset=None read_as=None read_action=None tier=None DESC=Two's-complement left-justified output
+REGISTER OUT_Z_L @ 0x2C reset=None access=RO runtime=True DESC=Z acceleration low byte; p.31,40
+  DATA[7:0] RO reset=None read_as=None read_action=None tier=None DESC=Two's-complement left-justified output
+REGISTER OUT_Z_H @ 0x2D reset=None access=RO runtime=True DESC=Z acceleration high byte; p.31,40
+  DATA[7:0] RO reset=None read_as=None read_action=None tier=None DESC=Two's-complement left-justified output

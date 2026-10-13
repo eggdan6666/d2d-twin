@@ -1,0 +1,65 @@
+Contents                                                                LIS3DH
+
+Contents
+
+
+1        Block diagram and pin description  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+           1.1    Block diagram . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+           1.2    Pin description  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
+
+2        Mechanical and electrical specifications  . . . . . . . . . . . . . . . . . . . . . . . 10
+
+           2.1    Mechanical characteristics  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+           2.2    Temperature sensor characteristics  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+           2.3     Electrical characteristics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+           2.4   Communication interface characteristics  . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+                     2.4.1    SPI - serial peripheral interface  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+                     2.4.2    I2C - Inter IC control interface   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+           2.5    Absolute maximum ratings  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15
+
+3        Terminology and functionality  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+           3.1    Terminology   . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+                     3.1.1     Sensitivity . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+                     3.1.2    Zero-g level  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+           3.2    Functionality  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+                     3.2.1     High-resolution, normal mode, low-power mode  . . . . . . . . . . . . . . . . . . 16
+
+                     3.2.2     Self-test  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 17
+
+                     3.2.3   6D / 4D orientation detection  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+                     3.2.4    “Sleep-to-wake” and “Return-to-sleep”   . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+           3.3    Sensing element . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+           3.4    IC interface . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 18
+
+           3.5    Factory calibration  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+           3.6   FIFO  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+           3.7    Auxiliary ADC and temperature sensor   . . . . . . . . . . . . . . . . . . . . . . . . . . 19
+
+4        Application hints  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 20
+
+           4.1    Soldering information  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 21
+
+5          Digital main blocks  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+
+           5.1   FIFO  . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22
+
+
+
+2/54                                   DocID17530 Rev 2

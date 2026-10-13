@@ -1,0 +1,62 @@
+Terminology and functionality                                                LIS3DH
+
+3.2.3    6D / 4D orientation detection
+
+          The LIS3DH provides the capability to detect the orientation of the device in space, enabling
+           easy implementation of energy-saving procedures and automatic image rotation for mobile
+            devices.
+
+          The 4D detection is a subset of the 6D function especially defined to be implemented in
+            mobile devices for portrait and landscape computation. In 4D configuration, the Z-axis
+             position detection is disabled.
+
+3.2.4     “Sleep-to-wake” and “Return-to-sleep”
+
+          The LIS3DH can be programmed to automatically switch to low-power mode upon
+             recognition of a determined event.
+         Once the event condition is over, the device returns back to the preset normal or high-
+             resolution mode.
+
+           To enable this function the desired threshold value must be stored inside the ACT_THS
+            (3Eh) register while the duration value is written inside the ACT_DUR (3Fh) register.
+
+         When the acceleration falls below the threshold value, the device automatically switches to
+           low-power mode (10 Hz ODR).
+
+            During this condition, the ODR[3:0] bits and the LPen bit inside CTRL_REG1 (20h) and the
+        HR bit in CTRL_REG4 (23h) are not considered.
+
+          As soon as the acceleration rises above threshold, the module restores the operating mode
+          and ODRs as determined by the CTRL_REG1 (20h) and CTRL_REG4 (23h) settings.
+
+
+3.3     Sensing element
+
+        A proprietary process is used to create a surface micro-machined accelerometer. The
+            technology allows carrying out suspended silicon structures which are attached to the
+            substrate in a few points called anchors and are free to move in the direction of the sensed
+             acceleration. To be compatible with the traditional packaging techniques a cap is placed on
+            top of the sensing element to avoid blocking the moving parts during the moulding phase of
+            the plastic encapsulation.
+
+         When an acceleration is applied to the sensor the proof mass displaces from its nominal
+              position, causing an imbalance in the capacitive half-bridge. This imbalance is measured
+            using charge integration in response to a voltage pulse applied to the capacitor.
+
+            At steady state the nominal value of the capacitors are few pF and when an acceleration is
+            applied the maximum variation of the capacitive load is in the fF range.
+
+
+3.4     IC interface
+
+          The complete measurement chain is composed by a low-noise capacitive amplifier which
+            converts the capacitive unbalancing of the MEMS sensor into an analog voltage that is
+                finally available to the user by an analog-to-digital converter.
+          The acceleration data may be accessed through an I2C/SPI interface thus making the
+            device particularly suitable for direct interfacing with a microcontroller.
+
+
+
+
+
+18/54                                  DocID17530 Rev 2

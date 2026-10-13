@@ -1,0 +1,70 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 9.2.1 Design Requirements
+
+ For this design example, use the input parameters shown in Table 9-1. All other register settings are default.
+
+                                    Table 9-1. Design Parameters
+                 DESIGN PARAMETER                                EXAMPLE VALUE
+                       Supply voltage, VS                                           5V
+                            Pull-up resistors                                             10kΩ
+
+                              Input range                                                –163.84 to +163.8
+
+                       Enabled channel                                        CH1
+
+                         Operating mode                                          Shunt voltage, continuous
+
+                        Average setting                                                 1
+
+                                Critical alert limit                                        80mV
+
+                       Critical Alert Limit register setting                                      7D0h
+
+ 9.2.2 Detailed Design Procedure
+
+ This design shows two shunt voltage conversion times to demonstrate the difference in the alert response times.
+ This design generates a critical-alert response when the input voltage exceeds 80mV on channel 1. See Table
+ 9-1 for all design parameters.
+
+ For the first example the shunt voltage conversion time is set to 1.1ms. When the input signal exceeds 80mV,
+ the Critical alert pin pulls low after the conversion cycle completes, indicating an overcurrent condition, as shown
+ in Figure 9-2.
+
+ For the second example, the conversion time is set to 588µs, and the response is shown in Figure 9-3.
+
+ 9.2.3 Application Curves
+
+ Figure 9-2 shows the Critical alert pin response to a shunt voltage overlimit of 80mV for a conversion time of
+ 1.1ms. Figure 9-3 shows the response for the same limit, but with the conversion time reduced to 588µs.
+
+
+               Alert                                                                                                                                                                              Alert
+                                 (2V/div)                                                                                                                                                                                                                                                                                      (2V/div)                        Critical                                                                                                                                                                                                                                                                                      Critical
+                           CRITICAL ALERT                                                 CRITICAL ALERT
+                          INPUT                                                       INPUT
+                               LIMIT                                                                  LIMIT
+                                 Input/Limit  (50mV/div)                                                                                                                                                                                                                                                                                                                                                                                 Input/Limit  (50mV/div)
+
+
+
+                            Time (200 s/div)                                                   Time (100 s/div)
+
+          Configuration register = 4125h, conversion time = 1.1ms             Configuration register = 40DDh, conversion time = 588µs
+
+    Figure 9-2. Critical Alert Response for 1.1ms        Figure 9-3. Critical Alert Response for 588µs
+                Conversion Time                               Conversion Time
+
+ 9.3 Power Supply Recommendations
+
+The input circuitry of the device can accurately measure signals on common-mode voltages beyond the power
+ supply voltage, VS. For example, the voltage applied to the VS power supply terminal can be 5V, whereas the
+ load power-supply voltage being monitored (the common-mode voltage) on any one of the three channels can
+be as high as 26V. Note also that the device can withstand the full 0V to 26V range at the input terminals,
+
+
+
+38    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

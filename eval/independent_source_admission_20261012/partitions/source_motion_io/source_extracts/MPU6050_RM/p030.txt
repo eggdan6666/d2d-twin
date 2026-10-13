@@ -1,0 +1,61 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           30 of 46  
+   
+4.18 Registers 65 and 66 – Temperature Measurement 
+TEMP_OUT_H and TEMP_OUT_L 
+ 
+Type: Read Only 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+41 
+65 
+ 
+TEMP_OUT[15:8] 
+42 
+66 
+ 
+TEMP_OUT[7:0] 
+Description: 
+These registers store the most recent temperature sensor measurement.  
+Temperature measurements are written to these registers at the Sample Rate as defined in Register 
+25.  
+These temperature measurement registers, along with the accelerometer measurement registers, 
+gyroscope measurement registers, and external sensor data registers, are composed of two sets of 
+registers: an internal register set and a user-facing read register set.  
+The data within the temperature sensor’s internal register set is always updated at the Sample Rate. 
+Meanwhile, the user-facing read register set duplicates the internal register set’s data values 
+whenever the serial interface is idle. This guarantees that a burst read of sensor registers will read 
+measurements from the same sampling instant. Note that if burst reads are not used, the user is 
+responsible for ensuring a set of single byte reads correspond to a single sampling instant by 
+checking the Data Ready interrupt.  
+The scale factor and offset for the temperature sensor are found in the Electrical Specifications table 
+(Section 6.4 of the MPU-6000/MPU-6050 Product Specification document). 
+The temperature in degrees C for a given register value may be computed as: 
+Temperature in degrees C = (TEMP_OUT Register Value as a signed quantity)/340 + 36.53 
+Please note that the math in the above equation is in decimal. 
+ 
+ 
+Parameters: 
+TEMP_OUT 
+16-bit signed value. 
+Stores the most recent temperature sensor measurement. 
+ 
+ 
+ 

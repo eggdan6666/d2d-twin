@@ -1,0 +1,64 @@
+INA219
+
+SBOS448G –AUGUST 2008–REVISED DECEMBER 2015                                                                                                            www.ti.com
+
+
+
+                              1                                         9    1                                         9    1                                        9    1                                         9
+
+              SCL
+
+
+
+
+
+             SDA          1    0    0   A3   A2   A1   A0    R/W      P7   P6   P5   P4   P3   P2   P1   P0       D15 D14  D13  D12  D11  D10  D9   D8        D7   D6   D5   D4  D3  D2  D1  D0
+
+                           Start By                                  ACK By                                ACK By                                ACK By                                  ACK By      Stop By
+                       Master                                          INA219                                        INA219                                        INA219                                          INA219       Master
+                                Frame 1 Two-Wire Slave Address Byte (1)                     Frame 2 Register Pointer Byte                            Frame 3 Data MSByte                            Frame 4 Data LSByte
+
+
+
+
+             NOTE (1): The value of the Slave Address Byte is determined by the settings of the A0 and A1 pins.  Refer to Table 1.
+
+                                            Figure 15. Timing Diagram for Write Word Format
+
+
+
+                          1                                        9    1                                        9    1                                        9
+
+           SCL
+
+
+
+
+          SDA         1    0    0   A3   A2   A1   A0  R/W       D15  D14  D13  D12  D11  D10  D9  D8       D7  D6   D5   D4   D3   D2  D1  D0
+
+                                                                                                                                                                                                                                                                                                                          (3)
+                      Start By                                  ACK By                           From       ACK By                  From           NoACK By    Stop
+                   Master                                          INA219                            INA219         Master                   INA219                Master
+
+                                                                                                                    (1)                                                                                (2)                                                                                      (2)
+                             Frame 1 Two-Wire Slave Address Byte                         Frame 2 Data MSByte                            Frame 3 Data LSByte
+
+
+
+
+
+                       NOTES: (1) The value of the Slave Address Byte is determined by the settings of the A0 and A1 pins.
+                                         Refer to Table 1.
+                                             (2) Read data is from the last register pointer location. If a new register is desired, the register
+                                              pointer must be updated. See Figure 19.
+                                             (3) ACK by Master can also be sent.
+
+                                            Figure 16. Timing Diagram for Read Word Format
+
+
+
+
+
+16     Submit Documentation Feedback                                                                                                            Copyright © 2008–2015, Texas Instruments Incorporated
+
+                                                                          Product Folder Links: INA219

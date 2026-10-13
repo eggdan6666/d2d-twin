@@ -1,0 +1,64 @@
+                                                                            Document Number: PS-MPU-6000A-00
+                      MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                  Release Date: 08/19/2013
+
+
+ 7  Applications Information
+
+  7.1   Pin Out and Signal Description
+             MPU-       MPU-
+ Pin Number                                  Pin Name                             Pin Description               6000        6050
+     1         Y         Y             CLKIN          Optional external reference clock input. Connect to GND if unused.
+     6         Y         Y           AUX_DA         I2C master serial data, for connecting to external sensors
+     7         Y         Y           AUX_CL         I2C Master serial clock, for connecting to external sensors
+     8         Y                           /CS          SPI chip select (0=SPI mode)
+     8                   Y            VLOGIC          Digital I/O supply voltage
+     9         Y                     AD0 / SDO        I2C Slave Address LSB (AD0); SPI serial data output (SDO)
+     9                   Y             AD0           I2C Slave Address LSB (AD0)
+     10        Y         Y          REGOUT        Regulator filter capacitor connection
+     11        Y         Y           FSYNC       Frame synchronization digital input. Connect to GND if unused.
+     12        Y         Y                INT             Interrupt digital output (totem pole or open-drain)
+     13        Y         Y            VDD         Power supply voltage and Digital I/O supply voltage
+     18        Y         Y           GND         Power supply ground
+    19, 21       Y         Y            RESV         Reserved. Do not connect.
+     20        Y         Y           CPOUT        Charge pump capacitor connection
+     22        Y         Y            RESV         Reserved. Do not connect.
+     23        Y                     SCL / SCLK       I2C serial clock (SCL); SPI serial clock (SCLK)
+     23                  Y             SCL           I2C serial clock (SCL)
+     24        Y                    SDA / SDI        I2C serial data (SDA); SPI serial data input (SDI)
+     24                  Y            SDA           I2C serial data (SDA)
+ 2, 3, 4, 5, 14,
+              Y         Y            NC          Not internally connected. May be used for PCB trace routing.  15, 16, 17
+
+
+
+
+
+                   Top View                                            Top View
+                                                 SDA/SDI          SCL/SCLK     RESV     RESV      CPOUT     RESV                                                SDA    SCL     RESV     RESV      CPOUT     RESV
+
+              24  23  22  21  20  19                                24  23  22  21  20  19                             +Z
+
+  CLKIN   1                              18  GND         CLKIN   1                              18  GND
+                                                                                                                       +Z         +Y
+    NC   2                              17  NC          NC   2                              17  NC
+
+    NC   3                              16  NC          NC   3                              16  NC                             +Y
+            MPU-6000                           MPU-6050                                 MPU-6000    NC   4                              15  NC          NC   4                              15  NC                MPU-6050
+
+    NC   5                              14  NC          NC   5                              14  NC                                                                                                                    +X     +X
+
+AUX_DA   6                              13  VDD      AUX_DA   6                              13  VDD
+
+              7   8   9   10  11  12                                7   8   9   10  11  12
+                                          AUX_CL    /CS         AD0/SDO       REGOUT      FSYNC    INT                                                                                               AUX_CL       VLOGIC    AD0       REGOUT      FSYNC    INT
+
+
+                QFN Package                                   QFN Package                         Orientation of Axes of Sensitivity and
+                 24-pin, 4mm x 4mm x 0.9mm                                      24-pin, 4mm x 4mm x 0.9mm                            Polarity of Rotation
+
+
+
+
+
+                                             21 of 52

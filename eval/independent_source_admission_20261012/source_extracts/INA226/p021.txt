@@ -1,0 +1,45 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+                             Table 6-3. Bus Timing Diagram Definitions (1)
+                                                  FAST MODE          HIGH-SPEED MODE
+
+                PARAMETER                      MIN       MAX        MIN       MAX        UNIT
+ SCL operating frequency                                     f(SCL)     0.001           0.4          0.001          2.94       MHz
+ Bus free time between stop and start
+                                                                   t(BUF)     600                      160                        ns conditions
+
+ Hold time after repeated START condition.
+                                                            t(HDSTA)     100                      100                        ns After this period, the first clock is generated.
+ Repeated start condition setup time                    t(SUSTA)     100                      100                        ns
+ STOP condition setup time                             t(SUSTO)     100                      100                        ns
+ Data hold time                                          t(HDDAT)      10          900          10          100           ns
+ Data setup time                                         t(SUDAT)     100                      20                        ns
+ SCL clock low period                                     t(LOW)     1300                     200                        ns
+ SCL clock high period                                       t(HIGH)     600                      60                        ns
+ Data fall time                                                        tF                  300                      80           ns
+ Clock fall time                                                       tF                  300                      40           ns
+ Clock rise time                                                tR                  300                      40           ns
+ Clock/data rise time for SCLK ≤ 100kHz                     tR                 1000                                    ns
+
+ (1)   Values based on a statistical analysis of a one-time sample of devices. Minimum and maximum values are not guaranteed and not
+      production tested.
+
+ 6.5.5.4 SMBus Alert Response
+
+The INA226 is designed to respond to the SMBus Alert Response address. The SMBus Alert Response provides
+a quick fault identification for simple target devices. When an Alert occurs, the controller can broadcast the Alert
+Response target address (0001 100) with the Read/Write bit set high. Following this Alert Response, any target
+ device that generates an alert identifies the target device by acknowledging the Alert Response and sending the
+ address on the bus.
+The Alert Response can activate several different target devices simultaneously, similar to the I2C General Call.
+ If more than one target attempts to respond, bus arbitration rules apply. The losing device does not generate an
+Acknowledge and continues to hold the Alert line low until the interrupt is cleared.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    21
+
+                                                   Product Folder Links: INA226

@@ -1,0 +1,52 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 10.2 Layout Example
+
+The only component next to the device is the supply decoupling capacitor. The relative humidity is dependent on
+ the temperature, so the HDC2021 should be positioned away from hot spots present on the board, such as a
+ battery, display, or microcontroller. Slots around the device can be used to reduce the thermal mass for a quicker
+ response to environmental changes.
+
+The device package has a thermal pad which can be soldered to the PCB. The thermal pad can be left floated or
+ connected to the ground. Applying a different voltage other than ground to thermal pad can lead to permanent
+ device damage. If the user intends to use the integrated heater in the device, it is recommended NOT to solder
+ the thermal pad to PCB to achieve faster heating response.
+
+The below diagram shows an example layout of the device on a single-layer PCB board with no VIAs and ADDR
+ pin grounded.
+
+                               SDA                       SCL
+
+
+
+
+
+                  SDA                        SCL
+
+
+               GND                     VDD
+
+
+                ADDR                      DRDY/INT
+
+
+
+
+                                   Decoupling
+                                       Capacitor
+
+
+
+
+
+                                 GND       VDD
+     TI does NOT recommend to solder the thermal pad to PCB to achieve faster heating response if the integrated heater is used.
+
+                             Figure 10-1. HDC2021 PCB Layout Example
+
+
+
+
+
+36    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

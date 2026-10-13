@@ -1,0 +1,58 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+6   Electrical Characteristics
+
+6.1  Gyroscope Specifications
+VDD = 2.375V-3.46V, VLOGIC (MPU-6050 only) = 1.8V±5% or VDD, TA = 25°C
+
+ PARAMETER                         CONDITIONS                   MIN     TYP    MAX   UNITS    NOTES
+ GYROSCOPE SENSITIVITY
+  Full-Scale Range                       FS_SEL=0                                 ±250                      º/s
+                                     FS_SEL=1                                 ±500                      º/s
+                                     FS_SEL=2                                ±1000                     º/s
+                                     FS_SEL=3                                ±2000                     º/s
+ Gyroscope ADC Word Length                                                          16                      bits
+  Sensitivity Scale Factor                   FS_SEL=0                                 131                LSB/(º/s)
+                                     FS_SEL=1                                     65.5                LSB/(º/s)
+                                     FS_SEL=2                                     32.8                LSB/(º/s)
+                                     FS_SEL=3                                     16.4                LSB/(º/s)
+  Sensitivity Scale Factor Tolerance            25°C                                    -3                +3     %
+  Sensitivity Scale Factor Variation Over                                                   ±2          %
+ Temperature
+  Nonlinearity                                 Best fit straight line; 25°C                          0.2          %
+ Cross-Axis Sensitivity                                                                ±2          %
+ GYROSCOPE ZERO-RATE OUTPUT (ZRO)
+  Initial ZRO Tolerance                      25°C                                      ±20                       º/s
+ ZRO Variation Over Temperature              -40°C to +85°C                              ±20                       º/s
+ Power-Supply Sensitivity (1-10Hz)             Sine wave, 100mVpp; VDD=2.5V                   0.2                       º/s
+ Power-Supply Sensitivity (10 - 250Hz)          Sine wave, 100mVpp; VDD=2.5V                   0.2                       º/s
+ Power-Supply Sensitivity (250Hz - 100kHz)      Sine wave, 100mVpp; VDD=2.5V                4                        º/s
+ Linear Acceleration Sensitivity                     Static                                             0.1                     º/s/g
+ SELF-TEST RESPONSE
+ Relative                               Change from factory trim               -14                14     %         1
+ GYROSCOPE NOISE PERFORMANCE      FS_SEL=0
+  Total RMS Noise                      DLPFCFG=2 (100Hz)                            0.05                 º/s-rms
+ Low-frequency RMS noise                    Bandwidth 1Hz to10Hz                         0.033                º/s-rms
+ Rate Noise Spectral Density                    At 10Hz                                      0.005              º/s/√Hz
+ GYROSCOPE MECHANICAL
+ FREQUENCIES
+ X-Axis                                                                   30        33       36      kHz
+ Y-Axis                                                                   27        30       33      kHz
+ Z-Axis                                                                   24        27       30      kHz
+ LOW PASS FILTER RESPONSE
+                                         Programmable Range               5                 256   Hz
+ OUTPUT DATA RATE
+                                         Programmable                     4                  8,000     Hz
+ GYROSCOPE START-UP TIME           DLPFCFG=0
+ ZRO Settling (from power-on)                     to ±1º/s of Final                              30             ms
+     1.  Please refer to the following document for further information on Self-Test: MPU-6000/MPU-6050 Register Map
+       and Descriptions
+
+
+
+
+
+                                           12 of 52

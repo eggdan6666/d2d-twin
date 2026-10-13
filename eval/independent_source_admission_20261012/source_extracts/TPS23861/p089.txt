@@ -1,0 +1,83 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+8.3.3  Eight Port, Semi-Auto Mode Application Using MSP430 Micro-Controller
+
+                                                     VDD                      VPWR
+
+                                                           CVDD               TPS23861PW              CVPWR
+                  VPWR                                              1 VDD       VPWR 28                             VPWR                   P2   P3
+
+  RJ45   +                                                                  2  RESET          N/C 27                                                           +   RJ45
+  &      CP3        DP3A                                                                                                                          DP2A       CP2     &
+                                                                           3  SCL         AOUT 26
+ XFMR              -                      FP3                                                                                                              FP2                                  -  XFMR
+                                                                           4  SDAI           AIN 25
+                              QP3                                          5 SDAO     SHTDWN 24                                 QP2
+              DP3B                                                                                                                                         DP2B
+                                                                           6  INT            A3 23                                                              (Optional)           (Optional)
+                      RS3B     RS3A                                         7 DGND      AGND 22                                   RS2A     RS2B
+                                                                    RSEN3
+                                                                           8  SEN3        GATE2 21
+                                                                  RDRN3                                  RDRN2
+                      RS4B     RS4A                                         9  DRAIN3     DRAIN2 20                                   RS1A     RS1B                                                                                                            RSEN2
+           (Optional)                                                                                                                                                                   (Optional)
+                                                                           10 GATE3        SEN2 19
+              DP4B                                                                                                                                         DP1B
+                              QP4                                         11 KSENSB     KSENSA 18                                 QP1
+                                                                    RSEN4                                                                                          P1   P4
+                                                                           12 SEN4        GATE1 17
+                                                                  RDRN4                                  RDRN1              -                      FP4                                                                                                                                                 FP1                                  -   RJ45  RJ45
+                                                                           13 DRAIN4     DRAIN1 16
+                                                                                                                        &  &                                                                                                                                                   DP1A       CP1          CP4        DP4A                                                                                                            RSEN1
+ XFMR                                                                                                                                                                +  XFMR        +                                                                           14 GATE4        SEN1 15
+                                   VDD
+                  VPWR                                                  ADDR=0x20                                  VPWR
+
+                                         RSCL    RSDA
+
+
+                 I2C Host
+                 Device
+                                                            VDD                VPWR
+
+                                                           CVDD               TPS23861PW                     CVPWR
+                  VPWR                                              1 VDD       VPWR 28                             VPWR                   P6   P7
+
+  RJ45   +                                                                  2  RESET          N/C 27                                                           +   RJ45
+  &      CP7        DP7A                                                                                                                          DP6A       CP6     &
+                                                                           3  SCL         AOUT 26
+ XFMR              -                      FP7                                                                                                              FP6                                  -  XFMR
+                                                                           4  SDAI           AIN 25
+                              QP7                                          5 SDAO     SHTDWN 24                                 QP6
+              DP7B                                                                                                                                         DP6B
+                                                                           6  INT            A3 23                                                              (Optional)           (Optional)
+                      RS7B     RS7A                                         7 DGND      AGND 22                                   RS6A     RS6B
+                                                                    RSEN7
+                                                                           8  SEN3        GATE2 21
+                                                                  RDRN7                                  RDRN6
+                      RS8B     RS8A                                         9  DRAIN3     DRAIN2 20                                   RS5A     RS5B                                                                                                            RSEN6
+           (Optional)                                                                                                                                                                   (Optional)
+                                                                           10 GATE3        SEN2 19
+              DP8B                                                                                                                                         DP5B
+                              QP8                                         11 KSENSB     KSENSA 18                                 QP5
+                                                                    RSEN8                                                                                          P5   P8
+                                                                           12 SEN4        GATE1 17
+                                                                  RDRN8                                  RDRN5              -                      FP8                                                                                                                                                 FP5                                  -   RJ45  RJ45
+                                                                           13 DRAIN4     DRAIN1 16
+                                                                                                                        &  &                                                                                                                                                   DP5A       CP5          CP8        DP8A                                                                                                            RSEN5
+ XFMR                                                                                                                                                                +  XFMR        +                                                                           14 GATE4        SEN1 15
+
+                  VPWR                                                 ADDR=0x28                                  VPWR
+                                                                                                                                                                                                              Copyright © 2016, Texas Instruments Incorporated
+
+                          Figure 50. Eight Port Semi-Auto Mode Application
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     89
+
+                                                 Product Folder Links: TPS23861

@@ -1,0 +1,78 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+ 8.2.16 Mask/Enable Register (address = 0Fh) [reset = 0002h]
+
+ This register selects which function is enabled to control the Critical alert and Warning alert pins, and how each
+ warning alert responds to the corresponding channel. Read the Mask/Enable register to clear any flag results
+ present. Writing to this register does not clear the flag bit status. To make sure that there is no uncertainty in the
+ warning function setting that resulted in a flag bit being set, the Mask/Enable register must be read from to clear
+ the flag bit status before changing the warning function setting.
+
+                                  Table 8-33. Mask/Enable Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  —   SCC1  SCC2  SCC3  WEN  CEN   CF1   CF2   CF3    SF   WF1   WF2   WF3   PVF   TCF  CVRF
+
+  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-0  RW-1  RW-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                         Table 8-34. Mask/Enable Register Field Descriptions
+     Bit    Field           Type    Reset     Description
+
+    15    Reserved       R/W    0h        Reserved
+
+   14-12  SCC1-3        R/W    0h       Summation channel control. These bits determine which shunt voltage measurement
+                                                channels are enabled to fill the Shunt-Voltage Sum register. The selection of these bits
+                                            does not impact the individual channel enable or disable status, or the corresponding
+                                                channel measurements. The corresponding bit is used to select if the channel is used
+                                                         to fill the Shunt-Voltage Sum register.
+                                           0 = Disabled (default)
+                                           1 = Enabled
+
+    11   WEN          R/W    0h        Warning alert latch enable. These bits configure the latching feature of the Warning
+                                                             alert pin.
+                                           0 = Transparent (default)
+                                           1 = Latch enabled
+
+    10   CEN          R/W    0h           Critical alert latch enable. These bits configure the latching feature of the Critical alert
+                                                           pin.
+                                           0 = Transparent (default)
+                                           1 = Latch enabled
+
+    9-7    CF1-3         R/W    0h           Critical-alert flag indicator. These bits are asserted if the corresponding channel
+                                           measurement has exceeded the critical alert limit resulting in the Critical alert pin being
+                                                    asserted. Read these bits to determine which channel caused the critical alert. The
+                                                                   critical alert flag bits are cleared when the Mask/Enable register is read back.
+
+     6    SF           R/W    0h        Summation-alert flag indicator. This bit is asserted if the Shunt Voltage Sum register
+                                             exceeds the Shunt Voltage Sum Limit register. If the summation alert flag is asserted,
+                                                   the Critical alert pin is also asserted. The Summation Alert Flag bit is cleared when the
+                                             Mask/Enable register is read back.
+
+    5-3   WF1-3         R/W    0h         Warning-alert flag indicator. These bits are asserted if the corresponding channel
+                                              averaged measurement has exceeded the warning alert limit, resulting in the Warning
+                                                             alert pin being asserted. Read these bits to determine which channel caused the
+                                                warning alert. The Warning Alert Flag bits clear when the Mask/Enable register is read
+                                                  back.
+
+     2    PVF          R/W    0h         Power-valid-alert flag indicator. This bit can be used to be able to determine if the
+                                            power valid (PV) alert pin has been asserted through software rather than hardware.
+                                          The bit setting corresponds to the status of the PV pin. This bit does not clear until the
+                                                      condition that caused the alert is removed, and the PV pin has cleared.
+
+     1    TCF          R/W     11h         Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC)
+                                                             alert pin has been asserted through software rather than hardware. The bit setting
+                                                corresponds to the status of the TC pin. This bit does not clear after the bit has been
+                                                  asserted unless the power is recycled or a software reset is issued. The default state
+                                                             for the timing control alert flag is high.
+
+
+
+
+
+34    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

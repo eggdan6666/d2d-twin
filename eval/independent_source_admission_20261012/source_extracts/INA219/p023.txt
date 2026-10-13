@@ -1,0 +1,79 @@
+                                                                                   INA219
+
+www.ti.com                                                            SBOS448G –AUGUST 2008–REVISED DECEMBER 2015
+
+8.6.3.2 Bus Voltage Register (address = 02h)
+
+The Bus Voltage register stores the most recent bus voltage reading, VBUS.
+
+At full-scale range = 32 V (decimal = 8000, hex = 1F40), and LSB = 4 mV.
+
+                                  Figure 24. Bus Voltage Register
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+ BD12  BD11  BD10   BD9   BD8   BD7   BD6   BD5   BD4   BD3   BD2   BD1   BD0  —   CNVR  OVF
+
+At full-scale range = 16 V (decimal = 4000, hex = 0FA0), and LSB = 4 mV.
+
+
+ CNVR:              Conversion Ready
+
+ Bit 1                  Although the data from the last conversion can be read at any time, the INA219 Conversion Ready bit (CNVR)
+                         indicates when data from a conversion is available in the data output registers. The CNVR bit is set after all
+                        conversions, averaging, and multiplications are complete. CNVR will clear under the following conditions:
+
+                            1.) Writing a new mode into the Operating Mode bits in the Configuration Register (except for Power-Down or
+                        Disable)
+
+                            2.) Reading the Power Register
+
+
+ OVF:              Math Overflow Flag
+
+ Bit 0               The Math Overflow Flag (OVF) is set when the Power or Current calculations are out of range. It indicates that
+                         current and power data may be meaningless.
+
+8.6.3.3  Power Register (address = 03h) [reset = 00h]
+
+Full-scale range and LSB are set by the Calibration register. See the Programming the Calibration Register.
+
+                                     Figure 25. Power Register
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+ PD15  PD14  PD13  PD12  PD11  PD10   PD9   PD8   PD7   PD6   PD5   PD4   PD3   PD2   PD1   PD0
+  R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+The Power register records power in watts by multiplying the values of the current with the value of the bus
+voltage according to the equation Equation 5:
+
+8.6.3.4  Current Register (address = 04h) [reset = 00h]
+
+Full-scale range and LSB depend on the value entered in the Calibration register. See Programming the
+Calibration Register for more information. Negative values are stored in 2's complement format.
+
+                                     Figure 26. Current Register
+
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+ CSIGN  CD14  CD13  CD12  CD11  CD10  CD9   CD8   CD7   CD6   CD5   CD4   CD3   CD2   CD1   CD0
+  R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+The value of the Current register is calculated by multiplying the value in the Shunt Voltage register with the
+value in the Calibration register according to the Equation 4:
+
+8.6.4  Calibration Register
+
+8.6.4.1  Calibration Register (address = 05h) [reset = 00h]
+
+Current and power calibration are set by bits FS15 to FS1 of the Calibration register. Note that bit FS0 is not
+used in the calculation. This register sets the current that corresponds to a full-scale drop across the shunt. Full-
+scale range and the LSB of the current and power measurement depend on the value entered in this register.
+See the Programming the Calibration Register. This register is suitable for use in overall system calibration. Note
+that the 0 POR values are all default.
+
+Copyright © 2008–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     23
+
+                                                   Product Folder Links: INA219

@@ -1,0 +1,56 @@
+TMP126
+SNIS209C – JULY 2021 – REVISED JUNE 2022                                                                      www.ti.com
+
+8 Detailed Description
+ 8.1 Overview
+
+The TMP126 is a factory calibrated digital output temperature sensor designed for thermal management and
+ thermal protection applications. The device has a 3-wire SPI compatible interface with multiple operating modes
+ including continuous, one-shot, and shutdown mode. The TMP126 features an ALERT output with temperature
+ threshold settings for autonomous monitoring and system alerts. In addition the TMP126 also includes a
+ temperature slew rate warning feature that alerts the system to temperature spikes, allowing for corrective action
+ before reaching thermal limits.
+
+ For data integrity an optional Cyclic Redundancy Check (CRC) is available that will validate communication with
+ the device.
+
+ 8.2 Functional Block Diagram
+
+                                          VDD
+
+
+
+
+
+           CS                                                       Oscillator
+
+
+
+                                        I/O
+          SCLK                                      Buffer            Digital Core          Register
+                                                         Bank
+
+            SIO                                                                          Internal
+                                                                                   thermal
+                                                                    BJT
+
+         ALERT
+
+
+                                                                      Temperature
+                                         ADC             sensor
+                                                                                                  circuitry
+
+
+
+
+
+                                       GND
+
+
+
+
+
+10    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP126

@@ -1,0 +1,162 @@
+7.6.6 EEPROM Unlock Register (address = 04h) [reset = 0000h]
+Return to Register Map.
+Figure 7-17. EEPROM Unlock Register
+15
+14
+13
+12
+11
+10
+9
+8
+EUN
+EEPROM_Busy
+—
+—
+—
+—
+—
+—
+R/W-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+7
+6
+5
+4
+3
+2
+1
+0
+—
+—
+—
+—
+—
+—
+—
+—
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+R-0
+Table 7-10. EEPROM Unlock Register Field Descriptions
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+15
+EUN
+R/W
+0
+EEPROM unlock.
+0: EEPROM is locked for programming: writes to all EEPROM 
+addresses (such as configuration, limits, and EEPROM locations 
+1-4) are written to registers in digital logic and are not 
+programmed in the EEPROM
+1: EEPROM unlocked for programming: any writes to 
+programmable registers program the respective location in the 
+EEPROM
+14
+EEPROM_Busy
+R
+0
+EEPROM busy. This flag is the mirror of the EEPROM busy flag 
+(bit 12) in the configuration register.
+0: Indicates that the EEPROM is ready, which means that the 
+EEPROM has finished the last transaction and is ready to 
+accept new commands
+1: Indicates that the EEPROM is busy, which means that the 
+EEPROM is currently completing a programming operation or 
+performing power-up on reset load
+13:0
+—
+R
+0
+Not used
+7.6.7 EEPROM1 Register (address = 05h) [reset = XXXXh]
+The EEPROM1 register is a 16-bit register that be used as a scratch pad by the customer to store general-
+purpose data. This register has a corresponding EEPROM location. Writes to this address when the EEPROM is 
+locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked 
+causes the corresponding EEPROM location to be programmed. See the Programming the EEPROM section 
+for more information. EEPROM[4:1] are preprogrammed during manufacturing with the unique ID that can be 
+overwritten. To support NIST traceability do not delete or reprogram the EEPROM[1] register.
+Return to Register Map.
+Figure 7-18. EEPROM1 Register
+15
+14
+13
+12
+11
+10
+9
+8
+D15
+D14
+D13
+D12
+D11
+D10
+D9
+D8
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+7
+6
+5
+4
+3
+2
+1
+0
+D7
+D6
+D5
+D4
+D3
+D2
+D1
+D0
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+R/W-x
+Table 7-11. EEPROM1 Register Field Descriptions
+BIT
+FIELD
+TYPE
+RESET
+DESCRIPTION
+15:0
+D[15:0]
+R/W
+xxxxh
+This 16-bit register can be used as a scratch pad. To support 
+NIST traceability do not delete or re-program this register.
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+www.ti.com
+30
+Submit Document Feedback
+Copyright © 2022 Texas Instruments Incorporated
+Product Folder Links: TMP117

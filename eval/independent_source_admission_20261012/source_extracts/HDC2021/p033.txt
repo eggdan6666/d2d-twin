@@ -1,0 +1,80 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+8 Application and Implementation
+
+                                           Note
+
+      Information in the following applications sections is not part of the TI component specification, and TI
+     does not warrant its accuracy or completeness. TI’s customers are responsible for determining
+       suitability of components for their purposes. Customers should validate and test their design
+     implementation to confirm system functionality.
+
+ 8.1 Application Information
+
+An HVAC system thermostat control is made up of environmental sensors and a microcontroller. The
+ microcontroller acquires data from humidity and temperature sensors and controls the heating and cooling
+ system. The collected data are then shown on a display that can be easily controlled by the microcontroller.
+Based on data from the humidity and temperature sensor, the heating and cooling system then maintains the
+ environment at the customer-defined preferred conditions.
+
+ 8.2 Typical Application
+
+ In a battery-powered HVAC system thermostat, one of the key parameters in the selection of components is the
+power consumption. The HDC2021, with a current consumption of 550 nA (the average consumption over 1s for
+RH and Temperature measurements), and in conjunction with the MSP430, represents one way an engineer can
+ obtain low power consumption to extend battery life. A system block diagram of a battery-powered thermostat is
+shown in Figure 8-1.
+
+                                                                                 DISPLAY
+
+
+
+                                                                    TEMPERATURE: 25°C/ 77°F
+                                                                                                  Relative Humidity (RH): 25%
+
+                                                                                  Red
+
+                    ±       Lithium      +
+                                                                                   TIME: XX:XX
+                               Ion Battery                                                                           DATE: XX:XX:XX
+
+
+
+                                                                                 1.8 V                          1.8 V
+
+
+
+                                                     VDD
+                                HDC2021
+                                                                          VDD         MCU
+
+            RH
+                    Violet                                                SCL               Sensor
+                                                             SDA                I2C RedPeripheral   GPIOs
+                                        Orange        Registers/        I2C                             Red
+                     MUX       ADC         Red        Red      INT                                                  MUX          Red          Logic        Interface                   GPIO
+                                                          ADDR
+             TempViolet
+               Sensor
+                                                                      GND                                                                                                                                                                                                                                                                                                           GPIOs
+                                                                        CalibrationRed
+                                                                        Coefficients
+
+        GND
+                                                                                 KEYPAD
+
+
+                                                                                                          Button1C        Button2C
+
+                                                                              C
+
+                                                                                                          Button3C        Button4C
+
+
+                           Figure 8-1. Typical Application Schematic HVAC
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    33

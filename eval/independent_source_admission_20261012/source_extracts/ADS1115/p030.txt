@@ -1,0 +1,77 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 9.1.5 Analog Input Filtering
+
+ Analog input filtering serves two purposes:
+ 1.  Limits the effect of aliasing during the sampling process
+ 2.  Reduces external noise from being a part of the measurement
+
+ Aliasing occurs when frequency components are present in the input signal that are higher than half the
+ sampling frequency of the ADC (also known as the Nyquist frequency). These frequency components fold back
+and show up in the actual frequency band of interest below half the sampling frequency. The filter response of
+ the digital filter repeats at multiples of the sampling frequency, also known as the modulator frequency (fMOD),
+ as shown in Figure 9-3. Signals or noise up to a frequency where the filter response repeats are attenuated to
+a certain amount by the digital filter depending on the filter architecture. Any frequency components present in
+ the input signal around the modulator frequency, or multiples thereof, are not attenuated and alias back into the
+band of interest, unless attenuated by an external analog filter.
+
+                       Magnitude
+
+                            Sensor                                                      Unwanted
+                                 Signal          Unwanted                                             Signals
+                                                    Signals
+
+
+
+                                   Output                         fMOD / 2                                     fMOD   Frequency
+                                Data Rate
+
+                       Magnitude
+                                              Digital Filter
+
+
+                                                                       Aliasing of
+                                                    Unwanted Signals
+
+
+
+                                   Output                         fMOD / 2                                     fMOD   Frequency
+                                Data Rate
+
+                       Magnitude                                                                             External
+                                                                               Antialiasing Filter
+                                                                                    Roll-Off
+
+
+
+
+
+                                   Output                         fMOD / 2                                     fMOD   Frequency
+                                Data Rate
+
+                                    Figure 9-3. Effect of Aliasing
+
+Many sensor signals are inherently band-limited; for example, the output of a thermocouple has a limited rate of
+ change. In this case, the sensor signal does not alias back into the pass-band when using a ΔΣ ADC. However,
+ any noise pick-up along the sensor wiring or the application circuitry can potentially alias into the pass-band.
+Power line-cycle frequency and harmonics are one common noise source. External noise can also be generated
+ from electromagnetic interference (EMI) or radio frequency interference (RFI) sources, such as nearby motors
+and cellular phones. Another noise source typically exists on the printed-circuit-board (PCB) in the form of clocks
+and other digital signals. Analog input filtering helps remove unwanted signals from affecting the measurement
+ result.
+
+A first-order resistor-capacitor (RC) filter is (in most cases) sufficient to either totally eliminate aliasing, or to
+ reduce the effect of aliasing to a level within the noise floor of the sensor. Ideally, any signal beyond fMOD / 2 is
+ attenuated to a level below the noise floor of the ADC. The digital filter of the ADS111x attenuate signals to a
+ certain degree, as shown in Figure 5-21. In addition, noise components are usually smaller in magnitude than
+ the actual sensor signal. Therefore, use a first-order RC filter with a cutoff frequency set at the output data rate
+ or 10x higher as a generally good starting point for a system design.
+
+
+
+
+
+30    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

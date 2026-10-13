@@ -1,0 +1,85 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+Bit Descriptions
+
+CLASS Pn[3:0]: CLASS Pn is a 4-bit field for each port. The value of CLASS Pn is the most recent classification
+result on port n. The selection is as following:
+
+
+                    CLASS Pn                                      CLASSIFICATION STATUS
+
+                          0000                                                Unknown
+
+                          0001                                                         Class 1
+
+                          0010                                                         Class 2
+
+                          0011                                                         Class 3
+
+                          0100                                                         Class 4
+
+                          0101                                             Reserved – read as Class 0
+
+                          0110                                                         Class 0
+
+                          0111                                                          Overcurrent
+
+                          1000                                                      Class mismatch
+
+A class mismatch can occur only during two-event classification.  If the classification status for the  first and
+second event are different, and the second classification status is not Overcurrent, the Classification Status is set
+to Class mismatch. If the status of the first classification event is “Overcurrent”, the classification status will be set
+to “Overcurrent” in the CLASS Pn, and there will be no second classification event in any case. In Auto Mode,
+port will not power on automatically, but  still can be powered on through the Power Enable Register. The
+appropriate STRTn bit is set in the Start/ILIM Event Register following these sorts of faults during classification.
+
+DETECT Pn[3:0]: DETECT Pn is a 4-bit field for each port. The value of DETECT Pn is the most recent
+detection result on port n.
+
+
+                                  NOTE
+             Bit states 1001 – 1100 apply to legacy detection only.
+
+
+The selection is as following:
+
+
+                   DETECT Pn                                     DETECT STATUS
+
+                          0000                                           Unknown (POR value)
+
+                          0001                                                      Short circuit (<500 Ω)
+
+                          0010                                                     Reserved
+
+                          0011                                                     Resistance too low
+
+                          0100                                                      Resistance valid
+
+                          0101                                                     Resistance too high
+
+                          0110                                             Open circuit
+
+                          0111                                                     Reserved
+
+                          1000                                       MOSFET fault
+
+                          1001                                                   Legacy detect
+
+                          1010                                Capacitance measurement invalid: Detect measurement beyond
+                                                                                   clamp voltage
+
+                          1011                                  Capacitance measurement invalid: Insufficient Δv measured
+
+                          1100                              Capacitance measurement is valid, but outside the range of a legacy
+                                                                                                     device.
+
+
+
+
+
+56     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

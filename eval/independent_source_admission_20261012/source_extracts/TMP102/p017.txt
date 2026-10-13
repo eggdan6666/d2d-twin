@@ -1,0 +1,69 @@
+                                                                                   TMP102
+www.ti.com                                                                        SBOS397I – AUGUST 2007 – REVISED JUNE 2024
+
+                             Table 6-8. Byte 1 of Temperature Register(1)
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+      T11           T10           T9           T8           T7           T6           T5           T4
+
+      (T12)            (T11)           (T10)            (T9)             (T8)             (T7)             (T6)             (T5)
+
+ (1)   Extended mode 13-bit configuration shown in parenthesis.
+
+                             Table 6-9. Byte 2 of Temperature Register(1)
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+      T3           T2           T1           T0            0             0             0             0
+
+       (T4)             (T3)             (T2)             (T1)             (T0)               (0)                (0)                (1)
+
+ (1)   Extended mode 13-bit configuration shown in parenthesis.
+
+ 6.5.3 Configuration Register
+
+The Configuration Register is a 16-bit read/write register used to store bits that control the operational modes
+ of the temperature sensor. Read/write operations are performed MSB first. Table 6-10 and Table 6-11 list the
+ format and the power-up or reset value of the configuration register. For compatibility, Table 6-10 and Table 6-11
+ correspond to the configuration register in the TMP75 device and TMP275 device (for more information see the
+ device data sheets, SBOS288 and SBOS363, respectively). All registers are updated byte by byte.
+
+                   Table 6-10. Byte 1 of Configuration and Power-Up or Reset Format
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     OS          R1          R0           F1           F0         POL        TM         SD
+
+       0             1             1             0             0             0             0             0
+
+                   Table 6-11. Byte 2 of Configuration and Power-Up or Reset Format
+      D7          D6          D5          D4          D3          D2          D1          D0
+
+     CR1         CR0          AL         EM            0             0             0             0
+
+       1             0             1             0             0             0             0             0
+
+ 6.5.3.1 Shutdown Mode (SD)
+
+The Shutdown-mode bit saves maximum power by shutting down  all device circuitry other than the serial
+ interface, reducing current consumption to typically less than 0.5 μA. Shutdown mode enables when the SD bit
+ is 1; the device shuts down when current conversion is completed. When SD is equal to 0, the device maintains
+a continuous conversion state
+
+ 6.5.3.2 Thermostat Mode (TM)
+
+The Thermostat mode bit indicates to the device whether to operate in Comparator mode (TM = 0) or Interrupt
+mode (TM = 1). For more information on comparator and interrupt modes, see the High- and Low-Limit Registers
+ section.
+
+ 6.5.3.3 Polarity (POL)
+
+The polarity bit allows the user to adjust the polarity of the ALERT pin output. If the POL bit is set to 0 (default),
+ the ALERT pin becomes active low. When the POL bit is set to 1, the ALERT pin becomes active high and the
+ state of the ALERT pin is inverted. The operation of the ALERT pin in various modes is illustrated in Figure 6-7.
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    17
+
+                                                  Product Folder Links: TMP102

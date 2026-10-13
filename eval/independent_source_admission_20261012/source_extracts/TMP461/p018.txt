@@ -1,0 +1,70 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+8.6.1  Register Information
+
+The TMP461 device contains multiple registers for holding configuration information, temperature measurement
+results, and status information. These registers are described in Figure 17 and Table 4.
+
+8.6.1.1  Pointer Register
+
+Figure 17 shows the internal register structure of the TMP461 device. The 8-bit pointer register is used to
+address a given data register. The pointer register identifies which of the data registers must respond to a read
+or write command on the two-wire bus. This register is set with every write command. A write command must be
+issued to set the proper value in the pointer register before executing a read command. Table 4 describes the
+pointer register and the internal structure of the TMP461 registers. The power-on reset (POR) value of the
+pointer register is 00h (0000 0000b).
+
+                                                        Pointer Register
+
+                                         Local and Remote Temperature Registers
+
+                                                      Status Register
+
+                                                     Configuration Register                                SDA
+
+                                              Conversion Rate Register
+
+                                       Local and Remote Temperature Limit Registers
+
+                                            One-Shot Start Register
+                                                                                                         I/O
+                                   Remote Temperature Offset Registers                  Control
+                                                                                                         Interface
+                                         Local and Remote THERM Limit Registers
+
+                                THERM Hysteresis Register
+
+                                             Consecutive ALERT Register
+
+                                                   N-factor Correction Register                                SCL
+
+                                                             Digital Filter Register
+
+                                                Manufacturer ID Register
+
+                                Figure 17. Internal Register Structure
+
+8.6.1.2  Local and Remote Temperature Registers
+
+The TMP461 device has multiple 8-bit registers that hold temperature measurement results. The eight most
+significant bits (MSBs) of the local temperature sensor result are stored in register 00h, and the four least
+significant bits (LSBs) are stored in register 15h (the four MSBs of register 15h). The eight MSBs of the remote
+temperature sensor result are stored in register 01h, and the four LSBs are stored in register 10h (the four MSBs
+of register 10h). The four LSBs of both the local and remote sensor indicate the temperature value after the
+decimal point (for example, if the temperature result is 10.0625°C, then the high byte is 0000 1010 and the low
+byte is 0001 0000). These registers are read-only and are updated by the ADC each time a temperature
+measurement is completed.
+
+When the full temperature value is needed, reading the MSB value first causes the LSB value to be locked (the
+ADC does not write to it) until the LSB value is read. The same thing happens upon reading the LSB value first
+(the MSB value is locked until it is read). This mechanism assures that both bytes of the read operation are from
+the same ADC conversion. This assurance remains valid only until another register is read. For proper operation,
+read the high byte of the temperature result first. Read the low byte register in the next read command;  if the
+LSBs are not needed, the register can be left unread. The power-on reset value of all temperature registers is
+00h.
+
+18     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

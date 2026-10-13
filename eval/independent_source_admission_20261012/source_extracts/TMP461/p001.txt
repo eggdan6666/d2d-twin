@@ -1,0 +1,80 @@
+                               Product        Sample &         Technical            Tools &          Support &
+                                Folder         Buy            Documents         Software        Community
+
+
+                                                                          TMP461
+
+                                                                            SBOS722B –JUNE 2015–REVISED AUGUST 2016
+        TMP461 High-Accuracy Remote and Local Temperature Sensor with
+                         Pin-Programmable Bus Address
+
+1  Features                              3  Description
+1•  Remote Diode Temperature Sensor Accuracy:        The TMP461 device is a high-accuracy, low-power
+                                                   remote temperature sensor monitor with a  built-in   ±0.75°C
+                                                                local temperature sensor. The remote temperature
+•  Local Temperature Sensor Accuracy: ±1°C                                                     sensors are typically low-cost discrete NPN or PNP
+•  Resolution for Local and Remote Channels:             transistors, or substrate thermal transistors or diodes
+   0.0625°C                                                  that   are   integral   parts   of   microprocessors,
+                                                             microcontrollers, or field-programmable gate arrays•  Supply and Logic Voltage Range: 1.7 V to 3.6 V
+                                                   (FPGAs). Temperature  is represented as a  12-bit
+•  35-µA Operating Current (1 SPS),                                                                       digital code for both local and remote sensors, giving
+   3-µA Shutdown Current                                               a resolution of 0.0625°C. The two-wire serial interface
+•  Series Resistance Cancellation                      accepts the SMBus communication protocol with up
+                                                               to nine different pin-programmable addresses.•  η-Factor and Offset Correction
+•  Programmable Digital Filter                       Advanced  features  [such  as  series  resistance
+                                                              cancellation,  programmable  nonideality  factor  (η-•  Diode Fault Detection
+                                                                    factor),   programmable     offset,   programmable
+•  Two-Wire and SMBus™Serial Interface                                                      temperature limits, and a programmable digital filter]
+   Compatible with Pin-Programmable Address                                                       are combined to provide a robust thermal monitoring
+•  10-Lead WQFN Package                                solution with improved accuracy and noise immunity.
+
+                                              The TMP461 is ideal for multi-location, high-accuracy
+2  Applications                                                      temperature  measurements    in  a   variety   of
+•  Processor Temperature Monitoring                   communication,  computing,  instrumentation,  and
+                                                                  industrial  applications. The device  is  specified  for•  Telecommunication Equipment
+                                                         operation over a supply voltage range of 1.7 V to
+•  Servers and Personal Computers                                                         3.6 V, and a temperature range of –40°C to 125°C.
+•   Precision Instruments
+                                                               Device Information(1)•  Test Equipment
+•  Smart Batteries                                   PART NUMBER     PACKAGE    BODY SIZE (NOM)
+                                                     TMP461        WQFN (10)          2.00 mm × 2.00 mm
+•  Embedded Applications
+•  LED Lighting Thermal Control                                     (1) For all available packages, see the orderable addendum at
+                                                                            the end of the datasheet.
+
+4  Simplified Block Diagram
+
+                                                                   1.7 V to 3.6 V                                                  1.7 V to 3.6 V
+
+
+
+
+                                                                      10
+                                                                 A1                            Processor or ASIC
+                                                          1                           9
+                                                       V+              SCL
+
+                                                          2                           8
+                                                    D+    TMP461   SDA                                     SMBus
+                                                                                                                                                                Controller
+                                     Built-In Thermal                    3   D-     ALERT/THERM2  7
+                                Transistor, Diode
+                                                          4                           6
+                                                THERM        GND
+
+                                                                 A0
+                                                                          5
+
+
+                                                                                                                                  Overtemperature Shutdown
+
+
+
+
+
+1
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+        intellectual property matters and other important disclaimers. PRODUCTION DATA.

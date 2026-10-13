@@ -1,0 +1,70 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+This content can be later used as a register address pointer during next quick read cycle register access. See
+Figure 40. This internal register is cleared at power on or through the RESET pin.
+
+     1 Data Byte                   R/W                                           R/W
+    Read Cycle                                 Bit                                                                          Bit
+
+SDAI                 A6 A5 A4 A3 A2 A1 A0 R/W   C7 C6 C5 C4 C3 C2 C1 C0              A6 A5 A4 A3 A2 A1 A0 R/W    D7 D6 D5 D4 D3 D2 D1 D0
+                           Slave Address       Command Code               Bit     Slave Address              Data from       Bit     Bit                  Bit                        R/W=0        Bit                          Bit             R/W=1          Bit      Slave to Host
+                                                                                                                                            Start                              Start                         Ack                          Ack           Repeated                                                                                                                Ack                                 NAck      Stop
+SDAO                                                                                                 D7 D6 D5 D4 D3 D2 D1 D0
+
+
+                               R/W                                           R/W
+     2 Data Byte                                Bit                                                                          Bit
+    Read Cycle
+SDAI                 A6 A5 A4 A3 A2 A1 A0 R/W   C7 C6 C5 C4 C3 C2 C1 C0              A6 A5 A4 A3 A2 A1 A0R/W    D7 D6 D5 D4 D3 D2 D1 D0     D7 D6 D5 D4 D3 D2 D1 D0
+
+                                     Command Code                                                                                       Address                           Slave                               Address                                                                                                      LSByte                                                                                                              Data                                                                                                                         from                                                                                                                    MSByte                                                                                                                                       Data                                                                                    Bit     Slave                  Bit                                                                                                                                                   from      Bit     Bit                                                                       R/W=1                        R/W=0                                                                                                               Slave                                                                                                                                            to Host                                                                                                                Bit                                              Bit                                                                           Bit                                                                                                                                            Bit                                                                                                                                         Slave                                                                                                                                                                           to Host
+                                                                                                                                            Start                                                                                                                Ack                         Ack                                      NAck      Stop                               Start                         Ack                          Ack          Repeated
+SDAO                                                                                                  D7 D6 D5 D4 D3 D2 D1 D0     D7 D6 D5 D4 D3 D2 D1 D0
+
+
+                               R/W
+                                                     Bit
+     Write Cycle
+
+ SDAI                A6 A5 A4 A3 A2 A1 A0 R/W   C7 C6 C5 C4 C3 C2 C1 C0    D7 D6 D5 D4 D3 D2 D1 D0
+                  Bit       Slave Address        Command Code              Data from          Bit
+                        R/W=0        Bit                         Bit      Host to Slave      Bit
+                              Start                          Ack                         Ack                         Ack Stop
+ SDAO
+
+
+
+
+        Quick Read Cycle
+      (latest addressed register)         R/W
+                                                        Bit
+
+ SDAI                 A6 A5 A4 A3 A2 A1 A0 R/W    D7 D6 D5 D4 D3 D2 D1 D0
+
+                                                                          Data                                                                             from                               Address                    Bit      Slave                                                                             Bit     Bit                                                                                         to                                                                              Host                        R/W=1                                                 Bit          Slave
+                                 Start                          Ack                                 NAck      Stop
+ SDAO                                        D7 D6 D5 D4 D3 D2 D1 D0
+
+
+
+           Alert Response
+                                 R/W
+                                                        Bit
+
+ SDAI                 A6 A5 A4 A3 A2 A1 A0 R/W   A6 A5 A4 A3 A2 A1 A0
+
+                                                                        Slave                                                                       Address                                  Address                    Bit   ARA Slave                                                                                 from    Bit     Bit                                                                           Slave                                                                                         to Host                        R/W=1                                                 Bit
+                                 Start                          Ack                                 NAck      Stop
+ SDAO                                              A6 A5 A4 A3 A2 A1 A0
+
+                       Figure 40. I2C/SMBus Interface Read and Write Protocol
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     33
+
+                                                 Product Folder Links: TPS23861

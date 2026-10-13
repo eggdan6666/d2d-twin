@@ -1,0 +1,65 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+ with noisy or high-impedance power supplies can require additional decoupling capacitors to reject power-supply
+ noise.
+
+ 7.4 Layout
+ 7.4.1 Layout Guidelines
+
+ Place the power-supply bypass capacitor as close as possible to the supply and ground pins. The recommended
+ value of this bypass capacitor is 0.01 μF. Additional decoupling capacitance can be added to compensate for
+ noisy or high-impedance power supplies. Pull up the open-drain output pins (SDA , SCL and ALERT) through
+ 5-kΩ pullup resistors.
+
+ 7.4.2 Layout Example
+
+
+
+                                                                                                               Via to Power or
+                                                                                                 Ground Plane
+
+                                                Pullup Resistors                                                  Via to Internal Layer
+
+
+
+
+
+                                             SCL         SDA
+
+                                                                                                         Supply Voltage
+                                       GND           V+
+
+
+                                             ALERT       ADD0
+
+                                                                                                      Supply Bypass
+                                                                                                                Capacitor
+
+
+
+
+
+                                                       Ground Plane for
+                                                          Thermal Coupling
+                                                                          to Heat Source
+
+
+                        Serial Bus Traces
+
+
+
+                                                            Heat Source
+
+
+
+
+                                 Figure 7-4. TMP102 Layout Example
+
+
+
+
+
+22    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

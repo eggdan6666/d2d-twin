@@ -1,0 +1,80 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 6.3 Recommended Operating Conditions
+
+ over operating ambient temperature range (unless otherwise noted)
+
+                                                                                  MIN      NOM       MAX   UNIT
+
+ POWER SUPPLY
+
+                                   AVDD to AVSS                                           2.3                            5.5
+             Unipolar analog power supply                                                                          V
+                                     AVSS to DGND                                       –0.1            0            0.1
+
+                                   AVDD to DGND                                          2.3            2.5           2.75
+              Bipolar analog power supply                                                                           V
+                                     AVSS to DGND                                     –2.75           –2.5           –2.3
+
+               Digital power supply             DVDD to DGND                                          2.3                            5.5    V
+ ANALOG INPUTS(1)
+ VIN          Differential input voltage               VIN = VAINP – VAINN (2)                       –VREF / Gain                 VREF / Gain    V
+
+                                  PGA disabled, gain = 1 to 4                AVSS – 0.1             AVDD + 0.1    V
+  VAINx      Absolute input voltage
+                                  PGA enabled, gain = 1 to 128                   See the Low-Noise PGA section
+
+                                  PGA disabled, gain = 1 to 4                AVSS – 0.1             AVDD + 0.1    V
+ VCM      Common-mode input voltage
+                                  PGA enabled, gain = 1 to 128                   See the Low-Noise PGA section
+ VOLTAGE REFERENCE INPUTS(3)
+
+ VREF        Differential reference input voltage     VREF = VREFPx – VREFNx                                0.75            2.5 AVDD – AVSS    V
+ VREFNx     Absolute negative reference voltage                                      AVSS – 0.1                VREFPx – 0.75    V
+ VREFPx     Absolute positive reference voltage                                               VREFNx + 0.75             AVDD + 0.1    V
+
+ EXTERNAL CLOCK SOURCE
+
+  fCLK        External clock frequency                                                                        0.5         4.096            4.5   MHz
+
+            Duty cycle                                                           40%                  60%
+
+ DIGITAL INPUTS
+
+              Input voltage                                                  DGND                DVDD    V
+
+ TEMPERATURE RANGE
+
+ TA         Operating ambient temperature                                                      –40                       125    °C
+
+ (1)   AINP and AINN denote the positive and negative inputs of the PGA. AINx denotes one of the four available analog inputs.
+    PGA disabled means the low-noise PGA is powered down and bypassed. Gains of 1, 2, and 4 are still possible in this case.
+     See the Bypassing the PGA section for more information.
+ (2)   Excluding the effects of offset and gain error.
+       Limited to ±[(AVDD – AVSS) – 0.4V] / Gain, when the PGA is enabled.
+ (3)  REFPx and REFNx denote one of the two available differential reference input pairs.
+
+ 6.4 Thermal Information
+
+                                                                           ADS1220
+                     THERMAL METRIC(1)                        VQFN (RVA)     TSSOP (PW)     UNIT
+
+                                                                            16 PINS          16 PINS
+ RθJA      Junction-to-ambient thermal resistance                                          43.4               99.5        °C/W
+  RθJC(top)  Junction-to-case (top) thermal resistance                                        47.3               35.2        °C/W
+ RθJB      Junction-to-board thermal resistance                                            18.4               44.3        °C/W
+ ψJT       Junction-to-top characterization parameter                                         0.6                 2.4         °C/W
+ ψJB       Junction-to-board characterization parameter                                    18.4               43.8        °C/W
+  RθJC(bot)  Junction-to-case (bottom) thermal resistance                                       2.0                 n/a         °C/W
+
+ (1)   For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+       note.
+
+
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

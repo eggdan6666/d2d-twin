@@ -1,0 +1,62 @@
+TMP461
+
+SBOS722B –JUNE 2015–REVISED AUGUST 2016                                                                       www.ti.com
+
+8.5  Programming
+
+8.5.1  Serial Interface
+
+The TMP461 device operates only as a slave device on either the two-wire bus or the SMBus. Connections to
+either bus are made using the open-drain I/O lines, SDA and SCL. The SDA and SCL pins feature integrated
+spike suppression filters and Schmitt triggers to minimize the effects of input spikes and bus noise. The TMP461
+device supports the transmission protocol for fast (1 kHz to 400 kHz) and high-speed (1 kHz to 2.17 MHz)
+modes. All data bytes are transmitted MSB first.
+
+8.5.1.1 Bus Overview
+
+The TMP461 device is SMBus-interface-compatible. In SMBus protocol, the device that initiates the transfer is
+called a master, and the devices controlled by the master are slaves. The bus must be controlled by a master
+device that generates the serial clock (SCL), controls the bus access, and generates the  start and stop
+conditions.
+
+To address a specific device, a start condition is initiated. A start condition is indicated by pulling the data line
+(SDA) from a high-to-low logic level when SCL is high. All slaves on the bus shift in the slave address byte, with
+the last bit indicating whether a read or write operation is intended. During the ninth clock pulse, the slave being
+addressed responds to the master by generating an acknowledge bit and pulling SDA low.
+
+Data transfer is then initiated and sent over eight clock pulses followed by an acknowledge bit. During data
+transfer, SDA must remain stable when SCL is high. A change in SDA when SCL is high is interpreted as a
+control signal.
+
+After all data are transferred, the master generates a stop condition. A stop condition is indicated by pulling SDA
+from low to high when SCL is high.
+
+8.5.1.2 Bus Definitions
+
+The TMP461 device is two-wire- and SMBus-compatible. Figure 15 and Figure 16 illustrate the timing for various
+operations on the TMP461 device. The bus definitions are as follows:
+
+Bus Idle:   Both SDA and SCL lines remain high.
+
+Start Data Transfer: A change in the state of the SDA line (from high to low) when the SCL line is high defines
+           a start condition. Each data transfer initiates with a start condition.
+
+Stop Data Transfer: A change in the state of the SDA line (from low to high) when the SCL line is high defines
+           a stop condition. Each data transfer terminates with a repeated start or stop condition.
+
+Data Transfer: The number of data bytes transferred between a start and stop condition is not limited and is
+            determined by the master device. The receiver acknowledges the data transfer.
+
+Acknowledge: Each receiving device, when addressed, is obliged to generate an acknowledge bit. A device
+              that acknowledges must pull down the SDA line during the acknowledge clock pulse in such a way
+              that the SDA line is stable low during the high period of the acknowledge clock pulse. Take setup
+           and hold times into account. On a master receive, data transfer termination can be signaled by the
+            master generating a not-acknowledge on the last byte that is transmitted by the slave.
+
+
+
+
+
+14     Submit Documentation Feedback                                                     Copyright © 2015–2016, Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP461

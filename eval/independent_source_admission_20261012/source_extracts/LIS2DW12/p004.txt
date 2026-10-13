@@ -1,0 +1,77 @@
+                                                              LIS2DW12
+                                                                                       Block diagram and pin description
+
+
+1.2      Pin description
+
+                                                  Figure 2. Pin connections
+
+                            Z
+
+                                                                                                                                                                              INT2         INT1
+                          1
+                                                               VDDIO    10     11     12     1   SCL/SPC
+
+
+                                                          VDD    9                   2   CS
+
+
+                                                       GND    8                   3   SDO/SA0
+               X                Y
+                                                            RES    7      6     5      4   SDA/SDI/SDO
+                      (TOPVIEW)
+                  DIRECTION OF THE                                                 GND     NC
+                 DETECTABLE
+                 ACCELERATIONS                  (BOTTOM VIEW)
+
+
+                                                   Table 1. Pin description
+
+               Pin#    Name                                            Function
+
+                    SCL     I²C serial clock (SCL)
+                1
+                   SPC    SPI serial port clock (SPC)
+
+                                 Enable SPI
+
+                                     I²C/SPI mode selection
+                       2(1)     CS
+                                            (1: SPI idle mode / I²C communication enabled;
+
+                                         0: SPI communication mode / I²C disabled)
+
+                  SDO    SPI serial data output (SDO)
+                       3(1)
+                    SA0     I²C less significant bit of the device address (SA0)
+
+                   SDA     I²C serial data (SDA)
+
+                4       SDI     SPI serial data input (SDI)
+
+                  SDO     3-wire interface serial data output (SDO)
+
+                5     NC      Internally not connected. Can be tied to VDD, VDDIO, or GND.
+
+                6     GND    0 V supply
+
+                7     RES    Connect to GND
+
+                8     GND    0 V supply
+
+                9     VDD    Power supply
+
+               10    VDD_IO   Power supply for I/O pins
+
+                11      INT2     Interrupt pin 2. Clock input when selected in single data conversion on demand.
+
+               12      INT1     Interrupt pin 1
+
+                 1.  SDO/SA0 and CS pins are internally pulled up. Refer to Table 2. Internal pull-up values (typ.) for SDO/SA0 and CS pins for
+                   the internal pull-up values (typ).
+
+
+
+
+
+DS11811 - Rev 9                                                                                                        page 4/65

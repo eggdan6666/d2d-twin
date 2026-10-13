@@ -1,0 +1,66 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+7.3.11  A/D Converter and I2C Interface
+
+The TPS23861 features five multi-slope integrating converters. Each of the first four converters is dedicated to
+current measurement for one port and is operated independently to perform measurements. The converters are
+used for current monitoring (100 ms averaged) and disconnect. The fifth converter is shared between all four
+ports for detection (conversion time set by MAINS bit), port voltage monitoring, Power Good Status and FET
+short detection (1 ms for all). It is also used for general-purpose measurements including input voltage (1 ms)
+and temperature.
+
+The A/D converter type used in the TPS23861 differs from other types of converters in that it converts while the
+input signal is being sampled by the integrator, resulting in reduced conversion time and providing inherent
+filtering over the conversion period. The typical conversion time of the current converters is 800 µs. Digital
+averaging is used to provide a port current measurement integrated over a 100-ms time period.
+
+
+                                  NOTE
+        An  anti-aliasing   filter  is  present  for  current and  voltage  monitoring.  Port  current
+          conversions are performed continuously.
+
+
+Powered device (PD) detection is performed by averaging 16 consecutive samples providing significant rejection
+of noise at 50/60-Hz line frequency. The total time for the 16 samples can be set to 20 ms or 16.7 ms by the
+MAINS bit to correspond to the local mains frequency.
+
+The  fifth converter continuously measures drain voltages from one port to the next one, updating internal
+registers used for Power Good Status and FET short detection, unless a command is received to perform a
+specific measurement.
+
+Also, when the port is powered on, the tSTART timer (used during PD power-on inrush) must expire before any
+current or voltage A/D conversion can begin for the first four converters.
+Figure 40 illustrates read and write operations through I2C interface. The two-data-bytes-read operation  is
+applicable to A/D conversion results.
+It is also possible to perform an I2C write operation to many TPS23861 devices at same time. The slave address
+during this broadcast access is 0x30.
+
+The TPS23861, using the INT pin, supports the SMBALERT protocol. When INT is asserted low,  if the bus
+master controller sends the alert response address, the TPS23861 responds providing its device address on the
+SDA  line and releases the INT  line.  If there  is a  collision between two TPS23861 devices responding
+simultaneously, then the device with the lower address wins arbitration and responds first, by use of SDAI and
+SDAO lines.
+An I2C watchdog timer is also available on the TPS23861, which monitors the I2C clock line in order to prevent
+hung software situations that could leave ports in a hazardous state. The timer can be reset by either edge on
+the SCL line. When enabled,  if the watchdog timer expires, all ports are turned off and WDS bit is set. The
+nominal watchdog time-out period is 2 seconds. See I2C Watchdog Register for more details on the subject.
+
+
+                                  NOTE
+        When a stop condition is detected on the I2C bus after having at least received the
+        command byte, the TPS23861 stores the command byte in an internal register.
+
+
+                                  NOTE
+        When using the I2C interface the host software should wait 22 ms minimum after a reset to
+          ensure valid I2C transactions.
+
+
+
+
+
+32     Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

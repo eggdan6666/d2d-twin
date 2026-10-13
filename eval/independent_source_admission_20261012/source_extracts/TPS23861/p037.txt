@@ -1,0 +1,68 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+The sequence during address programming is as follows:
+•  Global write command including an unlock code (AAh) and a temporary common slave address (any address
+   other than 30h) is sent to all I2C devices through the broadcast address, 30h.
+•   All TPS23861 devices respond to the broadcast address 30h regardless of the state of the A3 pin. When the
+   three-byte sequence is correctly decoded,
+    1. Each TPS23861 has a new I2C address determined by the programmed temporary slave address with bit
+      3 equal to the state of the A3 pin.
+    2.  All TPS23861 devices force low the AOUT output.
+   For example, if a temporary common slave address of 20h is written to one device with A3 low and one with
+  A3 high, the device with A3 low will respond to I2C address 20h and the device with A3 high responds to I2C
+   address 28h.
+•  The  first TPS23861 device being selected is the only one having  its AIN pin at logic high level (U1 in
+   Figure 41).
+•  Using the temporary slave address, write the new 7-bit device address in the I2C slave address register. See
+   data format below.
+
+
+                                  NOTE
+         The SLA3 slave address bit follows the logic level of A3 input pin, as detailed for I2C Slave
+          Address register.
+
+
+
+    BITS        D7         D6         D5         D4         D3         D2         D1         D0
+  BIT NAME     AUTO                                                           7-bit I2C Address
+
+•  The first slave accepts the new address, then forces its AOUT output pin to high level and automatically locks
+   the access to its slave address register. It also stores permanently its new slave address into EEPROM.
+•  The same procedure is repeated for the next slave device, which has just detected that its AIN input has
+   become high.
+•  This is repeated until all slaves have been reprogrammed.
+•  The host can then interrogate each slave, one by one, in order to validate their new address.
+
+
+                                  NOTE
+          During the address programming procedure if the slave has not received its new address
+            within a timeout period (around 100 ms),  it goes back to the initial slave address (before
+           the address programming sequence was  initiated);   it locks  its address  register and
+           releases its AOUT output.
+
+•   Bit 7 of the 8-bit transfer (AUTO) defines  if the controller operates independently (no host processor) as an
+   automatic PSE. The state of this bit is monitored only immediately following a power-on reset, writing a 1 to
+   the RESAL bit of the RESET register, or after the RESET input has been activated. The impact of that bit
+   state on registers after reset is reflected in the Table 10 (Reset State column) and is referred to as “A”.
+
+
+                                  NOTE
+            After programming a new I2C slave address  to  register 0×11, a 100 ms delay  is
+         recommended before trying to perform a read check.
+
+
+                                  NOTE
+        When using I2C scan for device discovery,  it is recommended to add at least a 100 ms
+           delay between writing commands to address 0x30 (Broadcast address) and 0x31. This
+           prevents receiving unnecessary extra ACK. Skipping writing command to address 0x30
+         can also avoid the extra ACK.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     37
+
+                                                 Product Folder Links: TPS23861

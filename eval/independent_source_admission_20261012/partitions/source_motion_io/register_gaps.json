@@ -1,0 +1,152 @@
+[
+  {
+    "chip": "AD5592R",
+    "registers": [
+      "CONFIG_READ_AND_LDAC",
+      "DAC_WR",
+      "ADC_RESULT",
+      "GPIO/power/reference registers"
+    ],
+    "status": "CONDITIONAL",
+    "why": "IR inventories only22 fields, does not include native SPI readback enable completion, ADC data/clock sequence, GPIO, LDAC or reference mode dependencies.",
+    "candidate_rule": "Freeze current abstraction with explicit omissions; source-expanded adapter is separate generation/evaluation scope.",
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table_or_section": "READ MODE",
+        "excerpt": "Reading from a register first requires a write",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 43,
+        "printed_page": "43",
+        "table_or_section": "Table21",
+        "excerpt": "REG_RD_EN automatically clears",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      },
+      {
+        "pdf_page": 29,
+        "printed_page": "29",
+        "table_or_section": "ADC OPERATION",
+        "excerpt": "The ADC operates with one cycle latency",
+        "source_path": "corpus/data/raw_pdf/ADI/ad5592r.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS3DH",
+    "registers": [
+      "CTRL_REG2",
+      "CTRL_REG3",
+      "CTRL_REG5",
+      "CTRL_REG6",
+      "REFERENCE",
+      "FIFO_CTRL_REG",
+      "FIFO_SRC_REG",
+      "INT1/2 source/configuration registers"
+    ],
+    "status": "CONDITIONAL",
+    "why": "Output/FIFO/status interactions and interrupt clear are beyond34-field subset; native Rev2 source lacks explicit STATUS_REG flag-clearing map.",
+    "candidate_rule": "Output reset excluded; seven source-defined status defaults admitted only default boundary; no fabricated statusCoR; include FIFO/sample/read adapter before event assertions.",
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table_or_section": "§5.1.5",
+        "excerpt": "Each time data is read from the FIFO",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 38,
+        "printed_page": "38",
+        "table_or_section": "CTRL_REG5",
+        "excerpt": "cleared by reading INT1_SRC",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      },
+      {
+        "pdf_page": 42,
+        "printed_page": "42",
+        "table_or_section": "INT1_SRC",
+        "excerpt": "Reading at this address clears",
+        "source_path": "corpus/data/raw_pdf/ST/LIS3DH.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "LIS2DW12",
+    "registers": [
+      "CTRL3",
+      "CTRL6",
+      "CTRL7",
+      "OUT_X/Y/Z",
+      "STATUS_DUP",
+      "ALL_INT_SRC",
+      "TAP/SIXD registers"
+    ],
+    "status": "CONDITIONAL",
+    "why": "Single-shot trigger completion, global enable, latching, FIFO readouts, offset weighting/filter prerequisites unavailable in55-field subset.",
+    "candidate_rule": "Declare controlled fixtures or exclude event functionality; do not claim read-clear coverage from WAKE_UP_SRC.FF_IA alone.",
+    "locators": [
+      {
+        "pdf_page": 38,
+        "printed_page": "38",
+        "table_or_section": "Table34",
+        "excerpt": "this bit is set to 0 automatically",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 53,
+        "printed_page": "53",
+        "table_or_section": "§8.31",
+        "excerpt": "Reading this register",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      },
+      {
+        "pdf_page": 55,
+        "printed_page": "55",
+        "table_or_section": "Table92",
+        "excerpt": "FDS bit in CTRL6 (25h) must be set to 0",
+        "source_path": "corpus/data/raw_pdf/ST/lis2dw12.pdf"
+      }
+    ]
+  },
+  {
+    "chip": "MPU6050",
+    "registers": [
+      "INT_PIN_CFG",
+      "INT_ENABLE",
+      "INT_STATUS",
+      "PWR_MGMT_2",
+      "USER_CTRL",
+      "SIGNAL_PATH_RESET",
+      "FIFO controls/count/data"
+    ],
+    "status": "CONDITIONAL",
+    "why": "Any-read interrupt clear, sleep/cycle/clock effects and measurement snapshot/FIFO excluded from29-field subset.",
+    "candidate_rule": "Default interrupt fixture0 may support static subset; expanded event-aware generation must map dependencies. DEVICE_RESET atomic-complete is abstraction, not actual100ms validation.",
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table_or_section": "§4.14",
+        "excerpt": "interrupt status bits are cleared on any read",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 29,
+        "printed_page": "29",
+        "table_or_section": "§4.17",
+        "excerpt": "whenever the serial interface is idle",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      },
+      {
+        "pdf_page": 41,
+        "printed_page": "41",
+        "table_or_section": "§4.28",
+        "excerpt": "When using SPI interface",
+        "source_path": "corpus/data/raw_pdf/InvenSense/MPU-6000-Register-Map1_mirror.pdf"
+      }
+    ]
+  }
+]

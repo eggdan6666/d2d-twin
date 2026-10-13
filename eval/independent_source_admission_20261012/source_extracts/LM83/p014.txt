@@ -1,0 +1,56 @@
+1.0 Functional Description (Continued)                                                                           LM83
+2.0 LM83 REGISTERS
+
+2.1 COMMAND REGISTER
+Selects which registers will be read from or written to. Data for this register should be transmitted during the Command Byte of
+the SMBus write communication.
+ P7    P6    P5    P4    P3    P2    P1    P0
+  0               Command Select
+P0-P7: Command Select
+ Command Se-        Power On Default State         Register Name         Register Function
+   lect Address
+  <P7:P0> hex   <D7:D0> binary   <D7:D0> deci-
+                                      mal
+      00h           0000 0000            0            RLT       Read Local Temperature
+      01h           0000 0000            0           RD2RT      Read D2 Remote
+                                                                       Temperature
+      02h           0000 0000            0           RSR1      Read Status Register 1
+      03h           0000 0000            0           RC       Read Configuration
+      04h           0000 0000            0                          Reserved
+      05h           0111 1111           127          RLHS      Read Local HIGH Setpoint
+      06h                                                           Reserved
+      07h           0111 1111           127         RD2RHS     Read D2 Remote HIGH
+                                                                                Setpoint
+      08h                                                           Reserved
+      09h           0000 0000                  WC         Write Configuration
+      0Ah                                                           Reserved
+      0Bh          0111 1111           127         WD2LHS       Write Local HIGH Setpoint
+      0Ch                                                           Reserved
+      0Dh          0111 1111           127        WD2RHS      Write D2 Remote HIGH
+                                                                                Setpoint
+    0Eh-2Fh                                                         Reserved for Future Use
+      30h           0000 0000            0           RD1RT      Read D1 Remote
+                                                                       Temperature
+      31h           0000 0000            0           RD3RT      Read D3 Remote
+                                                                       Temperature
+     32h-34h                                                         Reserved for Future Use
+      35h           0000 0000            0           RSR2      Read Status Register 2
+     36h-37h                                                         Reserved for Future Use
+      38h           0111 1111           127         RD1RHS     Read D1 Remote HIGH
+                                                                                Setpoint
+      39h                                                           Reserved for Future Use
+      3Ah          0111 1111           127         RD3RHS     Read D3 Remote HIGH
+                                                                                Setpoint
+     3Bh-41h                                                         Reserved for Future Use
+      42h           0111 1111           127          RTCS      Read T_CRIT Setpoint
+     43h-4Fh                                                         Reserved for Future Use
+      50h           0111 1111           127        WD1RHS      Write D1 Remote HIGH
+                                                                                Setpoint
+      51h                                                           Reserved for Future Use
+      52h           0111 1111           127        WD3RHS      Write D3 Remote HIGH
+                                                                                Setpoint
+     53h-59h                                                         Reserved for Future Use
+      5Ah          0111 1111           127         WTCS        Write T_CRIT Setpoint
+
+
+                                                           13                                                    www.national.com

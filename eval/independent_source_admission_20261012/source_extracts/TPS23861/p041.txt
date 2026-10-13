@@ -1,0 +1,46 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.4.3  Semi-Auto
+
+No activity takes place on the port until the DETEn bit in the Detect/Class Enable register is set. When DETEn is
+set, port n automatically performs detection.  If a valid PD is detected and CLEn is set, the port initiates a
+classification cycle. The classification cycle is single-event  if a class 0, 1, 2 or 3 PD is recognized.  If the first
+classification event returns a class 4 signature, a second classification event is initiated depending on the setting
+of the TECLENn field in the Two-Event Classification Register. The cycle of detect, then classification repeats
+continuously.
+
+Powering on the port requires writing to the pushbutton PWONn bit in the Power Enable Register. The port
+powers on meeting the IEEE TP(on) requirement to power on within 400 ms of the end of a valid detection.
+Depending on the timing of the PWONn command, the controller may initiate a new detect and (if CLEn is set)
+classification sequence before powering on the port if required to meet the TP(on) requirement. If the final detect is
+invalid, or  if the final classification returns overcurrent or class mismatch, the port will not power on and the
+STRTn  bit  is set  in the Start/ILIM Event Register. For Turn-On sequencing see Push-Button Power On
+Response.
+
+
+                                  NOTE
+            In Semi-Auto Mode, the ICUTn and PoEPn fields are not set automatically. They must be
+           set by the host.
+
+
+Following a power-off command, disconnect or shutdown due to a Start, ICUT or ILIM fault, the port powers off.
+Following a shutdown due to a start, ILIM or ICUT fault, the TPS23861 enters into a cool-down period. During the
+cool-down period any port power on command using Power Enable Command is ignored. The length of the cool-
+down period is set in the CLDN field of the Cool Down/Gate Drive Register. After the end of the cool-down period
+the TPS23861 initiates a detect cycle and continues semi-automatic operation.
+
+
+                                  NOTE
+           TI recommends using this reference code to develop your software
+
+           http://www.ti.com/product/TPS23861/toolssoftware
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     41
+
+                                                 Product Folder Links: TPS23861

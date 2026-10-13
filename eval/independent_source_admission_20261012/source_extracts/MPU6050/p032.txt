@@ -1,0 +1,31 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+8  Programmable Interrupts
+
+The MPU-60X0 has a programmable interrupt system which can generate an interrupt signal on the INT pin.
+Status flags indicate the source of an interrupt. Interrupt sources may be enabled and disabled individually.
+
+
+Table of Interrupt Sources
+
+                                  Interrupt Name                       Module
+
+                           FIFO Overflow                         FIFO
+
+                              Data Ready                             Sensor Registers
+                                   I2C Master errors: Lost Arbitration, NACKs     I2C Master
+                                   I2C Slave 4                                   I2C Master
+
+
+For information regarding the interrupt enable/disable registers and flag registers, please refer to the MPU-
+6000/MPU-6050 Register Map and Register Descriptions document. Some interrupt sources are explained
+below.
+
+
+
+
+
+                                           32 of 52

@@ -1,0 +1,68 @@
+LIS3DH                                                                Registers description
+
+8.30   CLICK_SRC (39h)
+
+
+                                     Table 73. CLICK_SRC register
+
+                          IA        DCLICK   SCLICK    Sign      Z       Y       X
+
+                                   Table 74. CLICK_SRC description
+
+              IA            Interrupt active. Default value: 0
+                                (0: no interrupt has been generated; 1: one or more interrupts have been generated)
+
+           DCLICK     Double-click enable. Default value: 0
+                             (0:double-click detection disabled, 1: double-click detection enabled)
+
+           SCLICK     Single-click enable. Default value: 0
+                                (0: Single-click detection disabled, 1: single-click detection enabled)
+
+             Sign         Click sign.
+                                (0: positive detection, 1: negative detection)
+
+           Z        Z click detection. Default value: 0
+                                (0: no interrupt, 1: Z high event has occurred)
+
+          Y        Y click detection. Default value: 0
+                                (0: no interrupt, 1: Y high event has occurred)
+
+          X        X click detection. Default value: 0
+                                (0: no interrupt, 1: X high event has occurred)
+
+
+8.31   CLICK_THS (3Ah)
+
+
+                                     Table 75. CLICK_THS register
+
+              LIR_Click  Ths6      Ths5      Ths4      Ths3      Ths2      Ths1      Ths0
+
+                                   Table 76. CLICK_SRC description
+
+              LIR_Click    If the LIR_Click bit is not set, the interrupt is kept high for the duration of the latency
+                        window.
+                                            If the LIR_Click bit is set, the interrupt is kept high until the CLICK_SRC (39h) register is
+                           read.
+
+               Ths[6:0]    Click threshold. Default value: 000 0000
+
+
+8.32    TIME_LIMIT (3Bh)
+
+
+                                     Table 77. TIME_LIMIT register
+
+                    -           TLI6       TLI5       TLI4       TLI3       TLI2       TLI1       TLI0
+
+                                   Table 78. TIME_LIMIT description
+
+                TLI[6:0]           Click time limit. Default value: 000 0000
+
+
+
+
+
+                                      DocID17530 Rev 2                                      47/54
+
+                                                                                                                            54

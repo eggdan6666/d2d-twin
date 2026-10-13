@@ -1,0 +1,88 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           16 of 46  
+   
+Parameters: 
+XA_ST 
+When set to 1, the X- Axis accelerometer performs self test. 
+YA_ST 
+When set to 1, the Y- Axis accelerometer performs self test. 
+ZA_ST 
+When set to 1, the Z- Axis accelerometer performs self test. 
+AFS_SEL 
+2-bit unsigned value. Selects the full scale range of accelerometers. 
+ 
+4.6 
+Register 35 – FIFO Enable 
+FIFO_EN 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+23 
+35 
+TEMP_ 
+FIFO_EN 
+XG_ 
+FIFO_EN 
+YG_ 
+FIFO_EN 
+ZG_ 
+FIFO_EN 
+ACCEL 
+_FIFO_EN 
+SLV2 
+_FIFO_EN 
+SLV1 
+_FIFO_EN 
+SLV0 
+_FIFO_EN 
+Description:  
+This register determines which sensor measurements are loaded into the FIFO buffer.  
+Data stored inside the sensor data registers (Registers 59 to 96) will be loaded into the FIFO buffer if 
+a sensor’s respective FIFO_EN bit is set to 1 in this register.  
+When a sensor’s FIFO_EN bit is enabled in this register, data from the sensor data registers will be 
+loaded into the FIFO buffer. The sensors are sampled at the Sample Rate as defined in Register 25. 
+For further information regarding sensor data registers, please refer to Registers 59 to 96 
+When an external Slave’s corresponding FIFO_EN bit (SLVx_FIFO_EN, where x=0, 1, or 2) is set to 
+1, the data stored in its corresponding data registers (EXT_SENS_DATA registers, Registers 73 to 
+96) will be written into the FIFO buffer at the Sample Rate. EXT_SENS_DATA register association 
+with I2C Slaves is determined by the I2C_SLVx_CTRL registers (where x=0, 1, or 2; Registers 39, 
+42, and 45). For information regarding EXT_SENS_DATA registers, please refer to Registers 73 to 
+96. 
+Note that the corresponding FIFO_EN bit (SLV3_FIFO_EN) is found in I2C_MST_CTRL (Register 
+36). Also note that Slave 4 behaves in a different manner compared to Slaves 0-3. Please refer to 
+Registers 49 to 53 for further information regarding Slave 4 usage.  
+Parameters: 
+TEMP_FIFO_EN 
+When set to 1, this bit enables TEMP_OUT_H and TEMP_OUT_L (Registers 
+65 and 66) to be written into the FIFO buffer. 
+XG_ FIFO_EN 
+When set to 1, this bit enables GYRO_XOUT_H and GYRO_XOUT_L 
+(Registers 67 and 68) to be written into the FIFO buffer. 
+YG_ FIFO_EN  
+When set to 1, this bit enables GYRO_YOUT_H and GYRO_YOUT_L 
+(Registers 69 and 70) to be written into the FIFO buffer. 
+ZG_ FIFO_EN 
+When set to 1, this bit enables GYRO_ZOUT_H and GYRO_ZOUT_L 
+(Registers 71 and 72) to be written into the FIFO buffer. 
+ACCEL_ FIFO_EN 
+When set to 1, this bit enables ACCEL_XOUT_H, ACCEL_XOUT_L, 
+ACCEL_YOUT_H, ACCEL_YOUT_L, ACCEL_ZOUT_H, and 
+ACCEL_ZOUT_L (Registers 59 to 64) to be written into the FIFO buffer. 

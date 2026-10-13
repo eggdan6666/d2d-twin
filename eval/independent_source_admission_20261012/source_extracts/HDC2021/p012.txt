@@ -1,0 +1,27 @@
+HDC2021
+SNAS773A – DECEMBER 2019 – REVISED JUNE 2020                                                                www.ti.com
+
+ 7.3.5 Interrupt
+
+                                           Note
+
+    When multiple bits are enabled, the DRDY/INT pin can only reflect the status of one interrupt bit at a
+      time. The DRDY/INT pin DOES NOT function as the logical ‘OR’ of interrupt bits that have been
+     enabled.
+
+    The highest priority is given to TH_ENABLE bit, followed by TL_ENABLE, HH_ENABLE, and
+    HL_ENABLE bits in descending order. Therefore, programming recommendations are provided as
+     below. Note the DataReady (DRDY) interrupt has the same priority as the winner of the other 4
+      interrupts (TH_ENABLE, TL_ENABLE, HH_ENABLE, and HL_ENABLE).
+       •  The DRDY/INT will track the HL_ENABLE, if enabled, and all other ENABLE bits are disabled.
+       •  The DRDY/INT will track the HH_ENABLE, if enabled, and the TH_ENABLE and TL_ENABLE are
+         disabled.
+       •  The DRDY/INT will track the TL_ENABLE, if enabled, and the TH_ENABLE is disabled.
+       •  The DRDY/INT will track the TH_ENABLE, if enabled, and is independent of other ENABLE bit
+          settings.
+
+
+
+
+
+12    Submit Document Feedback                                                                     Copyright © 2020 Texas Instruments Incorporated

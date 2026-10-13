@@ -1,0 +1,48 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ Note all data transferred are sent MSB first. A write operation to a read-only register such as DEVICE ID or
+MANUFACTURER ID returns a NACK after each data byte. A read or write operation to an unused register
+ returns a NACK after the pointer register byte, and a read or write operation with incorrect device slave address
+ returns a NACK after the device slave address byte.
+
+                                     Table 7-2. Write Single Byte
+
+                               Device Slave address (W)
+  Master     START                                                         Register Pointer                DATA               STOP
+                                  100000X0
+
+  Slave                                         ACK                    ACK                ACK
+
+                                      Table 7-3. Write Multibyte
+
+                       Device Slave
+                                                        Register
+  Master  START      address (W)                                DATA            DATA                          STOP
+                                                          Pointer                               ………                      100000X0
+
+  Slave                          ACK             ACK           ACK            ACK
+
+                                     Table 7-4. Read Single Byte
+
+                                                                                 Device Slave
+                   Device Slave address            Register
+  Master  START                                                                 Start       address (R)                       NACK    STOP
+                     (W) 100000X0                Pointer
+                                                                         100000X1
+
+  Slave                        ACK            ACK                          ACK      DATA
+
+                                      Table 7-5. Read Multibyte
+
+                  Device Slave                                 Device Slave
+                  address (W)          Register                 address (R) Master START                                                Start                        ACK         ACK        NACK   STOP
+                 100000X0            Pointer                100000X1                      ……
+
+  Slave                  ACK         ACK                  ACK   DATA         DATA
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    19

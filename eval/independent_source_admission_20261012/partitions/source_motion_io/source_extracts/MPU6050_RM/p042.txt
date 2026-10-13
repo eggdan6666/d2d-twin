@@ -1,0 +1,93 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           42 of 46  
+   
+4.29 Register 108 – Power Management 2 
+PWR_MGMT_2 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+6C 
+108 
+LP_WAKE_CTRL[1:0] 
+STBY_XA 
+STBY_YA 
+STBY_ZA 
+STBY_XG 
+STBY_YG 
+STBY_ZG 
+ 
+Description: 
+This register allows the user to configure the frequency of wake-ups in Accelerometer Only Low 
+Power Mode. This register also allows the user to put individual axes of the accelerometer and 
+gyroscope into standby mode.  
+The MPU-60X0 can be put into Accelerometer Only Low Power Mode using the following steps:  
+(i) 
+Set CYCLE bit to 1 
+(ii) 
+Set SLEEP bit to 0 
+(iii) 
+Set TEMP_DIS bit to 1 
+(iv) 
+Set STBY_XG, STBY_YG, STBY_ZG bits to 1 
+All of the above bits can be found in Power Management 1 register (Register 107). 
+In this mode, the device will power off all devices except for the primary I2C interface, waking only 
+the accelerometer at fixed intervals to take a single measurement. The frequency of wake-ups can 
+be configured with LP_WAKE_CTRL as shown below.  
+LP_WAKE_CTRL 
+Wake-up Frequency 
+0 
+1.25 Hz 
+1 
+5 Hz 
+2 
+20 Hz 
+3 
+40 Hz 
+ 
+For further information regarding the MPU-6050’s power modes, please refer to Register 107.  
+The user can put individual accelerometer and gyroscopes axes into standby mode by using this 
+register. If the device is using a gyroscope axis as the clock source and this axis is put into standby 
+mode, the clock source will automatically be changed to the internal 8MHz oscillator. 
+Parameters: 
+LP_WAKE_CTRL 
+2-bit unsigned value.  
+Specifies the frequency of wake-ups during Accelerometer Only Low Power 
+Mode. 
+STBY_XA 
+ 
+When set to 1, this bit puts the X axis accelerometer into standby mode. 
+STBY_YA 
+ 
+When set to 1, this bit puts the Y axis accelerometer into standby mode. 
+STBY_ZA 
+ 
+When set to 1, this bit puts the Z axis accelerometer into standby mode. 
+STBY_XG 
+ 
+When set to 1, this bit puts the X axis gyroscope into standby mode. 
+STBY_YG 
+ 
+When set to 1, this bit puts the Y axis gyroscope into standby mode. 
+STBY_ZG 
+ 
+When set to 1, this bit puts the Z axis gyroscope into standby mode. 
+ 
+ 

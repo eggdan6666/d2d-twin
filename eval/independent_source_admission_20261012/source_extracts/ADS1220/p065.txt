@@ -1,0 +1,65 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 9.4 Layout
+ 9.4.1 Layout Guidelines
+
+Use best design  practices when  laying out a  printed  circuit board (PCB)  for both analog and  digital
+ components. This practice generally means that the layout separates analog components [such as ADCs,
+ amplifiers, references, digital-to-analog converters (DACs), and analog MUXs] from digital components [such as
+ microcontrollers, complex programmable logic devices (CPLDs), field-programmable gate arrays (FPGAs), radio
+ frequency (RF) transceivers, universal serial bus (USB) transceivers, and switching regulators]. An example
+ of good component placement is shown in Figure 9-15. Although Figure 9-15 provides a good example of
+component placement, the best placement for each application is unique to the geometries, components, and
+PCB fabrication capabilities employed. That is, there is no single layout that is perfect for every design and
+ careful consideration must always be used when designing with any analog component.
+
+
+                 Ground                                         Fill or                                    Split Cut               GroundGround PlaneFill or                 Ground                         Plane
+                                                                                    Supply
+                                                                                     Generation
+                  Signal                                                                                                                                                                                                                                               Optional: Ground
+               Conditioning
+                                                                                Interface
+            (RC Filters        Device              Microcontroller
+                                                                        Transceiver                and
+                 Amplifiers)                                                                  Split Cut                                      Connector
+                                                                                               or Antenna
+                 Ground Fill or                            Ground Fill or                 Ground Plane                                                                 Optional: Ground               Ground Plane
+
+                             Figure 9-15. System Component Placement
+
+The use of split analog and digital ground planes is not necessary for improved noise performance (although for
+ thermal isolation this option is a worthwhile consideration). However, the use of a solid ground plane or ground
+ fill in PCB areas with no components is essential for optimum performance. If the system being used employs a
+ split digital and analog ground plane, TI generally recommends that the ground planes be connected together as
+ close to the device as possible. A two-layer board is possible using common grounds for both analog and digital
+ grounds. Additional layers can be added to simplify PCB trace routing. Ground fill can also reduce EMI and RFI
+ issues.
+
+ TI also strongly recommends that digital components, especially RF portions, be kept as far as practically
+ possible from analog circuitry in a given system. Additionally, minimize the distance that digital control traces run
+ through analog areas and avoid placing these traces near sensitive analog components. Digital return currents
+ typically flow through a ground path that is as close to the digital path as possible. If a solid ground connection to
+a plane is not available, these currents can find paths back to the source that interfere with analog performance.
+The implications that layout has on the temperature-sensing functions are much more significant than for ADC
+ functions.
+
+ Supply pins must be bypassed to ground with a low-ESR ceramic capacitor. The optimum placement of the
+ bypass capacitors is as close as possible to the supply pins. If AVSS is connected to a negative supply, then
+ connect an additional bypass capacitor from AVSS to AGND as well. The ground-side connections of the bypass
+ capacitors must be low-impedance connections for optimum performance. The supply current flows through the
+ bypass capacitor terminal first and then to the supply pin to make the bypassing most effective.
+
+ Analog inputs with differential connections must have a capacitor placed differentially across the inputs. Best
+ input combinations for differential measurements are AIN0, AIN1 and AIN2, AIN3. The differential capacitors
+must be of high quality. The best ceramic chip capacitors are C0G (NPO), which have stable properties and low
+ noise characteristics. Thermally isolate a copper region around the thermocouple input connections to create a
+ thermally-stable cold junction. Obtaining acceptable performance with alternate layout schemes is possible as
+ long as the above guidelines are followed.
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    65
+
+                                                  Product Folder Links: ADS1220

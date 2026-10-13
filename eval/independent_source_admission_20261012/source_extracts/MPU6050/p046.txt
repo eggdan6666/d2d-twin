@@ -1,0 +1,61 @@
+                                                                          Document Number: PS-MPU-6000A-00
+                    MPU-6000/MPU-6050 Product Specification    Revision: 3.4
+                                                                                Release Date: 08/19/2013
+
+
+                Temperature Set Points Corresponding to Reflow Profile Above
+                                         CONSTRAINTS
+            Step  Setting
+                            Temp (°C)   Time (sec)     Max. Rate (°C/sec)
+             A      Troom                25
+             B      TSmin                150
+             C      TSmax                200           60 < tBC < 120
+             D       TLiquidus               217                                                  r(TLiquidus-TPmax) < 3
+              E      TPmin  [255°C, 260°C]        255                                                  r(TLiquidus-TPmax) < 3
+               F      TPmax  [ 260°C, 265°C]       260                 tAF < 480                  r(TLiquidus-TPmax) < 3
+            G      TPmin  [255°C, 260°C]        255           10< tEG < 30             r(TPmax-TLiquidus) < 4
+
+             H       TLiquidus               217           60 < tDH < 120
+                                  I       Troom                25
+               Notes:   Customers must never exceed the Classification temperature (TPmax = 260°C).
+                                 All temperatures refer to the topside of the QFN package, as measured on the package body surface.
+
+Production Reflow: Check the recommendations of your solder manufacturer.  For optimum results, use
+lead-free solders that have lower specified temperature profiles (Tpmax ~ 235°C). Also use lower ramp-up and
+ramp-down rates than those used in the qualification profile. Never exceed the maximum conditions that we
+used for qualification, as these represent the maximum tolerable ratings for the device.
+
+11.5 Storage Specifications
+The storage specification of the MPU-60X0 conforms to IPC/JEDEC J-STD-020D.1 Moisture Sensitivity
+Level (MSL) 3.
+
+ Calculated shelf-life in moisture-sealed bag  12 months -- Storage conditions: <40°C and <90% RH
+
+ After opening moisture-sealed bag         168 hours -- Storage conditions: ambient ≤30°C at 60%RH
+
+
+
+11.6 Package Marking Specification
+
+
+                          TOP VIEW          TOP VIEW
+
+
+                            INVENSENSE        INVENSENSE
+                    Part number      MPU6000              MPU6050
+             Lot traceability code     X X X X X X-X X        X X X X X X-X X
+                           X X Y Y W W X       X X Y Y W W X
+
+                    Foundry code                Rev Code
+                                      Y Y = Year Code
+             Package Vendor Code
+                           W W = Work Week
+
+
+                             Package Marking Specification
+
+
+
+
+
+                                           46 of 52

@@ -1,0 +1,59 @@
+LIS3DH                                                    Terminology and functionality
+
+
+          The LIS3DH features a Data-Ready signal (DRDY) which indicates when a new set of
+          measured acceleration data is available, thus simplifying data synchronization in the digital
+           system that uses the device.
+
+          The LIS3DH may also be configured to generate an inertial wake-up and free-fall interrupt
+             signal accordingly to a programmed acceleration event along the enabled axes. Both free-
+                  fall and wake-up can be available simultaneously on two different pins.
+
+
+3.5     Factory calibration
+
+          The IC interface is factory calibrated for sensitivity (So) and Zero-g level (TyOff).
+
+          The trim values are stored inside the device in non-volatile memory. Any time the device is
+            turned on, these values are downloaded into the registers to be used during active
+             operation. This allows using the device without further calibration.
+
+
+3.6     FIFO
+
+          The LIS3DH contains a 10-bit, 32-level FIFO. Buffered output allows 4 operation modes:
+           FIFO, Stream, Stream-to-FIFO and FIFO bypass. When FIFO bypass mode is activated,
+          FIFO is not operating and remains empty. In FIFO mode, measurement data from
+             acceleration detection on the x, y, and z axes are stored in the FIFO buffer.
+
+
+3.7      Auxiliary ADC and temperature sensor
+
+          The LIS3DH contains an auxiliary ADC with 3 separate dedicated inputs: pins ADC1, ADC2,
+          ADC3.
+
+          The user can retrieve the converted data from registers OUT_ADC1_L (08h),
+         OUT_ADC1_H (09h), OUT_ADC2_L (0Ah), OUT_ADC2_H (0Bh) and OUT_ADC3_L (0Ch),
+         OUT_ADC3_H (0Dh).
+
+              In order to use the auxiliary ADC, the user must set the BDU bit (bit 7) to 1 in CTRL_REG4
+            (23h) and the ADC_EN bit (bit 7) to 1 in TEMP_CFG_REG (1Fh). The ADC sampling
+            frequency is the same as that of the ODR in CTRL_REG1 (20h).
+
+          The input range is 1200 mv ±400 mV and the data output is expressed in 2's complement
+              left-aligned.
+
+          The ADC resolution is 10 bits if the LPen (bit 3) in CTRL_REG1 (20h) is cleared (high-
+             resolution / normal mode), otherwise, in low-power mode, the ADC resolution is 8-bit.
+
+           Channel 3 of the ADC can be connected to the temperature sensor by setting the
+        TEMP_EN bit (bit 6) to 1 in TEMP_CFG_REG (1Fh). Refer to Table 5: Temperature sensor
+             characteristics for the conversion factor.
+
+
+
+
+
+                                      DocID17530 Rev 2                                      19/54
+
+                                                                                                                            54

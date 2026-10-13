@@ -1,0 +1,72 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ Figure 9-8 shows a typical circuit implementation of a 4-wire RTD measurement. Similar to the 2-wire RTD
+ measurement, only one IDAC is required for exciting and measuring a 4-wire RTD in a ratiometric manner.
+The main benefit of using a 4-wire RTD is that the ADC inputs are connected to the RTD in the form of a
+ Kelvin connection. Apart from the input leakage currents of the ADC, there is no current flow through the lead
+ resistors RLEAD2 and RLEAD3 and therefore no voltage drop is created across them. The voltage at the ADC
+ inputs consequently equals the voltage across the RTD and the lead resistance is of no concern.
+
+                                                                                                          IIDAC1                                                               RREF
+
+
+
+
+                                                                                                            3.3V                            RF3          RF4        3.3V
+
+
+                                                                                                                                 CCM3       CDIF2      CCM4
+                                                                                               0.1µF                                                                         0.1µF
+
+
+
+                 RLEAD4                                                                          10 A to  AVDD           REFP0           REFN0      DVDD
+                                                                                          1.5mA
+                                                          CCM2
+                       RLEAD3                      RF2                    AIN0                                          2.048V             Reference         ADS1220
+                                                                                                                       Reference         MUX
+
+ 4-Wire RTD                                                         CDIF1
+                       RLEAD2                      RF1                    AIN1
+                                                                                                                                    CS
+                                                                                                   AINP
+                                                                                                                                                                                                             Digital Filter        SCLK
+                                                          CCM1                                                                                                                                                     and                                                               MUX              PGA                         24-Bit
+                                                                                                         ADC                                                                                                                                                           SPI            DIN                 RLEAD1
+                                                                   AIN2                                                                                                   Interface         DOUT/DRDY
+                                                                                                 AINN
+                                                                                                                                 DRDY
+
+
+                                                                   AIN3                                          Precision                     Low-Drift
+                                                                                                                Temperature
+                                                                     (IDAC1)                                     Sensor                       Oscillator
+
+
+
+
+                                                                                        AVSS                      CLK         DGND
+
+
+                                Figure 9-8. 4-Wire RTD Measurement
+
+As shown in Equation 39, the transfer function of a 2- and 4-wire RTD measurement differs compared to the one
+ of a 3-wire RTD measurement by a factor of 2 because only one IDAC is used and only one IDAC flows through
+ the reference resistor, RREF.
+
+    Code ∝ (RRTD (at Temperature) × Gain) / RREF                                                               (39)
+
+ In addition, the common-mode and reference voltage is reduced compared to the 3-wire RTD configuration.
+ Therefore, some further modifications can be required in case the 3-wire RTD design is used to measure 2- and
+ 4-wire RTDs as well. If the decreased common-mode voltage does not meet the VCMMIN requirements of the
+PGA anymore, either increase the value of RREF by switching in a larger resistor or, alternatively, increase the
+ excitation current while decreasing the gain at the same time.
+
+
+
+
+
+60    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

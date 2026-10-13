@@ -1,0 +1,59 @@
+                                                              LIS2DW12
+                                                                                                                Application hints
+
+4       Application hints
+
+
+                                     Figure 6. LIS2DW12 electrical connections (top view)
+
+
+
+
+                                                                               Vdd_IO
+
+
+                                                                           100nF
+                                                                            HOST
+
+
+                                                        GND                                                            I2C / SPI (3/4-w)
+                                                                                  Vdd                                                                                                          INT1         INT2
+                                                                                         10µF                      LIS2DW12
+                                SCL/SPC                             Vdd_IO
+                                                1     12     11     10
+
+
+                                CS                       VDD
+                                                2                  9                        100nF
+                                                                            GND                  I2C configuration
+                               SDO/SA0                      GND
+                                                3                  8                                                      Vdd_IO
+
+                              SDA/SDI/SDO
+                                                4     5     6      7   RES
+                                                                                                                                          Rpu     Rpu
+                                                      NC     GND                                           SCL
+
+                                                                                       SDA
+
+                                                                                                                                      Pull-up to be added
+                                                                                                      Rpu=10kOhm
+
+
+
+           The device core is supplied through the Vdd line while the I/O pads are supplied through the Vdd_IO line. Power
+             supply decoupling capacitors (100 nF ceramic, 10 µF aluminum) should be placed as near as possible to pin 9 of
+              the device (common design practice).
+                 All the voltage and ground supplies must be present at the same time to have proper behavior of the IC (refer to
+             Figure 6. LIS2DW12 electrical connections (top view)). It is possible to remove Vdd while maintaining Vdd_IO
+              without blocking the communication bus, in this condition the measurement chain is powered off.
+           The functionality of the device and the measured acceleration data are selectable and accessible through the I²C
+              or SPI interfaces. When using the I²C, CS must be tied high (i.e. connected to Vdd_IO).
+           The functions, the threshold and the timing of the two interrupt pins (INT1 and INT2) can be completely
+           programmed by the user through the I²C/SPI interface.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 19/65

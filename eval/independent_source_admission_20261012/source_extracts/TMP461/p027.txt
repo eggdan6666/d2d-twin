@@ -1,0 +1,65 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+11  Layout
+
+11.1  Layout Guidelines
+
+Remote temperature sensing on the TMP461 device measures very small voltages using very low currents;
+therefore, noise at the device inputs must be minimized. Most applications using the TMP461 have high digital
+content, with several clocks and logic-level transitions that create a noisy environment. Layout must adhere to
+the following guidelines:
+ 1. Place the TMP461 device as close to the remote junction sensor as possible.
+ 2. Route the D+ and D– traces next to each other and shield them from adjacent signals through the use of
+   ground guard traces, as shown in Figure 21.  If a multilayer PCB is used, bury these traces between the
+   ground or V+ planes to shield them from extrinsic noise sources. 5-mil (0.127 mm) PCB traces are
+   recommended.
+ 3. Minimize additional thermocouple junctions caused by copper-to-solder connections.  If these junctions are
+    used, make the same number and approximate locations of copper-to-solder connections in both the D+ and
+   D– connections to cancel any thermocouple effects.
+ 4. Use a 0.1-μF local bypass capacitor directly between the V+ and GND of the TMP461 device. For optimum
+   measurement performance, minimize  filter capacitance between D+ and D– to 1000 pF or less. This
+    capacitance includes any cable capacitance between the remote temperature sensor and the TMP461
+    device.
+ 5.  If the connection between the remote temperature sensor and the TMP461 device  is less than 8-in
+    (20.32 cm) long, use a twisted-wire pair connection. For lengths greater than 8 in, use a twisted, shielded
+    pair with the shield grounded as close to the TMP461 device as possible. Leave the remote sensor
+    connection end of the shield wire open to avoid ground loops and 60-Hz pickup.
+ 6. Thoroughly clean and remove  all flux residue in and around the pins of the TMP461 device to avoid
+    temperature offset readings as a result of leakage paths between D+ and GND, or between D+ and V+.
+
+
+
+
+
+                                         V+
+
+
+
+
+                                       D+
+                                                              Ground or V+ layer
+                                                              on bottom and top,
+                                                                                                                                          if possible.
+                                         D-
+
+
+
+
+                                  GND
+
+
+
+
+         NOTE: Use a minimum of 5-mil (0.127 mm) traces with 5-mil spacing.
+
+                           Figure 21. Suggested PCB Layer Cross-Section
+
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     27
+
+                                                  Product Folder Links: TMP461

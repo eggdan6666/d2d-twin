@@ -1,0 +1,55 @@
+Data Sheet                               AD5592R
+
+REGISTER MAP
+
+REGISTER DETAILS: AD5592R/AD5592R-1 CONTROL REGISTER MAP
+
+
+NOP Register
+
+Name: NOP
+
+No operation.
+
+
+
+
+
+Table 14. Bit Descriptions for NOP
+Bits            Bit Name           Description                                                                                                Default Value
+
+15         MSB               Set this bit to 0.                                                                                    0x0
+[14:11]      REG_ADDR         Register address.                                                                                  0x0
+[10:0]       NOP            No operation.                                                                                     0x0
+
+
+DAC Readback Register
+
+Name: DAC_RD
+
+Selects and enables DAC readback.
+
+
+
+
+
+Table 15. Bit Descriptions for DAC_RD
+Bits            Bit Name              Description                                                                                              Default Value
+
+15         MSB                  Set this bit to 0.                                                                                  0x0
+[14:11]      REG_ADDR            Register address. Set these bits to 0b0001.                                                            0x1
+[10:5]       RESERVED           Reserved. Set this bit to 0.                                                                         0x0
+[4:3]        DAC_RD_EN          Enable readback of the DAC input register.                                                            0x0
+                                            0: DAC register readback disabled.
+                                            1: DAC register readback enabled.
+[2:0]        DAC_CH_SEL          Select DAC channel.                                                                              0x0
+                                      000: DAC0.
+                                      001: DAC1.
+                                      010: DAC2.
+                                       011: DAC3.
+                                      100: DAC4.
+                                      101: DAC5.
+                                       110: DAC6.
+
+
+analog.com                                                                                         Rev. H | 36 of 54

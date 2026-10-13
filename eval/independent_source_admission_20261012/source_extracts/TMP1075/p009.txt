@@ -1,0 +1,64 @@
+                                                                                   TMP1075
+www.ti.com                                                                   SBOS854F – MARCH 2018 – REVISED JUNE 2024
+
+ 6.8 Timing Requirements: TMP1075N
+ minimum and maximum specifications are over –40°C to 125°C and V+ = 1.62 V to 3.6 V (unless otherwise noted)(1)
+                                                                          FAST MODE     HIGH-SPEED MODE
+                                                                                                                    UNIT
+                                                                               MIN    MAX      MIN    MAX
+
+  f(SCL)    SCL operating frequency                                                             0.001        0.4      0.001       2.85   MHz
+  t(BUF)     Bus-free time between STOP and START conditions                                   600                160               ns
+
+           Hold time after repeated START condition.
+  t(HDSTA)                                                                                600                160               ns             After this period, the first clock is generated.
+
+  t(SUSTA)   Repeated START condition setup time                                              600                160               ns
+  t(SUSTO)  STOP condition setup time                                                       600                160               ns
+  t(HDDAT)   Data hold time(2)                                                               100      900        25       105     ns
+  t(SUDAT)   Data setup time                                                                100                 25               ns
+  t(LOW)    SCL clock low period                                                           1300                210               ns
+  t(HIGH)   SCL clock high period                                                           600                 60               ns
+  tFD       Data fall time                                                                           300                  80     ns
+
+                                                                                                300
+  tRD       Data rise time
+                                                SCLK ≤100 kHz                          1000
+
+  tRC       Clock rise time                                                                          300                  40     ns
+  tFC       Clock fall time                                                                           300                  40     ns
+  ttimeout    Timeout (SCL = SDA = GND)                                                      30       40        30        40    ms
+
+ (1)  The host and device have the same V+ value. Values are based on statistical analysis of samples tested during initial release.
+ (2)  The maximum t(HDDAT) can be 0.9 µs for fast mode, and is less than the maximum t(VDAT) by a transition time.
+
+ 6.9 Switching Characteristics
+ over operating free-air temperature range (unless otherwise noted)
+                                                                                  MIN       TYP      MAX    UNIT
+  tLPF          Spike filter for I3C compatibility         SCL= 12.5 MHz                                          50                  ns
+
+
+ 6.10 Timing Diagrams
+
+                                           t(LOW)
+                                                                             tFC                                   t(HDSTA)
+                                                    tRC
+
+      SCL
+
+                                             t(HDSTA)                             t(HIGH)   t(SUSTA)                                                                   t(SUSTO)
+                                                                     t(HDDAT)               t(SUDAT)
+
+     SDA
+                            t(BUF)                                                    tRD                                                   tFD
+             P      S                                          S                             P
+
+                                Figure 6-1. Two-Wire Timing Diagram
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback     9
+
+                                                  Product Folder Links: TMP1075

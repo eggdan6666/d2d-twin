@@ -1,0 +1,82 @@
+TPS23861
+
+SLUSBX9I –MARCH 2014–REVISED JULY 2019                                                                        www.ti.com
+
+Electrical Characteristics (continued)
+
+–40 ≤TJ ≤+125°C, VVDD = 3.3 V, VVPWR = 48 V, VDGND = VAGND, DGND, KSENSA and KSENSB connected to AGND, and all
+outputs are unloaded, PoEPn = 0, Positive currents are into pins, RS = 0.255 Ω, to KSENSA (SEN1 or SEN2) or to KSENSB
+(SEN3 or SEN4), RSENS = 22 Ω, RDRAIN = 47 Ω, typical values are at 25°C. All voltages are with respect to AGND, operating
+registers loaded with default values (unless otherwise noted)
+
+            PARAMETER                    TEST CONDITIONS            MIN      TYP     MAX   UNIT
+
+ GATE
+
+ VGOH        Gate drive voltage                 VGATEn , IGATE = –1 μA                   10                   12.5    V
+
+             Gate sinking current with power-on
+ IGO-            reset, shutdown detected or port     VGATEn = 5 V                           80       100           mA
+                 turn off command
+
+             Gate sinking current with port short-  VGATEn = 5 V, VSENn ≥VSHORT (or IGO short–                                                                         80       100       150   mA                   circuit                           VSHORT2X if 2x mode)
+                                              VGATEn = 0 V, IGATE = 0                 39        50        63    µA
+ IGO+         Gate sourcing current
+                                        IGATE = 1                             18        25        34    µA
+
+ DRAIN INPUT
+
+ VPGT        Power good threshold             Measured at VDRAINn                        1.0        2.13         3    V
+ VSHT         Shorted FET threshold            Measured at VDRAINn                     4         6         8    V
+
+                                          Any operating mode except during
+ RDRAIN        Resistance from DRAINn to VPWR   detection or while the port is ON,           80       100       190    kΩ
+                                                       including in device reset state
+
+                                                 VDRAINn = 48 V, port OFF (not in                                                                                                      1    µA
+ IDRAIN       DRAINn pin bias current              detection)
+                                         VVPWR - VDRAINn = 30 V, port ON                     75       100    µA
+
+ A/D CONVERTER
+
+ TCONV        Conversion time , A/D #1 to 4          All ranges, each port current               0.65         0.8         1    ms
+ ADCBW(1)    ADC integration bandwidth (–3                                                    320             Hz                 dB)(1)
+
+ TINT_CUR       Integration (averaging) time, current  Each port, port ON current                80       100       125    ms
+
+                 Integration (averaging) time,
+ TINT_DET       detection(1)                   MAINS bit = 0                                              20    ms
+
+                                                   At VVPWR – VDRAINn = 57 V, 0°C to                                                                             15175     15565     15955   Counts
+                                           125°C
+
+                                                   At VVPWR – VDRAINn = 44 V, 0°C to                                                                             11713     12015     12316   Counts
+             Powered port voltage conversion    125°C
+               scale factor and accuracy            At VVPWR – VDRAINn = 57 V, –40°C                                                                             15020     15565     16110   Counts
+                                                          to 125°C
+
+                                                   At VVPWR – VDRAINn = 44 V, –40°C                                                                             11594     12015     12436   Counts
+                                                          to 125°C
+
+             Powered port current conversion     At port current = 770 mA              12300     12616     12932   Counts
+               scale factor and accuracy            At port current = 7.5 mA                  90       123       156   Counts
+
+                Input voltage conversion scale       At VVPWR = 57 V                     15175     15565     15955   Counts
+                 factor and accuracy                 At VVPWR = 44 V                     11713     12015     12316   Counts
+
+             Powered port voltage conversion
+ VOS                                               At VVPWR – VDRAINn = 0.3 V                0                 600   mV                  offset
+
+                                                   At 44 V to 57 V –40°C to 125°C        –3.5%                3.5%
+ δV/VPORT      Voltage reading accuracy
+                                                   At 44 V to 57 V 0°C to 125°C          –2.5%                2.5%
+
+ δI/Iport         Current reading accuracy            At 50 mA to 770 mA                 –2.5%                2.5%
+
+
+
+
+
+8      Submit Documentation Feedback                                                     Copyright © 2014–2019, Texas Instruments Incorporated
+
+                                                 Product Folder Links: TPS23861

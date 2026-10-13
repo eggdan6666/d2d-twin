@@ -1,0 +1,66 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 9.2.2.1 Shunt Resistor Considerations
+
+A shunt resistor (RSHUNT) is an accurate resistance inserted in series with the load as shown in Figure 9-6. If the
+ absolute voltage drop across the shunt, |VSHUNT|, is a larger percentage of the bus voltage, the voltage drop can
+ reduce the overall efficiency and system performance. If |VSHUNT| is too low, measuring the small voltage drop
+ requires careful design attention and proper selection of the ADC, operation amplifier, and precision resistors.
+Make sure that the absolute voltage at the shunt terminals does not result in violation of the input common-mode
+ voltage range requirements of the operational amplifier. The power dissipation on the shunt resistor increases
+ the temperature because of the current flowing through the resistor. To minimize the measurement errors
+ resulting from variation in temperature, select a low-drift shunt resistor. To minimize the measurement gain error,
+ select a shunt resistor with low tolerance value. To remove the errors caused by stray ground resistance, use a
+ four-wire Kelvin-connected shunt resistor, as shown in Figure 9-6.
+
+ 9.2.2.2 Operational Amplifier Considerations
+
+The operational amplifier used for this design example requires the following features:
+
+ •  Unipolar supply operation (5V)
+ •  Low input offset voltage (< 10µV) and input offset voltage drift (< 0.5µV/°C)
+ •   Rail-to-rail input and output capability
+ •  Low thermal and flicker noise
+ •  High common-mode rejection (> 100dB)
+
+The OPA333 offers all these benefits and is selected for this application.
+
+ 9.2.2.3 ADC Input Common-Mode Considerations
+
+VCM sets the VOUT common-mode voltage by appropriate selection of precision resistors R1, R2, R3, and R4.
+ If R1 = R3, R2 = R4, and VSHUNT = 0V, VOUT is given by Equation 10.
+
+    VOUT = VCM                                                                                         (10)
+
+ If VOUT is connected to the ADC positive input (AINP) and VCM is connected to the ADC negative input
+ (AINN), VCM appears as a common-mode voltage to the ADC. This configuration allows pseudo-differential
+measurements and uses the maximum dynamic range of the ADC  if VCM is set at mid-supply (VDD  / 2). A
+ resistor divider from VDD to GND followed by a buffer amplifier can be used to generate VCM.
+ 9.2.2.4 Resistor (R1, R2, R3, R4) Considerations
+ Proper selection of resistors R1, R2, R3, and R4 is critical for meeting the overall accuracy requirements.
+ Using Equation 8, the offset term, VOUT-OS, and the gain term, AOUT, of the  differential ADC input are
+ represented by Equation 11 and Equation 12, respectively. The error contributions from the first-order RC filters
+ are ignored.
+
+     VOUT-OS = VCM · (R2 / R1 – R3 / R4) / (1 + R3 / R4)                                                           (11)
+
+    AOUT = (1 + R2 / R1) / (1 + R4 / R3)                                                                     (12)
+
+The tolerance,  drift, and linearity performance of these resistors is critical to meeting the overall accuracy
+ requirements. In Equation 11, if R1 = R3 and R2 = R4, VOUT-OS = 0V and therefore, the common-mode voltage,
+ VCM, only contributes to level-shift VSHUNT and does not introduce any error at the differential ADC inputs.
+ High-precision resistors provide better common-mode rejection from VCM.
+
+ 9.2.2.5 Noise and Input Impedance Considerations
+
+ If vn_res represents the input-referred rms noise from all the resistors, vn_op represents the input-referred rms
+ noise of OPA333, and vn_ADC represents the input-referred rms noise of ADS1115, the total input-referred noise
+ of the entire system, vN, can be approximated by Equation 13.
+
+    vN 2 = vn_res 2 + vn_op 2 + vn_ADC/ (1 + R2 / R1)2                                                           (13)
+
+
+34    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

@@ -1,0 +1,64 @@
+                                                                                            INA3221
+www.ti.com                                                              SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026
+
+ 8.2.4 Channel-2 Shunt-Voltage Register (address = 03h) [reset = 00h]
+
+ This register contains the averaged shunt voltage measurement for channel 2. Full-scale range = 163.8mV
+ (decimal = 7FF8); LSB (SD0): 40μV. Although the input range is 26V, the full-scale range of the ADC scaling is
+ 32.76V. Do not apply more than 26V.
+
+                             Table 8-9. Channel-2 Shunt-Voltage Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  SIGN  SD11  SD10   SD9   SD8   SD7   SD6   SD5   SD4   SD3   SD2   SD1   SD0  —   —   —
+
+   R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                    Table 8-10. Channel-2 Shunt-Voltage Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15    SIGN                    R       0h          Sign bit.
+                                                             0 = positive number
+                                                             1 = negative number in twos complement format
+
+    14-3    SD11-0                   R       0h         Channel-2 shunt-voltage data bits
+
+     2-0    Reserved                  R       0h         Reserved
+
+ 8.2.5 Channel-2 Bus-Voltage Register (address = 04h) [reset = 00h]
+
+ This register stores the bus voltage reading, VBUS, for channel 2. Full-scale range = 32.76V (decimal = 7FF8);
+LSB (BD0) = 8mV. Although the input range is 26V, the full-scale range of the ADC scaling is 32.76V. Do not
+ apply more than 26V.
+
+                             Table 8-11. Channel-2 Bus-Voltage Register
+   15     14     13     12     11     10      9      8      7      6      5      4      3      2      1      0
+
+  SIGN  BD11  BD10   BD9   BD8   BD7   BD6   BD5   BD4   BD3   BD2   BD1   BD0  —   —   —
+
+   R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0    R-0
+
+
+ LEGEND: R/W = Read/Write; R = Read only; -n = value after reset
+
+                     Table 8-12. Channel-2 Bus-Voltage Register Field Descriptions
+     Bit     Field                          Type     Reset      Description
+
+     15    SIGN                    R       0h          Sign bit.
+                                                             0 = positive number
+                                                             1 = negative number in twos complement format
+
+    14-3    BD11-0                   R       0h         Channel-2 bus-voltage data bits
+
+     2-0    Reserved                  R       0h         Reserved
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    29
+
+                                                  Product Folder Links: INA3221

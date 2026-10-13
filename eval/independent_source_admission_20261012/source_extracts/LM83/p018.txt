@@ -1,0 +1,64 @@
+4.0 Application Hints                                                                                                  LM83
+The LM83 can be applied easily in the same way as other
+integrated-circuit temperature sensors, and its remote diode
+sensing capability allows it to be used in new ways as well.                                                            where:It can be soldered to a printed circuit board, and because the
+path of best thermal conductivity is between the die and the         •  η is the non-ideality factor of the process the diode is
+pins, its temperature will effectively be that of the printed cir-          manufactured on,
+cuit board lands and traces soldered to the LM83’s pins. This         •  q is the electron charge,
+presumes that the ambient air temperature is almost the         •  k is the Boltzmann’s constant,
+same as the surface temperature of the printed circuit board;                                                                                  • N is the current ratio,if the air temperature is much higher or lower than the sur-
+                                                                                  •  T is the absolute temperature in ˚K.face temperature, the actual temperature of the of the LM83
+die will be at an intermediate temperature between the sur-      The temperature sensor then measures ∆VBE and converts
+face and air temperatures. Again, the primary thermal con-        to digital data. In this equation, k and q are well defined uni-
+duction path is through the leads, so the circuit board tem-        versal constants, and N is a parameter controlled by the tem-
+perature will contribute to the die temperature much more       perature sensor. The only other parameter is η, which de-
+strongly than will the air temperature.                        pends on the diode that is used for measurement. Since
+To measure temperature external to the LM83’s die, use a      ∆VBE is proportional to both η and T, the variations in η can-
+                                                                 not be distinguished from variations in temperature. Sinceremote diode. This diode can be located on the die of a tar-
+                                                                 the non-ideality factor is not controlled by the temperatureget IC, allowing measurement of the IC’s temperature, inde-
+                                                                 sensor, it will directly add to the inaccuracy of the sensor. Forpendent of the LM83’s temperature. The LM83 has been op-
+                                                                 the Pentium II Intel specifies a ±1% variation in η from parttimized  to measure the remote diode  of a Pentium  II
+                                                                        to part. As an example, assume a temperature sensor hasprocessor as shown in Figure9. A discrete diode can also be
+                                                      an accuracy specification of ±3 ˚C at room temperature of 25used to sense the temperature of external objects or ambient
+                                                         ˚C and the process used to manufacture the diode has aair. Remember that a discrete diode’s temperature will be af-
+                                                                      non-ideality variation of ±1%. The resulting accuracy of thefected, and often dominated, by the temperature of its leads.
+                                                             temperature sensor at room temperature will be:
+                                                           TACC = ± 3˚C + (±1% of 298 ˚K) = ±6 ˚C.
+                                                    The additional inaccuracy in the temperature measurement
+                                                        caused by η, can be eliminated if each temperature sensor is
+                                                                     calibrated with the remote diode that it will be paired with.
+
+                                                                 3.2 PCB LAYOUT for MINIMIZING NOISE
+                                                                        In a noisy environment, such as a processor mother board,
+                                                                   layout considerations are very  critical. Noise induced on
+                                                                  traces running between the remote temperature diode sen-
+                                                                 sor and the LM83 can cause temperature conversion errors.
+                                                    The following guidelines should be followed:
+                                                                        1.  Place a 0.1 µF power supply bypass capacitor as close
+                                                            as possible to the VCCpin and the recommended 2.2 nF
+                                                                       capacitor as close as possible to the D+ and D−pins.
+                                                    Make  sure  the  traces  to  the 2.2nF  capacitor  are
+                                                              matched.
+                                                                        2.  The recommended 2.2nF diode bypass capacitor actu-
+                                                                                     ally has a range of 200pF to 3.3nF. The average tem-
+                                                                    perature accuracy will not degrade. Increasing the ca-
+                                                                   pacitance   will  lower  the  corner  frequency  where
+                                                                       DS101058-15              differential noise error affects the temperature reading
+  Pentium or 3904 Temperature vs LM83 Temperature             thus producing a reading that  is more stable. Con-
+                    Reading                                       versely, lowering the capacitance will increase the cor-
+                                                                  ner frequency where differential noise error affects theMost silicon diodes do not lend themselves well to this appli-
+                                                                 temperature reading thus producing a reading that iscation.  It is recommended that a 2N3904 transistor base
+                                                                        less stable.emitter junction be used with the collector tied to the base.
+                                                                        3.   Ideally, the LM83 should be placed within 10cm of theA diode connected 2N3904 approximates the junction avail-
+                                                                Processor diode pins with the traces being as straight,able on a Pentium microprocessor for temperature measure-
+                                                                        short and identical as possible. Trace resistance of 1Ωment. Therefore, the LM83 can sense the temperature of this
+                                                           can cause as much as 1˚C of error.diode effectively.
+                                                                        4.  Diode traces should be surrounded by a GND guard ring
+3.1 ACCURACY EFFECTS OF DIODE NON-IDEALITY                 to either side, above and below  if possible. This GND
+FACTOR                                                      guard should not be between the D+ and D−lines. In the
+                                                                 event that noise does couple to the diode lines it wouldThe technique used in today’s remote temperature sensors
+                                                         be ideal if it is coupled common mode. That is equally tois to measure the change in VBE at two different operating                                                                     the D+ and D−lines.(See Figure 10)points of a diode. For a bias current ratio of N:1, this differ-
+ence is given as:                                                      5.  Avoid routing diode traces in close proximity to power
+                                                                  supply switching or filtering inductors.
+
+                                                           17                                                    www.national.com

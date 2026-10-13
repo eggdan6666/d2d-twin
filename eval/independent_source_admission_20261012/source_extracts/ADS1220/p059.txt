@@ -1,0 +1,66 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 9.2.2.2.1 Design Variations for 2-Wire and 4-Wire RTD Measurements
+
+ Implementing a 2- or 4-wire RTD measurement is very similar to the 3-wire RTD measurement illustrated in
+ Figure 9-6, except that only one IDAC is required.
+
+ Figure 9-7 shows a typical circuit implementation of a 2-wire RTD measurement. The main difference compared
+ to a 3-wire RTD measurement is with respect to the lead resistance compensation. The voltage drop across the
+ lead resistors, RLEAD1 and RLEAD2, in this configuration is directly part of the measurement (as shown in Equation
+ 38) because there is no means to compensate the lead resistance by use of the second current source. Any
+ compensation must be done by calibration.
+
+     VIN = IIDAC1 × (RLEAD1 + RRTD + RLEAD2)                                                                (38)
+
+                                                                                                          IIDAC1                                                               RREF
+
+
+
+
+                                                                                                            3.3V                            RF3          RF4        3.3V
+
+
+                                                                                                                                 CCM3       CDIF2      CCM4
+                                                                                               0.1µF                                                                         0.1µF
+
+
+
+                                                                                             10 A to  AVDD           REFP0           REFN0      DVDD
+                                                                                          1.5mA
+                                                          CCM2
+                       RLEAD2                      RF2                    AIN0                                          2.048V             Reference         ADS1220
+                                                                                                                       Reference         MUX
+
+ 2-Wire RTD                                                         CDIF1
+                       RLEAD1                      RF1                    AIN1
+                                                                                                                                    CS
+                                                                                                   AINP
+                                                                                                                                                                                                             Digital Filter        SCLK
+                                                          CCM1                                                                                                                                                     and                                                               MUX              PGA                         24-Bit
+                                                                                                         ADC                                                                                                                                                           SPI            DIN
+                                                                   AIN2                                                                                                   Interface         DOUT/DRDY
+                                                                                                 AINN
+                                                                                                                                 DRDY
+
+
+                                                                   AIN3                                          Precision                     Low-Drift
+                                                                                                                Temperature
+                                                                     (IDAC1)                                     Sensor                       Oscillator
+
+
+
+
+                                                                                        AVSS                      CLK         DGND
+
+
+                                Figure 9-7. 2-Wire RTD Measurement
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    59
+
+                                                  Product Folder Links: ADS1220

@@ -1,0 +1,60 @@
+Bosch Sensortec | BME280 Data sheet                                            36 | 60
+
+
+
+
+
+           SDI
+
+                                      tBUF
+
+                                                                                                                                                                                                                         tf
+                                                            tLOW
+
+         SCK
+
+
+                                                                                                                         tHIGH
+                                              tHDSTA                                       tr              tHDDAT
+                                                                                                                                      tSUDAT
+
+
+
+
+           SDI
+
+
+                                                                                   tSUSTA
+                                                                                                                                              tSUSTO
+
+Figure 14: I²C timing diagram
+
+Table 33: I²C timings
+
+  Parameter            Symbol        Condition         Min      Typ     Max     Unit
+ SDI setup time                tSU;DAT        S&F Mode         160                         ns
+                               HS mode          30                         ns
+ SDI hold time                 tHD;DAT    S&F Mode, Cb≤100 pF     80                         ns
+                            S&F Mode, Cb≤400 pF     90                         ns
+                           HS mode, Cb≤100 pF     18                115      ns
+                           HS mode, Cb≤400 pF     24               150      ns
+ SCK low pulse              tLOW     HS mode, Cb≤100 pF     160                         ns
+                                            VDDIO = 1.62 V
+ SCK low pulse              tLOW     HS mode, Cb≤100 pF     210                         ns
+                                             VDDIO = 1.2 V
+
+The above-mentioned I2C specific timings correspond to the following internal added delays:
+    •   Input delay between SDI and SCK inputs: SDI is more delayed than SCK by typically 100 ns in
+       Standard and Fast Modes and by typically 20 ns in High Speed Mode.
+    •   Output delay from SCK falling edge to SDI output propagation is typically 140 ns in Standard
+       and Fast Modes and typically 70 ns in High Speed Mode.
+
+6.4.3  SPI timings
+The SPI timing diagram is in Figure 15, while the corresponding values are given in Table 34. All timings
+apply both to 4- and 3-wire SPI.
+
+
+
+
+
+Modifications reserved | Data subject to change without notice                     Document number: BST-BME280-DS001-23 Revision_1.23_012022

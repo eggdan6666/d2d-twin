@@ -1,0 +1,73 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+8 Detailed Description
+ 8.1 Overview
+
+The ADS1220 is a small, low-power, 24-bit, ΔΣ ADC that offers many integrated features to reduce system cost
+and component count in applications measuring small sensor signals.
+
+ In addition to the ΔΣ ADC core and single-cycle settling digital filter, the device offers a low-noise, high input
+ impedance, programmable gain amplifier (PGA), an internal voltage reference, and a clock oscillator. The device
+ also integrates a highly linear and accurate temperature sensor as well as two matched programmable current
+ sources (IDACs) for sensor excitation. All of these features are intended to reduce the required external circuitry
+ in typical sensor applications and improve overall system performance. An additional low-side power switch
+ eases the design of low-power bridge sensor applications. The device is fully configured through four registers
+and controlled by six commands through a mode 1 SPI-compatible interface. The Functional Block Diagram
+ section shows the device functional block diagram.
+
+The ADS1220 ADC measures a differential signal, VIN, which is the difference in voltage between nodes AINP
+and AINN. The converter core consists of a differential, switched-capacitor, ΔΣ modulator followed by a digital
+ filter. The digital filter receives a high-speed bitstream from the modulator and outputs a code proportional to the
+ input voltage. This architecture results in a very strong attenuation of any common-mode signal.
+
+The device has two available conversion modes: single-shot and continuous conversion mode. In single-shot
+ conversion mode, the ADC performs one conversion of the input signal upon request and stores the value in an
+ internal data buffer. The device then enters a low-power state to save power. Single-shot conversion mode is
+ intended to provide significant power savings in systems that require only periodic conversions, or when there
+ are long idle periods between conversions. In continuous conversion mode, the ADC automatically begins a
+ conversion of the input signal as soon as the previous conversion is completed. New data are available at the
+programmed data rate. Data can be read at any time without concern of data corruption and always reflect the
+most recently completed conversion.
+
+ 8.2 Functional Block Diagram
+
+                            AVDD             REFP0   REFN0    DVDD
+
+                                     10 A to
+                                    1.5mA
+
+                                             2.048V         Reference     ADS1220 AIN0/REFP1
+                                             Reference       MUX
+
+
+
+       AIN1                                                             CS
+                                AINP                                                    Digital Filter
+                                                                          SCLK
+                                                                           24-Bit           and
+                 MUX           PGA                                          DIN                                                ADC          SPI
+                                                                                             Interface      DOUT/DRDY
+       AIN2                    AINN
+                                                                    DRDY
+
+
+                                              Precision
+                                                                        Low-Drift
+ AIN3/REFN1                            Temperature
+                                                                            Oscillator
+                                         Sensor
+
+
+
+
+
+                             AVSS                  CLK        DGND
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    19
+
+                                                  Product Folder Links: ADS1220

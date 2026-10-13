@@ -1,0 +1,47 @@
+Bosch Sensortec | BMP280 Data sheet                                                          25 | 49
+
+
+        4.3.3  Register 0xF3 “status”
+       The “status” register contains two bits which indicate the status of the device.
+
+                                            Table 19: Register 0xF3 “status”
+           Register 0xF3        Name                           Description
+              “status”
+                     Bit 3             measuring[0]      Automatically set to ‘1’ whenever a conversion is
+                                                    running and back to ‘0’ when the results have been
+                                                         transferred to the data registers.
+                     Bit 0             im_update[0]      Automatically set to ‘1’ when the NVM data are being
+                                                   copied to image registers and back to ‘0’ when the
+                                                   copying is done. The data are copied at power-on-
+                                                        reset and before every conversion.
+
+        4.3.4  Register 0xF4 “ctrl_meas”
+       The “ctrl_meas” register sets the data acquisition options of the device.
+
+                                           Table 20: Register 0xF4 “ctrl_meas”
+           Register 0xF4        Name                           Description
+            “ctrl_meas”
+                  Bit 7, 6, 5              osrs_t[2:0]       Controls oversampling of temperature data. See
+                                                     chapter 3.3.2 for details.
+                  Bit 4, 3, 2             osrs_p[2:0]       Controls oversampling of pressure data. See chapter
+                                                        3.3.1 for details.
+                   Bit 1, 0             mode[1:0]       Controls the power mode of the device. See chapter
+                                                      3.6 for details.
+
+
+                                            Table 21: register settings osrs_p
+                                     osrs_p[2:0]        Pressure
+                                                  oversampling
+                                     000       Skipped (output set to
+                                                      0x80000)
+                                     001          oversampling ×1
+                                     010          oversampling ×2
+                                      011          oversampling ×4
+                                     100          oversampling ×8
+                                      101, Others     oversampling ×16
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021

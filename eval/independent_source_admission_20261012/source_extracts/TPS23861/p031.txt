@@ -1,0 +1,67 @@
+                                                                             TPS23861
+
+www.ti.com                                                                         SLUSBX9I –MARCH 2014–REVISED JULY 2019
+
+7.3.9 VPWR Undervoltage and UVLO Events
+
+This section lists the behavior of VPWR undervoltage and UVLO events when the voltage at the VDD pin is
+uninterrupted.
+
+When the voltage at the VPWR pin falls below VPUV_F the following occurs.
+•  The VPUV bit in the Supply Event Register is set.
+•   All ports are shut off.
+•  For ports that are shut off the corresponding PGCn and PECn bits in the Power Event Register is set and the
+  PGn and PEn bits in the Power Status Register are cleared.
+•  The following registers are cleared.
+   –  Detection Event Register
+   –  Fault Event Register
+   –  Start/ILIM Event Register
+   –  Port n Status Register
+   –  Detect/Class Enable Register
+
+
+                                  NOTE
+        When the voltage at the VPWR pin falls below VUVLOPW_F the following occurs.
+
+•  Both the VPUV and VDUV bits in the Supply Event Register is set
+•   All ports are shut off
+•   All registers are set to their power-on/reset state
+
+7.3.10  Timer-Deferrable Interrupt Support
+
+A programmable timer is provided with range selectable from 10 ms to 150 ms in 10 ms increments. Timer
+duration is programmed via the four-bit field TMR [3:0] in the Interrupt Timer Register. Non-critical interrupts will
+be deferred from asserting an interrupt on the INT pin until the timer times out. Critical interrupts such as faults
+will not be affected by the state of this timer. Critical vs. deferrable interrupts are identified in Table 6. The
+behavior of the various interrupt enable bits is not affected by the timer function.
+
+                                 Table 6. Timer-Deferrable Interrupt
+
+           INTERRUPT BIT                       FUNCTION                    CRITICAL OR DEFERRABLE
+
+              SUPF                             Supply or thermal fault                                      Critical
+
+              STRTF                                         Start fault                                   Deferrable
+
+               IFAULT                          ICUT or ILIM fault                                         Critical
+
+             CLASC                   A classification event occurred                         Deferrable
+
+             DETC                     A detection event occurred                           Deferrable
+
+                DISF                    A disconnect event occurred                          Deferrable
+
+             PGC                         Power good status change                           Deferrable
+
+              PEC                        Power enable status change                          Deferrable
+
+If the counter is loaded with 0000 (POR state) the counter will not count, and no interrupts will be deferred. That
+is, this function will be disabled.
+
+
+
+
+
+Copyright © 2014–2019, Texas Instruments Incorporated                                           Submit Documentation Feedback     31
+
+                                                 Product Folder Links: TPS23861

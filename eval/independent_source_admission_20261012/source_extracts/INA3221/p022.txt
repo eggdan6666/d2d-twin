@@ -1,0 +1,74 @@
+INA3221
+SBOS576C – MAY 2012 – REVISED SEPTEMBER 2026                                                                www.ti.com
+
+
+                         1                                    9    1                                    9    1                                    9
+
+
+         SCL
+
+
+
+
+
+         SDA          1    0    0    0    0    0   A0 R/W      D15 D14 D13 D12 D11 D10  D9  D8      D7  D6  D5  D4  D3  D2  D1  D0
+
+
+                     Start By                              ACK By               From            ACK By                From             No ACK By    Stop By
+                   Controller                                        Device                 Device                  Controller                 Device                   Controller(3)   Controller
+
+                         Frame 1: Two-Wire Target Address Byte(1)                 Frame 2: Data MSByte(2)                         Frame 3: Data LSByte(2)
+
+ A.  The value of the target address byte is determined by the A0 pin setting; see Table 7-1.
+ B.  Read data are from the last register pointer location. If a new register is desired, the register pointer must be updated. See Figure 7-9.
+ C.  The controller can also send an ACK.
+
+                          Figure 7-11. Timing Diagram for Read Word Format
+
+ Figure 7-12 shows the timing diagram for the SMBus Alert response operation.
+
+                        1                                    9    1                                    9
+
+
+         SCL
+
+
+
+
+
+        SDA          0    0    0    1    1    0    0  R/W       1    0    0    0    0    0   A0   0
+
+
+                     Start By                              ACK By                       From     No ACK By    Stop By
+                   Controller                                        Device                          Device        Controller    Controller
+
+                      Frame 1: SMBus ALERT Response Address Byte           Frame 2: Target Address Byte(1)
+
+
+ A.  The value of the Target Address Byte is determined by the A0 pin setting; see Table 7-1.
+
+                             Figure 7-12. Timing Diagram for SMBus Alert
+
+ 7.5.2.1 High-Speed I2C Mode
+
+When the bus is idle, the SDA and SCL lines are pulled high by the pull-up resistors. The controller generates
+a start condition followed by a valid serial byte with the high-speed (Hs) controller code 00001XXX. This
+ transmission is made in fast (400kHz) or standard (100kHz) (F/S) mode at no more than 400kHz. The INA3221
+does not acknowledge the Hs controller code, but does recognize the code and switches the internal filters to
+ support 2.44MHz operation.
+
+The controller then generates a repeated start condition (a repeated start condition has the same timing as
+ the start condition). After this repeated start condition, the protocol is the same as F/S mode, except that
+ transmission speeds up to 2.44MHz are allowed. Instead of using a stop condition, the controller uses a
+ repeated start conditions to secure the bus in Hs mode. A stop condition ends the Hs mode, and switches all
+ internal INA3221 filters to support F/S mode.
+
+ Figure 7-13 shows the bus timing, and Table 7-2 lists the bus timing definitions.
+
+
+
+
+
+22    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: INA3221

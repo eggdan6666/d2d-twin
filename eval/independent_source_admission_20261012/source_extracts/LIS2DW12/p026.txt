@@ -1,0 +1,39 @@
+                                                              LIS2DW12
+                                                                                                                             Digital main blocks
+
+
+5.3.5       Bypass-to-continuous mode
+               In bypass-to-continuous mode (FIFO_CTRL (2Eh)(FMode[2:0] = 100), data measurement storage inside FIFO
+               starts in continuous mode upon an internal trigger event, then the sample that follows the trigger is available in
+            FIFO. The trigger could be a single or double tap, wake-up, free-fall, 6D interrupt, or any combination of these
+              events, but every interrupt has to be routed to the corresponding pad to be used as a trigger.
+
+                                            Figure 10. Bypass-to-continuous mode
+
+
+                                                       xi,yi,zi                                                                                           xi,yi,zi
+                                                  x0       yy0        z0                                         x0        y0        z0
+
+                                                                                                                    x1        y1        z1
+                                                  x1        y1        z1
+                                                                                                                    x2        y2        z2
+                          empty                x2        y2        z2
+                                                                                                                        x30       y30       z30
+
+                                                                                                                        x31       y31       z31
+                                                    x31       y31       z31
+
+
+
+                                 Bypass Mode                 Continuous Mode
+
+                                                       Trigger event
+
+
+                                Figure 11. Trigger event to FIFO for bypass-to-continuous mode
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 26/65

@@ -1,0 +1,58 @@
+                                                                                   ADS1220
+www.ti.com                                                                      SBAS501D – MAY 2013 – REVISED MAY 2026
+
+ 9.1.6 Pseudo Code Example
+
+The following  list shows a pseudo code sequence with the required steps to set up the device and the
+ microcontroller that interfaces to the ADC to take subsequent readings from the ADS1220 in continuous
+ conversion mode. The dedicated DRDY pin is used to indicate availability of new conversion data. The default
+ configuration register settings are changed to gain = 16, continuous conversion mode, and simultaneous 50Hz
+and 60Hz rejection.
+
+
+
+  Power-up;
+  Delay to allow power supplies to settle and power-up reset to complete (minimum of 50µs);
+  Configure the SPI interface of the microcontroller to SPI mode 1 (CPOL = 0, CPHA = 1);
+  If the CS pin is not tied low permanently, configure the microcontroller GPIO connected to CS as an
+  output;
+  Configure the microcontroller GPIO connected to the DRDY pin as a falling edge triggered interrupt
+  input;
+  Set CS to the device low;
+  Delay for a minimum of td(CSSC);
+  Send the RESET command (06h) to make sure the device is properly reset after power-up;
+  Delay for a minimum of 50µs + 32 × tCLK;
+  Write the respective register configuration with the WREG command (43h, 08h, 04h, 10h, and 00h);
+  As an optional sanity check, read back all configuration registers with the RREG command (23h);
+  Send the START/SYNC command (08h) to start converting in continuous conversion mode;
+  Delay for a minimum of td(SCCS);
+  Clear CS to high (resets the serial interface);
+  Loop
+  {
+      Wait for DRDY to transition low;
+      Take CS low;
+      Delay for a minimum of td(CSSC);
+      Send 24 SCLK rising edges to read out conversion data on DOUT/DRDY;
+      Delay for a minimum of td(SCCS);
+      Clear CS to high;
+  }
+  Take CS low;
+  Delay for a minimum of td(CSSC);
+  Send the POWERDOWN command (02h) to stop conversions and put the device in power-down mode;
+  Delay for a minimum of td(SCCS);
+  Clear CS to high;
+
+Run an offset calibration before performing any measurements or when changing the gain of the PGA. The
+ internal offset of the device can, for example, be measured by shorting the inputs to mid-supply (MUX[3:0] =
+ 1110b). The microcontroller then takes multiple readings from the device with the inputs shorted and stores
+ the average value in the microcontroller memory. When measuring the sensor signal, the microcontroller then
+ subtracts the stored offset value from each device reading to obtain an offset compensated result. The offset can
+be either positive or negative in value.
+
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    51
+
+                                                  Product Folder Links: ADS1220

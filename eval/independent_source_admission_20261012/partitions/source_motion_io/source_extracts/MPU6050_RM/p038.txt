@@ -1,0 +1,85 @@
+ 
+MPU-6000/MPU-6050 Register Map and 
+Descriptions 
+Document Number: RM-MPU-6000A-00 
+Revision: 4.2 
+Release Date: 08/19/2013 
+ 
+ 
+           38 of 46  
+   
+4.27 Register 106 – User Control 
+USER_CTRL 
+ 
+Type: Read/Write 
+Register 
+(Hex) 
+Register 
+(Decimal) 
+Bit7 
+Bit6 
+Bit5 
+Bit4 
+Bit3 
+Bit2 
+Bit1 
+Bit0 
+6A 
+106 
+- 
+FIFO_EN 
+I2C_MST 
+_EN 
+I2C_IF 
+_DIS 
+- 
+FIFO 
+_RESET 
+I2C_MST 
+_RESET 
+SIG_COND 
+_RESET 
+ 
+Description: 
+This register allows the user to enable and disable the FIFO buffer, I2C Master Mode, and primary 
+I2C interface. The FIFO buffer, I2C Master, sensor signal paths and sensor registers can also be 
+reset using this register. 
+When I2C_MST_EN is set to 1, I2C Master Mode is enabled. In this mode, the MPU-60X0 acts as 
+the I2C Master to the external sensor slave devices on the auxiliary I2C bus. When this bit is cleared 
+to 0, the auxiliary I2C bus lines (AUX_DA and AUX_CL) are logically driven by the primary I2C bus 
+(SDA and SCL). This is a precondition to enabling Bypass Mode. For further information regarding 
+Bypass Mode, please refer to Register 55. 
+MPU-6000:  The primary SPI interface will be enabled in place of the disabled primary I2C interface 
+ 
+when  I2C_IF_DIS is set to 1. 
+MPU-6050:  Always write 0 to I2C_IF_DIS.  
+When the reset bits (FIFO_RESET, I2C_MST_RESET, and SIG_COND_RESET) are set to 1, these 
+reset bits will trigger a reset and then clear to 0.  
+Bits 7 and 3 are reserved. 
+ 
+Parameters: 
+FIFO_EN 
+When set to 1, this bit enables FIFO operations. 
+ 
+When this bit is cleared to 0, the FIFO buffer is disabled. The FIFO buffer 
+cannot be written to or read from while disabled.  
+ 
+The FIFO buffer’s state does not change unless the MPU-60X0 is power 
+cycled. 
+I2C_MST_EN 
+When set to 1, this bit enables I2C Master Mode.  
+ 
+When this bit is cleared to 0, the auxiliary I2C bus lines (AUX_DA and 
+AUX_CL) are logically driven by the primary I2C bus (SDA and SCL).  
+I2C_IF_DIS 
+MPU-6000: When set to 1, this bit disables the primary I2C interface and 
+enables the SPI interface instead. 
+ 
+MPU-6050: Always write this bit as zero. 
+FIFO_RESET 
+This bit resets the FIFO buffer when set to 1 while FIFO_EN equals 0. This 
+bit automatically clears to 0 after the reset has been triggered. 
+I2C_MST_RESET 
+This bit resets the I2C Master when set to 1 while I2C_MST_EN equals 0. 
+This bit automatically clears to 0 after the reset has been triggered. 
+ 

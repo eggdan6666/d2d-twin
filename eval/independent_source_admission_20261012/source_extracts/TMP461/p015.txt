@@ -1,0 +1,83 @@
+                                                                          TMP461
+
+www.ti.com                                                                   SBOS722B –JUNE 2015–REVISED AUGUST 2016
+
+Programming (continued)
+
+
+                              1                                     9    1                                     9
+               SCL                      ¼
+
+              SDA        1    0    0   1    1    0    0(1)  R/W       P7  P6  P5  P4  P3  P2  P1  P0  ¼
+
+                            Start By                              ACK By                             ACK By
+                       Master                                       Device                                      Device
+
+                                Frame 1 Two-Wire Slave Address Byte                 Frame 2 Pointer Register Byte
+
+                              1                                     9
+               SCL
+             (Continued)
+
+
+              SDA
+                         D7  D6  D5  D4  D3  D2  D1  D0
+             (Continued)
+                                                   ACK By     Stop By
+                                                                 Device     Master
+
+                                     Frame 3 Data Byte 1
+
+       (1)  Slave address 1001100 is shown.
+
+                     Figure 15. Two-Wire Timing Diagram for Write Word Format
+
+
+
+                         1                                        9    1                                        9
+          SCL                      ¼
+
+         SDA         1    0    0    1    1    0     0(1)  R/W       P7   P6   P5   P4   P3   P2   P1   P0  ¼
+
+                     Start By                                  ACK By                                ACK By
+                  Master                                            Device                                          Device
+
+                            Frame 1 Two-Wire Slave Address Byte                      Frame 2 Pointer Register Byte
+
+
+                         1                                        9    1                                        9
+
+          SCL                          ¼
+       (Continued)
+
+
+
+
+         SDA                         1    0    0    1    1    0     0(1)  R/W       D7  D6   D5   D4  D3   D2   D1   D0  ¼
+       (Continued)
+
+                     Start By                                  ACK By                           From         NACK By
+                  Master                                            Device                             Device             Master(2)
+
+                            Frame 3 Two-Wire Slave Address Byte                    Frame 4 Data Byte 1 Read Register
+
+       (1)  Slave address 1001100 is shown.
+
+       (2)  The master must leave SDA high to terminate a single-byte read operation.
+
+                  Figure 16. Two-Wire Timing Diagram for Single-Byte Read Format
+
+8.5.1.3  Serial Bus Address
+
+To communicate with the TMP461 device, the master must first address slave devices using a slave address
+byte. The slave address byte consists of seven address bits and a direction bit indicating the intent of executing a
+read or write operation. The TMP461 allows up to nine devices to be connected to the SMBus, depending on the
+A0, A1 pin connections as described in Table 3. The A0 and A1 address pins must be isolated from noisy or
+high-frequency signals traces in order to avoid false address settings when these pins are set to a float state.
+
+
+
+
+Copyright © 2015–2016, Texas Instruments Incorporated                                           Submit Documentation Feedback     15
+
+                                                  Product Folder Links: TMP461

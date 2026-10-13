@@ -1,0 +1,11 @@
+# 唯一下一步行动卡
+
+当前阶段M4；本轮完成独立来源审校验收和第一批事件原型，正式生成输入仍NOT_ADMITTED。
+
+唯一任务：按repair_closure_ledger补齐剩余契约实施，优先闭环TMP117全部EEPROM-backed配置、门限、offset和单次转换，再按芯片推进96项REPAIR。不得把局部场景通过改称完整字段通过。302项CONDITIONAL需逐条纳入可执行模式/事件/接口前提，或明确排除相应功能并声明新的研究范围。
+
+可复制提示词：
+
+> 请继续项目M4来源契约修复。先读取eval/semantic_protocol_v3_20261012/REPORT.md、README.md、repair_closure_ledger.json、admission_gate.json，以及eval/independent_source_admission_20261012的独立签审和逐项来源证据。在一个新版本中扩展现有runtime/scenarios/compiler，先完成TMP117 EEPROM-backed CONFIG的0x07fc掩码与MOD1非持久位、THIGH/TLOW/TEMP_OFFSET的锁定易失写与解锁编程、Busy镜像和POR加载、合法单次转换的开始/平均完成/数据就绪。对每项保存原页证据、实施代码、非零事件、反例夹具和全部条款的闭环记录。按精确条款扩展，未知或冲突方面保留排除，不把普通存储、读0再读0或参考通过当功能验证。不得修改原独立审校包、旧协议、正式d2d/IR、冻结测试或历史模型结果。仍使用本地PDF、CPU和pytest；完成全部准入规则、全芯片参考验证及精确生成上下文后才能建立正式production_generation_manifest；此前不启动模型生成。
+
+需要用户提供：当前无额外资料、账号或硬件。验收材料：新版本代码与哈希、每字段/维度闭环台账、实际执行和负向夹具证据、来源冲突/功能排除清单。只在所有声明范围的关键条件落实后讨论新一轮模型生成。

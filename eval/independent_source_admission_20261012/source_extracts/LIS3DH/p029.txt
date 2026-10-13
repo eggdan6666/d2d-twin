@@ -1,0 +1,57 @@
+LIS3DH                                                                               Digital interfaces
+
+6.2.2     SPI write
+
+                                      Figure 9. SPI write protocol
+
+
+
+            &6
+
+
+           63&
+
+              6',
+
+                       5:                                     ',   ',   ',   ',   ',   ',   ',   ',
+                            06 $'  $' $'  $'  $'  $'
+
+
+          The SPI write command is performed with 16 clock pulses. A multiple byte write command
+                is performed by adding blocks of 8 clock pulses to the previous one.
+
+              bit 0: WRITE bit. The value is 0.
+
+              bit 1: MS bit. When 0, does not increment the address; when 1, increments the address in
+             multiple writes.
+
+              bit 2 -7: address AD(5:0). This is the address field of the indexed register.
+
+              bit 8-15: data DI(7:0) (write mode). This is the data that is written inside the device (MSb
+                  first).
+
+              bit 16-... : data DI(...-8). Further data in multiple byte writes.
+
+                       Figure 10. Multiple byte SPI write protocol (2-byte example)
+
+
+
+           &6
+
+
+          63&
+
+
+             6',
+
+                                                                           ',   ',   ',   ',   ',   ',   ',   ',   ',   ',   ',   ',   ',   ',   ',   ',
+                        5:
+                             06 $' $' $' $' $' $'
+
+
+
+
+
+                                      DocID17530 Rev 2                                      29/54
+
+                                                                                                                            54

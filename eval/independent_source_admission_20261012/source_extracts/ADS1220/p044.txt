@@ -1,0 +1,78 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.6.2.2 Configuration Register 1 (Address = 01h) [reset = 00h]
+
+                                Figure 8-33. Configuration Register 1
+       7             6             5             4             3             2             1             0
+
+                     DR[2:0]                            MODE[1:0]           CM          TS         BCS
+
+                 R/W-000b                           R/W-00b              R/W-0b        R/W-0b        R/W-0b
+
+                        Table 8-11. Configuration Register 1 Field Descriptions
+      Bit     Field           Type      Reset      Description
+
+                                                Data rate
+     7:5     DR[2:0]        R/W       000b      These bits control the data rate setting depending on the selected operating
+                                               mode. Table 8-12 lists the bit settings for normal, duty-cycle, and turbo mode.
+
+                                                  Operating mode
+                                               These bits control the operating mode the device operates in.
+                                               00b : Normal mode (256kHz modulator clock)
+     4:3    MODE[1:0]     R/W       00b
+                                               01b : Duty-cycle mode (internal duty cycle of 1:4)
+                                               10b : Turbo mode (512kHz modulator clock)
+                                                 11b : Reserved
+
+                                               Conversion mode
+                                                       This bit sets the conversion mode for the device.
+     2    CM           R/W       0b
+                                               0b : Single-shot conversion mode
+                                               1b : Continuous conversion mode
+
+                                                Temperature sensor mode
+                                                       This bit enables the internal temperature sensor and puts the device in
+                                                     temperature sensor mode.
+     1    TS           R/W       0b        The settings of configuration register 0 have no effect and the device uses the
+                                                                internal reference for measurement when temperature sensor mode is enabled.
+                                               0b : Disables temperature sensor
+                                               1b : Enables temperature sensor
+
+                                                 Burn-out current sources
+                                                       This bit controls the 10µA, burn-out current sources.
+                                             The burn-out current sources can be used to detect sensor faults such as wire
+     0    BCS          R/W       0b
+                                                    breaks and shorted sensors.
+                                               0b : Current sources off
+                                               1b : Current sources on
+
+                                    Table 8-12. DR Bit Settings (1)
+         NORMAL MODE                   DUTY-CYCLE MODE                  TURBO MODE
+
+             000b = 20SPS                          000b = 5SPS                          000b = 40SPS
+
+             001b = 45SPS                         001b = 11.25SPS                         001b = 90SPS
+
+             010b = 90SPS                         010b = 22.5SPS                        010b = 180SPS
+
+             011b = 175SPS                          011b = 44SPS                          011b = 350SPS
+
+             100b = 330SPS                        100b = 82.5SPS                        100b = 660SPS
+
+             101b = 600SPS                         101b = 150SPS                        101b = 1200SPS
+
+             110b = 1000SPS                         110b = 250SPS                         110b = 2000SPS
+
+             111b = Reserved                          111b = Reserved                          111b = Reserved
+
+ (1)   Data rates provided are calculated using the internal oscillator or an external 4.096MHz clock. The data rates scale proportionally with
+      the external clock frequency when an external clock other than 4.096MHz is used.
+
+
+
+
+
+44    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

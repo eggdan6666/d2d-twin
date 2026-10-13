@@ -1,0 +1,76 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+5 Specifications
+
+ 5.1 Absolute Maximum Ratings
+ over operating ambient temperature range (unless otherwise noted)(1)
+                                                                     MIN                MAX              UNIT
+
+ Power-supply voltage            VDD to GND                                     –0.3                       7               V
+
+ Analog input voltage                 AIN0, AIN1, AIN2, AIN3                GND – 0.3              VDD + 0.3            V
+
+  Digital input voltage                SDA, SCL, ADDR, ALERT/RDY           GND – 0.3                        5.5              V
+
+  Input current, continuous            Any pin except power supply pins                –10                       10             mA
+
+                                      Operating ambient, TA                         –40                       125
+ Temperature                           Junction, TJ                                 –40                       150                 °C
+                                       Storage, Tstg                                 –60                       150
+
+ (1)   Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress
+       ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under
+     Recommended Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+         reliability.
+
+ 5.2 ESD Ratings
+                                                                              VALUE      UNIT
+                Electrostatic       Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)               ±2000
+ V(ESD)                                                                                    V
+              discharge          Charged-device model (CDM), per JEDEC specification JESD22-C101(2)       ±500
+
+ (1)  JEDEC document JEP155 states that 500V HBM allows safe manufacturing with a standard ESD control process.
+ (2)  JEDEC document JEP157 states that 250V CDM allows safe manufacturing with a standard ESD control process.
+
+ 5.3 Recommended Operating Conditions
+                                                                               MIN      NOM       MAX     UNIT
+
+ POWER SUPPLY
+
+              Power supply (VDD to GND)                                                    2                            5.5     V
+ ANALOG INPUTS(1)
+ FSR            Full-scale input voltage range(2) (VIN = V(AINP) – V(AINN))                             ±0.256                      ±6.144     V
+  V(AINx)         Absolute input voltage                                         GND                 VDD     V
+
+ DIGITAL INPUTS
+
+ VDIG             Digital input voltage                                          GND                            5.5     V
+
+ TEMPERATURE
+
+ TA            Operating ambient temperature                                                –40                       125      °C
+
+ (1)  AINP and AINN denote the selected positive and negative inputs. AINx denotes one of the four available analog inputs.
+ (2)   This parameter expresses the full-scale range of the ADC scaling. No more than VDD + 0.3V must be applied to the analog inputs of
+      the device. See Table 7-1 for more information.
+
+ 5.4 Thermal Information
+                                        RUG (X2QFN)     DYN (SOT)     DGS (VSSOP)
+             THERMAL METRIC(1)                                                                   UNIT
+                                                        10 PINS          10 PINS          10 PINS
+ RθJA         Junction-to-ambient thermal resistance               245.2              147.1              182.7         °C/W
+  RθJC(top)      Junction-to-case (top) thermal resistance               69.3               59.3               67.2          °C/W
+ RθJB         Junction-to-board thermal resistance                 172.0               71.3              103.8         °C/W
+ ψJT           Junction-to-top characterization parameter               8.2                 2.8                10.2          °C/W
+ ψJB          Junction-to-board characterization parameter          170.8               70.4              102.1         °C/W
+  RθJC(bot)      Junction-to-case (bottom) thermal resistance          N/A              N/A              N/A          °C/W
+
+ (1)   For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+       note.
+
+
+
+4     Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

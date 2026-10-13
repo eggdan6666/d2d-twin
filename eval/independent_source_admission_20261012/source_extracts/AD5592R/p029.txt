@@ -1,0 +1,51 @@
+Data Sheet                               AD5592R
+
+SERIAL INTERFACE
+
+GENERAL-PURPOSE CONTROL REGISTER            midscale. The input data is then read back. Bits[14:12] contain the
+                                                                  address of the DAC register being read back, and Bit 15 is 1 (see
+The general-purpose control register (see the General-Purpose                                                                      Table 32).
+Control Register section) enables or disables certain functions
+associated with the DAC, ADC, and I/Ox pin configuration (see
+Table 17). The general-purpose control register sets the gain of the
+DAC and ADC. Bit 5 sets the input range for the ADC, and Bit 4
+sets the output range of the DAC.
+
+The general-purpose control register also enables/disables the
+ADC buffer and precharge function (see the ADC Section section
+for more details). The register can also be used to lock the I/Ox pin
+configuration to prevent accidental change. When Bit 7 (IO_LOCK
+bit) is set to 1, writes to the configuration registers are ignored.
+DAC WRITE OPERATION                                                              Figure 44. DAC Readback Operation
+To set a pin as a DAC, set the appropriate bit in the DAC pin
+                                   ADC OPERATIONconfiguration register to 1 (see Table 19). For example, setting Bit
+0 to 1 enables I/O0 as a DAC output. Data is written to a DAC            To set a pin as an ADC, set the appropriate bit in the ADC pin
+when the MSB (Bit 15) of the serial write is 1. Bits[14:12] determine         configuration register to 1 (see Table 18). For example, setting Bit
+which DAC is addressed, and Bits[11:0] contain the 12-bit data to        0 to 1 enables I/O0 as an ADC input. The ADC channels of the
+be written to the DAC, as shown in Table 29. Data is written to           AD5592R/AD5592R-1 operate as a traditional multichannel ADC,
+the selected DAC input register. Data written to the input register         where each serial transfer selects the next channel for conversion.
+can be automatically copied to the DAC register, if required. Data is        Writing to the ADC sequence register (see the ADC Sequence
+transferred to the DAC register based on the setting of the LDAC          Register section and Table 16) selects the ADC channels to be
+mode register (see Table 21).                                            included in the sequence, and the REP bit determines if the se-
+                                                             quence is repeated. The SYNC signal is used to frame the write
+LDAC Mode Operation                                              to the converter on the SDI pin. The data that appears on the
+                                              SDO pin during the initial write to the ADC sequence register isWhen the LDAC mode bits (Bits[1:0]) are 00 respectively, new                                                                                      invalid. When the sequence register is written to, the ADC beginsdata is automatically transferred from the input register to the DAC                                                                                to track the first channel in the sequence. Tracking takes 500 ns;register, and the analog output updates. When the LDAC mode                                                            do not initiate a conversion until this time has passed. The nextbits are 01, data remains in the input register. This LDAC mode                                                SYNC falling edge initiates a conversion on the selected channel.allows writes to input registers without affecting the analog outputs.                                                          The subsequent SYNC falling edge begins clocking out the ADCWhen the input registers have been loaded with the desired val-                                                                                  result and also initiates the next conversion. The ADC operatesues, setting the LDAC mode bits to 10 transfers the values in                                                                           with one cycle latency. Thus, the conversion result correspondingthe input registers to the DAC registers, and the analog outputs                                                                                to each conversion is available one serial read cycle after the cycleupdate simultaneously. The LDAC mode bits then revert back to 01,                                                                                      in which the conversion was initiated. Note that for a valid ADCassuming their previous setting was 01 (see Table 21).                                                                        conversion, the first falling edge of SCLK must occur within the time
+DAC READBACK                                                                 t4 (mentioned in Table 3 and Table 4) after every falling edge of
+                                                SYNC (see Figure 5).
+The input register of each DAC can be read back via the SPI
+interface. Reading back the DAC register value can be used to                     If more than one channel is selected in the ADC sequence register,
+confirm that the data was received correctly before writing to the           the ADC converts all selected channels sequentially in ascending
+LDAC register, or to check what value was last loaded to a DAC.           order on successive SYNC falling edges. Once all the selected
+Data can only be read back from a DAC when there is no ADC            channels in the sequence register are converted, the ADC repeats
+conversion sequence taking place.                                       the sequence if the REP bit is set. If the REP bit is clear, the ADC
+                                                              goes three-state. Figure 45 to Figure 48 show typical ADC modes
+To read back a DAC input register, it is first necessary to enable                                                                                of operation. I/O7 can be configured as a BUSY output pin to indi-
+the readback function and select which DAC register is required.                                                                       cate when a conversion result is available. BUSY goes low while a
+This is achieved by writing to the DAC read back register (see Table                                                                     conversion takes place and goes high when the conversion result is
+15). Set the Bits[4:3] to 11 to enable the readback function. Bits[2:0]                                                                               available. The conversion result is clocked out on the SDO pin on
+select which DAC data is required. The DAC data is clocked out of                                                                        the following read/write operation. For an ADC conversion, Bit 15 is
+the AD5592R/AD5592R-1 on the subsequent SPI operation. Figure                                                                                0, Bits[14:12] contain the ADC address, and Bits[11:0] contain the
+44 shows an example of setting I/O3, configured as a DAC, to
+
+
+analog.com                                                                                         Rev. H | 29 of 54

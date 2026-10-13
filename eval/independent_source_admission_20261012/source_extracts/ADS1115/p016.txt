@@ -1,0 +1,78 @@
+ADS1113, ADS1114, ADS1115
+SBAS444E – MAY 2009 – REVISED DECEMBER 2024                                                                 www.ti.com
+
+ 7.3.7 Digital Comparator (ADS1114 and ADS1115 Only)
+
+The ADS1115 and ADS1114 feature a programmable  digital comparator that can issue an  alert on the
+ALERT/RDY pin. The COMP_MODE bit in the Config register configures the comparator as either a traditional
+ comparator or a window comparator. In traditional comparator mode, the ALERT/RDY pin asserts (active low by
+ default) when conversion data exceeds the limit set in the high-threshold register (Hi_thresh). The comparator
+ then deasserts only when the conversion data falls below the limit set in the low-threshold register (Lo_thresh).
+ In window comparator mode, the ALERT/RDY pin asserts when the conversion data exceeds the Hi_thresh
+ register or falls below the Lo_thresh register value.
+
+ In either window or traditional comparator mode, the comparator can be configured to latch after being asserted
+ by the COMP_LAT bit in the Config register. This setting causes the assertion to remain even if the input signal
+ is not beyond the bounds of the threshold registers. This latched assertion can only be cleared by issuing an
+SMBus alert response or by reading the Conversion register. The ALERT/RDY pin can be configured as active
+ high or active low by the COMP_POL bit in the Config register. Operational diagrams for both the comparator
+modes are shown in ALERT Pin Timing Diagram.
+
+The comparator can  also be  configured  to  activate  the ALERT/RDY  pin  only  after a  set number  of
+ successive readings exceed the threshold values set in the threshold registers (Hi_thresh and Lo_thresh). The
+COMP_QUE[1:0] bits in the Config register configure the comparator to wait for one, two, or four readings
+beyond the threshold before activating the ALERT/RDY pin. The COMP_QUE[1:0] bits can also disable the
+ comparator function and put the ALERT/RDY pin into a high state.
+
+
+
+
+               TH_H                                                      TH_H
+
+
+  Input Signal                                                                          Input Signal
+
+                TH_L                                                          TH_L
+
+
+
+                                          Time                                                                Time
+
+
+
+
+                                                                                      Latching
+     Latching                                  Successful                      Comparator       Successful               Successful
+  Comparator                        SMBus Alert                            Output    SMBus Alert          SMBus Alert
+      Output                              Response                                     Response             Response
+
+
+
+
+                                          Time                                                                Time
+
+
+
+
+                                                                              Non-Latching
+ Non-Latching                                                               Comparator
+  Comparator                                                                       Output
+      Output
+
+
+
+
+                                          Time                                                                Time
+
+
+                    TRADITIONAL COMPARATOR MODE                             WINDOW COMPARATOR MODE
+
+                               Figure 7-7. ALERT Pin Timing Diagram
+
+
+
+
+
+16    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

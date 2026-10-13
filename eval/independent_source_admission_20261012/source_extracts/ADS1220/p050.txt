@@ -1,0 +1,44 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ Fully-differential signals in contrast are defined as signals having a constant common-mode voltage where the
+ positive and negative analog inputs swing 180° out-of-phase but have the same amplitude.
+
+The ADS1220 can measure pseudo-differential and fully-differential signals both with the PGA enabled or
+ bypassed. However, the PGA must be enabled to use gains greater than 4. The common-mode voltage of
+ the input signal must meet the input-common mode voltage restrictions of the PGA (as explained in the PGA
+Common-Mode Voltage Requirements section) when the PGA is enabled. Setting the common-mode voltage at
+ or near (AVSS + AVDD) / 2 in most cases satisfies the PGA common-mode voltage requirements.
+
+ Signals where both the positive and negative inputs are always ≥ 0V are called unipolar signals. These signals
+ can in general be measured with the ADS1220 using a unipolar analog supply (AVSS = 0V). As mentioned
+ previously, the PGA must be bypassed to measure single-ended, unipolar signals when using a unipolar supply.
+
+A signal is called bipolar when either the positive or negative input can swing below 0V. A bipolar analog supply
+ (such as AVDD = 2.5V, AVSS = –2.5V) is required to measure bipolar signals with the ADS1220. A typical
+ application task is measuring a single-ended, bipolar ±10V signal where AINN is fixed at 0V while AINP swings
+between –10V and 10V. The ADS1220 cannot directly measure this signal because the 10V exceeds the analog
+ power-supply limits. However, one possible solution is to use a bipolar analog supply (AVDD = 2.5V, AVSS =
+ –2.5V), gain = 1, and a resistor divider in front of the ADS1220. The resistor divider must divide the voltage down
+ to ≤ ±2.048V to be able to measure with the internal 2.048V reference.
+
+ 9.1.5 Unused Inputs and Outputs
+
+ To minimize leakage currents on the analog inputs, leave unused analog and reference inputs floating, or
+ connect the inputs to mid-supply or to AVDD. AIN3/REFN1 is an exception. Leave the AIN3/REFN1 pin floating
+when not used to avoid accidentally shorting the pin to AVSS through the internal low-side switch. Connecting
+unused analog or reference inputs to AVSS is possible as well, but can yield higher leakage currents than the
+ previously mentioned options.
+
+Do not float unused digital inputs; excessive power-supply leakage current can result. Tie all unused digital
+ inputs to the appropriate levels, DVDD or DGND, even when in power-down mode. If CS is not used, tie this pin
+ to DGND. If the internal oscillator is used, tie the CLK pin to DGND. If the DRDY output is not used, leave the pin
+ unconnected or tie the pin to DVDD using a weak pullup resistor.
+
+
+
+
+
+50    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

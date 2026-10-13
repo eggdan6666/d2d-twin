@@ -1,0 +1,91 @@
+                                                                                             INA226
+www.ti.com                                                                 SBOS547C – JUNE 2011 – REVISED AUGUST 2026
+
+ RST:               Reset Bit
+
+  Bit 15                  Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default
+                        values; this bit self-clears.
+
+ AVG:               Averaging Mode
+
+ Bits 9–11            Determines the number of samples that are collected and averaged. Table 7-3 shows all the AVG bit settings and
+                         related number of averages for each bit setting.
+
+                            Table 7-3. AVG Bit Settings[11:9] Combinations
+                           AVG2       AVG1       AVG0      NUMBER OF
+                               D11         D10         D9        AVERAGES(1)
+
+                                   0            0            0              1
+
+                                   0            0            1              4
+
+                                   0            1            0              16
+
+                                   0            1            1              64
+
+                                   1            0            0             128
+
+                                   1            0            1             256
+
+                                   1            1            0             512
+
+                                   1            1            1             1024
+
+                                       (1)  Shaded values are default.
+
+ VBUSCT:          Bus Voltage Conversion Time
+
+ Bits 6–8              Sets the conversion time for the bus voltage measurement. Table 7-4 shows the VBUSCT bit options and related
+                       conversion times for each bit setting.
+
+                          Table 7-4. VBUSCT Bit Settings [8:6] Combinations
+                          VBUSCT2    VBUSCT1    VBUSCT0    CONVERSION
+                              D8         D7         D6             TIME(1)
+
+                                   0            0            0            140µs
+
+                                   0            0            1            204µs
+
+                                   0            1            0            332µs
+
+                                   0            1            1            588µs
+
+                                   1            0            0            1.1ms
+
+                                   1            0            1            2.116ms
+
+                                   1            1            0           4.156ms
+
+                                   1            1            1           8.244ms
+
+                                       (1)  Shaded values are default.
+
+ VSHCT:            Shunt Voltage Conversion Time
+
+ Bits 3–5              Sets the conversion time for the shunt voltage measurement. Table 7-5 shows the VSHCT bit options and related
+                       conversion times for each bit setting.
+
+                           Table 7-5. VSHCT Bit Settings [5:3] Combinations
+                           VSHCT2     VSHCT1     VSHCT0     CONVERSION
+                              D8         D7         D6             TIME(1)
+
+                                   0            0            0            140µs
+
+                                   0            0            1            204µs
+
+                                   0            1            0            332µs
+
+                                   0            1            1            588µs
+
+                                   1            0            0            1.1ms
+
+                                   1            0            1            2.116ms
+
+                                   1            1            0           4.156ms
+
+
+
+
+Copyright © 2026 Texas Instruments Incorporated                                                      Submit Document Feedback    23
+
+                                                   Product Folder Links: INA226

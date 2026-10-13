@@ -1,0 +1,51 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+10 Power Supply Recommendations
+
+The device requires a single unipolar supply, VDD, to power both the analog and digital circuitry of the device.
+
+ 10.1 Power-Supply Sequencing
+
+ Wait approximately 50µs after VDD is stabilized before communicating with the device to allow the power-up
+ reset process to complete.
+
+ 10.2 Power-Supply Decoupling
+
+Good power-supply decoupling is important to achieve optimum performance. VDD must be decoupled with at
+ least a 0.1µF capacitor, as shown in Figure 10-1. The 0.1μF bypass capacitor supplies the momentary bursts
+ of extra current required from the supply when the device is converting. Place the bypass capacitor as close to
+ the power-supply pin of the device as possible using low-impedance connections. Use multilayer ceramic chip
+ capacitors (MLCCs) that offer low equivalent series resistance (ESR) and inductance (ESL) characteristics for
+ power-supply decoupling purposes. For very sensitive systems, or for systems in harsh noise environments,
+ avoid using vias for connecting the capacitors to the device pins for better noise immunity. Using multiple vias in
+ parallel lowers the overall inductance, and is beneficial for connections to ground planes.
+
+                                                                   VDD
+                                                           10
+                                                         TI Device                                                  SCL
+
+
+
+                                            1 ADDR              SDA  9
+
+                                            2 ALERT/RDY          VDD  8
+
+                                            3 GND                  AIN3  7                 0.1 µF
+
+                                            4  AIN0                  AIN2  6
+
+
+
+                                                           AIN1
+                                                            5
+
+                           Figure 10-1. ADS1115 Power-Supply Decoupling
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    37
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

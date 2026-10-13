@@ -1,0 +1,81 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 9.3 Power Supply Recommendations
+
+The device requires two power supplies: analog (AVDD, AVSS) and digital (DVDD, DGND). The analog power
+ supply can be bipolar (for example, AVDD = 2.5V, AVSS = –2.5V) or unipolar (for example, AVDD = 3.3V, AVSS
+= 0V) and is independent of the digital power supply. The digital supply sets the digital I/O levels.
+
+ 9.3.1 Power-Supply Sequencing
+
+The power supplies can be sequenced in any order, but in no case must any analog or digital inputs exceed
+ the respective analog or digital power-supply voltage and current limits. Ramping DVDD together with or before
+AVDD minimizes any leakage current through AIN3/REFN1 because of the low-side switch connected to this
+ input. If AVDD ramps before DVDD, then the low-side switch is in an unknown state and can short the AIN3/
+REFN1 input to AVSS until DVDD has ramped. Wait approximately 50µs after all power supplies are stabilized
+ before communicating with the device to allow the power-up reset process to complete.
+
+ 9.3.2 Power-Supply Ramp Rate
+
+As shown in Figure 9-12, the power-supply ramp rate must be monotonic and slower than 1V per 50µs for
+ proper device power-up over the entire temperature range.
+
+                                                                       DVDD
+
+
+
+
+
+                                               1 V
+
+
+
+
+                                                            -50  s-
+
+                                Figure 9-12. Power-Supply Ramp Rate
+
+ 9.3.3 Power-Supply Decoupling
+
+Good power-supply decoupling is important to achieve optimum performance. AVDD, AVSS (when using a
+ bipolar supply) and DVDD must be decoupled with at least a 0.1µF capacitor, as shown in Figure 9-13 and
+ Figure 9-14. Place the bypass capacitors as close to the power-supply pins of the device as possible using
+ low-impedance connections. Use multilayer ceramic chip capacitors (MLCCs) that offer low equivalent series
+ resistance (ESR) and inductance (ESL) characteristics for power-supply decoupling purposes. For very sensitive
+ systems, or for systems in harsh noise environments, avoiding the use of vias for connecting the capacitors to
+ the device pins can offer good noise immunity. Using multiple vias in parallel lowers the overall inductance and
+ is beneficial for connections to ground planes. Connect analog and digital ground together as close to the device
+ as possible.
+
+
+
+
+
+                      1  SCLK              DIN 16                                                                   1  SCLK              DIN 16
+
+
+                      2 CS        DOUT/DRDY 15                                                                   2 CS        DOUT/DRDY 15
+
+                      3  CLK           DRDY 14                     3.3 V                                              3  CLK           DRDY 14                     3.3 V
+
+
+                      4 DGND          DVDD 13                                                                   4 DGND          DVDD 13
+                                     Device                                                                                                  Device
+                      5 AVSS          AVDD 12              3.3 V      0.1 PF                           -2.5 V               5 AVSS          AVDD 12              2.5 V      0.1 PF
+
+                      6  AIN3/REFN1  AIN0/REFP1 11                                                                   6  AIN3/REFN1  AIN0/REFP1 11
+                                                                       0.1 PF                                                      0.1 PF                                                 0.1 PF
+
+                      7  AIN2               AIN1 10                                                                   7  AIN2               AIN1 10
+
+
+                      8 REFN0         REFP0  9                                                                    8 REFN0         REFP0  9
+
+     Figure 9-13. Unipolar Analog Power Supply         Figure 9-14. Bipolar Analog Power Supply
+
+
+
+64    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

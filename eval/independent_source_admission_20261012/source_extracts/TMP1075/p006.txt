@@ -1,0 +1,79 @@
+TMP1075
+SBOS854F – MARCH 2018 – REVISED JUNE 2024                                                                   www.ti.com
+
+ 6.4 Thermal Information
+                                        TMP1075       TMP1075       TMP1075       TMP1075N
+         THERMAL METRIC(1)          DGK (VSSOP)     D (SOIC)     DSG (WSON)     DRL (SOT)     UNIT
+
+                                              8 PINS          8 PINS          8 PINS          6 PINS
+ RθJA     Junction-to-ambient thermal resistance       202.5             130.4              87.4             240.2       °C/W
+           Junction-to-case (top) thermal
+  RθJC(top)                                        82               76.9              111.1              96.4        °C/W           resistance
+ RθJB     Junction-to-board thermal resistance         124.4              72.3             54              124.3       °C/W
+           Junction-to-top characterization
+ ΨJT                                                 17.9             32                 9.8              4         °C/W          parameter
+
+           Junction-to-board characterization
+ ΨJB                                               122.6              71.9              54.4             123.1       °C/W          parameter
+
+           Junction-to-case (bottom) thermal
+  RθJC(bot)                                        __              __               28.1             __        °C/W           resistance
+ MT      Thermal mass                              16.6              64.2                5.0              __         mJ/°C
+
+ (1)   For more information about traditional and new thermal metrics, see the Semiconductor and IC Package Thermal Metrics application
+       report.
+
+ 6.5 Electrical Characteristics:TMP1075
+ at TA = –55°C to +125°C and V+ = 1.7 V to 5.5 V (unless noted); typical specification are at TA = 25°C and V+=3.3 V
+           PARAMETER                      TEST CONDITIONS                MIN    TYP   MAX  UNIT
+
+ TEMPERATURE INPUT
+
+              Range                                                                 –55              125   °C
+
+                                       –40°C to 110°C                                              ±0.25      ±1
+                        DGK, D                                                                           °C
+                Accuracy                 –55°C to 125°C                                             ±0.25      ±2
+                 (temperature
+                    error)                    –40°C to 75°C                                              ±0.25      ±1   °C                     DSG
+                                       –55°C to 125°C                                             ±0.25      ±2   °C
+
+                Accuracy (temperature error)
+                               PSRR                                                               ±0.03  °C/V
+                vs supply
+
+                 Resolution                1 LSB (12 bit)                                             0.0625           °C
+                   Repeatability(1)              25°C, V+= 3.3 V(2)                                         0.0625           °C
+                Long-term drift(3)           500 hours at 150°C, 5.5 V                                  0.0625           °C
+
+ DIGITAL INPUT/OUTPUT
+
+                  Input capacitance                                                                   5           pF
+ VIH              High-level input logic                                                            0.7(V+)                 V
+ VIL             Low-level input logic                                                                                 0.3(V+)   V
+  IIN            Leakage input current                                                          –0.25       0      0.25   µA
+                  Input voltage hysteresis     SCL and SDA pins                                        600        mV
+ VOL            Low-level output logic         IOL = -3 mA, SDA and ALERT pins                     0      0.15       0.4   V
+           ADC Conversion time        one-shot mode                                          4.5       5.5       7  ms
+
+                                  R1 = 0, R0 = 0 (default)                                         27.5
+
+                                  R1 = 0, R0 = 1                                            55
+ TC            Conversion Time                                                                   ms
+                                  R1 = 1, R0 = 0                                             110
+
+                                  R1 = 1, R0 = 1                                           220
+
+               Reset time               The time between reset until ADC conversion start                  0.3         ms
+
+                Conversion Rate Variation                                                  –10       0      10  %
+
+ POWER SUPPLY
+
+                 Operating voltage range                                                              1.7       3.3       5.5   V
+
+
+
+6     Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP1075

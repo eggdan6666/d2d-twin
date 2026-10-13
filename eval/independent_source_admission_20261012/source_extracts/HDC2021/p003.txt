@@ -1,0 +1,49 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+5 Pin Configuration and Functions
+
+
+                                    SDA  1                  6  SCL
+
+
+
+                                 GND  2                  5  VDD
+
+
+
+                                  ADDR  3                  4  DRDY/INT
+
+
+                      Figure 5-1. DEB Package 6-Pin WSON Transparent Top View
+
+Pin Functions
+
+          PIN
+                           TYPE(1)                                DESCRIPTION
+ NAME         NO.
+                                   Address select pin – connect to VDD, GND or float.
+                                   Connect to GND or float: address= 1000000X
+ ADDR           3                  I
+                                   Connect to VDD: address= 1000001X
+                                  where 'X' represents the read-write (R/W) bit.
+
+ DRDY/INT        4      O     Data ready/Interrupt. Push-Pull Output.
+
+ GND            2      G     Ground
+ SCL             6                  I       Serial clock line for I2C.
+ SDA             1          I/O      Serial data line for I2C. Open-drain output that requires a pullup resistor.
+ VDD             5       P      Positive Supply Voltage
+
+ (1)  The definitions below define the functionality of the TYPE cells for each pin:
+         •     I = input
+         •  O = output
+         •   I/O = input/output
+         •  G = ground
+         •  P = power
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback     3

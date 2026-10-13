@@ -1,0 +1,109 @@
+                                                                           ADS1113, ADS1114, ADS1115
+www.ti.com                                                                  SBAS444E – MAY 2009 – REVISED DECEMBER 2024
+
+ 9.1.6 Connecting Multiple Devices
+Up to four ADS111x devices can be connected to a single I2C bus using different address pin configurations for
+each device. Use the address pin to set the ADS111x to one of four different I2C addresses. Use the GND, VDD,
+and SCL addresses first. If SDA is used as the device address, hold the SDA line low for at least 100 ns after
+ the SCL line goes low to make sure the device decodes the address correctly during I2C communication. An
+example showing four ADS111x devices on the same I2C bus is shown in Figure 9-4. One set of pullup resistors
+ is required per bus. If needed, lower the pullup resistor values to compensate for the additional bus capacitance
+ presented by multiple devices and increased line length.
+
+                                                                                              VDD
+                                                  GND
+
+
+
+                                                                                                            10
+                                                                          ADS1115
+                                                                              SCL
+
+                                                                                            1 ADDR            SDA  9
+
+                                                    1-k                                                               to 10-k                                                                            (typ)
+                                                                                            2 ALERT/RDY        VDD  8                                                 VDD                                                    I2C                                                       Pullup                                                             Resistors
+
+                                                                                            3 GND               AIN3  7
+
+                                                   Microcontroller or                             4  AIN0               AIN2  6
+                                               Microprocessor                                     AIN1
+                                               With I2C Port
+                                                                                                            5
+
+                                         SCL
+
+
+                                       SDA
+
+
+
+
+
+                                                                                                            10
+                                                                          ADS1115
+                                                                              SCL
+
+                                                                                            1 ADDR            SDA  9
+
+                                                                                            2 ALERT/RDY        VDD  8
+
+                                                                                            3 GND               AIN3  7
+
+                                                                                            4  AIN0               AIN2  6
+
+                                                                                           AIN1
+
+                                                                                                            5
+
+
+
+
+
+                                                                                                            10
+                                                                          ADS1115
+                                                                              SCL
+
+                                                                                            1 ADDR            SDA  9
+
+                                                                                            2 ALERT/RDY        VDD  8
+
+                                                                                            3 GND               AIN3  7
+
+                                                                                            4  AIN0               AIN2  6
+
+                                                                                           AIN1
+
+                                                                                                            5
+
+
+
+
+
+                                                                                                            10
+                                                                          ADS1115
+                                                                              SCL
+
+                                                                                            1 ADDR            SDA  9
+
+                                                                                            2 ALERT/RDY        VDD  8
+
+                                                                                            3 GND               AIN3  7
+
+                                                                                            4  AIN0               AIN2  6
+
+                                                                                           AIN1
+
+                                                                                                            5
+
+    NOTE: The ADS111x power and input connections are omitted for clarity. The ADDR pin selects the I2C address.
+
+                          Figure 9-4. Connecting Multiple ADS111x Devices
+
+
+
+
+
+Copyright © 2024 Texas Instruments Incorporated                                                      Submit Document Feedback    31
+
+                                         Product Folder Links: ADS1113 ADS1114 ADS1115

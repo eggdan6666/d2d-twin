@@ -1,0 +1,45 @@
+                                                              LIS2DW12
+                                                                                            Terminology and functionality
+
+
+3.2.4        Activity/Inactivity, Android stationary/motion-detection functions
+           The activity/inactivity function recognizes the device’s sleep state and allows reducing system power
+             consumption.
+          When the activity/inactivity function is activated by setting the INTERRUPTS_ENABLE bit in CTRL7 (3Fh) and the
+          SLEEP_ON bit in WAKE_UP_THS (34h), the LIS2DW12 automatically goes to 12.5 Hz ODR in the low-power
+          mode previously selected by the LP_MODE[1:0] bits in CTRL1 (20h) if the sleep state condition is detected and
+           wakes up as soon as the interrupt event has been detected, increasing the output data rate and bandwidth.
+             With this feature the system may be efficiently switched from low-power mode to full performance depending on
+              user-selectable positioning and acceleration events, thus ensuring power saving and flexibility.
+           The Android stationary/motion detection function only recognizes the device’s sleep state.
+          When the Android stationary/motion-detection function is activated by setting the STATIONARY bit in
+         WAKE_UP_DUR (35h), the LIS2DW12 detects acceleration below a fixed threshold but does not change either
+         ODR or operating mode (high-performance mode or low-power mode) after sleep state detection.
+           The activity/inactivity recognition function can use the high-pass filter or the offset outputs, this choice can be
+          made through the USR_OFF_ON_OUT bit in CTRL7 (3Fh).
+                       If the device is in sleep (inactivity/stationary) mode, when at least one of the axes exceeds the threshold in
+         WAKE_UP_THS (34h), the device goes into a sleep-to-wake state (as wake-up).
+             For the activity/inactivity function, the device, in a wake-up state, returns to the operating mode (HP or LP) and
+         ODR before sleep state detection.
+                 Activity/inactivity, Android stationary/motion-detection threshold and duration can be configured in the following
+               control registers:
+         WAKE_UP_THS (34h)
+         WAKE_UP_DUR (35h)
+
+3.2.5      High tap/double-tap user configurability
+           The device embeds the possibility to select the following parameters:
+                  •      single axis or multiple axes in TAP_THS_Z (32h)
+                  •      axis priority in TAP_THS_Y (31h)
+                  •      threshold value of each axis in TAP_THS_X (30h), TAP_THS_Y (31h), and TAP_THS_Z (32h)
+                  •    max time threshold between two consecutive taps for double-tap recognition, min time threshold between
+                  two consecutive taps to detect a new tap event in INT_DUR (33h)
+
+3.2.6       Offset management
+           The user can manage the offset in the output or for wake-up detection using dedicated embedded hardware (see
+             Section 5.1: Block diagram of filters).
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 17/65

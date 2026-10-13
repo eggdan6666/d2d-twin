@@ -1,0 +1,55 @@
+                                                                                  HDC2021
+www.ti.com                                                                SNAS773A – DECEMBER 2019 – REVISED JUNE 2020
+
+ 7.6.8 Interrupt Enable (Address: 0x07)
+
+                         Table 7-21. Interrupt Enable Register (Address: 0x07)
+
+       7             6             5             4             3             2             1             0
+
+ DRDY_ENABLE  TH_ENABLE   TL_ENABLE   HH_ENABLE   HL_ENABLE      RES        RES        RES
+
+                        Table 7-22. Interrupt Enable Register Field Descriptions
+
+    BIT                                      RESET
+                      FIELD            TYPE     (HEX)                    DESCRIPTION
+
+     7    DRDY_ENABLE               R/W     0          DataReady Interrupt enable
+                                                             0 = DataReady Interrupt disabled
+                                                             1 = DataReady Interrupt enabled
+
+     6    TH_ENABLE                 R/W     0          Temperature threshold HIGH Interrupt enable
+                                                             0 = Temperature high Interrupt disabled
+                                                             1 = Temperature high Interrupt enabled
+
+     5    TL_ENABLE                 R/W     0          Temperature threshold LOW Interrupt enable
+                                                             0 = Temperature low Interrupt disabled
+                                                             1 = Temperature low Interrupt enabled
+
+     4    HH_ENABLE                 R/W     0           Humidity threshold HIGH Interrupt enable
+                                                             0 = Humidity high Interrupt disabled
+                                                             1 = Humidity high Interrupt enabled
+
+     3    HL_ENABLE                 R/W     0           Humidity threshold LOW Interrupt enable
+                                                             0 = Humidity low Interrupt disabled
+                                                             1 = Humidity low Interrupt enabled
+
+     2    RES                                    0          Reserved
+
+     1    RES                                    0          Reserved
+
+     0    RES                                    0          Reserved
+
+
+The Interrupt Enable register enables or disables interrupt asserstion on the DRDY/INT pin from DataReady,
+ Temperature threshold High, Temperature threshold Low, Humidity threshold High, or Humidity threshold Low.
+The Status register (address 0x04) content is unaffected by this register.
+
+ Note the settings of this regsiter only takes effect if the DRDY/INT_EN bit of the Device Configuration register
+ (address 0x0E) is set to 1.
+
+
+
+
+
+Copyright © 2020 Texas Instruments Incorporated                                                       Submit Document Feedback    25

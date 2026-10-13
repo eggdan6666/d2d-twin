@@ -1,0 +1,75 @@
+INA226
+SBOS547C – JUNE 2011 – REVISED AUGUST 2026                                                                  www.ti.com
+
+                 Current Limit Detect Following                           Bus and Power Limit Detect
+               Every Shunt Voltage Conversion                          Following Every Bus Voltage Conversion
+
+
+
+
+             I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V      I  V
+
+
+           P     P     P     P     P     P     P     P     P     P     P     P     P     P     P     P
+
+
+                                                          Power Average
+
+
+
+                                                     Bus Voltage Average
+
+
+
+                                                      Shunt Voltage Average
+
+                                Figure 6-1. Power Calculation Scheme
+
+ In addition to the current and power accumulating after every sample, the shunt and bus voltage measurements
+ are also collected. After all of the samples have been measured and the corresponding current and power
+ calculations have been made, the accumulated average for each of these parameters is then loaded to the
+ corresponding output registers, where the average can then be read.
+
+ 6.3.1.2 Alert Pin
+
+The INA226 has a single Alert Limit Register (07h), that allows the Alert pin to be programmed to respond to a
+ single user-defined event or to a Conversion Ready notification if desired. The Mask/Enable Register allows the
+ user to select from one of the five available functions to monitor and/or set the Conversion Ready bit to control
+ the response of the Alert pin. Based on the function being monitored, the user then enters a value into the Alert
+ Limit Register to set the corresponding threshold value that asserts the Alert pin.
+
+The Alert pin allows for one of several available alert functions to be monitored to determine  if a user-defined
+ threshold has been exceeded. The five alert functions that can be monitored are:
+ •  Shunt Voltage Over-Limit (SOL)
+ •  Shunt Voltage Under-Limit (SUL)
+ •  Bus Voltage Over-Limit (BOL)
+ •  Bus Voltage Under-Limit (BUL)
+ •  Power Over-Limit (POL)
+
+The Alert pin is an open-drain output. This pin is asserted when the alert function selected in the Mask/Enable
+ Register exceeds the value programmed into the Alert Limit Register. Only one of these alert functions can be
+ enabled and monitored at a time.  If multiple alert functions are enabled, the selected function in the highest
+ significant bit position takes priority and responds to the Alert Limit Register value. For example,  if the Shunt
+ Voltage Over-Limit function and the Shunt Voltage Under-Limit function are both selected, the Alert pin asserts
+when the Shunt Voltage Register exceeds the value in the Alert Limit Register.
+
+The Conversion Ready state of the device can also be monitored at the Alert pin to inform the user when the
+ device has completed the previous conversion and is ready to begin a new conversion. Conversion Ready can
+be monitored at the Alert pin along with one of the alert functions. If an alert function and the Conversion Ready
+ are both enabled to be monitored at the Alert pin, after the Alert pin is asserted, the Mask/Enable Register
+must be read following the alert to determine the source of the alert. By reading the Conversion Ready Flag
+ (CVRF, bit 3), and the Alert Function Flag (AFF, bit 4) in the Mask/Enable Register, the source of the alert can
+be determined. If the Conversion Ready feature is not desired and the CNVR bit is not set, the Alert pin only
+ responds to an exceeded alert limit based on the alert function enabled.
+
+ If the alert function is not used, the Alert pin can be left floating without impacting the operation of the device.
+
+ Refer to Figure 6-1 to see the relative timing of when the value in the Alert Limit Register is compared to the
+ corresponding converted value. For example,  if the alert function that is enabled is Shunt Voltage Over-Limit
+ (SOL), following every shunt voltage conversion the value in the Alert Limit Register  is compared to the
+
+
+
+12    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                   Product Folder Links: INA226

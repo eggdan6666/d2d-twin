@@ -1,0 +1,60 @@
+                                                              LIS2DW12
+                                                                                                            Register description
+
+
+8.5     CTRL2 (21h)
+              Control register 2 (R/W)
+
+
+                                                 Table 32. Control register 2
+
+                         SOFT_                CS_PU_                                   I2C_
+             BOOT                                  0(1)                  BDU     IF_ADD_ INC                 SIM                        RESET                   DISC                              DISABLE
+
+                 1.  This bit must be set to 0 for the correct operation of the device.
+
+
+                             Boot enables retrieving the correct trimming parameters from nonvolatile memory into registers where
+                               trimming parameters are stored.
+           BOOT
+                         Once the operation is over, this bit automatically returns to 0.
+
+                                 Default value: 0 (0: disabled; 1: enabled)
+
+                                 Soft reset acts as reset for all control registers, then goes to 0.
+           SOFT_RESET
+                                 Default value: 0 (0: disabled; 1: enabled)
+
+                              Disconnect CS pull-up. Default value: 0
+
+            CS_PU_DISC   (0: pull-up connected to CS pin;
+
+                                    1: pull-up disconnected to CS pin)
+
+                              Block data update. Default value: 0
+           BDU
+                                      (0: continuous update; 1: output registers not updated until MSB and LSB read)
+
+                                Register address automatically incremented during multiple byte access with a serial interface (I²C or SPI).
+             IF_ADD_INC   Default value: 1
+                                      (0: disabled; 1: enabled)
+
+                               Disable I²C communication protocol. Default value: 0
+             I2C_DISABLE
+                                      (0: SPI and I²C interfaces enabled; 1: I²C mode disabled)
+
+                            SPI serial interface mode selection. Default value: 0
+             SIM
+                                      (0: 4-wire interface; 1: 3-wire interface)
+
+
+           The BDU bit is used to inhibit the update of the output registers until both upper and lower register parts are read.
+               In default mode (BDU = 0) the output register values are updated continuously. When the BDU is activated
+          (BDU = 1), the content of the output registers is not updated until both MSB and LSB are read which avoids
+             reading values related to different sample times.
+
+
+
+
+
+DS11811 - Rev 9                                                                                                       page 37/65

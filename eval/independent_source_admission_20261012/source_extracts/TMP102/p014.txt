@@ -1,0 +1,94 @@
+TMP102
+SBOS397I – AUGUST 2007 – REVISED JUNE 2024                                                                   www.ti.com
+
+
+                                   1                                        9    1                                        9
+                   SCL                                 …
+
+
+                 SDA         1    0    0    1    0  A1(1)  A0(1)  R/W        0    0    0    0    0    0    P1   P0   …
+
+                                  Start By                                 ACK By                                ACK By    Stop By
+                              Host                                               Device                                            Device      Host
+
+                                     Frame 1 Two-Wire Device Address Byte                     Frame 2 Pointer Register Byte
+
+
+                                   1                                        9    1                                         9
+                   SCL                                  …
+                   (Continued)
+
+
+
+
+                 SDA                                  1    0    0    1    0  A1(1)  A0(1)  R/W       D7   D6   D5   D4   D3   D2  D1  D0  …
+                   (Continued)
+
+                                  Start By                                  ACK By                           From          ACK By
+                             Host                                               Device                               Device              Host (2)
+
+                                     Frame 3 Two-Wire Device Address Byte                   Frame 4 Data Byte 1 Read Register
+
+
+                            1                                        9
+                   SCL
+                   (Continued)
+
+
+
+
+                 SDA
+                        D7  D6   D5   D4   D3   D2   D1   D0
+                   (Continued)
+
+                                             From             ACK By   Stop By
+                                                   Device                 Host (3)     Host
+
+                                    Frame 5 Data Byte 2 Read Register
+
+
+                         NOTE: (1) The value of A0 and A1 are determined by the ADD0 pin.
+                                              (2) Host should leave SDA high to terminate a single-byte read operation.
+                                              (3) Host should leave SDA high to terminate a two-byte read operation.
+
+                      Figure 6-3. Two-Wire Timing Diagram for Read Word Format
+
+
+
+                ALERT
+
+
+                                  1                                        9    1                                        9
+
+                  SCL
+
+
+
+                 SDA         0    0    0    1    1    0    0  R/W         1    0    0    1       A1(1)  A0(1)   Status
+
+                                Start By                                  ACK By                           From     NACK By  Stop By
+                            Host                                               Device                               Device         Host     Host
+
+                                Frame 1 SMBus ALERT Response Address Byte                  Frame 2 Device Address Byte
+
+                         NOTE: (1) The value of A0 and A1 are determined by the ADD0 pin.
+
+                             Figure 6-4. Timing Diagram for SMBus Alert
+
+ 6.4 Device Functional Modes
+ 6.4.1 Continuous-Conversion Mode
+
+The default mode of the TMP102 device is continuous conversion mode. During continuous-conversion mode,
+ the ADC performs continuous temperature conversions and stores each results to the temperature register,
+ overwriting the result from the previous conversion. The conversion rate bits, CR1 and CR0, configure the
+TMP102 device for conversion rates of 0.25 Hz, 1 Hz, 4 Hz, or 8 Hz. The default rate is 4 Hz. The TMP102
+ device has a typical conversion time of 10 ms. To achieve different conversion rates, the TMP102 device makes
+a conversion and then powers down to wait for the appropriate delay set by CR1 and CR0. Table 6-5 lists the
+ settings for CR1 and CR0.
+
+
+
+
+14    Submit Document Feedback                                                                   Copyright © 2024 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP102

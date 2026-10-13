@@ -1,0 +1,33 @@
+ADS1220
+SBAS501D – MAY 2013 – REVISED MAY 2026                                                                       www.ti.com
+
+ 8.3.11 System Monitor
+
+The device provides some means for monitoring the analog power supply and the external voltage reference.
+ To select a monitoring voltage, configure the internal multiplexer accordingly using the MUX[3:0] bits in the
+ configuration register. The device automatically bypasses the PGA and sets the gain to 1, irrespective of the
+ configuration register settings while the monitoring feature is used. The system monitor function only provides a
+ coarse result and is not meant to be a precision measurement.
+
+When measuring the analog power supply (MUX[3:0] = 1101b), the resulting conversion is approximately (AVDD
+– AVSS) / 4. The device uses the internal 2.048V reference for the measurement regardless of what reference
+ source is selected in the configuration register (VREF[1:0]).
+
+When monitoring one of the two possible external reference voltage sources (MUX[3:0] = 1100b), the result is
+ approximately (VREFPx – VREFNx) / 4. REFPx and REFNx denote the external reference input pair selected in the
+ configuration register (VREF[1:0]). The device automatically uses the internal reference for the measurement.
+
+ 8.3.12 Offset Calibration
+
+The internal multiplexer offers the option to short both PGA inputs (AINP and AINN) to mid-supply (AVDD +
+AVSS) / 2. This option can be used to measure and calibrate the device offset voltage by storing the result of
+ the shorted input voltage reading in a microcontroller and consequently subtracting the result from each following
+ reading. Take multiple readings with the inputs shorted and average the result to reduce the effect of noise.
+
+
+
+
+
+32    Submit Document Feedback                                                                   Copyright © 2026 Texas Instruments Incorporated
+
+                                                  Product Folder Links: ADS1220

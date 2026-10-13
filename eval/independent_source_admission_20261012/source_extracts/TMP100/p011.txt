@@ -1,0 +1,71 @@
+                                                                           TMP100, TMP101
+
+www.ti.com                                                                   SBOS231I –JANUARY 2002–REVISED NOVEMBER 2015
+
+7.3.2.4  Slave Mode Operations
+
+The TMP100 and TMP101 devices can operate as a slave receiver or slave transmitter.
+
+7.3.2.4.1  Slave Receiver Mode
+
+The first byte transmitted by the master is the slave address, with the R/W bit LOW. The TMP100 or TMP101
+devices then acknowledges reception of a valid address. The next byte transmitted by the master is the Pointer
+Register. The TMP100 or TMP101 devices then acknowledges reception of the Pointer Register byte. The next
+byte or bytes are written to the register addressed by the Pointer Register. The TMP100 and TMP101 devices
+acknowledge reception of each data byte. The master can terminate data transfer by generating a START or
+STOP condition.
+
+7.3.2.4.2  Slave Transmitter Mode
+
+The  first byte  is transmitted by the master and  is the slave address, with the R/W  bit HIGH. The slave
+acknowledges reception of a valid slave address. The next byte is transmitted by the slave and is the most
+significant byte of the register indicated by the Pointer Register. The master acknowledges reception of the data
+byte. The next byte transmitted by the slave is the least significant byte. The master acknowledges reception of
+the data byte. The master can terminate data transfer by generating a Not-Acknowledge on reception of any data
+byte, or generating a START or STOP condition.
+
+7.3.2.5 SMBus Alert Function
+
+The TMP101 device supports the SMBus Alert function. When the TMP101 device is operating in Interrupt Mode
+(TM = 1), the ALERT pin of the TMP101 device can be connected as an SMBus Alert signal. When a master
+senses that an ALERT condition is present on the ALERT line, the master sends an SMBus Alert command
+(00011001) on the bus. If the ALERT pin of the TMP101 device is active, the TMP101 device acknowledges the
+SMBus Alert command and responds by returning its slave address on the SDA line. The eighth bit (LSB) of the
+slave address byte indicates  if the temperature exceeding THIGH or falling below TLOW caused the ALERT
+condition. For POL = 0, this bit is LOW if the temperature is greater than or equal to THIGH. This bit is HIGH if
+the temperature is less than TLOW. The polarity of this bit is inverted if POL = 1; see Figure 9 for details of this
+sequence.
+
+If multiple devices on the bus respond to the SMBus Alert command, arbitration during the slave address portion
+of the SMBus alert command determine which device clears its ALERT status. If the TMP101 device wins the
+arbitration, its ALERT pin becomes inactive at the completion of the SMBus Alert command. If the TMP101 loses
+the arbitration, its ALERT pin remains active.
+
+The TMP100 device also responds to the SMBus ALERT command if its TM bit is set to 1. Because the device
+does not have an ALERT pin, the device must periodically poll the device by issuing an SMBus Alert command.
+If the TMP100 device generates an ALERT, the device acknowledges the SMBus Alert command and returns its
+slave address in the next byte.
+
+7.3.2.6  General Call
+The TMP100 and TMP101 devices respond to the I2C General Call address (0000000) if the eighth bit is 0. The
+device acknowledges the General Call address and responds to commands in the second byte. If the second
+byte is 00000100, the TMP100 and TMP101 devices latch the status of their address pins, but do not reset. If the
+second byte is 00000110, the TMP100 and TMP101 devices latch the status of their address pins and reset their
+internal registers.
+
+7.3.2.7  High-Speed Mode
+In order for the I2C bus to operate at frequencies above 400 kHz, the master device must issue an Hs-mode
+master code (00001XXX) as the first byte after a START condition to switch the bus to high-speed operation.
+The TMP100 and TMP101 devices do not acknowledge this byte as required by the I2C specification, but do
+switch their input  filters on SDA and SCL and their output  filters on SDA to operate in Hs-mode, allowing
+transfers at up to 2 MHz. After the Hs-mode master code is issued, the master transmits an I2C slave address to
+initiate a data transfer operation. The bus continues to operate in Hs-mode until a STOP condition occurs on the
+bus. Upon receiving the STOP condition, the TMP100 and TMP101 devices switch the input and output filter
+back to fast-mode operation.
+
+
+
+
+Copyright © 2002–2015, Texas Instruments Incorporated                                           Submit Documentation Feedback     11
+
+                                              Product Folder Links: TMP100 TMP101

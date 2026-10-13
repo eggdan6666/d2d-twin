@@ -1,0 +1,55 @@
+Bosch Sensortec | BMP280 Data sheet                                                          31 | 49
+
+
+
+
+
+                                                      Control byte                                Data byte                                    Data byte
+                                         Start RW         Register address (F6h)                   Data register - address F6h                      Data register - address F7h           Stop
+                          CSB                                                                                                     CSB
+                               =    1   1   1   1   0   1   1   0   bit15  bit14  bit13  bit12  bit11  bit10   bit9   bit8   bit7   bit6   bit5   bit4   bit3   bit2   bit1   bit0   =
+                                 0                                                                                                                               1
+
+                                              Figure 11: SPI multiple byte read
+       5.4  Interface parameter specification
+        5.4.1  General interface parameters
+       The general interface parameters are given in Table 26 below.
+
+                                             Table 26: interface parameters
+         Parameter            Symbol        Condition         Min      Typ     Max     Units
+          Input – low level             Vil_si     VDDIO=1.2V to 3.6V                              0.2 *     V
+                                                                                                VDDIO
+          Input – high level           Vih_si     VDDIO=1.2V to 3.6V        0.8 *                    V
+                                                                           VDDIO
+         Output – low level for I2C  Vol_SDI   VDDIO=1.62V, iol=3 mA                           0.2 *     V
+                                                                                                VDDIO
+         Output – low level for I2C  Vol_SDI   VDDIO=1.20V, iol=3 mA                         0.23 *    V
+                                   _1.2                                                       VDDIO
+         Output – low level        Vol_SD   VDDIO=1.62V, iol=1 mA                           0.2 *     V
+                      O                                                          VDDIO
+         Output – low level        Vol_SD   VDDIO=1.20V, iol=1 mA                         0.23 *    V
+                               O_1.2                                                     VDDIO
+         Output – high level       Voh       VDDIO=1.62V, ioh=1 mA    0.8 *                    V
+                                       (SDO, SDI)                VDDIO
+         Output – high level        Voh_1.2   VDDIO=1.2V, ioh=1 mA      0.6 *                    V
+                                       (SDO, SDI)                VDDIO
+          Pull-up resistor             Rpull      Internal pull-up           70      120      190     kΩ
+                                                resistance to VDDIO
+          I2C bus load capacitor    Cb      On SDI and SCK                           400     pF
+
+        5.4.2  I²C timings
+        For I²C timings, the following abbreviations are used:
+           •  “S&F mode” = standard and fast mode
+           •  “HS mode” = high speed mode
+           •  Cb = bus capacitance on SDA line
+
+          All other naming refers to I²C specification 2.1 (January 2000).
+
+       The I²C timing diagram is shown in
+        Figure 12. The corresponding values are given in Table 27
+
+
+
+
+
+             Modifications reserved | Data subject to change without notice                      Document number: BST-BMP280-DS001-26 Revision_1.26_102021
