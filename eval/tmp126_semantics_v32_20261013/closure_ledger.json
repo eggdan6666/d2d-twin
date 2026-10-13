@@ -1,0 +1,298 @@
+[
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.CRC_FLAG",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C11",
+      "C12"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "flags_and_live"
+      ],
+      "C2": [
+        "flags_and_live",
+        "source_scope_guards"
+      ],
+      "C11": [
+        "crc_discard",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.DATA_READY_FLAG",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C3"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "flags_and_live"
+      ],
+      "C2": [
+        "flags_and_live",
+        "source_scope_guards"
+      ],
+      "C3": [
+        "temp_cross_clear"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.SLEW_FLAG",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C9"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "flags_and_live"
+      ],
+      "C2": [
+        "flags_and_live",
+        "source_scope_guards"
+      ],
+      "C9": [
+        "flags_and_live",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.THIGH_FLAG",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C8",
+      "C10"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "flags_and_live"
+      ],
+      "C2": [
+        "flags_and_live",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "signed_hysteresis"
+      ],
+      "C10": [
+        "comparator_to_interrupt",
+        "signed_hysteresis"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.ALERT_STATUS.TLOW_FLAG",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C8",
+      "C10"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "flags_and_live"
+      ],
+      "C2": [
+        "flags_and_live",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "signed_hysteresis"
+      ],
+      "C10": [
+        "comparator_to_interrupt",
+        "signed_hysteresis"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.CONFIG.INT_COMP",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C4",
+      "C10"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C4": [
+        "comparator_to_interrupt"
+      ],
+      "C10": [
+        "comparator_to_interrupt",
+        "signed_hysteresis"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.CONFIG.ONE_SHOT",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C5",
+      "C6",
+      "C7",
+      "C8"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C5": [
+        "oneshot_average_restart"
+      ],
+      "C6": [
+        "abort_preserves_alerts"
+      ],
+      "C7": [
+        "oneshot_average_restart",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "signed_hysteresis"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "TMP126.TEMP_RESULT.TEMP",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C8",
+      "C11"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "temp_cross_clear"
+      ],
+      "C8": [
+        "signed_hysteresis"
+      ],
+      "C11": [
+        "crc_discard",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP126-C-REV-CLEAR",
+      "TMP126-C-REV-CRC",
+      "TMP126-C-REV-SLEW",
+      "TMP126-C-INT-COMP-CODE",
+      "TMP126-C-ENABLE-DEASSERT",
+      "TMP126-C-TLOW-NAME"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared event abstraction and explicit candidate interpretations; no physical/source conflict resolution"
+  }
+]

@@ -1,0 +1,2320 @@
+{
+  "flags_and_live": {
+    "status": "PASS",
+    "check_count": 2,
+    "checks": [
+      {
+        "clause": "five nonzero RC flags and high/slew live states returned before clear",
+        "actual": 247,
+        "expected": 247
+      },
+      {
+        "clause": "only RC0xA7 cleared; live0x58 preserved",
+        "actual": 80,
+        "expected": 80
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 0,
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 768
+        },
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_positive_slew_changed",
+        "payload": {
+          "exceeded": true
+        },
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 384,
+          "success": false
+        },
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 247,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "five_flags"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "five_flags"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "temp_cross_clear": {
+    "status": "PASS",
+    "check_count": 3,
+    "checks": [
+      {
+        "clause": "signed14 result returned",
+        "actual": 768,
+        "expected": 768
+      },
+      {
+        "clause": "TEMP clears only DR; other flags/live survive",
+        "actual": 246,
+        "expected": 246
+      },
+      {
+        "clause": "qualified status read clears remaining RC",
+        "actual": 80,
+        "expected": 80
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 0,
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 768
+        },
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_positive_slew_changed",
+        "payload": {
+          "exceeded": true
+        },
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 384,
+          "success": false
+        },
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 768,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 246,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "cross_clear"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "cross_clear"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "comparator_to_interrupt": {
+    "status": "PASS",
+    "check_count": 5,
+    "checks": [
+      {
+        "clause": "enabled high comparator uses live state",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "preclear comparator flag history",
+        "actual": 247,
+        "expected": 247
+      },
+      {
+        "clause": "clearing flags preserves comparator live alert",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "1to0 clears whole status including live",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "1to0 deasserts logical ALERT",
+        "actual": 1,
+        "expected": 1
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 32,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ALERT_ENABLE",
+        "value": 4,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 0,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 768
+        },
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_positive_slew_changed",
+        "payload": {
+          "exceeded": true
+        },
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 384,
+          "success": false
+        },
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 247,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 0,
+        "instance": "candidate_encoding"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "candidate_encoding"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "oneshot_average_restart": {
+    "status": "PASS",
+    "check_count": 31,
+    "checks": [
+      {
+        "clause": "ONE_SHOT reads zero during active conversion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot completion sets MODEshutdown",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": "shutdown",
+        "expected": "shutdown"
+      },
+      {
+        "clause": "completion sets DR",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "distinct signed sample exact-grid average result",
+        "actual": 512,
+        "expected": 512
+      },
+      {
+        "clause": "noncontinuous slew default zero",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "ONE_SHOT reads zero during active conversion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "retrigger discards partial average",
+        "actual": [],
+        "expected": []
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "running",
+        "expected": "running"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "complete after required sample count",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "ONE_SHOT reads zero through completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot completion sets MODEshutdown",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": "shutdown",
+        "expected": "shutdown"
+      },
+      {
+        "clause": "completion sets DR",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "distinct signed sample exact-grid average result",
+        "actual": 65532,
+        "expected": 65532
+      },
+      {
+        "clause": "noncontinuous slew default zero",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 24,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 512,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SLEW_RESULT",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "single"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 152,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 256
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 256
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 256
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 152,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65528
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65528
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65528
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65528
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 65532,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SLEW_RESULT",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "average8"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "abort_preserves_alerts": {
+    "status": "PASS",
+    "check_count": 6,
+    "checks": [
+      {
+        "clause": "MODE1 aborts partial average",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "aborted samples discarded",
+        "actual": [],
+        "expected": []
+      },
+      {
+        "clause": "abort retains last completed temperature",
+        "actual": 768,
+        "expected": 768
+      },
+      {
+        "clause": "shutdown retains all alert history",
+        "actual": 246,
+        "expected": 246
+      },
+      {
+        "clause": "shutdown slew default",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "no completion after abort",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 0,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 768
+        },
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_positive_slew_changed",
+        "payload": {
+          "exceeded": true
+        },
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 384,
+          "success": false
+        },
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 128,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 768,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 256
+        },
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 136,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 768,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 246,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "abort"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SLEW_RESULT",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "abort"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "signed_hysteresis": {
+    "status": "PASS",
+    "check_count": 16,
+    "checks": [
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 512,
+        "expected": 512
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 256,
+        "expected": 256
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 192,
+        "expected": 192
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 188,
+        "expected": 188
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 10,
+        "expected": 10
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 65024,
+        "expected": 65024
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 65280,
+        "expected": 65280
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 65344,
+        "expected": 65344
+      },
+      {
+        "clause": "signed crossing, strict hysteresis boundary and re-arm",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "signed14 temperature word preserved",
+        "actual": 65348,
+        "expected": 65348
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 257,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 21,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 512,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 256
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 17,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 256,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 192
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 17,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 192,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 188
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 5,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 188,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 11,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 65024,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65280
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 9,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 65280,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65344
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 9,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 65344,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65348
+        },
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 3,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_RESULT",
+        "value": 65348,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "low_limit_candidate"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "crc_discard": {
+    "status": "PASS",
+    "check_count": 4,
+    "checks": [
+      {
+        "clause": "qualified failed CRC discards settings",
+        "actual": 256,
+        "expected": 256
+      },
+      {
+        "clause": "failed CRC flag set",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "qualified successful write applied",
+        "actual": 512,
+        "expected": 512
+      },
+      {
+        "clause": "latest valid CRC clears error",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 512,
+          "success": false
+        },
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 512,
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 512,
+          "success": true
+        },
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "THIGH_LIMIT",
+        "value": 512,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "qualified_event_not_crc_algorithm"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "qualified_event_not_crc_algorithm"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "source_scope_guards": {
+    "status": "PASS",
+    "check_count": 8,
+    "checks": [
+      {
+        "clause": "conflicted auto-increment clear unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "conflicted burst clear unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "repeated TEMP body restriction unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "conflicted CRC CONFIG unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "numerical slew outside scope",
+        "outside_contract": true
+      },
+      {
+        "clause": "reverse INT_COMP with history unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "active alert disable conflict unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "fractional mean rounding unscored",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 0,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 768
+        },
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_positive_slew_changed",
+        "payload": {
+          "exceeded": true
+        },
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 384,
+          "success": false
+        },
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 152,
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 0
+        },
+        "instance": "rounding_guard"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "nominal_period_table": {
+    "status": "PASS",
+    "check_count": 8,
+    "checks": [
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 6,
+        "expected": 6
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 31.25,
+        "expected": 31.25
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 62.5,
+        "expected": 62.5
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 125,
+        "expected": 125
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 250,
+        "expected": 250
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 500,
+        "expected": 500
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 1000,
+        "expected": 1000
+      },
+      {
+        "clause": "nominal source table only; not measured timing",
+        "actual": 2000,
+        "expected": 2000
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 0,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 2,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 3,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 3,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 4,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 5,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 5,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 6,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 6,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 7,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "value": 7,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "nominal_metadata"
+      }
+    ],
+    "execution_kind": "SOURCE_TABLE_METADATA"
+  },
+  "exploratory_burst": {
+    "status": "PASS",
+    "check_count": 2,
+    "checks": [
+      {
+        "clause": "exploratory body policy preserves flags",
+        "actual": 247,
+        "expected": 247
+      },
+      {
+        "clause": "exploratory followed by qualified clear",
+        "actual": 247,
+        "expected": 247
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "write",
+        "register": "THIGH_LIMIT",
+        "value": 256,
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "write",
+        "register": "TLOW_LIMIT",
+        "value": 65280,
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "write",
+        "register": "HYSTERESIS",
+        "value": 0,
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 512
+        },
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 65024
+        },
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "conversion_sample_completed",
+        "payload": {
+          "temperature_word": 768
+        },
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "qualified_positive_slew_changed",
+        "payload": {
+          "exceeded": true
+        },
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "event",
+        "name": "qualified_crc_write_completed",
+        "payload": {
+          "register": "THIGH_LIMIT",
+          "value": 384,
+          "success": false
+        },
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 247,
+        "transaction": "burst",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "disputed_body_policy"
+      },
+      {
+        "chip": "TMP126",
+        "profile": "body_candidate",
+        "op": "read",
+        "register": "ALERT_STATUS",
+        "value": 247,
+        "transaction": "single",
+        "auto_increment": false,
+        "word_count": 1,
+        "instance": "disputed_body_policy"
+      }
+    ],
+    "execution_kind": "EXPLORATORY_BODY_POLICY"
+  }
+}

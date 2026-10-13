@@ -1,0 +1,111 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "tmp126-v32/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/TI/TMP126.pdf SNIS209C printed pp2,14-17,21,26-32",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "eval/tmp126_semantics_v32_20261013/source_review.json",
+    "eval/tmp126_semantics_v32_20261013/tmp126.py",
+    "eval/tmp126_semantics_v32_20261013/scenarios.py",
+    "eval/tmp126_semantics_v32_20261013/admission.py",
+    "eval/tmp126_semantics_v32_20261013/scenario_execution.json",
+    "eval/tmp126_semantics_v32_20261013/closure_ledger.json",
+    "eval/tmp126_semantics_v32_20261013/admission_gate.json",
+    "eval/tmp126_semantics_v32_20261013/execution_manifest.json",
+    "_setup/run_tmp126_v32.py"
+  ],
+  "outputs": [
+    "code_review.md",
+    "code_review.json",
+    "code_acceptance_checklist.md",
+    "tests/test_independent_tmp126.py",
+    "tests/record_independent_execution.py",
+    "tests/package_code_review.py",
+    "independent_code_execution.json",
+    "independent_code_execution.log",
+    "independent_code_results.xml"
+  ],
+  "evidence_status": [
+    "VERIFIED_SOURCE: directly read original SNIS209C pp2,14-17,21,26-32 and verified PDF SHA256.",
+    "EXECUTED_LOCAL: 121 independent tests passed; 13 synthetic runtime faults detected; 28 corrupted execution/source variants rejected.",
+    "EXECUTED_LOCAL: ten saved scenarios exactly replay; eight bounded ledger rows reconstruct exactly; all recorded input/output SHA256 verified.",
+    "VERIFIED_USER_MATERIAL: preservation record states old12563 files/prior1390 archived payloads unchanged; independently checked the frozen harness MD5.",
+    "NOT_EXECUTED: physical SPI frames, actual CRC computation, electrical timing, analog measurements, new model generation/rescoring or global production admission."
+  ],
+  "assumptions": [
+    "Completed-conversion and qualified CRC/slew events are declared atomic digital inputs, not physical measurement or bus proof.",
+    "Eight-sample averaging is tested only for exact integral signed14 code means; unknown rounding is excluded atomically.",
+    "Common clear proof is single-word/no-increment; disputed body_candidate burst behavior is explicitly exploratory.",
+    "Int_Comp table encoding and low-limit interpretation remain declared candidate decisions with unresolved source contradictions.",
+    "Deterministic replay establishes local reproducibility with trusted code, not remote attestation."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "121/121 local independent pytest cases, zero failure/error/skip.",
+    "Nonzero0xA7 flag return-before-clear and0x58 live-status preservation distinguish incorrect readclear implementations.",
+    "TEMP clears DR only; comparator1tointerrupt0 clears nonzero whole status and logical ALERT.",
+    "AVG8, automatic MODE1, readzeroONE_SHOT, restart/discard, shutdownabort and exactsignedmean checked.",
+    "Invalid words/events/register identities and ambiguous transactions reject without state mutation.",
+    "13 source-derived oracle/fault pairs each pass reference and reject deliberate synthetic implementation fault.",
+    "28 false/corrupt execution/source variants rejected; eight missing required scenarios yield PARTIAL, never promotion.",
+    "Ten saved scenarios/85 checks include8 nominalmetadata and2 exploratory checks, not85 independent physical measurements.",
+    "Eight original REPAIR fields/eight dimensions remain whole_dimension_closed=false and whole_field_promoted=false.",
+    "Execution input/output hashes match current bytes; frozen harness MD5 is8cf0854d4779467bc8e472ee4fb97023."
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "TMP126_SOURCE_SIX_CONFLICTS",
+      "type": "SOURCE_INTERNAL",
+      "claim": "Burstclear, CRC_CONFIG, negative slew, comparator encoding, enable-disable response and low-limit naming remain unresolved.",
+      "source_or_locator": "source_review.json six conflicts; SNIS209C pp2,13,16-17,26-30",
+      "resolution": "Retain explicit common/exploratory profiles and exclusions; no official erratum or full field certification."
+    },
+    {
+      "conflict_id": "GLOBAL_PRODUCTION_ADMISSION_OPEN",
+      "type": "SCOPE",
+      "claim": "These eight bounded TMP126 obligations do not admit all20chips/572fields.",
+      "source_or_locator": "admission_gate.json and original independent source signoff",
+      "resolution": "production_generation_ready=false; M4 stage remains under orchestrator authority."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Orchestrator verifies exact accepted bytes and scope, then handles HDC2021 eight REPAIR fields while retaining global generation block.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "review_date": "2026-10-13",
+  "readiness": "CONDITIONALLY_READY_FOR_DECLARED_TMP126_SCOPE_ONLY",
+  "paper_submission_readiness": "NOT_READY",
+  "bounded_implementation_recommendation": "PASS_CANDIDATE",
+  "independent_test_counts": {
+    "tests": 121,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 121
+  },
+  "synthetic_runtime_faults": 13,
+  "proof_corruption_rejections": 28,
+  "reviewed_input_sha256": {
+    "eval/tmp126_semantics_v32_20261013/tmp126.py": "3e5f68c2018b88c2ed7a60fca588388f2da391554c7dc90052907d601b9b40ba",
+    "eval/tmp126_semantics_v32_20261013/scenarios.py": "8fff2800857eac5394e35eb74236c68f854375760cb79ee39dd134919efbefa1",
+    "eval/tmp126_semantics_v32_20261013/admission.py": "10a1cf0150f039190e99db84b740f76f1ca859f14b67b1470174e5683a1cbce3",
+    "eval/tmp126_semantics_v32_20261013/source_review.json": "b5f54489179c7d5c5560aed3eb77d20b8dff67dc8171411ec9cb7fa4570b9c9d",
+    "corpus/data/raw_pdf/TI/TMP126.pdf": "6d9bab59b2814422d7bc1dff8fbd203df26e92ee40075b613c1f1fbb59eddfef",
+    "_setup/run_tmp126_v32.py": "1e2d84b652841c055ac055d05285dcf3095c7b48ab8f0fbd1bdfc09f67c0dc50",
+    "eval/tmp126_semantics_v32_20261013/scenario_execution.json": "4ded3e5d972c954838616c9c18b7d39e3574fa0990db72bba6941d1da3edce7c",
+    "eval/tmp126_semantics_v32_20261013/closure_ledger.json": "75a2c72b8e753f7e93c296dd03403fa423c0cb65640e34080127b447aa940497",
+    "eval/tmp126_semantics_v32_20261013/admission_gate.json": "b46c70804c3b230727b88130b45b38815133b05540a19dd5a177dda9043fbd83",
+    "eval/tmp126_semantics_v32_20261013/preservation_verification.json": "0973c1d042031cf697c67e9b5f60e4b66129f5085dbcb8a7cb248c88a76f172d",
+    "eval/tmp126_semantics_v32_20261013/tests/test_independent_tmp126.py": "739c1f49588aae0203a80746b62bc0dbf80b4d213c465b3789a8253d56c387a1",
+    "eval/tmp126_semantics_v32_20261013/tests/record_independent_execution.py": "6bfb53e9febed69438b7454c87806ad7291cbfcfcd22280722d1224141b380e8",
+    "eval/tmp126_semantics_v32_20261013/execution_manifest.json": "110ea560c2533f692d1724c29a1ac51764d4065c1d58d8e5bb192f61d6ddc20d",
+    "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+    "eval/semantic_protocol_v3_20261012/runtime.py": "ddeb772ee87bbfe126fe4bf379ef3eb824072a2ff2083f39787a7ccea1399b9c"
+  }
+}

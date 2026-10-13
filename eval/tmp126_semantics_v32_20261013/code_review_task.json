@@ -1,0 +1,38 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "tmp126-v32/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "TMP126 eight source REPAIR field bounded semantics and admission",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/tmp117_semantics_v31_20261013",
+    "corpus/data/raw_pdf/TI/TMP126.pdf"
+  ],
+  "expected_outputs": [
+    "code_review.md",
+    "code_review.json"
+  ],
+  "evidence_boundaries": [
+    "Original PDF facts only",
+    "Retain unknown/physical exclusions",
+    "No old artifacts or model results modified"
+  ],
+  "acceptance_checks": [
+    "Nonzero preclear/postclear",
+    "Transaction and mode conditions",
+    "AVG/one-shot completion",
+    "Proof identity and replay"
+  ],
+  "known_missing_items": [
+    "No real SPI/CRC/analog stimulus"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}
