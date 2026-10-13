@@ -1,0 +1,383 @@
+[
+  {
+    "inventory_field_id": "HDC2021.DEVICE_CONFIG.INT_MODE",
+    "dimension": "legal_encoding",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C3",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C3": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C9": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C3": [
+        "mode_encoding",
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C9": [
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "pin_priority",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.DEVICE_CONFIG.SOFT_RES",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C5",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C5": "VERIFIED_SOURCE",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C5": [
+        "reset_completion",
+        "nominal_period_table"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.MEAS_CONFIG.MEAS_TRIG",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C4",
+      "C6",
+      "C7",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE",
+      "C7": "VERIFIED_SOURCE",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C4": [
+        "trigger_boundary"
+      ],
+      "C6": [
+        "periodic_series",
+        "nominal_period_table"
+      ],
+      "C7": [
+        "channel_and_resolution"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.DRDY_STATUS",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C4",
+      "C9"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C2": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C9": "VERIFIED_SOURCE_WITH_CONFLICT"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "latched_flags"
+      ],
+      "C2": [
+        "dr_cross_clear"
+      ],
+      "C4": [
+        "trigger_boundary"
+      ],
+      "C9": [
+        "latched_flags",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.HH_STATUS",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C8",
+      "C9",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C8": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C9": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "latched_flags"
+      ],
+      "C3": [
+        "mode_encoding",
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "threshold_candidate_comparisons"
+      ],
+      "C9": [
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.HL_STATUS",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C8",
+      "C9",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C8": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C9": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "latched_flags"
+      ],
+      "C3": [
+        "mode_encoding",
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "threshold_candidate_comparisons"
+      ],
+      "C9": [
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.TH_STATUS",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C8",
+      "C9",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C8": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C9": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "latched_flags"
+      ],
+      "C3": [
+        "mode_encoding",
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "threshold_candidate_comparisons"
+      ],
+      "C9": [
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  },
+  {
+    "inventory_field_id": "HDC2021.STATUS.TL_STATUS",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C8",
+      "C9",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C8": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C9": "VERIFIED_SOURCE_WITH_CONFLICT",
+      "C12": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "latched_flags"
+      ],
+      "C3": [
+        "mode_encoding",
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C8": [
+        "threshold_candidate_comparisons"
+      ],
+      "C9": [
+        "latched_flags",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "HDC2021-C-COMPARATOR-CLEAR",
+      "HDC2021-C-ENABLE-STATUS",
+      "HDC2021-C-TLOW-ADDRESS",
+      "HDC2021-C-HHIGH-CONDITION",
+      "HDC2021-C-HLOW-CONDITION",
+      "HDC2021-C-DR-PIN-COMPOSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Common mode0 readclear with explicit table/figure candidate trigger interpretations; comparator branch exploratory; no physical/source conflict resolution"
+  }
+]

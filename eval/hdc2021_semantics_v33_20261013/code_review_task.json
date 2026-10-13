@@ -1,0 +1,39 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "hdc2021-v33/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "HDC2021 eight source REPAIR field bounded semantics and admission",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/semantic_protocol_v3_20261012",
+    "corpus/data/raw_pdf/TI/HDC2021.pdf"
+  ],
+  "expected_outputs": [
+    "code_review.md",
+    "code_review.json"
+  ],
+  "evidence_boundaries": [
+    "Original PDF facts only",
+    "Retain unknown/physical exclusions",
+    "No old artifacts or model results modified"
+  ],
+  "acceptance_checks": [
+    "Nonzero status read-clear with correct mode/read context",
+    "MEAS_TRIG start versus completion",
+    "Soft-reset event boundary",
+    "Auto measurement and channel conditions",
+    "Source identity and exact evidence replay"
+  ],
+  "known_missing_items": [
+    "No physical I2C/analog/humidity/elapsed-time certification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

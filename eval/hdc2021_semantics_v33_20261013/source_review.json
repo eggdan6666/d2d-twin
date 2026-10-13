@@ -1,0 +1,66 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "hdc2021-v33/source_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/TI/HDC2021.pdf full accessible 48-page primary PDF; functional specification printed pp. 1-38; packaging/addenda PDF pp. 39-48",
+    "eval/independent_source_admission_20261012/field_evidence.json eight HDC2021 REPAIR fields",
+    "eval/hdc2021_semantics_v33_20261013/source_review_task.json"
+  ],
+  "outputs": ["eval/hdc2021_semantics_v33_20261013/source_review.md", "eval/hdc2021_semantics_v33_20261013/source_review.json"],
+  "evidence_status": ["VERIFIED_SOURCE: original local manufacturer PDF identity and exact page/table/figure locators", "EXECUTED_LOCAL: SHA-256, full PDF text extraction and seven critical rendered page inspections", "NOT_EXECUTED: runtime implementation, independent regression and physical I2C tests are outside this source review"],
+  "assumptions": ["Register-level logical event adapter, not a physical I2C implementation", "Mode0 all five interrupt enables set avoids the enable/status contradiction", "Common read-clear scope uses positive nonzero status before read and prevents new conversion between reads", "Figure/table-supported conflicting threshold/comparator branches are explicit candidate interpretations", "Externally injected completed data are logical stimuli, not calibrated analog measurements"],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": ["Source SHA-256 exactly matches all eight frozen field evidence records", "Eight REPAIR fields map to eight REPAIR dimensions: one legal_encoding, two trigger_completion, five read_clear", "Visually inspected printed pages 7,14,16,17,23,30,31", "Read entire functional specification and retained all six bounded source conflicts/ambiguities", "Distinguished trigger write, measurement start and conversion complete", "Distinguished digital interrupt latch from analog humidity hysteresis", "No original IR, frozen harness or historic results modified"],
+  "conflicts": [
+    {"conflict_id": "HDC2021-C-COMPARATOR-CLEAR", "type": "SOURCE_INTERNAL", "claim": "Threshold status read-clear in comparator mode", "locators": ["p.23 section7.6.5", "pp.14-17 sections7.3.5.2.1-4 Figures7-3..7-6", "p.30 Table7-36"], "competing": ["Status descriptions state read-clear without an explicit mode qualifier", "Mode1 prose says current result and figures show following threshold rather than latch"], "resolution": "UNRESOLVED; common mode0 readclear; mode1 nonclearing-current-result is figure_candidate only, no universal manufacturer claim"},
+    {"conflict_id": "HDC2021-C-ENABLE-STATUS", "type": "SOURCE_INTERNAL", "claim": "Status generation when interrupt enable is zero", "locators": ["pp.13-17 sections7.3.5.1-2", "p.25 section7.6.8"], "competing": ["Feature prose describes status assertion when corresponding ENABLE is enabled", "Interrupt Enable prose states Status content is unaffected by this register"], "resolution": "UNRESOLVED; common positive scenario all relevant enables1; disabled-status behavior candidate or excluded"},
+    {"conflict_id": "HDC2021-C-TLOW-ADDRESS", "type": "SOURCE_INTERNAL", "claim": "Temperature-low threshold address", "locators": ["p.15 section7.3.5.2.2", "p.20 Table7-6", "p.28 Tables7-27/7-28"], "competing": ["Feature prose names0x0C", "Register map and threshold table name0x0A;0x0C is humidity-low"], "resolution": "UNRESOLVED manufacturer text; register-table mapping0x0A is explicit table_candidate, not an official erratum"},
+    {"conflict_id": "HDC2021-C-HHIGH-CONDITION", "type": "SOURCE_INTERNAL", "claim": "Humidity-high trigger channel and comparison", "locators": ["p.16 section7.3.5.2.3 Figure7-5", "p.29 Tables7-33/7-34 Equation10", "p.23 Table7-16"], "competing": ["Prose says temperature under humidity-high threshold/current temperature result", "Humidity-high name, humidity equation and Figure7-5 show humidity above high threshold"], "resolution": "UNRESOLVED; humidity-above-high is explicit figure/table_candidate; no silent typo correction"},
+    {"conflict_id": "HDC2021-C-HLOW-CONDITION", "type": "SOURCE_INTERNAL", "claim": "Humidity-low threshold channel/name/address", "locators": ["p.17 section7.3.5.2.4 Figure7-6", "p.20 Table7-6", "p.29 Tables7-31/7-32 Equation9"], "competing": ["Prose says temperature under Humidity Threshold HIGH0x0E", "Figure7-6 and tables say humidity below LOW0x0C;0x0E is Device Configuration"], "resolution": "UNRESOLVED; humidity-low0x0C candidate follows figure/tables, not an official erratum"},
+    {"conflict_id": "HDC2021-C-DR-PIN-COMPOSITION", "type": "SPECIFICATION_AMBIGUITY", "claim": "Pin composition when DR and a threshold interrupt are jointly enabled", "locators": ["p.12 section7.3.5", "p.13 section7.3.5.1", "pp.14-17 Figures7-3..7-6"], "competing": ["Pin is explicitly notOR and threshold winner priorityTH>TL>HH>HL", "DR is described as same priority as winner but joint-source selection/composition truth table is absent"], "resolution": "UNRESOLVED; no combined DR+threshold pin oracle; qualify isolated DR or isolated threshold pin cases"}
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Implement and independently replay the eight bounded clauses, retaining source conflicts and excluded hardware/timing branches before input admission.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "source": {
+    "path": "corpus/data/raw_pdf/TI/HDC2021.pdf",
+    "manual_version": "SNAS773A revised June2020; packaging addendum9-Nov2025 and materials15-Jan2026",
+    "sha256": "bbe3256eb811eb000f871eb3740449bd9ad2adf60db91d859ac433131d6d0a27",
+    "pdf_pages": 48,
+    "reviewed_printed_pages": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38],
+    "visual_pages": [7,14,16,17,23,30,31]
+  },
+  "claims": [
+    {"id": "C1", "class": "VERIFIED_SOURCE", "locators": ["p.23 Tables7-15/7-16"], "rule": "STATUS DRbit7,THbit6,TLbit5,HHbit4,HLbit3,mask0xF8; reservedbits2:0 reset0"},
+    {"id": "C2", "class": "VERIFIED_SOURCE", "locators": ["p.23 section7.6.5"], "rule": "DR clears on any one read of registers0x00,01,02,03,04 and onRESET; data read must not indiscriminately clear threshold bits"},
+    {"id": "C3", "class": "VERIFIED_SOURCE_WITH_CONFLICT", "locators": ["pp.14-17 Figures7-3..7-6", "p.23 section7.6.5", "p.30 Table7-36"], "rule": "INT_MODE0 clear-on-read and1 comparator are explicit encodings; mode0 threshold latches until STATUSread even after return inside; mode1 current-result/read-preservation only explicit figure_candidate"},
+    {"id": "C4", "class": "VERIFIED_SOURCE", "locators": ["p.31 Table7-38", "p.18 section7.4.1", "p.11 section7.3.3"], "rule": "MEAS_TRIG write1 starts one measurement in CC0 or continuous measurements in CCnonzero; self-clears atmeasurementSTART, notatcompletion; completion updates selectedchannel data and returns sleep; DR logical completion follows, with enable scope retained"},
+    {"id": "C5", "class": "VERIFIED_SOURCE", "locators": ["p.30 Table7-36", "p.7 section6.6", "p.20 Table7-6", "p.23 section7.6.5"], "rule": "SOFT_RES1 triggersRESET and bitselfclearsAFTERRESET; tPOR Power-On orSoftwareReset max3.5ms is manufacturerdesign/characterization metadata; completed reset uses documenteddefault boundary; no guaranteed readbackduringreset or measureddeadline"},
+    {"id": "C6", "class": "VERIFIED_SOURCE", "locators": ["p.30 Table7-36", "p.11 section7.3.3", "p.31 Table7-38"], "rule": "CC0 oneshot,CC1..7 nominalperiod120,60,10,5,1,0.5,0.2seconds; MEAS_TRIG requiredto start continuous series; event-driven scheduling is abstraction notelapsedtime proof"},
+    {"id": "C7", "class": "VERIFIED_SOURCE", "locators": ["pp.21-22 Tables7-7..7-14 Equations1..4", "p.31 Table7-38"], "rule": "Data are unsigned16 splitlow/high bytes; Temperature=165*word/65536-40C andRH=100*word/65536; MEAS_CONF0both/1temperatureonly;2,3NA; TACC/HACC0,1,2 are14/11/9bitaccuracy and3NA; actual low-bit alignment/truncation not specified"},
+    {"id": "C8", "class": "VERIFIED_SOURCE_WITH_CONFLICT", "locators": ["pp.28-29 Tables7-27..7-34 Equations7..10", "pp.14-17 Figures7-3..7-6"], "rule": "Thresholds are unsigned8; sameTemp/RHscaled formulas use denominator256; source-supported candidate comparewordagainstthreshold<<8, strictseparatedstimuli; conflictingTLow/HHigh/HLowprose remains unresolved"},
+    {"id": "C9", "class": "VERIFIED_SOURCE_WITH_CONFLICT", "locators": ["pp.13-17", "p.25 section7.6.8"], "rule": "Statusset whenenabled1 is common intersection; disabledgeneration notunqualified; mode0positive nonzeroandreturninside latch testedwithallenabled avoidsdisabledstatusambiguity"},
+    {"id": "C10", "class": "VERIFIED_SOURCE_WITH_AMBIGUITY", "locators": ["p.12 section7.3.5", "p.30 Table7-36", "p.13 Figures7-1/7-2"], "rule": "Threshold pinwinnerTH>TL>HH>HL, explicitlynotOR; pin disabled=HighZ andpolarity0low/1high; isolateDRonlymode0 orsinglethresholdsource; noDRpluswinnercompositionoracle"},
+    {"id": "C11", "class": "VERIFIED_SOURCE", "locators": ["pp.18-19 section7.5.3 Tables7-2..7-5", "p.20 Table7-6"], "rule": "Registers accessed throughI2Cpointer; multibyteincrementautomatic; byteMSBfirst; physicalACK/NACKandwaveforms requireinterfaceproof beyond logical register adapter"},
+    {"id": "C12", "class": "ABSTRACTION_ASSUMPTION", "locators": ["Task evidence boundary", "pp.5-6 RHHYSandfootnote8", "p.31 Table7-38"], "rule": "No invented digitalhysteresis: humidityRHHYS isanalogresponse; excludeequalityboundary, activeconfig/modeswitch, midconversionretrigger, resetpendingreads, exactresolutionLSBs, offsets/heaterphysics/calibration; logicalevents nothardwarecertification"}
+  ],
+  "field_closure_advice": [
+    {"field": "DEVICE_CONFIG.INT_MODE", "claims": ["C3","C9","C10","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["quiescent0/1encoding readback", "mode0 latchpersists afterreturninside", "mode0STATUSreadclears nonzero", "mode1figure_candidate followslatestvalue butdoesnotclaimunconditionalsourceclosure", "excludeactivehistorymodeswitch"]},
+    {"field": "DEVICE_CONFIG.SOFT_RES", "claims": ["C5","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["dirty documentedregisters beforetrigger", "triggerandcompletion distinctlogicalevents", "noadmittedreadbackduringreset", "completedreset documenteddefaults andSOFT_RES0", "resetclearsSTATUS", "3.5msmetadata notexecutedtimingproof"]},
+    {"field": "MEAS_CONFIG.MEAS_TRIG", "claims": ["C4","C6","C7","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["trigger/startselfclearwithoutDRcompletion", "completedselectedchannels updateandDR", "temp-only preserveshumidity", "continuousseries armedwithtrigger", "noautomaticwallclockproof"]},
+    {"field": "STATUS.DRDY_STATUS", "claims": ["C1","C2","C4","C9"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["freshnonzeroDR beforeeachindependentread0x00..04", "returnpreclearvalue", "subsequentSTATUSDR0withnoconversionintervening", "eachdatareadpreservesotherthresholdbits", "nondatareadnotaclearscope"]},
+    {"field": "STATUS.HH_STATUS", "claims": ["C1","C3","C8","C9","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["qualifiednonzerohighhumidityflagmode0", "returninsidekeepslatch", "STATUSreadreturnpreclearandclear", "datareadpreservesHH", "figure_candidate labeledsourceconflict"]},
+    {"field": "STATUS.HL_STATUS", "claims": ["C1","C3","C8","C9","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["qualifiednonzerolowhumidityflagmode0", "returninsidekeepslatch", "STATUSreadreturnpreclearandclear", "datareadpreservesHL", "0x0Ccandidateaddresssourceconflictretained"]},
+    {"field": "STATUS.TH_STATUS", "claims": ["C1","C3","C8","C9","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["nonzerohightempflagmode0", "returninsidekeepslatch", "STATUSreadreturnpreclearandclear", "datareadpreservesTH", "newcontrolledconversionrearmsafterclear"]},
+    {"field": "STATUS.TL_STATUS", "claims": ["C1","C3","C8","C9","C12"], "status": "REPAIR_PENDING_EXECUTION", "checks": ["qualifiednonzerolowtempflagmode0", "returninsidekeepslatch", "STATUSreadreturnpreclearandclear", "datareadpreservesTL", "0x0Acandidateaddresssourceconflictretained"]}
+  ],
+  "denominator": {"repair_fields": 8, "repair_dimensions": 8, "dimension_counts": {"legal_encoding": 1, "trigger_completion": 2, "read_clear": 5}, "whole_field_promotions_authorized": 0},
+  "excluded_claims": ["Physical I2C transaction/electrical proof", "Actual conversion duration/deadline/calibration", "Actual reset deadline", "Guaranteed pending reset bus reads", "Resolution-dependent outputLSBalignment/rounding", "Disabledinterruptstatus generation asunconflictedsourcefact", "JointDRthresholdpincomposition", "ActiveINT_MODEswitchclearbehavior", "Unspecifiedretriggers/midflightCCchanges", "Thresholdequalityandprogrammablehysteresis"]
+}

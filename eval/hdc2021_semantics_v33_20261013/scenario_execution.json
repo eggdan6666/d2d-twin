@@ -1,0 +1,7202 @@
+{
+  "latched_flags": {
+    "status": "PASS",
+    "check_count": 3,
+    "checks": [
+      {
+        "clause": "five nonzero flags survive return inside in mode0 then return preclear",
+        "actual": 248,
+        "expected": 248
+      },
+      {
+        "clause": "defined flags cleared with no new event",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "controlled completed measurement re-arms high flags",
+        "actual": 208,
+        "expected": 208
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 248,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 208,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_COR_under_candidate_threshold_stimuli"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "dr_cross_clear": {
+    "status": "PASS",
+    "check_count": 11,
+    "checks": [
+      {
+        "clause": "data byte returned from selected completed sample",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "data register clears DR only, preserves four threshold flags",
+        "actual": 120,
+        "expected": 120
+      },
+      {
+        "clause": "data byte returned from selected completed sample",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "data register clears DR only, preserves four threshold flags",
+        "actual": 120,
+        "expected": 120
+      },
+      {
+        "clause": "data byte returned from selected completed sample",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "data register clears DR only, preserves four threshold flags",
+        "actual": 120,
+        "expected": 120
+      },
+      {
+        "clause": "data byte returned from selected completed sample",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "data register clears DR only, preserves four threshold flags",
+        "actual": 120,
+        "expected": 120
+      },
+      {
+        "clause": "STATUS returns old flags then clears",
+        "actual": 248,
+        "expected": 248
+      },
+      {
+        "clause": "STATUS clears all defined flags",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "nondata configuration read does not clear DR",
+        "actual": 248,
+        "expected": 248
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 120,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 120,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_TEMP_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 120,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_LOW"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 120,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_HUM_HIGH"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 248,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "fresh_DR_STATUS"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unrelated_read"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 248,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unrelated_read"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "trigger_boundary": {
+    "status": "PASS",
+    "check_count": 14,
+    "checks": [
+      {
+        "clause": "trigger request is distinct logical boundary",
+        "actual": "start_requested",
+        "expected": "start_requested"
+      },
+      {
+        "clause": "pending trigger readback not assumed observable",
+        "outside_contract": true
+      },
+      {
+        "clause": "no completion DR at request",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "TRIG selfclear at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "old data before completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "start alone does not assert completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completion returns sleep boundary",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "completion asserts DR",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "completion updates TEMP_LOW",
+        "actual": 52,
+        "expected": 52
+      },
+      {
+        "clause": "completion updates TEMP_HIGH",
+        "actual": 18,
+        "expected": 18
+      },
+      {
+        "clause": "completion updates HUM_LOW",
+        "actual": 120,
+        "expected": 120
+      },
+      {
+        "clause": "completion updates HUM_HIGH",
+        "actual": 86,
+        "expected": 86
+      },
+      {
+        "clause": "TRIG stays zero at completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot does not schedule another measurement",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4660,
+          "humidity_code": 22136
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 52,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 18,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 120,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 86,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "one_shot"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "periodic_series": {
+    "status": "PASS",
+    "check_count": 56,
+    "checks": [
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      },
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      },
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      },
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      },
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      },
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      },
+      {
+        "clause": "CC setting alone not a qualified series start",
+        "outside_contract": true
+      },
+      {
+        "clause": "trigger arms periodic series",
+        "actual": true,
+        "expected": true
+      },
+      {
+        "clause": "continuous TRIG clears at start",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "autonomous qualified completion updates data",
+        "actual": 12,
+        "expected": 12
+      },
+      {
+        "clause": "periodic selected humidity updated",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "periodic measurement returns sleep between events",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "quiescent CC0 disables periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "CC0 requires new trigger",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 16,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 32,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 48,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_3"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 64,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_4"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 80,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_5"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 96,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_6"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 112,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 20484,
+          "humidity_code": 24584
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 28684,
+          "humidity_code": 32784
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 12,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "CC_7"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "CC_7"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "channel_and_resolution": {
+    "status": "PASS",
+    "check_count": 45,
+    "checks": [
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 18,
+        "expected": 18
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 34,
+        "expected": 34
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 66,
+        "expected": 66
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 82,
+        "expected": 82
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 98,
+        "expected": 98
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 130,
+        "expected": 130
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 146,
+        "expected": 146
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      },
+      {
+        "clause": "legal precision encodings retained; TRIGclear",
+        "actual": 162,
+        "expected": 162
+      },
+      {
+        "clause": "qualified post-quantized unsigned data, no invented resolution LSB rule",
+        "actual": 20,
+        "expected": 20
+      },
+      {
+        "clause": "temperature-only channel updated",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "temperature-only retains previous humidity low",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "temperature-only retains previous humidity high",
+        "actual": 112,
+        "expected": 112
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 3,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 19,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 18,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 35,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 34,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC0_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 67,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 66,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 83,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 82,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 99,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 98,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC1_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 131,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 130,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 147,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 146,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 24580,
+          "humidity_code": 28680
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 163,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 162,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 36884,
+          "humidity_code": null
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC2"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "TACC2_HACC2"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "reset_completion": {
+    "status": "PASS",
+    "check_count": 36,
+    "checks": [
+      {
+        "clause": "reset trigger and completion are separate",
+        "actual": "reset_pending",
+        "expected": "reset_pending"
+      },
+      {
+        "clause": "no guaranteed bus read during reset",
+        "outside_contract": true
+      },
+      {
+        "clause": "no status snapshot during reset",
+        "outside_contract": true
+      },
+      {
+        "clause": "completed reset selfclears SOFT_RES and resets configuration",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset initializes measurement config",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset clears status",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary TEMP_THR_L",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "documented reset boundary TEMP_THR_H",
+        "actual": 255,
+        "expected": 255
+      },
+      {
+        "clause": "documented reset boundary RH_THR_L",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary RH_THR_H",
+        "actual": 255,
+        "expected": 255
+      },
+      {
+        "clause": "documented reset boundary TEMP_LOW",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary TEMP_HIGH",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary HUM_LOW",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary HUM_HIGH",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary MANUF_ID_L",
+        "actual": 73,
+        "expected": 73
+      },
+      {
+        "clause": "documented reset boundary DEVICE_ID_H",
+        "actual": 7,
+        "expected": 7
+      },
+      {
+        "clause": "reset cancels periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "reset restores one-shot idle",
+        "outside_contract": true
+      },
+      {
+        "clause": "reset trigger and completion are separate",
+        "actual": "reset_pending",
+        "expected": "reset_pending"
+      },
+      {
+        "clause": "no guaranteed bus read during reset",
+        "outside_contract": true
+      },
+      {
+        "clause": "no status snapshot during reset",
+        "outside_contract": true
+      },
+      {
+        "clause": "completed reset selfclears SOFT_RES and resets configuration",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset initializes measurement config",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset clears status",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary TEMP_THR_L",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "documented reset boundary TEMP_THR_H",
+        "actual": 255,
+        "expected": 255
+      },
+      {
+        "clause": "documented reset boundary RH_THR_L",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary RH_THR_H",
+        "actual": 255,
+        "expected": 255
+      },
+      {
+        "clause": "documented reset boundary TEMP_LOW",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary TEMP_HIGH",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary HUM_LOW",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary HUM_HIGH",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented reset boundary MANUF_ID_L",
+        "actual": 73,
+        "expected": 73
+      },
+      {
+        "clause": "documented reset boundary DEVICE_ID_H",
+        "actual": 7,
+        "expected": 7
+      },
+      {
+        "clause": "reset cancels periodic series",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "reset restores one-shot idle",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 116,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 128,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "reset_completed",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_THR_L",
+        "mask": 255,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_THR_H",
+        "mask": 255,
+        "value": 255,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "RH_THR_L",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "RH_THR_H",
+        "mask": 255,
+        "value": 255,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MANUF_ID_L",
+        "mask": 255,
+        "value": 73,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_ID_H",
+        "mask": 255,
+        "value": 7,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "idle_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 116,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 161,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 128,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "reset_completed",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_THR_L",
+        "mask": 255,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_THR_H",
+        "mask": 255,
+        "value": 255,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "RH_THR_L",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "RH_THR_H",
+        "mask": 255,
+        "value": 255,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_HIGH",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "HUM_HIGH",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MANUF_ID_L",
+        "mask": 255,
+        "value": 73,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_ID_H",
+        "mask": 255,
+        "value": 7,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "active_reset"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "mode_encoding": {
+    "status": "PASS",
+    "check_count": 2,
+    "checks": [
+      {
+        "clause": "unambiguous INT_MODE encoding0COR/1comparator",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "unambiguous INT_MODE encoding0COR/1comparator",
+        "actual": 1,
+        "expected": 1
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "quiescent_mode_0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "quiescent_mode_0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 1,
+        "instance": "quiescent_mode_1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "quiescent_mode_1"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "threshold_candidate_comparisons": {
+    "status": "PASS",
+    "check_count": 4,
+    "checks": [
+      {
+        "clause": "table/figure candidate16bit vs threshold<<8 comparison",
+        "actual": 192,
+        "expected": 192
+      },
+      {
+        "clause": "table/figure candidate16bit vs threshold<<8 comparison",
+        "actual": 160,
+        "expected": 160
+      },
+      {
+        "clause": "table/figure candidate16bit vs threshold<<8 comparison",
+        "actual": 144,
+        "expected": 144
+      },
+      {
+        "clause": "table/figure candidate16bit vs threshold<<8 comparison",
+        "actual": 136,
+        "expected": 136
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 49156,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 192,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 16380,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 160,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 49156
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 16380
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "disputed_numeric_trigger_mapping"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 136,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disputed_numeric_trigger_mapping"
+      }
+    ],
+    "execution_kind": "EXPLORATORY_TABLE_FIGURE_POLICY"
+  },
+  "comparator_candidate": {
+    "status": "PASS",
+    "check_count": 5,
+    "checks": [
+      {
+        "clause": "candidate current high result and DR",
+        "actual": 208,
+        "expected": 208
+      },
+      {
+        "clause": "candidate preserves high statuses, clears DR",
+        "actual": 80,
+        "expected": 80
+      },
+      {
+        "clause": "candidate return inside replaces prior high statuses",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "candidate current low statuses",
+        "actual": 168,
+        "expected": 168
+      },
+      {
+        "clause": "candidate low statuses survive read",
+        "actual": 40,
+        "expected": 40
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 1,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 208,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 168,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "table_figure_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 40,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "exploratory_comparator_read_policy"
+      }
+    ],
+    "execution_kind": "EXPLORATORY_TABLE_FIGURE_POLICY"
+  },
+  "pin_priority": {
+    "status": "PASS",
+    "check_count": 12,
+    "checks": [
+      {
+        "clause": "pin output disabled is high impedance",
+        "actual": "HIGH_Z",
+        "expected": "HIGH_Z"
+      },
+      {
+        "clause": "THenabled inactive wins over HHactive; not OR",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "isolated HHactive follows polarity",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "mode0 selected interrupt deasserts after read",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "isolated DRactive polarity",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "isolated DRdeassert after data read",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "pin output disabled is high impedance",
+        "actual": "HIGH_Z",
+        "expected": "HIGH_Z"
+      },
+      {
+        "clause": "THenabled inactive wins over HHactive; not OR",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "isolated HHactive follows polarity",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "mode0 selected interrupt deasserts after read",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "isolated DRactive polarity",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "isolated DRdeassert after data read",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 80,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 4,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 16,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "priority_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 128,
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 4,
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "DR_pol0"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 80,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 6,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 16,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 248,
+        "value": 144,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "priority_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 128,
+        "instance": "DR_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 6,
+        "instance": "DR_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "DR_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "DR_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "DR_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "DR_pol1"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "DR_pol1"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "source_scope_guards": {
+    "status": "PASS",
+    "check_count": 13,
+    "checks": [
+      {
+        "clause": "active-history mode switch excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "reserved bits not fabricated",
+        "outside_contract": true
+      },
+      {
+        "clause": "NA temperature precision excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "NA humidity-only channel excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "heater physics excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "offset pipeline arithmetic excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "unimplemented peak cannot stay fictitiously zero",
+        "outside_contract": true
+      },
+      {
+        "clause": "ambiguous DRplus threshold composition excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "midconversion retrigger excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "exact threshold equality unspecified",
+        "outside_contract": true
+      },
+      {
+        "clause": "malformed completion value excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "common comparator read conflict unscored",
+        "outside_contract": true
+      },
+      {
+        "clause": "disabled status generation remains unknown",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 4096,
+          "humidity_code": 4096
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 4,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "scope_guards"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "INTERRUPT_ENABLE",
+        "value": 248,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_L",
+        "value": 64,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "TEMP_THR_H",
+        "value": 192,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_L",
+        "value": 64,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "RH_THR_H",
+        "value": 192,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 1,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 61440,
+          "humidity_code": 61440
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "common_comparator_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MEAS_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "disabled_generation_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MEAS_CONFIG",
+        "value": 1,
+        "instance": "disabled_generation_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_started",
+        "payload": {},
+        "threshold_policy": "NOT_APPLICABLE",
+        "instance": "disabled_generation_guard"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "event",
+        "name": "measurement_completed",
+        "payload": {
+          "temperature_code": 32768,
+          "humidity_code": 32768
+        },
+        "threshold_policy": "TABLE_FIGURE_CANDIDATE",
+        "instance": "disabled_generation_guard"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE_WITH_CANDIDATE_PRECONDITIONS"
+  },
+  "nominal_period_table": {
+    "status": "PASS",
+    "check_count": 9,
+    "checks": [
+      {
+        "clause": "tPOR source maximum metadata, not executed reset deadline",
+        "actual": 3.5,
+        "expected": 3.5
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": null,
+        "expected": null
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 120,
+        "expected": 120
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 60,
+        "expected": 60
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 10,
+        "expected": 10
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 5,
+        "expected": 5
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 0.5,
+        "expected": 0.5
+      },
+      {
+        "clause": "nominal CC table only, not measured intervals",
+        "actual": 0.2,
+        "expected": 0.2
+      }
+    ],
+    "trace": [
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 0,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 16,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 32,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 32,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 48,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 48,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 64,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 80,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 96,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 96,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "write",
+        "register": "DEVICE_CONFIG",
+        "value": 112,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "HDC2021",
+        "profile": "common_source",
+        "op": "read",
+        "register": "DEVICE_CONFIG",
+        "mask": 255,
+        "value": 112,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      }
+    ],
+    "execution_kind": "SOURCE_TABLE_METADATA"
+  }
+}
