@@ -1,0 +1,210 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina219-v36/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/TI/INA219.pdf SBOS448G printed pp.9–13,17–24 independently read",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "eval/ina219_semantics_v36_20261013/source_review.json",
+    "eval/ina219_semantics_v36_20261013/ina219.py",
+    "eval/ina219_semantics_v36_20261013/scenarios.py",
+    "eval/ina219_semantics_v36_20261013/admission.py",
+    "eval/ina219_semantics_v36_20261013/scenario_execution.json",
+    "eval/ina219_semantics_v36_20261013/closure_ledger.json",
+    "eval/ina219_semantics_v36_20261013/admission_gate.json",
+    "eval/ina219_semantics_v36_20261013/execution_manifest.json"
+  ],
+  "outputs": [
+    "code_review.md",
+    "code_review.json",
+    "code_acceptance_checklist.md",
+    "tests/test_independent_ina219.py",
+    "tests/record_independent_execution.py",
+    "tests/package_code_review.py",
+    "independent_code_execution.json",
+    "independent_code_execution.log",
+    "independent_code_results.xml"
+  ],
+  "evidence_status": [
+    "VERIFIED_SOURCE: original primary specification read independently before implementation.",
+    "EXECUTED_LOCAL: 193 independent tests passed; 13 synthetic faults detected; 30 proof/source corruption variants rejected.",
+    "EXECUTED_LOCAL: accepted saved scenarios and seven closure rows replay exactly; source PDF and frozen authority rehashed.",
+    "EXECUTED_LOCAL: 10 required-scenario omissions retain partial closure; 1 optional supporting-scenario omission leaves bounded rows verified.",
+    "VERIFIED_USER_MATERIAL: owner preservation record reviewed and frozen harness independently rehashed.",
+    "NOT_EXECUTED: analog ADC, I2C electrical traffic, calibration arithmetic, timing, model generation and formal full-source admission."
+  ],
+  "assumptions": [
+    "Logical completed-sequence and reset events are externally supplied qualifications.",
+    "SHUNT/BUS cold values and BUS bit2 stay unknown; knownmask0 never asserts numeric zero.",
+    "Conflicting CNVR reads and same-mode writes invalidate main knowledge; named-register detail is candidate policy.",
+    "Only qualified math-overflow sets1; no fabricated no-overflow or clear promise.",
+    "Previously programmed calibration cleared to0 does not restore an immediate numeric CURRENT/POWER oracle; qualified reset restores known zero.",
+    "Nominal metadata and exact scoped supplied raw words do not establish physical ADC results."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "193/193 actual tests, zero errors/failures/skips.",
+    "Exactly six source REPAIR fields/seven dimensions retained without changing frozen authority.",
+    "Defined defaults separated from unspecified SHUNT/BUS reset and reserved bit2.",
+    "RST pending blocks numeric promises; completed reset restores only documented defaults.",
+    "Calibration pre-first-programming zero guarantee is not generalized to nonzero-to-zero histories; an injected instant-zero fault is detected.",
+    "CNVR whole-completion, active-mode changes, power-down/ADC-off exceptions and candidate crossread checked.",
+    "Source-derived faults and altered evidence identities, traces, checks, hashes and execution kinds rejected.",
+    "Every whole_field_promoted and whole_dimension_closed remains false."
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "INA219-C-CNVR-READ",
+      "type": "SOURCE_CONTRADICTION",
+      "claim": "CNVR clear read register",
+      "locators": [
+        "p10 section8.3.1",
+        "p18 Table2",
+        "p23 section8.6.3.2"
+      ],
+      "competing": [
+        "p10 says Status register read",
+        "p23 says Power register read",
+        "Table2 has no Status register"
+      ],
+      "resolution": "UNRESOLVED; common profile numeric CNVR valid only before ambiguous BUS/POWER read; after read mark unknown. register_detail_candidate POWER clear remains candidate."
+    },
+    {
+      "conflict_id": "INA219-C-CNVR-SAME-MODE",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "CNVR on same active-mode CONFIG write",
+      "locators": [
+        "p10 section8.3.1",
+        "p23 section8.6.3.2"
+      ],
+      "competing": [
+        "any CONFIG write except0/4",
+        "writing a new mode except0/4"
+      ],
+      "resolution": "UNRESOLVED; changed active modes clear is common; same-mode active rewrite invalidates CNVR. Trigger start is supported independently."
+    },
+    {
+      "conflict_id": "INA219-C-CONVERT-PIN",
+      "type": "SOURCE_CONTRADICTION",
+      "claim": "Single-shot convert pin and Status register mentioned in general prose",
+      "locators": [
+        "p3 Pin Functions",
+        "p9 section8.3.1",
+        "p10 section8.3.1",
+        "p18 Table2"
+      ],
+      "competing": [
+        "p10 names convert pin",
+        "p3 has no such pin; p9 uses CONFIG-triggered operation"
+      ],
+      "resolution": "UNRESOLVED; do not invent convert-pin API or label possible copied prose an official erratum."
+    },
+    {
+      "conflict_id": "INA219-C-RESET-PENDING",
+      "type": "SOURCE_OMISSION",
+      "claim": "Reset-in-progress readback and latency",
+      "locators": [
+        "p19 Table3"
+      ],
+      "competing": [
+        "self-clearing reset and completed defaults documented",
+        "intermediate read or deadline omitted"
+      ],
+      "resolution": "UNRESOLVED; explicit qualified reset_completed event, no numeric reads while pending."
+    },
+    {
+      "conflict_id": "INA219-C-BUS-RESERVED",
+      "type": "SOURCE_OMISSION",
+      "claim": "BUS reserved bit2 value and software policy",
+      "locators": [
+        "p18 Table2",
+        "p23 Figure24"
+      ],
+      "competing": [
+        "reserved dash",
+        "no default value or write policy"
+      ],
+      "resolution": "UNRESOLVED; knownmask bit2 zero means exclusion, not bit value0. No write-persistence/value oracle."
+    },
+    {
+      "conflict_id": "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "type": "SPECIFICATION_AMBIGUITY",
+      "claim": "OVF clearing and out-of-range current/power representation",
+      "locators": [
+        "p12 Equations4-5",
+        "p23 OVF and Current/Power definitions"
+      ],
+      "competing": [
+        "overflow sets flag and values may be meaningless",
+        "no clearing trigger, truncation/wrap/saturation/sign rule for every history"
+      ],
+      "resolution": "UNRESOLVED; certify qualified overflow sets1 only; overflowFalse/clearing, arithmetic overflow representations, rounding and signed power excluded."
+    },
+    {
+      "conflict_id": "INA219-C-SEQUENCE-ABSTRACTION",
+      "type": "ABSTRACTION_GAP",
+      "claim": "ADC/average/multiplication completion supplied as logical event",
+      "locators": [
+        "p9 section8.3.1",
+        "p10 section8.3.1",
+        "p20 Tables5-6",
+        "p23 CNVR"
+      ],
+      "competing": [
+        "hardware complete sequence including averaging and multiplication",
+        "local supplied completed result does not observe actual ADC hardware"
+      ],
+      "resolution": "UNRESOLVED; only qualified supplied settled result; excludes sample scheduling, incomplete-average results, analog accuracy and I2C electrical behavior."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Orchestrator verify accepted INA219 bytes and continue remaining frozen REPAIR obligations while formal generation stays blocked.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "review_date": "2026-10-14",
+  "readiness": "CONDITIONALLY_READY_FOR_DECLARED_INA219_SCOPE_ONLY",
+  "paper_submission_readiness": "NOT_READY",
+  "bounded_implementation_recommendation": "PASS_CANDIDATE",
+  "independent_test_counts": {
+    "tests": 193,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 193
+  },
+  "synthetic_runtime_faults": 13,
+  "proof_corruption_rejections": 30,
+  "missing_scenario_partial_checks": 10,
+  "optional_supporting_scenario_checks": 1,
+  "source_conflict_ids": [
+    "INA219-C-CNVR-READ",
+    "INA219-C-CNVR-SAME-MODE",
+    "INA219-C-CONVERT-PIN",
+    "INA219-C-RESET-PENDING",
+    "INA219-C-BUS-RESERVED",
+    "INA219-C-OVF-CLEAR-ARITHMETIC",
+    "INA219-C-SEQUENCE-ABSTRACTION"
+  ],
+  "reviewed_input_sha256": {
+    "eval/ina219_semantics_v36_20261013/ina219.py": "690d46bad81d1ee51affc444d4dec3a0e0810bd5267c8ed45918f6e3d76c9d4a",
+    "eval/ina219_semantics_v36_20261013/scenarios.py": "06593b16a9465d6103a68c8c7265a51444743d1cb788c4a2f2ebd3b705013ed0",
+    "eval/ina219_semantics_v36_20261013/admission.py": "28ef7f8d9be5533562d97ff9d24133a1b9df049ee2d3a9289e400dea7a5681a2",
+    "eval/ina219_semantics_v36_20261013/source_review.json": "19a2f8a6a6130b74aadcf6c789136ab123b433082afb41b15d9c590b3c551f8e",
+    "corpus/data/raw_pdf/TI/INA219.pdf": "58004eda854d07478e6fc6f4398c114f60a3bcf18d4877471c7c1a306d1fa1cb",
+    "_setup/run_ina219_v36.py": "1ef284acdaece00bd6e2d6ebc02caef177ae4cd6ffe3776706cd43239adf00d9",
+    "eval/ina219_semantics_v36_20261013/scenario_execution.json": "ccbd27a1834347b29368a349f9bb18ac739a3da7cb27d72cc691d8db06f2380e",
+    "eval/ina219_semantics_v36_20261013/closure_ledger.json": "6248b6f71db0998c19f821c249f86b231cd1251af7b113950619bab28d74b307",
+    "eval/ina219_semantics_v36_20261013/admission_gate.json": "cfd9ca58ff0d85ad221f55291af222ddfcd9d86293fd24b5b94113c751964f81",
+    "eval/ina219_semantics_v36_20261013/preservation_verification.json": "062cc67f8976ee08135fedd25c4b58051f3647b1be7e48f5f46ee1d4ef32f8d6",
+    "eval/ina219_semantics_v36_20261013/tests/test_independent_ina219.py": "4144f534703171945cab208268826207f84fa300b3cea950c6fa07dd30a577b6",
+    "eval/ina219_semantics_v36_20261013/tests/record_independent_execution.py": "8f1e882efa6085849eeb2408c30493f9c7d629266de82853668c82ce52aa7c70",
+    "eval/ina219_semantics_v36_20261013/execution_manifest.json": "19750313b97cb795f12ac0157b717e6de66b426e55da326a6598fa777199cde5",
+    "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+    "eval/semantic_protocol_v3_20261012/runtime.py": "ddeb772ee87bbfe126fe4bf379ef3eb824072a2ff2083f39787a7ccea1399b9c"
+  }
+}

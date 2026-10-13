@@ -1,0 +1,40 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina219-v36/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "INA219 six REPAIR fields seven repair dimensions bounded validation",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/lis3dh_semantics_v35_20261013",
+    "corpus/data/raw_pdf/TI/INA219.pdf"
+  ],
+  "expected_outputs": [
+    "code_review.md",
+    "code_review.json"
+  ],
+  "evidence_boundaries": [
+    "Original PDF facts only",
+    "Retain unknown/physical exclusions",
+    "No old artifacts or model results modified"
+  ],
+  "acceptance_checks": [
+    "Exactly6fields7dimensions",
+    "BUS/SHUNT known reset boundary",
+    "BUS bit2 reserved policy",
+    "CNVR OVF completion qualification",
+    "RST separate completion and unknownpending",
+    "Exactsourceandwitnessreplay"
+  ],
+  "known_missing_items": [
+    "No physical I2C/analog/calibration/electrical timing certification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

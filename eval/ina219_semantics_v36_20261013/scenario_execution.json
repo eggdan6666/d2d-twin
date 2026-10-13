@@ -1,0 +1,3136 @@
+{
+  "cold_unknown": {
+    "status": "PASS",
+    "check_count": 11,
+    "checks": [
+      {
+        "clause": "no numeric cold BUS field oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "no numeric cold BUS field oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "no numeric cold BUS field oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "no numeric cold BUS field oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "no numeric cold BUS field oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "measurement reset is unknown",
+        "outside_contract": true
+      },
+      {
+        "clause": "documented factory default CONFIGURATION",
+        "actual": 14751,
+        "expected": 14751
+      },
+      {
+        "clause": "documented factory default CALIBRATION",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented factory default CURRENT",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented factory default POWER",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "cold mask excludes all dynamic and reserved bits",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIGURATION",
+        "mask": 65535,
+        "value": 14751,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "cold"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CALIBRATION",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "cold"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CURRENT",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "cold"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "cold"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "reset_completion": {
+    "status": "PASS",
+    "check_count": 15,
+    "checks": [
+      {
+        "clause": "request is not completed reset",
+        "actual": "reset_pending",
+        "expected": "reset_pending"
+      },
+      {
+        "clause": "pending reset has no readback guarantee",
+        "outside_contract": true
+      },
+      {
+        "clause": "pending reset has no readback guarantee",
+        "outside_contract": true
+      },
+      {
+        "clause": "pending reset has no readback guarantee",
+        "outside_contract": true
+      },
+      {
+        "clause": "pending reset has no readback guarantee",
+        "outside_contract": true
+      },
+      {
+        "clause": "pending reset has no readback guarantee",
+        "outside_contract": true
+      },
+      {
+        "clause": "pending reset has no readback guarantee",
+        "outside_contract": true
+      },
+      {
+        "clause": "reset abort has no old conversion completion",
+        "outside_contract": true
+      },
+      {
+        "clause": "completed reset restores documented default CONFIGURATION",
+        "actual": 14751,
+        "expected": 14751
+      },
+      {
+        "clause": "completed reset restores documented default CALIBRATION",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset restores documented default CURRENT",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset restores documented default POWER",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset does not invent measurement defaults",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed reset retains unknown SHUNT",
+        "outside_contract": true
+      },
+      {
+        "clause": "no duplicate reset completion",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CALIBRATION",
+        "value": 4660,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1200
+        },
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 32768,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "reset_completed",
+        "payload": {},
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIGURATION",
+        "mask": 65535,
+        "value": 14751,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CALIBRATION",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CURRENT",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "reset"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "sequence_completion": {
+    "status": "PASS",
+    "check_count": 10,
+    "checks": [
+      {
+        "clause": "MODE3 write starts one shot",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "changed active mode clears CNVR before ambiguous read",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "voltage completion does not complete math",
+        "actual": "calculating",
+        "expected": "calculating"
+      },
+      {
+        "clause": "ambiguous prior read retains no CNVR oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "settled supplied shunt result",
+        "actual": 100,
+        "expected": 100
+      },
+      {
+        "clause": "whole completion sets CNVR and encodes BD",
+        "actual": 8002,
+        "expected": 8002
+      },
+      {
+        "clause": "completed one shot sleeps without MODE storage rewrite",
+        "actual": "triggered_sleep",
+        "expected": "triggered_sleep"
+      },
+      {
+        "clause": "MODE storage remains programmed",
+        "actual": 3,
+        "expected": 3
+      },
+      {
+        "clause": "unchanged MODE3 also triggers",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "same-mode CNVR consequence remains unknown",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14747,
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 100,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65530,
+        "value": 8002,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIGURATION",
+        "mask": 65535,
+        "value": 14747,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14747,
+        "instance": "sequence"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "signed_voltage_formats": {
+    "status": "PASS",
+    "check_count": 48,
+    "checks": [
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 61536,
+        "expected": 61536
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 65535,
+        "expected": 65535
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 4000,
+        "expected": 4000
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 57536,
+        "expected": 57536
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 65535,
+        "expected": 65535
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 8000,
+        "expected": 8000
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 49536,
+        "expected": 49536
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 65535,
+        "expected": 65535
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 16000,
+        "expected": 16000
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 33536,
+        "expected": 33536
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 65535,
+        "expected": 65535
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "signed in-range supplied code and PGA sign extension",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "BD shifted three places with 4mV units",
+        "actual": 32000,
+        "expected": 32000
+      },
+      {
+        "clause": "result event cannot supply reserved bit",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 8607,
+        "instance": "PG0_-4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG0_-4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 61536,
+          "bus_code": 4000
+        },
+        "instance": "PG0_-4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG0_-4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 61536,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_-4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_-4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 8607,
+        "instance": "PG0_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG0_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 65535,
+          "bus_code": 4000
+        },
+        "instance": "PG0_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG0_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 65535,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 8607,
+        "instance": "PG0_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG0_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 1,
+          "bus_code": 4000
+        },
+        "instance": "PG0_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG0_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 8607,
+        "instance": "PG0_4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG0_4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 4000,
+          "bus_code": 4000
+        },
+        "instance": "PG0_4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG0_4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 4000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG0_4000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 10655,
+        "instance": "PG1_-8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG1_-8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 57536,
+          "bus_code": 4000
+        },
+        "instance": "PG1_-8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG1_-8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 57536,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_-8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_-8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 10655,
+        "instance": "PG1_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG1_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 65535,
+          "bus_code": 4000
+        },
+        "instance": "PG1_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG1_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 65535,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 10655,
+        "instance": "PG1_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG1_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 1,
+          "bus_code": 4000
+        },
+        "instance": "PG1_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG1_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 10655,
+        "instance": "PG1_8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG1_8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 8000,
+          "bus_code": 4000
+        },
+        "instance": "PG1_8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG1_8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 8000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG1_8000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 12703,
+        "instance": "PG2_-16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG2_-16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 49536,
+          "bus_code": 4000
+        },
+        "instance": "PG2_-16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG2_-16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 49536,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_-16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_-16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 12703,
+        "instance": "PG2_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG2_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 65535,
+          "bus_code": 4000
+        },
+        "instance": "PG2_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG2_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 65535,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 12703,
+        "instance": "PG2_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG2_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 1,
+          "bus_code": 4000
+        },
+        "instance": "PG2_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG2_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 12703,
+        "instance": "PG2_16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG2_16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 16000,
+          "bus_code": 4000
+        },
+        "instance": "PG2_16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG2_16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 16000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG2_16000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "PG3_-32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG3_-32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 33536,
+          "bus_code": 4000
+        },
+        "instance": "PG3_-32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG3_-32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 33536,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_-32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_-32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "PG3_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG3_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 65535,
+          "bus_code": 4000
+        },
+        "instance": "PG3_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG3_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 65535,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_-1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "PG3_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG3_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 1,
+          "bus_code": 4000
+        },
+        "instance": "PG3_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG3_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_1"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "PG3_32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "PG3_32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 32000,
+          "bus_code": 4000
+        },
+        "instance": "PG3_32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "PG3_32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_32000"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 32000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "PG3_32000"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "common_read_unknown": {
+    "status": "PASS",
+    "check_count": 9,
+    "checks": [
+      {
+        "clause": "first qualified observation",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "main profile does not choose disputed read-clear rule",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "no repeated CNVR value guaranteed",
+        "outside_contract": true
+      },
+      {
+        "clause": "first qualified observation",
+        "actual": 8000,
+        "expected": 8000
+      },
+      {
+        "clause": "main profile does not choose disputed read-clear rule",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "no repeated CNVR value guaranteed",
+        "outside_contract": true
+      },
+      {
+        "clause": "first qualified observation",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "main profile does not choose disputed read-clear rule",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "no repeated CNVR value guaranteed",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "postread_BUS_VOLTAGE_2"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "postread_BUS_VOLTAGE_2"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "postread_BUS_VOLTAGE_2"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "postread_BUS_VOLTAGE_2"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "postread_BUS_VOLTAGE_65528"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "postread_BUS_VOLTAGE_65528"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "postread_BUS_VOLTAGE_65528"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65528,
+        "value": 8000,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "postread_BUS_VOLTAGE_65528"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "postread_POWER_65535"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "postread_POWER_65535"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "postread_POWER_65535"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "postread_POWER_65535"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "candidate_read_clear": {
+    "status": "PASS",
+    "check_count": 5,
+    "checks": [
+      {
+        "clause": "candidate BUS observation retains CNVR",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "candidate repeated BUS observation",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "candidate POWER default observation",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "candidate follows detailed POWER clear text",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "candidate cannot invent reserved bit",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_read"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "candidate_read"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "candidate_read"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_read"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_read"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_read"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_read"
+      }
+    ],
+    "execution_kind": "EXPLORATORY_REGISTER_DETAIL_POLICY"
+  },
+  "mode_clear_boundaries": {
+    "status": "PASS",
+    "check_count": 5,
+    "checks": [
+      {
+        "clause": "explicit mode0/4 exception preserves prior CNVR observation",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "explicit mode0/4 exception preserves prior CNVR observation",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "changed active mode clears",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "same-mode conflicting source left unknown",
+        "outside_contract": true
+      },
+      {
+        "clause": "candidate chooses any active CONFIG write clears",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "off_0"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "off_0"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "off_0"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14744,
+        "instance": "off_0"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "off_0"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "off_4"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "off_4"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "off_4"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14748,
+        "instance": "off_4"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "off_4"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "changed"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "changed"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "changed"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14747,
+        "instance": "changed"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "changed"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "same_common_source"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "same_common_source"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "same_common_source"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "same_common_source"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "same_register_detail_candidate"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "same_register_detail_candidate"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "same_register_detail_candidate"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "same_register_detail_candidate"
+      },
+      {
+        "chip": "INA219",
+        "profile": "register_detail_candidate",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 2,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "same_register_detail_candidate"
+      }
+    ],
+    "execution_kind": "MIXED_SOURCE_AND_CANDIDATE_POLICY"
+  },
+  "calibration_boundary": {
+    "status": "PASS",
+    "check_count": 8,
+    "checks": [
+      {
+        "clause": "explicit FS0 RO0 differs from unspecified BUS reserved bit",
+        "actual": 4660,
+        "expected": 4660
+      },
+      {
+        "clause": "nonzero calibration arithmetic not fabricated",
+        "outside_contract": true
+      },
+      {
+        "clause": "nonzero calibration arithmetic not fabricated",
+        "outside_contract": true
+      },
+      {
+        "clause": "absence of qualified overflow does not prove zero",
+        "outside_contract": true
+      },
+      {
+        "clause": "later calibration clear is not immediate result reset",
+        "outside_contract": true
+      },
+      {
+        "clause": "later calibration clear is not immediate result reset",
+        "outside_contract": true
+      },
+      {
+        "clause": "reset restores pre-first-programming zero guarantee",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "reset restores pre-first-programming zero guarantee",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CALIBRATION",
+        "value": 4661,
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CALIBRATION",
+        "mask": 65535,
+        "value": 4660,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CALIBRATION",
+        "value": 0,
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 32768,
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "reset_completed",
+        "payload": {},
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CURRENT",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "calibration"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "calibration"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "qualified_overflow": {
+    "status": "PASS",
+    "check_count": 6,
+    "checks": [
+      {
+        "clause": "math overflow cannot precede voltage result",
+        "outside_contract": true
+      },
+      {
+        "clause": "qualified overflow sets OVF with completed CNVR",
+        "actual": 8003,
+        "expected": 8003
+      },
+      {
+        "clause": "out-of-range result has no fabricated representation",
+        "outside_contract": true
+      },
+      {
+        "clause": "later sequence cannot certify prior OVF lifetime or zero",
+        "outside_contract": true
+      },
+      {
+        "clause": "no unsourced no-overflow clearing rule",
+        "outside_contract": true
+      },
+      {
+        "clause": "overflow does not assign reserved bit",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CALIBRATION",
+        "value": 4096,
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 100,
+          "bus_code": 1000
+        },
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_math_overflow",
+        "payload": {},
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65531,
+        "value": 8003,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "voltage_results_completed",
+        "payload": {
+          "shunt_word": 1,
+          "bus_code": 1
+        },
+        "instance": "overflow"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {},
+        "instance": "overflow"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "source_scope_guards": {
+    "status": "PASS",
+    "check_count": 16,
+    "checks": [
+      {
+        "clause": "legal selected-channel mode outside implemented histories",
+        "outside_contract": true
+      },
+      {
+        "clause": "legal selected-channel mode outside implemented histories",
+        "outside_contract": true
+      },
+      {
+        "clause": "legal selected-channel mode outside implemented histories",
+        "outside_contract": true
+      },
+      {
+        "clause": "legal selected-channel mode outside implemented histories",
+        "outside_contract": true
+      },
+      {
+        "clause": "no reserved CONFIG nondefault policy",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion requires an active sequence",
+        "outside_contract": true
+      },
+      {
+        "clause": "overflow needs qualified math history",
+        "outside_contract": true
+      },
+      {
+        "clause": "manual conflict cannot invent a pin",
+        "outside_contract": true
+      },
+      {
+        "clause": "RO write not reserved-bit stimulus",
+        "outside_contract": true
+      },
+      {
+        "clause": "physical I2C framing excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "strict word type",
+        "outside_contract": true
+      },
+      {
+        "clause": "out-of-range PGA saturation excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "digital range guard",
+        "outside_contract": true
+      },
+      {
+        "clause": "rejected payloads do not complete conversion",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "active retrigger/discard history excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "reset may abort conversion through qualified completion",
+        "actual": 14751,
+        "expected": 14751
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "guards"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 32768,
+        "instance": "guards"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "event",
+        "name": "reset_completed",
+        "payload": {},
+        "instance": "guards"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIGURATION",
+        "mask": 65535,
+        "value": 14751,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "guards"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "nominal_adc_table": {
+    "status": "PASS",
+    "check_count": 32,
+    "checks": [
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        },
+        "expected": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        },
+        "expected": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        },
+        "expected": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        },
+        "expected": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        },
+        "expected": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        },
+        "expected": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 2,
+          "conversion_time_us": 1060
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 2,
+          "conversion_time_us": 1060
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 4,
+          "conversion_time_us": 2130
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 4,
+          "conversion_time_us": 2130
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 8,
+          "conversion_time_us": 4260
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 8,
+          "conversion_time_us": 4260
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 16,
+          "conversion_time_us": 8510
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 16,
+          "conversion_time_us": 8510
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 32,
+          "conversion_time_us": 17020
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 32,
+          "conversion_time_us": 17020
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 64,
+          "conversion_time_us": 34050
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 64,
+          "conversion_time_us": 34050
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 128,
+          "conversion_time_us": 68100
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 128,
+          "conversion_time_us": 68100
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        },
+        "expected": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        },
+        "expected": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        },
+        "expected": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        },
+        "expected": {
+          "resolution_bits": 9,
+          "samples": 1,
+          "conversion_time_us": 84
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        },
+        "expected": {
+          "resolution_bits": 10,
+          "samples": 1,
+          "conversion_time_us": 148
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        },
+        "expected": {
+          "resolution_bits": 11,
+          "samples": 1,
+          "conversion_time_us": 276
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 1,
+          "conversion_time_us": 532
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 2,
+          "conversion_time_us": 1060
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 2,
+          "conversion_time_us": 1060
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 4,
+          "conversion_time_us": 2130
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 4,
+          "conversion_time_us": 2130
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 8,
+          "conversion_time_us": 4260
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 8,
+          "conversion_time_us": 4260
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 16,
+          "conversion_time_us": 8510
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 16,
+          "conversion_time_us": 8510
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 32,
+          "conversion_time_us": 17020
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 32,
+          "conversion_time_us": 17020
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 64,
+          "conversion_time_us": 34050
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 64,
+          "conversion_time_us": 34050
+        }
+      },
+      {
+        "clause": "all16 source encodings including legal alias4..7; nominal metadata only",
+        "actual": {
+          "resolution_bits": 12,
+          "samples": 128,
+          "conversion_time_us": 68100
+        },
+        "expected": {
+          "resolution_bits": 12,
+          "samples": 128,
+          "conversion_time_us": 68100
+        }
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14367,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14495,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14623,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14879,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15007,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15135,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15263,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15391,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15519,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15647,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15775,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 15903,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 16031,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 16159,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 16287,
+        "instance": "table_BADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14727,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14735,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14743,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14751,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14759,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14767,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14775,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14783,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14791,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14799,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14807,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14815,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14823,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14831,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14839,
+        "instance": "table_SADC"
+      },
+      {
+        "chip": "INA219",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIGURATION",
+        "value": 14847,
+        "instance": "table_SADC"
+      }
+    ],
+    "execution_kind": "SOURCE_TABLE_METADATA"
+  }
+}

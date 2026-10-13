@@ -1,0 +1,261 @@
+[
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.BD",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RESET-UNKNOWN"
+    ],
+    "source_claim_classes": {
+      "INA219-RESET-UNKNOWN": "SOURCE_OMISSION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RESET-UNKNOWN": [
+        "cold_unknown",
+        "reset_completion"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.CNVR",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RESET-UNKNOWN",
+      "INA219-CNVR-SET",
+      "INA219-CNVR-MODE-CHANGE",
+      "INA219-CNVR-POWER-CANDIDATE"
+    ],
+    "source_claim_classes": {
+      "INA219-RESET-UNKNOWN": "SOURCE_OMISSION",
+      "INA219-CNVR-SET": "VERIFIED_SOURCE",
+      "INA219-CNVR-MODE-CHANGE": "VERIFIED_SOURCE",
+      "INA219-CNVR-POWER-CANDIDATE": "CONFLICTING_SOURCE"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RESET-UNKNOWN": [
+        "cold_unknown",
+        "reset_completion"
+      ],
+      "INA219-CNVR-SET": [
+        "sequence_completion"
+      ],
+      "INA219-CNVR-MODE-CHANGE": [
+        "mode_clear_boundaries"
+      ],
+      "INA219-CNVR-POWER-CANDIDATE": [
+        "common_read_unknown",
+        "candidate_read_clear"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.OVF",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RESET-UNKNOWN",
+      "INA219-OVF-QUALIFIED"
+    ],
+    "source_claim_classes": {
+      "INA219-RESET-UNKNOWN": "SOURCE_OMISSION",
+      "INA219-OVF-QUALIFIED": "VERIFIED_SOURCE"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RESET-UNKNOWN": [
+        "cold_unknown",
+        "reset_completion"
+      ],
+      "INA219-OVF-QUALIFIED": [
+        "qualified_overflow",
+        "calibration_boundary"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.RSV_2",
+    "dimension": "reserved_policy",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RESET-UNKNOWN",
+      "INA219-BUS-RSV2-UNKNOWN"
+    ],
+    "source_claim_classes": {
+      "INA219-RESET-UNKNOWN": "SOURCE_OMISSION",
+      "INA219-BUS-RSV2-UNKNOWN": "SOURCE_OMISSION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RESET-UNKNOWN": [
+        "cold_unknown",
+        "reset_completion"
+      ],
+      "INA219-BUS-RSV2-UNKNOWN": [
+        "cold_unknown",
+        "signed_voltage_formats",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "INA219.BUS_VOLTAGE.RSV_2",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RESET-UNKNOWN",
+      "INA219-BUS-RSV2-UNKNOWN"
+    ],
+    "source_claim_classes": {
+      "INA219-RESET-UNKNOWN": "SOURCE_OMISSION",
+      "INA219-BUS-RSV2-UNKNOWN": "SOURCE_OMISSION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RESET-UNKNOWN": [
+        "cold_unknown",
+        "reset_completion"
+      ],
+      "INA219-BUS-RSV2-UNKNOWN": [
+        "cold_unknown",
+        "signed_voltage_formats",
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "INA219.CONFIGURATION.RST",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RST-COMPLETION",
+      "INA219-DEFINED-DEFAULTS"
+    ],
+    "source_claim_classes": {
+      "INA219-RST-COMPLETION": "VERIFIED_SOURCE",
+      "INA219-DEFINED-DEFAULTS": "VERIFIED_SOURCE"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RST-COMPLETION": [
+        "reset_completion",
+        "source_scope_guards"
+      ],
+      "INA219-DEFINED-DEFAULTS": [
+        "cold_unknown",
+        "reset_completion"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "INA219.SHUNT_VOLTAGE.SV",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "INA219-RESET-UNKNOWN"
+    ],
+    "source_claim_classes": {
+      "INA219-RESET-UNKNOWN": "SOURCE_OMISSION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "INA219-RESET-UNKNOWN": [
+        "cold_unknown",
+        "reset_completion"
+      ]
+    },
+    "source_conflict_ids": [
+      "INA219-C-CNVR-READ",
+      "INA219-C-CNVR-SAME-MODE",
+      "INA219-C-CONVERT-PIN",
+      "INA219-C-RESET-PENDING",
+      "INA219-C-BUS-RESERVED",
+      "INA219-C-OVF-CLEAR-ARITHMETIC",
+      "INA219-C-SEQUENCE-ABSTRACTION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown BUS/SHUNT reset and reservedbit2; qualified voltage/math/reset events; disputed CNVR read and same-mode write remain unknown; candidate branch explicit; no physical/full-source certification"
+  }
+]
