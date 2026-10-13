@@ -1,0 +1,5397 @@
+{
+  "unknown_por": {
+    "status": "PASS",
+    "check_count": 14,
+    "checks": [
+      {
+        "clause": "STATUS no numeric POR authority",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x80",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x40",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x20",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x10",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x8",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x4",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x2",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0x1",
+        "outside_contract": true
+      },
+      {
+        "clause": "unknown STATUS POR observation mask0xff",
+        "outside_contract": true
+      },
+      {
+        "clause": "write-only undefined action byte has no zero reset readback",
+        "outside_contract": true
+      },
+      {
+        "clause": "ONE_SHOT has no sourced stored/reset bits",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "documented nonzero limit POR retained",
+        "actual": 127,
+        "expected": 127
+      },
+      {
+        "clause": "CONAL default source01",
+        "actual": 1,
+        "expected": 1
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 9,
+        "stored": true,
+        "instance": "unknown_POR"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "LOCAL_HIGH_LIMIT",
+        "mask": 255,
+        "value": 127,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unknown_POR"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONSECUTIVE_ALERT",
+        "mask": 255,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "unknown_POR"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "active_retired_flags": {
+    "status": "PASS",
+    "check_count": 24,
+    "checks": [
+      {
+        "clause": "active temperature cause returned before any qualified clear",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "active cause remains after repeated STATUS reads",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "retired cause flag latched until read",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "eligible flag cleared only after cause retirement",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "STATUS clear alone does not release ALERT latch",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "qualified device-address service releases retired ALERT",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "active temperature cause returned before any qualified clear",
+        "actual": 32,
+        "expected": 32
+      },
+      {
+        "clause": "active cause remains after repeated STATUS reads",
+        "actual": 32,
+        "expected": 32
+      },
+      {
+        "clause": "retired cause flag latched until read",
+        "actual": 32,
+        "expected": 32
+      },
+      {
+        "clause": "eligible flag cleared only after cause retirement",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "STATUS clear alone does not release ALERT latch",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "qualified device-address service releases retired ALERT",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "active temperature cause returned before any qualified clear",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "active cause remains after repeated STATUS reads",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "retired cause flag latched until read",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "eligible flag cleared only after cause retirement",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "STATUS clear alone does not release ALERT latch",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "qualified device-address service releases retired ALERT",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "active temperature cause returned before any qualified clear",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "active cause remains after repeated STATUS reads",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "retired cause flag latched until read",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "eligible flag cleared only after cause retirement",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "STATUS clear alone does not release ALERT latch",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "qualified device-address service releases retired ALERT",
+        "actual": 1,
+        "expected": 1
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 960,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x40"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 80,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 32,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 32,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 32,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x20"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x10"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 80,
+          "remote_open": false
+        },
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "flag_0x8"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "flag_0x8"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "selective_retirement": {
+    "status": "PASS",
+    "check_count": 6,
+    "checks": [
+      {
+        "clause": "masked BUSY observation is still a whole STATUS read",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "local cause cleared while active remote flag persists",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "active remote cause/flag blocks latch service",
+        "outside_contract": true
+      },
+      {
+        "clause": "remote latch returns preclear after retirement",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "all retired flags cleared",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "service follows all cleared causes",
+        "actual": 1,
+        "expected": 1
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 960,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "selective_clear"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "selective_clear"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "all_five_latches": {
+    "status": "PASS",
+    "check_count": 4,
+    "checks": [
+      {
+        "clause": "BUSY live and qualified OPEN nonzero during conversion",
+        "actual": 132,
+        "expected": 132
+      },
+      {
+        "clause": "five retired nonzero latches return old state",
+        "actual": 124,
+        "expected": 124
+      },
+      {
+        "clause": "retired mask7C cleared; BUSY/THERM distinct",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "fiveflag clear does not acknowledge ALERT",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 960,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 80,
+          "remote_code": 80,
+          "remote_open": false
+        },
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_remote_open_detected",
+        "payload": {},
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 132,
+        "value": 132,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 124,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "combined_flags"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "combined_flags"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "open_cause": {
+    "status": "PASS",
+    "check_count": 5,
+    "checks": [
+      {
+        "clause": "qualified open result sets OPEN",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "persistent open cause survives STATUS read",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "faulted remote ADC result not fabricated",
+        "outside_contract": true
+      },
+      {
+        "clause": "functional remote retires cause but keeps OPEN until read",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "OPEN clears after functional recovery",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": null,
+          "remote_open": true
+        },
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 4,
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 4,
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 4,
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "open_recovery"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "open_recovery"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "busy_one_shot": {
+    "status": "PASS",
+    "check_count": 68,
+    "checks": [
+      {
+        "clause": "any byte is an action, not stored conversion data",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "one-shot starts BUSY without completion",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUSread does not clear BUSY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "no trigger-register readback/selfclear oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion clears live BUSY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "completed local result independent of action payload",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "local word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed remote result independent of action payload",
+        "actual": 30,
+        "expected": 30
+      },
+      {
+        "clause": "remote word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "shutdown does not continue without action",
+        "outside_contract": true
+      },
+      {
+        "clause": "any byte is an action, not stored conversion data",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "one-shot starts BUSY without completion",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUSread does not clear BUSY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "no trigger-register readback/selfclear oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion clears live BUSY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "completed local result independent of action payload",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "local word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed remote result independent of action payload",
+        "actual": 30,
+        "expected": 30
+      },
+      {
+        "clause": "remote word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "shutdown does not continue without action",
+        "outside_contract": true
+      },
+      {
+        "clause": "any byte is an action, not stored conversion data",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "one-shot starts BUSY without completion",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUSread does not clear BUSY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "no trigger-register readback/selfclear oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion clears live BUSY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "completed local result independent of action payload",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "local word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed remote result independent of action payload",
+        "actual": 30,
+        "expected": 30
+      },
+      {
+        "clause": "remote word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "shutdown does not continue without action",
+        "outside_contract": true
+      },
+      {
+        "clause": "any byte is an action, not stored conversion data",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "one-shot starts BUSY without completion",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUSread does not clear BUSY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "no trigger-register readback/selfclear oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion clears live BUSY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "completed local result independent of action payload",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "local word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed remote result independent of action payload",
+        "actual": 30,
+        "expected": 30
+      },
+      {
+        "clause": "remote word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "shutdown does not continue without action",
+        "outside_contract": true
+      },
+      {
+        "clause": "any byte is an action, not stored conversion data",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "one-shot starts BUSY without completion",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUSread does not clear BUSY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "no trigger-register readback/selfclear oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion clears live BUSY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "completed local result independent of action payload",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "local word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed remote result independent of action payload",
+        "actual": 30,
+        "expected": 30
+      },
+      {
+        "clause": "remote word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "shutdown does not continue without action",
+        "outside_contract": true
+      },
+      {
+        "clause": "any byte is an action, not stored conversion data",
+        "actual": "converting",
+        "expected": "converting"
+      },
+      {
+        "clause": "one-shot starts BUSY without completion",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "STATUSread does not clear BUSY",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "no trigger-register readback/selfclear oracle",
+        "outside_contract": true
+      },
+      {
+        "clause": "completion clears live BUSY",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "one-shot returns shutdown",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "completed local result independent of action payload",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "local word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed remote result independent of action payload",
+        "actual": 30,
+        "expected": 30
+      },
+      {
+        "clause": "remote word pair completed",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "shutdown does not continue without action",
+        "outside_contract": true
+      },
+      {
+        "clause": "SD request finishes current conversion, does not abort",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "pending shutdown completes current conversion",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ONE_SHOT",
+        "value": 0,
+        "stored": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 480,
+          "remote_open": false
+        },
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 30,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ONE_SHOT",
+        "value": 1,
+        "stored": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 480,
+          "remote_open": false
+        },
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 30,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_1"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ONE_SHOT",
+        "value": 6,
+        "stored": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 480,
+          "remote_open": false
+        },
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 30,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_6"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ONE_SHOT",
+        "value": 127,
+        "stored": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 480,
+          "remote_open": false
+        },
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 30,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_127"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ONE_SHOT",
+        "value": 128,
+        "stored": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 480,
+          "remote_open": false
+        },
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 30,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_128"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ONE_SHOT",
+        "value": 255,
+        "stored": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 480,
+          "remote_open": false
+        },
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 30,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "payload_255"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "deferred_shutdown"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 64,
+        "stored": true,
+        "instance": "deferred_shutdown"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "deferred_shutdown"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "deferred_shutdown"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "deferred_shutdown"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "live_therm_hysteresis": {
+    "status": "PASS",
+    "check_count": 12,
+    "checks": [
+      {
+        "clause": "THERM sets above limit and resets at/below limit minus hysteresis",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "live THERM is not read-clear",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "THERM ORs local and remote thermal causes",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM sets above limit and resets at/below limit minus hysteresis",
+        "actual": 3,
+        "expected": 3
+      },
+      {
+        "clause": "live THERM is not read-clear",
+        "actual": 3,
+        "expected": 3
+      },
+      {
+        "clause": "THERM ORs local and remote thermal causes",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM sets above limit and resets at/below limit minus hysteresis",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "live THERM is not read-clear",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "THERM ORs local and remote thermal causes",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM sets above limit and resets at/below limit minus hysteresis",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "live THERM is not read-clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM ORs local and remote thermal causes",
+        "actual": 1,
+        "expected": 1
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 1136,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 65,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 65,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 1040,
+          "remote_code": 1136,
+          "remote_open": false
+        },
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 83,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 83,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 960,
+          "remote_code": 1040,
+          "remote_open": false
+        },
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 82,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 82,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 16,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "THERM_live"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "therm2_candidate": {
+    "status": "PASS",
+    "check_count": 21,
+    "checks": [
+      {
+        "clause": "THERM2 high flags follow explicit hysteresis branch",
+        "actual": 80,
+        "expected": 80
+      },
+      {
+        "clause": "THERM2 highs are not read-clear",
+        "actual": 80,
+        "expected": 80
+      },
+      {
+        "clause": "THERM2 lowtemperature alone does not trip high pin",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM2 low numeric state remains unspecified",
+        "outside_contract": true
+      },
+      {
+        "clause": "THERM2 high flags follow explicit hysteresis branch",
+        "actual": 80,
+        "expected": 80
+      },
+      {
+        "clause": "THERM2 highs are not read-clear",
+        "actual": 80,
+        "expected": 80
+      },
+      {
+        "clause": "THERM2 lowtemperature alone does not trip high pin",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM2 low numeric state remains unspecified",
+        "outside_contract": true
+      },
+      {
+        "clause": "THERM2 high flags follow explicit hysteresis branch",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM2 highs are not read-clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM2 lowtemperature alone does not trip high pin",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "THERM2 low numeric state remains unspecified",
+        "outside_contract": true
+      },
+      {
+        "clause": "THERM2 high flags follow explicit hysteresis branch",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM2 highs are not read-clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "THERM2 lowtemperature alone does not trip high pin",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "THERM2 low numeric state remains unspecified",
+        "outside_contract": true
+      },
+      {
+        "clause": "MASK1 has no effect on THERM2",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "THERM2 OPEN latch persists while cause active",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "qualified OPEN-only event does not independently trip THERM2 before unknown ADC outcome",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "THERM2 retired OPEN returns preclear",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "THERM2 only OPEN latch readcleared",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 32,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 960,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 720,
+          "remote_code": 720,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 80,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 640,
+          "remote_code": 640,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 80,
+          "remote_code": 80,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 215,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 160,
+        "stored": true,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "qualified_remote_open_detected",
+        "payload": {},
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 4,
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 4,
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "therm2_candidate",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 4,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "candidate_THERM2"
+      }
+    ],
+    "execution_kind": "EXPLORATORY_THERM2_POLICY"
+  },
+  "reset_unknown_boundary": {
+    "status": "PASS",
+    "check_count": 10,
+    "checks": [
+      {
+        "clause": "non06 generalcall byte has no reset effect",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "qualified reset aborts conversion",
+        "actual": "idle",
+        "expected": "idle"
+      },
+      {
+        "clause": "reset restores documented CONFIG",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "reset restores documented nonzero rate",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "reset restores nonzero high limit",
+        "actual": 127,
+        "expected": 127
+      },
+      {
+        "clause": "reset restores nonzero hysteresis",
+        "actual": 10,
+        "expected": 10
+      },
+      {
+        "clause": "reset returns unknown STATUS boundary",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "reset does not fabricate numeric STATUS00",
+        "outside_contract": true
+      },
+      {
+        "clause": "reset does not create action register storage",
+        "outside_contract": true
+      },
+      {
+        "clause": "aborted conversion has no completion",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 1136,
+          "remote_code": 1136,
+          "remote_open": false
+        },
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 3,
+        "stored": true,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "general_call_reset_completed",
+        "payload": {
+          "second_byte": 5
+        },
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "general_call_reset_completed",
+        "payload": {
+          "second_byte": 6
+        },
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "LOCAL_HIGH_LIMIT",
+        "mask": 255,
+        "value": 127,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "THERM_HYSTERESIS",
+        "mask": 255,
+        "value": 10,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "dirty_generalcall_reset"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "signed_and_extended_words": {
+    "status": "PASS",
+    "check_count": 16,
+    "checks": [
+      {
+        "clause": "normal signed or extended unsigned raw high byte",
+        "actual": 255,
+        "expected": 255
+      },
+      {
+        "clause": "fraction nibble at bits7:4 and lower zeros",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "remote follows source data format",
+        "actual": 255,
+        "expected": 255
+      },
+      {
+        "clause": "remote fractional byte",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "normal signed or extended unsigned raw high byte",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "fraction nibble at bits7:4 and lower zeros",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "remote follows source data format",
+        "actual": 25,
+        "expected": 25
+      },
+      {
+        "clause": "remote fractional byte",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "normal signed or extended unsigned raw high byte",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "fraction nibble at bits7:4 and lower zeros",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "remote follows source data format",
+        "actual": 64,
+        "expected": 64
+      },
+      {
+        "clause": "remote fractional byte",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "normal signed or extended unsigned raw high byte",
+        "actual": 254,
+        "expected": 254
+      },
+      {
+        "clause": "fraction nibble at bits7:4 and lower zeros",
+        "actual": 128,
+        "expected": 128
+      },
+      {
+        "clause": "remote follows source data format",
+        "actual": 254,
+        "expected": 254
+      },
+      {
+        "clause": "remote fractional byte",
+        "actual": 128,
+        "expected": 128
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 0,
+        "stored": true,
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 4088,
+          "remote_code": 4088,
+          "remote_open": false
+        },
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 255,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 255,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xff8_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 0,
+        "stored": true,
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 408,
+          "remote_code": 408,
+          "remote_open": false
+        },
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 25,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x198_0"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 4,
+        "stored": true,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 0,
+        "stored": true,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 255,
+        "stored": true,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 0,
+        "stored": true,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 255,
+        "stored": true,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 1024,
+          "remote_code": 1024,
+          "remote_open": false
+        },
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 64,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0x400_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 4,
+        "stored": true,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 0,
+        "stored": true,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 255,
+        "stored": true,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 0,
+        "stored": true,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 255,
+        "stored": true,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 4072,
+          "remote_code": 4072,
+          "remote_open": false
+        },
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 254,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_HIGH",
+        "mask": 255,
+        "value": 254,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xfe8_4"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_REMOTE_LOW",
+        "mask": 255,
+        "value": 128,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "format_0xfe8_4"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "source_scope_guards": {
+    "status": "PASS",
+    "check_count": 12,
+    "checks": [
+      {
+        "clause": "SD0 one-shot outcome excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "unqualified branch CONSECUTIVE_ALERT",
+        "outside_contract": true
+      },
+      {
+        "clause": "unqualified branch DIGITAL_FILTER",
+        "outside_contract": true
+      },
+      {
+        "clause": "unqualified branch REMOTE_OFFSET_HIGH",
+        "outside_contract": true
+      },
+      {
+        "clause": "unqualified branch N_FACTOR",
+        "outside_contract": true
+      },
+      {
+        "clause": "unqualified branch CHANNEL_ENABLE",
+        "outside_contract": true
+      },
+      {
+        "clause": "THERM2 requires separate declared profile",
+        "outside_contract": true
+      },
+      {
+        "clause": "active RANGE history mix excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "unimplemented read transaction excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "busy limit rewrite excluded",
+        "outside_contract": true
+      },
+      {
+        "clause": "malformed digital sample rejected atomically",
+        "outside_contract": true
+      },
+      {
+        "clause": "unfinished snapshot pair prevents unsupported interleaved ADC update",
+        "outside_contract": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 128,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_service_completed",
+        "payload": {},
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_HIGH_LIMIT",
+        "value": 50,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_LOW_LIMIT",
+        "value": 10,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_HIGH",
+        "value": 50,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_HIGH_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_HIGH",
+        "value": 10,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_LOW_LIMIT_LOW",
+        "value": 0,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "LOCAL_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "REMOTE_THERM_LIMIT",
+        "value": 70,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "THERM_HYSTERESIS",
+        "value": 10,
+        "stored": true,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 400,
+          "remote_code": 400,
+          "remote_open": false
+        },
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "STATUS",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 960,
+          "remote_code": 960,
+          "remote_open": false
+        },
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 320,
+          "remote_code": 320,
+          "remote_open": false
+        },
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_HIGH",
+        "mask": 255,
+        "value": 20,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "TEMP_LOCAL_LOW",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "source_exclusions"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_completed",
+        "payload": {
+          "local_code": 336,
+          "remote_code": 336,
+          "remote_open": false
+        },
+        "instance": "source_exclusions"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE"
+  },
+  "nominal_period_table": {
+    "status": "PASS",
+    "check_count": 10,
+    "checks": [
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 4,
+        "expected": 4
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 2,
+        "expected": 2
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 1,
+        "expected": 1
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 0.5,
+        "expected": 0.5
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 0.25,
+        "expected": 0.25
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 0.125,
+        "expected": 0.125
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 0.0625,
+        "expected": 0.0625
+      },
+      {
+        "clause": "source rate table only, not measured conversion period",
+        "actual": 0.03125,
+        "expected": 0.03125
+      }
+    ],
+    "trace": [
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 0,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 0,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 1,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 1,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 2,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 2,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 3,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 3,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 4,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 4,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 5,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 5,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 6,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 6,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 7,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 7,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 8,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 8,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONV_RATE",
+        "value": 9,
+        "stored": true,
+        "instance": "nominal_metadata"
+      },
+      {
+        "chip": "TMP461",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONV_RATE",
+        "mask": 255,
+        "value": 9,
+        "transaction": "single",
+        "auto_increment": false,
+        "instance": "nominal_metadata"
+      }
+    ],
+    "execution_kind": "SOURCE_TABLE_METADATA"
+  }
+}

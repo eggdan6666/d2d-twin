@@ -1,0 +1,40 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "tmp461-v34/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "TMP461 nine source REPAIR fields fourteen repair dimensions bounded implementation",
+  "inputs": [
+    "eval/independent_source_admission_20261012",
+    "eval/hdc2021_semantics_v33_20261013",
+    "corpus/data/raw_pdf/TI/TMP461.pdf"
+  ],
+  "expected_outputs": [
+    "code_review.md",
+    "code_review.json"
+  ],
+  "evidence_boundaries": [
+    "Original PDF facts only",
+    "Retain unknown/physical exclusions",
+    "No old artifacts or model results modified"
+  ],
+  "acceptance_checks": [
+    "Exactly9REPAIRfields/14dimensions",
+    "Unknownresetstate notfabricated",
+    "STATUSreadclear cause qualification",
+    "BUSY vs alertlatch vs THERM live state",
+    "AlertvsTHERM2conditions",
+    "Sourceidentity and actual evidence replay"
+  ],
+  "known_missing_items": [
+    "No physical SMBus/remote diode/analog/electrical timing certification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

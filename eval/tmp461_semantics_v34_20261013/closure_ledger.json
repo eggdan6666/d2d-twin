@@ -1,0 +1,873 @@
+[
+  {
+    "inventory_field_id": "TMP461.ONE_SHOT.START",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C7",
+      "C8",
+      "C12",
+      "C13"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C7": "VERIFIED_SOURCE",
+      "C8": "VERIFIED_SOURCE",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C13": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C7": [
+        "busy_one_shot"
+      ],
+      "C8": [
+        "busy_one_shot",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ],
+      "C13": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.BUSY",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C8",
+      "C12",
+      "C13"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C2": "VERIFIED_SOURCE",
+      "C8": "VERIFIED_SOURCE",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C13": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C2": [
+        "busy_one_shot",
+        "live_therm_hysteresis"
+      ],
+      "C8": [
+        "busy_one_shot",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ],
+      "C13": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LHIGH",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LHIGH",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LLOW",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LLOW",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RHIGH",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RHIGH",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RLOW",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RLOW",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C9",
+      "C10",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.OPEN",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C11": "VERIFIED_SOURCE",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C13": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "open_cause",
+        "therm2_candidate"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ],
+      "C13": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.OPEN",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C3",
+      "C4",
+      "C6",
+      "C10",
+      "C11",
+      "C12",
+      "C13"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C3": "VERIFIED_SOURCE",
+      "C4": "VERIFIED_SOURCE",
+      "C6": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C10": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C11": "VERIFIED_SOURCE",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C13": "ABSTRACTION_ASSUMPTION"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C3": [
+        "active_retired_flags",
+        "selective_retirement",
+        "all_five_latches"
+      ],
+      "C4": [
+        "active_retired_flags",
+        "selective_retirement"
+      ],
+      "C6": [
+        "therm2_candidate"
+      ],
+      "C10": [
+        "source_scope_guards"
+      ],
+      "C11": [
+        "open_cause",
+        "therm2_candidate"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ],
+      "C13": [
+        "source_scope_guards"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.RTHRM",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C5",
+      "C9",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C2": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C2": [
+        "busy_one_shot",
+        "live_therm_hysteresis"
+      ],
+      "C5": [
+        "live_therm_hysteresis"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  },
+  {
+    "inventory_field_id": "TMP461.STATUS.LTHRM",
+    "dimension": "reset",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "C1",
+      "C2",
+      "C5",
+      "C9",
+      "C12"
+    ],
+    "source_claim_classes": {
+      "C1": "VERIFIED_SOURCE",
+      "C2": "VERIFIED_SOURCE",
+      "C5": "VERIFIED_SOURCE",
+      "C9": "VERIFIED_SOURCE_WITH_AMBIGUITY",
+      "C12": "VERIFIED_SOURCE_WITH_AMBIGUITY"
+    },
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "C1": [
+        "unknown_por",
+        "reset_unknown_boundary"
+      ],
+      "C2": [
+        "busy_one_shot",
+        "live_therm_hysteresis"
+      ],
+      "C5": [
+        "live_therm_hysteresis"
+      ],
+      "C9": [
+        "signed_and_extended_words",
+        "source_scope_guards"
+      ],
+      "C12": [
+        "reset_unknown_boundary",
+        "nominal_period_table"
+      ]
+    },
+    "source_conflict_ids": [
+      "TMP461-C-CONAL-STATUS",
+      "TMP461-C-CONAL-SOURCES",
+      "TMP461-C-FILTER-HISTORY",
+      "TMP461-C-THERM2-LOW-STATE",
+      "TMP461-C-POR-STATUS",
+      "TMP461-C-RANGE-TRANSITION"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Unknown POR and qualified event/readclear conditions; declared THERM2 candidate; no physical/full-source certification"
+  }
+]
