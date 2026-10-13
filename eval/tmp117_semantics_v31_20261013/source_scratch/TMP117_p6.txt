@@ -1,0 +1,81 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 6.5 Electrical Characteristics
+ Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+ 150 °C (unless otherwise noted); Typical specifications are at TA = 25 °C and V+ = 3.3 V (unless otherwise noted)
+          PARAMETER                     TEST CONDITIONS                 MIN     TYP    MAX  UNIT
+
+ TEMPERATURE TO DIGITAL CONVERTER
+
+                                         -20 °C to 50 °C                                             -0.1     ±0.05         0.1
+
+                                         -40 °C to 70 °C                                          -0.15     ±0.05       0.15
+
+                      TMP117    -40 °C to 100 °C                                            -0.2      ±0.1         0.2
+                                         -55 °C to 125 °C        8 averages                    -0.25      ±0.1       0.25
+                                                           1-Hz conversion cycle
+                                         -55 °C to 150 °C                                            -0.3      ±0.1         0.3                                                            Thermal Pad unsoldered
+          Temperature
+                                   25 °C to 50 °C         (DRV Package)                  -0.1     ±0.05         0.1    °C
+          accuracy
+                                                                  I2C Input voltages: VIL ≤                     TMP117M  0°C to 70 °C                                            -0.15     ±0.05       0.15
+                                                                0.05 * V+, VIH ≥ 0.95 *
+                                   0 °C to 85 °C         V+                               -0.2      ±0.1         0.2
+                                         -40 °C to 100 °C                                            -0.2      ±0.1         0.2
+
+                      TMP117N   -55 °C to 125 °C                                        -0.25      ±0.1       0.25
+
+                                         -55 °C to 150 °C                                            -0.3      ±0.1         0.3
+
+       DC power supply sensitivity     One-shot mode, 8 Averages                                    6           m°C/V
+
+          Temperature resolution (LSB)                                                              7.8125           m°C
+
+                               V+ = 3.3 V
+            Repeatability(1)              8 averages                                                 ±1           LSB
+                                     1-Hz conversion cycle
+          Long-term stability and drift     1000 hours at 150 °C(2)                                        ±0.03             °C
+
+          Temperature cycling and
+                                   8 Averages                                                ±2           LSB            hysteresis(3)
+
+          Conversion time               One-shot mode                                    13      15.5       17.5   ms
+
+ DIGITAL INPUT/OUTPUT
+
+           Input capacitance                                                                       4             pF
+ VIH      Input logic high level          SCL, SDA                                         0.7 * (V+)                   V
+ VIL       Input logic low level           SCL, SDA                                                                0.3 * (V+)   V
+  IIN       Input leakage current                                                                         -0.1                   0.1   μA
+       SDA and ALERT output
+ VOL                                         IOL = -3 mA                                        0                   0.4   V            logic low level
+
+ POWER SUPPLY
+ IQ_ACTIV          Quiescent current during active
+ E                                         Active Conversion, serial bus inactive                          135       220   μA          conversion
+
+                                      Duty cycle 1 Hz, averaging mode off, serial bus
+                                                                                                              3.5         5
+                                                inactive. TA = 25 °C
+                                      Duty cycle 1 Hz, 8 averaging mode on, serial bus
+ IQ       Quiescent current                                                                     16        22   μA                                                inactive. TA = 25 °C
+                                      Duty cycle 1 Hz, averaging mode off, serial bus
+                                                                                            15
+                                               active, SCL frequency = 400 kHz
+                                              Serial bus inactive. SCL, SDA, and ADD0 = V+. TA ISB      Standby current(4)                                                                              1.25         3.1   μA                                 = 25 °C
+                                              Serial bus inactive, SCL, SDA, and ADD0 = V+. TA         Shutdown current                                                                              0.15         0.5   μA
+                                 = 25 °C
+                                              Serial bus inactive, SCL, SDA and ADD0 = V+, TA ISD     Shutdown current                                                                                5   μA                                 = 150 °C
+
+                                              Serial bus active, SCL frequency = 400 kHz, ADD0
+         Shutdown current                                                                      17            μA
+                                 = V+
+
+       EEPROM write quiescent
+ IEE                         ADC conversion off; serial bus inactive                         240            μA           current
+
+
+6     Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

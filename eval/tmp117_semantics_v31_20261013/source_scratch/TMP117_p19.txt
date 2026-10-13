@@ -1,0 +1,80 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+
+                                                                             Start
+
+
+
+
+                                                       Set Bit 15 of the EEPROM
+                                                     Unlock Register to 1 to Unlock
+
+
+
+
+                                                        Write Desired Data to the Register
+
+
+
+
+                                                               Wait 7 ms
+
+
+
+
+
+                                                         EEPROM_Busy = 1
+                                                                                                                  (Still Programming)
+
+
+
+
+
+                                              Read Back EEPROM_Busy
+                                                  From EEPROM Unlock                                                                                                                                                             Process                   Register
+
+
+
+
+                                                         EEPROM_Busy = 0                                                                                                                                                                                                                                                       Programming                       (Programming Complete)
+
+
+
+
+
+                                                  Program Another Location?
+                                                                          Yes
+
+
+
+
+
+                                                      No
+
+
+
+
+                                                              General-Call Reset
+
+
+
+
+
+                                           Read Programed Registers to Verify
+
+
+
+
+                                                       End
+
+                            Figure 7-7. EEPROM Programming Sequence
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    19
+
+                                                  Product Folder Links: TMP117

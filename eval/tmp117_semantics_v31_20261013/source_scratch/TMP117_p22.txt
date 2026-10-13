@@ -1,0 +1,77 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ high if the temperature is greater than T(HIGH), or low if the temperature is less than T(LOW). See Figure 7-11 for
+ details of this sequence.
+
+ If multiple devices on the bus respond to the SMBus ALERT command, arbitration during the slave address
+ portion of the SMBus ALERT command determines which device clears the alert status of that device. The
+ device with the lowest two-wire address wins the arbitration.  If the TMP117 wins the arbitration, the TMP117
+ALERT pin becomes inactive at the completion of the SMBus ALERT command.  If the TMP117 loses the
+ arbitration, the TMP117 ALERT pin remains active.
+
+ 7.5.3.1.6 General-Call Reset Function
+
+The TMP117 responds to a two-wire, general-call address (0000 000)  if the eighth  bit  is 0. The device
+ acknowledges the general-call address and responds to commands in the second byte.  If the second byte
+ is 0000 0110, the TMP117 internal registers are reset to power-up values.
+
+ 7.5.3.1.7 Timeout Function
+
+The TMP117 resets the serial interface if the SCL line is held low by the master or the SDA line is held low by
+ the TMP117 for 35 ms (typical) between a START and STOP condition. The TMP117 releases the SDA line if the
+SCL pin is pulled low and waits for a START condition from the host controller. To avoid activating the timeout
+ function, maintain a communication speed of at least 1 kHz for the SCL operating frequency.
+
+ 7.5.3.1.8 Timing Diagrams
+The TMP117 is two-wire, SMBus and I2C interface-compatible. Figure 7-9 to Figure 7-12 show the various
+ operations with the TMP117. Bus definitions are:
+
+Bus Idle: Both SDA and SCL lines remain high.
+
+ Start Data Transfer: A change in the state of the SDA line from high to low when the SCL line is high defines a
+START condition. Each data transfer is initiated with a START condition.
+
+Stop Data Transfer: A change in the state of the SDA line from low to high when the SCL line is high defines a
+STOP condition. Each data transfer is terminated with a repeated START or STOP condition.
+
+Data Transfer: The number of data bytes transferred between a START and a STOP condition is not limited and
+ is determined by the master device.
+
+Acknowledge: Each receiving device, when addressed, is obliged to generate an acknowledge bit. A device
+ that acknowledges must pull down the SDA line during the acknowledge clock pulse in such a way that the
+SDA line is stable low during the high period of the acknowledge clock pulse. The user must take setup and
+ hold times into account. On a master receive, the termination of the data transfer can be signaled by the master
+ generating a not-acknowledge (1) on the last byte transmitted by the slave.
+
+
+        Master controls SDA line
+
+
+        Slave controls SDA line
+
+
+
+              Slave Address                                     Register Pointer (N)            Data to Register N MSB                  Data to Register N LSB
+
+
+
+   S  A6  A5  A4  A3  A2  A1  A0  0  A       0   0   0   0  P3  P2  P1  P0  A     D15 D14 D13 D12 D11 D10 D9  D8  A      D7  D6  D5  D4  D3  D2  D1  D0  A  P
+
+
+
+ START                     R/W           Must be 0                                                                            STOP
+
+
+
+                    ACK from Slave                   ACK from Slave                   ACK from Slave                   ACK from Slave
+
+                          Figure 7-9. Write Word Command Timing Diagram
+
+
+
+
+
+22    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

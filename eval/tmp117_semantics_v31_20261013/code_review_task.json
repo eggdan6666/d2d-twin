@@ -1,0 +1,37 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "tmp117-v31/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "Independent fault and admission review of TMP117 v3.1",
+  "inputs": [
+    "eval/semantic_protocol_v3_20261012",
+    "eval/independent_source_admission_20261012",
+    "corpus/data/raw_pdf/TI/TMP117.pdf"
+  ],
+  "expected_outputs": [
+    "code_review.md",
+    "code_review.json"
+  ],
+  "evidence_boundaries": [
+    "No changes to frozen inputs",
+    "Retain source conflicts and unidentified readbacks",
+    "Events are abstract; no physical timing claim"
+  ],
+  "acceptance_checks": [
+    "Original PDF locators",
+    "Nonzero events and fault fixtures",
+    "Exact field/dimension closure boundaries"
+  ],
+  "known_missing_items": [
+    "No silicon or physical bus measurements"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

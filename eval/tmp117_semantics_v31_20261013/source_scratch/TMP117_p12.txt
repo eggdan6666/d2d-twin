@@ -1,0 +1,58 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.3 Feature Description
+ 7.3.1 Power Up
+
+ After the supply voltage reaches within the operating range, the device requires 1.5 ms to power up before
+ conversions can begin. The device can be programmed to start up in shutdown mode as well. See the EEPROM
+Programming section for more information. The temperature register reads –256 °C before the first conversion.
+
+ 7.3.2 Averaging
+
+ Users can configure the device to report the average of multiple temperature conversions with the AVG[1:0]
+ bits to reduce noise in the conversion results. When the TMP117 is configured to perform averaging with AVG
+ set to 01, the device executes the configured number of conversions to eight. The device accumulates those
+ conversion results and reports the average of all the collected results at the end of the process. As shown in the
+ noise histograms of Figure 6-6 and Figure 6-7, the temperature result output has a repeatability of approximately
+±3 LSBs when there is no averaging and ±1 LSB when the device is configured to perform eight averages.
+
+ Figure 7-2 shows the total conversion cycle time trade-off when using the averaging mode to achieve this
+ improvement in noise performance. Averaging will increase the average active current consumption due to
+ increasing the active conversion time in a conversion cycle. For example a single active conversion typically
+ takes 15.5 ms, so  if the device  is configured to report an average of eight conversions, then the active
+ conversion time is 124 ms (15.5 ms × 8). Use Equation 1 to factor in this increase in active conversion time
+ to accurately calculate the average current consumption of the device. The average current consumption of the
+ device can be decreased by increasing the amount of time the device spends in standby period as compared
+ to active conversion. Under the factory EEPROM settings, the device is configured to report an average of eight
+ conversions with a conversion cycle time of 1 second by default.
+
+ Averaging can be used in both the continuous conversion mode and the one-shot mode.
+
+                                   1 Second
+                          124 ms
+                          8 Conv
+
+
+       8 Averages, 1-Hz CC
+                                           Standby
+                               15.5 ms
+
+
+     I2C Temperature or
+Configuration Register Read
+
+
+
+
+         Data_Ready Flag
+
+                                Figure 7-2. Averaging Timing Diagram
+
+
+
+
+
+12    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

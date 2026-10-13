@@ -1,0 +1,40 @@
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                               www.ti.com
+
+ 7.6.1 Register Descriptions
+
+ 7.6.2 Temperature Register (address = 00h) [default reset = 8000h]
+
+ This register is a 16-bit, read-only register that stores the output of the most recent conversion. One LSB
+ equals 7.8125 m°C. Data are represented in binary two's complement format. Following a reset, the temperature
+ register reads –256 °C until the first conversion, including averaging, is complete. See the Power Up section for
+more information.
+
+ Return to Register Map.
+
+                                  Figure 7-13. Temperature Register
+       15            14            13            12             11            10             9             8
+
+      T15           T14           T13           T12           T11           T10           T9           T8
+
+      R-1           R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+       7             6             5             4             3             2             1             0
+
+      T7           T6           T5           T4           T3           T2           T1           T0
+
+      R-0           R-0            R-0            R-0            R-0            R-0            R-0           R-0
+
+                          Table 7-5. Temperature Register Field Descriptions
+    BIT    FIELD                      TYPE   RESET    DESCRIPTION
+
+    15:0     T[15:0]                   R       8000h        16-bit, read-only register that stores the most recent
+                                                                     temperature conversion results.
+
+
+
+
+
+26    Submit Document Feedback                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117

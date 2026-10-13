@@ -1,0 +1,848 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "tmp117-v31/source_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    {
+      "path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "access": "FULL_LOCAL_MANUFACTURER_PDF",
+      "revision": "SNOSD82D June2018 revisedSeptember2022",
+      "pdf_pages": 50,
+      "reviewed_printed_pages": [
+        6,
+        12,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        21,
+        22,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32
+      ]
+    },
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "eval/semantic_protocol_v3_20261012/runtime.py",
+    "eval/semantic_protocol_v3_20261012/repair_closure_ledger.json"
+  ],
+  "outputs": [
+    "eval/tmp117_semantics_v31_20261013/source_review.md",
+    "eval/tmp117_semantics_v31_20261013/source_review.json"
+  ],
+  "evidence_status": [
+    "VERIFIED_SOURCE: originalPDFdirectreview withmanualrevision/SHA/pages;17 boundedclaims",
+    "EXECUTED_LOCAL: PDFtext extraction andvisualinspectionofpp15/18/27/28/31",
+    "PENDING_VERIFICATION: newv3.1implementationandtestsnotexaminedbythisexpert"
+  ],
+  "assumptions": [
+    "Completed sample eventsinjectpost-linearizationdigitalcodes; noanalogtemperature or physicaltiming proof.",
+    "Nonintegralmeans, unknownMODreadback andunsupportedtransitionresponses remainunscored.",
+    "Orderedlow/highlimit is a benchmarkguard, not a datasheet-forbiddenhardwarevalue."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "Verified sourceSHA256 againstactualPDF.",
+    "Visually checkedCONFIGfootnotemask0x07fc andTable7-7.",
+    "Visually checkedoffsetsaturationstatement onp31.",
+    "Directlyreviewedall15TMP117REPAIRfieldrows;16REPAIRdimensionsincludingCONVlegal_encoding+conditional_write.",
+    "NooldIR/harness/resultartifactwritesperformedbythisreview."
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "ACTIVE-RECONFIGURATION",
+      "conflict_type": "UNSPECIFIED_OR_ABSTRACTION_BOUNDARY",
+      "claim": "Only MOD01 immediate abort is explicit; AVG/CONV edits, repeatedMOD11 and transitions while active lack a full restart/abort oracle.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[14, 15, 27]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "Reject unsupported active reconfiguration, preserve no-hardware-claim boundary."
+    },
+    {
+      "conflict_id": "AUTO-SHUTDOWN-MOD-READBACK",
+      "conflict_type": "UNSPECIFIED_OR_ABSTRACTION_BOUNDARY",
+      "claim": "Runtime shutdown after OS is explicit; exact numeric MOD readback is not.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[15, 27]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "MarkMOD bits unknown after automatic completion; known-mask-aware reads/assertions required."
+    },
+    {
+      "conflict_id": "NONINTEGRAL-AVERAGE-ROUNDING",
+      "conflict_type": "UNSPECIFIED_OR_ABSTRACTION_BOUNDARY",
+      "claim": "Average rounding/tie behavior and offset-relative averaging saturation pipeline are not given.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[12, 27, 31]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "Reject nondivisible means; score constant or exactly divisible safe sequences. Do not certify a chosen Python division rule."
+    },
+    {
+      "conflict_id": "UNLOCKED-VOLATILE-READBACK",
+      "conflict_type": "UNSPECIFIED_OR_ABSTRACTION_BOUNDARY",
+      "claim": "Backing programming established, immediate volatile exposure/activation not explicit.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[18, 30]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "Assert post-general-call/POR reload rather than intermediate unlocked readback."
+    },
+    {
+      "conflict_id": "POR-NONLIMIT-WRITES",
+      "conflict_type": "UNSPECIFIED_OR_ABSTRACTION_BOUNDARY",
+      "claim": "POR ignore statement coversCONFIG andlimits, notOFF/EUN/scratch.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[18]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "Reject unmodeled POR writes; do not generalize ignore."
+    },
+    {
+      "conflict_id": "CONFIG-SOFT-RESET",
+      "conflict_type": "SOURCE_CONFLICT",
+      "claim": "Figure7-14 marks bit1R-0; continuedTable7-6 saysR/W reset trigger alwaysread0.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[27, 28]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "Keep prior unresolvedsourceconflict, leaveSOFT_RESET unscored; no officialerratum claim."
+    },
+    {
+      "conflict_id": "DEVICE-REVISION",
+      "conflict_type": "SOURCE_CONFLICT",
+      "claim": "Figure7-22 labelsRevR-x whileTable7-15 saysreset0.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[32]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "OnlyDID11:0 known0x117; do not certify revisionnibble."
+    },
+    {
+      "conflict_id": "ALERT-MODE-SWITCH",
+      "conflict_type": "UNSPECIFIED_OR_ABSTRACTION_BOUNDARY",
+      "claim": "Mode-specific completed-conversion/read behavior is defined; transition-time alert-bit effects are not.",
+      "source_or_locator": "corpus/data/raw_pdf/TI/TMP117.pdf printedpages[16, 17, 27]",
+      "competing_interpretations": "Retainunknown;do notcertifyguessedbehavior",
+      "recommended_resolution": "ConfigureTNA before qualifyingevents; reject/leaveunscored direct sideeffects ofTNA switch."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Implement and independently test only the sourcedv3.1clauses with explicitknownmasksandunscoredguards, thenletorchestratorreviewclauseclosure; do notfreezeformalinputs yet.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "claims": [
+    {
+      "claim_id": "NVM-CONFIG-MASK",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        27,
+        28
+      ],
+      "printed_pages": [
+        "27",
+        "28"
+      ],
+      "locator": "Figure7-14 notes(1)-(2); Table7-6",
+      "paraphrased_fact": "Only MOD0 and CONFIG bits9:2 are EEPROM-persistent; MOD1 is not. Exact backing mask is 0x07fc. Factory CONFIG is0x0220.",
+      "implementation_constraints": [
+        "Separate persistent mask0x07fc from volatile writable mask0x0ffc and from source-conflicted SOFT_RESET bit1.",
+        "Source-prohibited default one-shot maps to shutdown at startup; never persist MOD1.",
+        "Mask derivation is a digital bitwise consequence of explicitly tagged bits, not a silicon measurement."
+      ]
+    },
+    {
+      "claim_id": "NVM-BACKED-LOCATIONS",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        18,
+        25,
+        27,
+        28,
+        29,
+        31
+      ],
+      "printed_pages": [
+        "18",
+        "25",
+        "27",
+        "28",
+        "29",
+        "31"
+      ],
+      "locator": "Section7.5.1.1; Table7-3 note(1); Figure7-14; Tables7-8,7-9,7-13",
+      "paraphrased_fact": "CONFIG tagged bits, THIGH, TLOW and TEMP_OFFSET have writable EEPROM reset images; defaults0x0220,0x6000,0x8000,0x0000 are factory profile values.",
+      "implementation_constraints": [
+        "Keep arbitrary seeded image separate from factory defaults.",
+        "General-call reset loads EEPROM-backed values, including signed nonzero offset.",
+        "Do not enlarge this IR into general-purpose EEPROM1/2/3 without a separate task."
+      ]
+    },
+    {
+      "claim_id": "NVM-LOCKED-WRITES",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        18,
+        30
+      ],
+      "printed_pages": [
+        "18",
+        "30"
+      ],
+      "locator": "Section7.5.1.2; Table7-10 EUN",
+      "paraphrased_fact": "With EUN0, programmable-address writes change digital volatile registers without programming EEPROM.",
+      "implementation_constraints": [
+        "Test volatile changes then reset reload of old backing image.",
+        "Assert no Busy/program event for ordinary locked write."
+      ]
+    },
+    {
+      "claim_id": "NVM-PROGRAM",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        18,
+        19,
+        30
+      ],
+      "printed_pages": [
+        "18",
+        "19",
+        "30"
+      ],
+      "locator": "Section7.5.1.2; Figure7-7; Table7-10",
+      "paraphrased_fact": "EUN1 enables backing programming on writes to programmable locations. Busy is set, readiness is polled, no I2C write should occur before completion. A subsequent general-call reset loads programmed data and clears EUN.",
+      "implementation_constraints": [
+        "Use explicit program-completed event with nonzero before/after observables.",
+        "Reject prohibited busy writes as outside contract; do not assert their hardware response is ignore, NACK or exception.",
+        "Do not score immediate volatile readback/activation of unlocked writes: it is not specified explicitly.",
+        "Avoid temperature conversions while EUN1."
+      ]
+    },
+    {
+      "claim_id": "NVM-POR",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        18,
+        30
+      ],
+      "printed_pages": [
+        "18",
+        "30"
+      ],
+      "locator": "Section7.5.1.1; Table7-10",
+      "paraphrased_fact": "Reset starts approximately1.5ms EEPROM load; CONFIG and limit writes in this initial POR are ignored, reads are allowed, and EEPROM Busy is set while load executes.",
+      "implementation_constraints": [
+        "POR started and POR completed are logical events, not wall-clock simulation.",
+        "Verify CONFIG/THIGH/TLOW ignore using nonzero attempted writes and later backing reload.",
+        "POR writes to OFF, EUN or scratch EEPROM are not defined by the ignore clause: reject or leave unscored."
+      ]
+    },
+    {
+      "claim_id": "NVM-BUSY-MIRROR",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        27,
+        30
+      ],
+      "printed_pages": [
+        "27",
+        "30"
+      ],
+      "locator": "Tables7-6,7-10",
+      "paraphrased_fact": "EEPROM_UL bit14 mirrors CONFIG bit12; flags indicate EEPROM programming or POR load. Clear only when completion/readiness established.",
+      "implementation_constraints": [
+        "Both mirrors must be1 in active program and POR,0 after corresponding completion.",
+        "Read must not clear Busy. Register table reset0 is post-load baseline, not permission to skip active POR phase."
+      ]
+    },
+    {
+      "claim_id": "GENERAL-CALL-RESET",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        18,
+        22,
+        24
+      ],
+      "printed_pages": [
+        "18",
+        "22",
+        "24"
+      ],
+      "locator": "Section7.5.3.1.6; Figure7-12; Section7.5.1.2",
+      "paraphrased_fact": "The device responds to general-call address0000000 with eighthbit0 and secondbyte00000110 by resetting registers to power-up values.",
+      "implementation_constraints": [
+        "A semantic general-call event can stand for this accepted frame; no physical ACK, arbitration or wire-timing claim.",
+        "General-call then POR completion reloads image and locks EUN."
+      ]
+    },
+    {
+      "claim_id": "MODE-ENCODINGS",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        14,
+        15,
+        27
+      ],
+      "printed_pages": [
+        "14",
+        "15",
+        "27"
+      ],
+      "locator": "Sections7.4.1-3; Table7-6 MOD",
+      "paraphrased_fact": "MOD00 and10 are continuous;10 reads back00. MOD01 instantly aborts active conversion into shutdown. MOD11 starts one-shot; after completion device enters shutdown.",
+      "implementation_constraints": [
+        "Use runtime mode state separately from raw post-one-shot MOD bits.",
+        "Unknown automatic-shutdown numeric readback must not be fabricated as01.",
+        "Allow explicit MOD01 abort with previously accumulated samples discarded.",
+        "Do not assert unsupported AVG/CONV edits, repeated MOD11 or mode changes restart a partial cycle."
+      ]
+    },
+    {
+      "claim_id": "AVERAGE-COUNTS",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        12,
+        15,
+        26,
+        27
+      ],
+      "printed_pages": [
+        "12",
+        "15",
+        "26",
+        "27"
+      ],
+      "locator": "Section7.3.2; Section7.4.3; Table7-6 AVG; Table7-5",
+      "paraphrased_fact": "AVG0/1/2/3 choose1/8/32/64 conversions; accumulation is batch average, not a running average. Result and DataReady publish only at end of batch. Applies CC and OS.",
+      "implementation_constraints": [
+        "Require exactlyN completed sample events before first publication; test N-1 and N.",
+        "OS completion enters shutdown, so N+1 event is unsupported.",
+        "Rounding of nonintegral means and precise offset-versus-average pipeline order are not specified.",
+        "Use identical or evenly divisible nonsaturating samples for exact mean oracle; saturation tests can use constant samples."
+      ]
+    },
+    {
+      "claim_id": "OS-CONV-INDEPENDENT",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        15,
+        27
+      ],
+      "printed_pages": [
+        "15",
+        "27"
+      ],
+      "locator": "Section7.4.3; Table7-6 DataReady",
+      "paraphrased_fact": "One-shot duration contains active conversion only and is affected by AVG, not CONV; after completion DataReady can be cleared by TEMP or CONFIG read.",
+      "implementation_constraints": [
+        "Sweep CONV0..7 with fixedAVG and assert the same sample count, not identical physical elapsed time.",
+        "Completion event is post-linearization sample/result abstraction."
+      ]
+    },
+    {
+      "claim_id": "CC-CYCLE-TABLE",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        14,
+        28
+      ],
+      "printed_pages": [
+        "14",
+        "28"
+      ],
+      "locator": "Figure7-3; Table7-7; paragraph after table",
+      "paraphrased_fact": "Table7-7 reports CC conversion CYCLE times; rowsCONV0..7 and columnsAVG0..3: [15.5,125,500,1000], [125,125,500,1000], [250,250,500,1000], [500,500,500,1000], four1000, four4000, four8000, four16000 milliseconds.",
+      "implementation_constraints": [
+        "Do not describe the entire table as standalone standby time.",
+        "No standby when required averaging active period is longer than requested cycle.",
+        "A table lookup check validates transcription only; no physical timer/conversion accuracy proof."
+      ]
+    },
+    {
+      "claim_id": "SIGNED-OFFSET-SATURATION",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        26,
+        31
+      ],
+      "printed_pages": [
+        "26",
+        "31"
+      ],
+      "locator": "Sections7.6.2,7.6.9; Tables7-5,7-13",
+      "paraphrased_fact": "TEMP_OFFSET is signed16 two's-complement with1LSB=7.8125mC, added after linearization; out-of-bound sum shows maximum/minimum result.",
+      "implementation_constraints": [
+        "Decode signed16 before arithmetic; clamp to[-32768,32767], then encode.",
+        "Test nonzero positive and negative offset and positive/negative saturation; never wrap.",
+        "Do not invent physical temperature or linearization model: injected code is already linearized.",
+        "Use uniform sample vectors for saturation to avoid unspecified pipeline ordering."
+      ]
+    },
+    {
+      "claim_id": "SIGNED-LIMITS",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        29
+      ],
+      "printed_pages": [
+        "29"
+      ],
+      "locator": "Sections7.6.4-5; Tables7-8-9",
+      "paraphrased_fact": "THIGH/TLOW use signed16 two's complement, sameLSB asTEMP, loaded from backing EEPROM on reset.",
+      "implementation_constraints": [
+        "Compare signed temperature against signed limits; positive/negative cross-zero cases required.",
+        "Ordered limits are a benchmark domain guard, not an asserted hardware prohibition for reversed limits."
+      ]
+    },
+    {
+      "claim_id": "READY-READ-CLEAR",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        14,
+        15,
+        27
+      ],
+      "printed_pages": [
+        "14",
+        "15",
+        "27"
+      ],
+      "locator": "Sections7.4.1,7.4.3; Table7-6 DataReady",
+      "paraphrased_fact": "DataReady sets on completed register update and clears on either TEMP or CONFIG read.",
+      "implementation_constraints": [
+        "Return the pre-clear CONFIG flag value then clear side effect.",
+        "TEMP reads clearReady only; they do not acquire the CONFIG alert-clear side effect."
+      ]
+    },
+    {
+      "claim_id": "ALERT-MODE",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        16,
+        27
+      ],
+      "printed_pages": [
+        "16",
+        "27"
+      ],
+      "locator": "Section7.4.4.1; Figure7-5; Table7-6",
+      "paraphrased_fact": "TNA0: >THIGH setsHIGH, <TLOW setsLOW; CONFIG read clears flags. ALERT signal reflectsHIGH orLOW unlessDR_ALERT selectsReady; POL chooses active polarity.",
+      "implementation_constraints": [
+        "Test positive and negative signed thresholds, snapshot-then-clear, and re-arm with a later conversion.",
+        "The vague ALERT wording in p15 OS paragraph does not imply unconditionalHIGH/LOW on every OS completion.",
+        "Equality does not exceed/fall below thresholds; avoid inventing an unconditional clear at equality."
+      ]
+    },
+    {
+      "claim_id": "THERM-MODE",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        17,
+        27
+      ],
+      "printed_pages": [
+        "17",
+        "27"
+      ],
+      "locator": "Section7.4.4.2; Figure7-6; Table7-6",
+      "paraphrased_fact": "TNA1:HIGH sets abovehigh and clears belowlow; between/equality preserves hysteresis state;LOW reads0. CONFIG reads do not clearHIGH. ALERT remains until qualifying conversion, not CONFIG/SMBus response.",
+      "implementation_constraints": [
+        "Test assertedHIGH survivingCONFIG read, intermediate and threshold-equality values, then belowlow clear.",
+        "DataReady still clears onCONFIG/TEMP inTHERM.",
+        "Do not assert unspecified mode-change-time alert flag clearing/recomputation."
+      ]
+    },
+    {
+      "claim_id": "SOURCE-TIMING",
+      "evidence_status": "VERIFIED_SOURCE",
+      "source_path": "corpus/data/raw_pdf/TI/TMP117.pdf",
+      "source_sha256": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+      "pdf_pages": [
+        6,
+        12,
+        18,
+        28
+      ],
+      "printed_pages": [
+        "6",
+        "12",
+        "18",
+        "28"
+      ],
+      "locator": "Section6.5; Section7.3.2; Section7.5.1.2; Table7-6",
+      "paraphrased_fact": "Single active conversion has13/15.5/17.5ms min/typ/max under specified conditions; p12 example8conversions is124ms active, Table7-7 uses125ms CC cycle. Programming7ms is typical; POR1.5ms approximate. SoftReset prose duration2ms is separate and source-conflicted.",
+      "implementation_constraints": [
+        "No measured latency claims from logical events.",
+        "Do not collapse124ms active into125ms cycle, or treat typ/program/POR figures as guaranteed event deadlines."
+      ]
+    }
+  ],
+  "unspecified_boundaries": [
+    {
+      "id": "ACTIVE-RECONFIGURATION",
+      "source_pages": [
+        14,
+        15,
+        27
+      ],
+      "fact": "Only MOD01 immediate abort is explicit; AVG/CONV edits, repeatedMOD11 and transitions while active lack a full restart/abort oracle.",
+      "policy": "Reject unsupported active reconfiguration, preserve no-hardware-claim boundary."
+    },
+    {
+      "id": "AUTO-SHUTDOWN-MOD-READBACK",
+      "source_pages": [
+        15,
+        27
+      ],
+      "fact": "Runtime shutdown after OS is explicit; exact numeric MOD readback is not.",
+      "policy": "MarkMOD bits unknown after automatic completion; known-mask-aware reads/assertions required."
+    },
+    {
+      "id": "NONINTEGRAL-AVERAGE-ROUNDING",
+      "source_pages": [
+        12,
+        27,
+        31
+      ],
+      "fact": "Average rounding/tie behavior and offset-relative averaging saturation pipeline are not given.",
+      "policy": "Reject nondivisible means; score constant or exactly divisible safe sequences. Do not certify a chosen Python division rule."
+    },
+    {
+      "id": "UNLOCKED-VOLATILE-READBACK",
+      "source_pages": [
+        18,
+        30
+      ],
+      "fact": "Backing programming established, immediate volatile exposure/activation not explicit.",
+      "policy": "Assert post-general-call/POR reload rather than intermediate unlocked readback."
+    },
+    {
+      "id": "POR-NONLIMIT-WRITES",
+      "source_pages": [
+        18
+      ],
+      "fact": "POR ignore statement coversCONFIG andlimits, notOFF/EUN/scratch.",
+      "policy": "Reject unmodeled POR writes; do not generalize ignore."
+    },
+    {
+      "id": "CONFIG-SOFT-RESET",
+      "source_pages": [
+        27,
+        28
+      ],
+      "fact": "Figure7-14 marks bit1R-0; continuedTable7-6 saysR/W reset trigger alwaysread0.",
+      "policy": "Keep prior unresolvedsourceconflict, leaveSOFT_RESET unscored; no officialerratum claim."
+    },
+    {
+      "id": "DEVICE-REVISION",
+      "source_pages": [
+        32
+      ],
+      "fact": "Figure7-22 labelsRevR-x whileTable7-15 saysreset0.",
+      "policy": "OnlyDID11:0 known0x117; do not certify revisionnibble."
+    },
+    {
+      "id": "ALERT-MODE-SWITCH",
+      "source_pages": [
+        16,
+        17,
+        27
+      ],
+      "fact": "Mode-specific completed-conversion/read behavior is defined; transition-time alert-bit effects are not.",
+      "policy": "ConfigureTNA before qualifyingevents; reject/leaveunscored direct sideeffects ofTNA switch."
+    }
+  ],
+  "closure_advice": [
+    {
+      "inventory_field_id": "TMP117.CONFIG.AVG",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-CONFIG-MASK",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "AVERAGE-COUNTS"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.CONV",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "legal_encoding",
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "CC-CYCLE-TABLE",
+        "NVM-CONFIG-MASK",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "OS-CONV-INDEPENDENT"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.DATA_READY",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "read_clear"
+      ],
+      "required_claim_ids": [
+        "READY-READ-CLEAR",
+        "AVERAGE-COUNTS",
+        "OS-CONV-INDEPENDENT"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.DR_ALERT",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-CONFIG-MASK",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "ALERT-MODE",
+        "READY-READ-CLEAR"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.EEPROM_BUSY",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "trigger_completion"
+      ],
+      "required_claim_ids": [
+        "NVM-BUSY-MIRROR",
+        "NVM-PROGRAM",
+        "NVM-POR"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.HIGH_ALERT",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "read_clear"
+      ],
+      "required_claim_ids": [
+        "ALERT-MODE",
+        "THERM-MODE",
+        "SIGNED-LIMITS"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.LOW_ALERT",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "read_clear"
+      ],
+      "required_claim_ids": [
+        "ALERT-MODE",
+        "THERM-MODE",
+        "SIGNED-LIMITS"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.MOD",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "MODE-ENCODINGS",
+        "NVM-CONFIG-MASK",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "AVERAGE-COUNTS"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.POL",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-CONFIG-MASK",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "ALERT-MODE"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.CONFIG.TNA",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-CONFIG-MASK",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "THERM-MODE",
+        "ALERT-MODE"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.EEPROM_UL.EEPROM_BUSY",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "trigger_completion"
+      ],
+      "required_claim_ids": [
+        "NVM-BUSY-MIRROR",
+        "NVM-PROGRAM",
+        "NVM-POR"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.EEPROM_UL.EUN",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "GENERAL-CALL-RESET"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.TEMP_OFFSET.OFF",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-BACKED-LOCATIONS",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "SIGNED-OFFSET-SATURATION"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.THIGH.H",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-BACKED-LOCATIONS",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "SIGNED-LIMITS",
+        "ALERT-MODE",
+        "THERM-MODE"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    },
+    {
+      "inventory_field_id": "TMP117.TLOW.L",
+      "source_overall_status": "REPAIR",
+      "source_repair_dimensions": [
+        "conditional_write"
+      ],
+      "required_claim_ids": [
+        "NVM-BACKED-LOCATIONS",
+        "NVM-LOCKED-WRITES",
+        "NVM-PROGRAM",
+        "NVM-POR",
+        "SIGNED-LIMITS",
+        "ALERT-MODE",
+        "THERM-MODE"
+      ],
+      "closure_recommendation": "SCOPED_CLAUSES_ONLY_AFTER_EXECUTION",
+      "whole_field_pass_recommended": false,
+      "rationale": "A source review supplies constraints; matching nonvacuous tests and exact operating-scope exclusions must be accepted separately. No automatic whole-dimension closure from field matching."
+    }
+  ],
+  "closure_summary": {
+    "repair_fields": 15,
+    "repair_dimensions": 16,
+    "whole_field_pass_count_recommended": 0,
+    "note": "Sourcefactreviewiscomplete; implementationacceptanceandwholeprojectM4remainorchestratorowned."
+  }
+}

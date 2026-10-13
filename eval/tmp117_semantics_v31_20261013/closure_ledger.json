@@ -1,0 +1,560 @@
+[
+  {
+    "inventory_field_id": "TMP117.CONFIG.AVG",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "AVERAGE-COUNTS"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "AVERAGE-COUNTS": [
+        "one_shot_matrix"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.CONV",
+    "dimension": "legal_encoding",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "CC-CYCLE-TABLE",
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "OS-CONV-INDEPENDENT"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "CC-CYCLE-TABLE": [
+        "nominal_cycle_table"
+      ],
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "OS-CONV-INDEPENDENT": [
+        "one_shot_matrix"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.CONV",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "CC-CYCLE-TABLE",
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "OS-CONV-INDEPENDENT"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "CC-CYCLE-TABLE": [
+        "nominal_cycle_table"
+      ],
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "OS-CONV-INDEPENDENT": [
+        "one_shot_matrix"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.DATA_READY",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "READY-READ-CLEAR",
+      "AVERAGE-COUNTS",
+      "OS-CONV-INDEPENDENT"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "READY-READ-CLEAR": [
+        "one_shot_matrix",
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ],
+      "AVERAGE-COUNTS": [
+        "one_shot_matrix"
+      ],
+      "OS-CONV-INDEPENDENT": [
+        "one_shot_matrix"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.DR_ALERT",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "ALERT-MODE",
+      "READY-READ-CLEAR"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ],
+      "READY-READ-CLEAR": [
+        "one_shot_matrix",
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.EEPROM_BUSY",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-BUSY-MIRROR",
+      "NVM-PROGRAM",
+      "NVM-POR"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-BUSY-MIRROR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.HIGH_ALERT",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "ALERT-MODE",
+      "THERM-MODE",
+      "SIGNED-LIMITS"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ],
+      "THERM-MODE": [
+        "alert_and_therm"
+      ],
+      "SIGNED-LIMITS": [
+        "alert_and_therm"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.LOW_ALERT",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "ALERT-MODE",
+      "THERM-MODE",
+      "SIGNED-LIMITS"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ],
+      "THERM-MODE": [
+        "alert_and_therm"
+      ],
+      "SIGNED-LIMITS": [
+        "alert_and_therm"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.MOD",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "MODE-ENCODINGS",
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "AVERAGE-COUNTS"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "MODE-ENCODINGS": [
+        "mode_abort_and_atomic_guards",
+        "one_shot_matrix"
+      ],
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "AVERAGE-COUNTS": [
+        "one_shot_matrix"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.POL",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "ALERT-MODE"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.CONFIG.TNA",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-CONFIG-MASK",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "THERM-MODE",
+      "ALERT-MODE"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-CONFIG-MASK": [
+        "config_bit_persistence"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "THERM-MODE": [
+        "alert_and_therm"
+      ],
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.EEPROM_UL.EEPROM_BUSY",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-BUSY-MIRROR",
+      "NVM-PROGRAM",
+      "NVM-POR"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-BUSY-MIRROR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.EEPROM_UL.EUN",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "GENERAL-CALL-RESET"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "GENERAL-CALL-RESET": [
+        "eeprom_roundtrips"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.TEMP_OFFSET.OFF",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-BACKED-LOCATIONS",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "SIGNED-OFFSET-SATURATION"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-BACKED-LOCATIONS": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "SIGNED-OFFSET-SATURATION": [
+        "signed_offset"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.THIGH.H",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-BACKED-LOCATIONS",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "SIGNED-LIMITS",
+      "ALERT-MODE",
+      "THERM-MODE"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-BACKED-LOCATIONS": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "SIGNED-LIMITS": [
+        "alert_and_therm"
+      ],
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ],
+      "THERM-MODE": [
+        "alert_and_therm"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  },
+  {
+    "inventory_field_id": "TMP117.TLOW.L",
+    "dimension": "conditional_write",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "required_claim_ids": [
+      "NVM-BACKED-LOCATIONS",
+      "NVM-LOCKED-WRITES",
+      "NVM-PROGRAM",
+      "NVM-POR",
+      "SIGNED-LIMITS",
+      "ALERT-MODE",
+      "THERM-MODE"
+    ],
+    "missing_claim_ids": [],
+    "claim_scenarios": {
+      "NVM-BACKED-LOCATIONS": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-LOCKED-WRITES": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-PROGRAM": [
+        "eeprom_roundtrips"
+      ],
+      "NVM-POR": [
+        "eeprom_roundtrips",
+        "por_and_user_image"
+      ],
+      "SIGNED-LIMITS": [
+        "alert_and_therm"
+      ],
+      "ALERT-MODE": [
+        "alert_and_therm",
+        "data_ready_pin_selection"
+      ],
+      "THERM-MODE": [
+        "alert_and_therm"
+      ]
+    },
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Declared digital event profile and explicit exclusions only"
+  }
+]

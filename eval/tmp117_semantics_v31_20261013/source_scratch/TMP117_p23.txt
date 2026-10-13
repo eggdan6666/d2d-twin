@@ -1,0 +1,78 @@
+                                                                                    TMP117
+www.ti.com                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+        Master controls SDA line
+
+
+        Slave controls SDA line
+
+
+
+             Slave Address                                     Register Pointer (N)                   Slave Address
+
+
+
+
+   S  A6  A5  A4  A3  A2  A1  A0  0  A       0   0   0   0  P3  P2  P1  P0  A     RS  A6  A5  A4  A3  A2  A1  A0  1  A
+
+
+
+START                     R/W           Must be 0                    Re-START                   R/W
+
+
+
+                    ACK from Slave                   ACK from Slave                      ACK from Slave
+
+
+
+
+
+                            Data from Register N MSB                Data from Register N LSB
+
+
+
+                        D15 D14 D13 D12 D11 D10 D9  D8  A      D7  D6  D5  D4  D3  D2  D1  D0 NA  P
+
+
+
+                                                                          STOP
+
+
+
+                                 ACK from Master                 NACK from Master
+
+                          Figure 7-10. Read Word Command Timing Diagram
+
+
+                    Master controls SDA line
+
+
+                    Slave controls SDA line
+
+
+
+                   SMBus Alert Response
+                       Command                   TMP117 I2C Address
+
+
+
+             S   0   0   0   1   1   0   0   1  A       1   0   0   1   0  A1  A0  Stat NA  P
+
+
+
+          START                                                                      Status  STOP
+
+
+
+                             ACK from Slave                 NACK from Master
+
+                             Figure 7-11. SMBus ALERT Timing Diagram
+
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback    23
+
+                                                  Product Folder Links: TMP117
