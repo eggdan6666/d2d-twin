@@ -1,0 +1,44 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina3221-v38/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "Independent INA3221 source-derived runtime, fault-oracle and evidence admission review",
+  "inputs": [
+    "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "eval/ina3221_semantics_v38_20261014/ina3221.py",
+    "eval/ina3221_semantics_v38_20261014/code_acceptance_checklist.md",
+    "eval/ina3221_semantics_v38_20261014/target_fields.json",
+    "eval/ina3221_semantics_v38_20261014/source_review.json"
+  ],
+  "expected_outputs": [
+    "Independent runtime and mutation pytest tests",
+    "Admission/witness rejection tests",
+    "Full code_review.json contract and code_review.md",
+    "Actual JUnit and final input before/after hash execution manifest"
+  ],
+  "evidence_boundaries": [
+    "Write only sandbox/ina3221_v38/code_review",
+    "No main directory,state,Gold,Harness or archive edits",
+    "Synthetic mutants are not LLM or hardware statistics"
+  ],
+  "acceptance_checks": [
+    "Exactly3fields3dimensions no promotion",
+    "RST requests and qualifiedcurrentepochcompletion with PV logical output exception",
+    "CVRF coverage of enabled signals,recursivefilter identity/no Ncyclewait",
+    "MODE0/4 exception and all-disabled clear unknown",
+    "TCF common numeric reset/fault unknown, separate logicalTCpin state",
+    "EarlyCONFIG cancelsTC, cycle/software-resetrearm, no falseTCFreadclear",
+    "Actual rejecting forgery, missing witness PARTIAL, independent sourcebyte binding"
+  ],
+  "known_missing_items": [
+    "No physical timing/ADC/filter/PV/TC measurement"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python"
+  ],
+  "stage_authority": "sci-skills"
+}

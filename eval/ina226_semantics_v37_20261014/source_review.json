@@ -1,0 +1,1084 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina226-v37/source_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    {
+      "path": "corpus/data/raw_pdf/TI/INA226.pdf",
+      "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+      "page_count": 41
+    },
+    {
+      "path": "eval/independent_source_admission_20261012/field_evidence.json",
+      "sha256": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711"
+    },
+    {
+      "path": "eval/ina226_semantics_v37_20261014/target_fields.json",
+      "role": "scope inventory only"
+    },
+    {
+      "path": "eval/ina226_semantics_v37_20261014/input_identity.json",
+      "role": "identity expectations"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "sandbox/ina226_v37/source_review/source_review.json"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/source_review.md"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/independent_source_checklist.md"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/source_identity.json"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/full_pdf_text.json"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/full_pdf_text.txt"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/extract_source.py"
+    },
+    {
+      "path": "sandbox/ina226_v37/source_review/build_review.py"
+    }
+  ],
+  "evidence_status": [
+    {
+      "label": "VERIFIED_SOURCE",
+      "detail": "User-held manufacturer PDF relevant original definitions independently extracted and visually inspected; authenticity of retrieved bytes against TI website not independently checked."
+    },
+    {
+      "label": "EXECUTED_LOCAL",
+      "detail": "pypdf extraction of 41 pages; Poppler PNG renders; input SHA computation. No implementation evaluation run."
+    },
+    {
+      "label": "VERIFIED_USER_MATERIAL",
+      "detail": "Old field_evidence.json used only as inventory and hashed identity, never as manufacturer authority."
+    },
+    {
+      "label": "AI_INFERENCE",
+      "detail": "Exclusions, event gating, unknown-state common profile and read-order convention are explicit bounded modeling choices."
+    },
+    {
+      "label": "NOT_EXECUTED",
+      "detail": "Candidate implementation, hidden tests, physical measurement and manufacturer clarification not performed."
+    }
+  ],
+  "assumptions": [
+    {
+      "id": "A_RESERVED_LEGAL_PATTERN",
+      "detail": "Admitted writes hold the unnamed bits at POR; nondefault access response excluded."
+    },
+    {
+      "id": "A_RESET_BOUNDARY",
+      "detail": "Explicit abstract reset completion separates request from defaults; no silicon time inferred."
+    },
+    {
+      "id": "A_QUALIFIED_COMPLETE",
+      "detail": "Completion records require all current-mode conversions, configured average and calculations in current epoch."
+    },
+    {
+      "id": "A_READ_SNAPSHOT",
+      "detail": "Complete abstract 16-bit read returns preclear snapshot then applies clear, with no event interleaving; functional convention only."
+    },
+    {
+      "id": "A_COMMON_AFF_UNKNOWN",
+      "detail": "After disputed latch-mode CONFIG write AFF is unknown until an agreed clearing/reset boundary."
+    }
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {
+      "check": "PDF and ledger hashes match task input identity",
+      "status": "PASS"
+    },
+    {
+      "check": "Exact target fields and original REPAIR dimensions",
+      "status": "PASS",
+      "fields": 6,
+      "dimensions": 6
+    },
+    {
+      "check": "Full PDF extracted; complete relevant pages including tables/footnotes visually reviewed",
+      "status": "PASS",
+      "extracted_pages": 41,
+      "visually_reviewed_pages": [
+        11,
+        12,
+        13,
+        19,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ]
+    },
+    {
+      "check": "Source checklist written without implementation inspection/execution",
+      "status": "PASS",
+      "checklist_sha256": "a8b20e0ab20ff230b7e544cfa05f7352a34922f79b5efa028380b360467f1ed5"
+    },
+    {
+      "check": "AFF competing manufacturer statements preserved with locators",
+      "status": "PASS"
+    },
+    {
+      "check": "Read-return ordering separated from explicit manufacturer fact",
+      "status": "PASS"
+    },
+    {
+      "check": "No candidate code or physical hardware executed; no whole-field promotion",
+      "status": "PASS"
+    },
+    {
+      "check": "All output writes confined to sandbox/ina226_v37/source_review",
+      "status": "PASS"
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "INA226_CONFLICT_AFF_CONFIG_WRITE",
+      "conflict_type": "INTRA_SOURCE_SEMANTIC_CONTRADICTION",
+      "claim": "Whether latched AFF clears when Configuration Register is written",
+      "competing_positions": [
+        {
+          "claim_id": "INA226_C12_AFF_CONFIG_P13",
+          "value": "CONFIG write clears latched AFF",
+          "source_or_locator": {
+            "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+            "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+            "pdf_page": 13,
+            "printed_page": "13",
+            "section": "6.3.1.2 continuation",
+            "table": null,
+            "excerpt": null,
+            "inspection": "full page visual and extracted text"
+          }
+        },
+        {
+          "claim_id": "INA226_C13_AFF_CONFIG_P27",
+          "value": "Only MASK_ENABLE read clears latched AFF",
+          "source_or_locator": {
+            "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+            "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+            "pdf_page": 27,
+            "printed_page": "27",
+            "section": "7.1.7 AFF and LEN",
+            "table": null,
+            "excerpt": null,
+            "inspection": "full page visual and extracted text"
+          }
+        }
+      ],
+      "recommended_resolution": "Retain both positions and UNKNOWN for common-profile AFF after latched CONFIG write. Manufacturer clarification/errata or independent hardware evidence needed for source resolution; named profiles are explicit assumptions, not source resolution.",
+      "status": "UNRESOLVED"
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Primary single writer integrates these six dimension-specific source dispositions, preserves conflict/unknown/exclusion policies, and performs independent bounded implementation acceptance.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "source": {
+    "path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "page_count": 41
+  },
+  "ledger": {
+    "path": "eval/independent_source_admission_20261012/field_evidence.json",
+    "sha256": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711"
+  },
+  "claims": [
+    {
+      "id": "INA226_C01_CAL_POR",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "CALIBRATION D15 is unnamed (dash) and POR=0; register 05h is R/W, but table does not assign per-bit write protection.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 26,
+          "printed_page": "26",
+          "section": "7.1.6",
+          "table": "7-11",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CALIBRATION.UNNAMED_15"
+      ],
+      "mask": "0x8000",
+      "reset_field_value": 0
+    },
+    {
+      "id": "INA226_C02_CFG_POR",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "CONFIG D14:D12 are unnamed with POR bits 1,0,0; register 00h is R/W, POR 0x4127.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 22,
+          "printed_page": "22",
+          "section": "7.1.1",
+          "table": "7-1 and 7-2",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CONFIG.UNNAMED_14_12"
+      ],
+      "mask": "0x7000",
+      "reset_field_value": 4,
+      "reset_word_bits": "0x4000"
+    },
+    {
+      "id": "INA226_C03_MASK_POR",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "MASK_ENABLE D9:D5 are unnamed with POR=00000; AFF and CVRF POR=0; register 06h is R/W.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 26,
+          "printed_page": "26",
+          "section": "7.1.7",
+          "table": "7-12",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.UNNAMED_9_5",
+        "MASK_ENABLE.AFF",
+        "MASK_ENABLE.CVRF"
+      ],
+      "mask": "0x03e0",
+      "reset_field_value": 0
+    },
+    {
+      "id": "INA226_C04_RESERVED_WRITE_GAP",
+      "class": "UNDEFINED_BEHAVIOR",
+      "evidence_class": "UNDEFINED_BEHAVIOR",
+      "statement": "The three target unnamed ranges have no per-bit RO, ignore-write, permanent-constant-read or nondefault-write-response guarantee in reviewed original definitions. Whole-register R/W does not establish them.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 22,
+          "printed_page": "22",
+          "section": "7.1.1",
+          "table": "7-2",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 26,
+          "printed_page": "26",
+          "section": "7.1.6 and 7.1.7",
+          "table": "7-11 and 7-12",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CALIBRATION.UNNAMED_15",
+        "CONFIG.UNNAMED_14_12",
+        "MASK_ENABLE.UNNAMED_9_5"
+      ],
+      "search_scope": "Entire 41-page extracted source searched for reserved/read/reset/clear; complete target tables and neighboring text reviewed."
+    },
+    {
+      "id": "INA226_C05_RESERVED_PROTOCOL",
+      "class": "ABSTRACTION_ASSUMPTION",
+      "evidence_class": "ABSTRACTION_ASSUMPTION",
+      "statement": "Keep unnamed bits at their POR pattern in admitted writes; exclude access oracles for nondefault writes. POR knownness is retained only at defined reset boundary; later constant reads are not inferred.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 22,
+          "printed_page": "22",
+          "section": "7.1.1",
+          "table": "7-2",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 26,
+          "printed_page": "26",
+          "section": "7.1.6 and 7.1.7",
+          "table": "7-11 and 7-12",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CALIBRATION.UNNAMED_15",
+        "CONFIG.UNNAMED_14_12",
+        "MASK_ENABLE.UNNAMED_9_5"
+      ],
+      "negative_guarantees": [
+        "No inferred silicon ignore",
+        "No inferred silicon error",
+        "No inferred runtime constant"
+      ]
+    },
+    {
+      "id": "INA226_C06_RST_REQUEST",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "Setting RST=1 generates system reset equal to power-on reset, resets all registers to defaults, and RST self-clears.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 23,
+          "printed_page": "23",
+          "section": "7.1.1 RST",
+          "table": null,
+          "excerpt": "Setting this bit to '1' generates a system reset",
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CONFIG.RST"
+      ]
+    },
+    {
+      "id": "INA226_C07_RST_TIMING_GAP",
+      "class": "UNDEFINED_BEHAVIOR",
+      "evidence_class": "UNDEFINED_BEHAVIOR",
+      "statement": "RST prose does not specify reset completion duration or any transient readback value while reset is pending. Powerdown recovery 40us on p11 is not an RST timing guarantee.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 23,
+          "printed_page": "23",
+          "section": "7.1.1 RST",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 11,
+          "printed_page": "11",
+          "section": "6.3.1 power-down",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CONFIG.RST"
+      ]
+    },
+    {
+      "id": "INA226_C08_RST_COMPLETION_PROTOCOL",
+      "class": "ABSTRACTION_ASSUMPTION",
+      "evidence_class": "ABSTRACTION_ASSUMPTION",
+      "statement": "Separate reset request from explicit abstract completion. During pending reset, affected readback knownness is unknown; on declared completion restore defined PORs and RST=0. Atomic completion is an alternative only if explicitly named an abstraction.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 23,
+          "printed_page": "23",
+          "section": "7.1.1 RST",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 22,
+          "printed_page": "22",
+          "section": "7.1",
+          "table": "7-1 and 7-2",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 26,
+          "printed_page": "26",
+          "section": "7.1.6 and 7.1.7",
+          "table": "7-11 and 7-12",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CONFIG.RST"
+      ],
+      "note": "No physical latency or low-bit same-transaction ordering claimed."
+    },
+    {
+      "id": "INA226_C09_AFF_FAULT_SET",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "Selected alert function compares against Alert Limit after its related conversion/calculation and asserts AFF upon alert condition. Highest enabled alert-function bit D15-D11 has priority; conversion-ready notification can coexist.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 12,
+          "printed_page": "12",
+          "section": "6.3.1.2",
+          "table": "Figure 6-1",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 13,
+          "printed_page": "13",
+          "section": "6.3.1.2 continuation",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 26,
+          "printed_page": "26",
+          "section": "7.1.7",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 SOL/SUL/BOL/BUL/POL and AFF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF"
+      ]
+    },
+    {
+      "id": "INA226_C10_AFF_LATCH_READ",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "With LEN=1 latch mode, AFF persists following fault and clears when MASK_ENABLE is read. Fault absence on next conversion is not the latch-mode clear event.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 13,
+          "printed_page": "13",
+          "section": "6.3.1.2 continuation",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 AFF and LEN",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF"
+      ]
+    },
+    {
+      "id": "INA226_C11_AFF_TRANSPARENT",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "With LEN=0 transparent mode, AFF clears following the next conversion that does not result in an alert condition; LEN prose describes return to idle when fault cleared.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 AFF and LEN",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF"
+      ],
+      "boundary": "Removing fault stimulus alone is not the specified conversion event."
+    },
+    {
+      "id": "INA226_C12_AFF_CONFIG_P13",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "p13 says latched AFF and Alert remain asserted until Configuration Register is written OR Mask/Enable Register is read.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 13,
+          "printed_page": "13",
+          "section": "6.3.1.2 continuation",
+          "table": null,
+          "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read.",
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF"
+      ],
+      "conflict_id": "INA226_CONFLICT_AFF_CONFIG_WRITE"
+    },
+    {
+      "id": "INA226_C13_AFF_CONFIG_P27",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "p27 AFF prose says latch-mode AFF clears ONLY when Mask/Enable Register is read; LEN prose agrees with Mask/Enable read.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 AFF and LEN",
+          "table": null,
+          "excerpt": "clears only when the Mask/Enable",
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF"
+      ],
+      "conflict_id": "INA226_CONFLICT_AFF_CONFIG_WRITE"
+    },
+    {
+      "id": "INA226_C14_AFF_COMMON_PROFILE",
+      "class": "ABSTRACTION_ASSUMPTION",
+      "evidence_class": "ABSTRACTION_ASSUMPTION",
+      "statement": "Common profile excludes definitive AFF readback after latched CONFIG-write: mark AFF unknown because source disagrees. Optional separately named p13-clear or p27-preserve profiles may retain each interpretation; neither is hardware-verified.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 13,
+          "printed_page": "13",
+          "section": "6.3.1.2 continuation",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 AFF and LEN",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF"
+      ],
+      "conflict_id": "INA226_CONFLICT_AFF_CONFIG_WRITE"
+    },
+    {
+      "id": "INA226_C15_CVRF_COMPLETE",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "CVRF is set after ALL conversions, averaging, and multiplication operations complete; output registers retain previous completed results until replacement, and reading data output registers does not affect conversion in progress.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 11,
+          "printed_page": "11",
+          "section": "6.3.1",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 12,
+          "printed_page": "12",
+          "section": "6.3.1.1",
+          "table": "Figure 6-1",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 CVRF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.CVRF"
+      ]
+    },
+    {
+      "id": "INA226_C16_CVRF_CLEAR",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "CVRF clears on MASK_ENABLE read or Configuration Register write except selecting power-down mode.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 11,
+          "printed_page": "11",
+          "section": "6.3.1 CVRF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 CVRF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.CVRF"
+      ]
+    },
+    {
+      "id": "INA226_C17_MODE_ENCODING",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "MODE[2:0] 000 and 100 are both power-down/shutdown; 001/010/011 are triggered; 101/110/111 are continuous.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 24,
+          "printed_page": "24",
+          "section": "7.1.1 MODE",
+          "table": "7-6",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.CVRF"
+      ],
+      "powerdown_modes": [
+        0,
+        4
+      ],
+      "triggered_modes": [
+        1,
+        2,
+        3
+      ],
+      "continuous_modes": [
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "id": "INA226_C18_CVRF_COMPLETION_PROTOCOL",
+      "class": "ABSTRACTION_ASSUMPTION",
+      "evidence_class": "ABSTRACTION_ASSUMPTION",
+      "statement": "A source-qualified completion event must represent every conversion required by current mode, configured averaging completion and math completion in a current configuration epoch. A bare result update does not prove the condition. Stale/partial events must not set CVRF in the admitted protocol.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 11,
+          "printed_page": "11",
+          "section": "6.3.1",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 12,
+          "printed_page": "12",
+          "section": "6.3.1.1",
+          "table": "Figure 6-1",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 22,
+          "printed_page": "22",
+          "section": "7.1.1 CONFIG write behavior",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 CVRF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.CVRF"
+      ],
+      "warning": "Mode/epoch event fields and rejected-invalid-event response are protocol design, not observed silicon behavior."
+    },
+    {
+      "id": "INA226_C19_READ_DIAGNOSTIC",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "Reading MASK_ENABLE CVRF/AFF following alert identifies the alert source; thus source describes useful read observation of flags despite read-clear side effects.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 12,
+          "printed_page": "12",
+          "section": "6.3.1.2 Alert Pin",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 AFF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF",
+        "MASK_ENABLE.CVRF"
+      ]
+    },
+    {
+      "id": "INA226_C20_READ_ORDER_GAP",
+      "class": "AI_ANALYSIS",
+      "evidence_class": "AI_INFERENCE",
+      "statement": "No reviewed sentence or read-word diagram explicitly timestamps flag clear relative to sampling or each data byte. Return-before-clear is a reasonable functional protocol convention, supported indirectly by diagnostic purpose, rather than a byte-accurate silicon guarantee.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 12,
+          "printed_page": "12",
+          "section": "6.3.1.2 Alert Pin",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 19,
+          "printed_page": "19",
+          "section": "6.5.5.3",
+          "table": "Figure 6-5",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 AFF/CVRF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF",
+        "MASK_ENABLE.CVRF"
+      ],
+      "protocol_assumption": "Full 16-bit abstract read returns snapshot then applies clear; no concurrent hardware event during that transaction."
+    },
+    {
+      "id": "INA226_C21_CNVR_SCOPE",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "CNVR bit10 enables Alert pin assertion when CVRF is asserted; it is not stated to be a precondition for CVRF state generation.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 27,
+          "printed_page": "27",
+          "section": "7.1.7 CNVR and CVRF",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.CVRF"
+      ]
+    },
+    {
+      "id": "INA226_C22_CONFIG_SIDE_EFFECTS",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "Reading CONFIG does not affect settings/conversion; writing CONFIG halts in-progress conversion until write completes, with next conversion based on new contents. Rewriting a triggered mode triggers a new single-shot even if unchanged.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 22,
+          "printed_page": "22",
+          "section": "7.1.1",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        },
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 11,
+          "printed_page": "11",
+          "section": "6.3.1 triggered mode",
+          "table": null,
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "CONFIG.RST",
+        "MASK_ENABLE.CVRF"
+      ]
+    },
+    {
+      "id": "INA226_C23_BUS_TIMING_LIMIT",
+      "class": "SOURCE_FACT",
+      "evidence_class": "MANUFACTURER_FACT",
+      "statement": "Table 6-3 footnote states bus timing min/max derive from one-time sample statistical analysis, are not guaranteed, and are not production tested.",
+      "locators": [
+        {
+          "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+          "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+          "pdf_page": 21,
+          "printed_page": "21",
+          "section": "6.5.5.3",
+          "table": "6-3 footnote 1",
+          "excerpt": null,
+          "inspection": "full page visual and extracted text"
+        }
+      ],
+      "fields": [
+        "MASK_ENABLE.AFF",
+        "MASK_ENABLE.CVRF",
+        "CONFIG.RST"
+      ],
+      "scope": "No physical timing conclusion admitted."
+    }
+  ],
+  "field_closure_advice": [
+    {
+      "field": "CALIBRATION.UNNAMED_15",
+      "dimension": "access",
+      "claims": [
+        "INA226_C01_CAL_POR",
+        "INA226_C04_RESERVED_WRITE_GAP",
+        "INA226_C05_RESERVED_PROTOCOL"
+      ],
+      "recommended_disposition": "EXCLUDE_NONDEFAULT_ACCESS_ORACLE",
+      "reset_retained": true,
+      "exclude_nondefault_write": true,
+      "write_pattern": 0,
+      "mask": "0x8000",
+      "whole_field_promotion": false
+    },
+    {
+      "field": "CONFIG.RST",
+      "dimension": "trigger_completion",
+      "claims": [
+        "INA226_C06_RST_REQUEST",
+        "INA226_C07_RST_TIMING_GAP",
+        "INA226_C08_RST_COMPLETION_PROTOCOL"
+      ],
+      "recommended_disposition": "CONDITIONAL_EVENT_BOUNDARY",
+      "pending_readback": "UNKNOWN",
+      "completion_readback": 0,
+      "whole_field_promotion": false
+    },
+    {
+      "field": "CONFIG.UNNAMED_14_12",
+      "dimension": "access",
+      "claims": [
+        "INA226_C02_CFG_POR",
+        "INA226_C04_RESERVED_WRITE_GAP",
+        "INA226_C05_RESERVED_PROTOCOL"
+      ],
+      "recommended_disposition": "EXCLUDE_NONDEFAULT_ACCESS_ORACLE",
+      "reset_retained": true,
+      "exclude_nondefault_write": true,
+      "write_pattern": 4,
+      "word_pattern": "0x4000",
+      "mask": "0x7000",
+      "whole_field_promotion": false
+    },
+    {
+      "field": "MASK_ENABLE.AFF",
+      "dimension": "read_clear",
+      "claims": [
+        "INA226_C03_MASK_POR",
+        "INA226_C09_AFF_FAULT_SET",
+        "INA226_C10_AFF_LATCH_READ",
+        "INA226_C11_AFF_TRANSPARENT",
+        "INA226_C12_AFF_CONFIG_P13",
+        "INA226_C13_AFF_CONFIG_P27",
+        "INA226_C14_AFF_COMMON_PROFILE",
+        "INA226_C19_READ_DIAGNOSTIC",
+        "INA226_C20_READ_ORDER_GAP"
+      ],
+      "recommended_disposition": "CONDITIONAL_COMMON_PROFILE_WITH_UNRESOLVED_SOURCE_CONFLICT",
+      "conflicts": [
+        "INA226_CONFLICT_AFF_CONFIG_WRITE"
+      ],
+      "latch_config_write_knownness": "UNKNOWN",
+      "whole_field_promotion": false
+    },
+    {
+      "field": "MASK_ENABLE.CVRF",
+      "dimension": "read_clear",
+      "claims": [
+        "INA226_C03_MASK_POR",
+        "INA226_C15_CVRF_COMPLETE",
+        "INA226_C16_CVRF_CLEAR",
+        "INA226_C17_MODE_ENCODING",
+        "INA226_C18_CVRF_COMPLETION_PROTOCOL",
+        "INA226_C19_READ_DIAGNOSTIC",
+        "INA226_C20_READ_ORDER_GAP",
+        "INA226_C21_CNVR_SCOPE",
+        "INA226_C22_CONFIG_SIDE_EFFECTS"
+      ],
+      "recommended_disposition": "CONDITIONAL_QUALIFIED_COMPLETION_AND_CLEAR_EVENTS",
+      "config_powerdown_exceptions": [
+        0,
+        4
+      ],
+      "rst_precedence": "Reset completion separately restores POR; do not use exception to override reset",
+      "whole_field_promotion": false
+    },
+    {
+      "field": "MASK_ENABLE.UNNAMED_9_5",
+      "dimension": "access",
+      "claims": [
+        "INA226_C03_MASK_POR",
+        "INA226_C04_RESERVED_WRITE_GAP",
+        "INA226_C05_RESERVED_PROTOCOL"
+      ],
+      "recommended_disposition": "EXCLUDE_NONDEFAULT_ACCESS_ORACLE",
+      "reset_retained": true,
+      "exclude_nondefault_write": true,
+      "write_pattern": 0,
+      "mask": "0x03e0",
+      "whole_field_promotion": false
+    }
+  ],
+  "target_counts": {
+    "fields": 6,
+    "original_repair_dimensions": 6,
+    "excluded_access_dimensions": 3,
+    "conditional_dimensions": 3,
+    "whole_field_promotions": 0
+  },
+  "review_scope": {
+    "full_source_extracted_pages": 41,
+    "complete_visual_pages": [
+      11,
+      12,
+      13,
+      19,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28
+    ],
+    "additional_complete_text_pages": [
+      1,
+      3,
+      10,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "candidate_implementation_reviewed": false,
+    "physical_guarantees_missing": [
+      "Analog threshold/measurement fidelity",
+      "Physical bus electrical and timing",
+      "Reset completion duration/pending readback",
+      "Read-clear byte/clock timing and conversion race",
+      "Reserved nondefault-write response",
+      "Manufacturer AFF CONFIG-write contradiction resolution"
+    ],
+    "classification": "Full user-held manufacturer datasheet; scoped semantics review, not an empirical paper or hardware validation"
+  }
+}

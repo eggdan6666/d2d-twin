@@ -1,0 +1,11 @@
+{
+  "contract_version":"1.0", "project_id":"d2d-twin", "paper_family":"M", "stage_id":"M4",
+  "task_id":"lm83-v39/code_review", "expert_skill":"sci-skills-presubmission-review",
+  "task_summary":"Independent source-derived LM83 conditional read-clear runtime, fault and witness admission acceptance",
+  "inputs":["research/lm83/lm83_datasheet.pdf","research/lm83/lm83.c","eval/lm83_semantics_v39_20261014/target_fields.json","eval/lm83_semantics_v39_20261014/code_acceptance_checklist.md","sandbox/lm83_v39/implementation/lm83.py","sandbox/lm83_v39/implementation/scenarios.py","sandbox/lm83_v39/implementation/admission.py"],
+  "expected_outputs":["Independent runtime tests with explicit source-derived expectations","Executed synthetic fault probes","Admission forgery/missing-witness tests","Full code_review.json contract and code_review.md","JUnit/execution log/manifest input before-after hashes"],
+  "evidence_boundaries":["Only write sandbox/lm83_v39/code_review","Do not alter implementation or eval or old archives or project state","Synthetic mutants not model/hardware samples"],
+  "acceptance_checks":["Read full fixed root checklist before test execution","Read original source and preserve critical conflict","Nonzero all8 masks, address-local clear, persistent pin holds, qualified corresponding conversion relatch","ReservedA8/48, malformed atomic rejection","Common_source unknown propagation and timing metadata","Exact source bytes and typed canonical replay rejection, genuine missing witness PARTIAL","No field/dimension status promotion"],
+  "known_missing_items":["No physical silicon/timing validation"],
+  "manual_operation_allowed":false, "optional_adapters_allowed":["local-python"], "stage_authority":"sci-skills"
+}

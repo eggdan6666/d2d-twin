@@ -1,0 +1,36 @@
+{
+  "contract_version": "1.0",
+  "status": "PASS",
+  "tasks": [
+    {
+      "task_id": "ina226-v37/source_review",
+      "expert_skill": "sci-skills-paper-deep-reading",
+      "status": "VERIFIED",
+      "accepted_sha256": "87f5b61b18453f8b074aee3e6c773da0b5e292283e276d86040301d90cf1fc71",
+      "recommendation": "REPAIR",
+      "lifecycle": [
+        "QUEUED",
+        "DISPATCHED",
+        "RETURNED",
+        "VERIFIED"
+      ],
+      "source_conflicts_preserved": true
+    },
+    {
+      "task_id": "ina226-v37/code_review",
+      "expert_skill": "sci-skills-presubmission-review",
+      "status": "VERIFIED",
+      "accepted_sha256": "275c5d02925bfaadc7f0a6c883586512cabb6cb10f68a9077a90b55a7ed8377a",
+      "recommendation": "PASS_CANDIDATE",
+      "lifecycle": [
+        "QUEUED",
+        "DISPATCHED",
+        "RETURNED",
+        "VERIFIED"
+      ],
+      "source_conflicts_preserved": true
+    }
+  ],
+  "source_recommendation_meaning": "REPAIR refers to unresolved full-source admission, not a failure of the bounded dispositions.",
+  "code_recommendation_meaning": "PASS_CANDIDATE applies only to the tested bounded implementation; stage authority remains root."
+}

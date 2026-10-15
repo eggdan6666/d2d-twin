@@ -1,0 +1,120 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_ids": [
+    "lm83-access-v40/source_review",
+    "lm83-access-v40/code_review"
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "inherited_conflicts": [
+    {
+      "conflict_id": "LM83-C01",
+      "conflict_type": "INTRA_SOURCE",
+      "claim": "Persistent CRIT flag clears on read while converted fault remains active",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3 prose"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figure6 waveform/note"
+        }
+      ],
+      "competing_positions": [
+        "prose: flags and output reset only after read and conversion below T_CRIT",
+        "Figure6: read marker clears CRIT status while temperature stays above T_CRIT; pin stays asserted"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain conflict; admit common retired-fault scope only, keep figure_clear persistent behavior conditional; board evidence or manufacturer clarification needed for physical closure."
+    },
+    {
+      "conflict_id": "LM83-C02",
+      "conflict_type": "UNDERSPECIFIED_BOUNDARY",
+      "claim": "Previously asserted CRIT flag/pin at equality",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3"
+        }
+      ],
+      "competing_positions": [
+        "assert only >; retire explicitly <",
+        "equality history not exhaustively stated"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Treat retention at equality as conservative model profile, not new manufacturer fact; test below/equal/above separately."
+    },
+    {
+      "conflict_id": "LM83-C03",
+      "conflict_type": "UNDERSPECIFIED_HISTORY",
+      "claim": "Read acknowledgement before temperature falls versus after retiring conversion",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "competing_positions": [
+        "read-and-retired condition is stated",
+        "persistence/lifetime of earlier read acknowledgement is not completely specified"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Certify retired conversion then read only; label any remembered-acknowledgement implementation as history profile."
+    },
+    {
+      "conflict_id": "LM83-C04",
+      "conflict_type": "MEMO_OVERGENERALIZATION",
+      "claim": "All reassertions promised within0..600ms from any read",
+      "sources": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "conversion-time table"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Note10/§1.1"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "competing_positions": [
+        "table600max conversion cadence with specified conditions",
+        "memo turns cadence into universal pin/flag latency bound"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain qualified cadence-based latency inference only, not observed or universal guarantee."
+    }
+  ],
+  "access_unknown_boundaries": [
+    {
+      "boundary_id": "LM83-ACCESS-U01",
+      "claim": "Unsupported physical status data-write ACK/NACK and no-op behavior",
+      "status": "UNKNOWN",
+      "physical_experiment": "NOT_EXECUTED"
+    },
+    {
+      "boundary_id": "LM83-ACCESS-U02",
+      "claim": "Failed physical read progress, consumption, pin or command-latch side effects",
+      "status": "UNKNOWN",
+      "physical_experiment": "NOT_EXECUTED"
+    }
+  ],
+  "root_disposition": "Software storage guard and consuming successful reads only; no physical write/failure behavior invented."
+}

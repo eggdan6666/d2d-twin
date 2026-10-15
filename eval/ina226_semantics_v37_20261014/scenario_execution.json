@@ -1,0 +1,3345 @@
+{
+  "cold_defaults": {
+    "status": "PASS",
+    "check_count": 10,
+    "checks": [
+      {
+        "clause": "Table7-1 documented reset CONFIG",
+        "actual": 16679,
+        "expected": 16679
+      },
+      {
+        "clause": "Table7-1 documented reset CALIBRATION",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset MASK_ENABLE",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset ALERT_LIMIT",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset SHUNT_VOLTAGE",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset BUS_VOLTAGE",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset CURRENT",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset POWER",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "Table7-1 documented reset MANUFACTURER_ID",
+        "actual": 21577,
+        "expected": 21577
+      },
+      {
+        "clause": "2260/2261 variant not selected",
+        "outside_contract": true,
+        "atomic_rejection": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 65535,
+        "result": 16679,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CALIBRATION",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_LIMIT",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CURRENT",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MANUFACTURER_ID",
+        "mask": 65535,
+        "result": 21577,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "cold"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "reserved_boundaries": {
+    "status": "PASS",
+    "check_count": 48,
+    "checks": [
+      {
+        "clause": "POR knownness is not access certification",
+        "actual": 16384,
+        "expected": 16384
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "default write is not a reserved retention oracle",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "postwrite reserved observation remains unknown",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "POR knownness is not access certification",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded CALIBRATION",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "default write is not a reserved retention oracle",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "postwrite reserved observation remains unknown",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "POR knownness is not access certification",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "nondefault reserved stimulus excluded MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "default write is not a reserved retention oracle",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "postwrite reserved observation remains unknown",
+        "outside_contract": true,
+        "atomic_rejection": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 28672,
+        "result": 16384,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "CONFIG"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "CONFIG"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CALIBRATION",
+        "mask": 32768,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "CALIBRATION"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CALIBRATION",
+        "value": 4660,
+        "instance": "CALIBRATION"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 992,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "MASK_ENABLE"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32768,
+        "instance": "MASK_ENABLE"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "dirty_reset": {
+    "status": "PASS",
+    "check_count": 25,
+    "checks": [
+      {
+        "clause": "nonzero AFF and CVRF pre-reset digital witness",
+        "actual": 24,
+        "expected": 24
+      },
+      {
+        "clause": "request is not qualified completion",
+        "actual": "reset_pending",
+        "expected": "reset_pending"
+      },
+      {
+        "clause": "no pending-reset numeric oracle CONFIG",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle SHUNT_VOLTAGE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle BUS_VOLTAGE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle POWER",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle CURRENT",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle CALIBRATION",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle MASK_ENABLE",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle ALERT_LIMIT",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle MANUFACTURER_ID",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "no pending-reset numeric oracle DIE_ID",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "pending reset rejects new conversion",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "completed POR-equivalent reset CONFIG",
+        "actual": 16679,
+        "expected": 16679
+      },
+      {
+        "clause": "completed POR-equivalent reset CALIBRATION",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed POR-equivalent reset MASK_ENABLE",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed POR-equivalent reset ALERT_LIMIT",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed POR-equivalent reset SHUNT_VOLTAGE",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed POR-equivalent reset BUS_VOLTAGE",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed POR-equivalent reset CURRENT",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed POR-equivalent reset POWER",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "completed RST self-clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "qualified reset clears calibration history",
+        "actual": false,
+        "expected": false
+      },
+      {
+        "clause": "duplicate reset completion excluded",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "pre-reset completion token is stale",
+        "outside_contract": true,
+        "atomic_rejection": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32769,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CALIBRATION",
+        "value": 4660,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "ALERT_LIMIT",
+        "value": 9320,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16675,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 1,
+          "sequence_id": 1
+        },
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1000,
+          "configuration_epoch": 1,
+          "sequence_id": 1
+        },
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 1,
+          "sequence_id": 1
+        },
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 49152,
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "reset_completed",
+        "payload": {},
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CONFIG",
+        "mask": 65535,
+        "result": 16679,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CALIBRATION",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "ALERT_LIMIT",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "CURRENT",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "POWER",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "reset"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "reset"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "latched_aff": {
+    "status": "PASS",
+    "check_count": 5,
+    "checks": [
+      {
+        "clause": "latched AFF survives next nofault conversion",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "other register read not a MASK clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "linearized preclear snapshot convention",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "latched MASK transaction clears AFF",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "new qualified fault reasserts latched AFF",
+        "actual": 16,
+        "expected": 16
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32769,
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": false,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 16,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "latch"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 16,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "latch"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "transparent_aff": {
+    "status": "PASS",
+    "check_count": 4,
+    "checks": [
+      {
+        "clause": "transparent MASK read does not itself clear AFF",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "transparent MASK read does not itself clear AFF",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "next related nofault conversion clears transparent AFF",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "transparent flag reasserts",
+        "actual": 16,
+        "expected": 16
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32768,
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 16,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 16,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": false,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "transparent"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "transparent"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "cv_sequence": {
+    "status": "PASS",
+    "check_count": 11,
+    "checks": [
+      {
+        "clause": "start does not certify full conversion completion",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "qualified staged results do not prematurely publish outputs",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "staged voltage results not sufficient for CVRF",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "incomplete conversions_complete rejected",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "incomplete averaging_complete rejected",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "incomplete multiplication_complete rejected",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "supplied settled signed code, no ADC accuracy claim",
+        "actual": 33536,
+        "expected": 33536
+      },
+      {
+        "clause": "supplied settled bus code, no analog safety claim",
+        "actual": 28800,
+        "expected": 28800
+      },
+      {
+        "clause": "full qualified sequence sets CVRF even CNVR disabled",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "read observes ready before protocol clear",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "MASK read clears CVRF",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 33536,
+          "bus_code": 28800,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "SHUNT_VOLTAGE",
+        "mask": 65535,
+        "result": 33536,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "BUS_VOLTAGE",
+        "mask": 65535,
+        "result": 28800,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "sequence"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 8,
+        "result": 8,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "sequence"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "cv_config_boundaries": {
+    "status": "PASS",
+    "check_count": 13,
+    "checks": [
+      {
+        "clause": "CVRF CONFIG clear except both powerdown modes",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "powerdown still allows flag read-clear",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "MASK read is distinct from CONFIG exception",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "CVRF CONFIG clear except both powerdown modes",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "powerdown still allows flag read-clear",
+        "actual": 8,
+        "expected": 8
+      },
+      {
+        "clause": "MASK read is distinct from CONFIG exception",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "CVRF CONFIG clear except both powerdown modes",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "powerdown still allows flag read-clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "MASK read is distinct from CONFIG exception",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "CVRF CONFIG clear except both powerdown modes",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "powerdown still allows flag read-clear",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "MASK read is distinct from CONFIG exception",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "same active-mode rewrite also clears CVRF",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "mode0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1000,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16672,
+        "instance": "mode0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 8,
+        "result": 8,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "mode0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "mode4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1000,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16676,
+        "instance": "mode4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 8,
+        "result": 8,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "mode4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "mode3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1000,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16675,
+        "instance": "mode3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 8,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "mode3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "mode7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1000,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "mode7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "mode7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 8,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "mode7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "same_mode"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_results_staged",
+        "payload": {
+          "shunt_word": 65520,
+          "bus_code": 1000,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "same_mode"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "whole_sequence_completed",
+        "payload": {
+          "conversions_complete": true,
+          "averaging_complete": true,
+          "multiplication_complete": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "same_mode"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "same_mode"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "aff_config_conflict": {
+    "status": "PASS",
+    "check_count": 4,
+    "checks": [
+      {
+        "clause": "disputed CONFIG clear invalidates AFF knowledge",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "common profile must not pick p13 or p27",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "successful MASK transaction gives common latch-clear evidence",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "common latch clear after disputed write",
+        "actual": 0,
+        "expected": 0
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32769,
+        "instance": "common"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "common"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "common"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "common"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 8,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "common"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "named_conflict_candidates": {
+    "status": "PASS",
+    "check_count": 2,
+    "checks": [
+      {
+        "clause": "named source-conditioned candidate, not resolved fact",
+        "actual": 0,
+        "expected": 0
+      },
+      {
+        "clause": "named source-conditioned candidate, not resolved fact",
+        "actual": 16,
+        "expected": 16
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "config_clear_candidate",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32769,
+        "instance": "config_clear_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "config_clear_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "config_clear_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "config_clear_candidate",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "config_clear_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "config_clear_candidate",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "config_clear_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "config_clear_candidate",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 0,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "config_clear_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "register_detail_candidate",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 32769,
+        "instance": "register_detail_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "register_detail_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "register_detail_candidate",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "register_detail_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "register_detail_candidate",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "register_detail_candidate"
+      },
+      {
+        "chip": "INA226",
+        "profile": "register_detail_candidate",
+        "op": "read",
+        "register": "MASK_ENABLE",
+        "mask": 16,
+        "result": 16,
+        "observation_convention": "linearized_preclear_snapshot",
+        "instance": "register_detail_candidate"
+      }
+    ],
+    "execution_kind": "EXPLORATORY_SOURCE_CONDITIONED_PROFILES",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "alert_priority": {
+    "status": "PASS",
+    "check_count": 10,
+    "checks": [
+      {
+        "clause": "highest selected alert bit priority",
+        "actual": "SOL",
+        "expected": "SOL"
+      },
+      {
+        "clause": "qualified selected function sets AFF",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "highest selected alert bit priority",
+        "actual": "SUL",
+        "expected": "SUL"
+      },
+      {
+        "clause": "qualified selected function sets AFF",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "highest selected alert bit priority",
+        "actual": "BOL",
+        "expected": "BOL"
+      },
+      {
+        "clause": "qualified selected function sets AFF",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "highest selected alert bit priority",
+        "actual": "BUL",
+        "expected": "BUL"
+      },
+      {
+        "clause": "qualified selected function sets AFF",
+        "actual": 16,
+        "expected": 16
+      },
+      {
+        "clause": "highest selected alert bit priority",
+        "actual": "POL",
+        "expected": "POL"
+      },
+      {
+        "clause": "qualified selected function sets AFF",
+        "actual": 16,
+        "expected": 16
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 63488,
+        "instance": "SOL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "SOL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "SOL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 30720,
+        "instance": "SUL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "SUL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "SUL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "SUL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 14336,
+        "instance": "BOL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "BOL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "BOL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "BOL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 6144,
+        "instance": "BUL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "BUL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "BUL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "BUL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "MASK_ENABLE",
+        "value": 2048,
+        "instance": "POL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "conversion_started",
+        "payload": {},
+        "instance": "POL"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "event",
+        "name": "qualified_alert_conversion",
+        "payload": {
+          "function": "POL",
+          "fault": true,
+          "configuration_epoch": 0,
+          "sequence_id": 1
+        },
+        "instance": "POL"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "token_and_domain_guards": {
+    "status": "PASS",
+    "check_count": 19,
+    "checks": [
+      {
+        "clause": "previous trigger token invalid",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed numeric write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed numeric write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed numeric write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed numeric write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed numeric write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed numeric write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed/empty mask",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed/empty mask",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed/empty mask",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed/empty mask",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed/empty mask",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "malformed/empty mask",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "documented single-channel mode outside implemented scope",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "documented single-channel mode outside implemented scope",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "documented single-channel mode outside implemented scope",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "documented single-channel mode outside implemented scope",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "unrecognised physical event",
+        "outside_contract": true,
+        "atomic_rejection": true
+      },
+      {
+        "clause": "hardware status input not emulated software write",
+        "outside_contract": true,
+        "atomic_rejection": true
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16675,
+        "instance": "guards"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16675,
+        "instance": "guards"
+      }
+    ],
+    "execution_kind": "DIGITAL_EVENT_PROFILE",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  },
+  "nominal_table": {
+    "status": "PASS",
+    "check_count": 64,
+    "checks": [
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 1,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 4,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 4,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 16,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 16,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 64,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 64,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 128,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 128,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 256,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 256,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 512,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 512,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 140,
+          "shunt_conversion_time_us": 140
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 204,
+          "shunt_conversion_time_us": 204
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 332,
+          "shunt_conversion_time_us": 332
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 588,
+          "shunt_conversion_time_us": 588
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 1100,
+          "shunt_conversion_time_us": 1100
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 2116,
+          "shunt_conversion_time_us": 2116
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 4156,
+          "shunt_conversion_time_us": 4156
+        }
+      },
+      {
+        "clause": "Tables7-3/4/5 metadata only, not elapsed-time measurement",
+        "actual": {
+          "samples": 1024,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        },
+        "expected": {
+          "samples": 1024,
+          "bus_conversion_time_us": 8244,
+          "shunt_conversion_time_us": 8244
+        }
+      }
+    ],
+    "trace": [
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16391,
+        "instance": "avg0ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16463,
+        "instance": "avg0ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16535,
+        "instance": "avg0ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16607,
+        "instance": "avg0ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16679,
+        "instance": "avg0ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16751,
+        "instance": "avg0ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16823,
+        "instance": "avg0ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16895,
+        "instance": "avg0ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16903,
+        "instance": "avg1ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 16975,
+        "instance": "avg1ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17047,
+        "instance": "avg1ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17119,
+        "instance": "avg1ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17191,
+        "instance": "avg1ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17263,
+        "instance": "avg1ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17335,
+        "instance": "avg1ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17407,
+        "instance": "avg1ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17415,
+        "instance": "avg2ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17487,
+        "instance": "avg2ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17559,
+        "instance": "avg2ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17631,
+        "instance": "avg2ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17703,
+        "instance": "avg2ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17775,
+        "instance": "avg2ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17847,
+        "instance": "avg2ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17919,
+        "instance": "avg2ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17927,
+        "instance": "avg3ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 17999,
+        "instance": "avg3ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18071,
+        "instance": "avg3ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18143,
+        "instance": "avg3ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18215,
+        "instance": "avg3ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18287,
+        "instance": "avg3ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18359,
+        "instance": "avg3ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18431,
+        "instance": "avg3ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18439,
+        "instance": "avg4ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18511,
+        "instance": "avg4ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18583,
+        "instance": "avg4ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18655,
+        "instance": "avg4ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18727,
+        "instance": "avg4ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18799,
+        "instance": "avg4ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18871,
+        "instance": "avg4ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18943,
+        "instance": "avg4ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 18951,
+        "instance": "avg5ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19023,
+        "instance": "avg5ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19095,
+        "instance": "avg5ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19167,
+        "instance": "avg5ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19239,
+        "instance": "avg5ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19311,
+        "instance": "avg5ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19383,
+        "instance": "avg5ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19455,
+        "instance": "avg5ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19463,
+        "instance": "avg6ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19535,
+        "instance": "avg6ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19607,
+        "instance": "avg6ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19679,
+        "instance": "avg6ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19751,
+        "instance": "avg6ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19823,
+        "instance": "avg6ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19895,
+        "instance": "avg6ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19967,
+        "instance": "avg6ct7"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 19975,
+        "instance": "avg7ct0"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20047,
+        "instance": "avg7ct1"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20119,
+        "instance": "avg7ct2"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20191,
+        "instance": "avg7ct3"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20263,
+        "instance": "avg7ct4"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20335,
+        "instance": "avg7ct5"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20407,
+        "instance": "avg7ct6"
+      },
+      {
+        "chip": "INA226",
+        "profile": "common_source",
+        "op": "write",
+        "register": "CONFIG",
+        "value": 20479,
+        "instance": "avg7ct7"
+      }
+    ],
+    "execution_kind": "SOURCE_TABLE_METADATA",
+    "chip": "INA226",
+    "no_physical_hardware_validation": true
+  }
+}

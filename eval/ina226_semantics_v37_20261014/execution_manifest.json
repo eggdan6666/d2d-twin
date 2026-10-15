@@ -1,0 +1,38 @@
+{
+  "protocol": "3.7-ina226-20261014",
+  "status": "EXECUTED_LOCAL_NOT_PRODUCTION_FREEZE",
+  "execution_date": "2026-10-14",
+  "started_utc": "2026-10-13T19:49:45.350655+00:00",
+  "completed_utc": "2026-10-13T19:49:50.404507+00:00",
+  "python": "3.11.9",
+  "command": "python sandbox/ina226_v37/run_task.py",
+  "elapsed_seconds": 5.063000000023749,
+  "input_sha256": {
+    "eval/ina226_semantics_v37_20261014/ina226.py": "13c0af60b11ada5459496e20ed321a7361fae7ec7589b978cfb572f06a1cef7a",
+    "eval/ina226_semantics_v37_20261014/scenarios.py": "37d7705841ba5f962b9ec7bd4330ec099d460eb692efaafddd294d5f00a6208e",
+    "eval/ina226_semantics_v37_20261014/admission.py": "0568a4fa9561d552574ea55a6f2fc205ce086d80d1d31f7e514b3876c9acfc05",
+    "eval/ina226_semantics_v37_20261014/source_review.json": "87f5b61b18453f8b074aee3e6c773da0b5e292283e276d86040301d90cf1fc71",
+    "eval/ina226_semantics_v37_20261014/input_identity.json": "83c363cd57f6de7929b09fe399dc17ff64a65cb1db2f1f3ad9ee72194c601eed",
+    "eval/ina226_semantics_v37_20261014/target_fields.json": "c2fd2a0ed16a261eeb140fed3ac5f6a77c60beff93a2b4c4e277e02500f17a71",
+    "sandbox/ina226_v37/run_task.py": "10e21b26d7e4111a77aba3eef53970d33b495f0173cc67e9492d364397fce735",
+    "corpus/data/raw_pdf/TI/INA226.pdf": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711"
+  },
+  "output_sha256": {
+    "scenario_execution.json": "cc35cc7efc9a882f0da21cb7b3ef2c31753db1e4812ddebc0efc5647bcf41434",
+    "closure_ledger.json": "19d7bd242d223bbab1a6104d6e0cd421cf8340516d2074a26a0e883cf7482e5b",
+    "admission_gate.json": "cb207b445b1d4b61fa59ce3479ee13dffe41f8385f8889f5e4a25d781b70b32f",
+    "preservation_verification.json": "bd075c8de71c66c828a7f38eeeba903bbdbd4b60b33a82ecaa9eda7dc1eabc14"
+  },
+  "scenario_count": 12,
+  "check_count": 215,
+  "source_table_metadata_checks": 64,
+  "source_conditioned_candidate_checks": 2,
+  "claims_without_runtime_execution": [
+    "INA226_C23_BUS_TIMING_LIMIT"
+  ],
+  "notes": [
+    "Check counts are not independent source facts, LLM samples or physical measurements.",
+    "Local deterministic replay is not remote attestation or hardware equivalence."
+  ]
+}

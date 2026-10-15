@@ -1,0 +1,391 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lm83-trigger-v41/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "sandbox/lm83_v41/implementation/trigger_model.py",
+    "sandbox/lm83_v41/implementation/scenarios.py",
+    "sandbox/lm83_v41/implementation/admission.py",
+    "sandbox/lm83_v39/implementation/lm83.py",
+    "sandbox/lm83_v40/implementation/access_model.py",
+    "eval/lm83_semantics_v39_20261014/source_review.json",
+    "eval/lm83_access_v40_20261014/source_review.json",
+    "eval/lm83_trigger_v41_20261014/source_review.json",
+    "eval/lm83_trigger_v41_20261014/target_fields.json",
+    "eval/lm83_trigger_v41_20261014/scope_freeze.json",
+    "eval/lm83_trigger_v41_20261014/code_acceptance_checklist.md",
+    "eval/lm83_trigger_v41_20261014/code_review_task.json",
+    "research/lm83/lm83_datasheet.pdf",
+    "corpus/data/raw_pdf/TI/LM83.pdf",
+    "research/lm83/lm83.c",
+    "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "sandbox/lm83_v41/code_review/test_acceptance.py",
+    "sandbox/lm83_v41/code_review/run_review.py"
+  ],
+  "outputs": [
+    "sandbox/lm83_v41/code_review/code_review.json",
+    "sandbox/lm83_v41/code_review/code_review.md",
+    "sandbox/lm83_v41/code_review/test_acceptance.py",
+    "sandbox/lm83_v41/code_review/run_review.py",
+    "sandbox/lm83_v41/code_review/execution_manifest.json",
+    "sandbox/lm83_v41/code_review/pytest.log",
+    "sandbox/lm83_v41/code_review/junit.xml",
+    "sandbox/lm83_v41/code_review/primary_extract.txt",
+    "sandbox/lm83_v41/code_review/primary_figures.png"
+  ],
+  "evidence_status": [
+    {
+      "status": "VERIFIED_SOURCE",
+      "description": "Independent DS101058 text plus visual PDF page10 Figure4–7; whole pinned Linux local c checked; no remote byte equality assertion."
+    },
+    {
+      "status": "VERIFIED_USER_MATERIAL",
+      "description": "Exact eight frozen target rows verified against original ledger; all overall REPAIR, trigger CONDITIONAL, zero dimensional REPAIR."
+    },
+    {
+      "status": "EXECUTED_LOCAL",
+      "description": "142 pytest cases:77 behavior,12 actual faults,53 admission; exact source/current advice/old dependency hashes before-after equal."
+    },
+    {
+      "status": "NOT_EXECUTED",
+      "description": "Silicon/ADC/timing/IRQ, raw bus write/ACK, failed physical read, target kernel build or concurrency."
+    }
+  ],
+  "assumptions": [
+    "sample/complete separation and matching channel token validation are audit protocol abstractions",
+    "round start aligned to L in supplied witnesses, not inferred power-on ADC phase",
+    "continuous repeated round-robin conversions with valid sensed diodes, fixed thresholds/masks during each bounded witness",
+    "critical persistent read-clear and equality/acknowledgement history retain explicit source profiles/unknown"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {
+      "check": "Frozen eight field/dimension identities; remaining eight conditional_write unchanged",
+      "status": "PASS"
+    },
+    {
+      "check": "Explicit independently transcribed bit and pin expectations for all eight under both profiles",
+      "status": "PASS"
+    },
+    {
+      "check": "Sample does not update values/status/pins; own completion updates immediately before full round",
+      "status": "PASS"
+    },
+    {
+      "check": "Captured sample preserved; qualified matching id/round/slot; malformed/duplicate/stale typed inputs atomic",
+      "status": "PASS"
+    },
+    {
+      "check": "Prior field consuming reads/software RO guard/persistent pin/unknown/retired then read preserved",
+      "status": "PASS"
+    },
+    {
+      "check": "Real in-memory faults for early commit/full-round barrier/missing commit/mapping/pins/read release/unknown/software write/sample value/reserved/qualifiers",
+      "status": "PASS"
+    },
+    {
+      "check": "20 genuine missing witnesses PARTIAL;22 typed trace/envelope forgeries REJECTED;10 actual byte faults REJECTED",
+      "status": "PASS"
+    },
+    {
+      "check": "3 implementation and2 old core and2 old review/current review plus checklist/scope/targets/sources bytes unchanged",
+      "status": "PASS"
+    },
+    {
+      "check": "Final JUnit bound to executed result; no pytest cache/old bytecode; zero physical evidence attribution",
+      "status": "PASS"
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "LM83-C01",
+      "conflict_type": "INTRA_SOURCE",
+      "claim": "Persistent CRIT flag clears on read while converted fault remains active",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3 prose"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figure6 waveform/note"
+        }
+      ],
+      "competing_positions": [
+        "prose: flags and output reset only after read and conversion below T_CRIT",
+        "Figure6: read marker clears CRIT status while temperature stays above T_CRIT; pin stays asserted"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain conflict; admit common retired-fault scope only, keep figure_clear persistent behavior conditional; board evidence or manufacturer clarification needed for physical closure."
+    },
+    {
+      "conflict_id": "LM83-C02",
+      "conflict_type": "UNDERSPECIFIED_BOUNDARY",
+      "claim": "Previously asserted CRIT flag/pin at equality",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3"
+        }
+      ],
+      "competing_positions": [
+        "assert only >; retire explicitly <",
+        "equality history not exhaustively stated"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Treat retention at equality as conservative model profile, not new manufacturer fact; test below/equal/above separately."
+    },
+    {
+      "conflict_id": "LM83-C03",
+      "conflict_type": "UNDERSPECIFIED_HISTORY",
+      "claim": "Read acknowledgement before temperature falls versus after retiring conversion",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "competing_positions": [
+        "read-and-retired condition is stated",
+        "persistence/lifetime of earlier read acknowledgement is not completely specified"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Certify retired conversion then read only; label any remembered-acknowledgement implementation as history profile."
+    },
+    {
+      "conflict_id": "LM83-C04",
+      "conflict_type": "MEMO_OVERGENERALIZATION",
+      "claim": "All reassertions promised within0..600ms from any read",
+      "sources": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "conversion-time table"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Note10/§1.1"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "competing_positions": [
+        "table600max conversion cadence with specified conditions",
+        "memo turns cadence into universal pin/flag latency bound"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain qualified cadence-based latency inference only, not observed or universal guarantee."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "根任务以本独立验收与来源契约整合v41有界归档，保留全部未知及REPAIR身份。",
+  "stage_acceptance_recommendation": "REPAIR",
+  "bounded_implementation_verdict": "PASS",
+  "readiness": "NOT_READY",
+  "execution": {
+    "command": [
+      "C:\\Users\\ZhuanZ\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\sandbox\\lm83_v41\\code_review\\test_acceptance.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\sandbox\\lm83_v41\\code_review\\test_temp",
+      "--junitxml",
+      "E:\\HD-Agent·分层记忆RAG的电子Dstasheet智能问答\\sandbox\\lm83_v41\\code_review\\junit.xml"
+    ],
+    "started_epoch": 1791951162.0183625,
+    "ended_epoch": 1791951169.585007,
+    "elapsed_seconds": 7.5666444301605225,
+    "exit_code": 0,
+    "tests": 142,
+    "runtime_cases": 77,
+    "mutation_cases": 12,
+    "admission_cases": 53,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "case_category_function_identities": {
+      "mutation": [
+        "test_executed_behavior_fault",
+        "test_executed_qualifier_fault"
+      ],
+      "admission": [
+        "test_genuine_missing_witness_partial",
+        "test_genuine_scope_and_no_promotions",
+        "test_source_dependency_advice_bytes_rejected",
+        "test_typed_forgery_rejected"
+      ],
+      "runtime": "remaining exact function names"
+    },
+    "inputs_before": {
+      "sandbox/lm83_v41/implementation/trigger_model.py": "70566bb143d6ba1eec7011af3ca5bca75539dc4af0c69d4c34740bf12463e275",
+      "sandbox/lm83_v41/implementation/scenarios.py": "11f4f75b4ce794f2d615ae36f50edf16ab97b2ebc8d694eadf49da7a789ea669",
+      "sandbox/lm83_v41/implementation/admission.py": "b1061fe33c9ecc712db1c7969c75e1f8c80b95cebce4c467a41fde73830e41e8",
+      "sandbox/lm83_v39/implementation/lm83.py": "4fe908c44e321077e5d644feec11bcd992e787d965708f14792cda01b084ef23",
+      "sandbox/lm83_v40/implementation/access_model.py": "9f45a3dad4461f3b3d85677504dc33803aa5b75b84766a068a621771c54dec71",
+      "eval/lm83_semantics_v39_20261014/source_review.json": "6e9c09447fc35d06b5ee7ae5cbfe3d9a190e254b0940e43bef80af5a632fed6d",
+      "eval/lm83_access_v40_20261014/source_review.json": "0879ef10e436e9b60bc63de61262bd3705c2f672d387f0cbcea889a0e07716cd",
+      "eval/lm83_trigger_v41_20261014/source_review.json": "98b4cbd7fab6eab97ece77ffb4f0fcfa62aaa88973c6f6c97fbad8682f41ab73",
+      "eval/lm83_trigger_v41_20261014/target_fields.json": "6b0df4fb973b142df12ccf9d3c5fd2676ae6b9c16565102e6dc61e59d97c5ff6",
+      "eval/lm83_trigger_v41_20261014/scope_freeze.json": "91f958fee4a4ce75ffa2e371bf2844d9070c89aebf9ce404a4e3987f744f0c7f",
+      "eval/lm83_trigger_v41_20261014/code_acceptance_checklist.md": "5aeb85ede08bca686748617f8bc34184ca0730d3514ef327caecee3dbce1a5e6",
+      "eval/lm83_trigger_v41_20261014/code_review_task.json": "808e02e4813af8fa062d0d10a03f25e406c9d05b8aa5798eaf8eda6d2f6e957c",
+      "research/lm83/lm83_datasheet.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "corpus/data/raw_pdf/TI/LM83.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "research/lm83/lm83.c": "c388209e03ef84c7a3b43590e21720c6e26cac27061831550446ffee1048f680",
+      "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md": "1ed6f958642eb5f9e09d1f8e5e44ad6081b92b34a696d6422c5d09f54c819549",
+      "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+      "sandbox/lm83_v41/code_review/test_acceptance.py": "901b4c2639f4faed2ba32ee744dab58fe4bf0884366ae7d4b8ddebbf5afe3d6c",
+      "sandbox/lm83_v41/code_review/run_review.py": "98b627ab9f28835a471b8c572b9a3e423dd4d89f300332c241aae30c0c09391b"
+    },
+    "inputs_after": {
+      "sandbox/lm83_v41/implementation/trigger_model.py": "70566bb143d6ba1eec7011af3ca5bca75539dc4af0c69d4c34740bf12463e275",
+      "sandbox/lm83_v41/implementation/scenarios.py": "11f4f75b4ce794f2d615ae36f50edf16ab97b2ebc8d694eadf49da7a789ea669",
+      "sandbox/lm83_v41/implementation/admission.py": "b1061fe33c9ecc712db1c7969c75e1f8c80b95cebce4c467a41fde73830e41e8",
+      "sandbox/lm83_v39/implementation/lm83.py": "4fe908c44e321077e5d644feec11bcd992e787d965708f14792cda01b084ef23",
+      "sandbox/lm83_v40/implementation/access_model.py": "9f45a3dad4461f3b3d85677504dc33803aa5b75b84766a068a621771c54dec71",
+      "eval/lm83_semantics_v39_20261014/source_review.json": "6e9c09447fc35d06b5ee7ae5cbfe3d9a190e254b0940e43bef80af5a632fed6d",
+      "eval/lm83_access_v40_20261014/source_review.json": "0879ef10e436e9b60bc63de61262bd3705c2f672d387f0cbcea889a0e07716cd",
+      "eval/lm83_trigger_v41_20261014/source_review.json": "98b4cbd7fab6eab97ece77ffb4f0fcfa62aaa88973c6f6c97fbad8682f41ab73",
+      "eval/lm83_trigger_v41_20261014/target_fields.json": "6b0df4fb973b142df12ccf9d3c5fd2676ae6b9c16565102e6dc61e59d97c5ff6",
+      "eval/lm83_trigger_v41_20261014/scope_freeze.json": "91f958fee4a4ce75ffa2e371bf2844d9070c89aebf9ce404a4e3987f744f0c7f",
+      "eval/lm83_trigger_v41_20261014/code_acceptance_checklist.md": "5aeb85ede08bca686748617f8bc34184ca0730d3514ef327caecee3dbce1a5e6",
+      "eval/lm83_trigger_v41_20261014/code_review_task.json": "808e02e4813af8fa062d0d10a03f25e406c9d05b8aa5798eaf8eda6d2f6e957c",
+      "research/lm83/lm83_datasheet.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "corpus/data/raw_pdf/TI/LM83.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "research/lm83/lm83.c": "c388209e03ef84c7a3b43590e21720c6e26cac27061831550446ffee1048f680",
+      "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md": "1ed6f958642eb5f9e09d1f8e5e44ad6081b92b34a696d6422c5d09f54c819549",
+      "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+      "sandbox/lm83_v41/code_review/test_acceptance.py": "901b4c2639f4faed2ba32ee744dab58fe4bf0884366ae7d4b8ddebbf5afe3d6c",
+      "sandbox/lm83_v41/code_review/run_review.py": "98b627ab9f28835a471b8c572b9a3e423dd4d89f300332c241aae30c0c09391b"
+    },
+    "input_hashes_unchanged": true,
+    "junit_sha256": "0341b9c73de30a69ff35b44d1793c10292f62150851f58b42869baa3e4511636",
+    "physical_measurements": 0,
+    "model_generated_samples": 0
+  },
+  "fact_base": {
+    "family": "M",
+    "stage": "M4",
+    "artifact": "eight LM83 trigger_completion conditional event rules",
+    "central_claim": "Source-constrained auditable matching-channel conversion commits with independent acceptance",
+    "whole_field_promotions": 0,
+    "whole_dimension_promotions": 0,
+    "remaining_conditional_write_rules": 8,
+    "source_profile_unknowns": [
+      "LM83-C01",
+      "LM83-C02",
+      "LM83-C03",
+      "LM83-C04",
+      "LM83-ACCESS-U01",
+      "LM83-ACCESS-U02"
+    ]
+  },
+  "three_reviews": [
+    {
+      "lens": "CONTRIBUTION",
+      "finding": "Bounded event identity/independent rejection evidence supports auditable closure; no new chip physics inferred.",
+      "concerns": [
+        {
+          "location": "DS101058 §1.3/Figure6; inherited v39/v40 C01–C04",
+          "evidence": "Source conflicts remain UNRESOLVED and profile/common_source unknown are inherited byte-for-byte.",
+          "why_it_matters": "Digital agreement cannot resolve persistent CRIT/read acknowledgement/equality or certify silicon timing.",
+          "severity": "MAJOR",
+          "minimum_repair": "Retain overall REPAIR, zero dimensional REPAIR, all unknowns and no Gold promotion.",
+          "ideal_repair": "Manufacturer clarification or separately qualified hardware experiment before physical claims."
+        }
+      ]
+    },
+    {
+      "lens": "METHODS",
+      "finding": "Independent nonzero oracles and actual executed mutant/byte-forgery probes pass; no circular replay-only acceptance.",
+      "concerns": [
+        {
+          "location": "trigger_model.py::_position/sample/complete; source claims T02/T13/T17",
+          "evidence": "Fresh sample IDs and explicit round/slot are software protocol tokens; no such hardware registers in source.",
+          "why_it_matters": "Exactly-once audit rejection does not demonstrate chip-trigger identity or ADC phase.",
+          "severity": "MODERATE",
+          "minimum_repair": "Describe witnesses as logically aligned continuous fixed unmasked conversions.",
+          "ideal_repair": "Separately instrument physical phase if later paper claims require it."
+        },
+        {
+          "location": "TIMING and execution_manifest.json",
+          "evidence": "0 physical measurements; 460 typ/600 max table cadence and approx480/120/60 prose; no time-driven runtime.",
+          "why_it_matters": "Tests must not be counted as latency measurements or independent source samples.",
+          "severity": "MODERATE",
+          "minimum_repair": "Keep physical_timing_measured=false and no universal reassert deadline.",
+          "ideal_repair": "Use explicitly qualified measurement protocol for any future silicon latency study."
+        }
+      ]
+    },
+    {
+      "lens": "COMMUNICATION",
+      "finding": "Keep overall versus dimensional statuses and audit versus silicon timing explicit; name source uncertainties.",
+      "concerns": [
+        {
+          "location": "DS101058 §1.3/Figure6; inherited v39/v40 C01–C04",
+          "evidence": "Source conflicts remain UNRESOLVED and profile/common_source unknown are inherited byte-for-byte.",
+          "why_it_matters": "Digital agreement cannot resolve persistent CRIT/read acknowledgement/equality or certify silicon timing.",
+          "severity": "MAJOR",
+          "minimum_repair": "Retain overall REPAIR, zero dimensional REPAIR, all unknowns and no Gold promotion.",
+          "ideal_repair": "Manufacturer clarification or separately qualified hardware experiment before physical claims."
+        },
+        {
+          "location": "TIMING and execution_manifest.json",
+          "evidence": "0 physical measurements; 460 typ/600 max table cadence and approx480/120/60 prose; no time-driven runtime.",
+          "why_it_matters": "Tests must not be counted as latency measurements or independent source samples.",
+          "severity": "MODERATE",
+          "minimum_repair": "Keep physical_timing_measured=false and no universal reassert deadline.",
+          "ideal_repair": "Use explicitly qualified measurement protocol for any future silicon latency study."
+        }
+      ]
+    }
+  ],
+  "cross_review_synthesis": {
+    "bounded_blockers": [],
+    "shared_full_stage_blockers": [
+      "Inherited source unknowns and absence of physical evidence preclude full formal promotion."
+    ],
+    "reviewer_disagreements": [],
+    "highest_risk_claims": [
+      "sample_id as hardware signal",
+      "600ms as unconditional read relatch guarantee",
+      "events as measured ADC/pin behavior"
+    ],
+    "missing_validation": [
+      "Physical silicon and raw bus fault experiments NOT_EXECUTED"
+    ],
+    "effort": "Bounded package ready for root review; physical closure needs separately scoped work."
+  },
+  "revision_plan": [
+    {
+      "priority": 1,
+      "action": "Root preserves unknowns/statuses while integrating bounded implementation evidence",
+      "status": "ROOT_ACCEPTANCE_PENDING"
+    }
+  ]
+}

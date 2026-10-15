@@ -1,0 +1,606 @@
+[
+  {
+    "chip": "INA3221",
+    "register": "CONFIG",
+    "field": "RST",
+    "bits": "15",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x8000",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      },
+      "access": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "字段相关表/正文访问语义为 RW；此处未把整寄存器R/W推成每一保留位可写。",
+        "candidate_rule": {
+          "source_access": "RW",
+          "software_write_persistence": false,
+          "ro_protection_requires_no_hardware_update": false
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "来源定义所列编码/数据位格式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "software_encoding_test_applicable": true,
+          "exclude_unlisted_codes": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "原文定义写1产生系统复位且该位self-clears；未给此位任意瞬时读必为0的承诺。",
+        "candidate_rule": {
+          "write_value": 1,
+          "after_reset_completed": "all defined defaults restored and RST=0",
+          "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+          "exclude_during_reset_readback_oracle": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 8-4",
+            "section": null,
+            "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 8-4",
+        "section": null,
+        "excerpt": "Reset bit. Set this bit = 1 to generate a system reset that is the same as a power-on reset (POR). This bit resets all registers to default values and self-clears. 14 CH1en R/W 7h Channel enable mode. These bits allow ea"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA3221",
+      "register": "CONFIG",
+      "field": "RST",
+      "bits": "15",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8000",
+      "known_protection_bit_mask": "0x8000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "CVRF",
+    "bits": "0",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x1",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "Table8-34明确R/W标签；正文定义硬件状态，写MASK不清状态，不给任意写值持久化规则。现RO编码是抽象的软件保护选择。",
+        "candidate_rule": {
+          "source_label": "R/W",
+          "effective_role": "hardware managed status",
+          "exclude_ordinary_RW_persistence": true,
+          "software_ignores_write_to_status": "abstraction assumption, not a quoted RO code"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Writing to this register does not clear the flag bit status. To make sure that there is no uncertainty in the warning function setting that resulted in a flag bit being set, the Mask/Enable register must be read from to "
+          },
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "来源定义所列编码/数据位格式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "software_encoding_test_applicable": false,
+          "exclude_unlisted_codes": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "CVRF在所有转换完成置1；MASK读清、CONFIG写清除powerdown/disable选择。旧无条件CONFIG写清说明不精确。",
+        "candidate_rule": {
+          "on_read": "MASK_ENABLE",
+          "on_CONFIG_write_clear_if_MODE_not": [
+            0,
+            4
+          ],
+          "set_event": "all enabled channel conversions complete",
+          "require_nonzero_event": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion ready clears under the following conditions: 1. Writing the Configuration register (except for power-down or disable-mode selections). 2. Reading the Mask/Enable register. 8.2.17 Power-valid Upper-limit Regist"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "字段为测量/硬件状态，结果可随对应测量或事件更新；只读不等于运行中恒定。",
+        "candidate_rule": {
+          "event_driven_model_required": true,
+          "exclude_analog_event_claims_from_static_register_contract": true,
+          "test_nonzero_event_before_clear": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 35,
+            "printed_page": "35",
+            "table": "Table 8-34 continued",
+            "section": null,
+            "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": "Table 8-34 continued",
+        "section": null,
+        "excerpt": "Conversion-ready flag. Although the INA3221 can be read at any time, and the data from the last conversion are available, the conversion ready bit is provided to help coordinate single-shot conversions. The conversion bi"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "Writing to this register does not clear the flag bit status. To make sure that there is no uncertainty in the warning function setting that resulted in a flag bit being set, the Mask/Enable register must be read from to "
+      },
+      {
+        "pdf_page": 35,
+        "printed_page": "35",
+        "table": "Table 8-34 continued",
+        "section": null,
+        "excerpt": "Conversion ready clears under the following conditions: 1. Writing the Configuration register (except for power-down or disable-mode selections). 2. Reading the Mask/Enable register. 8.2.17 Power-valid Upper-limit Regist"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA3221",
+      "register": "MASK_ENABLE",
+      "field": "CVRF",
+      "bits": "0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x1",
+      "known_protection_bit_mask": "0x1",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA3221",
+    "register": "MASK_ENABLE",
+    "field": "TCF",
+    "bits": "1",
+    "source_path": "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "manual_version": "SBOS576C, May 2012, revised September 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "位图RW-1、寄存器0002及正文default high支持1；同一单比特的Table8-34 reset列却为11h，超范围。保留数值表达冲突。",
+        "candidate_rule": {
+          "main_por_expected_bit": 1,
+          "support": "register header, bitmap, default-high prose",
+          "table_literal": "11h",
+          "classification": "source representation conflict, not official erratum"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-33",
+            "section": null,
+            "excerpt": "RW-1 RW-0 LEGEND: R/W = Read/Write; R = Read only; -n = value after reset Table 8-34. Mask/Enable Register Field Descriptions Bit Field Type Reset Description 15 Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation cha"
+          },
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. Th"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "Table8-34明确R/W标签；正文定义硬件状态，写MASK不清状态，不给任意写值持久化规则。现RO编码是抽象的软件保护选择。",
+        "candidate_rule": {
+          "source_label": "R/W",
+          "effective_role": "hardware managed status",
+          "exclude_ordinary_RW_persistence": true,
+          "software_ignores_write_to_status": "abstraction assumption, not a quoted RO code"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Writing to this register does not clear the flag bit status. To make sure that there is no uncertainty in the warning function setting that resulted in a flag bit being set, the Mask/Enable register must be read from to "
+          },
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. This b"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "来源定义所列编码/数据位格式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "software_encoding_test_applicable": false,
+          "exclude_unlisted_codes": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. This b"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "TCF不由读取清除；原文明确power recycled或software reset，旧注释只断电遗漏software reset。",
+        "candidate_rule": {
+          "no_read_clear": true,
+          "reinitialize_event": [
+            "power cycle",
+            "software reset"
+          ],
+          "do_not_keep_forever_constant_1": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "unless the power is recycled or a software reset is issued. The default state for the timing control alert flag is high. 34 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: I"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "字段为测量/硬件状态，结果可随对应测量或事件更新；只读不等于运行中恒定。",
+        "candidate_rule": {
+          "event_driven_model_required": true,
+          "exclude_analog_event_claims_from_static_register_contract": true,
+          "test_nonzero_event_before_clear": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. This b"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. This b"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 34,
+            "printed_page": "34",
+            "table": "Table 8-34",
+            "section": null,
+            "excerpt": "Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. This b"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. This b"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "Writing to this register does not clear the flag bit status. To make sure that there is no uncertainty in the warning function setting that resulted in a flag bit being set, the Mask/Enable register must be read from to "
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "unless the power is recycled or a software reset is issued. The default state for the timing control alert flag is high. 34 Submit Document Feedback Copyright © 2026 Texas Instruments Incorporated Product Folder Links: I"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-33",
+        "section": null,
+        "excerpt": "RW-1 RW-0 LEGEND: R/W = Read/Write; R = Read only; -n = value after reset Table 8-34. Mask/Enable Register Field Descriptions Bit Field Type Reset Description 15 Reserved R/W 0h Reserved 14-12 SCC1-3 R/W 0h Summation cha"
+      },
+      {
+        "pdf_page": 34,
+        "printed_page": "34",
+        "table": "Table 8-34",
+        "section": null,
+        "excerpt": "11h Timing-control-alert flag indicator. Use this bit to determine if the timing control (TC) alert pin has been asserted through software rather than hardware. The bit setting corresponds to the status of the TC pin. Th"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA3221",
+      "register": "MASK_ENABLE",
+      "field": "TCF",
+      "bits": "1",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x2",
+      "known_protection_bit_mask": "0x2",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "TI/INA3221.pdf p.33 Tables8-31/8-32; bits14:1 quarantined"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  }
+]

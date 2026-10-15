@@ -1,0 +1,97 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-statistical-reporting",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "aei-feasibility-design-20261014",
+  "task_status": "PROVISIONAL",
+  "inputs_reviewed": [
+    "AEI_JOURNAL_PROPOSAL_FOR_CODEX.md",
+    "_setup/STRUCTURED_PATCH_REPORT.md",
+    ".sci-skills/project-state.yaml",
+    "eval/model_comparison_20chip/REPORT_three_models.md",
+    "eval/protocol_v2_20261012/REPORT.md",
+    "eval/protocol_v2_20261012/audit_round_1/REPORT.md",
+    "eval/independent_source_admission_20261012/INPUT_FREEZE_RECOMMENDATION.md",
+    "d2d/eval/main_table_n24.json",
+    "_setup/generate_paper_assets.py",
+    "skills/sci-skills-statistical-reporting/SKILL.md",
+    "skills/sci-skills-statistical-reporting/references/playbook.md"
+  ],
+  "outputs": [
+    {
+      "section": "scope",
+      "finding": "Read-only design review. No execution or stage advancement. Existing data supports historical descriptive benchmarks and pilots."
+    },
+    {
+      "section": "cohorts",
+      "finding": "Separate 17/612,3/108 and three-model20/720 cohorts. v1 22,25,48 out of240; final v2 .1 13,14,41 out of240. Audit-round score was superseded; rescoring is not model learning."
+    },
+    {
+      "section": "rag",
+      "finding": "Paired inputs and fixed parser/model/budgets, independently sourced Gold, heldout chips, explicit matching units and missingness denominators; report Silver-vs-Gold downstream efficacy."
+    },
+    {
+      "section": "repair",
+      "finding": "Fixed initial failure cohort, paired budgets, no-feedback resampling control, independent hidden confirmation. Report cumulative repair success within R rounds, all rejects/errors/timeouts and regressions."
+    },
+    {
+      "section": "inference",
+      "finding": "Preserve chip/sample/round hierarchy; paired chip resampling is exploratory for convenience sample. Do not count720 runs as independent devices."
+    },
+    {
+      "section": "limits",
+      "finding": "Structured write_register pilot0/6 fully green and post-hoc scope re-audit do not establish self-healing. rho=-0.828 is old17-chip result, not new20-chip correlation."
+    }
+  ],
+  "evidence_status": [
+    "VERIFIED_USER_MATERIAL: cohorts, final .1 scores, pilot0/6, partial M4",
+    "AI_INFERENCE: design and inference recommendations",
+    "NOT_EXECUTED: new analysis/experiments not run",
+    "PENDING_VERIFICATION: future admitted end-to-end results"
+  ],
+  "assumptions": [
+    "Traceable nested grouping",
+    "Preserve historical artifacts",
+    "Hash stability does not certify source truth"
+  ],
+  "author_input_needed": [
+    "Formal protocol and coverage",
+    "Annotation and heldout units",
+    "Repair sampling, rounds and budgets",
+    "Intended generalization"
+  ],
+  "manual_actions": [],
+  "quality_checks": [
+    "Read corrected final .1 REPORT; qwen14b41/240",
+    "Checked240/model and20-chip grouping",
+    "Separated protocol sensitivity, repair and new generation",
+    "Separated source certification and test counts",
+    "Preserved unknown/exclusion and no stage advancement"
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "AEI-STATS-01",
+      "claim": "Historical9.2%-20.0% treated as current admitted scores",
+      "source": "AEI_JOURNAL_PROPOSAL_FOR_CODEX.md §2; eval/protocol_v2_20261012/REPORT.md",
+      "recommended_resolution": "Keep as version-labelled historical result; separate rescoring and admitted generation."
+    },
+    {
+      "conflict_id": "AEI-STATS-02",
+      "claim": "Self-healing convergence treated as established",
+      "source": "AEI_JOURNAL_PROPOSAL_FOR_CODEX.md §3-4; _setup/STRUCTURED_PATCH_REPORT.md",
+      "recommended_resolution": "Treat as hypothesis, retain0/6 and predeclare gates/denominators."
+    },
+    {
+      "conflict_id": "AEI-STATS-03",
+      "claim": "rho=-0.828 transferred to20-chip cohort",
+      "source": "d2d/eval/main_table_n24.json spearman; _setup/generate_paper_assets.py:93",
+      "recommended_resolution": "Label old17-chip cohort or recompute using real new inputs."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Freeze three-layer interface and design while retaining current M4 mainline.",
+  "stage_acceptance_recommendation": "REPAIR"
+}

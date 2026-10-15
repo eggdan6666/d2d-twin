@@ -1,0 +1,17 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "aei-feasibility-design-20261014",
+  "expert_skill": "sci-skills-statistical-reporting",
+  "task_summary": "Read-only review of proposed RAG ablations and iterative repair study design",
+  "inputs": ["AEI_JOURNAL_PROPOSAL_FOR_CODEX.md", ".sci-skills/project-state.yaml", "_setup/STRUCTURED_PATCH_REPORT.md", "eval/model_comparison_20chip/REPORT_three_models.md", "eval/protocol_v2_20261012/REPORT.md"],
+  "expected_outputs": ["Experimental-design advice", "Metric and denominator audit", "Leakage and inference boundaries", "Full expert result contract"],
+  "evidence_boundaries": ["No execution or mutation", "No APIs", "No fabricated statistics", "No stage advancement"],
+  "acceptance_checks": ["Exact contract identity", "Source-aligned final protocol counts", "Distinguish pass@k from adaptive repair", "Respect chip-level grouping"],
+  "known_missing_items": ["No formal new-generation input admission", "No executed proposed ablations"],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [],
+  "stage_authority": "sci-skills"
+}

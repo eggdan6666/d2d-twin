@@ -1,0 +1,42 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina226-v37/code_review",
+  "expert_skill": "sci-skills-presubmission-review",
+  "task_summary": "Independent source-derived implementation/oracle and evidence-rejection review",
+  "inputs": [
+    "corpus/data/raw_pdf/TI/INA226.pdf",
+    "eval/ina226_semantics_v37_20261014/ina226.py",
+    "eval/ina226_semantics_v37_20261014/target_fields.json",
+    "sandbox/ina226_v37/source_review/independent_source_checklist.md"
+  ],
+  "expected_outputs": [
+    "Independent pytest oracles and distinguishing synthetic fault fixtures",
+    "code_review.json complete expert contract",
+    "code_review.md and actual test execution manifest/JUnit"
+  ],
+  "evidence_boundaries": [
+    "Only write sandbox/ina226_v37/code_review",
+    "Do not mutate main task, Gold, Harness, prior archive or state",
+    "Actual tests of new digital profile only; synthetic mutations are not LLM defect statistics"
+  ],
+  "acceptance_checks": [
+    "Original6fields6dimensions preserved",
+    "All malformed and out-of-profile inputs reject atomically",
+    "Reserved baseline constraints not branded hardware RO",
+    "RST request/completion separates timing",
+    "AFF latch/transparent and source-conditioned CONFIG alternatives",
+    "CVRF full completion, read clear and powerdown exemptions",
+    "Source and witness evidence anti-forgery checks"
+  ],
+  "known_missing_items": [
+    "No physical I2C/ADC/timing certification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python"
+  ],
+  "stage_authority": "sci-skills"
+}

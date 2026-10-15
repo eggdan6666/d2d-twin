@@ -1,0 +1,718 @@
+% ============================================================================
+% D2D-Twin / HD-Agent —— AEI 投稿草案（框架版，尚未定稿）
+%
+% 目标期刊：Advanced Engineering Informatics (Elsevier)，elsarticle 模板
+% 本文件仅搭骨架：Title / Highlights / 五段式摘要 / Introduction / Related Work。
+% 所有正式结果仅从锁定 manifest 派生；标注「待核实」处不得当作已定稿事实。
+% ============================================================================
+\documentclass[preprint,review]{elsarticle}
+
+\usepackage{amsmath,amssymb}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[colorlinks,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+% 占位/待核实标注：投稿前需移除
+\newcommand{\todo}[1]{\textcolor{red}{\textbf{[TODO: #1]}}}
+\newcommand{\unverified}[1]{\textcolor{orange}{\textbf{[待核实: #1]}}}
+
+\journal{Advanced Engineering Informatics}
+
+\begin{document}
+
+% ----------------------------------------------------------------------------
+\title{Source-Constrained Agentic Synthesis of Register-Level Peripheral
+Emulators from Datasheets with Bounded Blackbox Verification}
+
+\author[a]{Chengtong Lan}
+\affiliation[a]{organization={School of Computer and Information Security,
+Guilin University of Electronic Technology}, city={Guilin}, country={P.R. China}}
+
+\begin{abstract}
+% 五段式摘要（Elsevier AEI 允许结构化摘要；目标 150–250 词）——
+
+\textbf{Background.} Register-level virtual prototypes and peripheral behavioral
+emulators are foundational infrastructure for embedded firmware bring-up and
+electronic design automation (EDA). Although code-specialized large language
+models (LLMs) achieve strong results on general programming and register-transfer-level
+(RTL) synthesis benchmarks, their capacity to faithfully translate a hardware
+datasheet into an \emph{executable}, register-accurate emulator remains underexplored.
+Widely adopted text question-answering or LLM-as-a-judge evaluations are prone to
+hallucination and are not executable.
+
+\textbf{Objective.} We aim to provide a deterministic, source-constrained means of
+measuring how faithfully code LLMs synthesize register-level behavioral emulators
+directly from datasheets, and to situate the resulting evidence within an auditable
+agentic engineering loop suitable for trustworthy engineering AI.
+
+\textbf{Methods.} We construct a benchmark grounded on single-writer, human-verified
+Gold intermediate representations (Gold IR) of peripheral register maps. LLMs are
+prompted to synthesize Python register emulators, which are scored by a frozen,
+deterministic blackbox pytest harness (\texttt{MD5: 8cf0854d4779467bc8e472ee4fb97023})
+across eight behavioral specification dimensions. A pilot upstream extraction stage
+produces \emph{Silver} register-field candidates (source-tagged by PDF SHA-256 and
+physical page) that must pass source and schema admission before any promotion to read-only Gold.
+
+\textbf{Results.} Across a historical queue of 17 industrial peripheral ICs evaluated
+with two code LLMs, systematic deficits emerge: a 49.2\% failure rate in read-only
+protection and 71.1\% in sub-register bitfield persistence, a 100.0\% failure rate on
+read/write address aliasing, and an exploratory strong negative rank correlation between semantic
+complexity and synthesis pass rate ($\rho=-0.828$, $p=0.0001$, observed as a descriptive baseline on the historical 17-IC queue). These findings are bounded to
+datasheet-constrained register behavior and are not claimed as silicon-level equivalence.
+
+\textbf{Conclusion.} The evidence indicates that bitfield persistence and address
+aliasing constitute persistent, cross-model failure modes for code LLMs. We argue that
+source constraints, explicit unknowns, conditional execution, and independent acceptance
+jointly form an auditable agentic loop, and outline the verification and experiment
+design required before submission.
+\end{abstract}
+
+\begin{keyword}
+trustworthy engineering AI \sep large language models \sep hardware digital twins
+\sep register-level emulation \sep benchmark \sep retrieval-augmented generation
+\end{keyword}
+
+% ----------------------------------------------------------------------------
+\begin{highlights}
+\item Deterministic blackbox harness with no LLM-as-a-judge for emulator scoring.
+\item 17-IC, two-model evidence of bitfield-persistence and alias failure modes.
+\item Complexity is strongly anti-correlated with synthesis pass rate ($\rho=-0.828$, exploratory baseline on historical 17-IC queue).
+\item Source-tagged Silver--Gold admission pipeline with explicit unknowns.
+\item Verification scoped to datasheet-constrained register behavior (bounded).
+\end{highlights}
+
+\maketitle
+
+% ============================================================================
+\section{Introduction}
+\label{sec:intro}
+
+Before physical silicon tape-out, firmware and driver engineers rely on register-level
+behavioral emulators---software models of an integrated circuit's I/O-mapped registers
+and their side effects---to validate device drivers, interrupt service routines, and
+bus protocols \cite{bellard2005qemu,ghenassia2005transaction}. The ground truth for such
+a model is the vendor datasheet, a document that specifies register addresses, bitfields,
+access permissions, reset values, and non-trivial state-transition semantics such as
+self-clearing bits and read/write aliasing \cite{thakur2023verilogeval}. Authoring these
+models by hand is laborious and error-prone; it is therefore natural to ask whether code
+LLMs can synthesize them automatically.
+
+Recent code LLMs such as Qwen2.5-Coder \cite{hui2024qwen25coder} and DeepSeek-Coder
+\cite{guo2024deepseekcoder} perform well on general programming benchmarks
+\cite{chen2021evaluating,jimenez2024swebench} and on hardware-description-language
+generation benchmarks \cite{thakur2023verilogeval,lu2024rtllm,liu2023chipnemo}. However, most
+hardware-oriented LLM evaluations measure \emph{static} artifacts (generated Verilog) or
+rely on \emph{LLM-as-a-judge} scoring, which is itself susceptible to hallucination and
+cannot guarantee the generated model behaves according to the datasheet. This gap
+motivates a benchmark that ties every claim to (i) a human-verified Gold intermediate
+representation and (ii) a deterministic, executable blackbox assertion.
+
+Our primary contribution is a {\bfseries source-constrained, blackbox-verified} benchmark
+and an {\bfseries auditable agentic pipeline} for datasheet-to-emulator synthesis. We
+argue, following the framing of the accompanying special issue on trustworthy
+human--agentic engineering systems \cite{trappey2026human,trappey2024how}, that the conjunction of {\em source constraints},
+{\em explicit unknowns}, {\em conditional execution}, {\em independent acceptance}, and
+{\em patch rejection} constitutes an auditable engineering-agentic loop. We frame human
+oversight not as a passive annotation step, but as a sovereign single-writer gate that
+audits provenance ledgers and resolves semantic ambiguities, thereby bounding agent
+autonomy within auditable engineering safety envelopes \cite{zhou2025examining}. This paper establishes the
+scope statement, problem formulation, and related-work positioning; the concrete
+three-arm retrieval ablation and the reflection-guided iterative structured patch repair
+protocol are specified as separate experiment protocols
+(\todo{Insert cross-reference to benchmark protocol}).
+
+We deliberately bound our claims. The frozen harness (\texttt{MD5:
+8cf0854d4779467bc8e472ee4fb97023}) establishes determinism and local reproducibility, but
+it does {\em not} by itself prove specification correctness, silicon equivalence, or
+physical timing. Our verification scope is therefore {\bfseries datasheet-constrained
+register behavior simulation and bounded verification}, not an unrestricted ``digital
+twin''. Any residual uncertainty---such as registers whose reset value the datasheet does
+not resolve---is recorded as an explicit unknown rather than silently defaulted
+\unverified{待核实：本句需与已冻结的 Gold IR policy 文案对齐}.
+
+% ============================================================================
+\section{Related Work}
+\label{sec:related}
+
+Table~\ref{tab:related} positions this work against representative code-synthesis,
+hardware, and retrieval-augmented benchmarks. The distinguishing axes are: (i) whether
+the task targets \emph{executable} register-level behavior rather than static code;
+(ii) whether scoring avoids LLM-as-a-judge; (iii) whether each claim is traceable to a
+specific source page; and (iv) whether an upstream retrieval/extraction stage is admitted
+under an audited source--Silver--Gold contract.
+
+\begin{table}[t]
+\centering
+\caption{Positioning against representative code-synthesis and hardware LLM benchmarks.
+``--'' denotes not applicable or not reported. Rows are qualitative summaries of the
+cited works; see the references for authoritative descriptions.}
+\label{tab:related}
+\small
+\begin{tabular}{@{}l p{2.4cm} p{2.2cm} p{2.6cm} p{2.2cm}@{}}
+\toprule
+Benchmark / work & Target artifact & Judge-free scoring & Source traceability & Upstream
+retrieval \\
+\midrule
+HumanEval \cite{chen2021evaluating} & Python snippets & Unit tests & --- & --- \\
+SWE-bench \cite{jimenez2024swebench} & Repo-level patches & Unit tests & Issue context & --- \\
+VerilogEval \cite{thakur2023verilogeval} & Verilog/RTL & Testbenches & --- & --- \\
+RTLLM \cite{lu2024rtllm} & RTL designs & Static + metrics & --- & --- \\
+ChipNeMo \cite{liu2023chipnemo} & Domain RTL/scripts & Mixed & --- & --- \\
+RAG \cite{lewis2020retrieval} & Text generation & --- & Passage-level & Retrieval-only \\
+\textbf{D2D-Twin (ours)} & Register emulators & Frozen blackbox pytest & PDF SHA-256 + page & Audited
+Silver--Gold \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+The closest line of prior work on executable hardware artifacts is the RTL-generation
+benchmark family \cite{thakur2023verilogeval,lu2024rtllm,liu2023chipnemo}. These benchmarks
+advance measurement of {\em static} hardware description generation, but they do not close
+the loop on {\em behavioral} fidelity of datasheet-derived register models, nor do they
+enforce per-claim source traceability. In the broader engineering informatics literature,
+cognitive digital twins and cyber-physical models demonstrate substantial utility for
+high-level decision support, scheduling, and operational resilience \cite{gao2024digital,lim2024graph,lim2024incorporating}.
+However, such frameworks primarily validate macro-level simulation trajectories rather than
+low-level register contracts. Retrieval-augmented generation \cite{lewis2020retrieval}
+supplies the upstream evidence-gathering machinery on which datasheet-scale understanding
+depends; concurrently, while agentic workflows are increasingly explored for engineering
+knowledge synthesis \cite{zhou2025examining,trappey2025inventive}, their practical dependability
+hinges on verifiable knowledge grounding and strict generation--verification loops \cite{kuo2026technology,liu2024multi}.
+A plain RAG pipeline neither verifies extracted register geometry nor guarantees that an
+extracted field survives an independent acceptance gate.
+
+Our contribution combines these threads: an upstream, source-tagged Silver extraction
+stage feeding a single-writer Gold IR, and a downstream frozen blackbox harness that
+scores generated emulators without a language-model judge. We emphasize that this paper
+does not claim superiority over the cited benchmarks on their own metrics; rather, it
+targets a complementary and executable evaluation regime \todo{相关内容引用与对比列，
+投稿前需逐条核对并补齐页码证据}。
+
+% ============================================================================
+\section{Problem Formulation \& System Architecture}
+\label{sec:problem}
+
+We formalize the synthesis target, the intermediate representation, and the auditable
+agentic loop that ties them together. All notation is self-contained; no result below is
+claimed to hold beyond the datasheet-constrained register-behavior scope defined in
+Section~\ref{sec:intro}.
+
+\subsection{Peripheral Register Bus Model}
+\label{sec:bus-model}
+
+A peripheral integrated circuit (IC) accessed over an I2C or SPI bus is modelled as a
+deterministic state machine whose observable interface is a finite register map with
+explicit side effects.
+
+\begin{definition}[Register-Level Bus Peripheral as Extended Finite State Machine]
+A peripheral device is modelled as an extended finite state machine:
+\begin{equation}
+\mathcal{M} \;=\; \bigl\langle \mathcal{A},\ \mathbf{n},\ \mathcal{S},\ s_0,\ \mathcal{T},\ \delta,\ \omega \bigr\rangle,
+\label{eq:peripheral}
+\end{equation}
+where:
+\begin{itemize}
+    \item $\mathcal{A} \subset \mathbb{N}$ is the finite set of valid register addresses, and $\mathbf{n}: \mathcal{A} \rightarrow \mathbb{N}^+$ assigns to each $a \in \mathcal{A}$ its physical bit-width $n_a$.
+    \item The state space factorizes into observable register storage and latent internal variables: $\mathcal{S} \subseteq \prod_{a \in \mathcal{A}} \{0,1\}^{n_a} \times \mathcal{S}_{\mathrm{latent}}$, with initial state $s_0 \in \mathcal{S}$.
+    \item $\mathcal{T} = \mathcal{T}_{\mathrm{rd}} \cup \mathcal{T}_{\mathrm{wr}}$ is the bus transaction alphabet, with $\mathcal{T}_{\mathrm{rd}} = \{\mathrm{rd}(a) \mid a \in \mathcal{A}\}$ denoting read transactions and $\mathcal{T}_{\mathrm{wr}} = \{\mathrm{wr}(a, d) \mid a \in \mathcal{A},\ d \in [0, 2^{n_a})\}$ denoting write transactions.
+    \item $\delta: \mathcal{S} \times \mathcal{T} \rightarrow \mathcal{S}$ is the deterministic state transition function governing side-effects and register mutations.
+    \item $\omega: \mathcal{S} \times \mathcal{T}_{\mathrm{rd}} \rightarrow \mathbb{N}$ is the readback observation function satisfying $\omega(s, \mathrm{rd}(a)) \in [0, 2^{n_a})$.
+\end{itemize}
+\end{definition}
+
+Each register at address $a \in \mathcal{A}$ hosts a disjoint collection of bit-slices
+$\mathcal{F}_a=\{f_{a,i}\}_{i=1}^{m_a}$ within its $[0, n_a-1]$ index span. A bitfield is the tuple
+\begin{equation}
+f_{a,i} \;=\; \bigl(\mathrm{hi}_{a,i},\ \mathrm{lo}_{a,i},\ \mu_{a,i}\bigr),
+\qquad \mu_{a,i}\in\{\mathrm{RO},\ \mathrm{RW},\ \mathrm{WO},\ \dots\},
+\label{eq:field}
+\end{equation}
+where $[\mathrm{lo}_{a,i},\mathrm{hi}_{a,i}] \subseteq [0, n_a-1]$ is a contiguous bit range and $\mu_{a,i}$
+the declared access mode. Semantically non-trivial behaviours---self-clearing bits,
+clear-on-read interrupts, and read/write address aliasing---are encoded not as annotations
+but as non-identity structure in $\delta$ and $\omega$; this is precisely the structure the
+harness probes.
+
+A \emph{synthesized emulator} $\hat{\mathcal{M}}$ is a program (here, a Python class) that
+promises the same bus contract. Verification is \emph{bounded} and \emph{dynamic}: a frozen
+harness selects a finite, prefix-closed stimulus set $\mathcal{H}\subseteq\mathcal{T}^{*}$
+and, for each word $\pi=(t_1,\dots,t_k)\in\mathcal{H}$, walks the induced state sequence
+and asserts the observable readbacks. Writing
+$\omega_\pi=\bigl(\omega(s_{j-1},t_j)\bigr)_{t_j\;=\mathrm{rd}}$ for the reference
+readback trace, $\hat{\mathcal{M}}$ passes the blackbox assertion iff
+\begin{equation}
+\hat\omega_\pi = \omega_\pi \quad \text{for every } \pi\in\mathcal{H}.
+\label{eq:bounded-verif}
+\end{equation}
+Eq.~\eqref{eq:bounded-verif} says nothing about silicon equivalence or physical timing; it
+establishes behavioural agreement on the injected stimuli only, which is the stated,
+bounded scope.
+
+\subsection{Single-Writer IR and the Explicit Unknown Mask}
+\label{sec:ir-known-mask}
+
+Ground truth for Eq.~\eqref{eq:peripheral} is written into a machine-readable Intermediate
+Representation (IR). To make uncertainty explicit rather than silently resolved, we attach
+a per-register \emph{known mask} and define reset states over three-valued logic.
+
+\begin{definition}[Explicit Unknown Mask and Ternary Reset]
+For a register at address $a \in \mathcal{A}$ with width $n_a$, let the bit-index set be $\mathcal{I}_a = \{0, 1, \dots, n_a-1\}$. The source-resolved knowledge is formalized by a known mask $\mathbf{k}_a \in \{0,1\}^{n_a}$, where $\mathbf{k}_a[j]=1$ if and only if bit $j$ is unambiguously specified by the vendor datasheet. 
+The nominal reset vector is defined over the Kleene ternary logic $\mathbb{T} = \{0, 1, \mathsf{X}\}$:
+\begin{equation}
+\mathbf{r}_a \in \mathbb{T}^{n_a}, \qquad 
+\mathbf{r}_a[j] = \begin{cases} 
+b \in \{0, 1\}, & \text{if } \mathbf{k}_a[j] = 1, \\ 
+\mathsf{X}, & \text{if } \mathbf{k}_a[j] = 0 \text{ (explicit unknown)}.
+\end{cases}
+\label{eq:ternary-reset}
+\end{equation}
+Any bit with $\mathbf{k}_a[j]=0$ represents an explicit unknown and is \emph{never silently defaulted to $0$}.
+\end{definition}
+
+A bitfield $f_{a,i} = (\mathrm{hi}_{a,i}, \mathrm{lo}_{a,i}, \mu_{a,i})$ is \emph{admitted} into the executable test suite if and only if its asserted slice contains no unknown bits:
+\begin{equation}
+\mathsf{admit}(f_{a,i}) \;\iff\; \bigwedge_{j=\mathrm{lo}_{a,i}}^{\mathrm{hi}_{a,i}} \bigl(\mathbf{k}_a[j] == 1\bigr).
+\label{eq:admit}
+\end{equation}
+Fields failing \eqref{eq:admit} carry the status \texttt{CONDITIONAL} or
+\texttt{UNKNOWN} and are excluded from the executable denominator rather than coerced into
+a fabricated value. Discrete semantics---address, bit range, effective mask---are bound by a
+zero-tolerance geometry contract: addresses must be unique, bit ranges legal, and fields
+non-overlapping and in-bounds. Continuous tolerances are admitted only where the source
+states an explicit precision; no uniform percentage tolerance is applied to addresses,
+masks, or side-effect actions.
+
+\begin{definition}[Single-writer IR]
+The Gold IR is authored by exactly one authority $\Pi$ (the single writer). Conflicts
+between source readings are \emph{never} resolved by model voting; every admitted
+side-effect action must carry independent source evidence.
+\end{definition}
+
+\subsection{Three-Stage Auditable Closed Loop}
+\label{sec:architecture}
+
+Figure-level architecture is deferred to the Results artefact set; textually the system is a
+three-stage pipeline \todo{插入系统架构图并交叉引用}:
+
+\begin{enumerate}
+\item \textbf{(S1) Upstream source-constrained extraction.} Raw PDFs are byte-anchored and
+parsed into \emph{Silver} register-field candidates (Section~\ref{sec:extraction}); these
+are deliberately non-authoritative and never written into the formal IR.
+\item \textbf{(S2) Core single-writer synthesis and bounded verification.} A human
+single-writer promotes Silver candidates to read-only Gold IR under the admission gates of
+Section~\ref{sec:silver-pipeline}; code LLMs synthesize emulators judged by the frozen
+blackbox harness (Section~\ref{sec:bus-model}).
+\item \textbf{(S3) Downstream reflection-guided structured repair.} Failure traces drive a
+structured single-method patch agent whose edits are scope-gated and re-injected into the
+harness \todo{Cross-reference to iterative structured patch repair protocol}.
+\end{enumerate}
+
+The candidate $\to$ Gold promotion is a function $\Pi:\mathrm{Silver}\rightarrow
+\mathrm{Gold}$ applied only after the admission predicates of
+Table~\ref{tab:related}--style provenance contracts are satisfied. We define the loop to be
+\emph{auditable} precisely because it instantiates five jointly necessary properties:
+(i) \emph{source constraints} (every claim is anchored to a PDF byte-hash and page),
+(ii) \emph{explicit unknowns} (Eq.~\eqref{eq:known-mask}), (iii) \emph{conditional
+execution} (Eq.~\eqref{eq:admit} gates the executable denominator), (iv) \emph{independent
+acceptance} (scoring is model-free and frozen), and (v) \emph{patch rejection} (repair edits
+are scope-gated and re-verified). The single-writer authority $\Pi$ is human, which is the
+link to the special-issue framing of trustworthy hybrid human--agentic engineering;
+promotion workload and conflict dispositions are recorded, not asserted
+\unverified{待核实：晋升工作量与冲突处置的记账字段需与已冻结 source-ledger 对齐}.
+
+% ============================================================================
+\section{Upstream Source-Constrained Register Extraction}
+\label{sec:extraction}
+
+This section specifies the upstream stage (S1): how a datasheet PDF becomes source-tagged
+Silver candidates, and how that stage is measured without an LLM judge.
+
+\subsection{Silver Extraction Pipeline and PDF Anchoring}
+\label{sec:silver-pipeline}
+
+The extraction data flow is
+\[
+\text{raw PDF} \;\longrightarrow\; \text{byte-hash anchor} \;\longrightarrow\;
+\text{page/table reconstruction} \;\longrightarrow\; \text{field candidates}
+\;\longrightarrow\; \text{admission gates}.
+\]
+\textbf{PDF SHA-256 anchoring.} Every candidate is bound to the exact source bytes:
+$H=\text{SHA-256}(\mathrm{bytes}(P))$. A candidate record therefore carries the tuple
+\begin{equation}
+c \;=\; \bigl(\mathrm{run\_id},\ H,\ \text{page},\ \text{address},\ \text{bit\_hi},\
+ \text{bit\_lo},\ \text{bit\_mask},\ \text{access},\ \text{reset},\ \text{evidence},\
+ \text{confidence},\ \mathrm{status}{=}\texttt{silver\_candidate}\bigr),
+\label{eq:candidate}
+\end{equation}
+where $\mathrm{bit\_mask}$ is the integer mask over $[\mathrm{bit\_lo},\mathrm{bit\_hi}]$.
+The hash freezes the source version; content caches are keyed by it so that concurrent
+corpus edits cannot reuse a stale extraction. \emph{Extraction strategy} is table-first:
+PyMuPDF table reconstruction is preferred, anchored by register headings, with a per-line
+regular-expression fallback for tables the detector misses. The Silver layer under a
+dedicated schema (\texttt{rag-silver-v1}) is explicitly \emph{not} the read-only Gold IR
+(\texttt{d2d-ir-v1}); no test oracle is generated from unaudited Silver, so an incorrect
+specification and its implementation can never cross-authenticate.
+
+\textbf{Admission gates.} Promotion to Gold enforces, in order: (i) \emph{identity and
+provenance} (device/variant, hash, physical and printed page, table/figure id, run id);
+(ii) \emph{field geometry} (unique address, legal bit range, non-overlapping, in-bounds);
+(iii) \emph{behaviour} (reset value under Eq.~\eqref{eq:known-mask}, side-effect action
+with independent source); (iv) \emph{input domain} (legal values, cross-field
+preconditions, excluded clauses); and (v) \emph{admission} (schema/policy/evidence, promotion
+identity). Extraction is allowed to abstain and report coverage; confidence orders review
+priority and does \emph{not} substitute for source verification.
+
+\subsection{L1 Retrieval and L3 Structural Metrics}
+\label{sec:metrics}
+
+Let $Q$ be the set of field queries, $C$ the corpus of page-aligned chunks, and
+$\mathrm{rel}(q,c)\in\{0,1\}$ a human-frozen relevance label. The Gold IR, reference
+simulators, and any hidden oracle are excluded from the retrieval corpus. Across the three
+retrieval arms, parsing, slicing, the extraction model, the output schema, the context
+budget, and decoding settings are held identical so that only the retrieval strategy varies;
+each arm records whether a vector branch actually fired, so a degraded BM25-only run is not
+reported as ``hybrid''\unverified{待核实：三臂是否统一记录向量分支启用标志，需在协议文档固化}.
+
+\textbf{L1 --- Retrieval.} For query $q$ and top-$k$ retrieved set $R_q^{k}$,
+\begin{equation}
+\mathrm{CP@}k(q)=\frac{|\{c\in R_q^{k}:\mathrm{rel}(q,c)=1\}|}{k},\qquad
+\mathrm{CR}(q)=\frac{|\{c\in R_q^{k}:\mathrm{rel}(q,c)=1\}|}{|\{c\in C:\mathrm{rel}(q,c)=1\}|},
+\label{eq:l1}
+\end{equation}
+aggregated as
+\begin{equation}
+\mathrm{CP@}k_{\mathrm{micro}}=
+\frac{\sum_{q}|\{c\in R_q^{k}:\mathrm{rel}=1\}|}{\sum_{q}k},\qquad
+\mathrm{CP@}k_{\mathrm{macro}}=\frac{1}{|Q|}\sum_{q}\mathrm{CP@}k(q),
+\label{eq:l1-agg}
+\end{equation}
+with $\mathrm{CR}_{\mathrm{micro/macro}}$ defined analogously using the pooled denominator
+$\sum_q|\{c:\mathrm{rel}=1\}|$. The matching unit is the page-aligned chunk; relevance is
+frozen once and not adjudicated by a model.
+
+\textbf{L2 --- Extraction (field-level admission).} Between retrieval and structure, each
+Silver candidate is scored against reference fields under the exact-match key
+$(\mathrm{address},\mathrm{bit\_hi},\mathrm{bit\_lo})$ with $\mathrm{access}$ matched over a
+normalized vocabulary and $\mathrm{reset}$ matched only on source-resolved bits:
+\begin{equation}
+\mathrm{P}_{\mathrm{field}}=\frac{|\mathrm{TP}_{\mathrm{field}}|}{|\mathrm{Pred}_{\mathrm{field}}|},\qquad
+\mathrm{R}_{\mathrm{field}}=\frac{|\mathrm{TP}_{\mathrm{field}}|}{|\mathrm{Ref}_{\mathrm{field}}|}.
+\label{eq:l2}
+\end{equation}
+
+\textbf{L3 --- Structure.} Let $\mathcal{R}_t$ and $\hat{\mathcal{R}}_t$ be the reference
+and predicted normalized rows of a reconstructed register-map table $t$, matched by the key
+$(\mathrm{address},\mathrm{field\_name})$ after deterministic hex/dec and unit
+normalization only. Row-level reconstruction F1 is
+\begin{equation}
+\mathrm{P}_{\mathrm{row}}(t)=\frac{|\hat{\mathcal{R}}_t\cap\mathcal{R}_t|}{|\hat{\mathcal{R}}_t|},\quad
+\mathrm{R}_{\mathrm{row}}(t)=\frac{|\hat{\mathcal{R}}_t\cap\mathcal{R}_t|}{|\mathcal{R}_t|},\quad
+\mathrm{F1}_{\mathrm{row}}(t)=\frac{2\,\mathrm{P}_{\mathrm{row}}(t)\,\mathrm{R}_{\mathrm{row}}(t)}
+{\mathrm{P}_{\mathrm{row}}(t)+\mathrm{R}_{\mathrm{row}}(t)}.
+\label{eq:l3-row}
+\end{equation}
+Bitfield mapping accuracy, over reference field geometries $M_t=\{(\mathrm{address},
+\mathrm{bit\_hi},\mathrm{bit\_lo})\}$, is
+\begin{equation}
+\mathrm{BMA}(t)=\frac{|\hat{M}_t\cap M_t|}{|M_t|},
+\label{eq:l3-bma}
+\end{equation}
+reported as both micro (pooled over $t$) and macro (mean over $t$) averages. Duplicated
+predictions count once as false positives; any reference field absent from the prediction is
+a false negative. No tolerance applies to addresses or masks; the only legal normalization
+is the deterministic one that cannot change physical meaning. Every metric in this section
+is model-free, so none of them relies on an LLM-as-judge
+\todo{插入针对跨页/动态/冲突的代表性材料 pilot 结果，单列}。
+
+% ============================================================================
+\section{Core Benchmark \& Empirical Findings}
+\label{sec:core-benchmark}
+
+This section states what is measured and what the evidence shows, with explicit separation of
+the two evaluation queues and their respective denominators (Section~\ref{sec:queues}).
+
+\subsection{Test Set and Eight Verification Dimensions}
+\label{sec:testset}
+
+The D2D-Twin suite curates \textbf{20 industrial peripheral ICs} spanning environmental
+sensing, power monitoring, precision analog-to-digital conversion, and digital temperature
+domains, each accessed over I2C or SPI. The behavioral contract of each device is decomposed
+into \emph{eight} verification dimensions (Table~\ref{tab:dims}). A dimension is
+\emph{conditional}: the harness injects its assertion only when the datasheet declares the
+corresponding semantics (an aliased read/write address pair, a clear-on-read interrupt, a
+soft-reset key, and so on). Consequently the applicable denominator differs per dimension and
+is reported explicitly rather than collapsed into a single accuracy.
+
+\begin{table}[t]
+\centering
+\caption{Eight behavioral verification dimensions. Each is emitted only when the source
+declares the corresponding semantics, so applicable denominators vary.}
+\label{tab:dims}
+\small
+\begin{tabular}{@{}c l l@{}}
+\toprule
+\# & Dimension & Assertion target \\
+\midrule
+D1 & Reset-value transcription & read-back equals declared reset after init \\
+D2 & Read-only write protection & RO write is discarded and the value preserved \\
+D3 & Sub-register bitfield persistence & writing one field leaves neighbours intact \\
+D4 & Write-triggered self-clearing & self-clearing bit returns to $0$ after trigger \\
+D5 & Soft-reset key & magic write triggers reset / write-protection \\
+D6 & Single-byte semantics & high/low byte writes preserve 16-bit behaviour \\
+D7 & Read/write aliasing & write address updates the aliased read address \\
+D8 & Clear-on-read & a read clears the status bit exactly once \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Two Evaluation Queues and Their Denominators}
+\label{sec:queues}
+
+Two queues are reported and \emph{never} share denominators. The \textbf{historical 17-chip
+queue} is the granular one: per-dimension failure rates are finalized there for
+Qwen2.5-Coder-14B ($n=24$ per chip) and cross-checked on DeepSeek-Coder-6.7B ($n=12$ per
+chip), totalling $N=612$ synthesizer runs. The \textbf{20-chip three-model queue} ($N=720$)
+currently reports only the all-pass rate; its per-dimension disaggregation and formal
+input-version audit remain open. Section~\ref{sec:four-defects} draws its numbers from the
+historical queue, and Section~\ref{sec:complexity} draws $\rho=-0.828$ from the same queue;
+neither is transplanted onto the 20-chip queue.
+
+\subsection{Three-Model Evaluation ($N=720$)}
+\label{sec:three-model}
+
+Table~\ref{tab:three-model} reports the all-pass (``all-green'') outcome of the frozen
+blackbox harness across three code models. Each model synthesizes $n=240$ samples (20 chips
+$\times$ 3 seeds $\times$ 4 samples), so the aggregate all-pass rate equals the macro mean of
+the per-chip all-pass rates.
+
+\begin{table}[t]
+\centering
+\caption{Three-model, 20-chip evaluation ($N=720$). ``All-pass'' means every applicable
+assertion in the frozen harness passed for that generated emulator.}
+\label{tab:three-model}
+\small
+\begin{tabular}{@{}l r r r@{}}
+\toprule
+Model & Samples & All-pass & All-pass rate \\
+\midrule
+Qwen2.5-Coder-3B & 240 & 22 & $9.17\%$ \\
+DeepSeek-Coder-6.7B & 240 & 25 & $10.42\%$ \\
+Qwen2.5-Coder-14B & 240 & 48 & $20.00\%$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+These differences are \emph{descriptive}: no significance or causal claim is attached. The
+240 samples per model are technical replicates (chips as the grouping unit, 3 seeds
+$\times$ 4 samples), not 240 independent devices, and per-chip skip counts differ. The
+two smaller models lack per-run IR/prompt/model-revision hashes, so
+Table~\ref{tab:three-model} describes the current run but does not yet establish that all
+inputs were byte-identical across models \unverified{待核实：3B/6.7B 缺少逐次运行输入哈希，8 颗芯片 IR 版本远端与本地存在差异}。
+
+\subsection{Four Systemic Failure Modes}
+\label{sec:four-defects}
+
+The decisive evidence is the per-dimension disaggregation, finalized only on the historical
+17-chip queue (Qwen2.5-Coder-14B, applicable denominators per dimension). Four failure modes
+recur and are, in each case, reproduced rather than model-specific:
+
+\begin{enumerate}
+\item \textbf{Read-only write protection.} Writing randomized values to read-only bits
+fails to preserve the stored value in $49.2\%$ of applicable cases, indicating a default to
+full-word blind writes without a read-only mask.
+\item \textbf{Sub-register bitfield persistence.} A single-field write corrupts neighbouring
+fields in $71.1\%$ of cases; $47.5\%$ of these are ``true-capability'' failures that survive
+every reservation-tier relaxation, confirming a masking rather than a documentation-gap
+deficit.
+\item \textbf{Read/write address aliasing.} Both models fail the aliased read/write pair on
+$100.0\%$ of attempts ($48/48$ and $27/27$ respectively). Generated emulators key storage by
+the read address, so a write to the aliased address raises an exception or writes an isolated
+slot, never mirroring the physical state.
+\item \textbf{Write-triggered self-clearing.} Self-clearing reset bits fail in $53.7\%$ of
+applicable cases. The failures are \emph{isomorphic} across TI INA-series devices, consistent
+with vendor IP-template reuse producing a systematic, product-line-wide blind spot rather
+than independent per-chip noise.
+\end{enumerate}
+
+\subsection{Complexity--Performance Correlation (Historical Queue)}
+\label{sec:complexity}
+
+For the 17-chip historical queue, the number of special-semantic registers $X$ and the
+synthesis pass rate $Y$ exhibit a strong negative Spearman rank correlation:
+$\rho=-0.828$, $p=0.0001$ (Monte Carlo permutation, $N=200{,}000$). This is reported strictly
+as a historical-queue descriptive result; it is \emph{not} transplanted onto the 20-chip
+three-model queue, whose complexity definition, scoring protocol, and cohort differ and whose
+correlation must be recomputed before any joint claim \unverified{待核实：20 芯片队列的复杂度定义与评分协议需冻结后重算相关系数}.
+
+% ============================================================================
+\section{Reflection-Guided Structured Self-Repair}
+\label{sec:self-repair}
+
+The downstream stage (S3) turns a failed harness trace into a gated, single-edited patch.
+This section fixes the protocol and its success metric, and states the exploratory boundary
+of the current evidence.
+
+\subsection{Protocol: Reflection and Structured Single-Method Patch Gating}
+\label{sec:repair-protocol}
+
+The input is a \emph{frozen} population $\mathcal{P}$ of initially failing emulators, each
+identified by (queue, model, chip, seed, sample id). For a failing sample, the blackbox trace
+is the sole feedback signal. In each round the agent (i) reads the trace and the current
+source (reflection), (ii) proposes a patch whose edit site is confined---by an AST scope
+guard---to the declared target method (e.g., \texttt{write\_register}) and its explicit
+semantic range, and (iii) submits the patch to a gate. The guard forbids edits to the schema,
+IR, harness, or assertions, and forbids new out-of-contract interfaces. A pure
+string-hexadecimal-literal whitelist is not a general gate, since equivalent decimal or
+loop-based writes bypass it \unverified{待核实：十六进制字面白名单可被十进制/泛化循环绕过，不能作为通用语义门禁}。
+
+\subsection{Cumulative Repair Success Rate}
+\label{sec:crs}
+
+Let round $r\in\{0,\dots,R\}$ with $r=0$ the initial generation (its counting convention is
+stated explicitly, per run), and $a_r(s)\in\{0,1\}$ the all-pass indicator of sample $s$
+after round $r$ under its \emph{last accepted} state. The metric is the \emph{cumulative
+repair success rate up to round $R$},
+\begin{equation}
+\mathrm{CRS}(R) = \frac{1}{M}\,\Bigl|\Bigl\{\,s\in\mathcal{P}\;:\;\exists\, r\le R,\ a_r(s)=1\Bigr\}\Bigr|,\qquad M=|\mathcal{P}|,
+\label{eq:crs}
+\end{equation}
+where a sample is counted at most once. Eq.~\eqref{eq:crs} is \emph{not} $\mathrm{pass@}k$,
+which assumes independent candidate sampling; here every round depends on the failure trace
+of the previous accepted state, so the two estimators answer different questions and must not
+be conflated. Reported alongside Eq.~\eqref{eq:crs} are the per-round all-pass rate, the
+\emph{retention coverage} (fraction of previously passing applicable assertions that still
+pass), the \emph{false-admission rate} (accepted patches that later fail held-out tests), the
+inference cost (tokens/calls per sample), and the final held-out success rate.
+
+\subsection{Patch Rejection and Regression Interception}
+\label{sec:patch-rejection}
+
+A patch is \emph{accepted} only when it is simultaneously well-formed and within budget,
+inside the AST scope guard, free of schema/IR/harness/assertion edits, and non-regressive on
+both the previously passing applicable assertions and independent non-target regressions.
+Any violation---out-of-scope edit, timeout, malformed output, or regression---triggers
+\emph{rejection}, and the sample reverts to its last accepted state. Rejected, timed-out, and
+malformed attempts count against the fixed denominator $M$; a rejection is not silently
+excluded. This gate is the ``patch rejection'' half of the auditable loop, paired with the
+``independent acceptance'' of the frozen harness.
+
+\subsection{Exploratory Status and Boundaries}
+\label{sec:repair-boundary}
+
+The current evidence is an exploratory pilot on the \texttt{write\_register} interface:
+\textbf{$0/6$ all-green} ($6$ candidates, $0\%$). This establishes the runnability of the runner and
+the viability of scope-limited exploration; it does \emph{not} demonstrate sustained
+self-repair improvement. A read-only-scope positive result, if any, is reported separately from the
+write-trigger scope. No multi-round, cross-chip statistical protocol exists yet, and a claim
+that reflection contributes causally would additionally require a matched
+``same structured patch $+$ same feedback $+$ no reflection'' arm and a same-budget
+``no feedback'' re-generation arm \todo{Cross-reference to iterative structured patch repair protocol and exploratory pilot data}.
+
+% ============================================================================
+\section{Discussion}
+\label{sec:discussion}
+
+\subsection{Threats to Validity}
+\label{sec:validity}
+
+\textbf{Internal validity.} Three internal threats are disclosed rather than minimized.
+First, \emph{datasheet ambiguity}: a register whose reset value or side-effect the source
+does not resolve is recorded as an explicit unknown under the known mask
+(Eq.~\eqref{eq:known-mask}), but a residual risk remains that an unresolved bit was treated
+as resolved during curation; only the single-writer admission gates, not the automatic
+extractor, can intercept that error. Second, \emph{decoding stochasticity}: generation uses a
+sampling decoder at a fixed temperature, and only three seeds $\times$ four samples are drawn
+per chip; the reported rates describe that particular decoder setting, not a model's expected
+output distribution. Third, \emph{incompletely closed input provenance}: the two smaller
+models lack per-run IR/prompt/model-revision hashes and eight chips differ between the remote
+archive and the local IR, so Table~\ref{tab:three-model} does not yet establish byte-identical
+inputs across models. A related internal threat is scoring-protocol sensitivity: an earlier
+protocol revision assigned different all-pass counts to identical code, so the all-pass rate is
+a property of the scoring protocol, not of the model alone \unverified{Per-run input hashes and
+a frozen IR version are prerequisite to a strict cross-model comparison}.
+
+\textbf{External validity.} The 20-chip set is a curated convenience sample of industrial
+peripherals, not a random draw from any population, so no population-level generalization is
+claimed and the historical $\rho=-0.828$ remains a descriptive baseline on a single cohort.
+The verification scope is \emph{datasheet-constrained register behavior}, narrower than
+silicon equivalence or physical timing, so the findings do not transfer to cycle-accurate,
+analog, or thermal claims. Finally, the model set spans two families (Qwen2.5-Coder and
+DeepSeek-Coder); the 6.7B model is a cross-family contrast, not a midpoint on a
+within-family scaling curve.
+
+\subsection{Human-in-the-Loop Sovereign Gatekeeping}
+\label{sec:sovereign}
+
+The human's role in this loop is \emph{sovereign}, not annotative. The human is the
+\textbf{Single Writer} who holds final authority over the read-only Gold IR: automatic
+extraction only \emph{proposes} Silver candidates and the repair agent only \emph{proposes}
+patches, whereas the promotion map $\Pi:\mathrm{Silver}\rightarrow\mathrm{Gold}$ is executed
+by the single writer alone. Source conflicts are never resolved by model voting, and every
+admitted side-effect action must carry independent source evidence. This is the concrete
+sense in which the system answers the special issue's ``trustworthy hybrid human--agentic''
+framing \cite{trappey2026human}: the agentic components are proposal generators, and the human retains the decision
+authority and the accountability that attach to it \cite{zhou2025examining,palmer2025personas,aslam2023conceptual,lyu2024valio}.
+
+Because that authority is real, its \emph{cost is disclosed, not asserted}. The source-review
+ledger records, per field, a disposition---admitted, repaired, conditional, or excluded---with
+an evidence identifier and the promotion workload, so a reader can assess how much of the
+pipeline's correctness rests on human effort rather than on the models themselves
+\todo{Surface the frozen disposition counts and evidence identifiers from the source ledger}.
+
+\subsection{Engineering Implications for CPS and Digital Twins}
+\label{sec:implications}
+
+For industrial embedded-firmware bring-up and driver validation, three practices transfer
+beyond this benchmark. First, a \emph{frozen deterministic blackbox harness} decouples
+``does the model behave correctly'' from ``does the scorer agree with itself'', and is
+directly reusable as a continuous datasheet-conformance regression for device drivers.
+Second, the \emph{explicit unknown mask} hands firmware teams a machine-readable boundary
+between ``must handle'' and ``unspecified by the source'', replacing the silent zero-defaults
+that are a recurring field fault. Third, the \emph{single-writer admission contract} yields a
+provenance and accountability trail of the kind safety- and reliability-relevant
+cyber-physical systems increasingly require for conformance evidence.
+
+The scope caveat is equally important in practice: the benchmark certifies register-behavior
+fidelity, not full digital-twin fidelity, and analog, thermal, and timing effects are out of
+scope. Recommendations are therefore bounded to register-level driver and firmware
+co-validation; any extension toward physical-twin claims would require an independent
+verification regime.
+
+% ============================================================================
+\section{Conclusion \& Future Work}
+\label{sec:conclusion}
+
+\subsection{Summary of Contributions}
+This work contributes four artifacts that together constitute a source-constrained, auditable
+route from datasheet to executable register model. (i) A \emph{frozen, judge-free blackbox
+harness} (MD5-locked) that turns ``faithful to the datasheet'' into a deterministic, executable
+property. (ii) An \emph{explicit unknown mask} that represents source uncertainty instead of
+defaulting it to zero. (iii) \emph{Four evidenced systemic failure modes} of current code
+LLMs---read-only protection, bitfield persistence, read/write aliasing, and write-triggered
+self-clearing---with per-dimension rates drawn strictly from the historical 17-chip queue.
+(iv) A \emph{single-writer auditable closed loop} in which a human sovereign retains read-only
+Gold authority, acceptance is independent of the models, and rejected repairs do not leak into
+ground truth.
+
+\subsection{Future Work}
+Two lines of work are prioritized and conditioned on explicit milestones. First, after the
+scope freeze at the 11/15 milestone, the 20-chip queue requires a \emph{per-dimension
+disaggregation with a fully closed input-version audit} (per-run IR/prompt/model-revision
+hashes and a frozen IR version), so that its per-dimension failure rates and its complexity
+correlation can be computed under the same provenance standard as the historical queue.
+Second, a \emph{cross-chip, multi-round structured-repair benchmark} should be executed under
+the frozen protocol of Section~\ref{sec:self-repair}, including the matched
+``patch $+$ feedback, no reflection'' arm and the same-budget ``no feedback'' arm, so that any
+causal claim about reflection rests on paired evidence rather than on a single pilot. Both
+lines are stated as open work, gated behind evidence thresholds, not as results
+\todo{Reference the frozen 11/15 scope note and the structured-repair benchmark protocol}.
+
+% ============================================================================
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+\end{document}

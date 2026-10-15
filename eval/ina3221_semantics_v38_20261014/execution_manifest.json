@@ -1,0 +1,39 @@
+{
+  "protocol": "3.8-ina3221-20261014",
+  "status": "EXECUTED_LOCAL_NOT_PRODUCTION_FREEZE",
+  "execution_date": "2026-10-14",
+  "started_utc": "2026-10-13T20:25:10.003742+00:00",
+  "completed_utc": "2026-10-13T20:25:15.716251+00:00",
+  "python": "3.11.9",
+  "command": "python -B sandbox/ina3221_v38/run_task.py",
+  "elapsed_seconds": 5.717999999993481,
+  "input_sha256": {
+    "eval/ina3221_semantics_v38_20261014/ina3221.py": "58ebd06ddd064a3acccffe1d1d55df8014b741ae58b2e651686ff984dc51a6ea",
+    "eval/ina3221_semantics_v38_20261014/scenarios.py": "3e107ed73ea62a373a1b1a2d0a1748192c1faeb6a16946479e544427b1ccdb9c",
+    "eval/ina3221_semantics_v38_20261014/admission.py": "8cd20e62cc45f10d7048ef00c7c94b6abef5f5d7851c262eacd3b4d160595c2d",
+    "eval/ina3221_semantics_v38_20261014/source_review.json": "fdc5c242da057c71e404b1e50bf7d45cdf2b5f2e54ffdc5532ff006468c12311",
+    "eval/ina3221_semantics_v38_20261014/target_fields.json": "0970588fe3a5cd28cbd62e76fc9e2c70dcea2f5dd0948f2b3710cd9006916d51",
+    "eval/ina3221_semantics_v38_20261014/input_identity.json": "7dd9a2d92a3841c9b5f00090f644e5865a3219415b8bb69dc51a06b108c841c9",
+    "eval/ina3221_semantics_v38_20261014/code_acceptance_checklist.md": "f34aad8df6a5eeae7d3adda497de748e8c77697ec395696acb00cecc261fef9c",
+    "eval/ina3221_semantics_v38_20261014/source_clarification_checklist.md": "1d1cce1fbea4b1db5d61c9ffcd33e0be5ff621e889b960eb0a1eeb714ea78151",
+    "eval/ina3221_semantics_v38_20261014/source_clarification_supplement.json": "101e49c5e1d575786cf7c9ebbf71a87a29e6b91f1e0f8209664099c28c17e36c",
+    "sandbox/ina3221_v38/run_task.py": "1e9a4eba8f0c845bcb7fc6dbe2657ed2afd18d6ca4eee8594bf7d61ba9a4c801",
+    "corpus/data/raw_pdf/TI/INA3221.pdf": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+    "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711"
+  },
+  "output_sha256": {
+    "scenario_execution.json": "6911edf82bae5cc0bb912d0fbb4e21d8f1a74f439de633ebc9bd47c3b2123fab",
+    "closure_ledger.json": "602a18340f7368eca83f0b2ae4d1cb02d636713607003249489300989b423277",
+    "admission_gate.json": "e1dedbcb9571746259af6c562cc897c3a2c563ca82d73c7853991a5e9bfa2df1",
+    "preservation_verification.json": "cda05f54c8492793aee4f6d34044a67189601459f1e4a0846b9e41230832fff0"
+  },
+  "scenario_count": 12,
+  "check_count": 400,
+  "source_table_metadata_checks": 64,
+  "source_conditioned_candidate_checks": 10,
+  "notes": [
+    "Qualified post-filter outputs do not implement numeric filter arithmetic or N-cycle sample countdown.",
+    "TC cycles have unique injected indices, not verified physical cycle provenance.",
+    "Check counts are not independent source facts, LLM samples or physical measurements."
+  ]
+}

@@ -1,0 +1,1102 @@
+[
+  {
+    "chip": "INA226",
+    "register": "CALIBRATION",
+    "field": "UNNAMED_15",
+    "bits": "15",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x8000",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      },
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "逐位表给未命名位与POR，整寄存器为R/W；无逐位RO码或写保护文字。旧RO分类不能称厂商事实。",
+        "candidate_rule": {
+          "exclude_access_oracle": true,
+          "keep_reset_value_in_all_legal_writes": true,
+          "retain_known_por": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "EXCLUDE",
+        "applicable": true,
+        "fact": "未定义非默认写值的保证。",
+        "candidate_rule": {
+          "legal_baseline_only": 0,
+          "exclude_nondefault_values": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "原始表标为保留/未命名；已知reset与访问标签不说明非法/非默认写入的后果。",
+        "candidate_rule": {
+          "keep_default_in_legal_stimuli": true,
+          "fixed_write": 0,
+          "exclude_nondefault_write_oracle": true,
+          "do_not_infer_read_constant_from_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-11",
+            "section": null,
+            "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 7-11",
+        "section": null,
+        "excerpt": "Calibration Register (05h) (Read/Write) Description BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT — FS14 FS13 FS12 FS11 FS10 FS9 FS8 FS7 FS6 FS5 FS4 FS3 FS2 FS1 FS0 NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 "
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA226",
+      "register": "CALIBRATION",
+      "field": "UNNAMED_15",
+      "bits": "15",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8000",
+      "known_protection_bit_mask": "0x8000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "RST",
+    "bits": "15",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x8000",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      },
+      "access": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "字段相关表/正文访问语义为 RW；此处未把整寄存器R/W推成每一保留位可写。",
+        "candidate_rule": {
+          "source_access": "RW",
+          "software_write_persistence": false,
+          "ro_protection_requires_no_hardware_update": false
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "来源定义所列编码/数据位格式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "software_encoding_test_applicable": true,
+          "exclude_unlisted_codes": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "原文定义写1产生系统复位且该位self-clears；未给此位任意瞬时读必为0的承诺。",
+        "candidate_rule": {
+          "write_value": 1,
+          "after_reset_completed": "all defined defaults restored and RST=0",
+          "atomic_reset_abstraction": "explicit protocol assumption; no silicon timing proof",
+          "exclude_during_reset_readback_oracle": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 23,
+            "printed_page": "23",
+            "table": "§7.1.1 RST",
+            "section": null,
+            "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 23,
+        "printed_page": "23",
+        "table": "§7.1.1 RST",
+        "section": null,
+        "excerpt": "Reset Bit Bit 15 Setting this bit to '1' generates a system reset that is the same as power-on reset. Resets all registers to default values; this bit self-clears. AVG: Averaging Mode Bits 9–11 Determines the number of s"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA226",
+      "register": "CONFIG",
+      "field": "RST",
+      "bits": "15",
+      "ir_access": "RW",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8000",
+      "known_protection_bit_mask": "0x8000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA226",
+    "register": "CONFIG",
+    "field": "UNNAMED_14_12",
+    "bits": "14:12",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x4。",
+        "candidate_rule": {
+          "expected_field_value": 4,
+          "known_mask": "0x7000",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      },
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "逐位表给未命名位与POR，整寄存器为R/W；无逐位RO码或写保护文字。旧RO分类不能称厂商事实。",
+        "candidate_rule": {
+          "exclude_access_oracle": true,
+          "keep_reset_value_in_all_legal_writes": true,
+          "retain_known_por": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "EXCLUDE",
+        "applicable": true,
+        "fact": "未定义非默认写值的保证。",
+        "candidate_rule": {
+          "legal_baseline_only": 4,
+          "exclude_nondefault_values": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "原始表标为保留/未命名；已知reset与访问标签不说明非法/非默认写入的后果。",
+        "candidate_rule": {
+          "keep_default_in_legal_stimuli": true,
+          "fixed_write": 4,
+          "exclude_nondefault_write_oracle": true,
+          "do_not_infer_read_constant_from_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 22,
+            "printed_page": "22",
+            "table": "Table 7-2",
+            "section": null,
+            "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 22,
+        "printed_page": "22",
+        "table": "Table 7-2",
+        "section": null,
+        "excerpt": "Configuration Register (00h) (Read/Write) Descriptions BIT NO. D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT RST — — — AVG2 AVG1 AVG0 VBUSCT2 VBUSCT1 VBUSCT0 VSHCT2 VSHCT1 VSHCT0 MODE3 MODE2 MODE1 NAME POR 0 "
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA226",
+      "register": "CONFIG",
+      "field": "UNNAMED_14_12",
+      "bits": "14:12",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x7000",
+      "known_protection_bit_mask": "0x7000",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "AFF",
+    "bits": "4",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x10",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be enabled to assert the Alert pin. Reading the Alert Function Flag following an alert al"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "字段相关表/正文访问语义为 HARDWARE_MANAGED；此处未把整寄存器R/W推成每一保留位可写。",
+        "candidate_rule": {
+          "source_access": "HARDWARE_MANAGED",
+          "software_write_persistence": false,
+          "ro_protection_requires_no_hardware_update": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be enabled to assert the Alert pin. Reading the Alert Function Flag following an alert al"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "来源定义所列编码/数据位格式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "software_encoding_test_applicable": false,
+          "exclude_unlisted_codes": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be enabled to assert the Alert pin. Reading the Alert Function Flag following an alert al"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "LEN=1锁存时MASK读清AFF；LEN=0透明模式由下一次无告警转换清。不能无条件读清。",
+        "candidate_rule": {
+          "if_LEN1_on_read": "MASK_ENABLE",
+          "if_LEN0_clear": "next conversion without alert",
+          "require_controlled_alert": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": null,
+            "section": "§7.1.7 AFF",
+            "excerpt": "When the Alert Latch Enable bit is set to Latch mode, the Alert Function Flag bit clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "字段为测量/硬件状态，结果可随对应测量或事件更新；只读不等于运行中恒定。",
+        "candidate_rule": {
+          "event_driven_model_required": true,
+          "exclude_analog_event_claims_from_static_register_contract": true,
+          "test_nonzero_event_before_clear": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be enabled to assert the Alert pin. Reading the Alert Function Flag following an alert al"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "p13说锁存AFF/ALERT直到CONFIG写或MASK读；p27说AFF锁存only MASK读清。CONFIG写清AFF保持来源冲突。",
+        "candidate_rule": {
+          "CONFIG_write_clear_AFF": "excluded main profile; text disagreement retained",
+          "MASK_read_clear_AFF": "supported when LEN=1"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "locators": [
+          {
+            "pdf_page": 13,
+            "printed_page": "13",
+            "table": null,
+            "section": "§6.3.1.2",
+            "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read. The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every bus voltage co"
+          },
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": null,
+            "section": "§7.1.7 AFF",
+            "excerpt": "clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared following the next conversion that does not result in an Alert conditi"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be enabled to assert the Alert pin. Reading the Alert Function Flag following an alert al"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-12 / §7.1.7",
+        "section": null,
+        "excerpt": "Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Conversion Ready can also be enabled to assert the Alert pin. Reading the Alert Function Flag following an alert al"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "When the Alert Latch Enable bit is set to Latch mode, the Alert Function Flag bit clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit"
+      },
+      {
+        "pdf_page": 13,
+        "printed_page": "13",
+        "table": null,
+        "section": "§6.3.1.2",
+        "excerpt": "until either the Configuration Register (00h) is written to or the Mask/Enable Register is read. The Bus Voltage alert functions compare the measured bus voltage to the Alert Limit Register following every bus voltage co"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 AFF",
+        "excerpt": "clears only when the Mask/Enable Register is read. When the Alert Latch Enable bit is set to Transparent mode, the Alert Function Flag bit is cleared following the next conversion that does not result in an Alert conditi"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA226",
+      "register": "MASK_ENABLE",
+      "field": "AFF",
+      "bits": "4",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x10",
+      "known_protection_bit_mask": "0x10",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "CVRF",
+    "bits": "3",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x8",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "字段相关表/正文访问语义为 HARDWARE_MANAGED；此处未把整寄存器R/W推成每一保留位可写。",
+        "candidate_rule": {
+          "source_access": "HARDWARE_MANAGED",
+          "software_write_persistence": false,
+          "ro_protection_requires_no_hardware_update": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "来源定义所列编码/数据位格式。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "software_encoding_test_applicable": false,
+          "exclude_unlisted_codes": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "读MASK_ENABLE清CVRF；写CONFIG除powerdown也清；转换/平均/乘法全部完成置1。",
+        "candidate_rule": {
+          "on_read": "MASK_ENABLE",
+          "on_write": "CONFIG with MODE not 0 or 4",
+          "set_event": "all conversions, averaging, multiplications complete",
+          "require_nonzero_event": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": null,
+            "section": "§7.1.7 CVRF",
+            "excerpt": "Conversion Ready Flag bit clears under the following conditions: 1.) Writing to the Configuration Register (except for Power-Down selection) 2.) Reading the Mask/Enable Register OVF: Math Overflow Flag Bit 2 This bit is "
+          },
+          {
+            "pdf_page": 11,
+            "printed_page": "11",
+            "table": null,
+            "section": "§6.3.1",
+            "excerpt": "Conversion Ready flag (CVRF) bit is set after all conversions, averaging, and multiplication operations are complete. The Conversion Ready flag (CVRF) bit clears under these conditions: • Writing to the Configuration Reg"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "字段为测量/硬件状态，结果可随对应测量或事件更新；只读不等于运行中恒定。",
+        "candidate_rule": {
+          "event_driven_model_required": true,
+          "exclude_analog_event_claims_from_static_register_contract": true,
+          "test_nonzero_event_before_clear": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 27,
+            "printed_page": "27",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": "Table 7-12 / §7.1.7",
+        "section": null,
+        "excerpt": "Conversion Ready Flag, Bit 3, is asserted indicating that the device is ready for the next conversion. AFF: Alert Function Flag Bit 4 While only one Alert Function can be monitored at the Alert pin at a time, the Convers"
+      },
+      {
+        "pdf_page": 27,
+        "printed_page": "27",
+        "table": null,
+        "section": "§7.1.7 CVRF",
+        "excerpt": "Conversion Ready Flag bit clears under the following conditions: 1.) Writing to the Configuration Register (except for Power-Down selection) 2.) Reading the Mask/Enable Register OVF: Math Overflow Flag Bit 2 This bit is "
+      },
+      {
+        "pdf_page": 11,
+        "printed_page": "11",
+        "table": null,
+        "section": "§6.3.1",
+        "excerpt": "Conversion Ready flag (CVRF) bit is set after all conversions, averaging, and multiplication operations are complete. The Conversion Ready flag (CVRF) bit clears under these conditions: • Writing to the Configuration Reg"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA226",
+      "register": "MASK_ENABLE",
+      "field": "CVRF",
+      "bits": "3",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x8",
+      "known_protection_bit_mask": "0x8",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  },
+  {
+    "chip": "INA226",
+    "register": "MASK_ENABLE",
+    "field": "UNNAMED_9_5",
+    "bits": "9:5",
+    "source_path": "corpus/data/raw_pdf/TI/INA226.pdf",
+    "source_sha256": "c9b67f886d4a5241a5e070723f7b61867409eeb27eed768b9cdd9cb17e03ca2d",
+    "manual_version": "SBOS547C, June 2011, revised August 2026",
+    "overall_status": "REPAIR",
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "applicable": true,
+        "fact": "原始表/位图给字段上电初值 0x0。",
+        "candidate_rule": {
+          "expected_field_value": 0,
+          "known_mask": "0x3e0",
+          "phase": "defined reset boundary, before first result/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      },
+      "access": {
+        "status": "REPAIR",
+        "applicable": true,
+        "fact": "逐位表给未命名位与POR，整寄存器为R/W；无逐位RO码或写保护文字。旧RO分类不能称厂商事实。",
+        "candidate_rule": {
+          "exclude_access_oracle": true,
+          "keep_reset_value_in_all_legal_writes": true,
+          "retain_known_por": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "EXCLUDE",
+        "applicable": true,
+        "fact": "未定义非默认写值的保证。",
+        "candidate_rule": {
+          "legal_baseline_only": 0,
+          "exclude_nondefault_values": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "PASS",
+        "applicable": false,
+        "fact": "此字段自身在已核对的定义中未被规定为该类操作；这不是其所在寄存器无副作用的声明。",
+        "candidate_rule": {
+          "applicable": false,
+          "do_not_invent_unreported_behavior": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "CONDITIONAL",
+        "applicable": true,
+        "fact": "原始表标为保留/未命名；已知reset与访问标签不说明非法/非默认写入的后果。",
+        "candidate_rule": {
+          "keep_default_in_legal_stimuli": true,
+          "fixed_write": 0,
+          "exclude_nondefault_write_oracle": true,
+          "do_not_infer_read_constant_from_reset": true
+        },
+        "evidence_class": "UNDEFINED_BEHAVIOR",
+        "locators": [
+          {
+            "pdf_page": 26,
+            "printed_page": "26",
+            "table": "Table 7-12 / §7.1.7",
+            "section": null,
+            "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+          }
+        ]
+      }
+    },
+    "locators": [
+      {
+        "pdf_page": 26,
+        "printed_page": "26",
+        "table": "Table 7-12 / §7.1.7",
+        "section": null,
+        "excerpt": "Mask/Enable Register (06h) (Read/Write) BIT # D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 BIT SOL SUL BOL BUL POL CNVR — — — — — AFF CVRF OVF APOL LEN NAME POR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 VALUE SOL: Shunt V"
+      }
+    ],
+    "old_inventory": {
+      "chip": "INA226",
+      "register": "MASK_ENABLE",
+      "field": "UNNAMED_9_5",
+      "bits": "9:5",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x3e0",
+      "known_protection_bit_mask": "0x3e0",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "fact_scope": "local manufacturer PDF; source admission only; independent AI review, not hardware validation",
+    "conclusion": "修订/隔离待审输入后再冻结；保留已明确维度事实。"
+  }
+]

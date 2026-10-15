@@ -1,0 +1,372 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lm83-v39/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "sandbox/lm83_v39/implementation/admission.py",
+    "sandbox/lm83_v39/implementation/lm83.py",
+    "sandbox/lm83_v39/implementation/scenarios.py",
+    "eval/lm83_semantics_v39_20261014/code_acceptance_checklist.md",
+    "eval/lm83_semantics_v39_20261014/code_review_task.json",
+    "eval/lm83_semantics_v39_20261014/source_review.json",
+    "research/lm83/lm83_datasheet.pdf",
+    "research/lm83/lm83.c",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "sandbox/lm83_v39/code_review/test_independent.py"
+  ],
+  "outputs": [
+    "sandbox/lm83_v39/code_review/test_independent.py",
+    "sandbox/lm83_v39/code_review/run_review.py",
+    "sandbox/lm83_v39/code_review/package_review.py",
+    "sandbox/lm83_v39/code_review/junit.xml",
+    "sandbox/lm83_v39/code_review/execution.log",
+    "sandbox/lm83_v39/code_review/execution_manifest.json",
+    "sandbox/lm83_v39/code_review/initial_junit.xml",
+    "sandbox/lm83_v39/code_review/initial_execution.log",
+    "sandbox/lm83_v39/code_review/initial_execution_manifest.json",
+    "sandbox/lm83_v39/code_review/source_page10.png",
+    "sandbox/lm83_v39/code_review/code_review.json",
+    "sandbox/lm83_v39/code_review/code_review.md"
+  ],
+  "evidence_status": [
+    {
+      "label": "VERIFIED_SOURCE",
+      "scope": "Original PDF printed9 Figure4–7/§1.2–1.3 visual plus printed14 §2.3 table; local Linux status mapping/reserved detection"
+    },
+    {
+      "label": "VERIFIED_USER_MATERIAL",
+      "scope": "Frozen checklist/ledger and independent source contract"
+    },
+    {
+      "label": "EXECUTED_LOCAL",
+      "scope": "169 tests including19 actual source-text code mutants,49 admission checks; JUnit/log and immutable before-after input hashes"
+    },
+    {
+      "label": "AI_INFERENCE",
+      "scope": "Conservative equality/history model and pre-clear transaction abstraction"
+    },
+    {
+      "label": "NOT_EXECUTED",
+      "scope": "Board/electrical pin or real-time timing validation; kernel build; remote model generation"
+    }
+  ],
+  "assumptions": [
+    "Fixed unmasked configuration; HIGH70 perchannel andsharedCRIT90 explicitlytestsetup,notPOR",
+    "No concurrent I2C conversion race; event sample/complete qualification is digital abstraction",
+    "Figure read-clear is separately requested profile; common_source critical uncertainty remains",
+    "No OPEN/config mutation/threshold mutation certification"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {
+      "check": "Independent original-source bit expectations",
+      "result": "PASS: SR1 hot0x53/SR2hot0x93; channel masks not imported from implementation"
+    },
+    {
+      "check": "Address-local preclear read/persistent pins/corresponding conversion qualification",
+      "result": "PASS"
+    },
+    {
+      "check": "ReservedA8/48, signed/boundary values, malformed atomic rejection",
+      "result": "PASS"
+    },
+    {
+      "check": "Common-source unknown propagation/sourceintersection retiredconversion→read",
+      "result": "PASS"
+    },
+    {
+      "check": "Execution evidence",
+      "result": "PASS:169/169;19/19actualmutantsdetected"
+    },
+    {
+      "check": "Admission source advice pinning, genuine missing partial, typed canonical forgery rejection",
+      "result": "PASS:49tests"
+    },
+    {
+      "check": "Before-after source/implementation/checklist hashes",
+      "result": "PASS:unchanged"
+    },
+    {
+      "check": "Writes restricted to own sandbox",
+      "result": "PASS: implementation/eval/state neveredited"
+    },
+    {
+      "check": "Preserve stage/field/dimension authority",
+      "result": "PASS:no advancement/no promotions"
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "LM83-C01",
+      "conflict_type": "INTRA_SOURCE",
+      "claim": "Persistent CRIT flag clears on read while converted fault remains active",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3 prose"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figure6 waveform/note"
+        }
+      ],
+      "competing_positions": [
+        "prose: flags and output reset only after read and conversion below T_CRIT",
+        "Figure6: read marker clears CRIT status while temperature stays above T_CRIT; pin stays asserted"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain conflict; admit common retired-fault scope only, keep figure_clear persistent behavior conditional; board evidence or manufacturer clarification needed for physical closure."
+    },
+    {
+      "conflict_id": "LM83-C02",
+      "conflict_type": "UNDERSPECIFIED_BOUNDARY",
+      "claim": "Previously asserted CRIT flag/pin at equality",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3"
+        }
+      ],
+      "competing_positions": [
+        "assert only >; retire explicitly <",
+        "equality history not exhaustively stated"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Treat retention at equality as conservative model profile, not new manufacturer fact; test below/equal/above separately."
+    },
+    {
+      "conflict_id": "LM83-C03",
+      "conflict_type": "UNDERSPECIFIED_HISTORY",
+      "claim": "Read acknowledgement before temperature falls versus after retiring conversion",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "competing_positions": [
+        "read-and-retired condition is stated",
+        "persistence/lifetime of earlier read acknowledgement is not completely specified"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Certify retired conversion then read only; label any remembered-acknowledgement implementation as history profile."
+    },
+    {
+      "conflict_id": "LM83-C04",
+      "conflict_type": "MEMO_OVERGENERALIZATION",
+      "claim": "All reassertions promised within0..600ms from any read",
+      "sources": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "conversion-time table"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Note10/§1.1"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "competing_positions": [
+        "table600max conversion cadence with specified conditions",
+        "memo turns cadence into universal pin/flag latency bound"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain qualified cadence-based latency inference only, not observed or universal guarantee."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Single Writer integrates bounded conditional implementation acceptance with all four source conflicts retained and verifies protected/archive hashes.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "bounded_implementation_verdict": "PASS",
+  "readiness": "NOT_READY_FOR_FULL_M4_OR_PHYSICAL_CLOSURE",
+  "execution": {
+    "final_testcases": 169,
+    "passed": 169,
+    "failures": 0,
+    "errors": 0,
+    "runtime_boundary_tests": 101,
+    "executed_synthetic_mutants": 19,
+    "mutants_detected": 19,
+    "admission_tests": 49,
+    "genuine_missing_witness_partial_tests": 20,
+    "physical_measurements": 0,
+    "model_generated_samples": 0,
+    "scenario_count": 20,
+    "event_steps": 380,
+    "before_after_input_hashes_unchanged": true,
+    "pytest_elapsed_seconds": 8.22,
+    "runner_elapsed_seconds": 9.680331230163574,
+    "initial_run": {
+      "tests": 161,
+      "passed": 158,
+      "failed": 3,
+      "cause": "Review-test repairs only: two fault probes masked by other hot address; metadata dictionary updated to newlyqualifiedsourceconditions",
+      "implementation_changed_to_repair_initial_failures": false,
+      "retained_artifacts": [
+        "initial_junit.xml",
+        "initial_execution.log",
+        "initial_execution_manifest.json"
+      ]
+    }
+  },
+  "input_hashes": {
+    "sandbox/lm83_v39/implementation/admission.py": "a889ad0a500dba2d71f5a2055005be3ec99f75c5b592d67b78f905c545b77a4d",
+    "sandbox/lm83_v39/implementation/lm83.py": "4fe908c44e321077e5d644feec11bcd992e787d965708f14792cda01b084ef23",
+    "sandbox/lm83_v39/implementation/scenarios.py": "5c885f0b50b771645b81b754ccb24d56517b33ee1e778debb5fe0d4972f6416c",
+    "eval/lm83_semantics_v39_20261014/code_acceptance_checklist.md": "1a01fa4007dc1fbb1169ecda5eb85962a0167786fc3ef4a3f973a9e1a7a8087a",
+    "eval/lm83_semantics_v39_20261014/code_review_task.json": "afdc76591e7a68764261491c605e32e96ab2478165da0dedd55adacd13f269a8",
+    "eval/lm83_semantics_v39_20261014/source_review.json": "6e9c09447fc35d06b5ee7ae5cbfe3d9a190e254b0940e43bef80af5a632fed6d",
+    "research/lm83/lm83_datasheet.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "research/lm83/lm83.c": "c388209e03ef84c7a3b43590e21720c6e26cac27061831550446ffee1048f680",
+    "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+    "sandbox/lm83_v39/code_review/test_independent.py": "304a6af4f892e167fc756d47358e04ac5069417ed91b62c0bf3b9aacb98d8f1b"
+  },
+  "fact_base": {
+    "article_family": "M",
+    "article_type": "bounded method/evidence package, no manuscript readiness assessment",
+    "central_claim": "来源约束与独立验收的可审计有界闭环",
+    "target": "AEI planned manuscript; journal requirements not assessed here",
+    "validation": "deterministic nonzero source-derived local behavior and adversarial admission tests",
+    "scope": "8 selected read_clear CONDITIONAL rules;24otheropen",
+    "missing_validation": [
+      "physical silicon/timing",
+      "criticalsourceconflictresolution",
+      "other24conditionaldimensions"
+    ]
+  },
+  "three_reviews": {
+    "CONTRIBUTION": [
+      {
+        "id": "CR-C04",
+        "lens": "CONTRIBUTION",
+        "location": "closure and M4 status",
+        "evidence": "8 overallREPAIR fields,0 per-dimensionREPAIR,8selectedCONDITIONAL,24remainingCONDITIONAL",
+        "consequence": "bounded acceptance does not make M4 or formal Gold ready",
+        "severity": "MAJOR_IF_PROMOTED",
+        "minimum_repair": "Keep selected dimensions conditional and whole_field_promotions0",
+        "ideal_repair": "Maintain source-bound independent admission as explicit methodological contribution"
+      }
+    ],
+    "METHODS": [
+      {
+        "id": "CR-C01",
+        "lens": "METHODS",
+        "location": "lm83.py:read common_source; original PDF printed9 §1.3/Figure6",
+        "evidence": "manufacturer prose requires retired fault while Figure6 depicts read clearing persistent CRIT; common_source marks unresolved bits unknown",
+        "consequence": "figure_read_clear cannot become unconditional silicon truth",
+        "severity": "BLOCKER_FOR_PHYSICAL_SOURCE_CLOSURE",
+        "minimum_repair": "Keep conditional profile and unresolved LM83-C01; only retired-conversion then read is source intersection",
+        "ideal_repair": "Independent device evidence or manufacturer clarification; not a prerequisite to this bounded digital acceptance"
+      },
+      {
+        "id": "CR-C02",
+        "lens": "METHODS",
+        "location": "lm83.py critical equality and read-before-recovery state history",
+        "evidence": "source says > assertion and < retirement; equality/history exhaustiveness not established",
+        "consequence": "conservative history model does not certify all critical transitions",
+        "severity": "MAJOR_FOR_SCOPE_EXTENSION",
+        "minimum_repair": "Retain LM83-C02/C03 and avoid equality/history promotion",
+        "ideal_repair": "Separately pre-register ordered history cases for future evidence"
+      }
+    ],
+    "COMMUNICATION": [
+      {
+        "id": "CR-C03",
+        "lens": "COMMUNICATION",
+        "location": "TIMING and report terminology",
+        "evidence": "460typ/600max table with source conditions; about480 round and60 after sampling; no wall clock execution",
+        "consequence": "20 digital schedules and169 tests are not physical or model-generated samples",
+        "severity": "MAJOR_IF_OVERCLAIMED",
+        "minimum_repair": "Report event semantics and source-conditioned metadata; retain LM83-C04",
+        "ideal_repair": "Add actual timed board evidence only if physical claims become part of scope"
+      }
+    ]
+  },
+  "cross_review_synthesis": {
+    "shared_blockers": [
+      "four source conflicts bar full source/physical closure"
+    ],
+    "reviewer_disagreements": [],
+    "highest_risk_claims": [
+      "eightREPAIRdimensions",
+      "unconditionalpersistentcriticalreadclear",
+      "universal0..600mslatency"
+    ],
+    "missing_validation": [
+      "physicalstateandtimingevidence"
+    ],
+    "bounded_readiness": "CONDITIONALLY_READY",
+    "full_readiness": "NOT_READY"
+  },
+  "revision_plan": [
+    {
+      "priority": 1,
+      "task": "Archive sourceconditional boundedacceptance and preserve status/uncertainty",
+      "effort": "Root integration only; no runtime repair needed"
+    }
+  ],
+  "specialist_findings": [
+    {
+      "id": "CR-C01",
+      "lens": "METHODS",
+      "location": "lm83.py:read common_source; original PDF printed9 §1.3/Figure6",
+      "evidence": "manufacturer prose requires retired fault while Figure6 depicts read clearing persistent CRIT; common_source marks unresolved bits unknown",
+      "consequence": "figure_read_clear cannot become unconditional silicon truth",
+      "severity": "BLOCKER_FOR_PHYSICAL_SOURCE_CLOSURE",
+      "minimum_repair": "Keep conditional profile and unresolved LM83-C01; only retired-conversion then read is source intersection",
+      "ideal_repair": "Independent device evidence or manufacturer clarification; not a prerequisite to this bounded digital acceptance"
+    },
+    {
+      "id": "CR-C02",
+      "lens": "METHODS",
+      "location": "lm83.py critical equality and read-before-recovery state history",
+      "evidence": "source says > assertion and < retirement; equality/history exhaustiveness not established",
+      "consequence": "conservative history model does not certify all critical transitions",
+      "severity": "MAJOR_FOR_SCOPE_EXTENSION",
+      "minimum_repair": "Retain LM83-C02/C03 and avoid equality/history promotion",
+      "ideal_repair": "Separately pre-register ordered history cases for future evidence"
+    },
+    {
+      "id": "CR-C03",
+      "lens": "COMMUNICATION",
+      "location": "TIMING and report terminology",
+      "evidence": "460typ/600max table with source conditions; about480 round and60 after sampling; no wall clock execution",
+      "consequence": "20 digital schedules and169 tests are not physical or model-generated samples",
+      "severity": "MAJOR_IF_OVERCLAIMED",
+      "minimum_repair": "Report event semantics and source-conditioned metadata; retain LM83-C04",
+      "ideal_repair": "Add actual timed board evidence only if physical claims become part of scope"
+    },
+    {
+      "id": "CR-C04",
+      "lens": "CONTRIBUTION",
+      "location": "closure and M4 status",
+      "evidence": "8 overallREPAIR fields,0 per-dimensionREPAIR,8selectedCONDITIONAL,24remainingCONDITIONAL",
+      "consequence": "bounded acceptance does not make M4 or formal Gold ready",
+      "severity": "MAJOR_IF_PROMOTED",
+      "minimum_repair": "Keep selected dimensions conditional and whole_field_promotions0",
+      "ideal_repair": "Maintain source-bound independent admission as explicit methodological contribution"
+    }
+  ],
+  "created_at_utc": "2026-10-14T02:40:40.711137+00:00"
+}

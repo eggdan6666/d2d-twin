@@ -1,0 +1,287 @@
+[
+  {
+    "inventory_field_id": "INA226.CALIBRATION.UNNAMED_15",
+    "dimension": "access",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "EXCLUDE_NONDEFAULT_ACCESS_ORACLE",
+    "required_claim_ids": [
+      "INA226_C01_CAL_POR",
+      "INA226_C04_RESERVED_WRITE_GAP",
+      "INA226_C05_RESERVED_PROTOCOL"
+    ],
+    "source_claim_classes": {
+      "INA226_C01_CAL_POR": "SOURCE_FACT",
+      "INA226_C04_RESERVED_WRITE_GAP": "UNDEFINED_BEHAVIOR",
+      "INA226_C05_RESERVED_PROTOCOL": "ABSTRACTION_ASSUMPTION"
+    },
+    "claim_scenarios": {
+      "INA226_C01_CAL_POR": [
+        "reserved_boundaries",
+        "cold_defaults"
+      ],
+      "INA226_C04_RESERVED_WRITE_GAP": [
+        "reserved_boundaries"
+      ],
+      "INA226_C05_RESERVED_PROTOCOL": [
+        "reserved_boundaries"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three reserved-access exclusion guards; qualified reset and flag events; common AFF CONFIG-write conflict remains unknown; read-before-clear is protocol assumption; single-channel/physical/timing excluded",
+    "evidence_meaning": "Runtime confirms bounded dispositions, not the manufacturer truth or full implementation of every source statement."
+  },
+  {
+    "inventory_field_id": "INA226.CONFIG.RST",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "CONDITIONAL_EVENT_BOUNDARY",
+    "required_claim_ids": [
+      "INA226_C06_RST_REQUEST",
+      "INA226_C07_RST_TIMING_GAP",
+      "INA226_C08_RST_COMPLETION_PROTOCOL"
+    ],
+    "source_claim_classes": {
+      "INA226_C06_RST_REQUEST": "SOURCE_FACT",
+      "INA226_C07_RST_TIMING_GAP": "UNDEFINED_BEHAVIOR",
+      "INA226_C08_RST_COMPLETION_PROTOCOL": "ABSTRACTION_ASSUMPTION"
+    },
+    "claim_scenarios": {
+      "INA226_C06_RST_REQUEST": [
+        "dirty_reset"
+      ],
+      "INA226_C07_RST_TIMING_GAP": [
+        "dirty_reset"
+      ],
+      "INA226_C08_RST_COMPLETION_PROTOCOL": [
+        "dirty_reset"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three reserved-access exclusion guards; qualified reset and flag events; common AFF CONFIG-write conflict remains unknown; read-before-clear is protocol assumption; single-channel/physical/timing excluded",
+    "evidence_meaning": "Runtime confirms bounded dispositions, not the manufacturer truth or full implementation of every source statement."
+  },
+  {
+    "inventory_field_id": "INA226.CONFIG.UNNAMED_14_12",
+    "dimension": "access",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "EXCLUDE_NONDEFAULT_ACCESS_ORACLE",
+    "required_claim_ids": [
+      "INA226_C02_CFG_POR",
+      "INA226_C04_RESERVED_WRITE_GAP",
+      "INA226_C05_RESERVED_PROTOCOL"
+    ],
+    "source_claim_classes": {
+      "INA226_C02_CFG_POR": "SOURCE_FACT",
+      "INA226_C04_RESERVED_WRITE_GAP": "UNDEFINED_BEHAVIOR",
+      "INA226_C05_RESERVED_PROTOCOL": "ABSTRACTION_ASSUMPTION"
+    },
+    "claim_scenarios": {
+      "INA226_C02_CFG_POR": [
+        "reserved_boundaries",
+        "cold_defaults"
+      ],
+      "INA226_C04_RESERVED_WRITE_GAP": [
+        "reserved_boundaries"
+      ],
+      "INA226_C05_RESERVED_PROTOCOL": [
+        "reserved_boundaries"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three reserved-access exclusion guards; qualified reset and flag events; common AFF CONFIG-write conflict remains unknown; read-before-clear is protocol assumption; single-channel/physical/timing excluded",
+    "evidence_meaning": "Runtime confirms bounded dispositions, not the manufacturer truth or full implementation of every source statement."
+  },
+  {
+    "inventory_field_id": "INA226.MASK_ENABLE.AFF",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "CONDITIONAL_COMMON_PROFILE_WITH_UNRESOLVED_SOURCE_CONFLICT",
+    "required_claim_ids": [
+      "INA226_C03_MASK_POR",
+      "INA226_C09_AFF_FAULT_SET",
+      "INA226_C10_AFF_LATCH_READ",
+      "INA226_C11_AFF_TRANSPARENT",
+      "INA226_C12_AFF_CONFIG_P13",
+      "INA226_C13_AFF_CONFIG_P27",
+      "INA226_C14_AFF_COMMON_PROFILE",
+      "INA226_C19_READ_DIAGNOSTIC",
+      "INA226_C20_READ_ORDER_GAP"
+    ],
+    "source_claim_classes": {
+      "INA226_C03_MASK_POR": "SOURCE_FACT",
+      "INA226_C09_AFF_FAULT_SET": "SOURCE_FACT",
+      "INA226_C10_AFF_LATCH_READ": "SOURCE_FACT",
+      "INA226_C11_AFF_TRANSPARENT": "SOURCE_FACT",
+      "INA226_C12_AFF_CONFIG_P13": "SOURCE_FACT",
+      "INA226_C13_AFF_CONFIG_P27": "SOURCE_FACT",
+      "INA226_C14_AFF_COMMON_PROFILE": "ABSTRACTION_ASSUMPTION",
+      "INA226_C19_READ_DIAGNOSTIC": "SOURCE_FACT",
+      "INA226_C20_READ_ORDER_GAP": "AI_ANALYSIS"
+    },
+    "claim_scenarios": {
+      "INA226_C03_MASK_POR": [
+        "reserved_boundaries",
+        "cold_defaults"
+      ],
+      "INA226_C09_AFF_FAULT_SET": [
+        "latched_aff",
+        "transparent_aff",
+        "alert_priority"
+      ],
+      "INA226_C10_AFF_LATCH_READ": [
+        "latched_aff"
+      ],
+      "INA226_C11_AFF_TRANSPARENT": [
+        "transparent_aff"
+      ],
+      "INA226_C12_AFF_CONFIG_P13": [
+        "aff_config_conflict"
+      ],
+      "INA226_C13_AFF_CONFIG_P27": [
+        "aff_config_conflict"
+      ],
+      "INA226_C14_AFF_COMMON_PROFILE": [
+        "aff_config_conflict"
+      ],
+      "INA226_C19_READ_DIAGNOSTIC": [
+        "latched_aff",
+        "transparent_aff",
+        "cv_sequence"
+      ],
+      "INA226_C20_READ_ORDER_GAP": [
+        "latched_aff",
+        "transparent_aff",
+        "cv_sequence"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [
+      "INA226_CONFLICT_AFF_CONFIG_WRITE"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three reserved-access exclusion guards; qualified reset and flag events; common AFF CONFIG-write conflict remains unknown; read-before-clear is protocol assumption; single-channel/physical/timing excluded",
+    "evidence_meaning": "Runtime confirms bounded dispositions, not the manufacturer truth or full implementation of every source statement."
+  },
+  {
+    "inventory_field_id": "INA226.MASK_ENABLE.CVRF",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "CONDITIONAL_QUALIFIED_COMPLETION_AND_CLEAR_EVENTS",
+    "required_claim_ids": [
+      "INA226_C03_MASK_POR",
+      "INA226_C15_CVRF_COMPLETE",
+      "INA226_C16_CVRF_CLEAR",
+      "INA226_C17_MODE_ENCODING",
+      "INA226_C18_CVRF_COMPLETION_PROTOCOL",
+      "INA226_C19_READ_DIAGNOSTIC",
+      "INA226_C20_READ_ORDER_GAP",
+      "INA226_C21_CNVR_SCOPE",
+      "INA226_C22_CONFIG_SIDE_EFFECTS"
+    ],
+    "source_claim_classes": {
+      "INA226_C03_MASK_POR": "SOURCE_FACT",
+      "INA226_C15_CVRF_COMPLETE": "SOURCE_FACT",
+      "INA226_C16_CVRF_CLEAR": "SOURCE_FACT",
+      "INA226_C17_MODE_ENCODING": "SOURCE_FACT",
+      "INA226_C18_CVRF_COMPLETION_PROTOCOL": "ABSTRACTION_ASSUMPTION",
+      "INA226_C19_READ_DIAGNOSTIC": "SOURCE_FACT",
+      "INA226_C20_READ_ORDER_GAP": "AI_ANALYSIS",
+      "INA226_C21_CNVR_SCOPE": "SOURCE_FACT",
+      "INA226_C22_CONFIG_SIDE_EFFECTS": "SOURCE_FACT"
+    },
+    "claim_scenarios": {
+      "INA226_C03_MASK_POR": [
+        "reserved_boundaries",
+        "cold_defaults"
+      ],
+      "INA226_C15_CVRF_COMPLETE": [
+        "cv_sequence"
+      ],
+      "INA226_C16_CVRF_CLEAR": [
+        "cv_sequence",
+        "cv_config_boundaries"
+      ],
+      "INA226_C17_MODE_ENCODING": [
+        "cv_config_boundaries",
+        "token_and_domain_guards"
+      ],
+      "INA226_C18_CVRF_COMPLETION_PROTOCOL": [
+        "cv_sequence",
+        "token_and_domain_guards"
+      ],
+      "INA226_C19_READ_DIAGNOSTIC": [
+        "latched_aff",
+        "transparent_aff",
+        "cv_sequence"
+      ],
+      "INA226_C20_READ_ORDER_GAP": [
+        "latched_aff",
+        "transparent_aff",
+        "cv_sequence"
+      ],
+      "INA226_C21_CNVR_SCOPE": [
+        "cv_sequence"
+      ],
+      "INA226_C22_CONFIG_SIDE_EFFECTS": [
+        "token_and_domain_guards",
+        "cv_config_boundaries"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three reserved-access exclusion guards; qualified reset and flag events; common AFF CONFIG-write conflict remains unknown; read-before-clear is protocol assumption; single-channel/physical/timing excluded",
+    "evidence_meaning": "Runtime confirms bounded dispositions, not the manufacturer truth or full implementation of every source statement."
+  },
+  {
+    "inventory_field_id": "INA226.MASK_ENABLE.UNNAMED_9_5",
+    "dimension": "access",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "EXCLUDE_NONDEFAULT_ACCESS_ORACLE",
+    "required_claim_ids": [
+      "INA226_C03_MASK_POR",
+      "INA226_C04_RESERVED_WRITE_GAP",
+      "INA226_C05_RESERVED_PROTOCOL"
+    ],
+    "source_claim_classes": {
+      "INA226_C03_MASK_POR": "SOURCE_FACT",
+      "INA226_C04_RESERVED_WRITE_GAP": "UNDEFINED_BEHAVIOR",
+      "INA226_C05_RESERVED_PROTOCOL": "ABSTRACTION_ASSUMPTION"
+    },
+    "claim_scenarios": {
+      "INA226_C03_MASK_POR": [
+        "reserved_boundaries",
+        "cold_defaults"
+      ],
+      "INA226_C04_RESERVED_WRITE_GAP": [
+        "reserved_boundaries"
+      ],
+      "INA226_C05_RESERVED_PROTOCOL": [
+        "reserved_boundaries"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three reserved-access exclusion guards; qualified reset and flag events; common AFF CONFIG-write conflict remains unknown; read-before-clear is protocol assumption; single-channel/physical/timing excluded",
+    "evidence_meaning": "Runtime confirms bounded dispositions, not the manufacturer truth or full implementation of every source statement."
+  }
+]

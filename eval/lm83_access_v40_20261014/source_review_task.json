@@ -1,0 +1,11 @@
+{
+ "contract_version":"1.0","project_id":"d2d-twin","paper_family":"M","stage_id":"M4",
+ "task_id":"lm83-access-v40/source_review","expert_skill":"sci-skills-paper-deep-reading",
+ "task_summary":"Independent source review: eight conditional ACCESS rules, dynamic RO, whole-byte consuming driver reads, software storage protection versus unsupported wire transactions",
+ "inputs":["research/lm83/lm83_datasheet.pdf","research/lm83/lm83.c","research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md","eval/lm83_access_v40_20261014/target_fields.json","eval/lm83_access_v40_20261014/scope_freeze.json","eval/lm83_access_v40_20261014/input_identity.json","eval/lm83_semantics_v39_20261014/source_review.json"],
+ "expected_outputs":["Full source_review.json contract with source/ledger/claims/eight field advice/conflicts","Expert format source_review.md","Independent source checklist before reading implementation"],
+ "evidence_boundaries":["Only write sandbox/lm83_v40/source_review","No implementation or test reading/execution","Manufacturer vs Linux driver vs software contract vs memo inference separate","Keep prior C01-C04, v39 read_clear and other16 rules unchanged"],
+ "acceptance_checks":["Exactly8overallREPAIR,0dimensionREPAIR,8selectedCONDITIONAL access","Manufacturer command/read/write table status read02/35 without write aliases; RO means no software storage write, not constant observations","Does source define actual arbitrary unsupported I2C write ACK/ignore semantics? preserve UNKNOWN if absent","Linux show alarms and alarm field consume entire SRx before mask; shared register sibling read consumption and two separate non-atomic addresses","No hypothetical silicon proof from Linux; retain unknown masks under prior common_source","ReservedA8/48 and no OPEN certification"],
+ "known_missing_items":["No physical write/ACK/driver concurrency testing"],
+ "manual_operation_allowed":false,"optional_adapters_allowed":["local-python","local-file-import"],"stage_authority":"sci-skills"
+}

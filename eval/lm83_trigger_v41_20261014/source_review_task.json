@@ -1,0 +1,11 @@
+{
+ "contract_version":"1.0","project_id":"d2d-twin","paper_family":"M","stage_id":"M4",
+ "task_id":"lm83-trigger-v41/source_review","expert_skill":"sci-skills-paper-deep-reading",
+ "task_summary":"Independent trigger_completion review of original LM83: channel sampling, conversion-qualified alarm/pin updates, round-robin sequence and bounded timing metadata",
+ "inputs":["research/lm83/lm83_datasheet.pdf","research/lm83/lm83.c","research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md","eval/lm83_trigger_v41_20261014/target_fields.json","eval/lm83_trigger_v41_20261014/scope_freeze.json","eval/lm83_trigger_v41_20261014/input_identity.json","eval/lm83_access_v40_20261014/source_review.json","eval/lm83_semantics_v39_20261014/source_review.json"],
+ "expected_outputs":["Full1.0source_review.json with source/ledger/claims/eightfield_closure_advice/conflicts","Expert16section source_review.md","Independent source checklist before implementation reading"],
+ "evidence_boundaries":["Write onlysandbox/lm83_v41/source_review; do not read implementation/tests","8originaloverallREPAIR0dimensionREPAIR8selectedtriggerCONDITIONAL; other8conditionalwrite untouched","C01-C04/U01-U02 records exact inheritance; no physical/millisecond execution"],
+ "acceptance_checks":["Original§1.1 L D2 D1 D3 and per-channel completion; no full-round barrier for early alarms","§1.2/1.3 sampling vs conversion completion changes corresponding status/pin, not read/sample/noncorresponding conversion","460tabletyp/600max specifiedconditions vsapprox480round/120channel/60sampletoupdate; source footnotes and no universal relatchdeadline","Threshold boundaries, fault persistence/retirement, CRIT equality and ackhistory unknown unchanged","What does source establish about conversion continuity/inactive channels/automaticpolling? Do not invent host trigger-register or digitaltoken hardwarefact","Kernel confirms latestconvertedread/volatile/mapping, nophysicalqualification/timingproof","Protocol sampleid/round/slot are explicit audit choices notsiliconregisters"],
+ "known_missing_items":["No silicon timing/ADC phase/driverbuild experiment"],
+ "manual_operation_allowed":false,"optional_adapters_allowed":["local-python","local-file-import"],"stage_authority":"sci-skills"
+}

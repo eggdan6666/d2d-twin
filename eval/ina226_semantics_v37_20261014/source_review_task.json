@@ -1,0 +1,43 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina226-v37/source_review",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "task_summary": "INA226 six REPAIR fields / six dimensions independent manufacturer-source review",
+  "inputs": [
+    "corpus/data/raw_pdf/TI/INA226.pdf",
+    "eval/ina226_semantics_v37_20261014/target_fields.json",
+    "eval/ina226_semantics_v37_20261014/input_identity.json",
+    "eval/independent_source_admission_20261012/field_evidence.json"
+  ],
+  "expected_outputs": [
+    "source_review.json standard expert contract with claim IDs, source identity, field_closure_advice and unresolved conflicts",
+    "source_review.md 16-section scoped source review",
+    "independent_source_checklist.md predating implementation review"
+  ],
+  "evidence_boundaries": [
+    "Original PDF including complete relevant tables/footnotes only",
+    "No old files, current task directory, Gold IR or Harness modifications",
+    "All new expert materials only sandbox/ina226_v37/source_review",
+    "No physical analog/bus/timing claims",
+    "RST request/completion and AFF latch-mode source conflict explicit"
+  ],
+  "acceptance_checks": [
+    "Exact six fields and six original REPAIR dimensions",
+    "Reserved access excluded, POR knownness separated",
+    "AFF transparent/latch clear conditions and CONFIG-write prose contradiction retained",
+    "CVRF full sequence completion vs result-ready and CONFIG/powerdown read-clear boundaries",
+    "No invented runtime/hardware response for invalid inputs"
+  ],
+  "known_missing_items": [
+    "No physical validation or manufacturer errata clarification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

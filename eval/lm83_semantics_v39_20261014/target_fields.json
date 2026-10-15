@@ -1,0 +1,1690 @@
+[
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "D2CRIT",
+    "bits": "1",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "D2CRIT",
+      "bits": "1",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x2",
+      "known_protection_bit_mask": "0x2",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x2",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x2",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "safe_condition": "conversion below T_CRIT",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "D2RHIGH",
+    "bits": "4",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "D2RHIGH",
+      "bits": "4",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x10",
+      "known_protection_bit_mask": "0x10",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x10",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x10",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "safe_condition": "conversion <= corresponding HIGH",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "LCRIT",
+    "bits": "0",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "LCRIT",
+      "bits": "0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x1",
+      "known_protection_bit_mask": "0x1",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x1",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x1",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "safe_condition": "conversion below T_CRIT",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR1",
+    "field": "LHIGH",
+    "bits": "6",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "LHIGH",
+      "bits": "6",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x40",
+      "known_protection_bit_mask": "0x40",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x40",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x40",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x02",
+          "safe_condition": "conversion <= corresponding HIGH",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.1",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR1"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D1CRIT",
+    "bits": "0",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D1CRIT",
+      "bits": "0",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x1",
+      "known_protection_bit_mask": "0x1",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x1",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x1",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x35",
+          "safe_condition": "conversion below T_CRIT",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D1RHIGH",
+    "bits": "7",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D1RHIGH",
+      "bits": "7",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x80",
+      "known_protection_bit_mask": "0x80",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x80",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x80",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x35",
+          "safe_condition": "conversion <= corresponding HIGH",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D3CRIT",
+    "bits": "1",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D3CRIT",
+      "bits": "1",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x2",
+      "known_protection_bit_mask": "0x2",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x2",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x2",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x35",
+          "safe_condition": "conversion below T_CRIT",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "chip": "LM83",
+    "register": "SR2",
+    "field": "D3RHIGH",
+    "bits": "4",
+    "source_path": "corpus/data/raw_pdf/TI/LM83.pdf",
+    "source_sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "manual_version": "SNIS111A wrapper; National DS101058, November 1999, copyright 2000; local file includes 2025 packaging addendum",
+    "overall_status": "REPAIR",
+    "old_inventory": {
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D3RHIGH",
+      "bits": "4",
+      "ir_access": "RO",
+      "field_policy": {},
+      "excluded_access_assertions": false,
+      "known_reset_bit_mask": "0x10",
+      "known_protection_bit_mask": "0x10",
+      "source_review_status": "NOT_CERTIFIED_BY_THIS_V2_TASK",
+      "source_locator": "Inherited IR annotation; full review pending"
+    },
+    "dimensions": {
+      "reset": {
+        "status": "PASS",
+        "fact": "原始手册在所列位置给出寄存器初值 0x00；本字段初值为 0。",
+        "candidate_rule": {
+          "known_mask": "0x10",
+          "expected_register": "0x0",
+          "expected_field": 0,
+          "scope": "POR immediately after reset and before any new measurement/event"
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "access": {
+        "status": "CONDITIONAL",
+        "fact": "状态由温度/连接事件更新；RO不保证两次读值相同。",
+        "candidate_rule": {
+          "access": "RO",
+          "dynamic_mask": "0x10",
+          "reject_snapshot_equality_without_event_freeze": true,
+          "write_protection_means_no_software_storage_write": true,
+          "event_injection_required_for_nonzero_behavior": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "legal_encoding": {
+        "status": "PASS",
+        "fact": "位宽为 1，数据/位图为完整字段；未列出独立保留编码。",
+        "candidate_rule": {
+          "legal_values": [
+            0,
+            1
+          ],
+          "scope": "encoding/storage; no claim of physical measurement reachability"
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      },
+      "read_clear": {
+        "status": "CONDITIONAL",
+        "fact": "图注称所在status read清位，正文将output/flags解除与当前温度比较条件联合；重复conversion可重置位。不得把持久清零作为无条件硅事实。",
+        "candidate_rule": {
+          "read_address": "0x35",
+          "safe_condition": "conversion <= corresponding HIGH",
+          "read_returns_preclear_data": true,
+          "no_new_conversion_between_reads": true,
+          "active_fault_clear_timing": "exclude"
+        },
+        "evidence_class": "SOURCE_CONFLICT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2 / §1.3 / Figures 4–7",
+            "excerpt": "Status Register Bits are reset by a read of Status Register where bit is located."
+          },
+          {
+            "pdf_page": 12,
+            "printed_page": 11,
+            "table_or_section": "§1.9",
+            "excerpt": "INT, so long as a temperature comparison does not signal a"
+          }
+        ]
+      },
+      "trigger_completion": {
+        "status": "CONDITIONAL",
+        "fact": "mask不阻止状态置位；只有相应报警输出被屏蔽。",
+        "candidate_rule": {
+          "event": "completed temperature conversion",
+          "status_not_masked": true,
+          "output_clear_requires_read_and_retired_fault": true
+        },
+        "evidence_class": "MANUFACTURER_FACT",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.3",
+            "excerpt": "will still be set in the Status Registers."
+          }
+        ]
+      },
+      "conditional_write": {
+        "status": "CONDITIONAL",
+        "fact": "对只读动态字段，写入保护不等于两次读回必须一致。",
+        "candidate_rule": {
+          "reject_software_write_as_event_injection": true,
+          "compare_with_matched_event_schedule_or_mask_dynamic_bits": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": true,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          },
+          {
+            "pdf_page": 10,
+            "printed_page": 9,
+            "table_or_section": "§1.2–1.3",
+            "excerpt": "Register flags are updated at the completion of a conversion,"
+          }
+        ]
+      },
+      "reserved_policy": {
+        "status": "PASS",
+        "fact": "该字段是已命名功能/数据字段。",
+        "candidate_rule": {
+          "applicable": false,
+          "surrounding_reserved_bits_obey_separate_rules": true
+        },
+        "evidence_class": "ABSTRACTION_ASSUMPTION",
+        "applicable": false,
+        "locators": [
+          {
+            "pdf_page": 15,
+            "printed_page": 14,
+            "table_or_section": "§2.3.2",
+            "excerpt": "Power up default is with all bits “0” (zero)."
+          },
+          {
+            "pdf_page": 14,
+            "printed_page": 13,
+            "table_or_section": "§2.1 command/default table",
+            "excerpt": "SR2"
+          }
+        ]
+      }
+    }
+  }
+]

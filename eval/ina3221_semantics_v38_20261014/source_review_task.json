@@ -1,0 +1,42 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina3221-v38/source_review",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "task_summary": "Independent original-PDF review of INA3221 three REPAIR fields / three dimensions",
+  "inputs": [
+    "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "eval/ina3221_semantics_v38_20261014/target_fields.json",
+    "eval/ina3221_semantics_v38_20261014/input_identity.json"
+  ],
+  "expected_outputs": [
+    "source_review.json complete expert contract plus source,ledger,claims,field_closure_advice,conflicts",
+    "source_review.md 16-section scoped review",
+    "independent_source_checklist.md before implementation review"
+  ],
+  "evidence_boundaries": [
+    "Only original PDF for facts; ledger inventory only",
+    "Only write sandbox/ina3221_v38/source_review",
+    "No main task, Gold, old Harness, state or previous archive writes",
+    "No implementation reading/execution or hardware guarantee"
+  ],
+  "acceptance_checks": [
+    "Exactly3fields3originalREPAIRdimensions",
+    "RST request/completion default and pending timing boundaries",
+    "CVRF enabled channels, averaging, clearing, MODE0/4 and disabled channels",
+    "TCF non-read-clear, CONFIG early disable, powerup/software reset rearm",
+    "Separate TCF flag, TC pin, timing power events, unguaranteed threshold/timing assumptions",
+    "Preserve source contradictions"
+  ],
+  "known_missing_items": [
+    "No hardware measurement or manufacturer clarification"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

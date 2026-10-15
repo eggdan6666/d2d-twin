@@ -1,0 +1,1043 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lm83-trigger-v41/source_review",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "research/lm83/lm83_datasheet.pdf",
+    "research/lm83/lm83.c",
+    "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md",
+    "eval/lm83_trigger_v41_20261014/target_fields.json",
+    "eval/lm83_trigger_v41_20261014/scope_freeze.json",
+    "eval/lm83_trigger_v41_20261014/input_identity.json",
+    "eval/lm83_access_v40_20261014/source_review.json",
+    "eval/lm83_semantics_v39_20261014/source_review.json"
+  ],
+  "outputs": [
+    "sandbox/lm83_v41/source_review/source_review.json",
+    "sandbox/lm83_v41/source_review/source_review.md",
+    "sandbox/lm83_v41/source_review/independent_source_checklist.json"
+  ],
+  "evidence_status": [
+    {
+      "status": "VERIFIED_SOURCE",
+      "description": "Relevant full PDF text and six rendered pages visually checked; whole pinned local Linux code read, pinned official GitHub blob opened2026-10-14; no remote byte-for-byte claim."
+    },
+    {
+      "status": "VERIFIED_USER_MATERIAL",
+      "description": "Original572-row ledger equality and exact8field/dimension identity; v39/v40 conflict records checked."
+    },
+    {
+      "status": "EXECUTED_LOCAL",
+      "description": "Only PDF extraction/render and source hash/ledger identity verification."
+    },
+    {
+      "status": "NOT_EXECUTED",
+      "description": "Implementation/tests, silicon, raw SMBus/ACK, IRQ, ADC phase/timing, target kernel build."
+    }
+  ],
+  "assumptions": [
+    "sample/complete separation and matching channel token validation are audit protocol abstractions",
+    "round start aligned to L in supplied witnesses, not inferred power-on ADC phase",
+    "continuous repeated round-robin conversions with valid sensed diodes, fixed thresholds/masks during each bounded witness",
+    "critical persistent read-clear and equality/acknowledgement history retain explicit source profiles/unknown"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {
+      "check": "Exact frozen eight full rows equal original ledger",
+      "status": "PASS"
+    },
+    {
+      "check": "Eight overall REPAIR and eight selected CONDITIONAL, zero dimension REPAIR",
+      "status": "PASS"
+    },
+    {
+      "check": "Eight remaining conditional_write records retained unchanged",
+      "status": "PASS"
+    },
+    {
+      "check": "C01–C04 equal v39/v40 full records; U01–U02 equal v40 full records",
+      "status": "PASS"
+    },
+    {
+      "check": "Six original pages rendered and visually checked before any implementation reading",
+      "status": "PASS"
+    },
+    {
+      "check": "Table conditions/Notes distinguished from approximate prose and software event order",
+      "status": "PASS"
+    },
+    {
+      "check": "Driver poll-on-read differentiated from physical chip round robin",
+      "status": "PASS"
+    },
+    {
+      "check": "No physical/timing/implementation execution attributed to source review",
+      "status": "PASS"
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "LM83-C01",
+      "conflict_type": "INTRA_SOURCE",
+      "claim": "Persistent CRIT flag clears on read while converted fault remains active",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3 prose"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figure6 waveform/note"
+        }
+      ],
+      "competing_positions": [
+        "prose: flags and output reset only after read and conversion below T_CRIT",
+        "Figure6: read marker clears CRIT status while temperature stays above T_CRIT; pin stays asserted"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain conflict; admit common retired-fault scope only, keep figure_clear persistent behavior conditional; board evidence or manufacturer clarification needed for physical closure."
+    },
+    {
+      "conflict_id": "LM83-C02",
+      "conflict_type": "UNDERSPECIFIED_BOUNDARY",
+      "claim": "Previously asserted CRIT flag/pin at equality",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3"
+        }
+      ],
+      "competing_positions": [
+        "assert only >; retire explicitly <",
+        "equality history not exhaustively stated"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Treat retention at equality as conservative model profile, not new manufacturer fact; test below/equal/above separately."
+    },
+    {
+      "conflict_id": "LM83-C03",
+      "conflict_type": "UNDERSPECIFIED_HISTORY",
+      "claim": "Read acknowledgement before temperature falls versus after retiring conversion",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "competing_positions": [
+        "read-and-retired condition is stated",
+        "persistence/lifetime of earlier read acknowledgement is not completely specified"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Certify retired conversion then read only; label any remembered-acknowledgement implementation as history profile."
+    },
+    {
+      "conflict_id": "LM83-C04",
+      "conflict_type": "MEMO_OVERGENERALIZATION",
+      "claim": "All reassertions promised within0..600ms from any read",
+      "sources": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "conversion-time table"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Note10/§1.1"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "competing_positions": [
+        "table600max conversion cadence with specified conditions",
+        "memo turns cadence into universal pin/flag latency bound"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain qualified cadence-based latency inference only, not observed or universal guarantee."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "根任务依T01–T17及独立checklist验收八条trigger_completion事件规则，保留全部未知并仅做有界归档。",
+  "stage_acceptance_recommendation": "REPAIR",
+  "source": {
+    "manufacturer": {
+      "path": "research/lm83/lm83_datasheet.pdf",
+      "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "pages": 23,
+      "version": "SNIS111A wrapper; National DS101058 November1999 copyright2000; 2025 packaging addendum",
+      "depth": "FULL_RELEVANT_TEXT_AND_VISUAL_TRIGGER_REVIEW",
+      "visual_pages": [
+        5,
+        9,
+        10,
+        12,
+        14,
+        15
+      ],
+      "locator_convention": "PDF page is one-based file position; printed page is National footer, generally PDF-1"
+    },
+    "driver": {
+      "path": "research/lm83/lm83.c",
+      "sha256": "c388209e03ef84c7a3b43590e21720c6e26cac27061831550446ffee1048f680",
+      "commit": "24a19b953e2a3d0ea5a8c4951a0ab8f32720c907",
+      "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c",
+      "lines": 467,
+      "verification": "Local whole467-line code read; pinned official GitHub blob opened, no remote byte-for-byte hash assertion."
+    },
+    "memo": {
+      "path": "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md",
+      "sha256": "1ed6f958642eb5f9e09d1f8e5e44ad6081b92b34a696d6422c5d09f54c819549",
+      "authority": "RESEARCH_MATERIAL_NOT_FACT_OVERRIDE"
+    }
+  },
+  "ledger": {
+    "path": "eval/independent_source_admission_20261012/field_evidence.json",
+    "sha256": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+    "ledger_rows": 572,
+    "exact_rows_match": true,
+    "overall_REPAIR_fields": 8,
+    "per_dimension_REPAIR_count": 0,
+    "selected_trigger_completion_CONDITIONAL_rules": 8,
+    "prior_v39_read_clear_CONDITIONAL_rules_retained": 8,
+    "prior_v40_access_CONDITIONAL_rules_retained": 8,
+    "other_CONDITIONAL_rules_retained": 8,
+    "whole_field_promotions": 0
+  },
+  "claims": [
+    {
+      "claim_id": "LM83-T01",
+      "statement": "Eight original alarm identities, bits, SR1@0x02/SR2@0x35 and reserved-zero masks 0xA8/0x48 are unchanged.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3.1–2.3.2"
+        },
+        {
+          "path": "research/lm83/lm83.c",
+          "commit": "24a19b953e2a3d0ea5a8c4951a0ab8f32720c907",
+          "lines": "50–51;82–96;378–380"
+        }
+      ],
+      "boundary": "OPEN-bit behavior is outside this eight-rule scope."
+    },
+    {
+      "claim_id": "LM83-T02",
+      "statement": "Temperature conversion sequence is Local, D2RT, D1RT, D3RT, round robin.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.1"
+        }
+      ],
+      "boundary": "Host sample IDs, round counters and slot tokens are absent from the hardware interface; alignment/validation is an audit-protocol choice."
+    },
+    {
+      "claim_id": "LM83-T03",
+      "statement": "The end of each temperature reading compares that reading with its own HIGH limit; status and INT update on conversion completion.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.2"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2/Figures4–5"
+        }
+      ],
+      "boundary": "Corresponding channel-qualified completion; no all-channel round barrier is stated. Other channel completion cannot synthesize this channel’s new comparison."
+    },
+    {
+      "claim_id": "LM83-T04",
+      "statement": "T_CRIT_A and critical status flags update at conversion completion after sequential local/remote sampling.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3/Figures6–7"
+        }
+      ],
+      "boundary": "Shared T_CRIT threshold, channel-specific status. Persistent read-clear C01 and equality/history C02/C03 remain unresolved."
+    },
+    {
+      "claim_id": "LM83-T05",
+      "statement": "HIGH asserts on converted reading > its HIGH; INT retirement requires containing SR read and reading <= corresponding HIGH.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.2"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "boundary": "Stable thresholds/masks/polarity and aggregated contributing faults; certify retired conversion then read. Earlier-read acknowledgement lifetime stays C03."
+    },
+    {
+      "claim_id": "LM83-T06",
+      "statement": "CRIT asserts on converted reading > T_CRIT; explicit retirement uses conversion below T_CRIT plus containing SR read.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "boundary": "Strict below for retirement; equality is C02. A safe sample alone is not a qualified retiring conversion."
+    },
+    {
+      "claim_id": "LM83-T07",
+      "statement": "A containing-SR read does not release an enabled already asserted output while its qualified over-limit fault persists.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "boundary": "No unconditional pin guarantee across mask/setpoint/polarity changes or multiple causes; physical electrical level is not measured."
+    },
+    {
+      "claim_id": "LM83-T08",
+      "statement": "Flags that are cleared under the retained figure_clear profile can reassert when the corresponding next completed conversion is over-limit, not from the read or sample alone.",
+      "evidence_status": "AI_INFERENCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.1–1.2"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        }
+      ],
+      "boundary": "Profile-qualified inference; persistent CRIT read-clear remains C01 UNKNOWN under common_source. No positive minimum delay after a read is asserted."
+    },
+    {
+      "claim_id": "LM83-T09",
+      "statement": "INT output can be globally masked/inverted; each critical mask prevents output propagation while the status flag still sets. All four critical masks or T_CRIT=127 disable T_CRIT_A.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures5/7"
+        },
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.5"
+        },
+        {
+          "pdf_page_1_based": 16,
+          "printed_page": 15,
+          "section_or_table": "§2.5"
+        }
+      ],
+      "boundary": "Masks affect output, not sampling/comparison/status admission. Freeze mask/threshold changes during witness unless separately bounded."
+    },
+    {
+      "claim_id": "LM83-T10",
+      "statement": "Conversion table has 460 ms typical and bold 600 ms maximum for conversion of all temperatures.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "Temperature-to-Digital Converter Characteristics"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Notes6/7/10"
+        }
+      ],
+      "boundary": "VCC3.0–3.6V; bold limit at rated TA=TJ −40..125°C, typical25°C; Note7 AOQL. Note10 says update cadence only; no measured/universal read-to-relatch deadline."
+    },
+    {
+      "claim_id": "LM83-T11",
+      "statement": "§1.1 describes approximately480 ms per round and approximately120 ms per temperature; §1.2 describes approximately60 ms after a local or remote temperature diode is sampled until completion/status/INT update.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.1–1.2"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "boundary": "60 ms starts at sampling, not after conversion completion. Approximate descriptive values are not mandatory event-clock thresholds; CRIT completion shares sequence, not a separate certified60 ms specification."
+    },
+    {
+      "claim_id": "LM83-T12",
+      "statement": "LM83 may be read at any conversion state and yields last conversion result.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Note10"
+        }
+      ],
+      "boundary": "Reading temperature is not a new sample/completion, does not wait for fresh conversion, and does not establish a conversion-ready indicator."
+    },
+    {
+      "claim_id": "LM83-T13",
+      "statement": "The reviewed command/configuration tables expose no host one-shot/convert/rearm command or conversion-ready status bit.",
+      "evidence_status": "AI_INFERENCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 14,
+          "printed_page": 13,
+          "section_or_table": "§2.1"
+        },
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3/§2.5"
+        },
+        {
+          "pdf_page_1_based": 16,
+          "printed_page": 15,
+          "section_or_table": "§2.5"
+        }
+      ],
+      "boundary": "Automatic repeated round-robin operation is supported, but reset/phase-exact initial slot, write rearm and protocol token registers must not be invented as source facts."
+    },
+    {
+      "claim_id": "LM83-T14",
+      "statement": "Pinned Linux marks temperatures and both status registers volatile and reads the byte via regmap/SMBus; field alarm reads mask the containing SR byte.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "path": "research/lm83/lm83.c",
+          "commit": "24a19b953e2a3d0ea5a8c4951a0ab8f32720c907",
+          "lines": "109–120;150–172;176–218"
+        }
+      ],
+      "boundary": "Driver reads latest available converted data; it does not implement physical ADC phase, completion tokens, elapsed time, IRQ or forced conversions."
+    },
+    {
+      "claim_id": "LM83-T15",
+      "statement": "Pinned Linux aggregate alarm read makes SR1 then SR2 transactions; probe registers regmap/hwmon, without a timer, scheduled polling work or alarm-pin IRQ path.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "path": "research/lm83/lm83.c",
+          "commit": "24a19b953e2a3d0ea5a8c4951a0ab8f32720c907",
+          "lines": "250–272;420–439;450–460"
+        }
+      ],
+      "boundary": "Poll-on-read is host accessor behavior, independent of continuous chip conversion. SR pair is non-atomic; polling frequency/fairness/loss statistics are not established."
+    },
+    {
+      "claim_id": "LM83-T16",
+      "statement": "Power-on SR1/SR2 default to00h and remote temperature starts0 until a diode is sensed.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 11,
+          "printed_page": 10,
+          "section_or_table": "§1.4"
+        },
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3"
+        }
+      ],
+      "boundary": "Initialization evidence only; no phase-accurate reset or later-source UNKNOWN resolution; OPEN/short physical fault detection remains outside this witness scope."
+    },
+    {
+      "claim_id": "LM83-T17",
+      "statement": "All prior C01–C04/U01–U02 records, read_clear/access conditional rules and the other eight conditional_write rules remain unchanged.",
+      "evidence_status": "VERIFIED_USER_MATERIAL",
+      "locators": [
+        {
+          "path": "eval/lm83_access_v40_20261014/source_review.json",
+          "sha256": "0879ef10e436e9b60bc63de61262bd3705c2f672d387f0cbcea889a0e07716cd"
+        },
+        {
+          "path": "eval/lm83_trigger_v41_20261014/scope_freeze.json"
+        }
+      ],
+      "boundary": "No whole-field/dimension promotion, Gold/score alteration, implementation/silicon validation by this source expert."
+    }
+  ],
+  "accepted_claim_ids": [
+    "LM83-T01",
+    "LM83-T02",
+    "LM83-T03",
+    "LM83-T04",
+    "LM83-T05",
+    "LM83-T06",
+    "LM83-T07",
+    "LM83-T08",
+    "LM83-T09",
+    "LM83-T10",
+    "LM83-T11",
+    "LM83-T12",
+    "LM83-T13",
+    "LM83-T14",
+    "LM83-T15",
+    "LM83-T16",
+    "LM83-T17"
+  ],
+  "field_closure_advice": [
+    {
+      "field_id": "SR1.D2CRIT",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "D2CRIT",
+      "bits": "1",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.D2CRIT.trigger_completion",
+      "address": "0x02",
+      "channel": "D2",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > shared_T_CRIT",
+      "retirement_condition": "converted_temperature < shared_T_CRIT then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR1.D2RHIGH",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "D2RHIGH",
+      "bits": "4",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.D2RHIGH.trigger_completion",
+      "address": "0x02",
+      "channel": "D2",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > corresponding_HIGH",
+      "retirement_condition": "converted_temperature <= corresponding_HIGH then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR1.LCRIT",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "LCRIT",
+      "bits": "0",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.LCRIT.trigger_completion",
+      "address": "0x02",
+      "channel": "L",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > shared_T_CRIT",
+      "retirement_condition": "converted_temperature < shared_T_CRIT then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR1.LHIGH",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "LHIGH",
+      "bits": "6",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.LHIGH.trigger_completion",
+      "address": "0x02",
+      "channel": "L",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > corresponding_HIGH",
+      "retirement_condition": "converted_temperature <= corresponding_HIGH then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D1CRIT",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D1CRIT",
+      "bits": "0",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D1CRIT.trigger_completion",
+      "address": "0x35",
+      "channel": "D1",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > shared_T_CRIT",
+      "retirement_condition": "converted_temperature < shared_T_CRIT then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D1RHIGH",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D1RHIGH",
+      "bits": "7",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D1RHIGH.trigger_completion",
+      "address": "0x35",
+      "channel": "D1",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > corresponding_HIGH",
+      "retirement_condition": "converted_temperature <= corresponding_HIGH then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D3CRIT",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D3CRIT",
+      "bits": "1",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D3CRIT.trigger_completion",
+      "address": "0x35",
+      "channel": "D3",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > shared_T_CRIT",
+      "retirement_condition": "converted_temperature < shared_T_CRIT then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D3RHIGH",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D3RHIGH",
+      "bits": "4",
+      "original_overall_status": "REPAIR",
+      "dimension": "trigger_completion",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D3RHIGH.trigger_completion",
+      "address": "0x35",
+      "channel": "D3",
+      "candidate_admission": "PASS_CANDIDATE_IN_BOUNDED_CONVERSION_QUALIFIED_EVENT_SCOPE",
+      "qualifying_event": "MATCHING_CHANNEL_COMPLETED_TEMPERATURE_CONVERSION",
+      "sample_alone_updates_status_or_pin": false,
+      "full_round_barrier_required": false,
+      "threshold_assertion": "converted_temperature > corresponding_HIGH",
+      "retirement_condition": "converted_temperature <= corresponding_HIGH then containing_SR_read",
+      "status_not_masked": true,
+      "source_profiles_retained": [
+        "common_source",
+        "figure_clear"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "retained_access_unknown_boundaries": [
+        "LM83-ACCESS-U01",
+        "LM83-ACCESS-U02"
+      ],
+      "audit_tokens_are_software_protocol_only": true,
+      "physical_timing_experiment": "NOT_EXECUTED",
+      "accepted_claim_ids": [
+        "LM83-T01",
+        "LM83-T02",
+        "LM83-T03",
+        "LM83-T04",
+        "LM83-T05",
+        "LM83-T06",
+        "LM83-T07",
+        "LM83-T08",
+        "LM83-T09",
+        "LM83-T10",
+        "LM83-T11",
+        "LM83-T12",
+        "LM83-T13",
+        "LM83-T14",
+        "LM83-T15",
+        "LM83-T16",
+        "LM83-T17"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    }
+  ],
+  "access_unknown_boundaries": [
+    {
+      "boundary_id": "LM83-ACCESS-U01",
+      "claim": "Unsupported physical status data-write ACK/NACK and no-op behavior",
+      "status": "UNKNOWN",
+      "physical_experiment": "NOT_EXECUTED"
+    },
+    {
+      "boundary_id": "LM83-ACCESS-U02",
+      "claim": "Failed physical read progress, consumption, pin or command-latch side effects",
+      "status": "UNKNOWN",
+      "physical_experiment": "NOT_EXECUTED"
+    }
+  ],
+  "timing_metadata": {
+    "table_all_temperatures_ms": {
+      "typical": 460,
+      "maximum": 600,
+      "typical_condition": "TA25°C; most likely parametric norm",
+      "limit_conditions": "VCC3.0–3.6V; TA=TJ rated−40..125°C; bold limit; AOQL",
+      "note10": "update cadence only; read any time yields last conversion result"
+    },
+    "descriptive_approximate_ms": {
+      "round_robin": 480,
+      "each_temperature_digitized": 120,
+      "sample_to_conversion_completion_and_status_INT_update": 60
+    },
+    "measured_silicon": false,
+    "unconditional_read_to_relatch_deadline_ms": null,
+    "completion_then_extra60ms": false
+  },
+  "memo_discrepancies": [
+    {
+      "location": "§3.3/§4.3/§4.4",
+      "issue": "conversion completed+60ms is wrong event anchor",
+      "correct_qualification": "Approximately60ms from sampling to completion/update; C04 universal latency inference remains unresolved"
+    },
+    {
+      "location": "§5.1/§5.3",
+      "issue": "poll-on-read/volatile does not itself establish ADC conversion timing or universal persistentCRIT clear",
+      "correct_qualification": "Software access corroboration only; inheritedC01/C04 profiles/unknown"
+    }
+  ],
+  "created_at_utc": "2026-10-14T04:01:51.791073+00:00",
+  "implementation_independence": {
+    "implementation_read": false,
+    "tests_read": false,
+    "implementation_executed": false,
+    "write_scope": "sandbox/lm83_v41/source_review"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "contract_version": "1.0",
+  "task_id": "lm83-access-v40/source_review",
+  "created_at_utc": "2026-10-14T03:25:14.786470+00:00",
+  "basis": "Independent manufacturer text and rendered page review plus pinned local driver, before implementation or test access",
+  "implementation_read": false,
+  "tests_read": false,
+  "tests_run": false,
+  "exact_scope": {
+    "overall_REPAIR_fields": 8,
+    "per_dimension_REPAIR_count": 0,
+    "selected_access_CONDITIONAL_rules": 8,
+    "prior_read_clear_CONDITIONAL_rules": 8,
+    "other_CONDITIONAL_rules_retained": 16,
+    "whole_field_promotions": 0
+  },
+  "source_oracles": [
+    {
+      "id": "A01",
+      "check": "SR1 address 0x02 and SR2 address 0x35 explicitly Read Only in §2.3; no status write alias in command table"
+    },
+    {
+      "id": "A02",
+      "check": "Eight named bits fixed; reserved SR1 A8 and SR2 48 zero; OPEN not certified"
+    },
+    {
+      "id": "A03",
+      "check": "RO prohibits software storage write; does not prohibit conversion update or consuming read effect"
+    },
+    {
+      "id": "A04",
+      "check": "Alarm field driver reads entire containing volatile SR then masks desired bit; sibling alarm observation may be consumed"
+    },
+    {
+      "id": "A05",
+      "check": "No conversion freeze alone warrants repeated-read equality; exact same full state and consuming read schedule are necessary"
+    },
+    {
+      "id": "A06",
+      "check": "aggregate reads SR1 then SR2 as separate transactions; no atomic pair or source-supported loss duration"
+    },
+    {
+      "id": "A07",
+      "check": "alarms read-only 0444; temp_write supports max/crit only, others EOPNOTSUPP"
+    },
+    {
+      "id": "A08",
+      "check": "regmap_config has no writable_reg filter; regmap write default forwards raw command, so no universal underlying driver write firewall"
+    },
+    {
+      "id": "A09",
+      "check": "SMBus command-address setup is part of legal read; distinguish command byte from status-storage data write"
+    },
+    {
+      "id": "A10",
+      "check": "Unsupported physical status data-write ACK/NACK/ignore/no-op and possible side effects unspecified; UNKNOWN"
+    },
+    {
+      "id": "A11",
+      "check": "C01-C04 and common_source unknowns remain; wrapper must not upgrade uncertain mask to known"
+    },
+    {
+      "id": "A12",
+      "check": "Driver I2C read negative error returns before field assignment; no rollback of prior SR1 consumption if later aggregate SR2 read fails; physical failure side effects unknown"
+    }
+  ],
+  "required_negative_evidence": [
+    "reject software write as event injection",
+    "reject snapshot equality from RO or no-conversion alone",
+    "reject unsupported physical ACK/no-op claim",
+    "reject cached or bit-isolated alarm read",
+    "reject atomic aggregate claim",
+    "reject C01-C04 resolution without new evidence",
+    "reject scope/dimension/overall promotions"
+  ],
+  "not_executed": [
+    "implementation",
+    "tests",
+    "silicon I2C transactions",
+    "kernel build",
+    "concurrency measurement"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+ "contract_version":"1.0","project_id":"d2d-twin","paper_family":"M","stage_id":"M4",
+ "task_id":"lm83-access-v40/code_review","expert_skill":"sci-skills-presubmission-review",
+ "task_summary":"Independent LM83 conditional access adapter behavior, software RO storage guard, consuming field reads, mutants and byte-bound evidence admission",
+ "inputs":["research/lm83/lm83_datasheet.pdf","research/lm83/lm83.c","eval/lm83_access_v40_20261014/target_fields.json","eval/lm83_access_v40_20261014/scope_freeze.json","eval/lm83_access_v40_20261014/code_acceptance_checklist.md","sandbox/lm83_v40/implementation/access_model.py","sandbox/lm83_v40/implementation/scenarios.py","sandbox/lm83_v40/implementation/admission.py","sandbox/lm83_v39/implementation/lm83.py"],
+ "expected_outputs":["Independent source-derived behavioral tests","Executed synthetic code faults with meaningful probes","Admission missing-witness and forgery/source-byte change tests","Full code_review.json contract and code_review.md","Actual JUnit/log/execution manifest before-after hashes"],
+ "evidence_boundaries":["Only write sandbox/lm83_v40/code_review; no implementation/eval/state/Gold/old files","Software guard versus arbitrary wire semantics distinct; latter UNKNOWN","No physical/model samples or unsupported OPEN dimensions certified"],
+ "acceptance_checks":["Read root fixed checklist and original PDF/driver before tests","8dynamicRO fields, software write unchanged onzero/nonzero/unknown/pendingstates","Wholebyte consumption/sibling/crossaddress behavior and fieldknownmask","Conversion change not readonlyequality; preserve v39 commonunknown and reserved masks","Reject malformed write/field events atomically","Exact typed witness replay/source integrity including old core and prior review","Final output hashes bind finalimplementation; retain initialfailed runs if tests repaired"],
+ "known_missing_items":["No physical bus or concurrency verification"],
+ "manual_operation_allowed":false,"optional_adapters_allowed":["local-python"],"stage_authority":"sci-skills"
+}

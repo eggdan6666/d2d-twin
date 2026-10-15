@@ -1,0 +1,57 @@
+{
+  "scope": {
+    "dimension": "trigger_completion",
+    "original_status": "CONDITIONAL",
+    "trigger_source": "qualified corresponding-channel conversion completion",
+    "sample_alone_updates_alarms": false,
+    "full_round_barrier_required": false,
+    "round_robin_order": [
+      "L",
+      "D2",
+      "D1",
+      "D3"
+    ],
+    "digital_tokens_are_hardware_registers": false,
+    "execution_uses_elapsed_ms": false,
+    "continuously_running_fixed_unmasked_profile": true,
+    "source_boundaries_retained": 4,
+    "access_unknown_boundaries_retained": 2,
+    "whole_field_promotions": 0
+  },
+  "timing": {
+    "all_channels_table_typ_ms": 460,
+    "all_channels_table_max_ms": 600,
+    "round_robin_approx_ms": 480,
+    "channel_approx_ms": 120,
+    "sample_to_update_approx_ms": 60,
+    "measured": false,
+    "table_typ_condition": "TA=25 C",
+    "table_max_conditions": "specified TA/TJ ranges, VCC=3.0..3.6 V",
+    "time_driven_execution": false,
+    "universal_relatch_deadline": false
+  },
+  "source_claims": "LM83-T01..LM83-T17",
+  "dependency": {
+    "path": "sandbox/lm83_v40/implementation/access_model.py",
+    "sha256": "9f45a3dad4461f3b3d85677504dc33803aa5b75b84766a068a621771c54dec71"
+  },
+  "audit_boundary": "sampleid/current logical round-slot qualify digital commit; no hardware token, ADC or elapsed-time claim",
+  "sample_phase_alignment": "L slot0 initial alignment is explicit witness convention, not proven physical POR phase",
+  "source_timing_metadata": {
+    "table_all_temperatures_ms": {
+      "typical": 460,
+      "maximum": 600,
+      "typical_condition": "TA25°C; most likely parametric norm",
+      "limit_conditions": "VCC3.0–3.6V; TA=TJ rated−40..125°C; bold limit; AOQL",
+      "note10": "update cadence only; read any time yields last conversion result"
+    },
+    "descriptive_approximate_ms": {
+      "round_robin": 480,
+      "each_temperature_digitized": 120,
+      "sample_to_conversion_completion_and_status_INT_update": 60
+    },
+    "measured_silicon": false,
+    "unconditional_read_to_relatch_deadline_ms": null,
+    "completion_then_extra60ms": false
+  }
+}

@@ -1,0 +1,195 @@
+[
+  {
+    "inventory_field_id": "INA3221.CONFIG.RST",
+    "dimension": "trigger_completion",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "PASS_CANDIDATE_FOR_BOUNDED_PROTOCOL_ONLY",
+    "required_claim_ids": [
+      "INA3221-RST-01",
+      "INA3221-RST-02",
+      "INA3221-RST-03",
+      "INA3221-RST-04"
+    ],
+    "source_claim_classes": {
+      "INA3221-RST-01": "MANUFACTURER_FACT",
+      "INA3221-RST-02": "MANUFACTURER_FACT",
+      "INA3221-RST-03": "ABSTRACTION_ASSUMPTION",
+      "INA3221-RST-04": "SOURCE_CONFLICT"
+    },
+    "claim_scenarios": {
+      "INA3221-RST-01": [
+        "reset_and_pv_exception"
+      ],
+      "INA3221-RST-02": [
+        "reset_and_pv_exception"
+      ],
+      "INA3221-RST-03": [
+        "reset_and_pv_exception",
+        "trigger_rewrite_and_tokens"
+      ],
+      "INA3221-RST-04": [
+        "cold_scope",
+        "domain_guards"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [
+      "INA3221-CONFLICT-06",
+      "INA3221-CONFLICT-07"
+    ],
+    "required_exclusions": [
+      "pendingreadback",
+      "PVpinimmediatePOR",
+      "0Ehconflictingdefault/access",
+      "postresetTCFexactdefaultasresolvedfact"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three conditional event/unknown guards; subset-CONFIG/CVRF, TCF numeric default/polarity and 0Eh excluded; recursive filter results externally qualified; PV pin hold explicit; no hardware/timing proof",
+    "evidence_meaning": "Execution verifies bounded dispositions, not all manufacturer clauses, exact filter arithmetic or physical measurements."
+  },
+  {
+    "inventory_field_id": "INA3221.MASK_ENABLE.CVRF",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "PASS_CANDIDATE_FOR_COMMON_CLEAR_SCOPE_WITH_EXCLUSIONS",
+    "required_claim_ids": [
+      "INA3221-CVRF-01",
+      "INA3221-CVRF-02",
+      "INA3221-CVRF-03",
+      "INA3221-CVRF-04",
+      "INA3221-CVRF-05",
+      "INA3221-CVRF-06",
+      "INA3221-CVRF-07",
+      "INA3221-CVRF-08"
+    ],
+    "source_claim_classes": {
+      "INA3221-CVRF-01": "MANUFACTURER_FACT",
+      "INA3221-CVRF-02": "MANUFACTURER_FACT",
+      "INA3221-CVRF-03": "MANUFACTURER_FACT",
+      "INA3221-CVRF-04": "MANUFACTURER_FACT",
+      "INA3221-CVRF-05": "SOURCE_CONFLICT",
+      "INA3221-CVRF-06": "MANUFACTURER_FACT",
+      "INA3221-CVRF-07": "ABSTRACTION_ASSUMPTION",
+      "INA3221-CVRF-08": "SOURCE_CONFLICT"
+    },
+    "claim_scenarios": {
+      "INA3221-CVRF-01": [
+        "cold_scope",
+        "partial_and_read_clear"
+      ],
+      "INA3221-CVRF-02": [
+        "enabled_mode_sequences"
+      ],
+      "INA3221-CVRF-03": [
+        "enabled_mode_sequences",
+        "trigger_rewrite_and_tokens"
+      ],
+      "INA3221-CVRF-04": [
+        "config_clear_and_disable",
+        "partial_and_read_clear"
+      ],
+      "INA3221-CVRF-05": [
+        "config_clear_and_disable"
+      ],
+      "INA3221-CVRF-06": [
+        "recursive_filter_scope"
+      ],
+      "INA3221-CVRF-07": [
+        "domain_guards",
+        "trigger_rewrite_and_tokens",
+        "partial_and_read_clear"
+      ],
+      "INA3221-CVRF-08": [
+        "partial_and_read_clear",
+        "domain_guards"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [
+      "INA3221-CONFLICT-04",
+      "INA3221-CONFLICT-05",
+      "INA3221-CONFLICT-08"
+    ],
+    "required_exclusions": [
+      "activeCONFIGwriteclearforpartial_subsets_and_all_disabled_CHen_not_111",
+      "ordinaryRWpersistence",
+      "siliconAVGsamplecountlatency",
+      "physicalconversiontiming"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three conditional event/unknown guards; subset-CONFIG/CVRF, TCF numeric default/polarity and 0Eh excluded; recursive filter results externally qualified; PV pin hold explicit; no hardware/timing proof",
+    "evidence_meaning": "Execution verifies bounded dispositions, not all manufacturer clauses, exact filter arithmetic or physical measurements."
+  },
+  {
+    "inventory_field_id": "INA3221.MASK_ENABLE.TCF",
+    "dimension": "read_clear",
+    "source_verdict": "REPAIR",
+    "assessment": "BOUNDED_CLAUSES_VERIFIED",
+    "bounded_disposition": "PASS_CANDIDATE_FOR_NONREADCLEAR_REARM_ONLY",
+    "required_claim_ids": [
+      "INA3221-TCF-01",
+      "INA3221-TCF-02",
+      "INA3221-TCF-03",
+      "INA3221-TCF-04",
+      "INA3221-TCF-05",
+      "INA3221-TCF-06",
+      "INA3221-TCF-07"
+    ],
+    "source_claim_classes": {
+      "INA3221-TCF-01": "SOURCE_CONFLICT",
+      "INA3221-TCF-02": "MANUFACTURER_FACT",
+      "INA3221-TCF-03": "MANUFACTURER_FACT",
+      "INA3221-TCF-04": "MANUFACTURER_FACT",
+      "INA3221-TCF-05": "SOURCE_CONFLICT",
+      "INA3221-TCF-06": "SOURCE_CONFLICT",
+      "INA3221-TCF-07": "ABSTRACTION_ASSUMPTION"
+    },
+    "claim_scenarios": {
+      "INA3221-TCF-01": [
+        "cold_scope"
+      ],
+      "INA3221-TCF-02": [
+        "tc_common_unknown",
+        "tc_cancel_and_rearm"
+      ],
+      "INA3221-TCF-03": [
+        "tc_cancel_and_rearm"
+      ],
+      "INA3221-TCF-04": [
+        "tc_common_unknown",
+        "tc_cancel_and_rearm"
+      ],
+      "INA3221-TCF-05": [
+        "tc_common_unknown"
+      ],
+      "INA3221-TCF-06": [
+        "domain_guards"
+      ],
+      "INA3221-TCF-07": [
+        "tc_common_unknown",
+        "tc_cancel_and_rearm"
+      ]
+    },
+    "missing_claim_ids": [],
+    "source_conflict_ids": [
+      "INA3221-CONFLICT-01",
+      "INA3221-CONFLICT-02",
+      "INA3221-CONFLICT-03",
+      "INA3221-CONFLICT-05"
+    ],
+    "required_exclusions": [
+      "postfaultflagpolarity",
+      "11hnumericresetresolution",
+      "ordinaryRWpersistence",
+      "physicalTCtiming"
+    ],
+    "whole_dimension_closed": false,
+    "whole_field_promoted": false,
+    "scope": "Three conditional event/unknown guards; subset-CONFIG/CVRF, TCF numeric default/polarity and 0Eh excluded; recursive filter results externally qualified; PV pin hold explicit; no hardware/timing proof",
+    "evidence_meaning": "Execution verifies bounded dispositions, not all manufacturer clauses, exact filter arithmetic or physical measurements."
+  }
+]

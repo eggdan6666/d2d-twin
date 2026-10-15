@@ -1,0 +1,116 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina226-v37/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/TI/INA226.pdf",
+    "eval/ina226_semantics_v37_20261014/ina226.py",
+    "eval/ina226_semantics_v37_20261014/scenarios.py",
+    "eval/ina226_semantics_v37_20261014/admission.py",
+    "eval/ina226_semantics_v37_20261014/target_fields.json",
+    "eval/ina226_semantics_v37_20261014/source_review.json",
+    "eval/ina226_semantics_v37_20261014/code_acceptance_checklist.md",
+    "eval/ina226_semantics_v37_20261014/README.md",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "sandbox/ina226_v37/source_review/independent_source_checklist.md",
+    "eval/ina226_semantics_v37_20261014/code_review_task.json"
+  ],
+  "outputs": [
+    "sandbox/ina226_v37/code_review/code_review.json",
+    "sandbox/ina226_v37/code_review/code_review.md",
+    "sandbox/ina226_v37/code_review/test_independent_runtime.py",
+    "sandbox/ina226_v37/code_review/test_independent_admission.py",
+    "sandbox/ina226_v37/code_review/test_mutation_detection.py",
+    "sandbox/ina226_v37/code_review/run_review.py",
+    "sandbox/ina226_v37/code_review/review_junit.xml",
+    "sandbox/ina226_v37/code_review/execution_manifest.json",
+    "sandbox/ina226_v37/code_review/review_execution.log",
+    "sandbox/ina226_v37/code_review/original_source_pages.json",
+    "sandbox/ina226_v37/code_review/original_source_identity.json",
+    "sandbox/ina226_v37/code_review/independent_scenario_witnesses.json",
+    "sandbox/ina226_v37/code_review/independent_closure.json",
+    "sandbox/ina226_v37/code_review/mutants"
+  ],
+  "evidence_status": [
+    {"label": "VERIFIED_SOURCE", "evidence": "Direct independent extraction of original manufacturer PDF pp11-13,22-28 and visual inspection pp23,26,27; SHA256 bound in original_source_identity.json."},
+    {"label": "VERIFIED_USER_MATERIAL", "evidence": "Accepted independent source expert contract, original six-field/six-dimension inventory and scoped task reviewed."},
+    {"label": "EXECUTED_LOCAL", "evidence": "187 pytest cases pass: 122 independent runtime, 10 synthetic distinguishing fixtures, 55 admission and scenario replay; 12 actual scenarios/215 checks. Exact source and command, per-case JUnit, before/after hashes retained."},
+    {"label": "AI_INFERENCE", "evidence": "No blocking defect observed within exercised digital profile; this is a bounded acceptance recommendation, not proof of all hardware or software behaviors."},
+    {"label": "NOT_EXECUTED", "evidence": "No physical hardware validation, LLM benchmark, formal generation-input admission or whole-field promotion performed by this expert."}
+  ],
+  "assumptions": [
+    "read_masked projects one complete 16-bit abstract transaction; preclear snapshot and no interleaving events are protocol assumptions.",
+    "Externally qualified digital completion/fault inputs do not certify actual ADC, math or analog threshold completion.",
+    "Hash/replay checks assume reviewed implementation and hash constants remain trusted and bound to final execution manifest.",
+    "OutsideContract is verification scope rejection, not silicon exception/ignore/write-protection behavior."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {"check": "Original six fields and six dimensions remain exact; no whole promotion", "status": "PASS", "evidence": "test_exact_six_original_dimensions_preserved; independent_closure.json"},
+    {"check": "Malformed and excluded runtime inputs reject atomically", "status": "PASS", "evidence": "122 independent source-derived runtime cases; review_junit.xml"},
+    {"check": "Reserved POR knownness does not become hardware RO/constant retention", "status": "PASS", "evidence": "POR/write-unknown/nondefault exclusion tests and reserved-retention mutation detector"},
+    {"check": "RST request versus qualified completion on dirty state", "status": "PASS", "evidence": "Dirty-reset oracle, pending access rejection and dirty-reset mutation detector"},
+    {"check": "AFF nonzero latch/transparent semantics and unresolved CONFIG alternatives", "status": "PASS", "evidence": "Nonfault/readclear/profile oracles and three distinguishing AFF mutation detectors"},
+    {"check": "CVRF all-completion/current token/CNVR independence and powerdown exceptions", "status": "PASS", "evidence": "Completion/token/mode oracles and stale/incomplete/CNVR/MODE4 mutation detectors"},
+    {"check": "Source and witness anti-forgery within declared trust boundary", "status": "PASS", "evidence": "55 admission tests including changed source/PDF/ledger bytes, source class/disposition/conflict tampering and forged witnesses"},
+    {"check": "Necessary witnesses versus optional supporting scenarios", "status": "PASS", "evidence": "10 necessary-witness deletion cases yield PARTIAL; 3 optional deletion combinations preserve common-source bounded closure"},
+    {"check": "Actual test execution and stable input hashes", "status": "PASS", "evidence": "execution_manifest.json: inputs_unchanged=true; review_junit.xml contains per-case result and SHA256 properties"},
+    {"check": "Auxiliary writer isolation and stage authority", "status": "PASS", "evidence": "All writes restricted to sandbox/ina226_v37/code_review; no stage/Gold/Harness modifications by this expert"}
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "INA226_CONFLICT_AFF_CONFIG_WRITE",
+      "conflict_type": "SOURCE_TEXT_CONTRADICTION",
+      "claim": "Latched AFF after CONFIG write",
+      "source_or_locator": "TI INA226 SBOS547C PDF p13 §6.3.1.2 versus p27 §7.1.7 AFF/LEN",
+      "competing_values_or_interpretations": ["CONFIG write clears AFF", "AFF clears only on MASK_ENABLE read"],
+      "recommended_resolution": "Retain unknown in common_source and separate named source-conditioned candidates; do not silently select a manufacturer fact."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Orchestrator verifies final implementation hashes and auxiliary manifest, then decides acceptance of the six bounded dispositions while retaining whole-field and generation-input nonadmission.",
+  "stage_acceptance_recommendation": "PASS_CANDIDATE",
+  "readiness": "READY_FOR_BOUNDED_REVIEW_ONLY",
+  "fact_base": {
+    "central_claim": "Source-constrained independently accepted auditable bounded digital closure",
+    "scope": "INA226 original six REPAIR fields/six dimensions; three reserved exclusions plus conditional RST/AFF/CVRF rules",
+    "article_type": "Method/application provisional engineering evidence package",
+    "no_journal_requirement_assessment": true,
+    "no_physical_hardware_validation": true,
+    "whole_field_promoted": false,
+    "whole_dimension_closed": false
+  },
+  "three_reviews": {
+    "CONTRIBUTION": "Evidence supports declared bounded closure; synthetic detector results cannot be relabeled LLM repair or silicon correctness.",
+    "METHODS": "187 actual tests pass with independent PDF-derived oracles, 10 distinguished defect fixtures and source/witness content binding.",
+    "COMMUNICATION": "Complete-word read projection/no-interleaving statement verified; source conflict and excluded modes remain visible."
+  },
+  "cross_review_synthesis": {
+    "shared_blockers": [],
+    "reviewer_disagreements": [],
+    "highest_risk_claims": ["Whole-field certification", "Physical I2C/ADC/timing fidelity", "Resolved manufacturer AFF conflict", "Synthetic defects as LLM statistics"],
+    "missing_validation": ["Physical hardware, analog thresholds, elapsed timing, concurrency and single-channel modes remain outside profile"],
+    "revision_plan": ["Maintain explicit boundaries and verify final-byte identity during orchestrator integration"],
+    "expected_effort": "Bounded integration/hash verification; no further runtime repair identified"
+  },
+  "execution_summary": {
+    "tests": 187,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "independent_runtime_cases": 122,
+    "synthetic_distinguishing_fixtures": 10,
+    "admission_and_scenario_cases": 55,
+    "actual_scenarios": 12,
+    "actual_scenario_checks": 215,
+    "inputs_unchanged": true,
+    "manifest_path": "sandbox/ina226_v37/code_review/execution_manifest.json",
+    "per_case_junit_path": "sandbox/ina226_v37/code_review/review_junit.xml"
+  }
+}

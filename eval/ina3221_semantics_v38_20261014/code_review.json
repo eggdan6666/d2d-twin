@@ -1,0 +1,264 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-presubmission-review",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "ina3221-v38/code_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "corpus/data/raw_pdf/TI/INA3221.pdf",
+    "eval/ina3221_semantics_v38_20261014/ina3221.py",
+    "eval/ina3221_semantics_v38_20261014/scenarios.py",
+    "eval/ina3221_semantics_v38_20261014/admission.py",
+    "eval/ina3221_semantics_v38_20261014/code_acceptance_checklist.md",
+    "eval/ina3221_semantics_v38_20261014/source_clarification_checklist.md",
+    "eval/ina3221_semantics_v38_20261014/source_clarification_supplement.json",
+    "eval/ina3221_semantics_v38_20261014/target_fields.json",
+    "eval/ina3221_semantics_v38_20261014/source_review.json",
+    "eval/ina3221_semantics_v38_20261014/input_identity.json",
+    "eval/independent_source_admission_20261012/field_evidence.json",
+    "sandbox/ina3221_v38/code_review/test_admission.py",
+    "sandbox/ina3221_v38/code_review/test_mutations.py",
+    "sandbox/ina3221_v38/code_review/test_runtime.py"
+  ],
+  "outputs": [
+    "sandbox/ina3221_v38/code_review/test_runtime.py",
+    "sandbox/ina3221_v38/code_review/test_mutations.py",
+    "sandbox/ina3221_v38/code_review/test_admission.py",
+    "sandbox/ina3221_v38/code_review/run_review.py",
+    "sandbox/ina3221_v38/code_review/junit.xml",
+    "sandbox/ina3221_v38/code_review/execution.log",
+    "sandbox/ina3221_v38/code_review/execution_manifest.json",
+    "sandbox/ina3221_v38/code_review/source_identity.json",
+    "sandbox/ina3221_v38/code_review/source_pages.txt",
+    "sandbox/ina3221_v38/code_review/code_review.json",
+    "sandbox/ina3221_v38/code_review/code_review.yaml",
+    "sandbox/ina3221_v38/code_review/code_review.md",
+    "sandbox/ina3221_v38/code_review/contract_validation.json"
+  ],
+  "evidence_status": [
+    "VERIFIED_SOURCE: independently read complete originalPDF page text11,12,13,14,15,16,18,24,26,27,33,34,35; originalPDFbytehashverified",
+    "VERIFIED_USER_MATERIAL: originalpreimplementationchecklist + honestlatersource-onlyclarification retained",
+    "EXECUTED_LOCAL:225actualpytestcases,163runtime+18syntheticmutants+44admission/forgery;0failures/errors/skips;before/afterinputhashesmatch",
+    "NOT_EXECUTED: hardware/electricaltiming/ADC/recursivefilterarithmetic; noLLMexperiment"
+  ],
+  "assumptions": [
+    "Currentconfiguration/startup/request/sequenceepochs,explicitqualificationevents,TCcycleindices and completewordpreclearprojection are boundedprotocolchoices.",
+    "Active subsetchannel-disableCONFIG/CVRFclear numericsUNKNOWN; laterqualifiednonemptycompletecycleorMASKreadrestoreknown1/0.",
+    "CommonTCFnumericdefaultandfaultpolarityUNKNOWN; namedcandidateprofiles are exploratory.",
+    "Independent admission forgery tests validate byte-bound deterministic replay; independent runtime tests remain the source-derived behavioral oracle."
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    "Exactly3originalfield/dimensiondenominator;wholefieldpromotionzero",
+    "DirtyRSTdefaults/requestsupersession/stalecompletion/PVholdverified",
+    "Sixactivemodes/nonemptyenabledsets/strictfilterqualification/AVGidentity verified;noNcyclewait",
+    "CVRFnonzeroreadclear/MODE0and4exception/subsetdisabledunknown verified",
+    "TCflag/pinseparation,earlyCONFIGdisable,resetandpowercyclerearm,currentstartup,uniquecycles andfourqualifiedfaultcyclesverified",
+    "18deliberatecodefaults distinguished by independent probes",
+    "44admissioncases include10missingmandatorywitnessPARTIAL,sourceadvice/schema/witnessforgeryrejection,3copiedauthoritybytechangesrejected",
+    "Originalchecklisthashpreserved;laterclarificationno-backdatingverified",
+    "Finalexecutionused-BandPYTHONDONTWRITEBYTECODE;authoredoutputsonlysandbox"
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "INA3221-CONFLICT-01",
+      "conflict_type": "RESET_LITERAL",
+      "claim_ids": [
+        "INA3221-TCF-01"
+      ],
+      "competing_positions": [
+        "bit1 Table8-34 reset11h",
+        "0002h/header + RW-1 + prosehigh"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Quarantine numeric conflict; candidate1 not official correction."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-02",
+      "conflict_type": "POLARITY_AND_LATCH_WORDING",
+      "claim_ids": [
+        "INA3221-TCF-02",
+        "INA3221-TCF-04",
+        "INA3221-TCF-05"
+      ],
+      "competing_positions": [
+        "TCpin high->low onfault and flag correspondspin",
+        "defaultflaghigh and notclear afterasserted wording"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Keep polarityUNKNOWN; avoid manufacturer fault1; field-specific no-read-clear only."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-03",
+      "conflict_type": "GENERAL_VS_SPECIFIC",
+      "claim_ids": [
+        "INA3221-TCF-04"
+      ],
+      "competing_positions": [
+        "Opening MASK readclearsanyflags",
+        "TCF specific exception reset/powercycle only"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Use boundedTCF nonreadclear advice retaining both texts; no globalreadclear."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-04",
+      "conflict_type": "UNDEFINED_DISABLE_SELECTION",
+      "claim_ids": [
+        "INA3221-CVRF-05"
+      ],
+      "competing_positions": [
+        "p11 exceptionpowerdown",
+        "p35 exceptionpowerdown ordisable-mode"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain undefined disable-mode conflict. MODE0/4 is the common power-down exception, preserving prior known/unknown. Active MODE with all3 enabled supports clear0. Active CHen!=0b111 selects a broader unknown CONFIG-write CVRF boundary covering partial/subset and all-disabled selections; do not certify either numeric clear or preservation. Qualified nonempty completion/read can re-establish known1/0. Alternative subset-clear interpretation must be named and excluded from manufacturer certification."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-05",
+      "conflict_type": "ACCESS_UNDERDETERMINED",
+      "claim_ids": [
+        "INA3221-CVRF-08",
+        "INA3221-TCF-06"
+      ],
+      "competing_positions": [
+        "sourceR/W",
+        "statushardware-managed with writesnotclear"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Exclude ordinarypersistence; no inventedRO or ignoredwrites fact."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-06",
+      "conflict_type": "POR_EQUIVALENCE_QUALIFICATION",
+      "claim_ids": [
+        "INA3221-RST-02"
+      ],
+      "competing_positions": [
+        "p26 sameasPOR broad",
+        "p15 PVoutputheld exception"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Preserve registerreset but explicitlyexclude pin equivalence; not anerratum."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-07",
+      "conflict_type": "SUPPORTING_REGISTER_RESET_AND_ACCESS",
+      "claim_ids": [
+        "INA3221-RST-04"
+      ],
+      "competing_positions": [
+        "p24/p33header7FFE R/W bitmap",
+        "p33fielddescription0h R"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Exclude0Eh supporting assertions; do not promote unrelated register."
+    },
+    {
+      "conflict_id": "INA3221-CONFLICT-08",
+      "conflict_type": "AVERAGING_SEMANTICS_RISK",
+      "claim_ids": [
+        "INA3221-CVRF-06"
+      ],
+      "competing_positions": [
+        "p26 samplescollectedandaveraged wording",
+        "p16 recursivefilter outputupdateeachconversion"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Do not interpretN as fixedCVRF completioncount; qualifyconfig/filterprocessingevent only."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Orchestrator verify these exact final hashes and archive the bounded three-dimension review with all eight conflicts/exclusions retained; keep M4/whole-field promotion unchanged.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "scope_and_inputs": {
+    "original_fields": [
+      "CONFIG.RST",
+      "MASK_ENABLE.CVRF",
+      "MASK_ENABLE.TCF"
+    ],
+    "original_dimensions": [
+      "trigger_completion",
+      "read_clear",
+      "read_clear"
+    ],
+    "source_oracle": "OriginalmanufacturerPDF + untouchedoriginalchecklist + explicitlydatedlatersourceclarification",
+    "source_sha256": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0"
+  },
+  "specialist_findings": [
+    {
+      "lens": "CONTRIBUTION",
+      "severity": "MODERATE",
+      "location": "Three-row bounded closure and report scope",
+      "evidence": "Exactly3originalfields/dimensions,19claims,8unresolvedconflicts,allwhole_field_promotedFalse",
+      "consequence": "Bounded protocol verification cannot support complete digital twin or silicon V&V claims.",
+      "minimum_repair": "Keep bounded source-constrained audit-loop contribution and explicit exclusions.",
+      "ideal_repair": "Future separately scoped hardware validation only if claimed."
+    },
+    {
+      "lens": "METHODS",
+      "severity": "MODERATE",
+      "location": "qualified_filtered_result, TC/PV qualification events",
+      "evidence": "Events attest post-filter results/complete cycles/detector completion; tests inject qualified events.",
+      "consequence": "No ADC/filter arithmetic, physical timing,1.2V electrical measurement or cycle acquisition is independently executed.",
+      "minimum_repair": "State token/cycle-index/event qualification as protocol assumptions.",
+      "ideal_repair": "Bind future qualified events to separately validated acquisition logs."
+    },
+    {
+      "lens": "COMMUNICATION",
+      "severity": "MINOR",
+      "location": "Original checklist + source_clarification_supplement.json",
+      "evidence": "Original f34aad... retained; laterCVRFpartialsubsetclarification dated2026-10-14T04:21:06+08:00 and explicitly afterimplementation exists.",
+      "consequence": "Calling entire finaloracle preimplementation would misrepresent chronology.",
+      "minimum_repair": "Distinguish originalchecklist from later source-only clarification.",
+      "ideal_repair": "Preserve both immutable hashes in archived review package."
+    }
+  ],
+  "cross_review_synthesis": {
+    "blocking_implementation_findings": [],
+    "readiness": "CONDITIONALLY_READY",
+    "scope": "Readyfororchestratorboundedreview,notwholemanuscriptsubmissionreadiness",
+    "disagreements": "Eightmanufacturersourceconflictsremainunresolved;nosilentselection",
+    "priority_revisions": "Reportqualification/timing/partialdisableunknownboundariesandchronologyaccurately",
+    "effort": "No runtime repair outstanding under finalboundedcontract"
+  },
+  "execution": {
+    "counts": {
+      "runtime": 163,
+      "mutations": 18,
+      "admission": 44
+    },
+    "tests": 225,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "junit_sha256": "5141ddbd74b031bde9e2e91aaafd4e7500ae6f27bbce5d79de3a112f66d3d61e",
+    "input_hashes": {
+      "corpus/data/raw_pdf/TI/INA3221.pdf": "6ef5bf2263e34332fce7ea2547d9824ff5d3900418d51d59e5e3b711dcdc98d0",
+      "eval/ina3221_semantics_v38_20261014/ina3221.py": "58ebd06ddd064a3acccffe1d1d55df8014b741ae58b2e651686ff984dc51a6ea",
+      "eval/ina3221_semantics_v38_20261014/scenarios.py": "3e107ed73ea62a373a1b1a2d0a1748192c1faeb6a16946479e544427b1ccdb9c",
+      "eval/ina3221_semantics_v38_20261014/admission.py": "8cd20e62cc45f10d7048ef00c7c94b6abef5f5d7851c262eacd3b4d160595c2d",
+      "eval/ina3221_semantics_v38_20261014/code_acceptance_checklist.md": "f34aad8df6a5eeae7d3adda497de748e8c77697ec395696acb00cecc261fef9c",
+      "eval/ina3221_semantics_v38_20261014/source_clarification_checklist.md": "1d1cce1fbea4b1db5d61c9ffcd33e0be5ff621e889b960eb0a1eeb714ea78151",
+      "eval/ina3221_semantics_v38_20261014/source_clarification_supplement.json": "101e49c5e1d575786cf7c9ebbf71a87a29e6b91f1e0f8209664099c28c17e36c",
+      "eval/ina3221_semantics_v38_20261014/target_fields.json": "0970588fe3a5cd28cbd62e76fc9e2c70dcea2f5dd0948f2b3710cd9006916d51",
+      "eval/ina3221_semantics_v38_20261014/source_review.json": "fdc5c242da057c71e404b1e50bf7d45cdf2b5f2e54ffdc5532ff006468c12311",
+      "eval/ina3221_semantics_v38_20261014/input_identity.json": "7dd9a2d92a3841c9b5f00090f644e5865a3219415b8bb69dc51a06b108c841c9",
+      "eval/independent_source_admission_20261012/field_evidence.json": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+      "sandbox/ina3221_v38/code_review/test_admission.py": "e926b911903c3c23375220ee5afd6c9d5d9e52c38098a72c594b035e282a1c6a",
+      "sandbox/ina3221_v38/code_review/test_mutations.py": "24f179d7ab6515535cbffce935e2dadcd35f0d40e576a80fe5038d8414e6e8ac",
+      "sandbox/ina3221_v38/code_review/test_runtime.py": "a70bb43c67c389d45240c8870eaea1ebd57c2598999e09615df57860fb3cac5a"
+    },
+    "inputs_unchanged": true
+  },
+  "limitations_and_risks": [
+    "NohardwareADC/filterarithmetic/physicaltimingvalidation;nominalmetadataarenotmeasurements",
+    "0Ehreset/accessquarantined;TCFnumericreset/polarityquarantined;ordinaryR/Wstatuspersistenceexcluded",
+    "Fullwordpreclearreadislinearizedprotocolassumptionwithoutinterleaving",
+    "FirstinitialPythonimportincidentallycreatedmain__pycache__/ina3221.cpython-311.pyc;reviewerdiscloseditandrootremovedit;final-Bexecutiondoesnotcreatebytecode. Noauthoredmaincode/state/Gold/Harness/archivechanges."
+  ]
+}

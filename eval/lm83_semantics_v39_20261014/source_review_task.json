@@ -1,0 +1,47 @@
+{
+  "contract_version": "1.0",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lm83-v39/source_review",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "task_summary": "Independent original-LM83 datasheet and pinned Linux-driver review of eight conditional read_clear rules and memo physical claims",
+  "inputs": [
+    "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md",
+    "research/lm83/lm83_datasheet.pdf",
+    "research/lm83/lm83.c",
+    "eval/lm83_semantics_v39_20261014/target_fields.json",
+    "eval/lm83_semantics_v39_20261014/scope_freeze.json",
+    "eval/lm83_semantics_v39_20261014/input_identity.json"
+  ],
+  "expected_outputs": [
+    "source_review.json full contract plus source/ledger/claims/field_closure_advice/conflicts",
+    "source_review.md 16-sectioncard",
+    "independent_source_checklist.md before implementation review",
+    "Memo discrepancies and exact Linux source locators"
+  ],
+  "evidence_boundaries": [
+    "Only write sandbox/lm83_v39/source_review; no current eval/state/Gold/Harness/archives",
+    "Manufacturer source authority vs Linux corroboration vs memo inference separate",
+    "No physical execution; exact timing metadata vs measured behavior separate",
+    "Eight overallREPAIR fields, zeroREPAIRdimensions, eightselectedCONDITIONALreadclear, other24unchanged"
+  ],
+  "acceptance_checks": [
+    "SR1/SR2 independent addressclear02/35 and reservedA8/48",
+    "Persistent fault flags reread vs pinlatch compare exact §1.2/1.3 figures4/6",
+    "Resolve/retain §1.3 flags clear onlyifbelow vs figcaption bitresetbyread conflict",
+    "HIGH deassert<= vs CRIT below strict; equalitynotguessed",
+    "460typ table vs approx480round vs approx60 aftersample, max600conditions",
+    "Mask/inversion scope and no immediate relatch without qualified corresponding conversion",
+    "Linux corroboratesreadmaskvolatile notpin/timing"
+  ],
+  "known_missing_items": [
+    "No board validation or hardware timing measurement"
+  ],
+  "manual_operation_allowed": false,
+  "optional_adapters_allowed": [
+    "local-python",
+    "local-file-import"
+  ],
+  "stage_authority": "sci-skills"
+}

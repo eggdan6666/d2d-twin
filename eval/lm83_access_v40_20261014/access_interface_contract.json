@@ -1,0 +1,35 @@
+{
+  "scope": {
+    "dimension": "access",
+    "original_status": "CONDITIONAL",
+    "software_storage_rule": "RO_REJECTED_WITH_NO_STATE_MUTATION",
+    "unsupported_physical_write_behavior": "UNKNOWN",
+    "physical_write_ack": "UNKNOWN",
+    "read_observation_constant": false,
+    "field_read_consumes": "whole_containing_status_register",
+    "atomic_two_register_snapshot": false,
+    "prior_source_boundaries_retained": 4,
+    "whole_field_promotions": 0
+  },
+  "source_claims": "LM83-A01..LM83-A14",
+  "implementation_dependency": {
+    "path": "sandbox/lm83_v39/implementation/lm83.py",
+    "sha256": "4fe908c44e321077e5d644feec11bcd992e787d965708f14792cda01b084ef23"
+  },
+  "driver_boundary": "public hwmon alarm0444 / writeEOPNOTSUPP; no arbitrary-regmap writable whitelist",
+  "command_pointer_boundary": "command-byte select/read does not write status storage",
+  "unknown_boundaries": [
+    {
+      "boundary_id": "LM83-ACCESS-U01",
+      "claim": "Unsupported physical status data-write ACK/NACK and no-op behavior",
+      "status": "UNKNOWN",
+      "physical_experiment": "NOT_EXECUTED"
+    },
+    {
+      "boundary_id": "LM83-ACCESS-U02",
+      "claim": "Failed physical read progress, consumption, pin or command-latch side effects",
+      "status": "UNKNOWN",
+      "physical_experiment": "NOT_EXECUTED"
+    }
+  ]
+}

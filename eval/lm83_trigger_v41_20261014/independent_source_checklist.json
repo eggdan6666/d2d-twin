@@ -1,0 +1,114 @@
+{
+  "contract_version": "1.0",
+  "task_id": "lm83-trigger-v41/source_review",
+  "created_at_utc": "2026-10-14T04:01:51.791073+00:00",
+  "implementation_read": false,
+  "tests_read": false,
+  "implementation_executed": false,
+  "source_visual_pages": [
+    5,
+    9,
+    10,
+    12,
+    14,
+    15
+  ],
+  "source_sha256": {
+    "research/lm83/lm83_datasheet.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "corpus/data/raw_pdf/TI/LM83.pdf": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+    "research/lm83/lm83.c": "c388209e03ef84c7a3b43590e21720c6e26cac27061831550446ffee1048f680",
+    "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md": "1ed6f958642eb5f9e09d1f8e5e44ad6081b92b34a696d6422c5d09f54c819549"
+  },
+  "field_identities": [
+    "SR1.D2CRIT",
+    "SR1.D2RHIGH",
+    "SR1.LCRIT",
+    "SR1.LHIGH",
+    "SR2.D1CRIT",
+    "SR2.D1RHIGH",
+    "SR2.D3CRIT",
+    "SR2.D3RHIGH"
+  ],
+  "selected_dimension": "trigger_completion",
+  "selected_dimension_status": "CONDITIONAL",
+  "overall_REPAIR_fields": 8,
+  "per_dimension_REPAIR_count": 0,
+  "remaining_CONDITIONAL_rules": [
+    {
+      "field": "SR1.D2CRIT",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR1.D2RHIGH",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR1.LCRIT",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR1.LHIGH",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR2.D1CRIT",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR2.D1RHIGH",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR2.D3CRIT",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    },
+    {
+      "field": "SR2.D3RHIGH",
+      "dimension": "conditional_write",
+      "status": "CONDITIONAL"
+    }
+  ],
+  "required_claim_ids": [
+    "LM83-T01",
+    "LM83-T02",
+    "LM83-T03",
+    "LM83-T04",
+    "LM83-T05",
+    "LM83-T06",
+    "LM83-T07",
+    "LM83-T08",
+    "LM83-T09",
+    "LM83-T10",
+    "LM83-T11",
+    "LM83-T12",
+    "LM83-T13",
+    "LM83-T14",
+    "LM83-T15",
+    "LM83-T16",
+    "LM83-T17"
+  ],
+  "checks": [
+    "sample alone leaves all qualified temperatures/status/pins unchanged",
+    "matching channel completion updates own comparison before round end",
+    "unmatched/stale/duplicate sample token rejects atomically as explicit protocol policy, not a hardware promise",
+    "continuous correct order L,D2,D1,D3; no invented host-trigger requirement",
+    "noncorresponding completion does not relatch other channel consumed flag",
+    "last converted data observable while new sample pending; reads do not advance sampler",
+    "masked HIGH/CRIT status still sets while output remains masked; fixed mask/threshold witness",
+    "persistent output retained across SR read, critical read outcome profile/unknown retained",
+    "retired corresponding conversion then correct SR read permits output retirement only if no other cause",
+    "CRIT equality and earlier-read history are UNKNOWN/profile-labelled, never newly resolved",
+    "SR1/SR2 independent consumption, reserved0 and driver whole-byte aggregate retained",
+    "timing metadata retains conditions; no timer sleeps used as measurement; no unconditional latency proof",
+    "C01-C04/U01-U02 record equality; failed physical reads/unsupported writes never claimed known",
+    "evidence rejects wrong field/dimension, rewritten conflict, missing source/profile/token qualifiers, forged physical guarantee",
+    "remaining eight conditional_write and Gold/historical score unchanged"
+  ]
+}

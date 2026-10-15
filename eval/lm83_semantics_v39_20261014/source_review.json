@@ -1,0 +1,837 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "lm83-v39/source_review",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md",
+    "research/lm83/lm83_datasheet.pdf",
+    "research/lm83/lm83.c",
+    "eval/lm83_semantics_v39_20261014/target_fields.json",
+    "eval/lm83_semantics_v39_20261014/scope_freeze.json",
+    "eval/lm83_semantics_v39_20261014/input_identity.json",
+    "eval/independent_source_admission_20261012/field_evidence.json"
+  ],
+  "outputs": [
+    "sandbox/lm83_v39/source_review/source_review.json",
+    "sandbox/lm83_v39/source_review/source_review.md",
+    "sandbox/lm83_v39/source_review/independent_source_checklist.md"
+  ],
+  "evidence_status": [
+    {
+      "label": "VERIFIED_SOURCE",
+      "scope": "original manufacturer PDF full relevant text and visual pages5/9/10/11/12/15/16; pinned Linux local source and GitHub commit page"
+    },
+    {
+      "label": "VERIFIED_USER_MATERIAL",
+      "scope": "memo as research material, frozen ledger identity/counts"
+    },
+    {
+      "label": "EXECUTED_LOCAL",
+      "scope": "source hash/ledger equality/rendering/artifact packaging only"
+    },
+    {
+      "label": "NOT_EXECUTED",
+      "scope": "No implementation/test review, kernel build, hardware execution, physical timing or pin verification"
+    }
+  ],
+  "assumptions": [
+    "Pre-clear read data transaction abstraction",
+    "figure_clear persistent-fault profile retained separately from conflict-safe scope",
+    "CRIT equality retention and acknowledgement history remain model choices"
+  ],
+  "author_input_needed": [],
+  "manual_actions": [],
+  "quality_checks": [
+    {
+      "check": "required input hashes match identity",
+      "result": "PASS"
+    },
+    {
+      "check": "eight target rows exactly equal frozen ledger",
+      "result": "PASS"
+    },
+    {
+      "check": "zeroREPAIRdimensions/eightselectedCONDITIONAL/24otheropen",
+      "result": "PASS"
+    },
+    {
+      "check": "original waveform/table visually inspected",
+      "result": "PASS"
+    },
+    {
+      "check": "implementation independence",
+      "result": "PASS: no implementation/tests read or run"
+    },
+    {
+      "check": "writes restricted to own sandbox",
+      "result": "PASS"
+    }
+  ],
+  "conflicts": [
+    {
+      "conflict_id": "LM83-C01",
+      "conflict_type": "INTRA_SOURCE",
+      "claim": "Persistent CRIT flag clears on read while converted fault remains active",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3 prose"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figure6 waveform/note"
+        }
+      ],
+      "competing_positions": [
+        "prose: flags and output reset only after read and conversion below T_CRIT",
+        "Figure6: read marker clears CRIT status while temperature stays above T_CRIT; pin stays asserted"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain conflict; admit common retired-fault scope only, keep figure_clear persistent behavior conditional; board evidence or manufacturer clarification needed for physical closure."
+    },
+    {
+      "conflict_id": "LM83-C02",
+      "conflict_type": "UNDERSPECIFIED_BOUNDARY",
+      "claim": "Previously asserted CRIT flag/pin at equality",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3"
+        }
+      ],
+      "competing_positions": [
+        "assert only >; retire explicitly <",
+        "equality history not exhaustively stated"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Treat retention at equality as conservative model profile, not new manufacturer fact; test below/equal/above separately."
+    },
+    {
+      "conflict_id": "LM83-C03",
+      "conflict_type": "UNDERSPECIFIED_HISTORY",
+      "claim": "Read acknowledgement before temperature falls versus after retiring conversion",
+      "sources": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "competing_positions": [
+        "read-and-retired condition is stated",
+        "persistence/lifetime of earlier read acknowledgement is not completely specified"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Certify retired conversion then read only; label any remembered-acknowledgement implementation as history profile."
+    },
+    {
+      "conflict_id": "LM83-C04",
+      "conflict_type": "MEMO_OVERGENERALIZATION",
+      "claim": "All reassertions promised within0..600ms from any read",
+      "sources": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "conversion-time table"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Note10/§1.1"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "competing_positions": [
+        "table600max conversion cadence with specified conditions",
+        "memo turns cadence into universal pin/flag latency bound"
+      ],
+      "status": "UNRESOLVED",
+      "recommended_resolution": "Retain qualified cadence-based latency inference only, not observed or universal guarantee."
+    }
+  ],
+  "conflict_resolution_status": "UNRESOLVED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Orchestrator accepts eight read_clear rules only in retired-fault conflict-safe scope, retains four conflicts and separately labels requested figure_clear behavior before test acceptance.",
+  "stage_acceptance_recommendation": "REPAIR",
+  "source": {
+    "manufacturer": {
+      "path": "research/lm83/lm83_datasheet.pdf",
+      "sha256": "ed0018c7adb9d5757668c4b864e803a859870d8b59f95135bb1ebbd24c75e635",
+      "pages": 23,
+      "version": "SNIS111A wrapper; National DS101058 November1999 copyright2000; 2025 packaging addendum",
+      "depth": "FULL_RELEVANT_TEXT_AND_VISUAL",
+      "visual_pages": [
+        5,
+        9,
+        10,
+        11,
+        12,
+        15,
+        16
+      ],
+      "locator_convention": "PDF page is one-based file position; printed page is National footer, generally PDF-1"
+    },
+    "driver": {
+      "path": "research/lm83/lm83.c",
+      "sha256": "c388209e03ef84c7a3b43590e21720c6e26cac27061831550446ffee1048f680",
+      "commit": "24a19b953e2a3d0ea5a8c4951a0ab8f32720c907",
+      "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c",
+      "lines": 467,
+      "verification": "Local full code read; pinned GitHub blob opened; Raw URL unavailable, no byte-for-byte remote hash equivalence claimed"
+    },
+    "memo": {
+      "path": "research/lm83/LM83_状态寄存器与Linux驱动_技术备忘录.md",
+      "sha256": "1ed6f958642eb5f9e09d1f8e5e44ad6081b92b34a696d6422c5d09f54c819549",
+      "authority": "RESEARCH_MATERIAL_NOT_FACT_OVERRIDE"
+    }
+  },
+  "ledger": {
+    "path": "eval/independent_source_admission_20261012/field_evidence.json",
+    "sha256": "0905059f5f981f89137533d8b6f34d33cde5b673a05707c6b7141d521bb54711",
+    "ledger_rows": 572,
+    "exact_rows_match": true,
+    "overall_REPAIR_fields": 8,
+    "per_dimension_REPAIR_count": 0,
+    "selected_read_clear_CONDITIONAL_rules": 8,
+    "other_CONDITIONAL_rules_retained": 24,
+    "prior_PASS_dimensions_retained": 24,
+    "whole_field_promotions": 0
+  },
+  "claims": [
+    {
+      "claim_id": "LM83-S01",
+      "statement": "Exact eight alarm fields and bits match frozen ledger and original status tables.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3.1–2.3.2"
+        }
+      ],
+      "boundary": "Eight original identities only; OPEN fields are not newly certified."
+    },
+    {
+      "claim_id": "LM83-S02",
+      "statement": "Read clear has register-local scope: SR1@0x02 and SR2@0x35 are distinct; a read clears flags where located.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figures4/6 notes; Figures5/7 read lines"
+        },
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3"
+        }
+      ],
+      "boundary": "Physical persistent-fault interpretation remains C01; schedule excludes concurrent conversion for untouched-value assertions."
+    },
+    {
+      "claim_id": "LM83-S03",
+      "statement": "SR1 reserved bits7/5/3 are zero (mask0xA8); SR2 bits6/3 are zero (mask0x48).",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3.1–2.3.2"
+        }
+      ],
+      "boundary": "Masks include reserved bits only, exclude named OPEN bits."
+    },
+    {
+      "claim_id": "LM83-S04",
+      "statement": "HIGH asserts for converted temperature > HIGH; INT retirement requires containing-register read and temperature <= corresponding HIGH.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.2"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2/Figures4–5"
+        }
+      ],
+      "boundary": "Setpoint fixed, INT unmasked, polarity known; output aggregation respected."
+    },
+    {
+      "claim_id": "LM83-S05",
+      "statement": "CRIT asserts for converted temperature > T_CRIT; §1.3 retirement explicitly says below T_CRIT plus status read.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3/Figures6–7"
+        }
+      ],
+      "boundary": "Below means strict <. Equality transition history remains profile assumption C02."
+    },
+    {
+      "claim_id": "LM83-S06",
+      "statement": "A register read alone cannot deactivate a qualified enabled output while its converted over-limit condition persists.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 12,
+          "printed_page": 11,
+          "section_or_table": "§1.9"
+        }
+      ],
+      "boundary": "Stable masks/inversion/setpoints; output already asserted; relevant fault contributes to this output. Not an unconditional electrical pin claim."
+    },
+    {
+      "claim_id": "LM83-S07",
+      "statement": "Figures4/6 depict register flags dropping at read markers during continuing fault while output can remain asserted.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figures4/6, visual waveform inspection"
+        }
+      ],
+      "boundary": "figure_clear is a conditional source profile; CRIT prose conflict C01 is unresolved and does not become unconditional silicon fact."
+    },
+    {
+      "claim_id": "LM83-S08",
+      "statement": "Status and output update on conversion completion; source supports corresponding channel-qualified reassertion rather than read-triggered conversion.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "§1.1/§1.2"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3"
+        }
+      ],
+      "boundary": "No positive minimum delay after read; model sample/completion event distinction is abstraction; persistent flag clearing depends on profile."
+    },
+    {
+      "claim_id": "LM83-S09",
+      "statement": "Electrical table specifies all-temperature conversion460ms typical/600ms max; §1.1 describes approx480ms round/120ms channel; §1.2 approx60ms sample-to-completion.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 5,
+          "printed_page": 4,
+          "section_or_table": "Temperature-to-Digital Converter Characteristics"
+        },
+        {
+          "pdf_page_1_based": 9,
+          "printed_page": 8,
+          "section_or_table": "Notes6/7/10;§1.1"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2"
+        }
+      ],
+      "boundary": "Table applies VCC3.0–3.6V, bold600limit full rated TA/TJ range; typical at25°C. Note10 specifies data update cadence; no unconditional flag latency promise."
+    },
+    {
+      "claim_id": "LM83-S10",
+      "statement": "INT mask/inversion affect output; T_CRIT masks suppress propagation but status still sets; all four masks or T_CRIT127 disable T_CRIT_A.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.2–1.3/Figures5/7"
+        },
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.5"
+        },
+        {
+          "pdf_page_1_based": 16,
+          "printed_page": 15,
+          "section_or_table": "§2.5"
+        }
+      ],
+      "boundary": "Mask stability required for persistent-pin assertion; no status-bit masking."
+    },
+    {
+      "claim_id": "LM83-S11",
+      "statement": "Power-on statuses SR1/SR2 are00h before subsequent measurements.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 11,
+          "printed_page": 10,
+          "section_or_table": "§1.4"
+        },
+        {
+          "pdf_page_1_based": 15,
+          "printed_page": 14,
+          "section_or_table": "§2.3"
+        }
+      ],
+      "boundary": "Existing PASS reset dimensions unchanged, no new certification."
+    },
+    {
+      "claim_id": "LM83-S12",
+      "statement": "Linux maps SR1/SR2 and eight HIGH/CRIT fields consistently with original tables.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 50,
+          "line_end": 51,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L50-L51"
+        },
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 82,
+          "line_end": 96,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L82-L96"
+        }
+      ],
+      "boundary": "Driver corroboration, not physical alarm validation."
+    },
+    {
+      "claim_id": "LM83-S13",
+      "statement": "Linux marks both status registers volatile, routes regmap reads to SMBus byte reads.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 112,
+          "line_end": 124,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L112-L124"
+        },
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 150,
+          "line_end": 173,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L150-L173"
+        }
+      ],
+      "boundary": "Volatile designation confirms freshness intent, not clearing hardware or timing measurement."
+    },
+    {
+      "claim_id": "LM83-S14",
+      "statement": "Linux individual alarm reads read the containing register; aggregate reads SR1 then SR2 as two transactions.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 201,
+          "line_end": 218,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L201-L218"
+        },
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 250,
+          "line_end": 266,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L250-L266"
+        }
+      ],
+      "boundary": "Not an atomic hardware snapshot; does not establish a lost-event rate."
+    },
+    {
+      "claim_id": "LM83-S15",
+      "statement": "Linux detect checks SR1&0xA8, SR2&0x48 and configuration&0x41.",
+      "evidence_status": "VERIFIED_SOURCE",
+      "locators": [
+        {
+          "source": "research/lm83/lm83.c",
+          "line_start": 378,
+          "line_end": 380,
+          "url": "https://github.com/torvalds/linux/blob/24a19b953e2a3d0ea5a8c4951a0ab8f32720c907/drivers/hwmon/lm83.c#L378-L380"
+        }
+      ],
+      "boundary": "Second read is conditional on short-circuit path; detect success path reads both. Reserved-mask corroboration only."
+    },
+    {
+      "claim_id": "LM83-S16",
+      "statement": "A status transaction returns pre-clear latched data before clear becomes observable to the next read.",
+      "evidence_status": "AI_INFERENCE",
+      "locators": [
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "Figures4/6"
+        },
+        {
+          "pdf_page_1_based": 10,
+          "printed_page": 9,
+          "section_or_table": "§1.3 source can read to determine alarm cause"
+        }
+      ],
+      "boundary": "Explicit transaction-level abstraction, no byte-edge timing measured; read/write error and aborted reads outside scope."
+    }
+  ],
+  "accepted_claim_ids": [
+    "LM83-S01",
+    "LM83-S02",
+    "LM83-S03",
+    "LM83-S04",
+    "LM83-S05",
+    "LM83-S06",
+    "LM83-S07",
+    "LM83-S08",
+    "LM83-S09",
+    "LM83-S10",
+    "LM83-S11",
+    "LM83-S12",
+    "LM83-S13",
+    "LM83-S14",
+    "LM83-S15",
+    "LM83-S16"
+  ],
+  "field_closure_advice": [
+    {
+      "field_id": "SR1.D2CRIT",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "D2CRIT",
+      "bits": "1",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.D2CRIT.read_clear",
+      "address": "0x02",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion < T_CRIT, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S05",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR1.D2RHIGH",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "D2RHIGH",
+      "bits": "4",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.D2RHIGH.read_clear",
+      "address": "0x02",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion <= corresponding HIGH, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S04",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR1.LCRIT",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "LCRIT",
+      "bits": "0",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.LCRIT.read_clear",
+      "address": "0x02",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion < T_CRIT, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S05",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR1.LHIGH",
+      "chip": "LM83",
+      "register": "SR1",
+      "field": "LHIGH",
+      "bits": "6",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR1.LHIGH.read_clear",
+      "address": "0x02",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion <= corresponding HIGH, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S04",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D1CRIT",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D1CRIT",
+      "bits": "0",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D1CRIT.read_clear",
+      "address": "0x35",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion < T_CRIT, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S05",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D1RHIGH",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D1RHIGH",
+      "bits": "7",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D1RHIGH.read_clear",
+      "address": "0x35",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion <= corresponding HIGH, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S04",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D3CRIT",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D3CRIT",
+      "bits": "1",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D3CRIT.read_clear",
+      "address": "0x35",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion < T_CRIT, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S05",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C01",
+        "LM83-C02",
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    },
+    {
+      "field_id": "SR2.D3RHIGH",
+      "chip": "LM83",
+      "register": "SR2",
+      "field": "D3RHIGH",
+      "bits": "4",
+      "original_overall_status": "REPAIR",
+      "dimension": "read_clear",
+      "original_dimension_status": "CONDITIONAL",
+      "selected_rule_id": "SR2.D3RHIGH.read_clear",
+      "address": "0x35",
+      "candidate_admission": "PASS_CANDIDATE_IN_CONFLICT_SAFE_SCOPE",
+      "safe_condition": "completed conversion <= corresponding HIGH, then containing-register read, no new conversion between reads",
+      "persistent_fault_profile": "figure_clear; conditional source interpretation, not unconditional manufacturer fact",
+      "read_preclear_data": "explicit transaction abstraction",
+      "accepted_claim_ids": [
+        "LM83-S01",
+        "LM83-S02",
+        "LM83-S03",
+        "LM83-S04",
+        "LM83-S06",
+        "LM83-S07",
+        "LM83-S08",
+        "LM83-S09",
+        "LM83-S10",
+        "LM83-S16"
+      ],
+      "retained_conflicts": [
+        "LM83-C03",
+        "LM83-C04"
+      ],
+      "other_dimensions_changed": false,
+      "whole_field_promoted": false
+    }
+  ],
+  "memo_discrepancies": [
+    {
+      "memo_section": "§3.1",
+      "issue": "POR does not independently establish read-clear, and entire11validbit clearing is broader than eight selected fields",
+      "correction": "Use Figures4/6 for alarm read-clear; keep OPEN certification outside scope"
+    },
+    {
+      "memo_section": "§3.2",
+      "issue": "No immediate relatch interpreted as positive minimum latency; universally0..600ms not direct silicon guarantee",
+      "correction": "Only corresponding qualified conversion reassertion; conversion can follow read arbitrarily closely; phase/rating assumptions declared"
+    },
+    {
+      "memo_section": "§3.3",
+      "issue": "Read-clears-persistent-CRIT wording silently overrides §1.3 prose",
+      "correction": "Preserve C01"
+    },
+    {
+      "memo_section": "§4.3/§4.4",
+      "issue": "Completion+60ms reverses source sample→completion meaning",
+      "correction": "Approximately60ms after temperature sampling, at completion"
+    },
+    {
+      "memo_section": "§5/sourceheader",
+      "issue": "Memo468lines versus actual source467",
+      "correction": "Local splitlines and GitHub blob report467; original detailed locators stable"
+    },
+    {
+      "memo_section": "§6.2",
+      "issue": "Two-address aggregate non-atomicity does not itself prove SR2 event loss between transactions",
+      "correction": "Treat incoherent snapshot/consuming-read risk as analysis, event-loss rates/window require explicit schedule or board evidence"
+    }
+  ],
+  "created_at_utc": "2026-10-14T02:35:29.588638+00:00",
+  "implementation_independence": {
+    "implementation_read": false,
+    "tests_read": false,
+    "tests_run": false,
+    "hardware_run": false
+  }
+}
