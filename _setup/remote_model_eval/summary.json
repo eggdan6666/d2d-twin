@@ -1,0 +1,146 @@
+{
+  "generated_at": "2026-10-10",
+  "total_samples": 108,
+  "runs": [
+    {
+      "file": "results_gen_ds67b_ad5592r_20261010.json",
+      "model": "ds67b",
+      "chip": "ad5592r",
+      "n": 12,
+      "all_green": 12,
+      "pass_rate": 1.0,
+      "rc_counts": {
+        "0": 12
+      },
+      "passed_mean": 4.0,
+      "passed_min": 4,
+      "passed_max": 4,
+      "failure_test_occurrences": {
+        "test_readonly_protection": 0,
+        "test_reset_values": 0,
+        "test_rw_field_persistence": 0,
+        "test_write_trigger_fields": 0
+      },
+      "failure_sample_categories": {}
+    },
+    {
+      "file": "results_gen_ds67b_lis3dh_20261010.json",
+      "model": "ds67b",
+      "chip": "lis3dh",
+      "n": 12,
+      "all_green": 0,
+      "pass_rate": 0.0,
+      "rc_counts": {
+        "1": 12
+      },
+      "passed_mean": 1.8333333333333333,
+      "passed_min": 0,
+      "passed_max": 2,
+      "failure_test_occurrences": {
+        "test_readonly_protection": 12,
+        "test_reset_values": 1,
+        "test_rw_field_persistence": 1,
+        "test_write_trigger_fields": 0
+      },
+      "failure_sample_categories": {
+        "readonly": 12,
+        "reset_or_trigger": 1,
+        "field_persistence": 1
+      }
+    },
+    {
+      "file": "results_gen_ds67b_mpu6050_20261010.json",
+      "model": "ds67b",
+      "chip": "mpu6050",
+      "n": 12,
+      "all_green": 0,
+      "pass_rate": 0.0,
+      "rc_counts": {
+        "1": 12
+      },
+      "passed_mean": 2.0,
+      "passed_min": 1,
+      "passed_max": 3,
+      "failure_test_occurrences": {
+        "test_readonly_protection": 11,
+        "test_reset_values": 0,
+        "test_rw_field_persistence": 3,
+        "test_write_trigger_fields": 10
+      },
+      "failure_sample_categories": {
+        "field_persistence": 2,
+        "readonly": 11,
+        "reset_or_trigger": 11
+      }
+    },
+    {
+      "file": "results_gen_qwen14b_ad5592r_20261010.json",
+      "model": "qwen14b",
+      "chip": "ad5592r",
+      "n": 24,
+      "all_green": 24,
+      "pass_rate": 1.0,
+      "rc_counts": {
+        "0": 24
+      },
+      "passed_mean": 4.0,
+      "passed_min": 4,
+      "passed_max": 4,
+      "failure_test_occurrences": {
+        "test_readonly_protection": 0,
+        "test_reset_values": 0,
+        "test_rw_field_persistence": 0,
+        "test_write_trigger_fields": 0
+      },
+      "failure_sample_categories": {}
+    },
+    {
+      "file": "results_gen_qwen14b_lis3dh_20261010.json",
+      "model": "qwen14b",
+      "chip": "lis3dh",
+      "n": 24,
+      "all_green": 9,
+      "pass_rate": 0.375,
+      "rc_counts": {
+        "1": 15,
+        "0": 9
+      },
+      "passed_mean": 2.375,
+      "passed_min": 2,
+      "passed_max": 3,
+      "failure_test_occurrences": {
+        "test_readonly_protection": 15,
+        "test_reset_values": 0,
+        "test_rw_field_persistence": 0,
+        "test_write_trigger_fields": 0
+      },
+      "failure_sample_categories": {
+        "readonly": 15
+      }
+    },
+    {
+      "file": "results_gen_qwen14b_mpu6050_20261010.json",
+      "model": "qwen14b",
+      "chip": "mpu6050",
+      "n": 24,
+      "all_green": 0,
+      "pass_rate": 0.0,
+      "rc_counts": {
+        "1": 24
+      },
+      "passed_mean": 2.2916666666666665,
+      "passed_min": 2,
+      "passed_max": 3,
+      "failure_test_occurrences": {
+        "test_readonly_protection": 22,
+        "test_reset_values": 0,
+        "test_rw_field_persistence": 0,
+        "test_write_trigger_fields": 19
+      },
+      "failure_sample_categories": {
+        "readonly": 22,
+        "reset_or_trigger": 19
+      }
+    }
+  ]
+}

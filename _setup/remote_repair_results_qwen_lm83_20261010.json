@@ -1,0 +1,38 @@
+{
+  "model_path": "/root/private_data/models/Qwen2.5-Coder-14B-Instruct",
+  "result_source": "eval/results_gen_repair_baseline_qwen_lm83_20261009.json",
+  "ir": "LM83_gold_ir.json",
+  "selected_index": 0,
+  "results": [
+    {
+      "stage": "baseline",
+      "round": 0,
+      "rc": 1,
+      "passed": 1,
+      "elapsed_s": 1.33,
+      "tail": ".FFssFss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_0/test_d2d_blackbox.py:123: AssertionError: TEMP_LOCAL 是 RO：写脏数据后 0x0 → 0xa5\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_0/test_d2d_blackbox.py:160: AssertionError: CONFIG.INT_MASK[7] 写全 1 后读回 0，期望 1（整寄存器 0x0）\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_0/test_d2d_blackbox.py:246: AssertionError: CONFIG: 写别名地址 0x09 后从 0x03 读回 0x0，期望 0x1a\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP_...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\nFAILED test_d2d_blackbox.py::test_read_write_alias - AssertionError: CONFIG: ...\n3 failed, 1 passed, 4 skipped in 0.74s",
+      "code": "from base_sensor import BaseVirtualSensor\n\nclass LM83_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x00,  # TEMP_LOCAL\n            0x01: 0x00,  # TEMP_D2\n            0x02: 0x00,  # SR1\n            0x03: 0x00,  # CONFIG\n            0x05: 0x7F,  # LHS\n            0x07: 0x7F,  # D2RHS\n            0x30: 0x00,  # TEMP_D1\n            0x31: 0x00,  # TEMP_D3\n            0x35: 0x00,  # SR2\n            0x38: 0x7F,  # D1RHS\n            0x3A: 0x7F,  # D3RHS\n            0x42: 0x7F,  # TCS\n            0xFE: 0x01,  # MID\n            0xFF: 0x00,  # STEP_ID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            return 0\n        value = self.regs[addr]\n        if nbytes == 1:\n            return (value >> 8) & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs or self.regs[addr] & 0xFF00 != 0:\n            return\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data & 0x00FF\n",
+      "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_0"
+    },
+    {
+      "round": 1,
+      "rc": 1,
+      "passed": 1,
+      "elapsed_s": 0.99,
+      "tail": ".FFssFss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_1/test_d2d_blackbox.py:123: AssertionError: TEMP_LOCAL 是 RO：写脏数据后 0x0 → 0xa5\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_1/test_d2d_blackbox.py:160: AssertionError: CONFIG.INT_MASK[7] 写全 1 后读回 0，期望 1（整寄存器 0x0）\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_1/test_d2d_blackbox.py:246: AssertionError: CONFIG: 写别名地址 0x09 后从 0x03 读回 0x0，期望 0x1a\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP_...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\nFAILED test_d2d_blackbox.py::test_read_write_alias - AssertionError: CONFIG: ...\n3 failed, 1 passed, 4 skipped in 0.12s",
+      "code": "from base_sensor import BaseVirtualSensor\n\nclass LM83_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x00,  # TEMP_LOCAL\n            0x01: 0x00,  # TEMP_D2\n            0x02: 0x00,  # SR1\n            0x03: 0x00,  # CONFIG\n            0x05: 0x7F,  # LHS\n            0x07: 0x7F,  # D2RHS\n            0x30: 0x00,  # TEMP_D1\n            0x31: 0x00,  # TEMP_D3\n            0x35: 0x00,  # SR2\n            0x38: 0x7F,  # D1RHS\n            0x3A: 0x7F,  # D3RHS\n            0x42: 0x7F,  # TCS\n            0xFE: 0x01,  # MID\n            0xFF: 0x00,  # STEP_ID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            return 0\n        value = self.regs[addr]\n        if nbytes == 1:\n            return value & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            return\n        if nbytes == 1:\n            data = (data & 0xFF) << 8\n        else:\n            data &= 0x00FF\n        self.regs[addr] = data\n",
+      "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_1",
+      "stage": "repair_1"
+    },
+    {
+      "round": 2,
+      "rc": 1,
+      "passed": 1,
+      "elapsed_s": 5.75,
+      "tail": ".FFssFss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_2/test_d2d_blackbox.py:123: AssertionError: TEMP_LOCAL 是 RO：写脏数据后 0x0 → 0xa5\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_2/test_d2d_blackbox.py:160: AssertionError: CONFIG.INT_MASK[7] 写全 1 后读回 0，期望 1（整寄存器 0x0）\n/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_2/test_d2d_blackbox.py:246: AssertionError: CONFIG: 写别名地址 0x09 后从 0x03 读回 0x0，期望 0x1a\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: TEMP_...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: CONF...\nFAILED test_d2d_blackbox.py::test_read_write_alias - AssertionError: CONFIG: ...\n3 failed, 1 passed, 4 skipped in 3.53s",
+      "code": "from base_sensor import BaseVirtualSensor\n\nclass LM83_Simulator(BaseVirtualSensor):\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x00: 0x00,  # TEMP_LOCAL\n            0x01: 0x00,  # TEMP_D2\n            0x02: 0x00,  # SR1\n            0x03: 0x00,  # CONFIG\n            0x05: 0x7F,  # LHS\n            0x07: 0x7F,  # D2RHS\n            0x30: 0x00,  # TEMP_D1\n            0x31: 0x00,  # TEMP_D3\n            0x35: 0x00,  # SR2\n            0x38: 0x7F,  # D1RHS\n            0x3A: 0x7F,  # D3RHS\n            0x42: 0x7F,  # TCS\n            0xFE: 0x01,  # MID\n            0xFF: 0x00,  # STEP_ID\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr not in self.regs:\n            return 0\n        value = self.regs[addr]\n        if nbytes == 1:\n            return value & 0xFF\n        return value\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr not in self.regs:\n            return\n        if nbytes == 1:\n            data = (data & 0xFF) << 8\n        else:\n            data &= 0x00FF\n        self.regs[addr] = data\n",
+      "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_qwen_lm83_repair_20261010_2",
+      "stage": "repair_2"
+    }
+  ]
+}

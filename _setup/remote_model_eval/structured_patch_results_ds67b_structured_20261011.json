@@ -1,0 +1,123 @@
+{
+  "model_path": "/root/private_data/models/deepseek-coder-6.7b-instruct",
+  "focus": "PWR_MGMT_1.DEVICE_RESET",
+  "interface": "write_register_method_only",
+  "results": [
+    {
+      "chip": "MPU6050",
+      "index": 0,
+      "status": "scope_reject",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 0.93,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_0_0/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 0.33s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x19: 0x00, 0x1A: 0x00, 0x1B: 0x00, 0x1C: 0x00, 0x3B: 0x00, 0x3C: 0x00, 0x3D: 0x00, 0x3E: 0x00, 0x3F: 0x00, 0x40: 0x00, 0x6B: 0x40, 0x75: 0x68}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] & 0xFF00) >> 8\n            else:\n                return self.regs[addr]\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_0_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 1.33,
+        "tail": ".F..ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_0_1/test_d2d_blackbox.py:123: AssertionError: ACCEL_XOUT_H 是 RO：写脏数据后 0x0 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: ACCEL...\n1 failed, 3 passed, 4 skipped in 0.54s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x19: 0x00, 0x1A: 0x00, 0x1B: 0x00, 0x1C: 0x00, 0x3B: 0x00, 0x3C: 0x00, 0x3D: 0x00, 0x3E: 0x00, 0x3F: 0x00, 0x40: 0x00, 0x6B: 0x40, 0x75: 0x68}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] & 0xFF00) >> 8\n            else:\n                return self.regs[addr]\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x6B:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n            if self.regs[addr] & 0x80:  # Check if DEVICE_RESET bit is set\n                self.regs[addr] = 0x40  # Restore reset state\n                self.regs[addr] &= ~0x80  # Clear DEVICE_RESET bit\n        else:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_0_1"
+      },
+      "scope": {
+        "scope_ok": false,
+        "syntax_ok": true,
+        "explicit_literals": [
+          "0x6B",
+          "0x00FF",
+          "0xFF",
+          "0x80",
+          "0x40",
+          "0x80",
+          "0x00FF",
+          "0xFF"
+        ],
+        "disallowed_literals": [
+          "0x00FF",
+          "0xFF"
+        ]
+      },
+      "method": "    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x6B:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n            if self.regs[addr] & 0x80:  # Check if DEVICE_RESET bit is set\n                self.regs[addr] = 0x40  # Restore reset state\n                self.regs[addr] &= ~0x80  # Clear DEVICE_RESET bit\n        else:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n"
+    },
+    {
+      "chip": "MPU6050",
+      "index": 4,
+      "status": "scope_reject",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 2,
+        "elapsed_s": 1.54,
+        "tail": ".FF.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_4_0/test_d2d_blackbox.py:123: AssertionError: ACCEL_XOUT_H 是 RO：写脏数据后 0x0 → 0xa5\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_4_0/test_d2d_blackbox.py:160: AssertionError: PWR_MGMT_1.CYCLE[5] 写全 1 后读回 0，期望 1（整寄存器 0x40）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: ACCEL...\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: PWR_...\n2 failed, 2 passed, 4 skipped in 0.55s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # Register width\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x19: 0x00,  # SMPLRT_DIV\n            0x1A: 0x00,  # CONFIG\n            0x1B: 0x00,  # GYRO_CONFIG\n            0x1C: 0x00,  # ACCEL_CONFIG\n            0x3B: 0x00,  # ACCEL_XOUT_H\n            0x3C: 0x00,  # ACCEL_XOUT_L\n            0x3D: 0x00,  # ACCEL_YOUT_H\n            0x3E: 0x00,  # ACCEL_YOUT_L\n            0x3F: 0x00,  # ACCEL_ZOUT_H\n            0x40: 0x00,  # ACCEL_ZOUT_L\n            0x6B: 0x40,  # PWR_MGMT_1\n            0x75: 0x68   # WHO_AM_I\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        elif nbytes == 2:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        elif nbytes == 2:\n            self.regs[addr] = data\n        if addr == 0x6B:  # DEVICE_RESET\n            self.regs[0x6B] = 0x40  # reset PWR_MGMT_1 to default\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_4_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 1.54,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_4_1/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 0.54s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16  # Register width\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x19: 0x00,  # SMPLRT_DIV\n            0x1A: 0x00,  # CONFIG\n            0x1B: 0x00,  # GYRO_CONFIG\n            0x1C: 0x00,  # ACCEL_CONFIG\n            0x3B: 0x00,  # ACCEL_XOUT_H\n            0x3C: 0x00,  # ACCEL_XOUT_L\n            0x3D: 0x00,  # ACCEL_YOUT_H\n            0x3E: 0x00,  # ACCEL_YOUT_L\n            0x3F: 0x00,  # ACCEL_ZOUT_H\n            0x40: 0x00,  # ACCEL_ZOUT_L\n            0x6B: 0x40,  # PWR_MGMT_1\n            0x75: 0x68   # WHO_AM_I\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        elif nbytes == 2:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x6B:  # PWR_MGMT_1\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n            elif nbytes == 2:\n                self.regs[addr] = data\n            if data & 0x80:  # DEVICE_RESET bit is set\n                self.regs[addr] = 0x40  # reset PWR_MGMT_1 to default\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_4_1"
+      },
+      "scope": {
+        "scope_ok": false,
+        "syntax_ok": true,
+        "explicit_literals": [
+          "0x6B",
+          "0x00FF",
+          "0x80",
+          "0x40"
+        ],
+        "disallowed_literals": [
+          "0x00FF"
+        ]
+      },
+      "method": "    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x6B:  # PWR_MGMT_1\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n            elif nbytes == 2:\n                self.regs[addr] = data\n            if data & 0x80:  # DEVICE_RESET bit is set\n                self.regs[addr] = 0x40  # reset PWR_MGMT_1 to default\n"
+    },
+    {
+      "chip": "MPU6050",
+      "index": 8,
+      "status": "scope_reject",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 2,
+        "elapsed_s": 1.62,
+        "tail": ".F.Fssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_8_0/test_d2d_blackbox.py:123: AssertionError: ACCEL_XOUT_H 是 RO：写脏数据后 0x0 → 0xa5\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_8_0/test_d2d_blackbox.py:198: AssertionError: PWR_MGMT_1.DEVICE_RESET 写触发后读回 1，期望 0\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: ACCEL...\nFAILED test_d2d_blackbox.py::test_write_trigger_fields - AssertionError: PWR_...\n2 failed, 2 passed, 4 skipped in 0.12s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            # Initialize all registers to their reset values\n            0x19: 0x00,  # SMPLRT_DIV\n            0x1A: 0x00,  # CONFIG\n            0x1B: 0x00,  # GYRO_CONFIG\n            0x1C: 0x00,  # ACCEL_CONFIG\n            0x3B: 0x00,  # ACCEL_XOUT_H\n            0x3C: 0x00,  # ACCEL_XOUT_L\n            0x3D: 0x00,  # ACCEL_YOUT_H\n            0x3E: 0x00,  # ACCEL_YOUT_L\n            0x3F: 0x00,  # ACCEL_ZOUT_H\n            0x40: 0x00,  # ACCEL_ZOUT_L\n            0x6B: 0x40,  # PWR_MGMT_1\n            0x75: 0x68   # WHO_AM_I\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            # Single byte semantics: return only bits 15:8\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            # Default: return the whole 16-bit register\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            # Single byte semantics: update only bits 15:8\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            # Default: write the whole 16-bit data\n            self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_8_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 2.2,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_8_1/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 0.96s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            # Initialize all registers to their reset values\n            0x19: 0x00,  # SMPLRT_DIV\n            0x1A: 0x00,  # CONFIG\n            0x1B: 0x00,  # GYRO_CONFIG\n            0x1C: 0x00,  # ACCEL_CONFIG\n            0x3B: 0x00,  # ACCEL_XOUT_H\n            0x3C: 0x00,  # ACCEL_XOUT_L\n            0x3D: 0x00,  # ACCEL_YOUT_H\n            0x3E: 0x00,  # ACCEL_YOUT_L\n            0x3F: 0x00,  # ACCEL_ZOUT_H\n            0x40: 0x00,  # ACCEL_ZOUT_L\n            0x6B: 0x40,  # PWR_MGMT_1\n            0x75: 0x68   # WHO_AM_I\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            # Single byte semantics: return only bits 15:8\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            # Default: return the whole 16-bit register\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x6B:\n            if nbytes == 1:\n                # Single byte semantics: update only bits 15:8\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                # Default: write the whole 16-bit data\n                self.regs[addr] = data\n            \n            if data & (1 << 7):  # Check if DEVICE_RESET bit is set\n                # Reset the device to its initial state\n                self.regs[addr] = int('40', 16)  # Reset value for PWR_MGMT_1 register\n                # Clear the DEVICE_RESET bit\n                self.regs[addr] &= ~(1 << 7)\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_structured_20261011_mpu6050_8_1"
+      },
+      "scope": {
+        "scope_ok": false,
+        "syntax_ok": true,
+        "explicit_literals": [
+          "0x6B",
+          "0x00FF",
+          "0xFF"
+        ],
+        "disallowed_literals": [
+          "0x00FF",
+          "0xFF"
+        ]
+      },
+      "method": "    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x6B:\n            if nbytes == 1:\n                # Single byte semantics: update only bits 15:8\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                # Default: write the whole 16-bit data\n                self.regs[addr] = data\n            \n            if data & (1 << 7):  # Check if DEVICE_RESET bit is set\n                # Reset the device to its initial state\n                self.regs[addr] = int('40', 16)  # Reset value for PWR_MGMT_1 register\n                # Clear the DEVICE_RESET bit\n                self.regs[addr] &= ~(1 << 7)\n"
+    }
+  ]
+}

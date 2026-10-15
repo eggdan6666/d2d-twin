@@ -1,0 +1,28 @@
+{
+  "model_path": "/root/private_data/models/deepseek-coder-6.7b-instruct",
+  "focus": "TRIGGER",
+  "results": [
+    {
+      "chip": "MPU6050",
+      "status": "regression",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 0.74,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_trigger_mpu6050_20261010_mpu6050_0/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 0.13s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x19: 0x00, 0x1A: 0x00, 0x1B: 0x00, 0x1C: 0x00, 0x3B: 0x00, 0x3C: 0x00, 0x3D: 0x00, 0x3E: 0x00, 0x3F: 0x00, 0x40: 0x00, 0x6B: 0x40, 0x75: 0x68}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] & 0xFF00) >> 8\n            else:\n                return self.regs[addr]\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_trigger_mpu6050_20261010_mpu6050_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 0,
+        "elapsed_s": 2.58,
+        "tail": "EEEEEEEE                                                                 [100%]\n==================================== ERRORS ====================================\n_____________________ ERROR at setup of test_reset_values ______________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n__________________ ERROR at setup of test_readonly_protection __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_rw_field_persistence __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_write_trigger_fields __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_single_byte_semantics _________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n___________________ ERROR at setup of test_read_write_alias ____________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_____________________ ERROR at setup of test_clear_on_read _____________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_write_only_reset_key __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n=========================== short test summary info ============================\nERROR test_d2d_blackbox.py::test_reset_values - Failed: 被测模块缺少 MPU6050_...\nERROR test_d2d_blackbox.py::test_readonly_protection - Failed: 被测模块缺少 M...\nERROR test_d2d_blackbox.py::test_rw_field_persistence - Failed: 被测模块缺少 ...\nERROR test_d2d_blackbox.py::test_write_trigger_fields - Failed: 被测模块缺少 ...\nERROR test_d2d_blackbox.py::test_single_byte_semantics - Failed: 被测模块缺少...\nERROR test_d2d_blackbox.py::test_read_write_alias - Failed: 被测模块缺少 MPU6...\nERROR test_d2d_blackbox.py::test_clear_on_read - Failed: 被测模块缺少 MPU6050...\nERROR test_d2d_blackbox.py::test_write_only_reset_key - Failed: 被测模块缺少 ...\n8 errors in 0.35s",
+        "code": "def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n    if addr in self.regs:\n        if addr == 0x19:  # SMPLRT_DIV register\n            self.regs[addr] = data & 0xFF\n        elif self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_trigger_mpu6050_20261010_mpu6050_1"
+      }
+    }
+  ]
+}

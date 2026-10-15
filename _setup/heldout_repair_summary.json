@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-10",
+  "heldout_chips": ["INA219", "TMP461", "TPS23861", "LIS2DW12"],
+  "combined_n_chips": 8,
+  "definition": "success means candidate passed count strictly exceeds its baseline; regressions are counted separately",
+  "qwen2_5_coder_14b": {
+    "successes": 5,
+    "regressions": 0,
+    "unchanged": 3,
+    "rate": 0.625,
+    "wilson_95_ci": [0.306, 0.863],
+    "baseline_passed_total": 9,
+    "candidate_passed_total": 16
+  },
+  "deepseek_coder_6_7b": {
+    "successes": 1,
+    "regressions": 1,
+    "unchanged": 6,
+    "rate": 0.125,
+    "wilson_95_ci": [0.022, 0.471],
+    "baseline_passed_total": 9,
+    "candidate_passed_total": 10
+  },
+  "caveat": "Small intervention sample; report as a pilot with frozen-harness evidence, not as a replacement for the main benchmark."
+}

@@ -1,0 +1,53 @@
+{
+  "model_path": "/root/private_data/models/deepseek-coder-6.7b-instruct",
+  "results": [
+    {
+      "chip": "LIS3DH",
+      "source": "results_gen_ds67b_lis3dh_20261010.json",
+      "index": 0,
+      "status": "not_improved",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 2,
+        "elapsed_s": 0.7,
+        "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_lis3dh_0/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.12s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 8\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_lis3dh_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 2,
+        "elapsed_s": 0.72,
+        "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_lis3dh_1/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 8\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            if addr in self.regs and self.regs[addr] & 0x8000:  # check if the register is RO\n                raise ValueError(f\"{hex(addr)} is RO: write dirty data after {hex(self.regs[addr])} → {hex(data)}\")\n            else:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            if addr in self.regs and self.regs[addr] & 0x8000:  # check if the register is RO\n                raise ValueError(f\"{hex(addr)} is RO: write dirty data after {hex(self.regs[addr])} → {hex(data)}\")\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_lis3dh_1"
+      }
+    },
+    {
+      "chip": "MPU6050",
+      "source": "results_gen_ds67b_mpu6050_20261010.json",
+      "index": 0,
+      "status": "not_improved",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 0.7,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_mpu6050_0/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 0.12s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x19: 0x00, 0x1A: 0x00, 0x1B: 0x00, 0x1C: 0x00, 0x3B: 0x00, 0x3C: 0x00, 0x3D: 0x00, 0x3E: 0x00, 0x3F: 0x00, 0x40: 0x00, 0x6B: 0x40, 0x75: 0x68}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] & 0xFF00) >> 8\n            else:\n                return self.regs[addr]\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_mpu6050_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 0,
+        "elapsed_s": 1.32,
+        "tail": "EEEEEEEE                                                                 [100%]\n==================================== ERRORS ====================================\n_____________________ ERROR at setup of test_reset_values ______________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n__________________ ERROR at setup of test_readonly_protection __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_rw_field_persistence __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_write_trigger_fields __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_single_byte_semantics _________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n___________________ ERROR at setup of test_read_write_alias ____________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_____________________ ERROR at setup of test_clear_on_read _____________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n_________________ ERROR at setup of test_write_only_reset_key __________________\nE   Failed: 被测模块缺少 MPU6050_Simulator 类\n=========================== short test summary info ============================\nERROR test_d2d_blackbox.py::test_reset_values - Failed: 被测模块缺少 MPU6050_...\nERROR test_d2d_blackbox.py::test_readonly_protection - Failed: 被测模块缺少 M...\nERROR test_d2d_blackbox.py::test_rw_field_persistence - Failed: 被测模块缺少 ...\nERROR test_d2d_blackbox.py::test_write_trigger_fields - Failed: 被测模块缺少 ...\nERROR test_d2d_blackbox.py::test_single_byte_semantics - Failed: 被测模块缺少...\nERROR test_d2d_blackbox.py::test_read_write_alias - Failed: 被测模块缺少 MPU6...\nERROR test_d2d_blackbox.py::test_clear_on_read - Failed: 被测模块缺少 MPU6050...\nERROR test_d2d_blackbox.py::test_write_only_reset_key - Failed: 被测模块缺少 ...\n8 errors in 0.74s",
+        "code": "def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n    if addr in self.regs and self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n        else:\n            self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_extension_minimal_20261010_mpu6050_1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "contract_version": "1.0",
+  "expert_skill": "sci-skills-paper-deep-reading",
+  "project_id": "d2d-twin",
+  "paper_family": "M",
+  "stage_id": "M4",
+  "task_id": "expansion-ir-source-review-20261010",
+  "task_status": "COMPLETE",
+  "inputs_reviewed": [
+    {
+      "path": "_setup/ir_drafts/AD5592R_draft_ir.json",
+      "scope": "whole draft"
+    },
+    {
+      "path": "_setup/ir_drafts/LIS3DH_draft_ir.json",
+      "scope": "whole draft"
+    },
+    {
+      "path": "corpus/data/raw_pdf/ADI/ad5592r.pdf",
+      "locators": "pp. 25-29, 35-43, 50-52"
+    },
+    {
+      "path": "corpus/data/raw_pdf/ST/LIS3DH.pdf",
+      "locators": "pp. 24-31, 34-40"
+    },
+    {
+      "path": "d2d/eval/test_d2d_blackbox.py",
+      "scope": "whole relevant assertion path"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "_setup/ir_drafts/SOURCE_REVIEW.md",
+      "type": "specialist-review"
+    },
+    {
+      "path": "_setup/ir_drafts/SOURCE_REVIEW_RESULT.json",
+      "type": "expert-result"
+    }
+  ],
+  "evidence_status": [
+    {
+      "label": "VERIFIED_SOURCE",
+      "claim": "Register addresses/defaults/bit positions/transport framing/reset key/dynamic labels checked against cited PDF pages."
+    },
+    {
+      "label": "VERIFIED_USER_MATERIAL",
+      "claim": "Drafts and frozen harness read from workspace."
+    },
+    {
+      "label": "EXECUTED_LOCAL",
+      "claim": "Selected PDF pages rendered and inspected; frozen harness MD5 recorded as 8cf0854d4779467bc8e472ee4fb97023."
+    },
+    {
+      "label": "AI_INFERENCE",
+      "claim": "RO versus UNSPEC and transport-adapter recommendations are analysis of source/harness boundary."
+    }
+  ],
+  "assumptions": [
+    "Harness addr values are logical direct-register addresses; they do not imply wire-level SPI/I2C validation.",
+    "A dynamic/output register should not be scored as a static reset value unless the IR explicitly freezes that behavior."
+  ],
+  "author_input_needed": [
+    "Choose and document the reserved/fixed-bit policy (RO assertion versus UNSPEC diagnostic) for both drafts.",
+    "Provide a separate human field-by-field review before promotion.",
+    "Decide whether transport framing and multi-byte semantics are out of scope for M4 or require a protocol adapter."
+  ],
+  "manual_actions": [
+    "A second human reviewer should compare each recommended field change with the rendered source pages and sign the review log."
+  ],
+  "quality_checks": [
+    {
+      "check": "Selected source tables rendered and visually inspected",
+      "status": "PASS"
+    },
+    {
+      "check": "Draft-to-harness branch comparison",
+      "status": "PASS"
+    },
+    {
+      "check": "Frozen harness unchanged; MD5 8cf0854d4779467bc8e472ee4fb97023",
+      "status": "PASS"
+    },
+    {
+      "check": "No formal roster admission performed",
+      "status": "PASS"
+    }
+  ],
+  "conflicts": [],
+  "conflict_resolution_status": "NOT_REQUIRED",
+  "merge_permission": "orchestrator_only",
+  "recommended_next_action": "Repair the two provisional drafts from SOURCE_REVIEW.md, then obtain separate human field-by-field review before promotion into d2d/ir.",
+  "stage_acceptance_recommendation": "REPAIR"
+}

@@ -1,0 +1,50 @@
+{
+  "model_path": "/root/private_data/models/deepseek-coder-6.7b-instruct",
+  "focus": "RO",
+  "results": [
+    {
+      "chip": "LIS3DH",
+      "status": "unchanged",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 2,
+        "elapsed_s": 0.71,
+        "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_lis3dh_0/test_d2d_blackbox.py:123: AssertionError: WHO_AM_I 是 RO：写脏数据后 0x33 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: WHO_A...\n1 failed, 2 passed, 5 skipped in 0.13s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 8\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_lis3dh_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 2,
+        "elapsed_s": 1.12,
+        "tail": ".F.sssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_lis3dh_1/test_d2d_blackbox.py:123: AssertionError: STATUS_REG 是 RO：写脏数据后 0x0 → 0xa5\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_readonly_protection - AssertionError: STATU...\n1 failed, 2 passed, 5 skipped in 0.54s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass LIS3DH_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 8\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {\n            0x0F: 0x33,  # WHO_AM_I\n            0x1E: 0x10,  # CTRL_REG0\n            0x1F: 0x00,  # TEMP_CFG_REG\n            0x20: 0x07,  # CTRL_REG1\n            0x23: 0x00,  # CTRL_REG4\n            0x27: 0x00,  # STATUS_REG\n            0x28: 0x00,  # OUT_X_L\n            0x29: 0x00,  # OUT_X_H\n            0x2A: 0x00,  # OUT_Y_L\n            0x2B: 0x00,  # OUT_Y_H\n            0x2C: 0x00,  # OUT_Z_L\n            0x2D: 0x00   # OUT_Z_H\n        }\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if nbytes == 1:\n            return (self.regs[addr] & 0xFF00) >> 8\n        else:\n            return self.regs[addr]\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr == 0x0F:\n            return  # WHO_AM_I is RO, so ignore writes\n        if nbytes == 1:\n            self.regs[addr] = (self.regs[addr] & 0x00FF) | (data << 8)\n        else:\n            self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_lis3dh_1"
+      }
+    },
+    {
+      "chip": "MPU6050",
+      "status": "unchanged",
+      "baseline": {
+        "round": 0,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 2.35,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_mpu6050_0/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 1.14s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x19: 0x00, 0x1A: 0x00, 0x1B: 0x00, 0x1C: 0x00, 0x3B: 0x00, 0x3C: 0x00, 0x3D: 0x00, 0x3E: 0x00, 0x3F: 0x00, 0x40: 0x00, 0x6B: 0x40, 0x75: 0x68}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            if nbytes == 1:\n                return (self.regs[addr] & 0xFF00) >> 8\n            else:\n                return self.regs[addr]\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n            if nbytes == 1:\n                self.regs[addr] = (self.regs[addr] & 0x00FF) | ((data & 0xFF) << 8)\n            else:\n                self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_mpu6050_0"
+      },
+      "candidate": {
+        "round": 1,
+        "rc": 1,
+        "passed": 3,
+        "elapsed_s": 0.7,
+        "tail": "..F.ssss                                                                 [100%]\n=================================== FAILURES ===================================\n/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_mpu6050_1/test_d2d_blackbox.py:160: AssertionError: SMPLRT_DIV.SMPLRT_DIV[7:0] 写全 1 后读回 0，期望 255（整寄存器 0x0）\n=========================== short test summary info ============================\nFAILED test_d2d_blackbox.py::test_rw_field_persistence - AssertionError: SMPL...\n1 failed, 3 passed, 4 skipped in 0.12s",
+        "code": "from base_sensor import BaseVirtualSensor\n\nclass MPU6050_Simulator(BaseVirtualSensor):\n    REG_WIDTH = 16\n\n    def __init__(self):\n        super().__init__()\n        self.regs = {0x19: 0x00, 0x1A: 0x00, 0x1B: 0x00, 0x1C: 0x00, 0x3B: 0x00, 0x3C: 0x00, 0x3D: 0x00, 0x3E: 0x00, 0x3F: 0x00, 0x40: 0x00, 0x6B: 0x40, 0x75: 0x68}\n\n    def read_register(self, addr: int, nbytes: int = 2) -> int:\n        if addr in self.regs:\n            return self.regs[addr]\n        else:\n            return 0\n\n    def write_register(self, addr: int, data: int, nbytes: int = 2) -> None:\n        if addr in self.regs and self.regs[addr] != 0x00 and self.regs[addr] != 0x40 and self.regs[addr] != 0x68:\n            self.regs[addr] = data\n",
+        "sandbox": "/root/private_data/d2d/eval/_repair_sandbox_ds67b_ro_extension_20261010_mpu6050_1"
+      }
+    }
+  ]
+}
