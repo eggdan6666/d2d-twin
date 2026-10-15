@@ -28,11 +28,13 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 EXPECTED_HARNESS_MD5 = "8cf0854d4779467bc8e472ee4fb97023"
 HARNESS_PATH = os.path.join(ROOT, "d2d", "eval", "test_d2d_blackbox.py")
 
-ALL_CHIPS = [
+BASELINE_CHIPS = [
     "TMP1075", "TMP102", "TMP100", "TMP117", "TMP126", "TMP461", "LM83",
     "HDC2021", "BME280", "BMP280", "INA219", "INA226", "INA3221",
     "ADS1115", "ADS1220", "LIS2DW12", "TPS23861"
 ]
+EXTENSION_CHIPS = ["AD5592R", "LIS3DH", "MPU6050"]
+ALL_CHIPS = BASELINE_CHIPS + EXTENSION_CHIPS
 
 
 def check_integrity():
@@ -57,7 +59,9 @@ def check_integrity():
         if not os.path.exists(ir_p):
             missing_ir.append(chip)
             
-    print(f"  Gold IRs     : {len(ALL_CHIPS) - len(missing_ir)}/{len(ALL_CHIPS)} present")
+    baseline_missing = [c for c in BASELINE_CHIPS if c in missing_ir]
+    extension_missing = [c for c in EXTENSION_CHIPS if c in missing_ir]
+    print(f"  Gold IRs     : {len(ALL_CHIPS) - len(missing_ir)}/{len(ALL_CHIPS)} present (baseline {len(BASELINE_CHIPS) - len(baseline_missing)}/{len(BASELINE_CHIPS)}, extension {len(EXTENSION_CHIPS) - len(extension_missing)}/{len(EXTENSION_CHIPS)})")
     if missing_ir:
         print(f"  [WARNING] Missing IRs: {', '.join(missing_ir)}")
         
@@ -125,8 +129,8 @@ def display_summary():
         }
         
         for chip in ALL_CHIPS:
-            p14 = n24["per_chip_rate_pct"].get(chip, 0.0)
-            p67 = ds67b["per_chip_rate_pct"].get(chip, 0.0)
+            p14 = n24["per_chip_rate_pct"].get(chip)
+            p67 = ds67b["per_chip_rate_pct"].get(chip)
             cat = cats.get(chip, "Peripheral")
             ir_p = os.path.join(ROOT, "d2d", "ir", f"{chip}_gold_ir.json")
             if os.path.exists(ir_p):
@@ -134,7 +138,9 @@ def display_summary():
                 regs = len(ir_obj.get("registers", []))
             else:
                 regs = "-"
-            print(f" {chip:<10} | {cat:<16} | {str(regs):<5} | {p14:>5.1f}%             | {p67:>5.1f}%")
+            p14_text = f"{p14:>5.1f}%" if p14 is not None else "  N/A"
+            p67_text = f"{p67:>5.1f}%" if p67 is not None else "  N/A"
+            print(f" {chip:<10} | {cat:<16} | {str(regs):<5} | {p14_text:<18} | {p67_text:<18}")
         print("-" * 78)
         print(f" [Finding] Spearman rank correlation (Special Registers vs Pass Rate): rho = -0.828, p = 0.0001")
         print(f" [Finding] Read/Write Alias Failure Rate (LM83, TMP461): 100.0% fail across both models")

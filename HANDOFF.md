@@ -16,7 +16,7 @@
 1. **过于局限在底层可综合 Verilog RTL**（忽视了嵌入式驱动所依赖的外设系统级寄存器语义建模）；
 2. **高度依赖主观的 LLM-as-a-Judge 或文本问答（QA）**，存在严重幻觉与评估噪声。
 
-前期真实测试揭示：**上游 PDF 检索与布局解析损失高达 40%–45%**。因此，必须将“文档解析”与“逻辑代码合成”彻底解耦。
+前期诊断发现：在三个 seed 均答错的题目（`all3`）中，固定检索上下文的数值—单位匹配分类将 **全部审校题目的 42.5%–46.7% 归为上游相关**（DCU-3B/7B/14B），占三个 seed 均答错题目的 71.1%–79.7%。该诊断支持将“文档解析”与“逻辑代码合成”解耦，但不能单独证明因果关系或模型规模不变性。
 
 **D2D-Twin（Datasheet-to-Digital-Twin）** 是国际首个完全确定性、零 LLM-as-a-judge 偏见、面向外设寄存器级仿真器合成的代码大模型基准测试套件。
 
@@ -42,6 +42,10 @@
   * **永久页面**：`https://zenodo.org/records/23262086`
   * **已嵌入 4 页标准双栏 PDF 在线阅读器**，首发时间戳与科研命名权已法律级锁定。
 * [x] **IEEE 双栏学术论文工程定稿**：位于 `paper/main.tex`、`paper/references.bib`、`paper/figures/`，Overleaf 100% 编译通过，排版无文字溢出，全 ASCII 字符集。
+* [x] **Failure-driven repair utility pilot**：在 8 颗芯片上用冻结 Harness 评测最小补丁；Qwen2.5-Coder-14B 严格提升 5/8（Wilson 95% CI `[30.6%, 86.3%]`），DeepSeek-Coder-6.7B 提升 1/8 并出现 1 次回归。原始日志与 IR 约束参考代码位于 `_setup/*repair*`。
+* [x] **32 芯片扩展清单**：`EXPANSION_ROSTER.md` 已从现有 456 份 PDF 中筛出 15 颗跨厂商候选；AD5592R、LIS3DH、MPU6050 已完成第一批 Gold IR 与参考 simulator 准入，正式 roster 为 20 颗，仍以 17 颗 baseline 的模型结果为历史比较集。
+* [x] **第一批扩容证据与集成**：`_setup/ir_drafts/` 已形成并经独立审校及修复后复核；三颗芯片的正式 IR 位于 `d2d/ir/`，参考 simulator 位于 `d2d/rtl/`，并通过全量参考 admission。结果见 `_setup/CANDIDATE_ADMISSION_REPORT.md`；协议扩展见 `_setup/EXTENDED_PROTOCOL_REPORT.md`。
+* [x] **I²C/SPI 扩展协议原型**：LIS3DH/MPU6050 的 I²C 地址选择、自动递增、BDU/BLE、重复 START、NACK、burst、DEVICE_RESET，以及 AD5592R 的 SPI 控制字、读回、250 μs 等待、软复位和 IO_LOCK 已在 `_setup/extended_eval/` 通过 10 项软件测试；未进行实物电气验证，原冻结 harness 未改。
 
 ### 2.2 未完成模块与当前卡点
 * [ ] **arXiv 预印本挂网（卡点：背书机制 Endorsement）**：
@@ -56,12 +60,13 @@
 1. **【P0】arXiv 背书激活与一键提交**：
    - 任何人（导师、实验室发过 3 篇 cs.* arXiv 的师兄/师姐、或学术同行）点击上述专属链接 `https://arxiv.org/auth/endorse.php?x=YFN9PW` 点一下确认，账号即终身解锁；
    - 解锁后在暂存的提交页面上传 `d2d_paper.zip`（已包含最新修复排版的全部 tex、bib、figures），复制本文第 4 节元数据直接提交。
-2. **【P1】顶会/顶级期刊投递准备**：
+2. **【P0】重新编译论文并确认页数**：`paper/main.tex` 已加入 failure-driven repair 小节和紧凑表格；需在 Overleaf 以论文目录为根编译，确认 4 页限制、表格不溢出且 Errors=0。
+3. **【P1】顶会/顶级期刊投递准备**：
    - 目标会议：DAC（CCF-A 顶会，主打外设数字孪生确定性测试）、DATE（CCF-B）、ICCAD（CCF-B），或 NeurIPS/ICLR（Datasets & Benchmarks Track，主打硬件规范代码大模型三大盲区揭示）；
    - 论文主体（4 页 IEEE 格式）已定稿，可随时输出。
-3. **【P2】横向扩展新模型评测**：
+4. **【P2】横向扩展新模型评测**：
    - 在现有的通用 Harness 下接入 Claude 3.5 Sonnet、GPT-4o、DeepSeek-V2.5 等最新模型的合成评测，扩充评测数据矩阵。
-4. **【P3】端到端 HD-Agent 上游流水线贯通**：
+5. **【P3】端到端 HD-Agent 上游流水线贯通**：
    - 将工作区中前置的芯片 Datasheet 分层分块 RAG 与结构化抽取模块（HD-Agent）与 D2D-Twin 的 Gold IR 生成对接，形成自动化 Datasheet -> IR -> Digital Twin 工具链。
 
 ---
@@ -199,8 +204,8 @@ class <ChipName>Emulator:
 
 ### 5.1 为什么采用 Gold IR 解耦设计？（避免前车之鉴）
 * **试过但失败的方案**：最初尝试直接把商业 Datasheet PDF（通常 30~80 页，包含大量多栏排版、非标表格、跨页时序图）通过 RAG 切片直接塞给 LLM 让其生成驱动仿真器。
-* **失败原因**：我们对 456 篇数据手册的消融实验证明，**检索遗漏和布局解析损坏直接占据了 40%–45% 的总体错误**！无论是 3B、7B 还是 14B 模型，都会被长文档格式干扰。
-* **最终设计**：采用“专家/高质量脚本建立 Gold IR 规范” -> “基于纯结构化 IR 评估代码大模型系统建模能力”。这让基准的评测结果具有 100% 的因果确定性。
+* **诊断证据**：对 456 篇数据手册和 120 道审校题的三 seed 评测中，DCU-3B/7B/14B 各有 76、73、64 道题在三个 seed 均答错；其中 54、56、51 道被固定检索上下文的数值—单位分类归为上游相关，分别占全部题目的 45.0%、46.7%、42.5%，占三 seed 均答错题目的 71.1%、76.7%、79.7%。分类是诊断代理，不能把单位匹配缺失直接等同于 PDF 物理信息丢失，也不能用固定上下文分类证明模型规模不变性。
+* **最终设计**：采用“专家/高质量脚本建立 Gold IR 规范” -> “基于纯结构化 IR 评估代码大模型系统建模能力”。这减少上游解析噪声，使断言结果可确定性复现；仍需考虑 Gold IR 策展与测试覆盖的边界。
 
 ### 5.2 代码大模型的四大系统性缺陷（论文核心论点）
 在交接后续实验时，请注意以下四个已证实的模型盲区，不要怀疑是测试脚本错误：
@@ -253,7 +258,7 @@ class <ChipName>Emulator:
   ```
 * **Comments**：
   ```text
-  4 pages, 3 figures, 3 tables. Benchmark repository available at https://github.com/eggdan6666/d2d-twin and https://huggingface.co/datasets/eggdan666/d2d-twin
+  4 pages, 3 figures, 3 tables after the repair-intervention addition. Benchmark repository available at https://github.com/eggdan6666/d2d-twin and https://huggingface.co/datasets/eggdan666/d2d-twin
   ```
 * **Abstract**：
   ```text
@@ -269,12 +274,28 @@ class <ChipName>Emulator:
   All evaluation harnesses, Gold IRs, and generated code samples are open-sourced on GitHub and Hugging Face.
   ```
 
+### 6.3 2026-10-10 三芯片扩展模型评测（已完成）
+* 本轮在 SCNet DCU 节点完成了 Qwen2.5-Coder-14B-Instruct 与 DeepSeek-Coder-6.7B-Instruct 的三芯片扩展评测：AD5592R、LIS3DH、MPU6050。
+* 每个模型/芯片组合使用 seeds `1,2,3`、temperature `0.7`；Qwen 每组合 24 个样本，DeepSeek 每组合 12 个样本，共 **108 个生成样本**。
+* 结果：AD5592R 两个模型均为 100% 全绿；LIS3DH 为 Qwen 14B `9/24 = 37.5%`、DeepSeek `0/12 = 0%`；MPU6050 两个模型均为 `0%`。全体合计 `45/108 = 41.7%`。
+* 失败集中在可解释的寄存器语义：LIS3DH 的 `WHO_AM_I`/`OUT_X_L`/`STATUS_REG` 只读保护，MPU6050 的 `ACCEL_XOUT_H` 只读保护与 `PWR_MGMT_1.DEVICE_RESET` 写触发；少量样本还暴露 `SMPLRT_DIV`、`YG_ST`、`CTRL_REG0.SDO_PU_DISC` 位域持久性问题。
+* 原始 JSON、启动日志和机器汇总：[`_setup/remote_model_eval/`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/remote_model_eval/)。分析报告：[`_setup/REMOTE_MODEL_EVAL_REPORT.md`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/REMOTE_MODEL_EVAL_REPORT.md)。
+* 这组分数只代表冻结 black-box harness 下的生成样本通过率；扩展 I2C/SPI 协议测试仍单独记录在 [`_setup/EXTENDED_PROTOCOL_REPORT.md`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/EXTENDED_PROTOCOL_REPORT.md)，未混入本轮 108 样本分母。
+* 随后的最小修复干预已完成：对 LIS3DH、MPU6050 各抽取两个模型的首个失败样本，四个候选均未提高严格通过数；DeepSeek/MPU6050 候选发生回归并被门禁拒绝。详情见 [`_setup/EXTENSION_REPAIR_PILOT.md`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/EXTENSION_REPAIR_PILOT.md)。该结果应作为负对照记录，不得写成准确率提升。
+* 进一步的单维探针已完成：只提供 RO 失败时，Qwen2.5-Coder-14B 的 MPU6050 单样本从 `3 passed, rc=1` 修复到 `4 passed, rc=0`；LIS3DH 两模型未改善。只提供写触发失败时，Qwen 未改善，DeepSeek 回归并被拒绝。这个正结果是单样本干预证据，不改变 24 样本生成通过率。
+* RO 稳定性复现已完成：固定 seeds `1,2,3` 各抽取一个失败样本，Qwen14B 在 MPU6050 上 `3/3` 严格提高、`2/3` 全绿；在 LIS3DH 上 `1/3` 提高并全绿。该结果支持 RO 语义修复的局部可迁移性，但剩余 LIS3DH RO 与 MPU6050 写触发失败仍需分开处理。
+* `DEVICE_RESET` 写触发稳定性检查已完成：Qwen14B 在 3 个固定样本中 `2/3` 提高、`1/3` 全绿；DeepSeek 在 `1/3` 提高中出现 `2/3` 回归。由于候选同时改变了其他寄存器行为，不能把这些结果写成纯触发语义准确率；必须先做 patch-diff 与语义审计。
+* 触发补丁审计已完成：六个候选中 **0/6** 属于干净的 `DEVICE_RESET` 专项修复；Qwen 的部分提升来自额外 RO 防护或仍残留触发失败，DeepSeek 有回归。审计报告为 [`_setup/TRIGGER_PATCH_AUDIT.md`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/TRIGGER_PATCH_AUDIT.md)。
+* 受限提示词 + 自动 diff 范围门禁复跑已完成：Qwen `0/3` 范围通过，DeepSeek `1/3` 范围通过但无性能提升；干净触发修复仍为 `0/6`。这说明仅靠提示词不能稳定完成单字段补丁，需要结构化补丁接口或更强解码约束。
+* 结构化 `write_register` 方法接口已实测：Qwen `1/3` 范围通过、DeepSeek `3/3` 范围通过，但六个候选均未达到完整 Harness 全绿（`0/6` clean green）。结构化接口减少了整文件重写，却尚未解决触发语义本身。详情见 [`_setup/STRUCTURED_PATCH_REPORT.md`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/STRUCTURED_PATCH_REPORT.md)。
+* 正式参考实现的契约级修复已完成：AD5592R、LIS3DH、MPU6050 均通过候选准入，共 `11 passed, 13 skipped`；扩展 I2C/SPI 协议测试 `10 passed`。这证明 Gold IR 与 Harness 可形成完整可执行参考，但不等同于模型原始生成能力提升。详情见 [`_setup/CONTRACT_REPAIR_FINAL.md`](file:///E:/HD-Agent·分层记忆RAG的电子Dstasheet智能问答/_setup/CONTRACT_REPAIR_FINAL.md)。
+
 ---
 
 ## 7. 给接手 AI 的第一项任务自检清单
 
 新接手 AI 在开始工作前，请先按以下顺序执行自检：
-1. 运行 `python run_benchmark.py`，确认 Harness MD5 与 17/17 Gold IR 完整性通过；需要刷新图表时再运行 `python run_benchmark.py --make-assets`，确认 `assets/` 与 `_out/latex/` 生成成功；
+1. 运行 `python run_benchmark.py`，确认 Harness MD5 与 20/20 Gold IR 完整性通过（其中 17/17 是历史基线，3 个是正式扩展）；需要刷新图表时再运行 `python run_benchmark.py --make-assets`，确认 `assets/` 与 `_out/latex/` 生成成功；
 2. 运行 MD5 校验命令，确保 `d2d/eval/test_d2d_blackbox.py` 的哈希值为 `8cf0854d4779467bc8e472ee4fb97023`；
 3. 阅读第 5 节的四大缺陷与踩坑记录，不得修改已冻结的测试断言逻辑；
 4. 若用户已完成背书，协助用户将 `d2d_paper.zip` 在 arXiv 上完成提交。

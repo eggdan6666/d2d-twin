@@ -128,7 +128,7 @@
 ### 1. 克隆仓库与安装依赖
 
 ```bash
-git clone https://github.com/your-username/d2d-twin.git
+git clone https://github.com/eggdan6666/d2d-twin.git
 cd d2d-twin
 
 # 安装极简评测依赖（仅 pytest, numpy, scipy, matplotlib, pandas）
@@ -194,7 +194,7 @@ python run_benchmark.py --make-assets
 在实现芯片代码数字孪生之前，大模型对外设手册的理解严重受限于**文档检索与结构解析**。前置系统 **HD-Agent** 包含：
 - **语料规模**：456 篇芯片手册，共 7,579 个章节切片；
 - **Datasheet-QA-100 评测集**：120 道正式题（参数定位 83 题 ＋ 跨章节综合 37 题），基于 `eval/qa100/score2.py` 严格判分；
-- **结论**：上游检索与解析损失合计占失败原因的 **40%–45%**，这一发现坚定了我们转向直接以结构化 Gold IR 输入评估代码模型行为建模能力的科研路线。
+- **结论**：在三个 seed 均答错的题目（`all3`）中，固定检索上下文的数值—单位匹配分类将 DCU-3B/7B/14B 的 54/120、56/120、51/120 道题归为上游相关，占 **全部题目的 42.5%–46.7%**，占 **三个 seed 均答错题目的 71.1%–79.7%**。该诊断支持 Gold IR 解耦路线，但不能单独证明因果关系或模型规模不变性；定义与限制见 `eval/qa100/taxonomy_summary.json`。
 
 ---
 

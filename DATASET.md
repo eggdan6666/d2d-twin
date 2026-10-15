@@ -143,7 +143,7 @@ Each sample object contains:
 To reproduce benchmark results without GPU or LLM APIs:
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/d2d-twin.git
+git clone https://github.com/eggdan6666/d2d-twin.git
 cd d2d-twin
 
 # Install dependencies

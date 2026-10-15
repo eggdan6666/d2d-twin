@@ -2,36 +2,58 @@
   title={Evaluating Large Language Models Trained on Code},
   author={Chen, Mark and Tworek, Jerry and Jun, Heewoo and Yuan, Qiming and Pinto, Henrique Ponde de Oliveira and Kaplan, Jared and Edwards, Harri and Burda, Yuri and Joseph, Nicholas and Brockman, Greg and others},
   journal={arXiv preprint arXiv:2107.03374},
-  year={2021}
+  year={2021},
+  doi={10.48550/arXiv.2107.03374},
+  note={OpenAI technical report (HumanEval); no peer-reviewed venue}
 }
 
 @inproceedings{jimenez2024swebench,
   title={SWE-bench: Can Language Models Resolve Real-World GitHub Issues?},
   author={Jimenez, Carlos E and Yang, John and Wettig, Alexander and Yao, Shunyu and Pei, Kexin and Press, Ofir and Narasimhan, Karthik},
-  booktitle={International Conference on Learning Representations (ICLR)},
-  year={2024}
+  booktitle={The Twelfth International Conference on Learning Representations (ICLR)},
+  year={2024},
+  url={https://openreview.net/forum?id=VTF8yNQM66},
+  note={Oral presentation; Docker-based test execution (FAIL\_TO\_PASS / PASS\_TO\_PASS)}
 }
 
 @inproceedings{thakur2023verilogeval,
   title={Benchmarking Large Language Models for Automated Verilog RTL Code Generation},
   author={Thakur, Shailja and Ahmad, Baleegh and Fan, Zhenxing and Pearce, Hammond and Tan, Benjamin and Karri, Ramesh and Dolan-Gavitt, Brendan and Garg, Siddharth},
-  booktitle={Design, Automation \& Test in Europe Conference \& Exhibition (DATE)},
+  booktitle={2023 Design, Automation \& Test in Europe Conference \& Exhibition (DATE)},
   pages={1--6},
-  year={2023}
+  year={2023},
+  doi={10.23919/DATE56975.2023.10137086},
+  note={VGen benchmark (17 designs); syntax flow + testbench functional evaluation}
 }
 
-@article{lu2024rtllm,
-  title={RTLLM: An Open-Source Benchmark for Generating Register-Transfer-Level Designs with Large Language Models},
-  author={Lu, Yao and Liu, Shang and Xu, Siyuan and Xie, Zhiyao},
-  journal={IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)},
-  year={2024}
+% 注：NVIDIA 的 VerilogEval（156 个 HDLBits 题目）是另一篇论文（见下），勿与 Thakur et al. 混淆
+@inproceedings{liu2023verilogeval,
+  title={Invited Paper: VerilogEval: Evaluating Large Language Models for Verilog Code Generation},
+  author={Liu, Mingjie and Pinckney, Nathaniel and Khailany, Brucek and Ren, Haoxing},
+  booktitle={2023 IEEE/ACM International Conference on Computer-Aided Design (ICCAD)},
+  pages={1--8},
+  year={2023},
+  doi={10.1109/ICCAD57390.2023.10323812},
+  note={156 HDLBits problems; Icarus Verilog simulation vs.\ golden solution}
 }
 
-@inproceedings{liu2023chipnemo,
+@inproceedings{lu2024rtllm,
+  title={RTLLM: An Open-Source Benchmark for Design RTL Generation with Large Language Model},
+  author={Lu, Yao and Liu, Shang and Zhang, Qijun and Xie, Zhiyao},
+  booktitle={2024 29th Asia and South Pacific Design Automation Conference (ASP-DAC)},
+  pages={722--727},
+  year={2024},
+  doi={10.1109/ASPDAC58780.2024.10473904},
+  note={30 designs (v1.0); syntax + testbench simulation + synthesis PPA goals}
+}
+
+@article{liu2023chipnemo,
   title={ChipNeMo: Domain-Adapted LLMs for Chip Design},
-  author={Liu, Mingjie and Ebrahimi, Teodor-Dumitru and Shen, Jing and Galal, Sherif and Ren, Haoxing and others},
-  booktitle={Proceedings of the IEEE/ACM International Conference on Computer-Aided Design (ICCAD)},
-  year={2023}
+  author={Liu, Mingjie and Ene, Teodor-Dumitru and Kirby, Robert and Cheng, Chris and Pinckney, Nathaniel and others},
+  journal={arXiv preprint arXiv:2311.00176},
+  year={2023},
+  doi={10.48550/arXiv.2311.00176},
+  note={Presented at ICCAD 2023 (keynote); internal NVIDIA evaluation suite, human expert evaluation}
 }
 
 @inproceedings{blocklove2023chip,
@@ -77,5 +99,7 @@
   journal={Advances in Neural Information Processing Systems (NeurIPS)},
   volume={33},
   pages={9459--9474},
-  year={2020}
+  year={2020},
+  doi={10.5555/3495724.3496517},
+  note={Article No.~793}
 }

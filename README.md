@@ -118,7 +118,7 @@ You can verify the dataset integrity, run admission tests, and reproduce all ben
 ### 1. Installation
 
 ```bash
-git clone https://github.com/your-username/d2d-twin.git
+git clone https://github.com/eggdan6666/d2d-twin.git
 cd d2d-twin
 
 # Install lightweight evaluation dependencies
@@ -189,7 +189,7 @@ python run_benchmark.py --make-assets
 Before synthesizing executable emulators, understanding datasheets requires reliable retrieval. Our companion subsystem, **HD-Agent**, features:
 - **Corpus**: 456 component datasheets across 7,579 section slices.
 - **QA-100 Benchmark**: 120 formally reviewed questions (param 83 + cross 37) under strict numerical and unit matching (`eval/qa100/score2.py`).
-- **Key Finding**: Retrieval and parsing losses account for **40%–45% of total errors**, demonstrating that LLMs cannot reliably synthesize models without structured intermediate representations (Gold IR).
+- **Key Finding**: Among questions answered incorrectly in all three seeds (`all3`), the fixed-context value–unit taxonomy classifies 54/120, 56/120, and 51/120 questions as upstream-related for DCU-3B/7B/14B (**42.5%–46.7% of all questions**; **71.1%–79.7% of all-three-seed failed questions**). This diagnostic supports Gold IR decoupling, but does not independently establish causality or model-scale invariance. See `eval/qa100/taxonomy_summary.json` for definitions and caveats.
 
 ---
 
